@@ -2,14 +2,14 @@ import { ElementType } from '@shared/types/constants';
 import { CreationTags } from '@shared/engine/shared/tag-domain';
 
 export const ELEMENT_TAG_TOKENS: Record<ElementType, string> = {
-  金: 'Metal',
-  木: 'Wood',
-  水: 'Water',
-  火: 'Fire',
-  土: 'Earth',
-  风: 'Wind',
-  雷: 'Thunder',
-  冰: 'Ice',
+  烛: 'Metal',
+  尸: 'Wood',
+  星: 'Water',
+  渊: 'Fire',
+  梦: 'Earth',
+  噬: 'Wind',
+  帘: 'Thunder',
+  疫: 'Ice',
 };
 
 export const ELEMENT_TO_MATERIAL_TAG: Record<ElementType, string> = Object.fromEntries(
@@ -20,12 +20,12 @@ export const ELEMENT_TO_MATERIAL_TAG: Record<ElementType, string> = Object.fromE
 ) as Record<ElementType, string>;
 
 export const ELEMENT_NAME_PREFIX: Record<ElementType, string> = {
-  金: '碎锋',
-  木: '青木',
-  水: '流泉',
-  火: '焚岳',
-  土: '镇岳',
-  风: '岚影',
-  雷: '惊霆',
-  冰: '玄冰',
+  烛: '碎锋',
+  尸: '青木',
+  星: '流泉',
+  渊: '焚岳',
+  梦: '镇岳',
+  噬: '岚影',
+  帘: '惊霆',
+  疫: '玄冰',
 };

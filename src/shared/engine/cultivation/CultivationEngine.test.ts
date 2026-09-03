@@ -8,7 +8,7 @@ function createCultivator(): Cultivator {
     id: 'cultivator-1',
     name: '韩立',
     gender: '男',
-    realm: '筑基',
+    realm: '守灯',
     realm_stage: '初期',
     age: 30,
     lifespan: 180,
@@ -22,7 +22,7 @@ function createCultivator(): Cultivator {
       willpower: 32,
     },
     unallocated_attribute_points: 0,
-    spiritual_roots: [{ element: '木', strength: 80, grade: '真灵根' }],
+    spiritual_roots: [{ element: '尸', strength: 80, grade: '真窍' }],
     pre_heaven_fates: [],
     cultivations: [],
     skills: [],
@@ -295,11 +295,11 @@ describe('CultivationEngine cultivation boost', () => {
     const result = attemptBreakthrough(cultivator, () => 0);
 
     expect(result.summary.success).toBe(true);
-    expect(result.cultivator.realm).toBe('筑基');
+    expect(result.cultivator.realm).toBe('守灯');
     expect(result.cultivator.realm_stage).toBe('中期');
     expect(result.cultivator.cultivation_progress?.cultivation_exp).toBe(275);
     expect(result.cultivator.cultivation_progress?.exp_cap).toBe(
-      resolveLiveExpCap('筑基', '中期'),
+      resolveLiveExpCap('守灯', '中期'),
     );
   });
 
@@ -432,7 +432,7 @@ describe('CultivationEngine cultivation boost', () => {
 
   it('uses the canonical 95 percent cap for modifiers and the actual roll', () => {
     const cultivator = createCultivator();
-    cultivator.realm = '炼气';
+    cultivator.realm = '闻腥';
     cultivator.cultivation_progress!.cultivation_exp = 100_000;
     cultivator.cultivation_progress!.comprehension_insight = 100;
 

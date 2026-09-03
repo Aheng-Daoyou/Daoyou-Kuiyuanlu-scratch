@@ -1,5 +1,5 @@
 /*
- * ArtifactBlueprintComposer: 将 rolledAffixes 与 composition decision 投影为法宝（artifact）的 CreationBlueprint。
+ * ArtifactBlueprintComposer: 将 rolledAffixes 与 composition decision 投影为封灵器（artifact）的 CreationBlueprint。
  * 负责域模型组装并调用 projectAbilityConfig 生成战斗层 AbilityConfig 表示。
  */
 import { AffixEffectTranslator } from '../affixes/AffixEffectTranslator';
@@ -14,9 +14,10 @@ import { CompositionFacts } from '../rules/contracts/CompositionFacts';
 import { PassiveProjectionPolicy } from '../rules/contracts/CompositionDecision';
 import { buildCompositionFacts } from './shared';
 import { buildAbilitySlug, ProductBlueprintComposer } from './types';
+import { buildArtifactSpirit } from '../artifacts/spiritNarrative';
 
 /**
- * 法宝蓝图 Composer
+ * 封灵器蓝图 Composer
  * 领域层产出 artifact，战斗层投影为 passive ability
  * 已重构为使用 CompositionRuleSet，规则逻辑集中在 rules/composition/
  */
@@ -53,13 +54,23 @@ export class ArtifactBlueprintComposer implements ProductBlueprintComposer {
       input.creatorName &&
       input.realm &&
       input.realmStage
-        ? {
-            creatorName: input.creatorName,
-            creatorCultivatorId: input.cultivatorId,
-            anchorRealm: input.realm,
-            anchorRealmStage: input.realmStage,
-            craftedAt: new Date().toISOString(),
-          }
+        ? (() => {
+            const craftedAt = new Date().toISOString();
+            return {
+              creatorName: input.creatorName,
+              creatorCultivatorId: input.cultivatorId,
+              anchorRealm: input.realm,
+              anchorRealmStage: input.realmStage,
+              craftedAt,
+              // 器灵叙事数据层：仅叙事，不参与数值判别。
+              spirit: buildArtifactSpirit(
+                decision.name,
+                projectionQuality,
+                rolledAffixes,
+                craftedAt,
+              ),
+            };
+          })()
         : undefined;
 
     const productModel: ArtifactProductModel = {

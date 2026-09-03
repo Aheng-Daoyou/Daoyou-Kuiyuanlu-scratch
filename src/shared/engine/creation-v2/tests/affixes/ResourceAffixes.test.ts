@@ -101,7 +101,7 @@ describe('resource affix balance contracts', () => {
     }
     expect(effect.params.target).toBe('mp');
     expect(effect.params.value.attribute).toBe(AttributeType.WILLPOWER);
-    expect(`${affix.displayName}${affix.displayDescription}`).toContain('法力');
+    expect(`${affix.displayName}${affix.displayDescription}`).toContain('灯焰');
     expect([
       ...(affix.match.all ?? []),
       ...(affix.match.any ?? []),

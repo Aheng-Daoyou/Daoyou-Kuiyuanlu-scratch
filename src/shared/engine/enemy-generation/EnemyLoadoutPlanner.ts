@@ -1,4 +1,4 @@
-import { ENEMY_RACE_PROFILES } from './EnemyRaceProfileRegistry';
+import { ENEMY_CLAN_PROFILES } from './EnemyClanProfileRegistry';
 import { getEnemyPersonas } from './EnemyPersonaRegistry';
 import {
   getEnemyCombatPolicy,
@@ -39,12 +39,12 @@ function resolveSkillCount(input: NormalizedEnemyGenerationInput): number {
           ? 2
           : 1;
   const bossBonus = input.isBoss && input.difficulty >= 60 ? 1 : 0;
-  const ancientBeastBonus =
-    input.race === '古兽' && input.difficulty >= 85 ? 1 : 0;
+  const relicBonus =
+    input.clan === '遗种' && input.difficulty >= 85 ? 1 : 0;
 
   return Math.min(
     4,
-    baseCount + bossBonus + ancientBeastBonus,
+    baseCount + bossBonus + relicBonus,
   );
 }
 
@@ -69,7 +69,7 @@ function resolveDifficultyProfile(
   input: NormalizedEnemyGenerationInput,
 ): EnemyDifficultyProfile {
   const effectiveDifficulty =
-    input.race === '古兽' ? Math.min(100, input.difficulty + 10) : input.difficulty;
+    input.clan === '遗种' ? Math.min(100, input.difficulty + 10) : input.difficulty;
   const band = difficultyToBand(effectiveDifficulty);
   return {
     band,
@@ -102,9 +102,9 @@ function resolveMaxAffixCount(
 export class EnemyLoadoutPlanner {
   plan(input: NormalizedEnemyGenerationInput): EnemyLoadoutPlan {
     const variantKey = buildVariantKey(input);
-    const profile = ENEMY_RACE_PROFILES[input.race];
+    const profile = ENEMY_CLAN_PROFILES[input.clan];
     const difficultyProfile = resolveDifficultyProfile(input);
-    const personas = getEnemyPersonas(input.race);
+    const personas = getEnemyPersonas(input.clan);
     const primaryPersona = pickBySeed(
       personas,
       `${variantKey}:primary-persona`,
@@ -223,7 +223,7 @@ export class EnemyLoadoutPlanner {
     primaryPersona: EnemyPersonaDefinition;
     accentPersona?: EnemyPersonaDefinition;
   }): EnemyPlannedProductIntent[] {
-    const policy = getEnemyCombatPolicy(args.input.race);
+    const policy = getEnemyCombatPolicy(args.input.clan);
     const roleOrder =
       policy.roleOrderBySkillCount[
         args.difficultyProfile.skillCount as 1 | 2 | 3 | 4
@@ -302,7 +302,7 @@ export class EnemyLoadoutPlanner {
     primaryPersona: EnemyPersonaDefinition;
     accentPersona?: EnemyPersonaDefinition;
   }): EnemyPlannedProductIntent[] {
-    const profile = ENEMY_RACE_PROFILES[args.input.race];
+    const profile = ENEMY_CLAN_PROFILES[args.input.clan];
     const selectedSlots = profile.slotPriority.slice(
       0,
       args.difficultyProfile.artifactCount,
@@ -369,7 +369,7 @@ export class EnemyLoadoutPlanner {
     candidateArchetypeIds: string[];
     personaTags: string[];
   }): EnemyPlannedProductIntent {
-    const profile = ENEMY_RACE_PROFILES[args.input.race];
+    const profile = ENEMY_CLAN_PROFILES[args.input.clan];
     const stableId = buildStableProductId(
       args.variantKey,
       args.productType,
@@ -405,7 +405,7 @@ export class EnemyLoadoutPlanner {
       candidateArchetypeIds: args.candidateArchetypeIds,
       energyBudget: resolveEnemyProductEnergyBudget({
         difficulty: args.input.difficulty,
-        race: args.input.race,
+        clan: args.input.clan,
         isBoss: args.input.isBoss,
         productType: args.productType,
       }),
@@ -420,7 +420,7 @@ export class EnemyLoadoutPlanner {
       ),
       qualityFloor: resolveEnemyProductQualityFloor({
         difficulty: args.input.difficulty,
-        race: args.input.race,
+        clan: args.input.clan,
         isBoss: args.input.isBoss,
       }),
     };

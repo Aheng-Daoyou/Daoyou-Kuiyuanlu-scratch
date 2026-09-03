@@ -463,11 +463,11 @@ describe('DamageSystem direct mitigation', () => {
 
   function createElementalAbility(
     slug: string,
-    element: '火' | '水' | '木' | '土' | '金' | '风' | '雷' | '冰',
+    element: '渊' | '星' | '尸' | '梦' | '烛' | '噬' | '帘' | '疫',
   ) {
     return AbilityFactory.create({
       slug,
-      name: `${element}系术法`,
+      name: `${element}系灯律`,
       type: AbilityType.ACTIVE_SKILL,
       tags: [
         GameplayTags.ABILITY.FUNCTION.DAMAGE,
@@ -632,7 +632,7 @@ describe('DamageSystem direct mitigation', () => {
     const damageSystem = new DamageSystem();
     const attacker = new Unit('attacker', '攻击者', {});
     const defender = new Unit('defender', '防御者', {});
-    attacker.setSpiritualRoots([{ element: '火', strength: 80, grade: '真灵根' }]);
+    attacker.setSpiritualRoots([{ element: '渊', strength: 80, grade: '真窍' }]);
 
     mockDeterministicDamageRolls();
 
@@ -641,7 +641,7 @@ describe('DamageSystem direct mitigation', () => {
       timestamp: Date.now(),
       caster: attacker,
       target: defender,
-      ability: createElementalAbility('fire-hit', '火'),
+      ability: createElementalAbility('fire-hit', '渊'),
       damageSource: DamageSource.DIRECT,
       damageType: DamageType.TRUE,
       baseDamage: 100,
@@ -659,7 +659,7 @@ describe('DamageSystem direct mitigation', () => {
     const damageSystem = new DamageSystem();
     const attacker = new Unit('attacker', '攻击者', {});
     const defender = new Unit('defender', '防御者', {});
-    attacker.setSpiritualRoots([{ element: '水', strength: 90, grade: '真灵根' }]);
+    attacker.setSpiritualRoots([{ element: '星', strength: 90, grade: '真窍' }]);
 
     mockDeterministicDamageRolls();
 
@@ -668,7 +668,7 @@ describe('DamageSystem direct mitigation', () => {
       timestamp: Date.now(),
       caster: attacker,
       target: defender,
-      ability: createElementalAbility('fire-hit', '火'),
+      ability: createElementalAbility('fire-hit', '渊'),
       damageSource: DamageSource.DIRECT,
       damageType: DamageType.TRUE,
       baseDamage: 100,
@@ -686,7 +686,7 @@ describe('DamageSystem direct mitigation', () => {
     const damageSystem = new DamageSystem();
     const attacker = new Unit('attacker', '攻击者', {});
     const defender = new Unit('defender', '防御者', {});
-    attacker.setSpiritualRoots([{ element: '火', strength: 100, grade: '天灵根' }]);
+    attacker.setSpiritualRoots([{ element: '渊', strength: 100, grade: '天窍' }]);
 
     mockDeterministicDamageRolls();
 
@@ -725,8 +725,8 @@ describe('DamageSystem direct mitigation', () => {
     const attacker = new Unit('attacker', '攻击者', {});
     const defender = new Unit('defender', '防御者', {});
     attacker.setSpiritualRoots([
-      { element: '火', strength: 40, grade: '真灵根' },
-      { element: '雷', strength: 95, grade: '变异灵根' },
+      { element: '渊', strength: 40, grade: '真窍' },
+      { element: '帘', strength: 95, grade: '变异窍' },
     ]);
 
     mockDeterministicDamageRolls();
@@ -738,8 +738,8 @@ describe('DamageSystem direct mitigation', () => {
       tags: [
         GameplayTags.ABILITY.FUNCTION.DAMAGE,
         GameplayTags.ABILITY.CHANNEL.TRUE,
-        ELEMENT_TO_RUNTIME_ABILITY_TAG['火'],
-        ELEMENT_TO_RUNTIME_ABILITY_TAG['雷'],
+        ELEMENT_TO_RUNTIME_ABILITY_TAG['渊'],
+        ELEMENT_TO_RUNTIME_ABILITY_TAG['帘'],
       ],
       effects: [],
     });
@@ -767,7 +767,7 @@ describe('DamageSystem direct mitigation', () => {
     const damageSystem = new DamageSystem();
     const attacker = new Unit('attacker', '攻击者', {});
     const defender = new Unit('defender', '防御者', {});
-    attacker.setSpiritualRoots([{ element: '火', strength: 100, grade: '天灵根' }]);
+    attacker.setSpiritualRoots([{ element: '渊', strength: 100, grade: '天窍' }]);
 
     vi.spyOn(Math, 'random').mockReturnValue(0.5);
 
@@ -776,7 +776,7 @@ describe('DamageSystem direct mitigation', () => {
       timestamp: Date.now(),
       caster: attacker,
       target: defender,
-      ability: createElementalAbility('fire-reflect', '火'),
+      ability: createElementalAbility('fire-reflect', '渊'),
       damageSource: DamageSource.REFLECT,
       damageType: DamageType.TRUE,
       baseDamage: 100,
@@ -844,7 +844,7 @@ describe('DamageSystem direct mitigation', () => {
     const damageSystem = new DamageSystem();
     const attacker = new Unit('attacker', '攻击者', {});
     const defender = new Unit('defender', '防御者', {});
-    attacker.setSpiritualRoots([{ element: '火', strength: 80, grade: '真灵根' }]);
+    attacker.setSpiritualRoots([{ element: '渊', strength: 80, grade: '真窍' }]);
 
     const sourceBuff = new Buff(
       'fire-dot' as AbilityId,
@@ -853,7 +853,7 @@ describe('DamageSystem direct mitigation', () => {
       2,
       StackRule.REFRESH_DURATION,
     );
-    sourceBuff.tags.addTags([ELEMENT_TO_RUNTIME_ABILITY_TAG['火']]);
+    sourceBuff.tags.addTags([ELEMENT_TO_RUNTIME_ABILITY_TAG['渊']]);
 
     mockDeterministicDamageRolls();
 

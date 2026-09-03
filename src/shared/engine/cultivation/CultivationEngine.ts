@@ -64,17 +64,17 @@ function getMajorDeviationGain(
   rng: () => number,
 ): number {
   switch (fromRealm) {
-    case '金丹':
+    case '窥渊':
       return randomInt(22, 35, rng);
-    case '元婴':
+    case '蚀体':
       return randomInt(30, 45, rng);
-    case '化神':
+    case '忘川':
       return randomInt(35, 50, rng);
-    case '炼虚':
+    case '执灯':
       return randomInt(40, 55, rng);
-    case '合体':
+    case '掌灯':
       return randomInt(45, 60, rng);
-    case '大乘':
+    case '近神':
       return randomInt(50, 65, rng);
     default:
       return randomInt(12, 20, rng);
@@ -210,7 +210,7 @@ export function performCultivation(
   // 修为允许超过当前阶段 cap；突破成功时扣除本阶段 cap 并保留溢出。
   progress.cultivation_exp = exp_before + finalExpGain;
 
-  // 更新感悟值（每次闭关都可能获得，非顿悟时0~20，顿悟时20~50）
+  // 更新窥悟值（每次闭关都可能获得，非窥真时0~20，窥真时20~50）
   if (finalInsightGain > 0) {
     progress.comprehension_insight = Math.min(
       100,
@@ -236,7 +236,7 @@ export function performCultivation(
     realm: cultivator.realm,
     realm_stage: cultivator.realm_stage,
     years,
-    success: false, // 修炼不算突破
+    success: false, // 窥悟不算突破
     chance: 0,
     roll: 0,
     timestamp: new Date().toISOString(),
@@ -282,7 +282,7 @@ export function attemptBreakthrough(
 
   // 检查修为是否足够
   if (!canAttemptBreakthrough(progress)) {
-    throw new Error('修为不足，无法突破（至少需要60%修为进度）');
+    throw new Error('灯韵不足，无法突破（至少需要60%灯韵进度）');
   }
 
   const fromRealm = cultivator.realm;
@@ -364,7 +364,7 @@ export function attemptBreakthrough(
     progress.inner_demon = false;
     progress.deviation_risk = 0;
 
-    // 感悟值变化
+    // 窥悟值变化
     if (breakthrough_type === 'perfect') {
       insight_change = 15;
     } else if (breakthrough_type === 'normal') {
@@ -404,7 +404,7 @@ export function attemptBreakthrough(
     progress.cultivation_exp = Math.max(0, progress.cultivation_exp - exp_lost);
     syncBottleneckState(progress);
 
-    // 感悟值降低
+    // 窥悟值降低
     const insightLoss = Math.floor(10 + rng() * 10); // 10-20
     const finalInsightLoss =
       isMajorBreakthrough && clearMindStatus

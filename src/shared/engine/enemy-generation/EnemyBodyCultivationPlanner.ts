@@ -10,7 +10,7 @@ import type {
   BodyCultivationRealm,
   BodyCultivationTrackKey,
 } from '@shared/types/condition';
-import { REALM_ORDER, type EnemyRace } from '@shared/types/constants';
+import { REALM_ORDER, type EnemyClan } from '@shared/types/constants';
 import type {
   BodyCultivationTrackLevels,
   EnemyBodyCultivationPlan,
@@ -21,50 +21,29 @@ import { hashText } from './utils';
 type BodyTrackWeights = Record<BodyCultivationTrackKey, number>;
 
 export const ENEMY_BODY_CULTIVATION_TRACK_WEIGHTS: Record<
-  EnemyRace,
+  EnemyClan,
   BodyTrackWeights
 > = {
-  人族: {
-    skin: 1,
-    sinew_bone: 1,
-    organs: 1.15,
-    qi_blood: 1,
-    primordial_spirit: 1.12,
-  },
-  妖族: {
+  腌物: {
     skin: 1.18,
-    sinew_bone: 1.3,
-    organs: 0.78,
-    qi_blood: 1.35,
-    primordial_spirit: 0.72,
+    sinew_bone: 1.2,
+    organs: 0.9,
+    qi_blood: 1.1,
+    primordial_spirit: 0.8,
   },
-  鬼魂: {
-    skin: 0.72,
+  遗种: {
+    skin: 1.05,
+    sinew_bone: 1.0,
+    organs: 1.22,
+    qi_blood: 0.95,
+    primordial_spirit: 1.25,
+  },
+  投影: {
+    skin: 0.85,
     sinew_bone: 0.72,
-    organs: 1.18,
-    qi_blood: 0.78,
-    primordial_spirit: 1.5,
-  },
-  魔族: {
-    skin: 1.08,
-    sinew_bone: 0.9,
-    organs: 1.32,
-    qi_blood: 1.2,
-    primordial_spirit: 0.85,
-  },
-  古兽: {
-    skin: 1.35,
-    sinew_bone: 1.45,
-    organs: 0.68,
-    qi_blood: 1.22,
-    primordial_spirit: 0.65,
-  },
-  灵族: {
-    skin: 1.08,
-    sinew_bone: 0.78,
-    organs: 1.28,
-    qi_blood: 0.86,
-    primordial_spirit: 1.24,
+    organs: 1.12,
+    qi_blood: 0.82,
+    primordial_spirit: 1.4,
   },
 };
 
@@ -89,11 +68,11 @@ function sumTrackLevels(levels: BodyCultivationTrackLevels): number {
   );
 }
 
-function sortTracksByRacePreference(
-  race: EnemyRace,
+function sortTracksByClanPreference(
+  clan: EnemyClan,
   variantKey: string,
 ): BodyCultivationTrackKey[] {
-  const weights = ENEMY_BODY_CULTIVATION_TRACK_WEIGHTS[race];
+  const weights = ENEMY_BODY_CULTIVATION_TRACK_WEIGHTS[clan];
   return [...BODY_CULTIVATION_TRACK_KEYS].sort((left, right) => {
     const weightDiff = weights[right] - weights[left];
     if (weightDiff !== 0) return weightDiff;
@@ -106,10 +85,10 @@ function sortTracksByRacePreference(
 
 function pickNextTrack(
   levels: BodyCultivationTrackLevels,
-  race: EnemyRace,
+  clan: EnemyClan,
   variantKey: string,
 ): BodyCultivationTrackKey {
-  const weights = ENEMY_BODY_CULTIVATION_TRACK_WEIGHTS[race];
+  const weights = ENEMY_BODY_CULTIVATION_TRACK_WEIGHTS[clan];
   return [...BODY_CULTIVATION_TRACK_KEYS].sort((left, right) => {
     const leftScore = levels[left] / weights[left];
     const rightScore = levels[right] / weights[right];
@@ -158,7 +137,7 @@ function resolveBodyRealm(
 
 function applyRealmRequirements(
   levels: BodyCultivationTrackLevels,
-  race: EnemyRace,
+  clan: EnemyClan,
   variantKey: string,
   realm: BodyCultivationRealm,
 ): void {
@@ -179,7 +158,7 @@ function applyRealmRequirements(
   }
 
   if (requirement.requiredAnyTracks) {
-    const preferredTracks = sortTracksByRacePreference(race, variantKey).slice(
+    const preferredTracks = sortTracksByClanPreference(clan, variantKey).slice(
       0,
       requirement.requiredAnyTracks.count,
     );
@@ -202,10 +181,10 @@ export class EnemyBodyCultivationPlanner {
     const realm = resolveBodyRealm(input, totalLevel);
     const trackLevels = createEmptyTrackLevels();
 
-    applyRealmRequirements(trackLevels, input.race, variantKey, realm);
+    applyRealmRequirements(trackLevels, input.clan, variantKey, realm);
 
     while (sumTrackLevels(trackLevels) < totalLevel) {
-      const track = pickNextTrack(trackLevels, input.race, variantKey);
+      const track = pickNextTrack(trackLevels, input.clan, variantKey);
       trackLevels[track] += 1;
     }
 
@@ -214,8 +193,8 @@ export class EnemyBodyCultivationPlanner {
       .sort((left, right) => {
         const levelDiff = trackLevels[right] - trackLevels[left];
         if (levelDiff !== 0) return levelDiff;
-        return sortTracksByRacePreference(input.race, variantKey).indexOf(left) -
-          sortTracksByRacePreference(input.race, variantKey).indexOf(right);
+        return sortTracksByClanPreference(input.clan, variantKey).indexOf(left) -
+          sortTracksByClanPreference(input.clan, variantKey).indexOf(right);
       })
       .slice(0, 3);
 

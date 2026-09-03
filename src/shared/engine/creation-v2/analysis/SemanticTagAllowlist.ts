@@ -19,6 +19,7 @@ const SEMANTIC_TAG_ALIASES: Record<CreationMaterialSemanticTag, readonly string[
     'material.semantic.flame',
     '火',
     '炎',
+    '渊',
   ],
   [CreationTags.MATERIAL.SEMANTIC_FREEZE]: [
     'freeze',
@@ -26,18 +27,21 @@ const SEMANTIC_TAG_ALIASES: Record<CreationMaterialSemanticTag, readonly string[
     'cold',
     'material.semantic.freeze',
     '冰',
+    '疫',
   ],
   [CreationTags.MATERIAL.SEMANTIC_THUNDER]: [
     'thunder',
     'lightning',
     'material.semantic.thunder',
     '雷',
+    '帘',
   ],
   [CreationTags.MATERIAL.SEMANTIC_WIND]: [
     'wind',
     'air',
     'material.semantic.wind',
     '风',
+    '噬',
   ],
   [CreationTags.MATERIAL.SEMANTIC_BLADE]: [
     'blade',
@@ -85,24 +89,28 @@ const SEMANTIC_TAG_ALIASES: Record<CreationMaterialSemanticTag, readonly string[
     'stone',
     'material.semantic.earth',
     '土',
+    '梦',
   ],
   [CreationTags.MATERIAL.SEMANTIC_METAL]: [
     'metal',
     'steel',
     'material.semantic.metal',
     '金',
+    '烛',
   ],
   [CreationTags.MATERIAL.SEMANTIC_WATER]: [
     'water',
     'aqua',
     'material.semantic.water',
     '水',
+    '星',
   ],
   [CreationTags.MATERIAL.SEMANTIC_WOOD]: [
     'wood',
     'timber',
     'material.semantic.wood',
     '木',
+    '尸',
   ],
   [CreationTags.MATERIAL.SEMANTIC_POISON]: [
     'poison',
@@ -224,14 +232,14 @@ const SEMANTIC_TAG_TEXT_PATTERN_MAP: Record<CreationMaterialSemanticTag, RegExp>
   [CreationTags.MATERIAL.SEMANTIC_SPACE]: /空|界|域|虚|折/u,
   [CreationTags.MATERIAL.SEMANTIC_TIME]: /时|刻|岁|轮|瞬/u,
   [CreationTags.MATERIAL.SEMANTIC_LIFE]: /生|命|苏|复|萌/u,
-  [CreationTags.MATERIAL.SEMANTIC_ALCHEMY]: /丹|药|炉|炼丹|药性/u,
+  [CreationTags.MATERIAL.SEMANTIC_ALCHEMY]: /丹|药|炉|制香|香性/u,
   [CreationTags.MATERIAL.SEMANTIC_REFINING]: /铸|锻|炼器|器胚|熔/u,
   [CreationTags.MATERIAL.SEMANTIC_BEAST]: /兽|妖|蛟|虎|鳞/u,
   [CreationTags.MATERIAL.SEMANTIC_BLOOD]: /血|脉|煞|精血|血髓/u,
   [CreationTags.MATERIAL.SEMANTIC_BONE]: /骨|骸|甲壳|角|刺/u,
   [CreationTags.MATERIAL.SEMANTIC_FORMATION]: /阵|禁|纹|符|阵图/u,
   [CreationTags.MATERIAL.SEMANTIC_ILLUSION]: /幻|梦|迷|蜃|惑/u,
-  [CreationTags.MATERIAL.SEMANTIC_QI]: /气|灵息|元炁|法力|灵压/u,
+  [CreationTags.MATERIAL.SEMANTIC_QI]: /气|灵息|元炁|灯焰|灯压/u,
 };
 
 const SEMANTIC_TAG_TEXT_PATTERNS = CREATION_MATERIAL_SEMANTIC_TAGS.map((tag) => ({

@@ -106,7 +106,7 @@ describe('MaterialFactsBuilder', () => {
         recipeTags: ['Recipe.ProductBias.Skill'],
         energyValue: 6,
         rarityWeight: 2,
-        element: '火',
+        element: '渊',
       }),
     );
 
@@ -169,36 +169,36 @@ describe('DefaultIntentResolver', () => {
         materialType: 'gongfa_manual',
         rank: '天品',
         quantity: 1,
-        explicitTags: [ELEMENT_TO_MATERIAL_TAG['火']],
+        explicitTags: [ELEMENT_TO_MATERIAL_TAG['渊']],
         semanticTags: ['Material.Semantic.Flame'],
         recipeTags: ['Recipe.ProductBias.GongFa'],
         energyValue: 40,
         rarityWeight: 6,
-        element: '火',
+        element: '渊',
       },
       {
         materialName: '冰魄辅材一',
         materialType: 'herb',
         rank: '凡品',
         quantity: 1,
-        explicitTags: [ELEMENT_TO_MATERIAL_TAG['冰']],
+        explicitTags: [ELEMENT_TO_MATERIAL_TAG['疫']],
         semanticTags: ['Material.Semantic.Freeze'],
         recipeTags: ['Recipe.ProductBias.GongFa'],
         energyValue: 4,
         rarityWeight: 1,
-        element: '冰',
+        element: '疫',
       },
       {
         materialName: '冰魄辅材二',
         materialType: 'herb',
         rank: '凡品',
         quantity: 1,
-        explicitTags: [ELEMENT_TO_MATERIAL_TAG['冰']],
+        explicitTags: [ELEMENT_TO_MATERIAL_TAG['疫']],
         semanticTags: ['Material.Semantic.Freeze'],
         recipeTags: ['Recipe.ProductBias.GongFa'],
         energyValue: 4,
         rarityWeight: 1,
-        element: '冰',
+        element: '疫',
       },
     ];
 
@@ -210,11 +210,11 @@ describe('DefaultIntentResolver', () => {
       fingerprints,
     );
 
-    expect(intent.elementBias).toBe('火');
+    expect(intent.elementBias).toBe('渊');
     expect(intent.dominantTags).toEqual(
       expect.arrayContaining([
-        ELEMENT_TO_MATERIAL_TAG['火'],
-        ELEMENT_TO_MATERIAL_TAG['冰'],
+        ELEMENT_TO_MATERIAL_TAG['渊'],
+        ELEMENT_TO_MATERIAL_TAG['疫'],
       ]),
     );
   });

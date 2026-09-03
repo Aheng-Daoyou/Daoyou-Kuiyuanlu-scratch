@@ -14,7 +14,7 @@ describe('creation-v2 affix match contract', () => {
   it('queryByTags 应仅依赖静态筛选标签，避免候选池不可达', () => {
     const candidates = DEFAULT_AFFIX_REGISTRY.queryByTags(
       [
-        ELEMENT_TO_MATERIAL_TAG['木'],
+        ELEMENT_TO_MATERIAL_TAG['尸'],
         CreationTags.MATERIAL.SEMANTIC_POISON,
         CreationTags.MATERIAL.SEMANTIC_THUNDER,
       ],

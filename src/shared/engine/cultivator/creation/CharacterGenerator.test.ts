@@ -3,12 +3,14 @@ import type { CultivatorAIRawData } from './types';
 import { CharacterGenerator } from './CharacterGenerator';
 import { CultivatorAIRawSchema } from './types';
 
-const { generateAiObjectMock } = vi.hoisted(() => ({
+const { generateAiObjectMock, hasAnyServerLlmProviderConfiguredMock } = vi.hoisted(() => ({
   generateAiObjectMock: vi.fn(),
+  hasAnyServerLlmProviderConfiguredMock: vi.fn(() => true),
 }));
 
 vi.mock('@server/utils/aiClient', () => ({
   generateAiObject: generateAiObjectMock,
+  hasAnyServerLlmProviderConfigured: hasAnyServerLlmProviderConfiguredMock,
 }));
 
 const buildAIData = (
@@ -18,8 +20,9 @@ const buildAIData = (
   gender: '男',
   origin: '青岚山',
   personality: '沉静坚韧',
+  lineage_lore: '祖上三代皆在灯下守灯，曾祖某夜未归，自此一脉开窍皆偏星。',
   background: '少年出身山村，偶得残卷，自此踏上修行之路。',
-  element_preferences: ['金', '木', '水', '火'],
+  element_preferences: ['烛', '尸', '星', '渊'],
   aptitude_score: 78,
   balance_notes: '双目有神，命数稳中带锋。',
   ...overrides,
@@ -33,41 +36,41 @@ describe('CharacterGenerator', () => {
   it('uses the tolerant AI schema and trims extra element preferences', async () => {
     generateAiObjectMock.mockResolvedValueOnce({
       output: buildAIData({
-        element_preferences: ['金', '木', '水', '火', '土'],
+        element_preferences: ['烛', '尸', '星', '渊', '梦'],
       }),
     });
 
-    const { cultivator } = await CharacterGenerator.generate('偏向剑修的少年');
+    const { cultivator } = await CharacterGenerator.generate('偏向封灵道的少年');
 
     expect(generateAiObjectMock).toHaveBeenCalledWith(
       expect.objectContaining({
         system: expect.any(String),
         prompt: expect.any(String),
         schema: CultivatorAIRawSchema,
-        name: '修仙真形骨架',
+        name: '守灯真形骨架',
         sceneId: 'character-generation',
       }),
     );
     expect(cultivator.spiritual_roots.map((root) => root.element)).toEqual([
-      '金',
-      '木',
-      '水',
-      '火',
+      '烛',
+      '尸',
+      '星',
+      '渊',
     ]);
   });
 
   it('deduplicates repeated element preferences before generating roots', async () => {
     generateAiObjectMock.mockResolvedValueOnce({
       output: buildAIData({
-        element_preferences: ['火', '火', '水'],
+        element_preferences: ['渊', '渊', '星'],
       }),
     });
 
     const { cultivator } = await CharacterGenerator.generate('擅长丹火的修士');
 
     expect(cultivator.spiritual_roots.map((root) => root.element)).toEqual([
-      '火',
-      '水',
+      '渊',
+      '星',
     ]);
   });
 

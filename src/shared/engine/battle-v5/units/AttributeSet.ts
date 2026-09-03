@@ -138,7 +138,7 @@ class Attribute {
  * - SPIRIT    (灵力)    — 法术攻击、少量法力
  * - ENDURANCE (根骨)    — 物理防御、少量气血上限
  * - SPEED     (身法)    — 行动速度、闪避率、命中
- * - WILLPOWER (神识)    — 法防、法力、控制命中与抗性
+ * - WILLPOWER (心神)    — 法防、法力、控制命中与抗性
  *
  * 派生型二级属性（浮点，base=公式，modifier 可叠加）：
  * - ATK                物理攻击   = 40 + STRENGTH×3.5

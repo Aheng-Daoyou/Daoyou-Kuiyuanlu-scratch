@@ -117,7 +117,7 @@ export class AffixPoolBuilder {
     return defs.filter((def) => {
       // --- 1. 通用环境约束过滤 (Universal Context Filtering) ---
 
-      // 法宝：检查装备槽位约束
+      // 封灵器：检查装备槽位约束
       if (productType === 'artifact' && def.applicableArtifactSlots) {
         const slotBias =
           intent?.slotBias ?? session.state.input.requestedSlot;

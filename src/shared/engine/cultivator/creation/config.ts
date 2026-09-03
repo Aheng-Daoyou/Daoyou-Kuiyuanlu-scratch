@@ -40,7 +40,7 @@ function buildTechnique(
     name,
     element,
     quality: '凡品',
-    description: `${element}行气入门之法，可温养经脉、稳固道基。`,
+    description: `${element}窍纳秽入门之法，导梦涎缓缓入体而不立毙，是守灯一脉最稳妥的「慢性中毒」。`,
     attributeModifiers: modifiers,
   });
 }
@@ -80,7 +80,7 @@ function buildAttackSkill(
     cost,
     cooldown,
     target_self: false,
-    description: `${element}灵力凝成一击，乃初入仙途的攻伐手段。`,
+    description: `${element}窍之力凝成一点凶光刺出，乃初入灯途的攻伐手段。`,
     abilityConfig: ability,
   });
 }
@@ -121,71 +121,71 @@ function buildHealSkill(
     cost,
     cooldown,
     target_self: true,
-    description: `${element}灵息回护周身，可作自保疗伤之用。`,
+    description: `${element}窍之息回护周身，可作自保续灯之用。`,
     abilityConfig: ability,
   });
 }
 
 export const BASIC_TECHNIQUES: Record<ElementType, () => CultivationTechnique> =
   {
-    金: () =>
-      buildTechnique('金锐功', '金', [
+    烛: () =>
+      buildTechnique('照烛功', '烛', [
         modifier(AttributeType.STRENGTH, 5),
         modifier(AttributeType.ENDURANCE, 5),
       ]),
-    木: () =>
-      buildTechnique('长春功', '木', [
+    尸: () =>
+      buildTechnique('枯荣功', '尸', [
         modifier(AttributeType.VITALITY, 5),
         modifier(AttributeType.ENDURANCE, 5),
       ]),
-    水: () =>
-      buildTechnique('玄水诀', '水', [
+    星: () =>
+      buildTechnique('坠星诀', '星', [
         modifier(AttributeType.SPIRIT, 5),
         modifier(AttributeType.SPEED, 5),
       ]),
-    火: () =>
-      buildTechnique('烈阳功', '火', [
+    渊: () =>
+      buildTechnique('渊火功', '渊', [
         modifier(AttributeType.SPIRIT, 8),
         modifier(AttributeType.WILLPOWER, 2),
       ]),
-    土: () =>
-      buildTechnique('厚土经', '土', [
+    梦: () =>
+      buildTechnique('沉梦经', '梦', [
         modifier(AttributeType.ENDURANCE, 8),
         modifier(AttributeType.VITALITY, 2),
       ]),
-    风: () =>
-      buildTechnique('御风诀', '风', [
+    噬: () =>
+      buildTechnique('噬风功', '噬', [
         modifier(AttributeType.SPEED, 8),
         modifier(AttributeType.STRENGTH, 2),
       ]),
-    雷: () =>
-      buildTechnique('紫雷诀', '雷', [
+    帘: () =>
+      buildTechnique('揭帘诀', '帘', [
         modifier(AttributeType.SPIRIT, 5),
         modifier(AttributeType.SPEED, 5),
       ]),
-    冰: () =>
-      buildTechnique('凝霜诀', '冰', [
+    疫: () =>
+      buildTechnique('瘟霜诀', '疫', [
         modifier(AttributeType.SPIRIT, 6),
         modifier(AttributeType.WILLPOWER, 4),
       ]),
   };
 
 export const BASIC_SKILLS: Record<ElementType, Skill[]> = {
-  金: [buildAttackSkill('金锋术', '金', 12), buildHealSkill('铁皮术', '金', 8)],
-  木: [buildAttackSkill('缠绕术', '木', 8), buildHealSkill('回春术', '木', 14)],
-  水: [
-    buildAttackSkill('冰锥术', '水', 10),
-    buildHealSkill('水罩术', '水', 12),
+  烛: [buildAttackSkill('烛锋刺', '烛', 12), buildHealSkill('灯皮护', '烛', 8)],
+  尸: [buildAttackSkill('枯藤缚', '尸', 8), buildHealSkill('续命灯', '尸', 14)],
+  星: [
+    buildAttackSkill('坠星锥', '星', 10),
+    buildHealSkill('星幕', '星', 12),
   ],
-  火: [buildAttackSkill('烈焰指', '火', 14), buildHealSkill('焰息诀', '火', 8)],
-  土: [
-    buildAttackSkill('落石术', '土', 11),
-    buildHealSkill('厚土护体', '土', 10),
+  渊: [buildAttackSkill('渊火指', '渊', 14), buildHealSkill('渊息灯', '渊', 8)],
+  梦: [
+    buildAttackSkill('梦石坠', '梦', 11),
+    buildHealSkill('梦土甲', '梦', 10),
   ],
-  风: [buildAttackSkill('风刃', '风', 10), buildHealSkill('清风诀', '风', 9)],
-  雷: [buildAttackSkill('紫雷击', '雷', 13), buildHealSkill('雷护身', '雷', 9)],
-  冰: [
-    buildAttackSkill('寒冰刺', '冰', 11),
-    buildHealSkill('冰幕诀', '冰', 10),
+  噬: [buildAttackSkill('吞风刃', '噬', 10), buildHealSkill('噬风息', '噬', 9)],
+  帘: [buildAttackSkill('裂幕击', '帘', 13), buildHealSkill('幕隙守', '帘', 9)],
+  疫: [
+    buildAttackSkill('瘟霜刺', '疫', 11),
+    buildHealSkill('瘟幕守', '疫', 10),
   ],
 };

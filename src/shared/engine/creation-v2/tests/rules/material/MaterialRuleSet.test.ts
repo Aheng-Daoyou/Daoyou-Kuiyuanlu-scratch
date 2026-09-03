@@ -9,7 +9,7 @@ describe('MaterialRuleSet', () => {
   it('应从材料事实中提取 dominant tags 与 recipe tags', () => {
     const fingerprints: MaterialFingerprint[] = [
       {
-        materialName: '赤焰妖骨',
+        materialName: '赤焰腌骨',
         materialType: 'monster',
         rank: '玄品',
         quantity: 1,
@@ -18,7 +18,7 @@ describe('MaterialRuleSet', () => {
         recipeTags: ['Recipe.ProductBias.Skill', 'Recipe.ProductBias.GongFa'],
         energyValue: 8,
         rarityWeight: 2,
-        element: '火',
+        element: '渊',
       },
     ];
 
@@ -43,7 +43,7 @@ describe('MaterialRuleSet', () => {
         recipeTags: ['Recipe.ProductBias.Skill'],
         energyValue: 8,
         rarityWeight: 2,
-        element: '火',
+        element: '渊',
       },
       {
         materialName: '玄冰玉髓',
@@ -55,7 +55,7 @@ describe('MaterialRuleSet', () => {
         recipeTags: ['Recipe.ProductBias.Skill'],
         energyValue: 8,
         rarityWeight: 2,
-        element: '冰',
+        element: '疫',
       },
     ];
 
@@ -63,7 +63,7 @@ describe('MaterialRuleSet', () => {
     const decision = ruleSet.evaluate(facts);
 
     expect(decision.valid).toBe(false);
-    expect(decision.notes).toContain('火、冰材料不可同炉炼制');
+    expect(decision.notes).toContain('渊、疫材料不可同炉炼制');
     expect(decision.reasons).toEqual(
       expect.arrayContaining([
         expect.objectContaining({ code: 'skill-ore-forbidden' }),

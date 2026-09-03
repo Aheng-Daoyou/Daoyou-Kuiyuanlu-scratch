@@ -71,7 +71,7 @@ function resolveRealmDiffMultiplier(realmDiff: number): number {
 }
 
 function resolveDailyBudget(realm: RealmType): number {
-  return REALM_DAILY_EXP_BUDGET[realm] ?? REALM_DAILY_EXP_BUDGET['炼气'];
+  return REALM_DAILY_EXP_BUDGET[realm] ?? REALM_DAILY_EXP_BUDGET['闻腥'];
 }
 
 function calculateResolvedExp(

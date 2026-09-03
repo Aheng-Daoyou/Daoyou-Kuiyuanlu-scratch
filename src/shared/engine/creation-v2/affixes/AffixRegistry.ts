@@ -91,7 +91,7 @@ export class AffixRegistry {
 
     for (const productType of def.applicableTo) {
       // 规则三：Artifact 默认禁止 OWNER_AS_CASTER scope。
-      // 武器法宝需要少量进攻型被动；只允许 weapon-only 词条在进攻事件上使用。
+      // 武器封灵器需要少量进攻型被动；只允许 weapon-only 词条在进攻事件上使用。
       if (
         productType === 'artifact' &&
         def.listenerSpec?.scope === GameplayTags.SCOPE.OWNER_AS_CASTER &&

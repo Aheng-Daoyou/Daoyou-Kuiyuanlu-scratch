@@ -172,7 +172,7 @@ describe('BuffContainer', () => {
     const firstAttribution = CombatAttributionV3.owned(firstSource, {
       kind: 'equipment',
       id: 'first-equipment',
-      name: '旧法器',
+      name: '旧凡器',
     });
     const nextAttribution = CombatAttributionV3.owned(nextSource, {
       kind: 'gongfa',
@@ -202,7 +202,7 @@ describe('BuffContainer', () => {
     const firstAttribution = CombatAttributionV3.owned(firstSource, {
       kind: 'equipment',
       id: 'first-equipment',
-      name: '旧法器',
+      name: '旧凡器',
     });
     const ignoredAttribution = CombatAttributionV3.owned(ignoredSource, {
       kind: 'gongfa',

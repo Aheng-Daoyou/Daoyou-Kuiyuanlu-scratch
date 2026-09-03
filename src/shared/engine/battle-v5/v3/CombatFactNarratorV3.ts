@@ -111,11 +111,11 @@ export class CombatFactNarratorV3 {
                 : `为「${fact.target.name}」恢复 `,
             ),
             part(String(fact.amount), 'number', 'positive'),
-            part(fact.resource === 'hp' ? ' 点气血' : ' 点法力'),
+            part(fact.resource === 'hp' ? ' 点气血' : ' 点灯焰'),
             ...(this.mode === 'detailed'
               ? [
                   part('，结算后'),
-                  part(fact.resource === 'hp' ? '气血 ' : '法力 ', 'resource'),
+                  part(fact.resource === 'hp' ? '气血 ' : '灯焰 ', 'resource'),
                   part(String(fact.after), 'number', 'resource'),
                 ]
               : []),
@@ -272,7 +272,7 @@ export class CombatFactNarratorV3 {
     let parts: PresentedLogPartV3[];
     switch (fact.defense) {
       case 'mana_shield':
-        parts = [part('法力护盾生效', 'status', 'shield')];
+        parts = [part('灯焰护盾生效', 'status', 'shield')];
         if (fact.amount !== undefined) {
           parts.push(
             part('，抵消 '),

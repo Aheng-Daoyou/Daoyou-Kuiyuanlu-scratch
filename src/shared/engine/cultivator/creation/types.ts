@@ -7,9 +7,9 @@ const elementPreferenceSchema = z
   .array(z.enum(ELEMENT_VALUES))
   .min(1)
   .max(MAX_ELEMENT_PREFERENCES)
-  .describe('该角色的灵根属性（如金、木、水、火、土）');
+  .describe('该角色的窍属性偏好，取烛/尸/星/渊/梦/噬/帘/疫 1-4 项，勿用金木水火土');
 
-// AI 只负责生成文本设定、灵根偏好和资质评分
+// AI 只负责生成文本设定、窍偏好和资质评分
 export const CultivatorAISchema = z.object({
   player_race: z.literal('human').default('human').describe('玩家种族，首版固定为人族'),
   race_narrative: z.string().min(4).max(120).default('人身近道，百法皆可参悟。').describe('种族判词'),
@@ -17,6 +17,11 @@ export const CultivatorAISchema = z.object({
   gender: z.enum(GENDER_VALUES).describe('性别'),
   origin: z.string().min(2).max(40).describe('出身势力或地域'),
   personality: z.string().min(2).max(100).describe('性格概述'),
+  lineage_lore: z
+    .string()
+    .min(10)
+    .max(200)
+    .describe('家系异闻：解释这身窍为何如此纯净或杂驳，即历代先祖纳秽（吸收梦涎）留下的污染遗产'),
   background: z.string().min(10).max(300).describe('背景故事'),
   element_preferences: elementPreferenceSchema,
   aptitude_score: z
@@ -33,7 +38,7 @@ export const CultivatorAIRawSchema = CultivatorAISchema.extend({
     .array(z.enum(ELEMENT_VALUES))
     .min(1)
     .max(ELEMENT_VALUES.length)
-    .describe('该角色的灵根属性原始输出，后续会去重并裁剪为最多4项'),
+    .describe('该角色的窍属性原始输出，后续会去重并裁剪为最多4项'),
 });
 
 export type CultivatorAIData = z.infer<typeof CultivatorAISchema>;

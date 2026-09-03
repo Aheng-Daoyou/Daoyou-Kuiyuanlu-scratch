@@ -21,7 +21,7 @@ describe('AsyncMaterialAnalyzer', () => {
       type: 'ore',
       rank: '玄品',
       quantity: 1,
-      element: '火',
+      element: '渊',
       description: '蕴含赤炎与锋锐之气',
     },
   ];
@@ -32,7 +32,7 @@ describe('AsyncMaterialAnalyzer', () => {
       new StubSemanticEnricher({
         status: 'success',
         provider: 'mock',
-        batchInsight: '火系进攻材料',
+        batchInsight: '渊系进攻材料',
         materials: [
           {
             materialId: 'mat-fire',
@@ -55,7 +55,7 @@ describe('AsyncMaterialAnalyzer', () => {
       addedTags: ['Material.Semantic.Burst'],
       droppedTags: ['unknown.tag'],
       reason: '火焰与爆裂意象明显',
-      batchInsight: '火系进攻材料',
+      batchInsight: '渊系进攻材料',
       provider: 'mock',
     });
   });

@@ -12,7 +12,7 @@ describe('ProductRehydrator', () => {
   it('rebuilds skill battleProjection from productModel only', () => {
     const model = composeProductFromAffixIds({
       productType: 'skill',
-      element: '火',
+      element: '渊',
       name: '赤炎术',
       affixIds: ['skill-core-damage-fire'],
     });
@@ -41,8 +41,8 @@ describe('ProductRehydrator', () => {
   it('returns a JSON-safe runtime model without explicit undefined fields', () => {
     const model = composeProductFromAffixIds({
       productType: 'artifact',
-      element: '金',
-      name: '无漏法器',
+      element: '烛',
+      name: '无漏凡器',
       affixIds: ['artifact-panel-atk'],
       requestedSlot: 'accessory',
     });
@@ -55,7 +55,7 @@ describe('ProductRehydrator', () => {
   it('keeps nested buff configs JSON-safe when optional listeners are absent', () => {
     const model = composeProductFromAffixIds({
       productType: 'artifact',
-      element: '雷',
+      element: '帘',
       name: '吞雷瓶',
       affixIds: ['artifact-treasure-thunder-devour-bottle'],
       requestedSlot: 'accessory',
@@ -68,7 +68,7 @@ describe('ProductRehydrator', () => {
       artifactSchema.safeParse({
         name: model.name,
         slot: 'accessory',
-        element: '雷',
+        element: '帘',
         abilityConfig: projectAbilityConfig(rehydrated),
         productModel: rehydrated,
       }).success,
@@ -78,10 +78,10 @@ describe('ProductRehydrator', () => {
   it('preserves enemy pacing context when rebuilding skill battleProjection', () => {
     const model = composeProductFromAffixIds({
       productType: 'skill',
-      element: '火',
+      element: '渊',
       name: '赤炎袭',
       affixIds: ['skill-core-damage-fire'],
-      realm: '金丹',
+      realm: '窥渊',
       realmStage: '后期',
       projectionContext: {
         ownerKind: 'enemy',
@@ -107,7 +107,7 @@ describe('ProductRehydrator', () => {
   it('rehydrates legacy skill models without pacing context', () => {
     const model = composeProductFromAffixIds({
       productType: 'skill',
-      element: '火',
+      element: '渊',
       name: '旧版赤炎术',
       affixIds: ['skill-core-damage-fire'],
     });
@@ -123,15 +123,15 @@ describe('ProductRehydrator', () => {
   it('ignores legacy skill projectionAnchor when rebuilding mpCost', () => {
     const model = composeProductFromAffixIds({
       productType: 'skill',
-      element: '火',
+      element: '渊',
       name: '旧版锚点赤炎术',
       affixIds: ['skill-core-damage-fire'],
-      realm: '炼气',
+      realm: '闻腥',
       realmStage: '初期',
     });
     const serialized = serializeProductModel(model) as Record<string, unknown>;
     serialized.projectionAnchor = {
-      realm: '渡劫',
+      realm: '渡渊',
       realmStage: '圆满',
     };
 
@@ -147,12 +147,12 @@ describe('ProductRehydrator', () => {
   it('recomputes stored artifact modifier values from current scaling rules', () => {
     const model = composeProductFromAffixIds({
       productType: 'artifact',
-      element: '金',
+      element: '烛',
       name: '旧版锋锐戒',
       affixIds: ['artifact-panel-atk'],
       requestedSlot: 'accessory',
       requestedQuality: '神品',
-      realm: '渡劫',
+      realm: '渡渊',
       realmStage: '圆满',
     });
     const serialized = serializeProductModel(model);
@@ -176,12 +176,12 @@ describe('ProductRehydrator', () => {
   it('serializes non-random artifact modifiers without modifier snapshots', () => {
     const model = composeProductFromAffixIds({
       productType: 'artifact',
-      element: '金',
+      element: '烛',
       name: '新版锋锐戒',
       affixIds: ['artifact-panel-atk'],
       requestedSlot: 'accessory',
       requestedQuality: '神品',
-      realm: '渡劫',
+      realm: '渡渊',
       realmStage: '圆满',
     });
 
@@ -195,7 +195,7 @@ describe('ProductRehydrator', () => {
   it('does not synthesize an artifact anchor when stored metadata is missing', () => {
     const model = composeProductFromAffixIds({
       productType: 'artifact',
-      element: '金',
+      element: '烛',
       name: '旧版基础剑',
       affixIds: ['artifact-panel-weapon-dual-atk'],
       requestedSlot: 'weapon',
@@ -204,7 +204,7 @@ describe('ProductRehydrator', () => {
     const serialized = serializeProductModel(model);
     delete (serialized as { metadata?: unknown }).metadata;
 
-    const rehydrated = deserializeAndRehydrate(serialized, '金');
+    const rehydrated = deserializeAndRehydrate(serialized, '烛');
 
     expect(rehydrated.productType).toBe('artifact');
     if (rehydrated.productType !== 'artifact') return;
@@ -218,12 +218,12 @@ describe('ProductRehydrator', () => {
   it('serializes random artifact modifiers as selections without values', () => {
     const model = composeProductFromAffixIds({
       productType: 'artifact',
-      element: '金',
+      element: '烛',
       name: '新版基础戒',
       affixIds: ['artifact-panel-accessory-utility'],
       requestedSlot: 'accessory',
       requestedQuality: '神品',
-      realm: '金丹',
+      realm: '窥渊',
       realmStage: '圆满',
     });
 
@@ -242,12 +242,12 @@ describe('ProductRehydrator', () => {
   it('uses stored random artifact selections to recompute values', () => {
     const model = composeProductFromAffixIds({
       productType: 'artifact',
-      element: '金',
+      element: '烛',
       name: '旧版基础戒',
       affixIds: ['artifact-panel-accessory-utility'],
       requestedSlot: 'accessory',
       requestedQuality: '神品',
-      realm: '金丹',
+      realm: '窥渊',
       realmStage: '圆满',
     });
     const serialized = serializeProductModel(model);

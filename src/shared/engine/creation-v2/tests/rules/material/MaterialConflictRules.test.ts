@@ -15,7 +15,7 @@ describe('detectMaterialConflicts', () => {
           recipeTags: ['Recipe.ProductBias.Artifact'],
           energyValue: 8,
           rarityWeight: 2,
-          element: '火',
+          element: '渊',
         },
         {
           materialName: '玄冰玉髓',
@@ -27,7 +27,7 @@ describe('detectMaterialConflicts', () => {
           recipeTags: ['Recipe.ProductBias.Artifact'],
           energyValue: 8,
           rarityWeight: 2,
-          element: '冰',
+          element: '疫',
         },
       ] as MaterialFingerprint[],
       'artifact',
@@ -76,7 +76,7 @@ describe('detectMaterialConflicts', () => {
     );
   });
 
-  it('应识别秘籍法宝冲突', () => {
+  it('应识别秘籍封灵器冲突', () => {
     const conflicts = detectMaterialConflicts(
       [
         {
@@ -101,7 +101,7 @@ describe('detectMaterialConflicts', () => {
     );
   });
 
-  it('应禁止灵药参与法宝炼制', () => {
+  it('应禁止灯药参与封灵器炼制', () => {
     const conflicts = detectMaterialConflicts(
       [
         {

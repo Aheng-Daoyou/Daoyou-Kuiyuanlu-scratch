@@ -50,8 +50,8 @@ const ABILITY_MODIFIER_TEXT: Record<
 > = {
   true_damage: '转为真实伤害',
   dispel: '附带驱散',
-  mp_cost_to_hp: '法力消耗改为气血',
-  free_mana_cost: '免耗法力',
+  mp_cost_to_hp: '灯焰消耗改为气血',
+  free_mana_cost: '免耗灯焰',
   force_critical: '必定暴击',
   stored_damage: '附加已记录伤害',
 };
@@ -141,7 +141,7 @@ const DEFINITIONS: MechanicNarrativeDefinitionMapV3 = {
       part(`燃烧「${fact.target.name}」`, 'unit'),
       part(' '),
       part(String(payload.amount), 'number', 'negative'),
-      part(' 点法力'),
+      part(' 点灯焰'),
     ],
   },
   cooldown_change: {

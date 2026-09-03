@@ -55,8 +55,8 @@ describe('realm pressure integration', () => {
   });
 
   it('increases high-rank damage and reduces low-rank damage', () => {
-    const lowRank = getRealmStageRank('炼气', '初期');
-    const highRank = getRealmStageRank('筑基', '初期');
+    const lowRank = getRealmStageRank('闻腥', '初期');
+    const highRank = getRealmStageRank('守灯', '初期');
 
     expect(
       publishTrueDamage(

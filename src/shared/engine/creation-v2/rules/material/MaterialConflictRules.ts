@@ -56,7 +56,7 @@ function buildForbiddenTypeConflict(
     if (materialType === 'herb') {
       return {
         id: CONFLICT_IDS.ARTIFACT_HERB_FORBIDDEN,
-        reason: '灵药不可用于炼制法宝',
+        reason: '灯药不可用于炼制封灵器',
         relatedTags: [CreationTags.MATERIAL.TYPE_HERB],
       };
     }
@@ -67,7 +67,7 @@ function buildForbiddenTypeConflict(
     ) {
       return {
         id: CONFLICT_IDS.ARTIFACT_MANUAL_FORBIDDEN,
-        reason: '功法、神通秘籍不可用于炼制法宝',
+        reason: '功法、神通秘籍不可用于炼制封灵器',
         relatedTags: [CreationTags.MATERIAL.TYPE_MANUAL],
       };
     }
@@ -148,13 +148,13 @@ export function detectMaterialConflicts(
   const conflicts = collectForbiddenTypeConflicts(fingerprints, productType);
 
   if (
-    hasTag(fingerprints, ELEMENT_TO_MATERIAL_TAG.火) &&
-    hasTag(fingerprints, ELEMENT_TO_MATERIAL_TAG.冰)
+    hasTag(fingerprints, ELEMENT_TO_MATERIAL_TAG.渊) &&
+    hasTag(fingerprints, ELEMENT_TO_MATERIAL_TAG.疫)
   ) {
     conflicts.push({
       id: CONFLICT_IDS.ELEMENT_FIRE_ICE,
-      reason: '火、冰材料不可同炉炼制',
-      relatedTags: [ELEMENT_TO_MATERIAL_TAG.火, ELEMENT_TO_MATERIAL_TAG.冰],
+      reason: '渊、疫材料不可同炉炼制',
+      relatedTags: [ELEMENT_TO_MATERIAL_TAG.渊, ELEMENT_TO_MATERIAL_TAG.疫],
     });
   }
 

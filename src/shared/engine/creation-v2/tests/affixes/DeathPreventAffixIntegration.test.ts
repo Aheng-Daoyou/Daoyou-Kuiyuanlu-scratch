@@ -100,7 +100,7 @@ describe('death_prevent artifact affix integration', () => {
 
     const artifact = composeProductFromAffixIds({
       productType: 'artifact',
-      element: '金',
+      element: '烛',
       name: '替身甲',
       requestedSlot: 'armor',
       affixIds: ['artifact-defense-death-prevent'],
@@ -130,7 +130,7 @@ describe('death_prevent artifact affix integration', () => {
     damageSystem.destroy();
   });
 
-  it('替身纸人与玉髓不灭骨应按不同来源分别触发', () => {
+  it('替身纸人与灯髓不灭骨应按不同来源分别触发', () => {
     const attacker = createUnit('attacker', '破阵者');
     const defender = createUnit('defender', '持符者');
     const damageSystem = new DamageSystem();
@@ -143,7 +143,7 @@ describe('death_prevent artifact affix integration', () => {
 
     const artifact = composeProductFromAffixIds({
       productType: 'artifact',
-      element: '金',
+      element: '烛',
       name: '替身甲',
       requestedSlot: 'armor',
       affixIds: ['artifact-defense-death-prevent'],
@@ -187,7 +187,7 @@ describe('death_prevent artifact affix integration', () => {
 
     const artifact = composeProductFromAffixIds({
       productType: 'artifact',
-      element: '金',
+      element: '烛',
       name: '替劫坠',
       requestedSlot: 'accessory',
       affixIds: ['artifact-treasure-calamity-coin'],

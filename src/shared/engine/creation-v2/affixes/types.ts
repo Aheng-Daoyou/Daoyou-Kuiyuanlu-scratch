@@ -445,7 +445,7 @@ export interface AffixDefinition {
   weight: number;
   /** 选中此词缀消耗的能量 */
   energyCost: number;
-  /** 法宝专用：限定可进入候选池的装备槽位 */
+  /** 封灵器专用：限定可进入候选池的装备槽位 */
   applicableArtifactSlots?: EquipmentSlot[];
   /** 神通专用：限定可进入候选池的目标策略偏好 */
   targetPolicyConstraint?: Partial<TargetPolicyConfig>;

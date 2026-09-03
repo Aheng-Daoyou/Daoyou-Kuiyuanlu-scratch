@@ -52,7 +52,7 @@ function createCultivator(id: string, name: string): Cultivator {
     equipped: { weapon: null, armor: null, accessory: null },
     spirit_stones: 0,
     gender: '男',
-    realm: '炼气',
+    realm: '闻腥',
     realm_stage: '初期',
   };
 }
@@ -435,7 +435,7 @@ describe('BattleInitApplier', () => {
     eventBus.reset();
   });
 
-  test('startingBuffs 中的金身燃血会在低血受击后触发且每场只触发一次', () => {
+  test('startingBuffs 中的金躯燃血会在低血受击后触发且每场只触发一次', () => {
     const eventBus = EventBus.instance;
     eventBus.reset();
     const damageSystem = new DamageSystem();
@@ -454,7 +454,7 @@ describe('BattleInitApplier', () => {
               source: 'self',
               buff: {
                 id: 'test_body_burn_blood',
-                name: '金身·燃血爆发',
+                name: '金躯·燃血爆发',
                 type: BuffType.BUFF,
                 duration: -1,
                 stackRule: 'override',
@@ -480,7 +480,7 @@ describe('BattleInitApplier', () => {
                         params: {
                           buffConfig: {
                             id: 'test_body_burn_blood_active',
-                            name: '金身·燃血',
+                            name: '金躯·燃血',
                             type: BuffType.BUFF,
                             duration: 3,
                             stackRule: 'override',
@@ -713,7 +713,7 @@ describe('BattleInitApplier', () => {
     eventBus.reset();
   });
 
-  test('startingBuffs 中的脏腑返还能在首次高耗技能前恢复法力', () => {
+  test('startingBuffs 中的脏腑返还能在首次高耗技能前恢复灯焰', () => {
     const eventBus = EventBus.instance;
     eventBus.reset();
 

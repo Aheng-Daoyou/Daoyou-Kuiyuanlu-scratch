@@ -44,7 +44,7 @@ function calculateSpiritualRootStrength(
 ): number {
   const normalizedScore = Math.max(0, Math.min(100, score));
   const baseCap = getBaseStrengthCap(rootCount);
-  const cap = grade === '变异灵根' ? Math.min(100, baseCap + 10) : baseCap;
+  const cap = grade === '变异窍' ? Math.min(100, baseCap + 10) : baseCap;
 
   // 分数越高，目标值越接近上限；仍保留随机波动
   const scoreRatio = normalizedScore / 100;
@@ -98,17 +98,17 @@ function resolveSpiritualRootGrade(
   rootCount: number,
   element: ElementType,
 ): SpiritualRoot['grade'] {
-  if (element === '风' || element === '雷' || element === '冰') {
-    return '变异灵根';
+  if (element === '噬' || element === '帘' || element === '疫') {
+    return '变异窍';
   }
 
   if (rootCount === 1) {
-    return '天灵根';
+    return '天窍';
   }
 
   if (rootCount <= 3) {
-    return '真灵根';
+    return '真窍';
   }
 
-  return '伪灵根';
+  return '伪窍';
 }

@@ -2,13 +2,13 @@ import {
   getRealmStageAttributeBudget,
   getRealmStageNaturalAttributeValue,
 } from '@shared/config/realmProgression';
-import { ENEMY_RACE_VALUES } from '@shared/types/constants';
+import { ENEMY_CLAN_VALUES } from '@shared/types/constants';
 import type { Attributes } from '@shared/types/cultivator';
 import { EnemyBodyCultivationPlanner } from './EnemyBodyCultivationPlanner';
 import { EnemyCraftExecutor } from './EnemyCraftExecutor';
 import { EnemyCultivatorAssembler } from './EnemyCultivatorAssembler';
 import { EnemyLoadoutPlanner } from './EnemyLoadoutPlanner';
-import { ENEMY_RACE_PROFILES } from './EnemyRaceProfileRegistry';
+import { ENEMY_CLAN_PROFILES } from './EnemyClanProfileRegistry';
 import {
   ATTRIBUTE_KEYS,
   type EnemyGenerationDraft,
@@ -19,9 +19,9 @@ import {
 import type { EnemyCopyProvider } from './EnemyCopyProvider';
 import {
   buildBackgroundFallback,
+  buildClanFallbackName,
   buildDescriptionFallback,
   buildDifficultyFactor,
-  buildRaceFallbackName,
   buildTitleFallback,
   normalizeOptionalText,
 } from './utils';
@@ -41,7 +41,7 @@ export class EnemyGenerationOrchestrator {
 
   buildDraft(input: EnemyGenerationInput): EnemyGenerationDraft {
     const normalized = this.normalizeInput(input);
-    const profile = ENEMY_RACE_PROFILES[normalized.race];
+    const profile = ENEMY_CLAN_PROFILES[normalized.clan];
     const plan = this.loadoutPlanner.plan(normalized);
     const stats = this.buildStatBudget(normalized, profile.attributeWeights);
     const bodyCultivation = this.bodyCultivationPlanner.plan({
@@ -62,8 +62,8 @@ export class EnemyGenerationOrchestrator {
 
     const fallbackName =
       normalized.name ??
-      buildRaceFallbackName(
-        normalized.race,
+      buildClanFallbackName(
+        normalized.clan,
         normalized.realm,
         normalized.realmStage,
         craftedLoadout.primaryElement,
@@ -71,7 +71,7 @@ export class EnemyGenerationOrchestrator {
     const fallbackBackground =
       normalized.background ??
       buildBackgroundFallback(
-        normalized.race,
+        normalized.clan,
         normalized.realm,
         normalized.realmStage,
         craftedLoadout.primaryElement,
@@ -80,7 +80,7 @@ export class EnemyGenerationOrchestrator {
     const fallbackDescription =
       normalized.description ??
       buildDescriptionFallback(
-        normalized.race,
+        normalized.clan,
         normalized.realm,
         normalized.realmStage,
         craftedLoadout.primaryElement,
@@ -88,7 +88,7 @@ export class EnemyGenerationOrchestrator {
     const fallbackTitle =
       normalized.title ??
       buildTitleFallback(
-        normalized.race,
+        normalized.clan,
         normalized.realm,
         normalized.realmStage,
         craftedLoadout.primaryElement,
@@ -127,7 +127,7 @@ export class EnemyGenerationOrchestrator {
         bodyCultivation: bodyCultivation.summary,
       },
       copyFacts: {
-        race: normalized.race,
+        clan: normalized.clan,
         realm: normalized.realm,
         realmStage: normalized.realmStage,
         difficulty: normalized.difficulty,
@@ -254,14 +254,14 @@ export class EnemyGenerationOrchestrator {
     if (!input.realmStage) {
       throw new Error('EnemyGenerator requires realmStage');
     }
-    if (!ENEMY_RACE_VALUES.includes(input.race)) {
-      throw new Error(`EnemyGenerator requires supported race, received: ${input.race}`);
+    if (!ENEMY_CLAN_VALUES.includes(input.clan)) {
+      throw new Error(`EnemyGenerator requires supported clan, received: ${input.clan}`);
     }
 
     return {
       realm: input.realm,
       realmStage: input.realmStage,
-      race: input.race,
+      clan: input.clan,
       difficulty: Math.max(0, Math.min(100, Math.round(input.difficulty ?? 50))),
       variantSeed: normalizeOptionalText(input.variantSeed),
       name: normalizeOptionalText(input.name),

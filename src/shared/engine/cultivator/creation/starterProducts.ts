@@ -27,33 +27,33 @@ interface StarterSkillRecipe {
 }
 
 const starterTechniqueRecipes = new Map<string, StarterTechniqueRecipe>([
-  ['金:金锐功', { affixIds: ['gongfa-foundation-atk'] }],
-  ['木:长春功', { affixIds: ['gongfa-foundation-vitality'] }],
-  ['水:玄水诀', { affixIds: ['gongfa-foundation-spirit'] }],
-  ['火:烈阳功', { affixIds: ['gongfa-foundation-magic-atk'] }],
-  ['土:厚土经', { affixIds: ['gongfa-foundation-def'] }],
-  ['风:御风诀', { affixIds: ['gongfa-foundation-speed'] }],
-  ['雷:紫雷诀', { affixIds: ['gongfa-foundation-control-hit'] }],
-  ['冰:凝霜诀', { affixIds: ['gongfa-foundation-magic-def'] }],
+  ['烛:照烛功', { affixIds: ['gongfa-foundation-atk'] }],
+  ['尸:枯荣功', { affixIds: ['gongfa-foundation-vitality'] }],
+  ['星:坠星诀', { affixIds: ['gongfa-foundation-spirit'] }],
+  ['渊:渊火功', { affixIds: ['gongfa-foundation-magic-atk'] }],
+  ['梦:沉梦经', { affixIds: ['gongfa-foundation-def'] }],
+  ['噬:噬风功', { affixIds: ['gongfa-foundation-speed'] }],
+  ['帘:揭帘诀', { affixIds: ['gongfa-foundation-control-hit'] }],
+  ['疫:瘟霜诀', { affixIds: ['gongfa-foundation-magic-def'] }],
 ]);
 
 const starterSkillRecipes = new Map<string, StarterSkillRecipe>([
-  ['金:金锋术', { affixIds: ['skill-core-damage-metal'] }],
-  ['金:铁皮术', { affixIds: ['skill-core-guard-aura'] }],
-  ['木:缠绕术', { affixIds: ['skill-core-damage-wood'] }],
-  ['木:回春术', { affixIds: ['skill-core-heal'] }],
-  ['水:冰锥术', { affixIds: ['skill-core-damage-water'] }],
-  ['水:水罩术', { affixIds: ['skill-core-guard-aura'] }],
-  ['火:烈焰指', { affixIds: ['skill-core-damage-fire'] }],
-  ['火:焰息诀', { affixIds: ['skill-core-fire-channeling'] }],
-  ['土:落石术', { affixIds: ['skill-core-damage-earth'] }],
-  ['土:厚土护体', { affixIds: ['skill-core-guard-aura'] }],
-  ['风:风刃', { affixIds: ['skill-core-damage-wind'] }],
-  ['风:清风诀', { affixIds: ['skill-core-wind-haste'] }],
-  ['雷:紫雷击', { affixIds: ['skill-core-damage-thunder'] }],
-  ['雷:雷护身', { affixIds: ['skill-core-guard-aura'] }],
-  ['冰:寒冰刺', { affixIds: ['skill-core-damage-ice'] }],
-  ['冰:冰幕诀', { affixIds: ['skill-core-ice-frost-guard'] }],
+  ['烛:烛锋刺', { affixIds: ['skill-core-damage-metal'] }],
+  ['烛:灯皮护', { affixIds: ['skill-core-guard-aura'] }],
+  ['尸:枯藤缚', { affixIds: ['skill-core-damage-wood'] }],
+  ['尸:续命灯', { affixIds: ['skill-core-heal'] }],
+  ['星:坠星锥', { affixIds: ['skill-core-damage-water'] }],
+  ['星:星幕', { affixIds: ['skill-core-guard-aura'] }],
+  ['渊:渊火指', { affixIds: ['skill-core-damage-fire'] }],
+  ['渊:渊息灯', { affixIds: ['skill-core-fire-channeling'] }],
+  ['梦:梦石坠', { affixIds: ['skill-core-damage-earth'] }],
+  ['梦:梦土甲', { affixIds: ['skill-core-guard-aura'] }],
+  ['噬:吞风刃', { affixIds: ['skill-core-damage-wind'] }],
+  ['噬:噬风息', { affixIds: ['skill-core-wind-haste'] }],
+  ['帘:裂幕击', { affixIds: ['skill-core-damage-thunder'] }],
+  ['帘:幕隙守', { affixIds: ['skill-core-guard-aura'] }],
+  ['疫:瘟霜刺', { affixIds: ['skill-core-damage-ice'] }],
+  ['疫:瘟幕守', { affixIds: ['skill-core-ice-frost-guard'] }],
 ]);
 
 function recipeKey(element: ElementType | undefined, name: string): string {
@@ -88,7 +88,7 @@ function normalizeTechniqueFromRecipe(
     ...technique,
     ...buildPresetTechnique({
       name: technique.name,
-      element: technique.element ?? '金',
+      element: technique.element ?? '烛',
       description: technique.description,
       affixIds: recipe.affixIds,
     }),
@@ -148,7 +148,7 @@ export function ensureStarterTechnique(
       productModel ??
       composePresetProductModel({
         productType: 'gongfa',
-        element: technique.element ?? '金',
+        element: technique.element ?? '烛',
         name: technique.name,
         description: technique.description,
         affixIds: ['gongfa-foundation-spirit'],

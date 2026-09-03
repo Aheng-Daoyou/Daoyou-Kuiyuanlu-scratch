@@ -12,12 +12,12 @@ export const CREATION_SKILL_NAMING = {
   nameSuffix: '剑法',
 } as const;
 
-/** 法宝类产物命名配置 */
+/** 封灵器类产物命名配置 */
 export const CREATION_ARTIFACT_NAMING = {
-  /** 无槽位偏向时的默认法宝名称 */
-  defaultName: '灵器',
+  /** 无槽位偏向时的默认封灵器名称 */
+  defaultName: '封灵器',
   /** 有槽位偏向时的名称后缀 */
-  slotSuffix: '法宝',
+  slotSuffix: '封灵器',
 } as const;
 
 export function getArtifactSlotDisplayName(slot: string): string {

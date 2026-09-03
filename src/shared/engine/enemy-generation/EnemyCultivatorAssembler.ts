@@ -1,5 +1,5 @@
 import {
-  EnemyRace,
+  EnemyClan,
   GENDER_VALUES,
   REALM_ORDER,
 } from '@shared/types/constants';
@@ -19,7 +19,7 @@ import type {
 import type {
   EnemyCraftedProduct,
   EnemyCraftedLoadout,
-  EnemyRaceProfile,
+  EnemyClanProfile,
   NormalizedEnemyGenerationInput,
 } from './types';
 import { hashText } from './utils';
@@ -93,7 +93,7 @@ export class EnemyCultivatorAssembler {
   assemble(args: {
     variantKey: string;
     input: NormalizedEnemyGenerationInput;
-    profile: EnemyRaceProfile;
+    profile: EnemyClanProfile;
     primaryElement: EnemyCraftedLoadout['primaryElement'];
     attributes: Attributes;
     name: string;
@@ -132,10 +132,10 @@ export class EnemyCultivatorAssembler {
     };
 
     const rootStrengthBonus = {
-      灵族: 12,
-      古兽: 10,
-      鬼魂: 6,
-    } as Record<EnemyRace, number>;
+      投影: 12,
+      遗种: 10,
+      腌物: 6,
+    } as Record<EnemyClan, number>;
 
     const spiritualRoots: SpiritualRoot[] = [
       {
@@ -146,7 +146,7 @@ export class EnemyCultivatorAssembler {
             48 +
               input.difficulty * 0.45 +
               (REALM_ORDER[input.realm] ?? 0) * 2 +
-              (rootStrengthBonus[input.race] ?? 0),
+              (rootStrengthBonus[input.clan] ?? 0),
           ),
         ),
       },
@@ -162,7 +162,7 @@ export class EnemyCultivatorAssembler {
       name,
       title,
       gender,
-      race: input.race,
+      clan: input.clan,
       realm: input.realm,
       realm_stage: input.realmStage,
       age: 30 + REALM_ORDER[input.realm] * 45 + (input.difficulty % 20),

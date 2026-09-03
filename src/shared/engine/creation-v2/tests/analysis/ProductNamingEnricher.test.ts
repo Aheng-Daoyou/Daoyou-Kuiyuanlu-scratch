@@ -8,7 +8,7 @@ describe('DeepSeekProductNamingEnricher', () => {
   const mockFacts: ProductNamingFacts = {
     productType: 'gongfa',
     projectionQuality: '灵品',
-    elementBias: '火',
+    elementBias: '渊',
     dominantTags: ['爆发'],
     rolledAffixes: [
       {
@@ -45,7 +45,7 @@ describe('DeepSeekProductNamingEnricher', () => {
       output: {
         name: '赤炎焚天诀',
         description: '此功法运转时如置身炼狱，赤炎破脉而出。',
-        styleInsight: '火系意象与爆发标签结合',
+        styleInsight: '渊系意象与爆发标签结合',
       },
     };
 
@@ -66,18 +66,18 @@ describe('DeepSeekProductNamingEnricher', () => {
     const variables = (enricher as any).buildPromptVariables({
       ...mockFacts,
       slotBias: 'weapon',
-      userPrompt: '希望名字偏火系剑修一脉',
+      userPrompt: '希望名字偏渊系封灵一脉',
     });
 
     expect(variables).toEqual({
       productTypeLabel: '功法典籍',
       projectionQuality: '灵品',
-      elementText: '火',
+      elementText: '渊',
       slotText: '兵刃',
       intentTagsText: '爆发',
       affixesText: '- 烈焰核心',
       materialsText: '赤炎矿',
-      playerIntentText: '希望名字偏火系剑修一脉',
+      playerIntentText: '希望名字偏渊系封灵一脉',
     });
   });
 });

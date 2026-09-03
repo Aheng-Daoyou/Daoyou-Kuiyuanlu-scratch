@@ -104,7 +104,7 @@ export function resolveExpCap(context: RealmStageExpContext): number {
 
   return (
     EXP_CAP_TABLE[context.realm]?.[context.realmStage] ??
-    EXP_CAP_TABLE['炼气']['初期']
+    EXP_CAP_TABLE['闻腥']['初期']
   );
 }
 

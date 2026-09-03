@@ -68,7 +68,7 @@ describe('AbilityTagAssembler', () => {
           GameplayTags.ABILITY.FUNCTION.BUFF,
         ]),
       ],
-      elementBias: '风',
+      elementBias: '噬',
     });
 
     expect(tags).toEqual(
@@ -93,7 +93,7 @@ describe('AbilityTagAssembler', () => {
           GameplayTags.ABILITY.CHANNEL.MAGIC,
         ]),
       ],
-      elementBias: '火',
+      elementBias: '渊',
     });
 
     expect(

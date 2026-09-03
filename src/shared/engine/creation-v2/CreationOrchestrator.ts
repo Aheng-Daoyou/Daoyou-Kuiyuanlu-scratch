@@ -708,7 +708,7 @@ export class CreationOrchestrator {
       maxAffixCount,
     );
 
-    // 断言：必须包含核心词缀（如果是技能、功法、法宝）
+    // 断言：必须包含核心词缀（如果是技能、功法、封灵器）
     const needsCore = ['skill', 'gongfa', 'artifact'].includes(
       session.state.input.productType,
     );
@@ -716,7 +716,7 @@ export class CreationOrchestrator {
     if (needsCore && !hasCore) {
       const message =
         selection.exhaustionReason === 'budget_exhausted'
-          ? '当前材料灵力不足，无法凝成核心词条。请提高材料品阶、增加投入数量，或更换更契合的主材。'
+          ? '当前材料梦涎不足，无法凝成核心词条。请提高材料品阶、增加投入数量，或更换更契合的主材。'
           : '当前材料无法凝成核心词条。请更换更契合该造物类型的主材。';
       throw new CreationError(
         'Selection',

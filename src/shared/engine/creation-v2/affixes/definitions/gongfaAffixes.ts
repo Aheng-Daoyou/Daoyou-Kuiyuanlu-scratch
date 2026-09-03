@@ -59,8 +59,8 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'gongfa-foundation-spirit',
-    displayName: '灵力充沛',
-    displayDescription: '功脉生息，提升灵力属性，使体内灵力更为充沛',
+    displayName: '梦涎充沛',
+    displayDescription: '功脉生息，提升梦涎属性，使体内梦涎更为充沛',
     slot: 'core',
     rarity: 'common',
     match: {
@@ -168,7 +168,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   {
     id: 'gongfa-foundation-willpower',
     displayName: '固神',
-    displayDescription: '识海如固，提升神识属性，使神魂根基更为稳固',
+    displayDescription: '心海如固，提升心神属性，使神魂根基更为稳固',
     slot: 'core',
     rarity: 'common',
     match: {
@@ -195,7 +195,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   {
     id: 'gongfa-foundation-speed',
     displayName: '御风',
-    displayDescription: '步踏罡斗，提升身法属性，使腾挪运转更为迅捷',
+    displayDescription: '步踏罡斗，提升灯影属性，使腾挪运转更为迅捷',
     slot: 'core',
     rarity: 'common',
     match: {
@@ -248,7 +248,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   {
     id: 'gongfa-foundation-magic-atk',
     displayName: '通明',
-    displayDescription: '通明达微，提升法术攻击属性，增强术法威能',
+    displayDescription: '通明达微，提升灯律攻击属性，增强灯律威能',
     slot: 'core',
     rarity: 'common',
     match: {
@@ -302,7 +302,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   {
     id: 'gongfa-foundation-magic-def',
     displayName: '凝神',
-    displayDescription: '凝神聚气，提升法术防御属性，强化护体灵障',
+    displayDescription: '凝神聚气，提升灯律防御属性，强化护体灯障',
     slot: 'core',
     rarity: 'common',
     match: {
@@ -356,7 +356,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   {
     id: 'gongfa-foundation-max-mp',
     displayName: '聚炁',
-    displayDescription: '气府深藏，提升最大法力，使灵力储备更为充盈',
+    displayDescription: '气府深藏，提升最大灯焰，使灯焰储备更为充盈',
     slot: 'core',
     rarity: 'common',
     match: {
@@ -506,12 +506,12 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   // --- 8 种元素专精 ---
   {
     id: 'gongfa-school-fire-spec',
-    displayName: '火行真解',
-    displayDescription: '通晓真火大道，提升火系技能造成的伤害',
+    displayName: '渊行真解',
+    displayDescription: '通晓真火灯道，提升渊系技能造成的伤害',
     slot: 'identity',
     rarity: 'uncommon',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['火']],
+      all: [ELEMENT_TO_MATERIAL_TAG['渊']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_FLAME,
         CreationTags.MATERIAL.SEMANTIC_BURST,
@@ -520,7 +520,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
     },
     exclusiveGroup: EXCLUSIVE_GROUP.GONGFA.PRIMARY_SCHOOL,
     selectionMeta: {
-      gongfa: { role: 'primary', archetype: 'fire', element: '火' },
+      gongfa: { role: 'primary', archetype: 'fire', element: '渊' },
     },
     weight: 75,
     energyCost: 16,
@@ -530,7 +530,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
       conditions: [
         {
           type: 'ability_has_tag',
-          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['火'] },
+          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['渊'] },
         },
       ],
       params: {
@@ -548,11 +548,11 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   {
     id: 'gongfa-school-ice-spec',
     displayName: '寒魄真解',
-    displayDescription: '凝绝幽寒，提升冰系技能造成的伤害',
+    displayDescription: '凝绝幽寒，提升疫系技能造成的伤害',
     slot: 'identity',
     rarity: 'uncommon',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['冰']],
+      all: [ELEMENT_TO_MATERIAL_TAG['疫']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_FREEZE,
         CreationTags.MATERIAL.SEMANTIC_BURST,
@@ -561,7 +561,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
     },
     exclusiveGroup: EXCLUSIVE_GROUP.GONGFA.PRIMARY_SCHOOL,
     selectionMeta: {
-      gongfa: { role: 'primary', archetype: 'ice', element: '冰' },
+      gongfa: { role: 'primary', archetype: 'ice', element: '疫' },
     },
     weight: 72,
     energyCost: 16,
@@ -571,7 +571,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
       conditions: [
         {
           type: 'ability_has_tag',
-          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['冰'] },
+          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['疫'] },
         },
       ],
       params: {
@@ -588,12 +588,12 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'gongfa-school-thunder-spec',
-    displayName: '惊雷真解',
-    displayDescription: '参透雷霆幻变之机，提升雷系技能造成的伤害',
+    displayName: '惊幕真解',
+    displayDescription: '参透幕隙幻变之机，提升帘系技能造成的伤害',
     slot: 'identity',
     rarity: 'uncommon',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['雷']],
+      all: [ELEMENT_TO_MATERIAL_TAG['帘']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_THUNDER,
         CreationTags.MATERIAL.SEMANTIC_BURST,
@@ -602,7 +602,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
     },
     exclusiveGroup: EXCLUSIVE_GROUP.GONGFA.PRIMARY_SCHOOL,
     selectionMeta: {
-      gongfa: { role: 'primary', archetype: 'thunder', element: '雷' },
+      gongfa: { role: 'primary', archetype: 'thunder', element: '帘' },
     },
     weight: 70,
     energyCost: 16,
@@ -612,7 +612,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
       conditions: [
         {
           type: 'ability_has_tag',
-          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['雷'] },
+          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['帘'] },
         },
       ],
       params: {
@@ -629,12 +629,12 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'gongfa-school-wind-spec',
-    displayName: '风行真解',
-    displayDescription: '明谙风行之道，提升风系技能造成的伤害',
+    displayName: '噬行真解',
+    displayDescription: '明谙风行之道，提升噬系技能造成的伤害',
     slot: 'identity',
     rarity: 'uncommon',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['风']],
+      all: [ELEMENT_TO_MATERIAL_TAG['噬']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_WIND,
         CreationTags.MATERIAL.SEMANTIC_BURST,
@@ -643,7 +643,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
     },
     exclusiveGroup: EXCLUSIVE_GROUP.GONGFA.PRIMARY_SCHOOL,
     selectionMeta: {
-      gongfa: { role: 'primary', archetype: 'wind', element: '风' },
+      gongfa: { role: 'primary', archetype: 'wind', element: '噬' },
     },
     weight: 68,
     energyCost: 16,
@@ -653,7 +653,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
       conditions: [
         {
           type: 'ability_has_tag',
-          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['风'] },
+          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['噬'] },
         },
       ],
       params: {
@@ -670,12 +670,12 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'gongfa-school-metal-spec',
-    displayName: '金行真解',
-    displayDescription: '金修内蕴之法，提升金系技能造成的伤害',
+    displayName: '烛行真解',
+    displayDescription: '金修内蕴之法，提升烛系技能造成的伤害',
     slot: 'identity',
     rarity: 'uncommon',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['金']],
+      all: [ELEMENT_TO_MATERIAL_TAG['烛']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_METAL,
         CreationTags.MATERIAL.SEMANTIC_BLADE,
@@ -684,7 +684,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
     },
     exclusiveGroup: EXCLUSIVE_GROUP.GONGFA.PRIMARY_SCHOOL,
     selectionMeta: {
-      gongfa: { role: 'primary', archetype: 'metal', element: '金' },
+      gongfa: { role: 'primary', archetype: 'metal', element: '烛' },
     },
     weight: 65,
     energyCost: 16,
@@ -694,7 +694,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
       conditions: [
         {
           type: 'ability_has_tag',
-          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['金'] },
+          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['烛'] },
         },
       ],
       params: {
@@ -711,12 +711,12 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'gongfa-school-water-spec',
-    displayName: '水行真解',
-    displayDescription: '通悉若水无定之形，提升水系技能造成的伤害',
+    displayName: '星行真解',
+    displayDescription: '通悉若水无定之形，提升星系技能造成的伤害',
     slot: 'identity',
     rarity: 'uncommon',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['水']],
+      all: [ELEMENT_TO_MATERIAL_TAG['星']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_WATER,
         CreationTags.MATERIAL.SEMANTIC_SPIRIT,
@@ -725,7 +725,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
     },
     exclusiveGroup: EXCLUSIVE_GROUP.GONGFA.PRIMARY_SCHOOL,
     selectionMeta: {
-      gongfa: { role: 'primary', archetype: 'water', element: '水' },
+      gongfa: { role: 'primary', archetype: 'water', element: '星' },
     },
     weight: 63,
     energyCost: 16,
@@ -735,7 +735,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
       conditions: [
         {
           type: 'ability_has_tag',
-          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['水'] },
+          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['星'] },
         },
       ],
       params: {
@@ -752,12 +752,12 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'gongfa-school-wood-spec',
-    displayName: '青木真解',
-    displayDescription: '融生克于一体，提升木系技能造成的伤害',
+    displayName: '尸行真解',
+    displayDescription: '融生克于一体，提升尸系技能造成的伤害',
     slot: 'identity',
     rarity: 'uncommon',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['木']],
+      all: [ELEMENT_TO_MATERIAL_TAG['尸']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_WOOD,
         CreationTags.MATERIAL.SEMANTIC_LIFE,
@@ -766,7 +766,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
     },
     exclusiveGroup: EXCLUSIVE_GROUP.GONGFA.PRIMARY_SCHOOL,
     selectionMeta: {
-      gongfa: { role: 'primary', archetype: 'wood', element: '木' },
+      gongfa: { role: 'primary', archetype: 'wood', element: '尸' },
     },
     weight: 60,
     energyCost: 16,
@@ -776,7 +776,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
       conditions: [
         {
           type: 'ability_has_tag',
-          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['木'] },
+          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['尸'] },
         },
       ],
       params: {
@@ -793,12 +793,12 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'gongfa-school-earth-spec',
-    displayName: '厚土真解',
-    displayDescription: '立足浩荡地脉，提升土系技能造成的伤害',
+    displayName: '梦行真解',
+    displayDescription: '立足浩荡地脉，提升梦系技能造成的伤害',
     slot: 'identity',
     rarity: 'uncommon',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['土']],
+      all: [ELEMENT_TO_MATERIAL_TAG['梦']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_EARTH,
         CreationTags.MATERIAL.SEMANTIC_GUARD,
@@ -807,7 +807,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
     },
     exclusiveGroup: EXCLUSIVE_GROUP.GONGFA.PRIMARY_SCHOOL,
     selectionMeta: {
-      gongfa: { role: 'primary', archetype: 'earth', element: '土' },
+      gongfa: { role: 'primary', archetype: 'earth', element: '梦' },
     },
     weight: 58,
     energyCost: 16,
@@ -817,7 +817,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
       conditions: [
         {
           type: 'ability_has_tag',
-          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['土'] },
+          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['梦'] },
         },
       ],
       params: {
@@ -836,20 +836,20 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   // --- 多元素主修：材料呈现三系以上均衡时，替代多重单元素专精 ---
   {
     id: 'gongfa-school-five-phase-flow',
-    displayName: '五行流转',
+    displayName: '八系流转',
     displayDescription: '诸行轮转不息，提升造成的伤害，但单系锋芒不及专修',
     slot: 'identity',
     rarity: 'uncommon',
     match: {
       any: [
-        ELEMENT_TO_MATERIAL_TAG['金'],
-        ELEMENT_TO_MATERIAL_TAG['木'],
-        ELEMENT_TO_MATERIAL_TAG['水'],
-        ELEMENT_TO_MATERIAL_TAG['火'],
-        ELEMENT_TO_MATERIAL_TAG['土'],
-        ELEMENT_TO_MATERIAL_TAG['风'],
-        ELEMENT_TO_MATERIAL_TAG['雷'],
-        ELEMENT_TO_MATERIAL_TAG['冰'],
+        ELEMENT_TO_MATERIAL_TAG['烛'],
+        ELEMENT_TO_MATERIAL_TAG['尸'],
+        ELEMENT_TO_MATERIAL_TAG['星'],
+        ELEMENT_TO_MATERIAL_TAG['渊'],
+        ELEMENT_TO_MATERIAL_TAG['梦'],
+        ELEMENT_TO_MATERIAL_TAG['噬'],
+        ELEMENT_TO_MATERIAL_TAG['帘'],
+        ELEMENT_TO_MATERIAL_TAG['疫'],
       ],
     },
     exclusiveGroup: EXCLUSIVE_GROUP.GONGFA.PRIMARY_SCHOOL,
@@ -877,12 +877,12 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   // --- 双元素共鸣：作为主修支脉，而不是第二个完整元素专精 ---
   {
     id: 'gongfa-school-ice-thunder-resonance',
-    displayName: '冰雷共鸣',
-    displayDescription: '寒霆相激，雷系技能攻击受控目标时伤害提升',
+    displayName: '疫帘共鸣',
+    displayDescription: '寒幕相激，帘系技能攻击受控目标时伤害提升',
     slot: 'resonance',
     rarity: 'rare',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['冰'], ELEMENT_TO_MATERIAL_TAG['雷']],
+      all: [ELEMENT_TO_MATERIAL_TAG['疫'], ELEMENT_TO_MATERIAL_TAG['帘']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_FREEZE,
         CreationTags.MATERIAL.SEMANTIC_THUNDER,
@@ -892,7 +892,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
       gongfa: {
         role: 'resonance',
         archetype: 'ice-thunder',
-        resonanceElements: ['冰', '雷'],
+        resonanceElements: ['疫', '帘'],
       },
     },
     weight: 24,
@@ -903,7 +903,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
       conditions: [
         {
           type: 'ability_has_tag',
-          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['雷'] },
+          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['帘'] },
         },
         {
           type: 'has_tag',
@@ -924,12 +924,12 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'gongfa-school-wind-fire-resonance',
-    displayName: '风火相生',
-    displayDescription: '风助火势，自身气血充盈时火系技能伤害提升',
+    displayName: '噬渊相生',
+    displayDescription: '风助火势，自身气血充盈时渊系技能伤害提升',
     slot: 'resonance',
     rarity: 'rare',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['风'], ELEMENT_TO_MATERIAL_TAG['火']],
+      all: [ELEMENT_TO_MATERIAL_TAG['噬'], ELEMENT_TO_MATERIAL_TAG['渊']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_WIND,
         CreationTags.MATERIAL.SEMANTIC_FLAME,
@@ -940,7 +940,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
       gongfa: {
         role: 'resonance',
         archetype: 'wind-fire',
-        resonanceElements: ['风', '火'],
+        resonanceElements: ['噬', '渊'],
       },
     },
     weight: 24,
@@ -951,7 +951,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
       conditions: [
         {
           type: 'ability_has_tag',
-          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['火'] },
+          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['渊'] },
         },
         { type: 'hp_above', params: { value: 0.8, scope: 'caster' } },
       ],
@@ -969,12 +969,12 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'gongfa-school-metal-fire-resonance',
-    displayName: '金火锻锋',
-    displayDescription: '烈火锻金，金系技能暴击时伤害提升',
+    displayName: '烛渊锻锋',
+    displayDescription: '烈火锻金，烛系技能暴击时伤害提升',
     slot: 'resonance',
     rarity: 'rare',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['金'], ELEMENT_TO_MATERIAL_TAG['火']],
+      all: [ELEMENT_TO_MATERIAL_TAG['烛'], ELEMENT_TO_MATERIAL_TAG['渊']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_METAL,
         CreationTags.MATERIAL.SEMANTIC_FLAME,
@@ -985,7 +985,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
       gongfa: {
         role: 'resonance',
         archetype: 'metal-fire',
-        resonanceElements: ['金', '火'],
+        resonanceElements: ['烛', '渊'],
       },
     },
     weight: 22,
@@ -996,7 +996,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
       conditions: [
         {
           type: 'ability_has_tag',
-          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['金'] },
+          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['烛'] },
         },
         { type: 'is_critical', params: {} },
       ],
@@ -1014,12 +1014,12 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'gongfa-school-water-wood-resonance',
-    displayName: '水木生息',
-    displayDescription: '水养青木，自身拥有护盾时木系技能伤害提升',
+    displayName: '星尸生息',
+    displayDescription: '水养青木，自身拥有护盾时尸系技能伤害提升',
     slot: 'resonance',
     rarity: 'rare',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['水'], ELEMENT_TO_MATERIAL_TAG['木']],
+      all: [ELEMENT_TO_MATERIAL_TAG['星'], ELEMENT_TO_MATERIAL_TAG['尸']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_WATER,
         CreationTags.MATERIAL.SEMANTIC_WOOD,
@@ -1030,7 +1030,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
       gongfa: {
         role: 'resonance',
         archetype: 'water-wood',
-        resonanceElements: ['水', '木'],
+        resonanceElements: ['星', '尸'],
       },
     },
     weight: 22,
@@ -1041,7 +1041,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
       conditions: [
         {
           type: 'ability_has_tag',
-          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['木'] },
+          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['尸'] },
         },
         { type: 'has_shield', params: { scope: 'caster' } },
       ],
@@ -1062,7 +1062,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   {
     id: 'gongfa-school-crit-mana',
     displayName: '涌潮',
-    displayDescription: '神识如潮，暴击时回复法力',
+    displayDescription: '心神如潮，暴击时回复灯焰',
     slot: 'modifier',
     rarity: 'uncommon',
     match: {
@@ -1106,7 +1106,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   {
     id: 'gongfa-school-low-mp-boost',
     displayName: '破釜',
-    displayDescription: '燃灵破釜，自身灵力低于 30% 时造成的伤害提升',
+    displayDescription: '燃灵破釜，自身灯焰低于 30% 时造成的伤害提升',
     slot: 'modifier',
     rarity: 'uncommon',
     match: {
@@ -1386,17 +1386,17 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   // ===== GONGFA_SECRET 池 (4 种) — 制造"门派真传感"
   // ================================================================
 
-  // --- 焚天诀：火系命中灼烧目标最终伤害再提高 ---
+  // --- 焚天诀：渊系命中灼烧目标最终伤害再提高 ---
   {
     id: 'gongfa-secret-inferno',
     displayName: '火噬',
-    displayDescription: '火系技能攻击灼烧目标时，造成的伤害进一步提升',
+    displayDescription: '渊系技能攻击灼烧目标时，造成的伤害进一步提升',
     slot: 'modifier',
     rarity: 'legendary',
     match: {
       all: [
         CreationTags.MATERIAL.SEMANTIC_FLAME,
-        ELEMENT_TO_MATERIAL_TAG['火'],
+        ELEMENT_TO_MATERIAL_TAG['渊'],
       ],
       any: [
         CreationTags.MATERIAL.TYPE_SPECIAL,
@@ -1405,7 +1405,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
     },
     exclusiveGroup: EXCLUSIVE_GROUP.GONGFA.SECRET_ULTIMATE,
     selectionMeta: {
-      gongfa: { role: 'secret', archetype: 'inferno', element: '火' },
+      gongfa: { role: 'secret', archetype: 'inferno', element: '渊' },
     },
     weight: 8,
     energyCost: 50,
@@ -1415,7 +1415,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
       conditions: [
         {
           type: 'ability_has_tag',
-          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['火'] },
+          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['渊'] },
         },
         {
           type: 'has_tag',
@@ -1444,7 +1444,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
     match: {
       all: [
         CreationTags.MATERIAL.SEMANTIC_FREEZE,
-        ELEMENT_TO_MATERIAL_TAG['冰'],
+        ELEMENT_TO_MATERIAL_TAG['疫'],
       ],
       any: [
         CreationTags.MATERIAL.TYPE_SPECIAL,
@@ -1453,7 +1453,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
     },
     exclusiveGroup: EXCLUSIVE_GROUP.GONGFA.SECRET_ULTIMATE,
     selectionMeta: {
-      gongfa: { role: 'secret', archetype: 'frost-soul', element: '冰' },
+      gongfa: { role: 'secret', archetype: 'frost-soul', element: '疫' },
     },
     weight: 8,
     energyCost: 50,
@@ -1813,7 +1813,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'gongfa-secret-heaven-jealous-root',
-    displayName: '天妒灵根',
+    displayName: '天妒窍',
     displayDescription: '暴击时叠加天妒，达到层数后爆发治疗',
     slot: 'modifier',
     rarity: 'legendary',
@@ -1916,7 +1916,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
   {
     id: 'gongfa-secret-leakless-body',
     displayName: '无漏法身',
-    displayDescription: '抵抗控制后获得无漏，下一次受到物理或法术伤害时免伤',
+    displayDescription: '抵抗控制后获得无漏，下一次受到物理或灯律伤害时免伤',
     slot: 'modifier',
     rarity: 'legendary',
     match: {
@@ -1936,7 +1936,7 @@ export const GONGFA_AFFIXES: AffixDefinition[] = [
         buffConfig: {
           id: 'leakless_body',
           name: '无漏',
-          description: '下一次受到物理或法术伤害时免疫该次伤害，触发后消失。',
+          description: '下一次受到物理或灯律伤害时免疫该次伤害，触发后消失。',
           type: BuffType.BUFF,
           duration: 1,
           stackRule: StackRule.OVERRIDE,

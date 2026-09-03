@@ -29,217 +29,217 @@ const ADVANCED_AFFIX_CASES: AdvancedAffixCase[] = [
   {
     affixId: 'skill-rare-life-for-fire',
     productType: 'skill',
-    element: '火',
+    element: '渊',
     coreAffixId: 'skill-core-damage-fire',
   },
   {
     affixId: 'skill-rare-frost-burial',
     productType: 'skill',
-    element: '冰',
+    element: '疫',
     coreAffixId: 'skill-core-damage-ice',
   },
   {
     affixId: 'skill-variant-thunder-pact',
     productType: 'skill',
-    element: '雷',
+    element: '帘',
     coreAffixId: 'skill-core-damage-thunder',
   },
   {
     affixId: 'skill-rare-poison-gu-return',
     productType: 'skill',
-    element: '木',
+    element: '尸',
     coreAffixId: 'skill-core-damage-wood',
   },
   {
     affixId: 'skill-rare-blood-ink-talisman',
     productType: 'skill',
-    element: '火',
+    element: '渊',
     coreAffixId: 'skill-core-damage-fire',
   },
   {
     affixId: 'skill-variant-wind-exchange-step',
     productType: 'skill',
-    element: '风',
+    element: '噬',
     coreAffixId: 'skill-core-damage-wind',
   },
   {
     affixId: 'skill-variant-cut-meridian',
     productType: 'skill',
-    element: '金',
+    element: '烛',
     coreAffixId: 'skill-core-damage',
   },
   {
     affixId: 'skill-rare-old-dream-rekindle',
     productType: 'skill',
-    element: '水',
+    element: '星',
     coreAffixId: 'skill-core-damage-water',
   },
   {
     affixId: 'gongfa-secret-causality-scripture',
     productType: 'gongfa',
-    element: '水',
+    element: '星',
   },
   {
     affixId: 'gongfa-secret-myriad-unity',
     productType: 'gongfa',
-    element: '土',
+    element: '梦',
   },
   {
     affixId: 'gongfa-school-reverse-cultivation',
     productType: 'gongfa',
-    element: '火',
+    element: '渊',
   },
   {
     affixId: 'gongfa-secret-three-breath-sword',
     productType: 'gongfa',
-    element: '金',
+    element: '烛',
   },
   {
     affixId: 'gongfa-secret-heaven-jealous-root',
     productType: 'gongfa',
-    element: '雷',
+    element: '帘',
   },
   {
     affixId: 'gongfa-secret-leakless-body',
     productType: 'gongfa',
-    element: '土',
+    element: '梦',
   },
-  { affixId: 'gongfa-secret-void-step', productType: 'gongfa', element: '风' },
+  { affixId: 'gongfa-secret-void-step', productType: 'gongfa', element: '噬' },
   {
     affixId: 'gongfa-school-borrowed-law-returned',
     productType: 'gongfa',
-    element: '木',
+    element: '尸',
   },
   {
     affixId: 'artifact-treasure-karma-mirror',
     productType: 'artifact',
-    element: '水',
+    element: '星',
     requestedSlot: 'accessory',
   },
   {
     affixId: 'artifact-treasure-calamity-coin',
     productType: 'artifact',
-    element: '金',
+    element: '烛',
     requestedSlot: 'accessory',
   },
   {
     affixId: 'artifact-treasure-thunder-devour-bottle',
     productType: 'artifact',
-    element: '雷',
+    element: '帘',
     requestedSlot: 'accessory',
   },
   {
     affixId: 'artifact-defense-soul-purifying-bell',
     productType: 'artifact',
-    element: '水',
+    element: '星',
     requestedSlot: 'accessory',
   },
   {
     affixId: 'artifact-treasure-taixu-robe',
     productType: 'artifact',
-    element: '土',
+    element: '梦',
     requestedSlot: 'armor',
   },
   {
     affixId: 'artifact-defense-demon-locking-nail',
     productType: 'artifact',
-    element: '金',
+    element: '烛',
     requestedSlot: 'accessory',
   },
   {
     affixId: 'artifact-treasure-returning-ruin-pearl',
     productType: 'artifact',
-    element: '水',
+    element: '星',
     requestedSlot: 'accessory',
   },
   {
     affixId: 'artifact-treasure-steal-heaven-seal',
     productType: 'artifact',
-    element: '水',
+    element: '星',
     requestedSlot: 'accessory',
   },
   {
     affixId: 'artifact-weapon-blood-drinker',
     productType: 'artifact',
-    element: '金',
+    element: '烛',
     requestedSlot: 'weapon',
   },
   {
     affixId: 'artifact-weapon-soul-siphon',
     productType: 'artifact',
-    element: '水',
+    element: '星',
     requestedSlot: 'weapon',
   },
   {
     affixId: 'artifact-weapon-spirit-breaking-awl',
     productType: 'artifact',
-    element: '金',
+    element: '烛',
     requestedSlot: 'weapon',
   },
   {
     affixId: 'artifact-weapon-ban-breaking-edge',
     productType: 'artifact',
-    element: '金',
+    element: '烛',
     requestedSlot: 'weapon',
   },
   {
     affixId: 'artifact-weapon-shield-rending-edge',
     productType: 'artifact',
-    element: '金',
+    element: '烛',
     requestedSlot: 'weapon',
   },
   {
     affixId: 'artifact-weapon-soul-falling-nail',
     productType: 'artifact',
-    element: '金',
+    element: '烛',
     requestedSlot: 'weapon',
   },
   {
     affixId: 'artifact-armor-soul-anchoring-plate',
     productType: 'artifact',
-    element: '土',
+    element: '梦',
     requestedSlot: 'armor',
   },
   {
     affixId: 'artifact-armor-spirit-leaking-inscription',
     productType: 'artifact',
-    element: '土',
+    element: '梦',
     requestedSlot: 'armor',
   },
   {
     affixId: 'artifact-armor-tide-breaking-mail',
     productType: 'artifact',
-    element: '水',
+    element: '星',
     requestedSlot: 'armor',
   },
   {
     affixId: 'artifact-armor-stone-cocoon',
     productType: 'artifact',
-    element: '土',
+    element: '梦',
     requestedSlot: 'armor',
   },
   {
     affixId: 'artifact-accessory-clear-heart-pendant',
     productType: 'artifact',
-    element: '水',
+    element: '星',
     requestedSlot: 'accessory',
   },
   {
     affixId: 'artifact-accessory-leaking-hourglass',
     productType: 'artifact',
-    element: '水',
+    element: '星',
     requestedSlot: 'accessory',
   },
   {
     affixId: 'artifact-accessory-mirror-thread-pendant',
     productType: 'artifact',
-    element: '风',
+    element: '噬',
     requestedSlot: 'accessory',
   },
   {
     affixId: 'artifact-accessory-hidden-radiance-box',
     productType: 'artifact',
-    element: '水',
+    element: '星',
     requestedSlot: 'accessory',
   },
 ];
@@ -248,7 +248,7 @@ describe('advanced affix projection and rehydrate', () => {
   it('rehydrates magic core skills with bleed DOT modifiers without mixed-channel rejection', () => {
     const product = composeProductFromAffixIds({
       productType: 'skill',
-      element: '金',
+      element: '烛',
       requestedQuality: '神品',
       name: '金磁裂星指',
       affixIds: [
@@ -294,7 +294,7 @@ describe('advanced affix projection and rehydrate', () => {
   it('thunder devour bottle stores thunder charges before cooldown release', () => {
     const product = composeProductFromAffixIds({
       productType: 'artifact',
-      element: '雷',
+      element: '帘',
       requestedSlot: 'accessory',
       requestedQuality: '神品',
       name: '测试-吞雷瓶',
@@ -325,7 +325,7 @@ describe('advanced affix projection and rehydrate', () => {
   it('weapon artifact affixes project to their intended offensive listener effects', () => {
     const projectWeaponAffix = (
       affixId: string,
-      element: ElementType = '金',
+      element: ElementType = '烛',
     ) => {
       const product = composeProductFromAffixIds({
         productType: 'artifact',
@@ -346,7 +346,7 @@ describe('advanced affix projection and rehydrate', () => {
       effects: [{ type: 'resource_drain' }],
     });
 
-    const soulSiphon = projectWeaponAffix('artifact-weapon-soul-siphon', '水');
+    const soulSiphon = projectWeaponAffix('artifact-weapon-soul-siphon', '星');
     expect(soulSiphon.listeners?.[0]?.effects[0]).toMatchObject({
       type: 'resource_drain',
       conditions: [{
@@ -399,7 +399,7 @@ describe('advanced affix projection and rehydrate', () => {
   it('projects causality scripture as reflect-safe and global unique', () => {
     const product = composeProductFromAffixIds({
       productType: 'gongfa',
-      element: '水',
+      element: '星',
       requestedQuality: '神品',
       name: '测试-因果经',
       affixIds: ['gongfa-secret-causality-scripture'],
@@ -429,7 +429,7 @@ describe('advanced affix projection and rehydrate', () => {
     const projectArtifactAffix = (
       affixId: string,
       requestedSlot: EquipmentSlot,
-      element: ElementType = '土',
+      element: ElementType = '梦',
     ) => {
       const product = composeProductFromAffixIds({
         productType: 'artifact',
@@ -461,7 +461,7 @@ describe('advanced affix projection and rehydrate', () => {
     });
 
     expect(
-      projectArtifactAffix('artifact-armor-tide-breaking-mail', 'armor', '水')
+      projectArtifactAffix('artifact-armor-tide-breaking-mail', 'armor', '星')
         .listeners?.[0],
     ).toMatchObject({
       eventType: 'DamageSegmentAppliedEvent',
@@ -484,7 +484,7 @@ describe('advanced affix projection and rehydrate', () => {
       projectArtifactAffix(
         'artifact-accessory-clear-heart-pendant',
         'accessory',
-        '水',
+        '星',
       ).listeners?.[0],
     ).toMatchObject({
       eventType: 'BuffAddEvent',
@@ -496,7 +496,7 @@ describe('advanced affix projection and rehydrate', () => {
       projectArtifactAffix(
         'artifact-accessory-leaking-hourglass',
         'accessory',
-        '水',
+        '星',
       ).listeners?.[0],
     ).toMatchObject({
       eventType: 'DamageSegmentAppliedEvent',
@@ -509,7 +509,7 @@ describe('advanced affix projection and rehydrate', () => {
       projectArtifactAffix(
         'artifact-accessory-mirror-thread-pendant',
         'accessory',
-        '风',
+        '噬',
       ).listeners?.[0],
     ).toMatchObject({
       eventType: 'DodgeEvent',
@@ -521,7 +521,7 @@ describe('advanced affix projection and rehydrate', () => {
       projectArtifactAffix(
         'artifact-accessory-hidden-radiance-box',
         'accessory',
-        '水',
+        '星',
       ).listeners?.[0],
     ).toMatchObject({
       eventType: 'ShieldBreakEvent',
@@ -533,7 +533,7 @@ describe('advanced affix projection and rehydrate', () => {
   it('last stand shell scales its shield from the artifact owner instead of the attacker', () => {
     const product = composeProductFromAffixIds({
       productType: 'artifact',
-      element: '土',
+      element: '梦',
       requestedSlot: 'accessory',
       requestedQuality: '神品',
       name: '测试-灵壁',
@@ -582,7 +582,7 @@ describe('advanced affix projection and rehydrate', () => {
   it('leakless body consumes its immunity buff after blocking one damage event', () => {
     const product = composeProductFromAffixIds({
       productType: 'gongfa',
-      element: '土',
+      element: '梦',
       requestedQuality: '神品',
       name: '测试-无漏法身',
       affixIds: ['gongfa-secret-leakless-body'],
@@ -609,7 +609,7 @@ describe('advanced affix projection and rehydrate', () => {
   it('calamity coin only projects its debt sequence for lethal damage windows', () => {
     const product = composeProductFromAffixIds({
       productType: 'artifact',
-      element: '金',
+      element: '烛',
       requestedSlot: 'accessory',
       requestedQuality: '神品',
       name: '测试-替劫铜钱',
@@ -630,7 +630,7 @@ describe('advanced affix projection and rehydrate', () => {
     const projectCalamityEffect = (requestedQuality: '凡品' | '神品') => {
       const product = composeProductFromAffixIds({
         productType: 'artifact',
-        element: '金',
+        element: '烛',
         requestedSlot: 'accessory',
         requestedQuality,
         name: `测试-替劫铜钱-${requestedQuality}`,
@@ -686,7 +686,7 @@ describe('advanced affix projection and rehydrate', () => {
   it('projects apply_buff embedded listener effects recursively', () => {
     const thunderPact = composeProductFromAffixIds({
       productType: 'skill',
-      element: '雷',
+      element: '帘',
       requestedQuality: '神品',
       name: '测试-雷契',
       affixIds: ['skill-core-damage-thunder', 'skill-variant-thunder-pact'],
@@ -725,9 +725,9 @@ describe('advanced affix projection and rehydrate', () => {
 
     const heavenRoot = composeProductFromAffixIds({
       productType: 'gongfa',
-      element: '雷',
+      element: '帘',
       requestedQuality: '神品',
-      name: '测试-天妒灵根',
+      name: '测试-天妒窍',
       affixIds: ['gongfa-secret-heaven-jealous-root'],
     });
     const heavenConfig = projectAbilityConfig(heavenRoot);
@@ -752,7 +752,7 @@ describe('advanced affix projection and rehydrate', () => {
   it('projects shield break and target max MP scaling into battle config', () => {
     const ruinPearl = composeProductFromAffixIds({
       productType: 'artifact',
-      element: '水',
+      element: '星',
       requestedSlot: 'accessory',
       requestedQuality: '神品',
       name: '测试-归墟珠',
@@ -772,7 +772,7 @@ describe('advanced affix projection and rehydrate', () => {
 
     const cutMeridian = composeProductFromAffixIds({
       productType: 'skill',
-      element: '金',
+      element: '烛',
       requestedQuality: '神品',
       name: '测试-截脉',
       affixIds: ['skill-core-damage', 'skill-variant-cut-meridian'],

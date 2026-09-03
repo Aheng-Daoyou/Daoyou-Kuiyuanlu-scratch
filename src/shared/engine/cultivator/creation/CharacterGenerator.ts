@@ -3,6 +3,7 @@ import type {
   Cultivator,
   Skill,
 } from '@shared/types/cultivator';
+import { hasAnyServerLlmProviderConfigured } from '@server/utils/aiClient';
 import { generateAiObject } from '@server/utils/aiClient';
 import { BASIC_SKILLS, BASIC_TECHNIQUES } from './config';
 import {
@@ -10,6 +11,7 @@ import {
   getCharacterGenerationUserPrompt,
 } from './prompts';
 import { CultivatorAIRawSchema, normalizeCultivatorAIData } from './types';
+import { buildTemplateCultivatorAIData } from './templateFallback';
 import { generateAttributes, generateSpiritualRoots } from './utils';
 
 export class CharacterGenerator {
@@ -20,19 +22,37 @@ export class CharacterGenerator {
   public static async generate(
     userInput: string,
   ): Promise<{ cultivator: Cultivator; balanceNotes: string }> {
-    // 1. 调用 AI 生成角色骨架
-    const prompt = getCharacterGenerationPrompt();
-    const userPrompt = getCharacterGenerationUserPrompt(userInput);
+    // 1. 调用 AI 生成角色骨架（未配置 LLM 或调用失败时降级到内置模板）
+    let aiOutput;
 
-    const aiResponse = await generateAiObject({
-      system: prompt,
-      prompt: userPrompt,
-      schema: CultivatorAIRawSchema,
-      name: '修仙真形骨架',
-      sceneId: 'character-generation',
-    });
+    if (!hasAnyServerLlmProviderConfigured()) {
+      console.warn(
+        '[CharacterGenerator] 未配置 LLM Provider，使用内置模板生成角色骨架',
+      );
+      aiOutput = buildTemplateCultivatorAIData(userInput);
+    } else {
+      const prompt = getCharacterGenerationPrompt();
+      const userPrompt = getCharacterGenerationUserPrompt(userInput);
 
-    const data = normalizeCultivatorAIData(aiResponse.output);
+      try {
+        const aiResponse = await generateAiObject({
+          system: prompt,
+          prompt: userPrompt,
+          schema: CultivatorAIRawSchema,
+          name: '守灯真形骨架',
+          sceneId: 'character-generation',
+        });
+        aiOutput = aiResponse.output;
+      } catch (error) {
+        console.warn(
+          '[CharacterGenerator] AI 角色生成失败，降级到内置模板:',
+          error instanceof Error ? error.message : error,
+        );
+        aiOutput = buildTemplateCultivatorAIData(userInput);
+      }
+    }
+
+    const data = normalizeCultivatorAIData(aiOutput);
 
     // 2. 数值化生成
     const attributes = generateAttributes();
@@ -41,22 +61,22 @@ export class CharacterGenerator {
       data.element_preferences,
     );
 
-    // 确定主灵根（强度最高的）
+    // 确定主窍（强度最高的）
     const mainRoot = spiritual_roots.reduce((prev, current) =>
       prev.strength > current.strength ? prev : current,
     );
 
     // 3. 分配功法与神通
-    // 功法：主灵根对应的基础功法
+    // 功法：主窍对应的基础功法
     const cultivation = BASIC_TECHNIQUES[mainRoot.element]();
     const cultivations: CultivationTechnique[] = [cultivation];
 
-    // 神通：主灵根对应的一攻一守
+    // 神通：主窍对应的一攻一守
     const skills: Skill[] = [...BASIC_SKILLS[mainRoot.element]];
 
     // 4. 其他基础数值
     const age = 14 + Math.floor(Math.random() * 6); // 14-20岁
-    // 寿元：炼气期基础100，分数高加成
+    // 寿元：闻腥期基础100，分数高加成
     const lifespan =
       80 + Math.floor(Math.random() * 20) + (data.aptitude_score > 80 ? 20 : 0);
 
@@ -67,11 +87,12 @@ export class CharacterGenerator {
       gender: data.gender,
       origin: data.origin,
       personality: data.personality,
+      lineage_lore: data.lineage_lore,
       background: data.background,
       playerRace: 'human',
       raceNarrative: data.race_narrative,
 
-      realm: '炼气',
+      realm: '闻腥',
       realm_stage: '初期',
       age,
       lifespan,

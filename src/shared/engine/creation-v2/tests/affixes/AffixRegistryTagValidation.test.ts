@@ -347,7 +347,7 @@ describe('AffixRegistry tag validation', () => {
     ).toThrow('skill affix must not declare listenerSpec');
   });
 
-  it('应允许武器法宝专属词条使用进攻型 OWNER_AS_CASTER 监听', () => {
+  it('应允许武器封灵器专属词条使用进攻型 OWNER_AS_CASTER 监听', () => {
     const registry = new AffixRegistry();
 
     expect(() =>
@@ -373,7 +373,7 @@ describe('AffixRegistry tag validation', () => {
     ).not.toThrow();
   });
 
-  it('应继续拒绝非武器专属法宝使用 OWNER_AS_CASTER 监听', () => {
+  it('应继续拒绝非武器专属封灵器使用 OWNER_AS_CASTER 监听', () => {
     const registry = new AffixRegistry();
 
     expect(() =>
@@ -399,7 +399,7 @@ describe('AffixRegistry tag validation', () => {
     ).toThrow('artifact affix must not use OWNER_AS_CASTER scope');
   });
 
-  it('应继续拒绝武器法宝在非进攻事件使用 OWNER_AS_CASTER 监听', () => {
+  it('应继续拒绝武器封灵器在非进攻事件使用 OWNER_AS_CASTER 监听', () => {
     const registry = new AffixRegistry();
 
     expect(() =>

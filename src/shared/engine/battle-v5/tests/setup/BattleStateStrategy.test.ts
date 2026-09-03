@@ -121,7 +121,7 @@ function createCultivator(
               id: 'max-resource-artifact',
               name: '归元佩',
               slot: 'accessory',
-              element: '水',
+              element: '星',
               attributeModifiers: [
                 {
                   attrType: AttributeType.MAX_MP,
@@ -175,7 +175,7 @@ function createCultivator(
     condition,
     spirit_stones: 0,
     gender: '男',
-    realm: '炼气',
+    realm: '闻腥',
     realm_stage: '初期',
   };
 }

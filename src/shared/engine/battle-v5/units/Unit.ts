@@ -114,7 +114,7 @@ export class Unit {
     }
     if (typeof options.mp === 'number') {
       if (!Number.isFinite(options.mp)) {
-        throw new Error('初始法力必须为有限数值');
+        throw new Error('初始灯焰必须为有限数值');
       }
       this.currentMp = Math.max(0, Math.min(this.maxMp, options.mp));
     }

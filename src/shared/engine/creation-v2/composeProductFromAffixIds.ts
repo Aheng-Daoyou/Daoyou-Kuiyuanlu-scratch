@@ -24,6 +24,7 @@ import type {
 } from '@shared/types/constants';
 import type { TargetPolicyConfig } from '@shared/engine/battle-v5/abilities/TargetPolicy';
 import { CREATION_PROJECTION_QUALITY_TIERS } from './config/CreationBalance';
+import { buildArtifactSpirit } from './artifacts/spiritNarrative';
 
 const PRESET_QUALITY = '凡品' as const;
 const PRESET_EFFECTIVE_ENERGY = 17;
@@ -224,13 +225,21 @@ export function composeProductFromAffixIds(
     args.realm &&
     args.realmStage
   ) {
+    const craftedAt = new Date().toISOString();
     productModel.metadata = {
       creatorName: args.creatorName ?? DEFAULT_ARTIFACT_CREATOR_NAME,
       creatorCultivatorId:
         args.creatorCultivatorId ?? DEFAULT_ARTIFACT_CREATOR_ID,
       anchorRealm: args.realm,
       anchorRealmStage: args.realmStage,
-      craftedAt: new Date().toISOString(),
+      craftedAt,
+      // 器灵叙事数据层：仅叙事，不参与数值判别。
+      spirit: buildArtifactSpirit(
+        args.name,
+        productModel.projectionQuality,
+        rolledAffixes,
+        craftedAt,
+      ),
     };
   }
 

@@ -32,7 +32,7 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   {
     id: 'artifact-panel-weapon-dual-atk',
     displayName: '基础攻击',
-    displayDescription: '提升攻击与法术攻击',
+    displayDescription: '提升攻击与灯律攻击',
     slot: 'core',
     rarity: 'common',
     match: {},
@@ -62,7 +62,7 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   {
     id: 'artifact-panel-armor-dual-def',
     displayName: '基础防御',
-    displayDescription: '提升防御与法术防御',
+    displayDescription: '提升防御与灯律防御',
     slot: 'core',
     rarity: 'common',
     match: {},
@@ -195,8 +195,8 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'artifact-panel-magic-atk',
-    displayName: '聚灵',
-    displayDescription: '提升法术攻击',
+    displayName: '聚灯',
+    displayDescription: '提升灯律攻击',
     slot: 'identity',
     rarity: 'common',
     match: {
@@ -248,7 +248,7 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   {
     id: 'artifact-panel-magic-def',
     displayName: '御法',
-    displayDescription: '提升法术防御',
+    displayDescription: '提升灯律防御',
     slot: 'identity',
     rarity: 'common',
     match: {
@@ -456,8 +456,8 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'artifact-panel-spirit',
-    displayName: '蕴灵',
-    displayDescription: '提升灵力属性',
+    displayName: '蕴灯',
+    displayDescription: '提升梦涎属性',
     slot: 'identity',
     rarity: 'common',
     match: {
@@ -563,7 +563,7 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   {
     id: 'artifact-panel-willpower',
     displayName: '凝神',
-    displayDescription: '提升神识属性',
+    displayDescription: '提升心神属性',
     slot: 'identity',
     rarity: 'common',
     match: {
@@ -589,7 +589,7 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   {
     id: 'artifact-panel-speed',
     displayName: '乘风',
-    displayDescription: '提升身法属性',
+    displayDescription: '提升灯影属性',
     slot: 'identity',
     rarity: 'common',
     match: {
@@ -757,8 +757,8 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   // --- 回合回蓝 ---
   {
     id: 'artifact-defense-mana-recovery',
-    displayName: '灵泉',
-    displayDescription: '每回合根据神识回复法力',
+    displayName: '灯泉',
+    displayDescription: '每回合根据心神回复灯焰',
     slot: 'modifier',
     rarity: 'uncommon',
     match: {
@@ -837,7 +837,7 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   {
     id: 'artifact-weapon-soul-siphon',
     displayName: '摄魂',
-    displayDescription: '法术造成伤害后，将部分伤害转化为法力',
+    displayDescription: '灯律造成伤害后，将部分伤害转化为灯焰',
     slot: 'modifier',
     rarity: 'rare',
     match: {
@@ -877,7 +877,7 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   {
     id: 'artifact-weapon-spirit-breaking-awl',
     displayName: '破灵锥',
-    displayDescription: '物理命中后削减目标法力',
+    displayDescription: '物理命中后削减目标灯焰',
     slot: 'modifier',
     rarity: 'uncommon',
     match: {
@@ -1029,8 +1029,8 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   // --- 法力护盾 ---
   {
     id: 'artifact-defense-magic-shield',
-    displayName: '法力护盾',
-    displayDescription: '当前法力高于 30% 时，受击时优先以灵力抵挡部分伤害',
+    displayName: '灯焰护盾',
+    displayDescription: '当前灯焰高于 30% 时，受击时优先以灯焰抵挡部分伤害',
     slot: 'modifier',
     rarity: 'rare',
     match: {
@@ -1170,13 +1170,13 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   // --- 8 种元素减伤 ---
   {
     id: 'artifact-defense-fire-resist',
-    displayName: '辟火',
-    displayDescription: '降低受到的火系伤害',
+    displayName: '辟渊',
+    displayDescription: '降低受到的渊系伤害',
     slot: 'modifier',
     rarity: 'common',
     match: {
       all: [CreationTags.MATERIAL.SEMANTIC_GUARD],
-      any: [ELEMENT_TO_MATERIAL_TAG['水'], ELEMENT_TO_MATERIAL_TAG['冰']],
+      any: [ELEMENT_TO_MATERIAL_TAG['星'], ELEMENT_TO_MATERIAL_TAG['疫']],
     },
     weight: 40,
     energyCost: 12,
@@ -1187,7 +1187,7 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
       conditions: [
         {
           type: 'ability_has_tag',
-          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['火'] },
+          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['渊'] },
         },
       ],
       params: {
@@ -1204,14 +1204,14 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'artifact-defense-ice-resist',
-    displayName: '辟冰',
-    displayDescription: '降低受到的冰系伤害',
+    displayName: '辟疫',
+    displayDescription: '降低受到的疫系伤害',
     slot: 'modifier',
     rarity: 'common',
     match: {
       all: [CreationTags.MATERIAL.SEMANTIC_GUARD],
       any: [
-        ELEMENT_TO_MATERIAL_TAG['火'],
+        ELEMENT_TO_MATERIAL_TAG['渊'],
         CreationTags.MATERIAL.SEMANTIC_FLAME,
       ],
     },
@@ -1224,7 +1224,7 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
       conditions: [
         {
           type: 'ability_has_tag',
-          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['冰'] },
+          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['疫'] },
         },
       ],
       params: {
@@ -1241,13 +1241,13 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'artifact-defense-thunder-resist',
-    displayName: '辟雷',
-    displayDescription: '降低受到的雷系伤害',
+    displayName: '辟帘',
+    displayDescription: '降低受到的帘系伤害',
     slot: 'modifier',
     rarity: 'uncommon',
     match: {
       all: [CreationTags.MATERIAL.SEMANTIC_GUARD],
-      any: [ELEMENT_TO_MATERIAL_TAG['木'], ELEMENT_TO_MATERIAL_TAG['土']],
+      any: [ELEMENT_TO_MATERIAL_TAG['尸'], ELEMENT_TO_MATERIAL_TAG['梦']],
     },
     weight: 36,
     energyCost: 16,
@@ -1258,7 +1258,7 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
       conditions: [
         {
           type: 'ability_has_tag',
-          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['雷'] },
+          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['帘'] },
         },
       ],
       params: {
@@ -1275,13 +1275,13 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'artifact-defense-wind-resist',
-    displayName: '辟风',
-    displayDescription: '降低受到的风系伤害',
+    displayName: '辟噬',
+    displayDescription: '降低受到的噬系伤害',
     slot: 'modifier',
     rarity: 'uncommon',
     match: {
       all: [CreationTags.MATERIAL.SEMANTIC_GUARD],
-      any: [ELEMENT_TO_MATERIAL_TAG['土'], ELEMENT_TO_MATERIAL_TAG['金']],
+      any: [ELEMENT_TO_MATERIAL_TAG['梦'], ELEMENT_TO_MATERIAL_TAG['烛']],
     },
     weight: 34,
     energyCost: 14,
@@ -1292,7 +1292,7 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
       conditions: [
         {
           type: 'ability_has_tag',
-          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['风'] },
+          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['噬'] },
         },
       ],
       params: {
@@ -1309,13 +1309,13 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'artifact-defense-metal-resist',
-    displayName: '辟金',
-    displayDescription: '降低受到的金系伤害',
+    displayName: '辟烛',
+    displayDescription: '降低受到的烛系伤害',
     slot: 'modifier',
     rarity: 'common',
     match: {
       all: [CreationTags.MATERIAL.SEMANTIC_GUARD],
-      any: [ELEMENT_TO_MATERIAL_TAG['火'], ELEMENT_TO_MATERIAL_TAG['水']],
+      any: [ELEMENT_TO_MATERIAL_TAG['渊'], ELEMENT_TO_MATERIAL_TAG['星']],
     },
     weight: 32,
     energyCost: 12,
@@ -1326,7 +1326,7 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
       conditions: [
         {
           type: 'ability_has_tag',
-          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['金'] },
+          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['烛'] },
         },
       ],
       params: {
@@ -1343,13 +1343,13 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'artifact-defense-water-resist',
-    displayName: '辟水',
-    displayDescription: '降低受到的水系伤害',
+    displayName: '辟星',
+    displayDescription: '降低受到的星系伤害',
     slot: 'modifier',
     rarity: 'common',
     match: {
       all: [CreationTags.MATERIAL.SEMANTIC_GUARD],
-      any: [ELEMENT_TO_MATERIAL_TAG['土'], ELEMENT_TO_MATERIAL_TAG['木']],
+      any: [ELEMENT_TO_MATERIAL_TAG['梦'], ELEMENT_TO_MATERIAL_TAG['尸']],
     },
     weight: 30,
     energyCost: 12,
@@ -1360,7 +1360,7 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
       conditions: [
         {
           type: 'ability_has_tag',
-          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['水'] },
+          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['星'] },
         },
       ],
       params: {
@@ -1377,13 +1377,13 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'artifact-defense-wood-resist',
-    displayName: '辟木',
-    displayDescription: '降低受到的木系伤害',
+    displayName: '辟尸',
+    displayDescription: '降低受到的尸系伤害',
     slot: 'modifier',
     rarity: 'common',
     match: {
       all: [CreationTags.MATERIAL.SEMANTIC_GUARD],
-      any: [ELEMENT_TO_MATERIAL_TAG['金'], ELEMENT_TO_MATERIAL_TAG['火']],
+      any: [ELEMENT_TO_MATERIAL_TAG['烛'], ELEMENT_TO_MATERIAL_TAG['渊']],
     },
     weight: 28,
     energyCost: 12,
@@ -1394,7 +1394,7 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
       conditions: [
         {
           type: 'ability_has_tag',
-          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['木'] },
+          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['尸'] },
         },
       ],
       params: {
@@ -1411,13 +1411,13 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'artifact-defense-earth-resist',
-    displayName: '辟土',
-    displayDescription: '降低受到的土系伤害',
+    displayName: '辟梦',
+    displayDescription: '降低受到的梦系伤害',
     slot: 'modifier',
     rarity: 'common',
     match: {
       all: [CreationTags.MATERIAL.SEMANTIC_GUARD],
-      any: [ELEMENT_TO_MATERIAL_TAG['木'], ELEMENT_TO_MATERIAL_TAG['风']],
+      any: [ELEMENT_TO_MATERIAL_TAG['尸'], ELEMENT_TO_MATERIAL_TAG['噬']],
     },
     weight: 28,
     energyCost: 12,
@@ -1428,7 +1428,7 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
       conditions: [
         {
           type: 'ability_has_tag',
-          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['土'] },
+          params: { tag: ELEMENT_TO_RUNTIME_ABILITY_TAG['梦'] },
         },
       ],
       params: {
@@ -1514,7 +1514,7 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   {
     id: 'artifact-armor-spirit-leaking-inscription',
     displayName: '泄灵纹甲',
-    displayDescription: '受到法术伤害时，以法力吸收部分伤害',
+    displayDescription: '受到灯律伤害时，以灯焰吸收部分伤害',
     slot: 'modifier',
     rarity: 'rare',
     match: {
@@ -1555,7 +1555,7 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   {
     id: 'artifact-armor-tide-breaking-mail',
     displayName: '溃潮甲',
-    displayDescription: '护盾吸收足量伤害后回复法力',
+    displayDescription: '护盾吸收足量伤害后回复灯焰',
     slot: 'modifier',
     rarity: 'legendary',
     match: {
@@ -1860,7 +1860,7 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   },
 
   // ================================================================
-  // ===== ARTIFACT_TREASURE 池 (3 种) — 制造"极品法宝感"
+  // ===== ARTIFACT_TREASURE 池 (3 种) — 制造"极品封灵器感"
   // ================================================================
 
   // --- 金甲：受击概率大幅度减伤 ---
@@ -1940,7 +1940,7 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   {
     id: 'artifact-treasure-void-mirror',
     displayName: '太虚',
-    displayDescription: '受击时有概率免疫本次法术伤害',
+    displayDescription: '受击时有概率免疫本次灯律伤害',
     slot: 'modifier',
     rarity: 'legendary',
     match: {
@@ -2162,7 +2162,7 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   {
     id: 'artifact-treasure-thunder-devour-bottle',
     displayName: '吞雷瓶',
-    displayDescription: '受到雷系伤害时减少自身冷却',
+    displayDescription: '受到帘系伤害时减少自身冷却',
     slot: 'modifier',
     rarity: 'legendary',
     match: {
@@ -2197,9 +2197,9 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
               target: 'caster',
               buffConfig: {
                 id: 'thunder_devour_charge',
-                name: '蓄雷',
+                name: '蓄帘',
                 description:
-                  '受到雷系伤害时积蓄；达到3层后清空，并减少自身一个技能冷却。',
+                  '受到帘系伤害时积蓄；达到3层后清空，并减少自身一个技能冷却。',
                 type: BuffType.BUFF,
                 duration: 3,
                 stackRule: StackRule.STACK_LAYER,
@@ -2304,7 +2304,7 @@ export const ARTIFACT_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'artifact-defense-demon-locking-nail',
-    displayName: '锁妖钉',
+    displayName: '镇诡钉',
     displayDescription: '抵抗控制时反向封禁施法者',
     slot: 'modifier',
     rarity: 'rare',

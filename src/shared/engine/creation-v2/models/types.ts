@@ -6,6 +6,7 @@ import type {
   RolledAffix,
 } from '../types';
 import type { BalanceMetrics } from '../balancing/PBU';
+import type { ArtifactSpiritInfo } from '../artifacts/spiritNarrative';
 
 export interface ArtifactDomainConfig {
   slot?: EquipmentSlot;
@@ -20,6 +21,8 @@ export interface ArtifactProductMetadata {
   anchorRealm: RealmType;
   anchorRealmStage: RealmStage;
   craftedAt: string;
+  /** 器灵叙事信息（可选）。随 productModel jsonb 落库，展示层读出。 */
+  spirit?: ArtifactSpiritInfo;
 }
 
 export interface GongFaDomainConfig {

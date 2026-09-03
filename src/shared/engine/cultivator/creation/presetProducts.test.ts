@@ -8,13 +8,13 @@ describe('preset products', () => {
       id: 'preset-artifact-1',
       name: '试锋金刃',
       slot: 'weapon',
-      element: '金',
+      element: '烛',
       affixIds: [
         'artifact-panel-weapon-dual-atk',
         'artifact-panel-atk',
         'artifact-defense-mana-recovery',
       ],
-      realm: '筑基',
+      realm: '守灯',
       realmStage: '后期',
       creatorName: '测试造物者',
       creatorCultivatorId: 'tester',
@@ -24,7 +24,7 @@ describe('preset products', () => {
     expect((artifact.productModel as { affixes?: unknown[] }).affixes?.length).toBeGreaterThan(0);
     expect((artifact.productModel as { metadata?: { anchorRealm?: string; anchorRealmStage?: string } }).metadata)
       .toMatchObject({
-        anchorRealm: '筑基',
+        anchorRealm: '守灯',
         anchorRealmStage: '后期',
       });
     expect(artifact.abilityConfig).toBeDefined();

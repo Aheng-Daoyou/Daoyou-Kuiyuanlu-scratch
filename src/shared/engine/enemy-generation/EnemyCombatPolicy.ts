@@ -1,4 +1,4 @@
-import type { EnemyRace } from '@shared/types/constants';
+import type { EnemyClan } from '@shared/types/constants';
 import type { EnemySkillRole } from './types';
 
 export interface EnemyCombatPolicy {
@@ -36,17 +36,14 @@ function buildPolicy(order: RoleOrder): EnemyCombatPolicy {
   };
 }
 
-export const ENEMY_COMBAT_POLICIES: Record<EnemyRace, EnemyCombatPolicy> = {
-  人族: buildPolicy(['offense', 'control', 'guard', 'sustain']),
-  妖族: buildPolicy(['offense', 'control', 'sustain', 'guard']),
-  鬼魂: buildPolicy(['control', 'offense', 'sustain', 'guard']),
-  魔族: buildPolicy(['offense', 'control', 'sustain', 'guard']),
-  古兽: buildPolicy(['offense', 'control', 'guard', 'sustain']),
-  灵族: buildPolicy(['offense', 'control', 'guard', 'sustain']),
+export const ENEMY_COMBAT_POLICIES: Record<EnemyClan, EnemyCombatPolicy> = {
+  腌物: buildPolicy(['offense', 'control', 'sustain', 'guard']),
+  遗种: buildPolicy(['control', 'offense', 'sustain', 'guard']),
+  投影: buildPolicy(['control', 'offense', 'sustain', 'guard']),
 };
 
-export function getEnemyCombatPolicy(race: EnemyRace): EnemyCombatPolicy {
-  return ENEMY_COMBAT_POLICIES[race];
+export function getEnemyCombatPolicy(clan: EnemyClan): EnemyCombatPolicy {
+  return ENEMY_COMBAT_POLICIES[clan];
 }
 
 export function isEnemyPressureRole(

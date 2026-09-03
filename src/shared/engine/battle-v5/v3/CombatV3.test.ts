@@ -348,7 +348,7 @@ describe('combat facts V3', () => {
       CombatAttributionV3.owned(owner, {
         kind: 'ability',
         id: 'persisted-source',
-        name: '遗留术法',
+        name: '遗留灯律',
       }),
     );
     owner.setHp(0);
@@ -849,7 +849,7 @@ describe('combat facts V3', () => {
     const passiveOrigin: CombatOriginV3 = {
       kind: 'owned',
       owner: actor,
-      carrier: { kind: 'gongfa', id: 'passive', name: '大巧不工' },
+      carrier: { kind: 'gongfa', id: 'passive', name: '铁壁' },
     };
     const equipmentOrigin: CombatOriginV3 = {
       kind: 'owned',
@@ -870,7 +870,7 @@ describe('combat facts V3', () => {
           origin: actionOrigin,
           target: actor,
           resourceId: 'sword-intent',
-          resourceName: '剑意',
+          resourceName: '灯焰',
           before: 0,
           after: 1,
           applied: 1,
@@ -882,7 +882,7 @@ describe('combat facts V3', () => {
           origin: passiveOrigin,
           target: actor,
           resourceId: 'sword-intent',
-          resourceName: '剑意',
+          resourceName: '灯焰',
           before: 1,
           after: 2,
           applied: 1,
@@ -919,7 +919,7 @@ describe('combat facts V3', () => {
     expect(inline).toMatchObject({ layout: 'inline' });
     if (inline.layout !== 'inline') throw new Error('Expected inline group');
     expect(inline.line.parts.map((entry) => entry.text).join('')).toBe(
-      '「大巧不工」触发：剑意 1 → 2',
+      '「铁壁」触发：灯焰 1 → 2',
     );
     const branch = presentation.groups[2];
     expect(branch).toMatchObject({ layout: 'branch' });
@@ -1069,7 +1069,7 @@ describe('combat facts V3', () => {
           type: 'defense',
           defense: 'mana_shield',
           amount: 12,
-          detail: '消耗12点法力',
+          detail: '消耗12点灯焰',
         });
       },
     );
@@ -1081,9 +1081,9 @@ describe('combat facts V3', () => {
     expect(output).not.toContain('internal_transform_rule');
     expect(output).toContain('必定暴击');
     expect(output).not.toContain('数值：1');
-    expect(output).toContain('法力护盾');
+    expect(output).toContain('灯焰护盾');
     expect(output).toContain('12');
-    expect(output).toContain('消耗12点法力');
+    expect(output).toContain('消耗12点灯焰');
     builder.destroy();
   });
 
@@ -1431,7 +1431,7 @@ describe('combat facts V3', () => {
           origin,
           target: actor,
           resourceId: 'sword-intent',
-          resourceName: '剑意',
+          resourceName: '灯焰',
           before: 1,
           after: 2,
           applied: 1,
@@ -1445,7 +1445,7 @@ describe('combat facts V3', () => {
           operation: 'apply',
           transition: 'added',
           statusId: 'thunder-mark',
-          statusName: '雷印',
+          statusName: '帘印',
           statusType: 'debuff',
           beforeLayers: 0,
           afterLayers: 1,
@@ -1468,7 +1468,7 @@ describe('combat facts V3', () => {
       .format(sequence)
       .join('\n');
     expect(concise).not.toContain('引雷');
-    expect(concise).toContain('雷印');
+    expect(concise).toContain('帘印');
     expect(concise).toContain('触发「余雷」');
     const detailed = new CombatPresenterV3('detailed')
       .format(sequence)
@@ -1562,7 +1562,7 @@ describe('combat facts V3', () => {
         { kind: 'damage_defer', amount: 80, turns: 2 },
         '80 点伤害延后 2 回合',
       ],
-      mana_burn: [{ kind: 'mana_burn', amount: 44 }, '44 点法力'],
+      mana_burn: [{ kind: 'mana_burn', amount: 44 }, '44 点灯焰'],
       cooldown_change: [
         { kind: 'cooldown_change', abilityName: '一叹', rounds: -1 },
         '冷却缩短 1 回合',
@@ -1900,12 +1900,12 @@ describe('combat facts V3', () => {
           origin,
           target,
           resourceId: 'intent',
-          resourceName: '剑意',
+          resourceName: '灯焰',
           before: 1,
           after: 2,
           applied: 1,
         },
-        expected: '剑意 1 → 2',
+        expected: '灯焰 1 → 2',
       },
       action_state: {
         fact: {
@@ -1976,7 +1976,7 @@ describe('combat facts V3', () => {
   it('renders every defense semantic', () => {
     type DefenseFact = Extract<CombatFactV3, { type: 'defense' }>;
     const cases = {
-      mana_shield: '法力护盾生效',
+      mana_shield: '灯焰护盾生效',
       damage_immune: '免疫伤害',
       skill_immune: '技能被免疫',
       dodge: '成功闪避',

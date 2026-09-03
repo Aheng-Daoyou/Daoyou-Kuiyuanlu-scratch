@@ -30,11 +30,12 @@ export class MaterialTypeRules implements Rule<MaterialFacts, MaterialDecision> 
     }
 
     for (const fp of facts.fingerprints) {
-      const typeTags = fp.explicitTags.filter(
-        (t) =>
-          t.startsWith(CreationTags.MATERIAL.TYPE) ||
-          t.startsWith(CreationTags.MATERIAL.QUALITY) ||
-          t.startsWith(CreationTags.MATERIAL.ELEMENT),
+      const typeTags = (fp.explicitTags ?? []).filter(
+        (t): t is string =>
+          typeof t === 'string' &&
+          (t.startsWith(CreationTags.MATERIAL.TYPE) ||
+            t.startsWith(CreationTags.MATERIAL.QUALITY) ||
+            t.startsWith(CreationTags.MATERIAL.ELEMENT)),
       );
 
       decision.trace.push({

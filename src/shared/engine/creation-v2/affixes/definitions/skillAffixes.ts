@@ -41,7 +41,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
   {
     id: 'skill-core-damage',
     displayName: '基础伤害',
-    displayDescription: '施放时造成一次基础法术伤害',
+    displayDescription: '施放时造成一次基础灯律伤害',
     slot: 'core',
     rarity: 'common',
     match: {
@@ -74,12 +74,12 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
   // --- 8 种元素伤害 ---
   {
     id: 'skill-core-damage-fire',
-    displayName: '火系伤害',
-    displayDescription: '施放时造成一次火系法术伤害',
+    displayName: '渊系伤害',
+    displayDescription: '施放时造成一次渊系灯律伤害',
     slot: 'core',
     rarity: 'common',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['火']],
+      all: [ELEMENT_TO_MATERIAL_TAG['渊']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_FLAME,
         CreationTags.MATERIAL.SEMANTIC_BURST,
@@ -107,12 +107,12 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'skill-core-damage-ice',
-    displayName: '冰系伤害',
-    displayDescription: '施放时造成一次冰系法术伤害',
+    displayName: '疫系伤害',
+    displayDescription: '施放时造成一次疫系灯律伤害',
     slot: 'core',
     rarity: 'common',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['冰']],
+      all: [ELEMENT_TO_MATERIAL_TAG['疫']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_FREEZE,
         CreationTags.MATERIAL.SEMANTIC_BURST,
@@ -140,12 +140,12 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'skill-core-damage-thunder',
-    displayName: '雷系伤害',
-    displayDescription: '施放时造成一次雷系法术伤害',
+    displayName: '帘系伤害',
+    displayDescription: '施放时造成一次帘系灯律伤害',
     slot: 'core',
     rarity: 'uncommon',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['雷']],
+      all: [ELEMENT_TO_MATERIAL_TAG['帘']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_THUNDER,
         CreationTags.MATERIAL.SEMANTIC_BURST,
@@ -173,12 +173,12 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'skill-core-damage-wind',
-    displayName: '风系伤害',
-    displayDescription: '施放时造成一次风系物理伤害',
+    displayName: '噬系伤害',
+    displayDescription: '施放时造成一次噬系物理伤害',
     slot: 'core',
     rarity: 'common',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['风']],
+      all: [ELEMENT_TO_MATERIAL_TAG['噬']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_WIND,
         CreationTags.MATERIAL.SEMANTIC_BURST,
@@ -206,12 +206,12 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'skill-core-damage-metal',
-    displayName: '金系伤害',
-    displayDescription: '施放时造成一次金系物理伤害',
+    displayName: '烛系伤害',
+    displayDescription: '施放时造成一次烛系物理伤害',
     slot: 'core',
     rarity: 'common',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['金']],
+      all: [ELEMENT_TO_MATERIAL_TAG['烛']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_METAL,
         CreationTags.MATERIAL.SEMANTIC_BLADE,
@@ -239,12 +239,12 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'skill-core-damage-water',
-    displayName: '水系伤害',
-    displayDescription: '施放时造成一次水系法术伤害',
+    displayName: '星系伤害',
+    displayDescription: '施放时造成一次星系灯律伤害',
     slot: 'core',
     rarity: 'common',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['水']],
+      all: [ELEMENT_TO_MATERIAL_TAG['星']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_WATER,
         CreationTags.MATERIAL.SEMANTIC_SPIRIT,
@@ -272,12 +272,12 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'skill-core-damage-wood',
-    displayName: '木系伤害',
-    displayDescription: '施放时造成一次木系法术伤害',
+    displayName: '尸系伤害',
+    displayDescription: '施放时造成一次尸系灯律伤害',
     slot: 'core',
     rarity: 'common',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['木']],
+      all: [ELEMENT_TO_MATERIAL_TAG['尸']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_WOOD,
         CreationTags.MATERIAL.SEMANTIC_LIFE,
@@ -305,12 +305,12 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'skill-core-damage-earth',
-    displayName: '土系伤害',
-    displayDescription: '施放时造成一次土系物理伤害',
+    displayName: '梦系伤害',
+    displayDescription: '施放时造成一次梦系物理伤害',
     slot: 'core',
     rarity: 'common',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['土']],
+      all: [ELEMENT_TO_MATERIAL_TAG['梦']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_EARTH,
         CreationTags.MATERIAL.SEMANTIC_GUARD,
@@ -377,7 +377,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
     slot: 'core',
     rarity: 'common',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['土']],
+      all: [ELEMENT_TO_MATERIAL_TAG['梦']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_GUARD,
         CreationTags.MATERIAL.SEMANTIC_EARTH,
@@ -409,7 +409,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
     slot: 'core',
     rarity: 'uncommon',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['风']],
+      all: [ELEMENT_TO_MATERIAL_TAG['噬']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_WIND,
         CreationTags.MATERIAL.SEMANTIC_SPACE,
@@ -449,7 +449,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
   {
     id: 'skill-core-fire-channeling',
     displayName: '焰息',
-    displayDescription: '施放时提升自身法术攻击',
+    displayDescription: '施放时提升自身灯律攻击',
     slot: 'core',
     rarity: 'uncommon',
     match: {
@@ -488,10 +488,10 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
     },
   },
 
-  // --- 雷印凝神 ---
+  // --- 帘印凝神 ---
   {
     id: 'skill-core-thunder-focus',
-    displayName: '雷印',
+    displayName: '帘印',
     displayDescription: '施放时提升自身控制命中',
     slot: 'core',
     rarity: 'uncommon',
@@ -514,7 +514,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
       params: {
         buffConfig: {
           id: 'craft-thunder-focus',
-          name: '雷印',
+          name: '帘印',
           type: BuffType.BUFF,
           duration: CREATION_DURATION_POLICY.buffDebuff.short,
           stackRule: StackRule.REFRESH_DURATION,
@@ -537,7 +537,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
   {
     id: 'skill-core-ice-frost-guard',
     displayName: '冰魄',
-    displayDescription: '施放时提升自身法术防御与控制抗性',
+    displayDescription: '施放时提升自身灯律防御与控制抗性',
     slot: 'core',
     rarity: 'uncommon',
     match: {
@@ -587,11 +587,11 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
   {
     id: 'skill-core-water-tide-surge',
     displayName: '潮生',
-    displayDescription: '施放时提升自身灵力与法术防御',
+    displayDescription: '施放时提升自身梦涎与灯律防御',
     slot: 'core',
     rarity: 'uncommon',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['水']],
+      all: [ELEMENT_TO_MATERIAL_TAG['星']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_WATER,
         CreationTags.MATERIAL.SEMANTIC_SPIRIT,
@@ -641,7 +641,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
     slot: 'core',
     rarity: 'uncommon',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['金']],
+      all: [ELEMENT_TO_MATERIAL_TAG['烛']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_METAL,
         CreationTags.MATERIAL.SEMANTIC_BLADE,
@@ -686,11 +686,11 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
   {
     id: 'skill-core-wood-regrowth',
     displayName: '回荣',
-    displayDescription: '施放时提升自身体魄与灵力',
+    displayDescription: '施放时提升自身体魄与梦涎',
     slot: 'core',
     rarity: 'uncommon',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['木']],
+      all: [ELEMENT_TO_MATERIAL_TAG['尸']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_WOOD,
         CreationTags.MATERIAL.SEMANTIC_LIFE,
@@ -740,7 +740,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
     slot: 'core',
     rarity: 'rare',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['金']],
+      all: [ELEMENT_TO_MATERIAL_TAG['烛']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_BLADE,
         CreationTags.MATERIAL.SEMANTIC_METAL,
@@ -784,7 +784,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
     slot: 'core',
     rarity: 'rare',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['木']],
+      all: [ELEMENT_TO_MATERIAL_TAG['尸']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_WOOD,
         CreationTags.MATERIAL.SEMANTIC_LIFE,
@@ -830,11 +830,11 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
   {
     id: 'skill-core-fire-solarflare',
     displayName: '焚阳',
-    displayDescription: '施放时提升自身法术攻击与暴击伤害',
+    displayDescription: '施放时提升自身灯律攻击与暴击伤害',
     slot: 'core',
     rarity: 'legendary',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['火'], CreationTags.MATERIAL.TYPE_SPECIAL],
+      all: [ELEMENT_TO_MATERIAL_TAG['渊'], CreationTags.MATERIAL.TYPE_SPECIAL],
       any: [
         CreationTags.MATERIAL.SEMANTIC_FLAME,
         CreationTags.MATERIAL.SEMANTIC_BURST,
@@ -883,7 +883,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
     slot: 'core',
     rarity: 'legendary',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['风'], CreationTags.MATERIAL.TYPE_SPECIAL],
+      all: [ELEMENT_TO_MATERIAL_TAG['噬'], CreationTags.MATERIAL.TYPE_SPECIAL],
       any: [
         CreationTags.MATERIAL.SEMANTIC_WIND,
         CreationTags.MATERIAL.SEMANTIC_SPACE,
@@ -933,7 +933,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
     slot: 'core',
     rarity: 'legendary',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['土'], CreationTags.MATERIAL.TYPE_SPECIAL],
+      all: [ELEMENT_TO_MATERIAL_TAG['梦'], CreationTags.MATERIAL.TYPE_SPECIAL],
       any: [
         CreationTags.MATERIAL.SEMANTIC_EARTH,
         CreationTags.MATERIAL.SEMANTIC_GUARD,
@@ -1028,7 +1028,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
     slot: 'modifier',
     rarity: 'common',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['火']],
+      all: [ELEMENT_TO_MATERIAL_TAG['渊']],
       any: [CreationTags.MATERIAL.SEMANTIC_FLAME],
     },
     weight: 80,
@@ -1085,7 +1085,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
     slot: 'modifier',
     rarity: 'common',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['冰']],
+      all: [ELEMENT_TO_MATERIAL_TAG['疫']],
       any: [CreationTags.MATERIAL.SEMANTIC_FREEZE],
     },
     weight: 78,
@@ -1127,7 +1127,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
     slot: 'modifier',
     rarity: 'common',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['木']],
+      all: [ELEMENT_TO_MATERIAL_TAG['尸']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_POISON,
         CreationTags.MATERIAL.SEMANTIC_WOOD,
@@ -1187,7 +1187,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
     slot: 'modifier',
     rarity: 'common',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['金']],
+      all: [ELEMENT_TO_MATERIAL_TAG['烛']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_BLADE,
         CreationTags.MATERIAL.SEMANTIC_METAL,
@@ -1247,7 +1247,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
     slot: 'modifier',
     rarity: 'uncommon',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['雷']],
+      all: [ELEMENT_TO_MATERIAL_TAG['帘']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_THUNDER,
         CreationTags.MATERIAL.SEMANTIC_SPIRIT,
@@ -1390,11 +1390,11 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
     },
   },
 
-  // --- 聚灵回元 ---
+  // --- 聚灯回元 ---
   {
     id: 'skill-variant-mana-spring',
-    displayName: '聚灵',
-    displayDescription: '施放时回复自身灵力',
+    displayName: '聚灯',
+    displayDescription: '施放时回复自身梦涎',
     slot: 'modifier',
     rarity: 'uncommon',
     match: {
@@ -1425,11 +1425,11 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
   {
     id: 'skill-variant-water-mana-burn',
     displayName: '蚀灵',
-    displayDescription: '施放时燃烧目标灵力',
+    displayDescription: '施放时燃烧目标梦涎',
     slot: 'modifier',
     rarity: 'uncommon',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['水']],
+      all: [ELEMENT_TO_MATERIAL_TAG['星']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_WATER,
         CreationTags.MATERIAL.SEMANTIC_SPIRIT,
@@ -1498,7 +1498,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
     slot: 'modifier',
     rarity: 'rare',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['雷'], CreationTags.MATERIAL.TYPE_SPECIAL],
+      all: [ELEMENT_TO_MATERIAL_TAG['帘'], CreationTags.MATERIAL.TYPE_SPECIAL],
       any: [
         CreationTags.MATERIAL.SEMANTIC_THUNDER,
         CreationTags.MATERIAL.SEMANTIC_ILLUSION,
@@ -1540,7 +1540,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
     slot: 'modifier',
     rarity: 'rare',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['水'], CreationTags.MATERIAL.TYPE_SPECIAL],
+      all: [ELEMENT_TO_MATERIAL_TAG['星'], CreationTags.MATERIAL.TYPE_SPECIAL],
       any: [
         CreationTags.MATERIAL.SEMANTIC_WATER,
         CreationTags.MATERIAL.SEMANTIC_DIVINE,
@@ -1637,11 +1637,11 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
   {
     id: 'skill-rare-ice-mirror-heart',
     displayName: '镜心',
-    displayDescription: '施放时提升自身法术防御与暴击抵抗',
+    displayDescription: '施放时提升自身灯律防御与暴击抵抗',
     slot: 'modifier',
     rarity: 'rare',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['冰'], CreationTags.MATERIAL.TYPE_SPECIAL],
+      all: [ELEMENT_TO_MATERIAL_TAG['疫'], CreationTags.MATERIAL.TYPE_SPECIAL],
       any: [
         CreationTags.MATERIAL.SEMANTIC_FREEZE,
         CreationTags.MATERIAL.SEMANTIC_SPIRIT,
@@ -1691,7 +1691,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
     slot: 'modifier',
     rarity: 'rare',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['金'], CreationTags.MATERIAL.TYPE_SPECIAL],
+      all: [ELEMENT_TO_MATERIAL_TAG['烛'], CreationTags.MATERIAL.TYPE_SPECIAL],
       any: [
         CreationTags.MATERIAL.SEMANTIC_BLADE,
         CreationTags.MATERIAL.SEMANTIC_METAL,
@@ -1741,7 +1741,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
     slot: 'modifier',
     rarity: 'rare',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['水'], CreationTags.MATERIAL.TYPE_SPECIAL],
+      all: [ELEMENT_TO_MATERIAL_TAG['星'], CreationTags.MATERIAL.TYPE_SPECIAL],
       any: [
         CreationTags.MATERIAL.SEMANTIC_WATER,
         CreationTags.MATERIAL.SEMANTIC_SPIRIT,
@@ -1771,7 +1771,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
     slot: 'modifier',
     rarity: 'legendary',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['木'], CreationTags.MATERIAL.TYPE_SPECIAL],
+      all: [ELEMENT_TO_MATERIAL_TAG['尸'], CreationTags.MATERIAL.TYPE_SPECIAL],
       any: [
         CreationTags.MATERIAL.SEMANTIC_WOOD,
         CreationTags.MATERIAL.SEMANTIC_LIFE,
@@ -1804,7 +1804,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
     slot: 'modifier',
     rarity: 'legendary',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['土']],
+      all: [ELEMENT_TO_MATERIAL_TAG['梦']],
       any: [
         CreationTags.MATERIAL.SEMANTIC_EARTH,
         CreationTags.MATERIAL.SEMANTIC_GUARD,
@@ -1829,12 +1829,12 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
   },
   {
     id: 'skill-rare-life-for-fire',
-    displayName: '劫火借命',
+    displayName: '渊火借命',
     displayDescription: '造成火伤；低血时额外燃烧自身气血追加伤害',
     slot: 'modifier',
     rarity: 'legendary',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['火']],
+      all: [ELEMENT_TO_MATERIAL_TAG['渊']],
       any: [CreationTags.MATERIAL.SEMANTIC_FLAME, CreationTags.MATERIAL.SEMANTIC_BLOOD],
     },
     exclusiveGroup: EXCLUSIVE_GROUP.SKILL.RARE_ULTIMATE,
@@ -1880,7 +1880,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
     slot: 'modifier',
     rarity: 'legendary',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['冰']],
+      all: [ELEMENT_TO_MATERIAL_TAG['疫']],
       any: [CreationTags.MATERIAL.SEMANTIC_FREEZE, CreationTags.MATERIAL.SEMANTIC_BURST],
     },
     exclusiveGroup: EXCLUSIVE_GROUP.SKILL.RARE_ULTIMATE,
@@ -1923,11 +1923,11 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
   {
     id: 'skill-variant-thunder-pact',
     displayName: '雷契',
-    displayDescription: '叠加雷印，雷印达到三层时爆发并增加冷却',
+    displayDescription: '叠加帘印，帘印达到三层时爆发并增加冷却',
     slot: 'modifier',
     rarity: 'rare',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['雷']],
+      all: [ELEMENT_TO_MATERIAL_TAG['帘']],
       any: [CreationTags.MATERIAL.SEMANTIC_THUNDER, CreationTags.MATERIAL.SEMANTIC_FORMATION],
     },
     weight: 18,
@@ -1944,7 +1944,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
       params: {
         buffConfig: {
           id: 'thunder_mark',
-          name: '雷印',
+          name: '帘印',
           description: '目标行动前检查层数；达到3层时消耗3层，造成雷伤并增加一个技能冷却。',
           type: BuffType.DEBUFF,
           duration: 3,
@@ -2104,7 +2104,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
     slot: 'modifier',
     rarity: 'rare',
     match: {
-      all: [ELEMENT_TO_MATERIAL_TAG['风']],
+      all: [ELEMENT_TO_MATERIAL_TAG['噬']],
       any: [CreationTags.MATERIAL.SEMANTIC_WIND, CreationTags.MATERIAL.SEMANTIC_SPACE],
     },
     weight: 18,
@@ -2181,7 +2181,7 @@ export const SKILL_AFFIXES: AffixDefinition[] = [
   {
     id: 'skill-variant-cut-meridian',
     displayName: '截脉',
-    displayDescription: '法力占优时焚元，否则封禁目标神通',
+    displayDescription: '灯焰占优时焚元，否则封禁目标神通',
     slot: 'modifier',
     rarity: 'rare',
     match: {

@@ -34,7 +34,7 @@ export function resolveUnlockedAffixRarities(
 export const CREATION_RESERVED_ENERGY: Record<CreationProductType, number> = {
   // 主动技能需要保留更多基础能量来支撑伤害、蓝耗等主结构。
   skill: 3,
-  // 法宝本体所需的基础结构能量。
+  // 封灵器本体所需的基础结构能量。
   artifact: 2,
   // 功法本体所需的基础结构能量。
   gongfa: 2,
@@ -55,7 +55,7 @@ export const CREATION_INPUT_CONSTRAINTS = {
   maxQuantityPerMaterial: 3,
 } as const;
 
-// 炼丹允许一次处理更大的材料堆叠；普通造物仍使用上面的通用上限。
+// 制香允许一次处理更大的材料堆叠；普通造物仍使用上面的通用上限。
 export const ALCHEMY_MAX_DOSE = MAX_PLAYER_ITEM_QUANTITY;
 
 /**
@@ -95,10 +95,10 @@ export const CREATION_DURATION_POLICY = {
 
 /**
  * 被动产物在缺少完整词缀时的默认投影参数。
- * 主要用于法宝、功法这类被动能力的兜底构造。
+ * 主要用于封灵器、功法这类被动能力的兜底构造。
  */
 export const CREATION_PASSIVE_DEFAULTS = {
-  // 法宝护盾型兜底效果的最低基础值。
+  // 封灵器护盾型兜底效果的最低基础值。
   minArtifactShieldBase: 10,
   // 功法回复型兜底效果的最低基础值。
   minGongFaHealBase: 8,
@@ -248,7 +248,7 @@ export const CREATION_PROJECTION_BALANCE = {
   skillPriorityBase: 10,
 
   /**
-   * 法宝护盾型兜底效果的换算除数。
+   * 封灵器护盾型兜底效果的换算除数。
    * 计算方式通常为：remaining / artifactShieldBaseDivisor。
    * 除数越小，剩余词缀能量转换出的护盾值越大。
    */

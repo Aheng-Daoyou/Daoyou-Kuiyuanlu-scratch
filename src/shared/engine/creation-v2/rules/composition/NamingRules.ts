@@ -67,7 +67,7 @@ export class NamingRules implements Rule<CompositionFacts, CompositionDecision> 
 
   private resolveDescription(facts: CompositionFacts): string {
     if (facts.materialNames.length === 0) {
-      return '由灵机推演凝成的战斗蓝图';
+      return '由灯机推演凝成的战斗蓝图';
     }
     return `${CREATION_DESCRIPTION_TEMPLATE.materialListPrefix}${facts.materialNames.join('、')}${CREATION_DESCRIPTION_TEMPLATE.materialListSuffix}`;
   }

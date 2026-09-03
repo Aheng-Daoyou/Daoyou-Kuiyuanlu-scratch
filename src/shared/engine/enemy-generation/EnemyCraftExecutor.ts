@@ -193,21 +193,21 @@ function coreSemanticTagsForIntent(
 
 function elementSemanticTag(element: ElementType): string | undefined {
   switch (element) {
-    case '金':
+    case '烛':
       return CreationTags.MATERIAL.SEMANTIC_METAL;
-    case '木':
+    case '尸':
       return CreationTags.MATERIAL.SEMANTIC_WOOD;
-    case '水':
+    case '星':
       return CreationTags.MATERIAL.SEMANTIC_WATER;
-    case '火':
+    case '渊':
       return CreationTags.MATERIAL.SEMANTIC_FLAME;
-    case '土':
+    case '梦':
       return CreationTags.MATERIAL.SEMANTIC_EARTH;
-    case '风':
+    case '噬':
       return CreationTags.MATERIAL.SEMANTIC_WIND;
-    case '雷':
+    case '帘':
       return CreationTags.MATERIAL.SEMANTIC_THUNDER;
-    case '冰':
+    case '疫':
       return CreationTags.MATERIAL.SEMANTIC_FREEZE;
   }
 }
@@ -284,7 +284,7 @@ export class EnemyCraftExecutor {
       throw new Error(`Invalid enemy skill count: ${skills.length}`);
     }
 
-    const policy = getEnemyCombatPolicy(input.race);
+    const policy = getEnemyCombatPolicy(input.clan);
     const pressureCount = skills.filter(isPressureSkill).length;
     const selfTargetCount = skills.filter(
       (skill) => skill.abilityConfig && targetsSelf(skill.abilityConfig),
@@ -535,7 +535,7 @@ export class EnemyCraftExecutor {
       case 'fixed':
         return archetype.fixedElement ?? primaryElement;
       case 'earth':
-        return '土';
+        return '梦';
       case 'secondary':
         return secondaryElement;
       case 'primary':

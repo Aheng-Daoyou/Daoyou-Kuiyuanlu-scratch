@@ -21,10 +21,10 @@ describe('CreationTagSignalBuilder', () => {
         recipeTags: ['Recipe.ProductBias.Skill'],
         energyValue: 6,
         rarityWeight: 2,
-        element: '火',
+        element: '渊',
       },
       {
-        materialName: '焚心妖核',
+        materialName: '焚心诡核',
         materialType: 'monster',
         rank: '玄品',
         quantity: 1,
@@ -33,14 +33,14 @@ describe('CreationTagSignalBuilder', () => {
         recipeTags: ['Recipe.ProductBias.Skill'],
         energyValue: 7,
         rarityWeight: 2,
-        element: '火',
+        element: '渊',
       },
     ];
 
     const intent: CreationIntent = {
       productType: 'skill',
       dominantTags: ['Material.Semantic.Flame'],
-      elementBias: '火',
+      elementBias: '渊',
     };
 
     const recipeMatch: RecipeMatch = {
