@@ -19,11 +19,11 @@ export const HEAVY_LAYER_3_NODES = [
       id: 'heavy-crossing-pass',
       layerId: '3',
       name: '镇关',
-      description: '《踏雪无痕》提供的护盾提高50%。',
+      description: '《踏影无痕》提供的护盾提高50%。',
     },
     (_context, builder) => heavySwordBuild(builder).enable('mountainGate'),
     (context) =>
-      `《踏雪无痕》提供的护盾提高50%，当前获得相当于${nodePercent(growthShieldMagnitude(context, 'void-step', 0.52 * 1.5))}物攻的护盾。`,
+      `《踏影无痕》提供的护盾提高50%，当前获得相当于${nodePercent(growthShieldMagnitude(context, 'void-step', 0.52 * 1.5))}物攻的护盾。`,
   ),
   createLingxiaoNode(
     {

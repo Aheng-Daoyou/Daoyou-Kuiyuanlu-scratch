@@ -5,7 +5,7 @@ import {
   QUALITY_ORDER,
   QUALITY_VALUES,
   type ElementType,
-  type EnemyRace,
+  type EnemyClan,
   type Quality,
   type RealmStage,
   type RealmType,
@@ -82,63 +82,57 @@ export function sumAttributeWeights(
   return ATTRIBUTE_KEYS.reduce((sum, key) => sum + weights[key], 0);
 }
 
-export function buildRaceFallbackName(
-  race: EnemyRace,
+export function buildClanFallbackName(
+  clan: EnemyClan,
   realm: RealmType,
   realmStage: RealmStage,
   element: ElementType,
 ): string {
-  const suffixByRace: Record<EnemyRace, string> = {
-    人族: '散修',
-    妖族: '妖修',
-    鬼魂: '幽魂',
-    魔族: '魔修',
-    古兽: '古兽',
-    灵族: '灵使',
+  const suffixByClan: Record<EnemyClan, string> = {
+    腌物: '腌物',
+    遗种: '遗种',
+    投影: '投影',
   };
 
-  return `${ELEMENT_NAME_PREFIX[element]}${realm}${realmStage}${suffixByRace[race]}`;
+  return `${ELEMENT_NAME_PREFIX[element]}${realm}${realmStage}${suffixByClan[clan]}`;
 }
 
 export function buildTitleFallback(
-  race: EnemyRace,
+  clan: EnemyClan,
   realm: RealmType,
   realmStage: RealmStage,
   primaryElement: ElementType,
 ): string {
-  const suffixByRace: Record<EnemyRace, string> = {
-    人族: '守关人',
-    妖族: '妖影',
-    鬼魂: '幽使',
-    魔族: '魔影',
-    古兽: '镇关兽',
-    灵族: '灵卫',
+  const suffixByClan: Record<EnemyClan, string> = {
+    腌物: '执念者',
+    遗种: '守则者',
+    投影: '倒影',
   };
 
-  return `${ELEMENT_NAME_PREFIX[primaryElement]}${realm}${realmStage}${suffixByRace[race]}`;
+  return `${ELEMENT_NAME_PREFIX[primaryElement]}${realm}${realmStage}${suffixByClan[clan]}`;
 }
 
 export function buildBackgroundFallback(
-  race: EnemyRace,
+  clan: EnemyClan,
   realm: RealmType,
   realmStage: RealmStage,
   primaryElement: ElementType,
   profileTags: string[],
 ): string {
-  return `${race}出身的${realm}${realmStage}敌对单位，以${primaryElement}行灵力为核心，战斗风格偏向${profileTags.join('、')}。`;
+  return `一名${clan}出身的${realm}${realmStage}诡异，以${primaryElement}行灯息为核心，战斗风格偏向${profileTags.join('、')}。`;
 }
 
 export function buildDescriptionFallback(
-  race: EnemyRace,
+  clan: EnemyClan,
   realm: RealmType,
   realmStage: RealmStage,
   primaryElement: ElementType,
 ): string {
-  return `一名${realm}${realmStage}的${race}强敌，周身缠绕着${primaryElement}行气息。`;
+  return `一名${realm}${realmStage}的${clan}，周身缠绕着${primaryElement}行气息。`;
 }
 
 export function buildVariantKey(input: {
-  race: EnemyRace;
+  clan: EnemyClan;
   realm: RealmType;
   realmStage: RealmStage;
   difficulty: number;
@@ -146,7 +140,7 @@ export function buildVariantKey(input: {
   variantSeed?: string;
 }): string {
   return [
-    input.race,
+    input.clan,
     input.realm,
     input.realmStage,
     String(input.difficulty),
@@ -198,7 +192,7 @@ export function resolveEnergyBudget(
 
 export function resolveEnemyProductQualityFloor(input: {
   difficulty: number;
-  race: EnemyRace;
+  clan: EnemyClan;
   isBoss: boolean;
 }): Quality {
   const difficulty = Math.max(0, Math.min(100, Math.round(input.difficulty)));
@@ -217,7 +211,7 @@ export function resolveEnemyProductQualityFloor(input: {
                 ? '玄品'
                 : '灵品';
 
-  if (!input.isBoss && input.race !== '古兽') {
+  if (!input.isBoss && input.clan !== '遗种') {
     return baseQuality;
   }
 
@@ -230,7 +224,7 @@ export function resolveEnemyProductQualityFloor(input: {
 
 export function resolveEnemyProductEnergyBudget(input: {
   difficulty: number;
-  race: EnemyRace;
+  clan: EnemyClan;
   isBoss: boolean;
   productType: 'skill' | 'gongfa' | 'artifact';
   bias?: number;

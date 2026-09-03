@@ -37,9 +37,9 @@ export function createSwordMark(): EffectConfig {
       buffConfig: withSectBuffMethodGrowth(
         {
           id: LINGXIAO_SWORD_MARK_BUFF,
-          name: '剑痕',
+          name: '照痕',
           description:
-            '每层使受到的直接、反击和追击伤害提高，可被《此剑平生》引动。',
+            '每层使受到的直接、反击和追击伤害提高，可被《照灯平生》引动。',
           type: BuffType.DEBUFF,
           duration: 3,
           stackRule: StackRule.STACK_LAYER,
@@ -91,7 +91,7 @@ export function createArmorRend(layers = 1): EffectConfig[] {
       buffConfig: withSectBuffMethodGrowth(
         {
           id: LINGXIAO_ARMOR_REND_BUFF,
-          name: '裂甲',
+          name: '灯隙',
           description: '每层降低目标物理防御。',
           type: BuffType.DEBUFF,
           duration: 3,

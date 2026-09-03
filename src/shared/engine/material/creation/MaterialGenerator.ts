@@ -51,7 +51,7 @@ export class MaterialGenerator {
     skeletons: MaterialSkeleton[],
   ): Promise<GeneratedMaterial[]> {
     if (skeletons.some((skeleton) => skeleton.type === 'seed')) {
-      throw new Error('灵植种子必须使用 SpiritSeedGenerator 生成');
+      throw new Error('灯植种子必须使用 SpiritSeedGenerator 生成');
     }
     return this.fillMaterialDetails(skeletons);
   }
@@ -82,7 +82,7 @@ export class MaterialGenerator {
         const aiData = aiResponse.output[index] || {
           name: '未知材料',
           description: '天道感应模糊...',
-          element: skeleton.forcedElement || '金',
+          element: skeleton.forcedElement || '烛',
         };
 
         // 最终元素：优先使用骨架强制指定的，否则使用 AI 生成的
@@ -132,7 +132,7 @@ export class MaterialGenerator {
     rng: () => number = Math.random,
   ): MaterialSkeleton[] {
     if (options.specifiedType === 'seed') {
-      throw new Error('灵植种子必须使用 SpiritSeedGenerator 生成');
+      throw new Error('灯植种子必须使用 SpiritSeedGenerator 生成');
     }
     const skeletons: MaterialSkeleton[] = [];
 
@@ -230,18 +230,18 @@ export class MaterialGenerator {
       next[type] = Math.max(0, next[type] * factor);
     };
 
-    // 元武国: 阵法材料、傀儡核心
-    if (normalizedTags.some((tag) => tag.includes('元武国'))) {
+    // 泽州·天枢峰: 阵法材料、傀儡核心
+    if (normalizedTags.some((tag) => tag.includes('天枢峰'))) {
       boost('ore', 1.2);
       boost('aux', 1.25);
     }
 
-    // 乱星海·奇渊岛: 高阶妖兽材料、海属矿石
+    // 灯外海: 高阶诡异材料、海属矿石
     if (
       normalizedTags.some(
         (tag) =>
-          tag.includes('乱星海') ||
-          tag.includes('奇渊岛') ||
+          tag.includes('灯外海') ||
+          tag.includes('灯塔港') ||
           tag.includes('海'),
       )
     ) {
@@ -249,11 +249,11 @@ export class MaterialGenerator {
       boost('ore', 1.15);
     }
 
-    // 溪国·云梦山脉: 灵草、丹药辅料
+    // 泽州·烟波泽: 香材、香品辅料
     if (
       normalizedTags.some(
         (tag) =>
-          tag.includes('溪国') || tag.includes('云梦') || tag.includes('山脉'),
+          tag.includes('烟波泽') || tag.includes('水泽'),
       )
     ) {
       boost('herb', 1.35);

@@ -197,7 +197,7 @@ export function buildHeavyAbilities(
     castEffects: [
       selfBuff(
         'sect.lingxiao.heavy.hidden-edge',
-        '藏锋听雷',
+        '守灯听漏',
         1,
         [],
         reductionListeners(
@@ -218,7 +218,7 @@ export function buildHeavyAbilities(
         type: 'queue_action',
         params: {
           id: 'sect.lingxiao.heavy.thunder-strike',
-          name: '听雷',
+          name: '听漏',
           tags: [
             GameplayTags.ABILITY.FUNCTION.DAMAGE,
             GameplayTags.ABILITY.CHANNEL.PHYSICAL,
@@ -253,7 +253,7 @@ export function buildHeavyAbilities(
         undefined,
         'caster',
       ),
-      selfBuff('sect.lingxiao.heavy.mountain-step', '踏雪无痕', 2, [
+      selfBuff('sect.lingxiao.heavy.mountain-step', '踏影无痕', 2, [
         { attrType: AttributeType.DEF, type: ModifierType.ADD, value: 0.16 },
       ]),
       sectEffects.modifyResource(resourceId, 1),
@@ -291,7 +291,7 @@ export function buildHeavyAbilities(
         : []),
       selfBuff(
         'sect.lingxiao.heavy.mountain-heart',
-        '剑心通明',
+        '灯心通明',
         3,
         [
           {
@@ -335,7 +335,7 @@ export function buildHeavyAbilities(
     role: 'defensive',
     targetPolicy: { team: 'self', scope: 'single' },
     effects: [
-      selfBuff('sect.lingxiao.heavy.weightless-edge', '人剑合一', 3, [
+      selfBuff('sect.lingxiao.heavy.weightless-edge', '人灯合一', 3, [
         { attrType: AttributeType.ATK, type: ModifierType.ADD, value: 0.08 },
         { attrType: AttributeType.DEF, type: ModifierType.ADD, value: 0.16 },
       ]),

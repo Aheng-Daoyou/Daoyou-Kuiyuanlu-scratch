@@ -26,11 +26,11 @@ export const HEAVY_ULTIMATE_NODES = [
       layerId: 'ultimate',
       name: '开天',
       description:
-        '《此剑平生》改为仅可在6点剑意时施展，提高随《红尘剑录》成长的总倍率并获得20%穿防；冷却增加1回合。',
+        '《照灯平生》改为仅可在6点香火时施展，提高随《守灯录》成长的总倍率并获得20%穿防；冷却增加1回合。',
     },
     (_context, builder) => heavySwordBuild(builder).enable('heavenCleaving'),
     (context) =>
-      `《此剑平生》仅可在6点剑意时施展，当前总倍率为${nodePercent(growthMagnitude(context, 'lingxiao-canon', HEAVY_HEAVEN_CLEAVING_TOTAL_COEFFICIENT))}物攻，并获得20%穿防；冷却增加1回合。`,
+      `《照灯平生》仅可在6点香火时施展，当前总倍率为${nodePercent(growthMagnitude(context, 'lingxiao-canon', HEAVY_HEAVEN_CLEAVING_TOTAL_COEFFICIENT))}物攻，并获得20%穿防；冷却增加1回合。`,
   ),
   createLingxiaoNode(
     {
@@ -38,11 +38,11 @@ export const HEAVY_ULTIMATE_NODES = [
       layerId: 'ultimate',
       name: '不动如山',
       description:
-        '《剑心通明》额外提供随《万法不侵》成长的护盾；持续期间每回合可反击一次，造成随该心法成长的伤害。',
+        '《灯心通明》额外提供随《澄心灯诀》成长的护盾；持续期间每回合可反击一次，造成随该心法成长的伤害。',
     },
     (_context, builder) => heavySwordBuild(builder).enable('immovableMountain'),
     (context) =>
-      `《剑心通明》额外提供相当于${nodePercent(growthShieldMagnitude(context, 'origin-returning', HEAVY_IMMOVABLE_SHIELD_COEFFICIENT))}物攻的护盾；未来${growthDuration(context, 'origin-returning', 3)}次自身行动内，每回合首次受到直接伤害时反击，造成相当于${nodePercent(growthMagnitude(context, 'origin-returning', HEAVY_IMMOVABLE_COUNTER_COEFFICIENT))}物攻的伤害。`,
+      `《灯心通明》额外提供相当于${nodePercent(growthShieldMagnitude(context, 'origin-returning', HEAVY_IMMOVABLE_SHIELD_COEFFICIENT))}物攻的护盾；未来${growthDuration(context, 'origin-returning', 3)}次自身行动内，每回合首次受到直接伤害时反击，造成相当于${nodePercent(growthMagnitude(context, 'origin-returning', HEAVY_IMMOVABLE_COUNTER_COEFFICIENT))}物攻的伤害。`,
   ),
   createLingxiaoNode(
     {
@@ -50,7 +50,7 @@ export const HEAVY_ULTIMATE_NODES = [
       layerId: 'ultimate',
       name: '山河回响',
       description:
-        '施展《此剑平生》后恢复气血并获得随《红尘剑录》成长的护盾，每3回合最多触发一次。',
+        '施展《照灯平生》后恢复气血并获得随《守灯录》成长的护盾，每3回合最多触发一次。',
     },
     (context, builder) => {
       heavySwordBuild(builder).enable('mountainRiverEcho');
@@ -80,6 +80,6 @@ export const HEAVY_ULTIMATE_NODES = [
       });
     },
     (context) =>
-      `施展《此剑平生》后恢复${nodePercent(growthHealMagnitude(context, 'lingxiao-canon', HEAVY_ECHO_HEAL_RATIO))}最大气血，并获得相当于${nodePercent(growthShieldMagnitude(context, 'lingxiao-canon', HEAVY_ECHO_SHIELD_COEFFICIENT))}物攻的护盾，每3回合最多触发一次。`,
+      `施展《照灯平生》后恢复${nodePercent(growthHealMagnitude(context, 'lingxiao-canon', HEAVY_ECHO_HEAL_RATIO))}最大气血，并获得相当于${nodePercent(growthShieldMagnitude(context, 'lingxiao-canon', HEAVY_ECHO_SHIELD_COEFFICIENT))}物攻的护盾，每3回合最多触发一次。`,
   ),
 ] as const;

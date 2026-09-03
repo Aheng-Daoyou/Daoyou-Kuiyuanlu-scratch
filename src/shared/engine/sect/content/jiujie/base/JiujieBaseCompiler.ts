@@ -124,8 +124,8 @@ const hiddenMarker = (
 function thunderBuff(settings: JiujieBuildSettings): BuffConfig {
   return {
     id: JIUJIE_THUNDER,
-    name: '劫雷',
-    description: '不可驱散。目标主动行动时承受天罚。',
+    name: '灯痕',
+    description: '不可驱散。目标主动行动时承受灯焰灼照。',
     type: BuffType.DEBUFF,
     duration: settings.thunderDuration,
     stackRule: StackRule.REFRESH_DURATION,
@@ -164,8 +164,8 @@ function thunderApplication(settings: JiujieBuildSettings): EffectConfig[] {
 function debtBuff(settings: JiujieBuildSettings): BuffConfig {
   return {
     id: JIUJIE_DEBT,
-    name: '劫债',
-    description: '不可驱散。重复主动行为会把劫债推向清算。',
+    name: '案债',
+    description: '不可驱散。重复主动行为会把案债推向清算。',
     type: BuffType.DEBUFF,
     duration: settings.debtDuration,
     stackRule: StackRule.STACK_LAYER,
@@ -181,7 +181,7 @@ function beheldBuff(): BuffConfig {
   return {
     id: JIUJIE_BEHELD,
     name: '照见',
-    description: '此人将灾厄带入劫眼，部分神通会追究其来力。',
+    description: '此人将灾厄带入灯眼，部分神通会追究其来力。',
     type: BuffType.DEBUFF,
     duration: 4,
     stackRule: StackRule.REFRESH_DURATION,
@@ -219,12 +219,12 @@ function eyeBuff(settings: JiujieBuildSettings): BuffConfig {
           type: 'consume_status_trigger',
           params: {
             match: { id: JIUJIE_SETTLEMENT_REOPEN_READY },
-            displayName: '劫后再开',
+            displayName: '焰后再开',
             consume: 'all',
             target: 'caster',
             effects: [
               { type: 'combat_resource_modify', params: { resourceId: JIUJIE_CALAMITY, operation: 'add', amount: 1, target: 'caster', reason: 'refund' } },
-              apply(hiddenMarker(JIUJIE_SETTLEMENT_REOPEN_LOCK, '劫后再开·调息', settlementReopenLockTag, 3), 'caster'),
+              apply(hiddenMarker(JIUJIE_SETTLEMENT_REOPEN_LOCK, '焰后再开·调息', settlementReopenLockTag, 3), 'caster'),
             ],
           },
         } satisfies EffectConfig]
@@ -290,8 +290,8 @@ function eyeBuff(settings: JiujieBuildSettings): BuffConfig {
   }
   return {
     id: JIUJIE_EYE,
-    name: '劫眼',
-    description: '直面来力，将承受的灾厄记入劫簿。',
+    name: '灯眼',
+    description: '直面来力，将承受的灾厄记入案簿。',
     type: BuffType.BUFF,
     duration: settings.eyeDuration,
     stackRule: StackRule.REFRESH_DURATION,
@@ -399,9 +399,9 @@ function receiveBuff(settings: JiujieBuildSettings): BuffConfig {
   }
   return {
     id: JIUJIE_RECEIVE,
-    name: '承天受劫',
+    name: '承灯受焰',
     description: recordsCalamity
-      ? '暂承来力，将受过的灾厄记入劫簿。'
+      ? '暂承来力，将受过的灾厄记入案簿。'
       : '暂承来力，降低受到的直接伤害。',
     type: BuffType.BUFF,
     duration: settings.receiveDuration,
@@ -453,7 +453,7 @@ function damagePunishmentBuff(): BuffConfig {
   return {
     id: JIUJIE_DAMAGE_PUNISHMENT,
     name: '伤罪加刑',
-    description: '物理与法术攻击降低12%。',
+    description: '物理与灯律攻击降低12%。',
     type: BuffType.DEBUFF,
     duration: 1,
     stackRule: StackRule.REFRESH_DURATION,
@@ -482,7 +482,7 @@ function controlPunishmentBuff(target = true): BuffConfig {
   return {
     id: target ? JIUJIE_CONTROL_TARGET_PUNISHMENT : JIUJIE_CONTROL_OWNER_PUNISHMENT,
     name: target ? '禁罪反照·迟滞' : '禁罪反照·定神',
-    description: target ? '身法降低10%。' : '控制抗性提高30%。',
+    description: target ? '灯影降低10%。' : '控制抗性提高30%。',
     type: target ? BuffType.DEBUFF : BuffType.BUFF,
     duration: target ? 2 : 1,
     stackRule: StackRule.REFRESH_DURATION,
@@ -506,7 +506,7 @@ function verdictBuff(id: string): BuffConfig {
   return {
     id,
     name: '判词·禁罪',
-    description: '身法降低15%。',
+    description: '灯影降低15%。',
     type: BuffType.DEBUFF,
     duration: 2,
     stackRule: StackRule.REFRESH_DURATION,
@@ -519,7 +519,7 @@ function openingShieldMarker(): BuffConfig {
   return {
     ...hiddenMarker(
       JIUJIE_OPENING_SHIELD_MEMORY,
-      '开门迎劫·护持',
+      '开门迎焰·护持',
       jiujieTag('opening-shield'),
       2,
     ),
@@ -533,7 +533,7 @@ function openingShieldMarker(): BuffConfig {
         type: 'consume_status_trigger',
         params: {
           match: { id: JIUJIE_OPENING_SHIELD_MEMORY },
-          displayName: '开门迎劫',
+          displayName: '开门迎焰',
           consume: 'all',
           target: 'caster',
           effects: [{ type: 'combat_resource_modify', params: { resourceId: JIUJIE_CALAMITY, operation: 'add', amount: 1, target: 'caster', reason: 'gain' } }],
@@ -547,7 +547,7 @@ function borrowShieldMarker(settings: JiujieBuildSettings): BuffConfig {
   return {
     ...hiddenMarker(
       JIUJIE_BORROW_SHIELD_MEMORY,
-      '劫甲回生·护持',
+      '灯甲回生·护持',
       jiujieTag('borrow-shield'),
       2,
     ),
@@ -561,7 +561,7 @@ function borrowShieldMarker(settings: JiujieBuildSettings): BuffConfig {
         type: 'consume_status_trigger',
         params: {
           match: { id: JIUJIE_BORROW_SHIELD_MEMORY },
-          displayName: '劫甲回生',
+          displayName: '灯甲回生',
           consume: 'all',
           target: 'caster',
           effects: [
@@ -642,7 +642,7 @@ function runtimeListeners(settings: JiujieBuildSettings): ListenerConfig[] {
             conditions: [c('runtime_counter_compare', { scope: 'target', key: JIUJIE_BASIC_CHAIN_COUNTER, op: 'gte', value: 2 })],
             params: {
               mechanic: 'named_trigger', internalKey: JIUJIE_BASIC_CHAIN_LOG,
-              displayName: settings.condemnation.twoBasicsCrime ? '两避成罪' : '两行成劫', target: 'target',
+              displayName: settings.condemnation.twoBasicsCrime ? '两避成罪' : '两行成焰', target: 'target',
             },
           },
           {
@@ -841,7 +841,7 @@ function compileRuntime(
     (a) => a.id === 'jiujie-tianwei-runtime',
   );
   if (!definition || definition.kind !== 'passive')
-    throw new Error('九劫天宫基础被动定义缺失');
+    throw new Error('掌灯司基础被动定义缺失');
   const tianweiConditions: ConditionConfig[] = [
     c('ability_has_not_tag', { tag: GameplayTags.ABILITY.KIND.BASIC }),
     c('ability_has_any_tag', {
@@ -864,24 +864,24 @@ function compileRuntime(
           priority: EventPriorityLevel.ACTION_TRIGGER,
           mapping: { caster: 'owner', target: 'owner' },
           conditions: tianweiConditions,
-          effects: [{ type: 'skill_immunity', params: { reason: '天威裁决' } }],
+          effects: [{ type: 'skill_immunity', params: { reason: '灯律裁决' } }],
         },
       ],
-      detailRows: ['受到敌方主动法术或负面技能时，有20%几率免疫整个技能。'],
+      detailRows: ['受到敌方主动灯律或负面技能时，有20%几率免疫整个技能。'],
     }),
   );
   const runtime = JIUJIE_BASE_DEFINITION.abilities.find(
     (a) => a.id === 'jiujie-law-runtime',
   );
   if (!runtime || runtime.kind !== 'passive')
-    throw new Error('九劫天宫劫律定义缺失');
+    throw new Error('掌灯司灯律定义缺失');
   builder.setAbility(
     'jiujie-law-runtime',
     factory.passive({
       definition: runtime,
       listeners: runtimeListeners(settings),
       extraTags: [GameplayTags.ABILITY.ELEMENT.THUNDER],
-      detailRows: ['劫雷在目标主动行动时触发；普攻只承受基础天罚。'],
+      detailRows: ['灯痕在目标主动行动时触发；照灯指只承受基础灯焰灼照。'],
     }),
   );
 }
@@ -901,8 +901,8 @@ export function compileJiujieBase(
 ): void {
   builder.setResource({
     id: JIUJIE_CALAMITY,
-    name: '劫数',
-    icon: '⚡',
+    name: '灯焰',
+    icon: '🏮',
     initial: 0,
     max: settings.resourceMax,
   });
@@ -910,7 +910,7 @@ export function compileJiujieBase(
   const d = (id: string) => {
     const item = JIUJIE_BASE_DEFINITION.abilities.find((a) => a.id === id);
     if (!item || (item.kind !== 'active' && item.kind !== 'default'))
-      throw new Error(`九劫天宫神通缺失: ${id}`);
+      throw new Error(`掌灯司神通缺失: ${id}`);
     return item;
   };
   ability(builder, 'thunder-finger', {
@@ -918,7 +918,7 @@ export function compileJiujieBase(
     effects: [damage(0.8)],
     targetPolicy: { team: 'enemy', scope: 'single' },
     extraTags: [GameplayTags.ABILITY.ELEMENT.THUNDER],
-    detailRows: ['普攻，仅造成基础雷属性伤害。'],
+    detailRows: ['照灯指，仅造成基础灯焰伤害。'],
   });
   ability(builder, 'heaven-hearing', {
     definition: d('heaven-hearing'),
@@ -931,7 +931,7 @@ export function compileJiujieBase(
     ],
     targetPolicy: { team: 'enemy', scope: 'single' },
     extraTags: [GameplayTags.ABILITY.ELEMENT.THUNDER],
-    detailRows: [`施加不可驱散劫雷，持续${settings.thunderDuration}回合。`],
+    detailRows: [`施加不可驱散灯痕，持续${settings.thunderDuration}回合。`],
   });
   ability(builder, 'receive-calamity', {
     definition: d('receive-calamity'),
@@ -958,8 +958,8 @@ export function compileJiujieBase(
       `${settings.receiveDuration}回合内降低${Math.round((1 - settings.receiveReduction) * 100)}%直接伤害。`,
       ...(settings.pathId === JIUJIE_EYE_PATH_ID
         ? [
-            `承劫量最多记录自身最大气血的${Math.round((settings.eye.armorMemory ? 0.70 : settings.memoryCap) * 100)}%。`,
-            `劫眼持续${settings.eyeDuration}回合；期间首次直接受击以0.15倍法攻反击并标记攻击者，且按行动获得劫数。`,
+            `承焰量最多记录自身最大气血的${Math.round((settings.eye.armorMemory ? 0.70 : settings.memoryCap) * 100)}%。`,
+            `灯眼持续${settings.eyeDuration}回合；期间首次直接受击以0.15倍法攻反击并标记攻击者，且按行动获得灯焰。`,
           ]
         : []),
     ],
@@ -998,7 +998,7 @@ export function compileJiujieBase(
     targetPolicy: { team: 'enemy', scope: 'single' },
     extraTags: [GameplayTags.ABILITY.ELEMENT.THUNDER],
     detailRows: [
-      '为目标施加或刷新不可驱散劫雷；目标已有劫雷时额外增加1层劫债。',
+      '为目标施加或刷新不可驱散灯痕；目标已有灯痕时额外增加1层案债。',
     ],
   });
   ability(builder, 'thunder-prison-question', {
@@ -1054,7 +1054,7 @@ export function compileJiujieBase(
     ],
     targetPolicy: { team: 'enemy', scope: 'single' },
     extraTags: [GameplayTags.ABILITY.ELEMENT.THUNDER],
-    detailRows: ['造成雷伤，延长劫雷，并推进劫债。'],
+    detailRows: ['造成灯焰伤害，延长灯痕，并推进案债。'],
   });
   ability(builder, 'borrow-calamity', {
     definition: d('borrow-calamity'),
@@ -1094,7 +1094,7 @@ export function compileJiujieBase(
         : []),
     ],
     targetPolicy: { team: 'self', scope: 'single' },
-    detailRows: ['消耗1点劫数，获得15%最大气血护盾。'],
+    detailRows: ['消耗1点灯焰，获得15%最大气血护盾。'],
   });
   const debtBonus = (coefficient: number): EffectConfig[] => [
     damage(coefficient),
@@ -1176,7 +1176,7 @@ export function compileJiujieBase(
         ? [GameplayTags.ABILITY.SECT.mechanic(JIUJIE_SECT_ID, 'heavy-statute')]
         : []),
     ],
-    detailRows: ['造成基础追击雷伤，并根据劫债层数追加回响雷伤。'],
+    detailRows: ['造成基础追击灯焰伤害，并根据案债层数追加回响灯焰伤害。'],
   });
   const twoPointFullDebtMarker = JIUJIE_TWO_POINT_SETTLEMENT;
   const threePointFullDebtMarker = JIUJIE_THREE_POINT_SETTLEMENT;
@@ -1188,14 +1188,14 @@ export function compileJiujieBase(
     ...(settings.condemnation.fullDebtSettlement
       ? [
           {
-            ...apply(hiddenMarker(twoPointFullDebtMarker, '三债终审·二劫', jiujieTag('settlement-two-point'), 1), 'caster'),
+            ...apply(hiddenMarker(twoPointFullDebtMarker, '三债终审·二焰', jiujieTag('settlement-two-point'), 1), 'caster'),
             conditions: [
               c('buff_layer_at_least', { scope: 'target', id: JIUJIE_DEBT, value: 3 }),
               c('combat_resource_below', { scope: 'caster', resourceId: JIUJIE_CALAMITY, value: 3 }),
             ],
           },
           {
-            ...apply(hiddenMarker(threePointFullDebtMarker, '三债终审·三劫', jiujieTag('settlement-three-point'), 1), 'caster'),
+            ...apply(hiddenMarker(threePointFullDebtMarker, '三债终审·三焰', jiujieTag('settlement-three-point'), 1), 'caster'),
             conditions: [
               c('buff_layer_at_least', { scope: 'target', id: JIUJIE_DEBT, value: 3 }),
               c('combat_resource_at_least', { scope: 'caster', resourceId: JIUJIE_CALAMITY, value: 3 }),
@@ -1205,7 +1205,7 @@ export function compileJiujieBase(
       : []),
     ...(settings.eye.settlementReopen
       ? [{
-          ...apply(hiddenMarker(fullSpendMarker, '清算留门·三劫', jiujieTag('settlement-full-spend'), 1), 'caster'),
+          ...apply(hiddenMarker(fullSpendMarker, '清算留门·三焰', jiujieTag('settlement-full-spend'), 1), 'caster'),
           conditions: [c('combat_resource_at_least', { scope: 'caster', resourceId: JIUJIE_CALAMITY, value: 3 })],
         }]
       : []),
@@ -1282,7 +1282,7 @@ export function compileJiujieBase(
       type: 'consume_status_trigger',
       params: {
         match: { id: JIUJIE_DEBT },
-        displayName: '劫债',
+        displayName: '案债',
         consume: 'all',
         aggregateDamageByLayer: true,
         target: 'target',
@@ -1372,7 +1372,7 @@ export function compileJiujieBase(
           apply(receiveBuff({ ...settings, receiveDuration: 1 }), 'caster'),
           apply(eyeBuff({ ...settings, eyeDuration: 2 }), 'caster'),
           {
-            ...apply(hiddenMarker(JIUJIE_SETTLEMENT_REOPEN_READY, '劫后再开·待应', settlementReopenReadyTag, 2), 'caster'),
+            ...apply(hiddenMarker(JIUJIE_SETTLEMENT_REOPEN_READY, '焰后再开·待应', settlementReopenReadyTag, 2), 'caster'),
             conditions: [c('has_not_tag', { scope: 'caster', tag: settlementReopenLockTag })],
           },
         ]
@@ -1401,6 +1401,6 @@ export function compileJiujieBase(
     effects: settlementEffects,
     targetPolicy: { team: 'enemy', scope: 'single' },
     extraTags: [GameplayTags.ABILITY.ELEMENT.THUNDER],
-    detailRows: ['消耗2～3点劫数，清算劫债与重犯记录，并按道途节点维持劫雷。'],
+    detailRows: ['消耗2～3点灯焰，清算案债与重犯记录，并按道途节点维持灯痕。'],
   });
 }

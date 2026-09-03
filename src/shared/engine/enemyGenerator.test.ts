@@ -18,9 +18,9 @@ import {
   getRealmStageNaturalAttributeValue,
 } from '@shared/config/realmProgression';
 import {
-  ENEMY_RACE_VALUES,
+  ENEMY_CLAN_VALUES,
   QUALITY_ORDER,
-  type EnemyRace,
+  type EnemyClan,
   type Quality,
 } from '@shared/types/constants';
 import type { Cultivator } from '@shared/types/cultivator';
@@ -50,7 +50,7 @@ function createPlayerFixture(): Cultivator {
     name: '韩立',
     title: null,
     gender: '男',
-    realm: '筑基',
+    realm: '守灯',
     realm_stage: '中期',
     age: 40,
     lifespan: 260,
@@ -62,10 +62,10 @@ function createPlayerFixture(): Cultivator {
       speed: 48,
       willpower: 44,
     },
-    spiritual_roots: [{ element: '木', strength: 82 }],
+    spiritual_roots: [{ element: '尸', strength: 82 }],
     pre_heaven_fates: [],
-    cultivations: [BASIC_TECHNIQUES.木()],
-    skills: [...BASIC_SKILLS.木],
+    cultivations: [BASIC_TECHNIQUES.尸()],
+    skills: [...BASIC_SKILLS.尸],
     inventory: {
       artifacts: [],
       consumables: [],
@@ -214,7 +214,7 @@ function assertThreateningLoadout(
   expect(skills.length).toBeGreaterThan(0);
 
   const skillCount = skills.length as 1 | 2 | 3 | 4;
-  const policy = getEnemyCombatPolicy(draft.input.race);
+  const policy = getEnemyCombatPolicy(draft.input.clan);
   const pressureCount = skills.filter(isPressureSkill).length;
   const selfTargetCount = skills.filter(
     (skill) => skill.abilityConfig?.targetPolicy?.team === 'self',
@@ -277,17 +277,17 @@ describe('EnemyGenerator', () => {
     { difficulty: 100, factor: 2.0 },
   ])('maps difficulty $difficulty to factor $factor', ({ difficulty, factor }) => {
     const draft = enemyGenerator.buildDraft({
-      realm: '筑基',
+      realm: '守灯',
       realmStage: '中期',
-      race: '人族',
+      clan: '腌物',
       difficulty,
     });
 
     expect(draft.balance.difficultyFactor).toBeCloseTo(factor, 6);
     expect(draft.balance.totalAttributeBudget).toBe(
       Math.max(
-        getRealmStageNaturalAttributeValue('筑基', '中期') * 6,
-        Math.round(getRealmStageAttributeBudget('筑基', '中期') * factor),
+        getRealmStageNaturalAttributeValue('守灯', '中期') * 6,
+        Math.round(getRealmStageAttributeBudget('守灯', '中期') * factor),
       ),
     );
     expect(sumAttributes(draft.cultivator.attributes)).toBe(
@@ -306,39 +306,39 @@ describe('EnemyGenerator', () => {
       expect(
         resolveEnemyProductQualityFloor({
           difficulty,
-          race: '人族',
+          clan: '腌物',
           isBoss: false,
         }),
       ).toBe(expectedQuality);
     },
   );
 
-  it('raises boss or ancient beast product quality floor by one tier without stacking', () => {
+  it('raises boss or relic clan product quality floor by one tier without stacking', () => {
     expect(
       resolveEnemyProductQualityFloor({
         difficulty: 75,
-        race: '人族',
+        clan: '腌物',
         isBoss: true,
       }),
     ).toBe('仙品');
     expect(
       resolveEnemyProductQualityFloor({
         difficulty: 75,
-        race: '古兽',
+        clan: '遗种',
         isBoss: false,
       }),
     ).toBe('仙品');
     expect(
       resolveEnemyProductQualityFloor({
         difficulty: 75,
-        race: '古兽',
+        clan: '遗种',
         isBoss: true,
       }),
     ).toBe('仙品');
     expect(
       resolveEnemyProductQualityFloor({
         difficulty: 95,
-        race: '古兽',
+        clan: '遗种',
         isBoss: true,
       }),
     ).toBe('神品');
@@ -349,7 +349,7 @@ describe('EnemyGenerator', () => {
       expect(
         resolveEnemyProductEnergyBudget({
           difficulty: 80,
-          race: '人族',
+          clan: '腌物',
           isBoss: false,
           productType,
         }),
@@ -357,7 +357,7 @@ describe('EnemyGenerator', () => {
       expect(
         resolveEnemyProductEnergyBudget({
           difficulty: 90,
-          race: '人族',
+          clan: '腌物',
           isBoss: false,
           productType,
         }),
@@ -367,9 +367,9 @@ describe('EnemyGenerator', () => {
 
   it('generates deterministic body cultivation condition without timestamp churn', () => {
     const input = {
-      realm: '金丹' as const,
+      realm: '窥渊' as const,
       realmStage: '后期' as const,
-      race: '魔族' as const,
+      clan: '遗种' as const,
       difficulty: 88,
       isBoss: true,
       variantSeed: 'body-deterministic',
@@ -406,9 +406,9 @@ describe('EnemyGenerator', () => {
     ].map(
       (input) =>
         enemyGenerator.buildDraft({
-          realm: '筑基',
+          realm: '守灯',
           realmStage: '中期',
-          race: '妖族',
+          clan: '腌物',
           ...input,
           variantSeed: `body-scale:${input.difficulty}:${input.isBoss}`,
         }).balance.bodyCultivation.totalLevel,
@@ -419,24 +419,21 @@ describe('EnemyGenerator', () => {
     expect(totals[3]).toBeGreaterThan(totals[2]);
   });
 
-  it('uses race preferences for enemy body cultivation focus tracks', () => {
-    const expectedTopTracks: Record<EnemyRace, string[]> = {
-      人族: ['organs', 'primordial_spirit'],
-      妖族: ['qi_blood', 'sinew_bone', 'skin'],
-      鬼魂: ['primordial_spirit', 'organs'],
-      魔族: ['organs', 'qi_blood', 'skin'],
-      古兽: ['sinew_bone', 'skin', 'qi_blood'],
-      灵族: ['organs', 'primordial_spirit', 'skin'],
+  it('uses clan preferences for enemy body cultivation focus tracks', () => {
+    const expectedTopTracks: Record<EnemyClan, string[]> = {
+      腌物: ['sinew_bone', 'skin'],
+      遗种: ['primordial_spirit', 'organs'],
+      投影: ['primordial_spirit', 'organs'],
     };
 
-    for (const race of ENEMY_RACE_VALUES) {
+    for (const clan of ENEMY_CLAN_VALUES) {
       const draft = enemyGenerator.buildDraft({
-        realm: '元婴',
+        realm: '蚀体',
         realmStage: '后期',
-        race,
+        clan,
         difficulty: 100,
         isBoss: true,
-        variantSeed: `body-race:${race}`,
+        variantSeed: `body-clan:${clan}`,
       });
       const trackLevels = draft.balance.bodyCultivation.trackLevels;
       const highestLevel = Math.max(...Object.values(trackLevels));
@@ -445,16 +442,16 @@ describe('EnemyGenerator', () => {
         .map(([track]) => track);
 
       expect(
-        highestTracks.some((track) => expectedTopTracks[race].includes(track)),
+        highestTracks.some((track) => expectedTopTracks[clan].includes(track)),
       ).toBe(true);
     }
   });
 
   it('starts generated enemy condition resources at display max resources', () => {
     const draft = enemyGenerator.buildDraft({
-      realm: '元婴',
+      realm: '蚀体',
       realmStage: '后期',
-      race: '古兽',
+      clan: '遗种',
       difficulty: 95,
       isBoss: true,
       variantSeed: 'body-resources',
@@ -466,6 +463,39 @@ describe('EnemyGenerator', () => {
     expect(sumAttributes(draft.cultivator.attributes)).toBe(
       draft.balance.totalAttributeBudget,
     );
+  });
+
+  it('generates enemies across the three clans and mounts the sanity-burn passive', () => {
+    for (const clan of ['腌物', '遗种', '投影'] as const) {
+      const draft = enemyGenerator.buildDraft({
+        realm: '窥渊',
+        realmStage: '中期',
+        clan,
+        difficulty: 70,
+        isBoss: false,
+        variantSeed: `guixi-${clan}`,
+      });
+      expect(draft.cultivator.clan).toBe(clan);
+      // 三族通过 copyFacts.clan 透传给 AI 叙事层（enemy-narrative 据以区分腌物/遗种/投影气质）。
+      expect(draft.copyFacts.clan).toBe(clan);
+      // 三族共享诡异原型：功法/技能/封灵器均以「浸染/低语/梦涎」等诡异气质命名。
+      expect(draft.cultivator.cultivations.length).toBeGreaterThan(0);
+      expect(draft.cultivator.skills.length).toBeGreaterThan(0);
+      assertV5Compatible(draft);
+
+      // 战斗单位生成后，诡异敌人额外挂载「梦涎蚀神」被动（烧神智）。
+      const unit = createCombatUnitFromCultivator(draft.cultivator);
+      expect(
+        unit.abilities.getAbility('core.guixi.sanity-burn'),
+      ).toBeDefined();
+    }
+  });
+
+  it('does not mount the sanity-burn passive on a player without a clan', () => {
+    // 玩家角色无 clan 字段，不应挂载「梦涎蚀神」被动；该被动仅由诡异三族敌人独占。
+    const player = createPlayerFixture();
+    const unit = createCombatUnitFromCultivator(player);
+    expect(unit.abilities.getAbility('core.guixi.sanity-burn')).toBeUndefined();
   });
 
   it.each([
@@ -508,9 +538,9 @@ describe('EnemyGenerator', () => {
     'scales loadout for difficulty $difficulty boss=$isBoss',
     ({ difficulty, isBoss, expectedBand, expectedSkills, expectedArtifacts }) => {
       const draft = enemyGenerator.buildDraft({
-        realm: '筑基',
+        realm: '守灯',
         realmStage: '中期',
-        race: '人族',
+        clan: '腌物',
         difficulty,
         isBoss,
       });
@@ -522,18 +552,18 @@ describe('EnemyGenerator', () => {
   );
 
   it.each([
-    { difficulty: 80, isBoss: false, race: '人族', expectedQuality: '天品' },
-    { difficulty: 90, isBoss: false, race: '人族', expectedQuality: '仙品' },
-    { difficulty: 95, isBoss: false, race: '人族', expectedQuality: '神品' },
-    { difficulty: 85, isBoss: true, race: '人族', expectedQuality: '神品' },
-    { difficulty: 85, isBoss: false, race: '古兽', expectedQuality: '神品' },
+    { difficulty: 80, isBoss: false, clan: '腌物', expectedQuality: '天品' },
+    { difficulty: 90, isBoss: false, clan: '腌物', expectedQuality: '仙品' },
+    { difficulty: 95, isBoss: false, clan: '腌物', expectedQuality: '神品' },
+    { difficulty: 85, isBoss: true, clan: '腌物', expectedQuality: '神品' },
+    { difficulty: 85, isBoss: false, clan: '遗种', expectedQuality: '神品' },
   ] as const)(
-    'generates $expectedQuality or better products for difficulty $difficulty race=$race boss=$isBoss',
-    ({ difficulty, isBoss, race, expectedQuality }) => {
+    'generates $expectedQuality or better products for difficulty $difficulty clan=$clan boss=$isBoss',
+    ({ difficulty, isBoss, clan, expectedQuality }) => {
       const draft = enemyGenerator.buildDraft({
-        realm: '元婴',
+        realm: '蚀体',
         realmStage: '中期',
-        race,
+        clan,
         difficulty,
         isBoss,
         variantSeed: 'quality-floor',
@@ -546,29 +576,26 @@ describe('EnemyGenerator', () => {
     },
   );
 
-  it('redistributes attributes by race profile while preserving total budget', () => {
+  it('redistributes attributes by clan profile while preserving total budget', () => {
     const expectations: Record<
-      EnemyRace,
+      EnemyClan,
       {
         top: string | string[];
         second?: string | string[];
       }
     > = {
-      人族: { top: 'spirit', second: 'willpower' },
-      妖族: { top: 'vitality', second: 'strength' },
-      鬼魂: { top: 'spirit', second: 'willpower' },
-      魔族: { top: ['vitality', 'strength'], second: ['vitality', 'strength'] },
-      古兽: { top: ['vitality', 'strength'], second: ['vitality', 'strength'] },
-      灵族: { top: 'spirit', second: 'willpower' },
+      腌物: { top: ['vitality', 'strength', 'endurance'], second: ['vitality', 'strength', 'endurance'] },
+      遗种: { top: 'spirit', second: ['strength', 'willpower'] },
+      投影: { top: ['spirit', 'willpower'], second: ['spirit', 'willpower'] },
     };
 
-    for (const [race, expected] of Object.entries(expectations) as Array<
-      [EnemyRace, (typeof expectations)[EnemyRace]]
+    for (const [clan, expected] of Object.entries(expectations) as Array<
+      [EnemyClan, (typeof expectations)[EnemyClan]]
     >) {
       const draft = enemyGenerator.buildDraft({
-        realm: '金丹',
+        realm: '窥渊',
         realmStage: '中期',
-        race,
+        clan,
         difficulty: 50,
       });
       const ordered = Object.entries(draft.cultivator.attributes)
@@ -604,9 +631,9 @@ describe('EnemyGenerator', () => {
 
   it('builds deterministic stable snapshots for the same battle parameters', () => {
     const input = {
-      realm: '金丹' as const,
+      realm: '窥渊' as const,
       realmStage: '中期' as const,
-      race: '灵族' as const,
+      clan: '投影' as const,
       difficulty: 73,
       isBoss: true,
     };
@@ -617,12 +644,12 @@ describe('EnemyGenerator', () => {
     expect(snapshotEnemy(left)).toBe(snapshotEnemy(right));
   });
 
-  it('keeps same-race variants from collapsing into one loadout signature', () => {
+  it('keeps same-clan variants from collapsing into one loadout signature', () => {
     const signatures = [18, 42, 68, 92].map((difficulty) => {
       const draft = enemyGenerator.buildDraft({
-        realm: '元婴',
+        realm: '蚀体',
         realmStage: '中期',
-        race: '妖族',
+        clan: '腌物',
         difficulty,
       });
       return [
@@ -638,7 +665,7 @@ describe('EnemyGenerator', () => {
     expect(new Set(signatures).size).toBeGreaterThan(1);
   });
 
-  it('keeps all race x band x boss combinations battle-ready', () => {
+  it('keeps all clan x band x boss combinations battle-ready', () => {
     const combinations = (
       [
         { difficulty: 10, isBoss: false },
@@ -648,17 +675,17 @@ describe('EnemyGenerator', () => {
         { difficulty: 95, isBoss: true },
       ] as const
     ).flatMap((config) =>
-      (['人族', '妖族', '鬼魂', '魔族', '古兽', '灵族'] as const).map((race) => ({
+      ENEMY_CLAN_VALUES.map((clan) => ({
         ...config,
-        race,
+        clan,
       })),
     );
 
     for (const combo of combinations) {
       const draft = enemyGenerator.buildDraft({
-        realm: combo.isBoss ? '元婴' : '金丹',
+        realm: combo.isBoss ? '蚀体' : '窥渊',
         realmStage: combo.isBoss ? '后期' : '中期',
-        race: combo.race,
+        clan: combo.clan,
         difficulty: combo.difficulty,
         isBoss: combo.isBoss,
       });
@@ -666,31 +693,31 @@ describe('EnemyGenerator', () => {
     }
   });
 
-  it('plans race-specific skill roles before crafting products', () => {
-    for (const race of ENEMY_RACE_VALUES) {
+  it('plans clan-specific skill roles before crafting products', () => {
+    for (const clan of ENEMY_CLAN_VALUES) {
       for (const difficulty of [10, 40, 70, 95] as const) {
         const draft = enemyGenerator.buildDraft({
-          realm: '金丹',
+          realm: '窥渊',
           realmStage: '中期',
-          race,
+          clan,
           difficulty,
         });
         const skillRoles = draft.copyFacts.products
           .filter((product) => product.productType === 'skill')
           .map((product) => product.role);
-        const expectedRoles = getEnemyCombatPolicy(race).roleOrderBySkillCount[
+        const expectedRoles = getEnemyCombatPolicy(clan).roleOrderBySkillCount[
           skillRoles.length as 1 | 2 | 3 | 4
         ];
 
         expect(skillRoles[0]).toBe(expectedRoles[0]);
-        expect(validateEnemySkillRoles(getEnemyCombatPolicy(race), skillRoles)).toBe(
+        expect(validateEnemySkillRoles(getEnemyCombatPolicy(clan), skillRoles)).toBe(
           true,
         );
       }
     }
   });
 
-  it('keeps all race x band x boss skill loadouts threatening', () => {
+  it('keeps all clan x band x boss skill loadouts threatening', () => {
     const combinations = (
       [
         { difficulty: 10, isBoss: false },
@@ -700,17 +727,17 @@ describe('EnemyGenerator', () => {
         { difficulty: 95, isBoss: true },
       ] as const
     ).flatMap((config) =>
-      ENEMY_RACE_VALUES.map((race) => ({
+      ENEMY_CLAN_VALUES.map((clan) => ({
         ...config,
-        race,
+        clan,
       })),
     );
 
     for (const combo of combinations) {
       const draft = enemyGenerator.buildDraft({
-        realm: combo.isBoss ? '元婴' : '金丹',
+        realm: combo.isBoss ? '蚀体' : '窥渊',
         realmStage: combo.isBoss ? '后期' : '中期',
-        race: combo.race,
+        clan: combo.clan,
         difficulty: combo.difficulty,
         isBoss: combo.isBoss,
       });
@@ -722,11 +749,11 @@ describe('EnemyGenerator', () => {
   it('keeps enemy skill mp cost generated from pacing rules across difficulty bands', () => {
     for (const difficulty of [0, 25, 50, 70, 85, 95, 100] as const) {
       for (const isBoss of [false, true]) {
-        for (const race of ENEMY_RACE_VALUES) {
+        for (const clan of ENEMY_CLAN_VALUES) {
           const draft = enemyGenerator.buildDraft({
-            realm: '筑基',
+            realm: '守灯',
             realmStage: '中期',
-            race,
+            clan,
             difficulty,
             isBoss,
             variantSeed: 'quality-pacing',
@@ -747,15 +774,15 @@ describe('EnemyGenerator', () => {
   it('can be materialized into combat units and run V5 battle smoke tests', () => {
     const player = createPlayerFixture();
     const normalEnemy = enemyGenerator.buildDraft({
-      realm: '筑基',
+      realm: '守灯',
       realmStage: '后期',
-      race: '魔族',
+      clan: '腌物',
       difficulty: 65,
     }).cultivator;
     const bossEnemy = enemyGenerator.buildDraft({
-      realm: '金丹',
+      realm: '窥渊',
       realmStage: '后期',
-      race: '古兽',
+      clan: '遗种',
       difficulty: 95,
       isBoss: true,
     }).cultivator;
@@ -780,21 +807,21 @@ describe('EnemyGenerator', () => {
     const player = createPlayerFixture();
 
     const lowEnemy = enemyGenerator.buildDraft({
-      realm: '筑基',
+      realm: '守灯',
       realmStage: '中期',
-      race: '人族',
+      clan: '腌物',
       difficulty: 25,
     }).cultivator;
     const midEnemy = enemyGenerator.buildDraft({
-      realm: '筑基',
+      realm: '守灯',
       realmStage: '中期',
-      race: '人族',
+      clan: '腌物',
       difficulty: 50,
     }).cultivator;
     const eliteEnemy = enemyGenerator.buildDraft({
-      realm: '筑基',
+      realm: '守灯',
       realmStage: '中期',
-      race: '人族',
+      clan: '腌物',
       difficulty: 70,
     }).cultivator;
     const nakedLowEnemy = stripEnemyLoadout(lowEnemy);
@@ -830,9 +857,9 @@ describe('EnemyGenerator', () => {
       copyProvider: new NoopEnemyCopyProvider(),
     });
     const draft = generator.buildDraft({
-      realm: '筑基',
+      realm: '守灯',
       realmStage: '中期',
-      race: '灵族',
+      clan: '投影',
       difficulty: 55,
     });
 
@@ -843,9 +870,9 @@ describe('EnemyGenerator', () => {
 
   it('builds a deterministic fallback title when no narrative override exists', () => {
     const draft = enemyGenerator.buildDraft({
-      realm: '筑基',
+      realm: '守灯',
       realmStage: '后期',
-      race: '鬼魂',
+      clan: '投影',
       difficulty: 62,
     });
 
@@ -855,9 +882,9 @@ describe('EnemyGenerator', () => {
 
   it('only fills missing character narrative fields and rewrites product copy in one shot', async () => {
     const draft = enemyGenerator.buildDraft({
-      realm: '金丹',
+      realm: '窥渊',
       realmStage: '中期',
-      race: '灵族',
+      clan: '投影',
       name: '手填名字',
       title: '手填名号',
       background: '手填背景',
@@ -867,7 +894,7 @@ describe('EnemyGenerator', () => {
         name: '不应覆盖',
         title: '不应覆盖',
         background: '不应覆盖',
-        description: '灵潮翻卷间，敌影似真似幻。',
+        description: '梦潮翻卷间，敌影似真似幻。',
       },
       products: draft.copyFacts.products.map((product, index) => ({
         id: product.id,
@@ -885,7 +912,7 @@ describe('EnemyGenerator', () => {
     expect(enriched.cultivator.name).toBe('手填名字');
     expect(enriched.cultivator.title).toBe('手填名号');
     expect(enriched.cultivator.background).toBe('手填背景');
-    expect(enriched.cultivator.description).toBe('灵潮翻卷间，敌影似真似幻。');
+    expect(enriched.cultivator.description).toBe('梦潮翻卷间，敌影似真似幻。');
     expect(enriched.cultivator.cultivations[0]?.name).toBe('润色产物1');
     expect(enriched.cultivator.cultivations[0]?.abilityConfig?.name).toBe('润色产物1');
     expect(enriched.cultivator.skills[0]?.name).toBe('润色产物2');
@@ -895,9 +922,9 @@ describe('EnemyGenerator', () => {
 
   it('rolls back the whole enrichment when product id sets do not match', async () => {
     const draft = enemyGenerator.buildDraft({
-      realm: '筑基',
+      realm: '守灯',
       realmStage: '后期',
-      race: '鬼魂',
+      clan: '投影',
       difficulty: 62,
     });
     const enrich = vi.fn().mockResolvedValue({
@@ -905,7 +932,7 @@ describe('EnemyGenerator', () => {
         name: '夜潮灵使',
         title: '镇潮灵卫',
         background: '其本体为潮汐灵物，久困古阵而化形。',
-        description: '灵潮翻卷间，敌影似真似幻。',
+        description: '梦潮翻卷间，敌影似真似幻。',
       },
       products: [
         {
@@ -939,9 +966,9 @@ describe('EnemyGenerator', () => {
       },
     });
     const input = {
-      realm: '金丹' as const,
+      realm: '窥渊' as const,
       realmStage: '后期' as const,
-      race: '古兽' as const,
+      clan: '遗种' as const,
       difficulty: 95,
       isBoss: true,
     };
@@ -975,7 +1002,7 @@ describe('EnemyGenerator', () => {
     const fallbackSkills = loadout.skills.map(
       (skill) => skill.item as Cultivator['skills'][number],
     );
-    const policy = getEnemyCombatPolicy(input.race);
+    const policy = getEnemyCombatPolicy(input.clan);
     const skillCount = fallbackSkills.length as 1 | 2 | 3 | 4;
     const pressureCount = fallbackSkills.filter(isPressureSkill).length;
     const selfTargetCount = fallbackSkills.filter(
@@ -1011,9 +1038,9 @@ describe('EnemyGenerator', () => {
 
   it('keeps low-floor ghost drafts threatening even when safety fallback is needed', () => {
     const draft = enemyGenerator.buildDraft({
-      realm: '筑基',
+      realm: '守灯',
       realmStage: '初期',
-      race: '鬼魂',
+      clan: '投影',
       difficulty: 1,
     });
 

@@ -3,11 +3,11 @@ import {
   type SectOrganizationTheme,
 } from '../../../core';
 
-/** 红尘剑宗只声明组织玩法的展示主题；核心流程由标准组织模块提供。 */
+/** 太乙清都观只声明组织玩法的展示主题；核心流程由标准组织模块提供。 */
 export const LINGXIAO_ORGANIZATION_THEME: SectOrganizationTheme = {
   elderTrial: {
-    name: '听剑老人·试炼化身',
-    description: '执一柄旧剑立于场中，只问弟子的剑为何而出。',
+    name: '掌灯老人·试炼化身',
+    description: '执一盏旧灯立于场中，只问弟子的灯为何而点。',
     configVersion: 4,
     methodIds: [
       'lingxiao-canon',
@@ -25,11 +25,11 @@ export const LINGXIAO_ORGANIZATION_THEME: SectOrganizationTheme = {
       'breaking-edge',
       'sect-ultimate',
     ],
-    artifactNames: ['照尘古剑', '藏锋剑衣', '澄心剑珏'],
+    artifactNames: ['照尘古灯', '藏锋灯衣', '澄心灯珏'],
     artifactDescriptions: [
-      '剑身照见尘世万象，饮敌势而养己锋。',
-      '剑气藏于衣纹，危急时替主人截断死局。',
-      '澄心定意，使纷乱外法难侵剑心。',
+      '灯焰照见尘世万象，饮敌势而养己焰。',
+      '灯火藏于衣纹，危急时替主人截断死局。',
+      '澄心定意，使纷乱外法难侵灯心。',
     ],
   },
 };

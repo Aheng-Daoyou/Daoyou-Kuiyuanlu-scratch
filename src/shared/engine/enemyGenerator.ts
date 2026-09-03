@@ -23,7 +23,7 @@ export type {
   EnemyGenerationDraft,
   EnemyGenerationInput,
   EnemyPersonaDefinition,
-  EnemyRaceProfile,
+  EnemyClanProfile,
   EnemyLoadoutPlan,
   EnemyPlannedProductIntent,
   NormalizedEnemyGenerationInput,

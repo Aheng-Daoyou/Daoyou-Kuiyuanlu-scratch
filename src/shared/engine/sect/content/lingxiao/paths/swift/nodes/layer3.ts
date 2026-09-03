@@ -25,18 +25,18 @@ export const SWIFT_LAYER_3_NODES = [
       layerId: '3',
       name: '燕返',
       description:
-        '提高《藏锋听雷》的首次闪避反击伤害，命中后施加1层随《红尘剑录》成长的剑痕。',
+        '提高《守灯听漏》的首次闪避反击伤害，命中后施加1层随《守灯录》成长的照痕。',
     },
     (_context, builder) => swiftSwordBuild(builder).enable('returningSwallow'),
     (context) =>
-      `《藏锋听雷》的首次闪避反击造成相当于${nodePercent(growthMagnitude(context, 'void-step', SWIFT_RETURNING_SWALLOW_COUNTER_COEFFICIENT))}物攻的伤害；命中后施加1层剑痕，每层使目标受到的直接、反击和追击伤害提高${nodePercent(growthStatusMagnitude(context, 'lingxiao-canon', 0.02))}，持续目标未来${growthDuration(context, 'lingxiao-canon', 3)}次行动。`,
+      `《守灯听漏》的首次闪避反击造成相当于${nodePercent(growthMagnitude(context, 'void-step', SWIFT_RETURNING_SWALLOW_COUNTER_COEFFICIENT))}物攻的伤害；命中后施加1层照痕，每层使目标受到的直接、反击和追击伤害提高${nodePercent(growthStatusMagnitude(context, 'lingxiao-canon', 0.02))}，持续目标未来${growthDuration(context, 'lingxiao-canon', 3)}次行动。`,
   ),
   createLingxiaoNode(
     {
       id: 'swift-borrowed-force',
       layerId: '3',
       name: '借风',
-      description: '每回合首次受到直接伤害时，获得1点剑意。',
+      description: '每回合首次受到直接伤害时，获得1点香火。',
     },
     (context, builder) =>
       addBorrowedNodePassive(context, builder, {
@@ -51,7 +51,7 @@ export const SWIFT_LAYER_3_NODES = [
       layerId: '3',
       name: '守锋',
       description:
-        '被控制而跳过行动时剑意不衰减；下一次通过积势神通获得剑意时额外获得1点。',
+        '被控制而跳过行动时香火不衰减；下一次通过积势神通获得香火时额外获得1点。',
     },
     (context, builder) => {
       swiftSwordBuild(builder).enable('guardedEdge');
@@ -102,7 +102,7 @@ export const SWIFT_LAYER_3_NODES = [
           {
             abilityId: 'guiding-sword',
             factRows: [
-              '参悟·守锋：被控制而跳过行动时剑意不衰减；下一次通过积势神通获得剑意时额外获得1点',
+              '参悟·守锋：被控制而跳过行动时香火不衰减；下一次通过积势神通获得香火时额外获得1点',
             ],
           },
         ],

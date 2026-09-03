@@ -13,33 +13,33 @@ const durationMilestones = [
 
 export const LINGXIAO_BASE_DEFINITION: SectDefinitionWithoutPaths = {
   id: LINGXIAO_SECT_ID,
-  name: '红尘剑宗',
+  name: '太乙清都观',
   description:
-    '从红尘中学剑，向红尘中还剑。门人以平生所见养成剑意，于照影游尘、守拙藏锋二道中自定剑途。',
+    '天下正道之首，执《守灯》第二章。门人燃心灯、炼香火，在照影游尘与守拙藏锋二道中自定守灯之途。',
   raceIds: ['human'],
   configVersion: 4,
   foundationPassiveId: 'lingxiao-runtime',
   combatResource: {
     id: 'sect.lingxiao.sword-momentum',
-    name: '剑意',
-    icon: '🗡️',
+    name: '香火',
+    icon: '🏮',
     max: 6,
   },
   methods: [
     {
       id: 'lingxiao-canon',
       slot: 1,
-      name: '《红尘剑录》',
+      name: '《守灯录》',
       isPrimary: true,
       description:
-        '历代门人将一生所见与问剑所得录入其中。此录不定剑招，只论剑从何起、当向何处。',
+        '历代门人将一生所见与点灯所得录入其中。此录不定灯式，只论灯从何起、当向何处照。',
       growthProfile: { curve: 'balanced', effects, durationMilestones },
     },
     {
       id: 'sword-guidance',
       slot: 3,
-      name: '《剑气长歌》',
-      description: '以气驭剑，使锋芒连绵不绝；剑气养于胸臆，动时如长风振野。',
+      name: '《香火长歌》',
+      description: '以香驭灯，使灯火连绵不绝；香火养于胸臆，动时如长风振野。',
       growthProfile: {
         curve: 'balanced', effects, durationMilestones,
         panelModifier: {
@@ -51,8 +51,8 @@ export const LINGXIAO_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'void-step',
       slot: 4,
-      name: '《凌虚步》',
-      description: '御气踏虚，身随剑走；方寸之间腾挪换位，不使自身困于敌势。',
+      name: '《照影步》',
+      description: '御气踏影，身随灯走；方寸之间腾挪换位，不使自身困于敌势。',
       growthProfile: {
         curve: 'early', effects, durationMilestones,
         panelModifier: {
@@ -64,8 +64,8 @@ export const LINGXIAO_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'edge-cleansing',
       slot: 2,
-      name: '《观微剑意》',
-      description: '静观一息之变，明察毫厘之机；敌势未成，破绽已映于剑心。',
+      name: '《观微灯意》',
+      description: '静观一息之变，明察毫厘之机；敌势未成，破绽已映于灯心。',
       growthProfile: {
         curve: 'early', effects, durationMilestones,
         countMilestones: [
@@ -82,8 +82,8 @@ export const LINGXIAO_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'origin-returning',
       slot: 5,
-      name: '《澄心剑诀》',
-      description: '收束心神，使剑意澄明；外法虽变化万端，不能动摇持剑之念。',
+      name: '《澄心灯诀》',
+      description: '收束心神，使灯意澄明；外法虽变化万端，不能动摇持灯之念。',
       growthProfile: {
         curve: 'early', effects, durationMilestones,
         panelModifier: {
@@ -95,8 +95,8 @@ export const LINGXIAO_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'sword-nurturing',
       slot: 6,
-      name: '《不灭剑体》',
-      description: '以身作剑，以骨为脊，经千锤百炼而锋芒不折、形神不摧。',
+      name: '《不灭灯体》',
+      description: '以身作灯，以骨为芯，经千锤百炼而灯焰不折、形神不摧。',
       growthProfile: {
         curve: 'late', effects, durationMilestones,
         panelModifier: {
@@ -110,9 +110,9 @@ export const LINGXIAO_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'plain-sword',
       kind: 'default',
-      baseName: '问剑式',
+      baseName: '燃灯式',
       description:
-        '红尘剑宗入门第一式。招式简明，不求出奇，重在出剑之前先明来意。',
+        '太乙清都观入门第一式。招式简明，不求出奇，重在点灯之前先明来意。',
       unlock: { type: 'method', methodId: 'lingxiao-canon', level: 1 },
       role: 'generator',
       mpCost: 0,
@@ -121,8 +121,8 @@ export const LINGXIAO_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'sect-ultimate',
       kind: 'active',
-      baseName: '此剑平生',
-      description: '剑意至极，平生所见皆归于一锋。此剑不借天威，只决眼前之局。',
+      baseName: '照灯平生',
+      description: '灯意至极，平生所见皆归于一焰。此灯不借天威，只决眼前之局。',
       unlock: { type: 'method', methodId: 'lingxiao-canon', level: 10 },
       role: 'finisher',
       mpCost: 200,
@@ -131,8 +131,8 @@ export const LINGXIAO_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'guiding-sword',
       kind: 'active',
-      baseName: '剑起沧澜',
-      description: '剑意初动，如沧海生澜；一势既起，后招便随之而来。',
+      baseName: '灯起沧澜',
+      description: '灯意初动，如沧海生澜；一势既起，后招便随之而来。',
       unlock: { type: 'method', methodId: 'sword-guidance', level: 1 },
       role: 'generator',
       mpCost: 80,
@@ -141,8 +141,8 @@ export const LINGXIAO_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'linked-edge',
       kind: 'active',
-      baseName: '剑荡山河',
-      description: '剑锋纵横，数势相连；前剑未尽，后剑已越其锋。',
+      baseName: '灯荡山河',
+      description: '灯焰纵横，数势相连；前灯未尽，后灯已越其焰。',
       unlock: { type: 'method', methodId: 'sword-guidance', level: 5 },
       role: 'combo',
       mpCost: 140,
@@ -151,8 +151,8 @@ export const LINGXIAO_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'turning-body',
       kind: 'active',
-      baseName: '藏锋听雷',
-      description: '收剑藏势，静候敌招；待来势真正落下，再以后发之剑应之。',
+      baseName: '守灯听漏',
+      description: '守灯藏势，静候敌招；待来势真正落下，再以后发之灯应之。',
       unlock: { type: 'method', methodId: 'void-step', level: 3 },
       role: 'defensive',
       mpCost: 160,
@@ -161,8 +161,8 @@ export const LINGXIAO_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'shadow-step',
       kind: 'active',
-      baseName: '踏雪无痕',
-      description: '身随剑行，进退不滞；剑光掠过之后，唯余风雪未定。',
+      baseName: '踏影无痕',
+      description: '身随灯行，进退不滞；灯影掠过之后，唯余灯辉未定。',
       unlock: { type: 'method', methodId: 'void-step', level: 5 },
       role: 'generator',
       mpCost: 120,
@@ -171,8 +171,8 @@ export const LINGXIAO_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'breaking-edge',
       kind: 'active',
-      baseName: '一剑破妄',
-      description: '剑意照见虚实，以锋芒截断敌方变化，使诸般护持无所藏形。',
+      baseName: '一灯破妄',
+      description: '灯意照见虚实，以灯焰截断敌方变化，使诸般护持无所藏形。',
       unlock: { type: 'method', methodId: 'edge-cleansing', level: 3 },
       role: 'utility',
       mpCost: 160,
@@ -181,8 +181,8 @@ export const LINGXIAO_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'sword-aegis',
       kind: 'active',
-      baseName: '剑心通明',
-      description: '心念澄澈，剑意自明；外法临身，只见其变，不为其所动。',
+      baseName: '灯心通明',
+      description: '心念澄澈，灯意自明；外法临身，只见其变，不为其所动。',
       unlock: { type: 'method', methodId: 'origin-returning', level: 3 },
       role: 'defensive',
       mpCost: 180,
@@ -191,8 +191,8 @@ export const LINGXIAO_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'nurturing-sword',
       kind: 'active',
-      baseName: '人剑合一',
-      description: '气随意转，意随剑行；持剑之人与手中之锋再无迟滞。',
+      baseName: '人灯合一',
+      description: '气随意转，意随灯行；持灯之人与手中之焰再无迟滞。',
       unlock: { type: 'method', methodId: 'sword-nurturing', level: 3 },
       role: 'defensive',
       mpCost: 180,
@@ -201,8 +201,8 @@ export const LINGXIAO_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'lingxiao-runtime',
       kind: 'passive',
-      baseName: '剑骨淬锋',
-      description: '以剑意淬炼筋骨，常驻提高暴击率与物理穿透。',
+      baseName: '灯骨淬心',
+      description: '以灯意淬炼筋骨，常驻提高暴击率与物理穿透。',
       role: 'combo',
       unlock: { type: 'always' },
       visibility: 'internal',
@@ -210,8 +210,8 @@ export const LINGXIAO_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'heavy-shield-momentum',
       kind: 'passive',
-      baseName: '大巧不工',
-      description: '护盾吸收直接伤害后，每回合获得一点剑意。',
+      baseName: '殿柱如山',
+      description: '护盾吸收直接伤害后，每回合获得一点香火。',
       role: 'defensive',
       unlock: { type: 'active_path', pathId: HEAVY_SWORD_PATH_ID },
       visibility: 'internal',

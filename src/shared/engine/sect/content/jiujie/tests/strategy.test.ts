@@ -107,7 +107,7 @@ function context(
   const opponent = unit('opponent');
   caster.combatResources.define({
     id: JIUJIE_CALAMITY,
-    name: '劫数',
+    name: '灯焰',
     initial: 0,
     max: 3,
   });
@@ -115,7 +115,7 @@ function context(
   const candidates: AbilitySelectionCandidate[] = abilityIds.flatMap(
     (abilityId, order) => {
       const ability = AbilityFactory.create(
-        resolveSectAbility({ sect, realm: '化神', abilityId }).config,
+        resolveSectAbility({ sect, realm: '忘川', abilityId }).config,
       ) as ActiveSkill;
       ability.setOwner(caster);
       ability.setActive(true);
@@ -137,7 +137,7 @@ function markThunder(opponent: Unit): void {
   opponent.buffs.addBuff(
     BuffFactory.create({
       id: JIUJIE_THUNDER,
-      name: '劫雷',
+      name: '灯痕',
       type: BuffType.DEBUFF,
       duration: 3,
       tags: [jiujieTag('thunder'), jiujieTag('calamity')],
@@ -147,26 +147,26 @@ function markThunder(opponent: Unit): void {
   );
 }
 
-describe('九劫天宫自动施法策略', () => {
+describe('掌灯司自动施法策略', () => {
   it('按当前流派投影对应策略', () => {
     expect(
-      projectSectCombat({ sect: state(), realm: '化神' })?.selectionStrategy,
+      projectSectCombat({ sect: state(), realm: '忘川' })?.selectionStrategy,
     ).toBeInstanceOf(JiujieBaseSelectionStrategy);
     expect(
       projectSectCombat({
         sect: state(JIUJIE_EYE_PATH_ID),
-        realm: '化神',
+        realm: '忘川',
       })?.selectionStrategy,
     ).toBeInstanceOf(JiujieEyeSelectionStrategy);
     expect(
       projectSectCombat({
         sect: state(JIUJIE_CONDEMNATION_PATH_ID),
-        realm: '化神',
+        realm: '忘川',
       })?.selectionStrategy,
     ).toBeInstanceOf(JiujieCondemnationSelectionStrategy);
   });
 
-  it('劫眼开局优先释放承天受劫', () => {
+  it('灯眼开局优先释放承灯受焰', () => {
     const battle = context(JIUJIE_EYE_PATH_ID, 'bear-and-return');
     const result = new JiujieEyeSelectionStrategy('bear-and-return').select(
       battle,
@@ -176,7 +176,7 @@ describe('九劫天宫自动施法策略', () => {
     expect(result?.target).toBe(battle.caster);
   });
 
-  it('承天状态尚在但劫眼已结束时会重新开眼', () => {
+  it('承灯状态尚在但灯眼已结束时会重新开眼', () => {
     const battle = context(JIUJIE_EYE_PATH_ID, 'bear-and-return', (caster) =>
       addBuff(caster, 'sect.jiujie.receive-calamity'),
     );
@@ -188,9 +188,9 @@ describe('九劫天宫自动施法策略', () => {
   });
 
   it.each([
-    ['劫眼临身', JIUJIE_EYE_PATH_ID, 'close-the-eye'],
-    ['天谴加身', JIUJIE_CONDEMNATION_PATH_ID, 'listen-to-heaven'],
-  ] as const)('%s保守战术健康时保留两点劫数，三点时才优先九霄清算', (_label, pathId, tacticId) => {
+    ['灯眼临身', JIUJIE_EYE_PATH_ID, 'close-the-eye'],
+    ['灯律加身', JIUJIE_CONDEMNATION_PATH_ID, 'listen-to-heaven'],
+  ] as const)('%s保守战术健康时保留两点灯焰，三点时才优先九灯清算', (_label, pathId, tacticId) => {
     const battle = context(pathId, tacticId, (caster, opponent) => {
       caster.combatResources.set(JIUJIE_CALAMITY, 2);
       markThunder(opponent);
@@ -212,9 +212,9 @@ describe('九劫天宫自动施法策略', () => {
   });
 
   it.each([
-    ['劫眼临身', JIUJIE_EYE_PATH_ID, 'bear-and-return'],
-    ['天谴加身', JIUJIE_CONDEMNATION_PATH_ID, 'record-and-judge'],
-  ] as const)('%s默认进攻战术在两点劫数时立即清算', (_label, pathId, tacticId) => {
+    ['灯眼临身', JIUJIE_EYE_PATH_ID, 'bear-and-return'],
+    ['灯律加身', JIUJIE_CONDEMNATION_PATH_ID, 'record-and-judge'],
+  ] as const)('%s默认进攻战术在两点灯焰时立即清算', (_label, pathId, tacticId) => {
     const battle = context(pathId, tacticId, (caster, opponent) => {
       caster.combatResources.set(JIUJIE_CALAMITY, 2);
       markThunder(opponent);
@@ -227,9 +227,9 @@ describe('九劫天宫自动施法策略', () => {
   });
 
   it.each([
-    ['劫眼临身', JIUJIE_EYE_PATH_ID, 'bear-and-return'],
-    ['天谴加身', JIUJIE_CONDEMNATION_PATH_ID, 'record-and-judge'],
-  ] as const)('%s在自身危急或目标濒危时会用两点劫数提前清算', (_label, pathId, tacticId) => {
+    ['灯眼临身', JIUJIE_EYE_PATH_ID, 'bear-and-return'],
+    ['灯律加身', JIUJIE_CONDEMNATION_PATH_ID, 'record-and-judge'],
+  ] as const)('%s在自身危急或目标濒危时会用两点灯焰提前清算', (_label, pathId, tacticId) => {
     const strategy = pathId === JIUJIE_EYE_PATH_ID
       ? new JiujieEyeSelectionStrategy(tacticId)
       : new JiujieCondemnationSelectionStrategy(tacticId);
@@ -250,7 +250,7 @@ describe('九劫天宫自动施法策略', () => {
     expect(strategy.select(execute)?.ability.id).toBe('sect.jiujie.nine-sky-settlement');
   });
 
-  it('闭目守劫仅在低血时消耗一点劫数换取护盾', () => {
+  it('闭目守灯仅在低血时消耗一点灯焰换取护盾', () => {
     const healthy = context(
       JIUJIE_EYE_PATH_ID,
       'close-the-eye',
@@ -281,7 +281,7 @@ describe('九劫天宫自动施法策略', () => {
     ).toBe('sect.jiujie.borrow-calamity');
   });
 
-  it('天谴所有战术在目标没有劫雷时优先以天听引雷造成伤害并启动', () => {
+  it('灯律所有战术在目标没有灯痕时优先以灯听引焰造成伤害并启动', () => {
     expect(
       new JiujieCondemnationSelectionStrategy('record-and-judge').select(
         context(JIUJIE_CONDEMNATION_PATH_ID, 'record-and-judge'),
@@ -299,7 +299,7 @@ describe('九劫天宫自动施法策略', () => {
     ).toBe('sect.jiujie.heaven-hearing');
   });
 
-  it('重典战术在满债且劫数未满时优先使用带重法催审语义的因果回响', () => {
+  it('重典战术在满债且灯焰未满时优先使用带重法催审语义的因果回响', () => {
     const battle = context(
       JIUJIE_CONDEMNATION_PATH_ID,
       'heavy-statute',
@@ -308,7 +308,7 @@ describe('九劫天宫自动施法策略', () => {
         markThunder(opponent);
         const debt = BuffFactory.create({
           id: 'sect.jiujie.debt',
-          name: '劫债',
+          name: '案债',
           type: BuffType.DEBUFF,
           duration: 4,
           maxLayers: 3,

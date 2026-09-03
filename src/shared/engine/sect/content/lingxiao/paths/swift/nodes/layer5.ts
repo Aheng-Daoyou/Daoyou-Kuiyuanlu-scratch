@@ -19,7 +19,7 @@ export const SWIFT_LAYER_5_NODES = [
       layerId: '5',
       name: '无隙',
       description:
-        '施展《此剑平生》后，下一次《剑起沧澜》不消耗法力，并额外获得1点剑意。',
+        '施展《照灯平生》后，下一次《灯起沧澜》不消耗灯焰，并额外获得1点香火。',
     },
     (context, builder) => {
       swiftSwordBuild(builder).enable('gapless');
@@ -63,7 +63,7 @@ export const SWIFT_LAYER_5_NODES = [
           {
             abilityId: 'sect-ultimate',
             factRows: [
-              '参悟·无隙：施展《此剑平生》后，下一次《剑起沧澜》不消耗法力，并额外获得1点剑意',
+              '参悟·无隙：施展《照灯平生》后，下一次《灯起沧澜》不消耗灯焰，并额外获得1点香火',
             ],
           },
         ],
@@ -76,7 +76,7 @@ export const SWIFT_LAYER_5_NODES = [
       layerId: '5',
       name: '连城',
       description:
-        '施展《剑荡山河》后，其他快剑神通的当前冷却减少1回合，每回合最多触发一次。',
+        '施展《灯荡山河》后，其他快灯神通的当前冷却减少1回合，每回合最多触发一次。',
     },
     (context, builder) => {
       swiftSwordBuild(builder).enable('linkedCity');
@@ -99,7 +99,7 @@ export const SWIFT_LAYER_5_NODES = [
           {
             abilityId: 'linked-edge',
             factRows: [
-              '参悟·连城：施展《剑荡山河》后，其他快剑神通的当前冷却减少1回合，每回合最多触发一次',
+              '参悟·连城：施展《灯荡山河》后，其他快灯神通的当前冷却减少1回合，每回合最多触发一次',
             ],
           },
         ],
@@ -112,7 +112,7 @@ export const SWIFT_LAYER_5_NODES = [
       layerId: '5',
       name: '静潮',
       description:
-        '连续两次自身行动未施展《此剑平生》后，暂停剑意衰减；下一次《此剑平生》伤害提高15%。',
+        '连续两次自身行动未施展《照灯平生》后，暂停香火衰减；下一次《照灯平生》伤害提高15%。',
     },
     (context, builder) => {
       swiftSwordBuild(builder).enable('stillTide');
@@ -166,7 +166,7 @@ export const SWIFT_LAYER_5_NODES = [
           {
             abilityId: 'sect-ultimate',
             factRows: [
-              '参悟·静潮：连续两次自身行动未施展《此剑平生》后暂停剑意衰减；下一次《此剑平生》伤害提高15%',
+              '参悟·静潮：连续两次自身行动未施展《照灯平生》后暂停香火衰减；下一次《照灯平生》伤害提高15%',
             ],
           },
         ],

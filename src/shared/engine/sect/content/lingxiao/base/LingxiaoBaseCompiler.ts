@@ -29,7 +29,7 @@ const abilityDefinition = (abilityId: string) => {
     (ability) => ability.id === abilityId,
   );
   if (!definition || definition.kind === 'passive')
-    throw new Error(`红尘剑宗基础主动神通未定义: ${abilityId}`);
+    throw new Error(`太乙清都观基础主动神通未定义: ${abilityId}`);
   return definition;
 };
 
@@ -38,7 +38,7 @@ const passiveDefinition = (abilityId: string) => {
     (ability) => ability.id === abilityId,
   );
   if (!definition || definition.kind !== 'passive')
-    throw new Error(`红尘剑宗基础被动未定义: ${abilityId}`);
+    throw new Error(`太乙清都观基础被动未定义: ${abilityId}`);
   return definition;
 };
 
@@ -144,7 +144,7 @@ export function compileLingxiaoBase(
     castEffects: [
       {
         type: 'skip_action',
-        params: { count: 1, name: '调息', reason: '剑荡山河·调息' },
+        params: { count: 1, name: '调息', reason: '灯荡山河·调息' },
       },
     ],
   });
@@ -154,7 +154,7 @@ export function compileLingxiaoBase(
     castEffects: [
       selfBuff(
         'sect.lingxiao.hidden-thunder-guard',
-        '藏锋听雷',
+        '守灯听漏',
         1,
         [],
         directReduction(0.2),
@@ -164,7 +164,7 @@ export function compileLingxiaoBase(
         type: 'queue_action',
         params: {
           id: 'sect.lingxiao.hidden-thunder-strike',
-          name: '听雷',
+          name: '听漏',
           tags: [
             GameplayTags.ABILITY.FUNCTION.DAMAGE,
             GameplayTags.ABILITY.CHANNEL.PHYSICAL,
@@ -187,7 +187,7 @@ export function compileLingxiaoBase(
   active('shadow-step', {
     targetPolicy: { team: 'self', scope: 'single' },
     effects: [
-      selfBuff('sect.lingxiao.traceless-step', '踏雪无痕', 2, [
+      selfBuff('sect.lingxiao.traceless-step', '踏影无痕', 2, [
         { attrType: AttributeType.SPEED, type: ModifierType.ADD, value: 0.08 },
         {
           attrType: AttributeType.EVASION_RATE,
@@ -212,7 +212,7 @@ export function compileLingxiaoBase(
   active('sword-aegis', {
     targetPolicy: { team: 'self', scope: 'single' },
     effects: [
-      selfBuff('sect.lingxiao.clear-heart', '剑心通明', 3, [
+      selfBuff('sect.lingxiao.clear-heart', '灯心通明', 3, [
         {
           attrType: AttributeType.MAGIC_DEF,
           type: ModifierType.ADD,
@@ -229,7 +229,7 @@ export function compileLingxiaoBase(
   active('nurturing-sword', {
     targetPolicy: { team: 'self', scope: 'single' },
     effects: [
-      selfBuff('sect.lingxiao.sword-intent', '人剑合一', 3, [
+      selfBuff('sect.lingxiao.sword-intent', '人灯合一', 3, [
         { attrType: AttributeType.ATK, type: ModifierType.ADD, value: 0.12 },
       ]),
     ],

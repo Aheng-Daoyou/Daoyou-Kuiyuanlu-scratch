@@ -49,7 +49,7 @@ function context(abilityIds: string[]) {
   const opponent = unit('opponent');
   caster.combatResources.define({
     id: LINGXIAO_SWORD_MOMENTUM,
-    name: '剑意',
+    name: '香火',
     initial: 0,
     max: 6,
   });
@@ -58,7 +58,7 @@ function context(abilityIds: string[]) {
       const ability = AbilityFactory.create(
         resolveSectAbility({
           sect: state(),
-          realm: '化神',
+          realm: '忘川',
           abilityId,
         }).config,
       ) as ActiveSkill;
@@ -77,9 +77,9 @@ function context(abilityIds: string[]) {
 describe('凌霄基础施法策略', () => {
   const strategy = new LingxiaoBaseSelectionStrategy();
 
-  it('未选择流派时投影基础策略，并在剑意满时使用终结技', () => {
+  it('未选择流派时投影基础策略，并在香火满时使用终结技', () => {
     expect(
-      projectSectCombat({ sect: state(), realm: '化神' })?.selectionStrategy,
+      projectSectCombat({ sect: state(), realm: '忘川' })?.selectionStrategy,
     ).toBeInstanceOf(LingxiaoBaseSelectionStrategy);
     const battle = context(['guiding-sword', 'sect-ultimate']);
     battle.caster.combatResources.set(LINGXIAO_SWORD_MOMENTUM, 6);
@@ -89,7 +89,7 @@ describe('凌霄基础施法策略', () => {
     );
   });
 
-  it('低血时优先防御，并在普通状态使用连招和起手式攒剑意', () => {
+  it('低血时优先防御，并在普通状态使用连招和起手式攒香火', () => {
     const lowHp = context(['guiding-sword', 'sword-aegis', 'turning-body']);
     lowHp.caster.setHp(Math.floor(lowHp.caster.getMaxHp() * 0.5));
     expect(strategy.select(lowHp)?.ability.id).toBe(
@@ -102,7 +102,7 @@ describe('凌霄基础施法策略', () => {
     );
   });
 
-  it('敌方存在可驱散增益时优先一剑破妄', () => {
+  it('敌方存在可驱散增益时优先一灯破妄', () => {
     const battle = context(['guiding-sword', 'breaking-edge']);
     battle.opponent.buffs.addBuff(
       BuffFactory.create({

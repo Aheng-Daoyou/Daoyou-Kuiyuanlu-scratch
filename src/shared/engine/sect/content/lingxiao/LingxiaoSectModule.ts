@@ -10,7 +10,7 @@ import { LINGXIAO_ORGANIZATION_THEME } from './organization/LingxiaoOrganization
 import { LINGXIAO_HEAVY_PATH_MODULE } from './paths/heavy/HeavySwordPathModule';
 import { LINGXIAO_SWIFT_PATH_MODULE } from './paths/swift/SwiftSwordPathModule';
 
-/** `lingxiao` 稳定模块只组合红尘剑宗基础传承和两个独立流派。 */
+/** `lingxiao` 稳定模块只组合太乙清都观基础传承和两个独立流派。 */
 export class LingxiaoSectModule extends StandardSectModule {
   constructor() {
     super(

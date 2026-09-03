@@ -13,27 +13,27 @@ const durationMilestones = [
 
 export const JIUJIE_BASE_DEFINITION: SectDefinitionWithoutPaths = {
   id: JIUJIE_SECT_ID,
-  name: '九劫天宫',
+  name: '掌灯司',
   description:
-    '九劫天宫奉天听而执劫簿，以不可驱散的劫雷记录出手，以劫债等待天道清算。',
+    '朝廷机构，登记、编号、镇压诡异。司中照灯记行，以不可驱散的灯痕标记诡异，待结案之日一并清算。',
   raceIds: ['human'],
   configVersion: 1,
   foundationPassiveId: 'jiujie-tianwei-runtime',
-  combatResource: { id: JIUJIE_CALAMITY, name: '劫数', icon: '⚡', max: 3 },
+  combatResource: { id: JIUJIE_CALAMITY, name: '灯焰', icon: '🏮', max: 3 },
   methods: [
     {
       id: 'jiujie-canon',
       slot: 1,
-      name: '《九劫天书》',
+      name: '《守灯律》',
       isPrimary: true,
-      description: '总录九劫法度，执雷而不滥刑。',
+      description: '掌灯司内库所执正法，总录照灯、记行、结案三法度。',
       growthProfile: { curve: 'balanced', effects, durationMilestones },
     },
     {
       id: 'calamity-eye',
       slot: 2,
-      name: '《劫眼观世》',
-      description: '以身为劫眼，观来力而承其灾。',
+      name: '《灯眼观行》',
+      description: '以身为灯眼，观来者之行而承其灾。',
       growthProfile: {
         curve: 'early',
         effects,
@@ -48,8 +48,8 @@ export const JIUJIE_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'heavenly-record',
       slot: 3,
-      name: '《天谴录》',
-      description: '以天听辨行为，以劫簿记主罪。',
+      name: '《案簿》',
+      description: '以灯听辨行为，以案簿记其主罪。',
       growthProfile: {
         curve: 'early',
         effects,
@@ -64,8 +64,8 @@ export const JIUJIE_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'thunder-prison',
       slot: 4,
-      name: '《雷狱镇魂》',
-      description: '雷狱穿透护持，使天罚不为法障所蔽。',
+      name: '《灯牢镇影》',
+      description: '灯牢穿透护持，使灯焰不为法障所蔽。',
       growthProfile: {
         curve: 'balanced',
         effects,
@@ -80,8 +80,8 @@ export const JIUJIE_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'cause-judgment',
       slot: 5,
-      name: '《因果问罪》',
-      description: '问因果、收劫债，留足清算天威。',
+      name: '《结案问灯》',
+      description: '问灯下因果、收案债，留足清算之焰。',
       growthProfile: {
         curve: 'balanced',
         effects,
@@ -96,8 +96,8 @@ export const JIUJIE_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'crossing-calamity',
       slot: 6,
-      name: '《渡劫归真》',
-      description: '渡劫之后仍守法身，不以天威伤己。',
+      name: '《渡渊守身》',
+      description: '渡渊之后仍守法身，不以灯焰伤己。',
       growthProfile: {
         curve: 'early',
         effects,
@@ -114,8 +114,8 @@ export const JIUJIE_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'thunder-finger',
       kind: 'default',
-      baseName: '惊雷指',
-      description: '仅在主动神通均不可用时使用，以雷力造成基础伤害。',
+      baseName: '照灯指',
+      description: '仅在主动神通均不可用时使用，以灯焰造成基础伤害。',
       role: 'generator',
       unlock: { type: 'method', methodId: 'jiujie-canon', level: 1 },
       mpCost: 0,
@@ -124,8 +124,8 @@ export const JIUJIE_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'heaven-hearing',
       kind: 'active',
-      baseName: '天听引雷',
-      description: '造成0.55倍法攻雷伤，并在目标身上留下不可驱散的劫雷。',
+      baseName: '灯听引焰',
+      description: '造成0.55倍法攻灯焰伤害，并在目标身上留下不可驱散的灯痕。',
       role: 'generator',
       unlock: { type: 'method', methodId: 'jiujie-canon', level: 1 },
       mpCost: 80,
@@ -134,8 +134,8 @@ export const JIUJIE_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'receive-calamity',
       kind: 'active',
-      baseName: '承天受劫',
-      description: '暂承来力，将受过的灾厄记入劫簿。',
+      baseName: '承灯受焰',
+      description: '暂承来力，将受过的灾厄记入灯眼。',
       role: 'defensive',
       unlock: { type: 'method', methodId: 'calamity-eye', level: 1 },
       mpCost: 120,
@@ -144,8 +144,8 @@ export const JIUJIE_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'calamity-seal',
       kind: 'active',
-      baseName: '劫簿落印',
-      description: '造成0.25倍法攻雷伤并落印；目标已有劫雷时，额外增加一层劫债。',
+      baseName: '案簿落印',
+      description: '造成0.25倍法攻灯焰伤害并落印；目标已有灯痕时，额外增加一层案债。',
       role: 'generator',
       unlock: { type: 'method', methodId: 'heavenly-record', level: 1 },
       mpCost: 120,
@@ -154,8 +154,8 @@ export const JIUJIE_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'thunder-prison-question',
       kind: 'active',
-      baseName: '雷狱问行',
-      description: '造成0.65倍法攻雷伤，追问目标仍在劫中的下一步并推进天罚。',
+      baseName: '灯牢问行',
+      description: '造成0.65倍法攻灯焰伤害，追问目标仍在案中的下一步并推进结案。',
       role: 'combo',
       unlock: { type: 'method', methodId: 'thunder-prison', level: 1 },
       mpCost: 140,
@@ -164,8 +164,8 @@ export const JIUJIE_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'borrow-calamity',
       kind: 'active',
-      baseName: '借劫回身',
-      description: '消耗一分劫数，获得相当于最大气血15%的护盾。',
+      baseName: '借焰护身',
+      description: '消耗一分灯焰，获得相当于最大气血15%的护盾。',
       role: 'defensive',
       unlock: { type: 'method', methodId: 'crossing-calamity', level: 1 },
       mpCost: 100,
@@ -174,8 +174,8 @@ export const JIUJIE_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'causal-echo',
       kind: 'active',
-      baseName: '因果回响',
-      description: '造成0.45倍法攻的基础雷伤，并根据劫债追加伤害。',
+      baseName: '灯影回响',
+      description: '造成0.45倍法攻的基础灯焰伤害，并根据案债追加伤害。',
       role: 'utility',
       unlock: { type: 'method', methodId: 'cause-judgment', level: 5 },
       mpCost: 140,
@@ -184,8 +184,8 @@ export const JIUJIE_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'nine-sky-settlement',
       kind: 'active',
-      baseName: '九霄清算',
-      description: '以劫数为引，清算目标累积的劫债。',
+      baseName: '九灯清算',
+      description: '以灯焰为引，清算目标累积的案债。',
       role: 'finisher',
       unlock: { type: 'method', methodId: 'jiujie-canon', level: 10 },
       mpCost: 200,
@@ -194,9 +194,9 @@ export const JIUJIE_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'jiujie-tianwei-runtime',
       kind: 'passive',
-      baseName: '天威裁决',
+      baseName: '灯律裁决',
       description:
-        '天宫弟子受到敌方主动法术或负面技能时，有20%的几率免疫整个技能。',
+        '掌灯司弟子受到敌方主动灯律或负面技能时，有20%的几率免疫整个技能。',
       role: 'defensive',
       unlock: { type: 'always' },
       sourceMethodId: 'heavenly-record',
@@ -204,8 +204,8 @@ export const JIUJIE_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'jiujie-law-runtime',
       kind: 'passive',
-      baseName: '劫律运行',
-      description: '记录劫雷触发与天宫劫簿。',
+      baseName: '灯律运行',
+      description: '记录灯痕触发与司中案簿。',
       role: 'utility',
       unlock: { type: 'always' },
       sourceMethodId: 'jiujie-canon',

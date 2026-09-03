@@ -20,22 +20,22 @@ function state(pathId: string, nodeIds: string[] = []): CultivatorSectState {
   };
 }
 
-describe('九劫天宫宗门投影', () => {
+describe('掌灯司宗门投影', () => {
   const expectedEyeNodes = [
-    ['eye-open', '开门迎劫'], ['eye-bear', '承灾留名'], ['eye-first-light', '雷光护心'],
-    ['eye-record', '血甲同书'], ['eye-question', '问劫寻隙'], ['eye-return', '借劫续门'],
-    ['eye-guard', '不退天门'], ['eye-deep-return', '劫威反震'], ['eye-still', '静候雷来'],
-    ['eye-long-gaze', '众劫归一'], ['eye-heavy-thunder', '雷狱追身'], ['eye-shelter', '劫甲回生'],
-    ['eye-true-record', '真劫入簿'], ['eye-returning-law', '劫尽身还'], ['eye-after-rain', '清算留门'],
-    ['eye-nine-gates', '九门归劫'], ['eye-heavenly-shield', '身为天门'], ['eye-calamity-without-end', '劫后再开'],
+    ['eye-open', '开门迎焰'], ['eye-bear', '承焰留名'], ['eye-first-light', '灯焰护心'],
+    ['eye-record', '血甲同书'], ['eye-question', '问焰寻隙'], ['eye-return', '借焰续眼'],
+    ['eye-guard', '不退灯门'], ['eye-deep-return', '灯焰反照'], ['eye-still', '静候灯来'],
+    ['eye-long-gaze', '众焰归一'], ['eye-heavy-thunder', '灯牢追身'], ['eye-shelter', '灯甲回生'],
+    ['eye-true-record', '真焰入簿'], ['eye-returning-law', '焰尽身还'], ['eye-after-rain', '清算留门'],
+    ['eye-nine-gates', '九门归焰'], ['eye-heavenly-shield', '身为灯门'], ['eye-calamity-without-end', '焰后再开'],
   ] as const;
   const expectedCondemnationNodes = [
-    ['condemnation-record', '天听记名'], ['condemnation-question', '问行取证'], ['condemnation-first-crime', '初罪立案'],
+    ['condemnation-record', '灯听记名'], ['condemnation-question', '问行取证'], ['condemnation-first-crime', '初罪立案'],
     ['condemnation-repeat', '伤罪加刑'], ['condemnation-heavy-debt', '援罪断供'], ['condemnation-long-record', '禁罪反照'],
     ['condemnation-no-pardon', '易罪不赦'], ['condemnation-debt-book', '定罪成册'], ['condemnation-heaven-hearing', '庶行有录'],
     ['condemnation-heavy-statute', '重法催审'], ['condemnation-quick-record', '疾书追罪'], ['condemnation-three-questions', '三问成案'],
     ['condemnation-reoffend', '再犯从重'], ['condemnation-clear-book', '清册留案'], ['condemnation-no-escape', '两避成罪'],
-    ['condemnation-final-verdict', '三债终审'], ['condemnation-nine-crimes', '九罪同科'], ['condemnation-heavenly-punishment', '天谴不绝'],
+    ['condemnation-final-verdict', '三债终审'], ['condemnation-nine-crimes', '九罪同科'], ['condemnation-heavenly-punishment', '灯律不绝'],
   ] as const;
 
   it('注册六本心法、两道途与每道途18个节点', () => {
@@ -64,7 +64,7 @@ describe('九劫天宫宗门投影', () => {
     ]);
   });
 
-  it('天谴录与雷狱镇魂采用前期更平滑的成长曲线', () => {
+  it('灯律录与灯牢镇魂采用前期更平滑的成长曲线', () => {
     const methods = Object.fromEntries(JIUJIE_BASE_DEFINITION.methods.map((method) => [
       method.id,
       method.growthProfile.curve,
@@ -91,7 +91,7 @@ describe('九劫天宫宗门投影', () => {
 
   it('关键节点修改与节点描述一致的编译字段', () => {
     const eyeState = state(JIUJIE_EYE_PATH_ID, ['eye-open']);
-    const receive = resolveSectAbility({ sect: eyeState, realm: '化神', abilityId: 'receive-calamity' }).config;
+    const receive = resolveSectAbility({ sect: eyeState, realm: '忘川', abilityId: 'receive-calamity' }).config;
     const receiveBuff = receive.effects?.find((effect) => effect.type === 'apply_buff');
     expect(receiveBuff).toMatchObject({ params: { buffConfig: { duration: 2 } } });
     expect(receive.effects).toEqual(expect.arrayContaining([
@@ -100,18 +100,18 @@ describe('九劫天宫宗门投影', () => {
     ]));
 
     const condemnationState = state(JIUJIE_CONDEMNATION_PATH_ID, ['condemnation-first-crime']);
-    const runtime = resolveSectAbility({ sect: condemnationState, realm: '化神', abilityId: 'jiujie-law-runtime' }).config;
+    const runtime = resolveSectAbility({ sect: condemnationState, realm: '忘川', abilityId: 'jiujie-law-runtime' }).config;
     const activeTrigger = runtime.listeners?.find((listener) => listener.id === 'jiujie.law.active-trigger');
-    const baselineRuntime = resolveSectAbility({ sect: state(JIUJIE_CONDEMNATION_PATH_ID), realm: '化神', abilityId: 'jiujie-law-runtime' }).config;
+    const baselineRuntime = resolveSectAbility({ sect: state(JIUJIE_CONDEMNATION_PATH_ID), realm: '忘川', abilityId: 'jiujie-law-runtime' }).config;
     const baselineTrigger = baselineRuntime.listeners?.find((listener) => listener.id === 'jiujie.law.active-trigger');
     expect(activeTrigger).not.toEqual(baselineTrigger);
     expect(JSON.stringify(activeTrigger)).toContain('first-crime-ready');
   });
 
-  it('问行取证在已有主罪时追加0.15倍法攻雷伤', () => {
+  it('问行取证在已有主罪时追加0.15倍法攻灯焰伤害', () => {
     const question = resolveSectAbility({
       sect: state(JIUJIE_CONDEMNATION_PATH_ID, ['condemnation-question']),
-      realm: '筑基',
+      realm: '守灯',
       abilityId: 'thunder-prison-question',
     }).config;
     const damageEffects = question.effects?.filter((effect) => effect.type === 'damage') ?? [];
@@ -123,10 +123,10 @@ describe('九劫天宫宗门投影', () => {
     ]));
   });
 
-  it('承灾留名使首次受击反击额外增加0.15倍法攻', () => {
+  it('承焰留名使首次受击反击额外增加0.15倍法攻', () => {
     const counterCoefficients = (nodeIds: string[]) => {
       const receive = resolveSectAbility({
-        sect: state(JIUJIE_EYE_PATH_ID, nodeIds), realm: '筑基', abilityId: 'receive-calamity',
+        sect: state(JIUJIE_EYE_PATH_ID, nodeIds), realm: '守灯', abilityId: 'receive-calamity',
       }).config;
       const eye = receive.effects?.find((effect) =>
         effect.type === 'apply_buff' && effect.params.buffConfig.id === 'sect.jiujie.eye');
@@ -155,12 +155,12 @@ describe('九劫天宫宗门投影', () => {
       ]));
     const baseline = productionSectRuntime.compiler.compile(JIUJIE_MODULE, {
       sect: state(pathId),
-      realm: '化神',
+      realm: '忘川',
     });
     for (const node of nodes) {
       const compiled = productionSectRuntime.compiler.compile(JIUJIE_MODULE, {
         sect: state(pathId, [node.definition.id]),
-        realm: '化神',
+        realm: '忘川',
       });
       expect(compiled, node.definition.id).not.toEqual(baseline);
       expect(behaviorOnly(compiled.abilities), node.definition.id).not.toEqual(behaviorOnly(baseline.abilities));
@@ -171,16 +171,16 @@ describe('九劫天宫宗门投影', () => {
   });
 
   it.each([JIUJIE_EYE_PATH_ID, JIUJIE_CONDEMNATION_PATH_ID])('以共通资源和共通技能底板编译 %s', (pathId) => {
-    const projection = projectSectCombat({ sect: state(pathId), realm: '化神' })!;
-    expect(projection.resources).toEqual([{ id: JIUJIE_CALAMITY, name: '劫数', icon: '⚡', initial: 0, max: 3 }]);
+    const projection = projectSectCombat({ sect: state(pathId), realm: '忘川' })!;
+    expect(projection.resources).toEqual([{ id: JIUJIE_CALAMITY, name: '灯焰', icon: '🏮', initial: 0, max: 3 }]);
     expect(projection.defaultAttack?.tags).toContain(GameplayTags.ABILITY.KIND.BASIC);
     expect(projection.abilities.map((ability) => ability.slug)).toEqual(expect.arrayContaining([
       'sect.jiujie.heaven-hearing', 'sect.jiujie.calamity-seal', 'sect.jiujie.jiujie-tianwei-runtime',
     ]));
   });
 
-  it('天威裁决只匹配法术或负面技能，劫雷和劫债独立使用protected规则', () => {
-    const passive = resolveSectAbility({ sect: state(JIUJIE_EYE_PATH_ID), realm: '化神', abilityId: 'jiujie-tianwei-runtime' });
+  it('灯律裁决只匹配灯律或负面技能，灯痕和案债独立使用protected规则', () => {
+    const passive = resolveSectAbility({ sect: state(JIUJIE_EYE_PATH_ID), realm: '忘川', abilityId: 'jiujie-tianwei-runtime' });
     expect(passive.config.listeners).toHaveLength(1);
     expect(passive.config.listeners?.[0]).toMatchObject({
       eventType: GameplayTags.EVENT.SKILL_PRE_CAST,
@@ -189,9 +189,9 @@ describe('九劫天宫宗门投影', () => {
         { type: 'ability_has_any_tag', params: { tags: [GameplayTags.ABILITY.CHANNEL.MAGIC, GameplayTags.ABILITY.FUNCTION.DEBUFF] } },
         { type: 'chance', params: { value: 0.20 } },
       ]),
-      effects: [{ type: 'skill_immunity', params: { reason: '天威裁决' } }],
+      effects: [{ type: 'skill_immunity', params: { reason: '灯律裁决' } }],
     });
-    const hearing = resolveSectAbility({ sect: state(JIUJIE_EYE_PATH_ID), realm: '化神', abilityId: 'heaven-hearing' });
+    const hearing = resolveSectAbility({ sect: state(JIUJIE_EYE_PATH_ID), realm: '忘川', abilityId: 'heaven-hearing' });
     const thunderConfig = hearing.config.effects?.find((effect) => effect.type === 'apply_buff');
     expect(thunderConfig).toMatchObject({ params: { buffConfig: { id: JIUJIE_THUNDER, dispelPolicy: 'protected', duration: 3 } } });
     expect(JIUJIE_DEBT).toBe('sect.jiujie.debt');
@@ -201,7 +201,7 @@ describe('九劫天宫宗门投影', () => {
     const coefficientOf = (abilityId: string) => {
       const ability = resolveSectAbility({
         sect: state(JIUJIE_EYE_PATH_ID),
-        realm: '筑基',
+        realm: '守灯',
         abilityId,
       });
       const directDamage = ability.config.effects?.find((effect) =>
@@ -217,11 +217,11 @@ describe('九劫天宫宗门投影', () => {
     expect(coefficientOf('thunder-prison-question')).toBeCloseTo(0.65 * growthScalar);
   });
 
-  it('承劫记忆只投影到劫眼道途', () => {
+  it('承焰记忆只投影到灯眼道途', () => {
     const listenerIds = (pathId: string | undefined) => {
       const sect = state(pathId ?? JIUJIE_EYE_PATH_ID);
       sect.activePathId = pathId;
-      const receive = resolveSectAbility({ sect, realm: '化神', abilityId: 'receive-calamity' }).config;
+      const receive = resolveSectAbility({ sect, realm: '忘川', abilityId: 'receive-calamity' }).config;
       const buff = receive.effects?.find((effect) => effect.type === 'apply_buff');
       if (!buff || buff.type !== 'apply_buff') return [];
       return buff.params.buffConfig.listeners?.map((listener) => listener.id) ?? [];
@@ -231,29 +231,29 @@ describe('九劫天宫宗门投影', () => {
     expect(listenerIds(undefined)).not.toContain('jiujie.eye.remember');
     const condemnationReceive = resolveSectAbility({
       sect: state(JIUJIE_CONDEMNATION_PATH_ID),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'receive-calamity',
     });
-    expect(condemnationReceive.detailRows.join('')).not.toContain('承劫量');
+    expect(condemnationReceive.detailRows.join('')).not.toContain('承焰量');
   });
 
   it('地图素材与节点主题已挂载', () => {
     expect(JIUJIE_SECT_PRESENTATION.map?.image).toBe('/assets/sect/jiujie-map.webp');
     expect(JIUJIE_SECT_PRESENTATION.map?.aspectRatio).toBe(1.5);
     expect(JIUJIE_SECT_PRESENTATION.map?.hotspots).toHaveLength(16);
-    expect(JIUJIE_SECT_PRESENTATION.map?.hotspots?.map((spot) => spot.label)).toEqual(expect.arrayContaining(['劫眼峰', '天谴司']));
+    expect(JIUJIE_SECT_PRESENTATION.map?.hotspots?.map((spot) => spot.label)).toEqual(expect.arrayContaining(['巡灯处', '缉诡司']));
     expect(JIUJIE_SECT_PRESENTATION.map?.hotspots?.find((spot) => spot.id === 'formation')).toMatchObject({ locked: true });
     expect(JIUJIE_SECT_PRESENTATION.facilityLabels).toMatchObject({
-      alchemy: '听雷丹房',
-      herb_garden: '天听木圃',
-      formation: '渡厄天梯',
+      alchemy: '闻香房',
+      herb_garden: '灯下草圃',
+      formation: '护城灯阵',
     });
-    expect(JIUJIE_SECT_PRESENTATION.map?.hotspots?.find((spot) => spot.id === 'alchemy')?.label).toBe('听雷丹房');
+    expect(JIUJIE_SECT_PRESENTATION.map?.hotspots?.find((spot) => spot.id === 'alchemy')?.label).toBe('闻香房');
     expect(JIUJIE_SECT_PRESENTATION.map?.hotspots?.find((spot) => spot.id === 'alchemy')?.facility).toBe('workshop');
     expect(JIUJIE_SECT_PRESENTATION.map?.hotspots?.find((spot) => spot.id === 'refinery')?.facility).toBe('workshop');
   });
 
-  it('入门演出使用独立的天宫叙事素材，并完整呈现两道途', () => {
+  it('入门演出使用独立的掌灯司叙事素材，并完整呈现两道途', () => {
     const onboarding = JIUJIE_SECT_PRESENTATION.onboarding;
     expect(onboarding?.script.backdrop.src).toBe('/assets/sect/onboarding/jiujie.webp');
     expect(onboarding?.script.acts.map((act) => act.id)).toEqual([

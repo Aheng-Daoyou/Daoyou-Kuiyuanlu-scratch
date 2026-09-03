@@ -55,7 +55,7 @@ function statusConfig(
 ): BuffConfig {
   const config = resolveSectAbility({
     sect: state(pathId),
-    realm: '渡劫',
+    realm: '渡渊',
     abilityId: 'linked-edge',
   }).config;
   const applied = config.effects?.find(
@@ -68,11 +68,11 @@ function statusConfig(
   return applied.params.buffConfig;
 }
 
-describe('红尘剑宗分层状态', () => {
+describe('太乙清都观分层状态', () => {
   beforeEach(() => EventBus.instance.reset());
 
   it.each([1, 2, 3])(
-    '剑痕%i层提高对应伤害2.24%%/层并排除反伤与DOT',
+    '照痕%i层提高对应伤害2.24%%/层并排除反伤与DOT',
     (layers) => {
       const target = new Unit('target', '目标', {});
       const caster = new Unit('caster', '施法者', {});
@@ -108,7 +108,7 @@ describe('红尘剑宗分层状态', () => {
     },
   );
 
-  it.each([1, 2, 3])('裂甲%i层降低3.36%%物防/层，移除后完整恢复', (layers) => {
+  it.each([1, 2, 3])('灯隙%i层降低3.36%%物防/层，移除后完整恢复', (layers) => {
     const target = new Unit('target', '目标', {});
     const caster = new Unit('caster', '施法者', {});
     const config = statusConfig('heavy-sword', LINGXIAO_ARMOR_REND_BUFF);

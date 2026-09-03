@@ -21,7 +21,7 @@ export const SWIFT_ULTIMATE_NODES = [
       layerId: 'ultimate',
       name: '无间',
       description:
-        '施展《此剑平生》后，追加随《红尘剑录》成长的追击并获得1点剑意，每3回合最多触发一次。',
+        '施展《照灯平生》后，追加随《守灯录》成长的追击并获得1点香火，每3回合最多触发一次。',
     },
     (context, builder) => {
       swiftSwordBuild(builder).enable('endlessFlow');
@@ -51,7 +51,7 @@ export const SWIFT_ULTIMATE_NODES = [
       });
     },
     (context) =>
-      `施展《此剑平生》后，追加相当于${nodePercent(growthMagnitude(context, 'lingxiao-canon', SWIFT_ENDLESS_FLOW_COEFFICIENT))}物攻的追击并获得1点剑意，每3回合最多触发一次。`,
+      `施展《照灯平生》后，追加相当于${nodePercent(growthMagnitude(context, 'lingxiao-canon', SWIFT_ENDLESS_FLOW_COEFFICIENT))}物攻的追击并获得1点香火，每3回合最多触发一次。`,
   ),
   createLingxiaoNode(
     {
@@ -59,7 +59,7 @@ export const SWIFT_ULTIMATE_NODES = [
       layerId: 'ultimate',
       name: '绝影',
       description:
-        '以6点剑意施展《此剑平生》时，总伤害降低15%，全部伤害段必定暴击，冷却增加1回合。',
+        '以6点香火施展《照灯平生》时，总伤害降低15%，全部伤害段必定暴击，冷却增加1回合。',
     },
     (_context, builder) => swiftSwordBuild(builder).enable('shadowLine'),
   ),
@@ -69,10 +69,10 @@ export const SWIFT_ULTIMATE_NODES = [
       layerId: 'ultimate',
       name: '回风',
       description:
-        '每次《藏锋听雷》持续期间首次闪避时，获得随《凌虚步》成长的护盾，并施加1层剑痕。',
+        '每次《守灯听漏》持续期间首次闪避时，获得随《照影步》成长的护盾，并施加1层照痕。',
     },
     (_context, builder) => swiftSwordBuild(builder).enable('unendingWind'),
     (context) =>
-      `每次《藏锋听雷》持续期间首次闪避时，获得相当于${nodePercent(growthShieldMagnitude(context, 'void-step', SWIFT_UNENDING_WIND_SHIELD_COEFFICIENT))}物攻的护盾，并施加1层剑痕。`,
+      `每次《守灯听漏》持续期间首次闪避时，获得相当于${nodePercent(growthShieldMagnitude(context, 'void-step', SWIFT_UNENDING_WIND_SHIELD_COEFFICIENT))}物攻的护盾，并施加1层照痕。`,
   ),
 ] as const;

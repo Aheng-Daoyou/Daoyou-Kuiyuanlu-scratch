@@ -16,9 +16,9 @@ export const QUALITY_CHANCE_MAP: Record<Quality, number> = {
 // 随机生成时各类型出现的权重 (非固定生成时使用)
 export const TYPE_CHANCE_MAP: Record<MaterialType, number> = {
   seed: 0,
-  herb: 0.3, // 30% 灵药
+  herb: 0.3, // 30% 灯药
   ore: 0.28, // 28% 矿石
-  monster: 0.22, // 22% 妖兽材料
+  monster: 0.22, // 22% 诡异材料
   tcdb: 0.05, // 5% 天材地宝
   aux: 0.05, // 5% 特殊辅料
   gongfa_manual: 0.05, // 5% 功法典籍（稀有）
@@ -51,12 +51,12 @@ export const TYPE_MULTIPLIERS: Record<MaterialType, number> = {
 
 // 类型中文描述与解释（用于 Prompt）
 export const TYPE_DESCRIPTIONS: Record<MaterialType, string> = {
-  seed: `${getMaterialTypeLabel('seed')} (仅由个人洞府灵田专用生成器产出)`,
-  herb: `${getMaterialTypeLabel('herb')} (用于炼丹，如灵草、灵果)`,
-  ore: `${getMaterialTypeLabel('ore')} (用于炼器，如金属、晶石)`,
-  monster: `${getMaterialTypeLabel('monster')} (妖丹、骨骼、皮毛等)`,
+  seed: `${getMaterialTypeLabel('seed')} (仅由个人灯宅灯田专用生成器产出)`,
+  herb: `${getMaterialTypeLabel('herb')} (用于制香，如灯药草、灯果)`,
+  ore: `${getMaterialTypeLabel('ore')} (用于封灵，如金属、晶石)`,
+  monster: `${getMaterialTypeLabel('monster')} (诡核、骨骼、皮毛等)`,
   tcdb: `${getMaterialTypeLabel('tcdb')} (稀世奇珍，蕴含天地法则)`,
-  aux: `${getMaterialTypeLabel('aux')} (炼丹/炼器的辅助材料，如灵液、粉尘)`,
+  aux: `${getMaterialTypeLabel('aux')} (制香/封灵的辅助材料，如灵液、粉尘)`,
   gongfa_manual: getMaterialTypeLabel('gongfa_manual'),
   skill_manual: getMaterialTypeLabel('skill_manual'),
 };

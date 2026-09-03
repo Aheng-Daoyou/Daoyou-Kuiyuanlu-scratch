@@ -13,7 +13,7 @@ function playerFixture(overrides: Partial<Cultivator> = {}): Cultivator {
     id: 'player',
     name: '玩家',
     gender: '女',
-    realm: '筑基',
+    realm: '守灯',
     realm_stage: '中期',
     age: 88,
     lifespan: 300,
@@ -25,7 +25,7 @@ function playerFixture(overrides: Partial<Cultivator> = {}): Cultivator {
       speed: 71,
       willpower: 26,
     },
-    spiritual_roots: [{ element: '雷', strength: 100 }],
+    spiritual_roots: [{ element: '帘', strength: 100 }],
     pre_heaven_fates: [{ name: '玩家命格' }],
     cultivations: [],
     skills: [],
@@ -64,16 +64,16 @@ describe('LingxiaoOrganizationModule', () => {
       ).map((rank) => LINGXIAO_ORGANIZATION.ranks.methodLevelCap(rank)),
     ).toEqual([45, 90, 135, 180]);
     expect(LINGXIAO_ORGANIZATION.ranks.requirement('outer')).toMatchObject({
-      minRealm: '炼气',
+      minRealm: '闻腥',
       contribution: 100,
       dailyCompletions: 3,
     });
     expect(LINGXIAO_ORGANIZATION.ranks.requirement('inner')).toMatchObject({
-      minRealm: '筑基',
+      minRealm: '守灯',
       contribution: 500,
     });
     expect(LINGXIAO_ORGANIZATION.ranks.requirement('true')).toMatchObject({
-      minRealm: '元婴',
+      minRealm: '蚀体',
       contribution: 3000,
     });
     expect(
@@ -203,12 +203,12 @@ describe('LingxiaoOrganizationModule', () => {
       title: '矿场巡视',
       presetId: 'mine-beast-rockfang-v1',
       description:
-        '盘踞宗门矿脉的厚甲妖兽，惯以獠牙冲阵、震地扰敌，并以妖血强化自身。',
+        '盘踞宗门矿脉的厚甲诡异，惯以獠牙冲阵、震地扰敌，并以腌血强化自身。',
     });
     expect(result.opponent.skills).toMatchObject([
-      { name: '碎岩扑击', element: '土', quality: '玄品' },
-      { name: '撼地怒吼', element: '土', quality: '玄品' },
-      { name: '妖血沸腾', element: '火', quality: '玄品' },
+      { name: '碎岩扑击', element: '梦', quality: '玄品' },
+      { name: '撼地怒吼', element: '梦', quality: '玄品' },
+      { name: '腌血沸腾', element: '渊', quality: '玄品' },
     ]);
     expect(
       result.opponent.skills.map((skill) =>
@@ -252,7 +252,7 @@ describe('LingxiaoOrganizationModule', () => {
       const target = playerFixture({
         id: 'target',
         name: '锁定对手',
-        realm: '筑基',
+        realm: '守灯',
         realm_stage: '圆满',
       });
       const result = LINGXIAO_ORGANIZATION.battles.get(taskId)?.create({
@@ -289,8 +289,8 @@ describe('LingxiaoOrganizationModule', () => {
       title: '长老试炼',
       presetId: 'elder-trial-lingxiao-v1',
       opponent: {
-        name: '听剑老人·试炼化身',
-        realm: '元婴',
+        name: '掌灯老人·试炼化身',
+        realm: '蚀体',
         realm_stage: '圆满',
       },
     });
@@ -326,9 +326,9 @@ describe('LingxiaoOrganizationModule', () => {
       },
     ]);
     expect(result?.opponent.inventory.artifacts).toMatchObject([
-      { name: '照尘古剑', slot: 'weapon', quality: '地品' },
-      { name: '藏锋剑衣', slot: 'armor', quality: '地品' },
-      { name: '澄心剑珏', slot: 'accessory', quality: '地品' },
+      { name: '照尘古灯', slot: 'weapon', quality: '地品' },
+      { name: '藏锋灯衣', slot: 'armor', quality: '地品' },
+      { name: '澄心灯珏', slot: 'accessory', quality: '地品' },
     ]);
     expect(
       result?.opponent.inventory.artifacts.map((artifact) =>

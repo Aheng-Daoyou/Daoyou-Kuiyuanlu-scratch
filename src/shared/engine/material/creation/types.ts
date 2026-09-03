@@ -13,7 +13,7 @@ export const MaterialAISchema = z.object({
   description: z.string().min(10).max(100).describe('材料描述'),
   element: z
     .enum(ELEMENT_VALUES)
-    .describe('材料的五行属性（金/木/水/火/土/风/雷/冰）'),
+    .describe('材料的八窍属性（烛/尸/星/渊/梦/噬/帘/疫），取其一'),
 });
 
 export type MaterialAIData = z.infer<typeof MaterialAISchema>;

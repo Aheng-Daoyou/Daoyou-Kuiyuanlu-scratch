@@ -260,7 +260,7 @@ export function buildSwiftAbilities(
       damage(0.3),
       selfBuff(
         LINGXIAO_RETURNING_SWALLOW_BUFF,
-        '藏锋听雷',
+        '守灯听漏',
         2,
         [
           {
@@ -316,7 +316,7 @@ export function buildSwiftAbilities(
     effects: [
       selfBuff(
         'sect.lingxiao.swift.traceless-step',
-        '踏雪无痕',
+        '踏影无痕',
         2,
         [
           {
@@ -369,7 +369,7 @@ export function buildSwiftAbilities(
     role: 'defensive',
     targetPolicy: { team: 'self', scope: 'single' },
     effects: [
-      selfBuff('sect.lingxiao.swift.wind-heart', '剑心通明', 3, [
+      selfBuff('sect.lingxiao.swift.wind-heart', '灯心通明', 3, [
         {
           attrType: AttributeType.MAGIC_DEF,
           type: ModifierType.ADD,
@@ -390,7 +390,7 @@ export function buildSwiftAbilities(
     role: 'defensive',
     targetPolicy: { team: 'self', scope: 'single' },
     effects: [
-      selfBuff('sect.lingxiao.swift.light-sword', '人剑合一', 3, [
+      selfBuff('sect.lingxiao.swift.light-sword', '人灯合一', 3, [
         { attrType: AttributeType.ATK, type: ModifierType.ADD, value: 0.1 },
         { attrType: AttributeType.SPEED, type: ModifierType.ADD, value: 0.1 },
       ]),
@@ -435,7 +435,7 @@ export function buildSwiftAbilities(
               type: 'consume_status_trigger' as const,
               params: {
                 match: { id: LINGXIAO_SWORD_MARK_BUFF },
-                displayName: '剑痕',
+                displayName: '照痕',
                 consume: 'all' as const,
                 aggregateDamageByLayer: true,
                 effects: [

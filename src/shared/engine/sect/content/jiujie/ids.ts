@@ -1,5 +1,10 @@
 import { GameplayTags } from '@shared/engine/shared/tag-domain';
 
+// 说明：以下内部 ID 是引擎判定的稳定标识（决定 buff 归属、存档兼容与伤害类型绑定），
+// 换皮为《窥渊录》掌灯司后一律保持不变。语义映射：
+//   calamity → 灯焰（战斗资源）   thunder → 灯痕（不可驱散标记）
+//   debt     → 案债（累积计数）   eye      → 灯眼（承焰标记）
+//   receive-calamity → 承灯受焰   beheld   → 照见   reoffend → 重犯
 export const JIUJIE_SECT_ID = 'jiujie';
 export const JIUJIE_CALAMITY = 'sect.jiujie.calamity';
 export const JIUJIE_THUNDER = 'sect.jiujie.thunder';

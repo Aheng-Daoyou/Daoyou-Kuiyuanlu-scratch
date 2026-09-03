@@ -5,7 +5,7 @@ import type {
 } from '@shared/engine/creation-v2/types';
 import type {
   ElementType,
-  EnemyRace,
+  EnemyClan,
   EquipmentSlot,
   Quality,
   RealmStage,
@@ -44,7 +44,8 @@ export type EnemyProductRole = 'technique' | EnemySkillRole | EnemyArtifactRole;
 export interface EnemyGenerationInput {
   realm: RealmType;
   realmStage: RealmStage;
-  race: EnemyRace;
+  /** 敌人三族：腌物 / 遗种 / 投影。 */
+  clan: EnemyClan;
   difficulty?: number;
   variantSeed?: string;
   name?: string;
@@ -57,7 +58,7 @@ export interface EnemyGenerationInput {
 export interface NormalizedEnemyGenerationInput {
   realm: RealmType;
   realmStage: RealmStage;
-  race: EnemyRace;
+  clan: EnemyClan;
   difficulty: number;
   variantSeed?: string;
   name?: string;
@@ -96,7 +97,7 @@ export interface EnemyCopyProductFacts {
 }
 
 export interface EnemyCopyFacts {
-  race: EnemyRace;
+  clan: EnemyClan;
   realm: RealmType;
   realmStage: RealmStage;
   difficulty: number;
@@ -128,7 +129,7 @@ export interface EnemyGenerationDraft {
   cultivator: Cultivator;
 }
 
-export interface EnemyRaceProfile {
+export interface EnemyClanProfile {
   attributeWeights: AttributeWeights;
   elementPool: ElementType[];
   narrativeTags: string[];

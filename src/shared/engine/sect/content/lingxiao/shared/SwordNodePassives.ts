@@ -106,7 +106,7 @@ export function addProbingNodePassive(
       {
         abilityId: args.basicAbilityId,
         factRows: [
-          '参悟·探虚：《问剑式》每累计命中2次，额外获得1点剑意，并施加1层剑痕',
+          '参悟·探虚：《燃灯式》每累计命中2次，额外获得1点香火，并施加1层照痕',
         ],
       },
     ],

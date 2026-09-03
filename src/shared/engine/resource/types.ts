@@ -9,13 +9,13 @@ import type {
  * 资源类型枚举
  *
  * 通用资源类型（资源引擎直接处理）：
- * - spirit_stones: 灵石
+ * - spirit_stones: 灯油券
  * - reputation: 声望
  * - lifespan: 寿元
  * - cultivation_exp: 修为
- * - comprehension_insight: 感悟值
+ * - comprehension_insight: 窥悟值
  * - material: 材料
- * - artifact: 法宝
+ * - artifact: 封灵器
  * - consumable: 消耗品
  *
  * 副本特有类型（副本系统内部处理）：
@@ -43,7 +43,7 @@ export type ResourceType =
 export interface ResourceOperation {
   type: ResourceType;
   value: number; // 数量（正数表示增加，负数表示减少）
-  name?: string; // 资源名称（材料/法宝/消耗品使用）
+  name?: string; // 资源名称（材料/封灵器/消耗品使用）
   data?: Partial<Material> | Partial<Artifact> | Partial<Consumable>; // 完整数据（获得物品时使用）
   metadata?: Record<string, unknown>; // 元数据
 }

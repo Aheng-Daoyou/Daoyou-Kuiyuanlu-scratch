@@ -13,18 +13,18 @@ export const SWIFT_LAYER_2_NODES = [
       layerId: '2',
       name: '分光',
       description:
-        '《剑荡山河》维持3段攻击并获得3点剑意；总伤害随《剑气长歌》成长。',
+        '《灯荡山河》维持3段攻击并获得3点香火；总伤害随《香火长歌》成长。',
     },
     (_context, builder) => swiftSwordBuild(builder).enable('splitLight'),
     (context) =>
-      `《剑荡山河》进行3段攻击，每段造成相当于${nodePercent(growthMagnitude(context, 'sword-guidance', SWIFT_SPLIT_LIGHT_HIT_COEFFICIENT))}物攻的伤害，并获得3点剑意。`,
+      `《灯荡山河》进行3段攻击，每段造成相当于${nodePercent(growthMagnitude(context, 'sword-guidance', SWIFT_SPLIT_LIGHT_HIT_COEFFICIENT))}物攻的伤害，并获得3点香火。`,
   ),
   createLingxiaoNode(
     {
       id: 'swift-stacking-waves',
       layerId: '2',
       name: '叠浪',
-      description: '施展《剑荡山河》后，其当前冷却减少1回合。',
+      description: '施展《灯荡山河》后，其当前冷却减少1回合。',
     },
     (_context, builder) => swiftSwordBuild(builder).enable('stackingWaves'),
   ),
@@ -33,7 +33,7 @@ export const SWIFT_LAYER_2_NODES = [
       id: 'swift-retained-force',
       layerId: '2',
       name: '留痕',
-      description: '《剑荡山河》额外施加1层剑痕，共施加2层。',
+      description: '《灯荡山河》额外施加1层照痕，共施加2层。',
     },
     (_context, builder) => swiftSwordBuild(builder).enable('retainedForce'),
   ),

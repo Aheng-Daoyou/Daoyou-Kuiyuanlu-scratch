@@ -87,7 +87,7 @@ function findObjectById(
 }
 
 describe('宗门注册投影', () => {
-  it('九个神通跨境界保持固定蓝耗且问剑式始终免费', () => {
+  it('九个神通跨境界保持固定蓝耗且燃灯式始终免费', () => {
     const expected = new Map([
       ['plain-sword', 0],
       ['guiding-sword', 80],
@@ -99,7 +99,7 @@ describe('宗门注册投影', () => {
       ['nurturing-sword', 180],
       ['sect-ultimate', 200],
     ]);
-    for (const realm of ['炼气', '化神', '渡劫'] as const) {
+    for (const realm of ['闻腥', '忘川', '渡渊'] as const) {
       for (const [abilityId, mpCost] of expected) {
         expect(
           resolveSectAbility({
@@ -125,7 +125,7 @@ describe('宗门注册投影', () => {
       );
       const shadow = resolveSectAbility({
         sect,
-        realm: '化神',
+        realm: '忘川',
         abilityId: 'shadow-step',
       }).config.effects?.find((effect) => effect.type === 'apply_buff');
       expect(
@@ -135,7 +135,7 @@ describe('宗门注册投影', () => {
       ).toBe(expectedDuration);
       const charge = resolveSectAbility({
         sect,
-        realm: '化神',
+        realm: '忘川',
         abilityId: 'turning-body',
       }).config.castEffects?.find((effect) => effect.type === 'apply_buff');
       expect(
@@ -157,7 +157,7 @@ describe('宗门注册投影', () => {
     [150, 3],
     [180, 4],
     [999, 4],
-  ])('一剑破妄在%i级驱散%i个正面状态', (level, expectedCount) => {
+  ])('一灯破妄在%i级驱散%i个正面状态', (level, expectedCount) => {
     for (const pathId of [undefined, 'swift-sword', 'heavy-sword'] as const) {
       const sect = state(pathId);
       sect.methods['edge-cleansing'] = level;
@@ -169,7 +169,7 @@ describe('宗门注册投影', () => {
       ];
       const ability = resolveSectAbility({
         sect,
-        realm: '化神',
+        realm: '忘川',
         abilityId: 'breaking-edge',
       });
       const dispel = ability.config.effects?.find(
@@ -184,7 +184,7 @@ describe('宗门注册投影', () => {
     }
   });
 
-  it('炼气初期心法上限可解锁除绝式外全部基础神通，10级开放此剑平生', () => {
+  it('闻腥初期心法上限可解锁除绝式外全部基础神通，10级开放照灯平生', () => {
     const early = state();
     early.methods = Object.fromEntries(
       Object.keys(early.methods).map((methodId) => [methodId, 5]),
@@ -201,14 +201,14 @@ describe('宗门注册投影', () => {
     );
   });
 
-  it('剑骨淬锋在基础态与两条流派中固定提供10%暴击率和10%物理穿透', () => {
+  it('灯骨淬心在基础态与两条流派中固定提供10%暴击率和10%物理穿透', () => {
     for (const pathId of [undefined, 'swift-sword', 'heavy-sword'] as const) {
       const sect = state(pathId);
       setMethodLevel(sect, pathId ? 180 : 1);
       sect.abilityLoadout = ['guiding-sword', null, null, null];
       const detail = resolveSectAbility({
         sect,
-        realm: '化神',
+        realm: '忘川',
         abilityId: 'lingxiao-runtime',
       });
       expect(detail.config.modifiers).toEqual([
@@ -230,7 +230,7 @@ describe('宗门注册投影', () => {
       expect(detail.config.tags).not.toContain(
         pathId ? GameplayTags.ABILITY.SECT.path('lingxiao', pathId) : undefined,
       );
-      const projection = projectSectCombat({ sect, realm: '化神' })!;
+      const projection = projectSectCombat({ sect, realm: '忘川' })!;
       expect(
         projection.abilities.filter(
           (ability) => ability.slug === 'sect.lingxiao.lingxiao-runtime',
@@ -239,7 +239,7 @@ describe('宗门注册投影', () => {
     }
   });
 
-  it('红尘剑宗两条流派各自保持六层且每层三个节点', () => {
+  it('太乙清都观两条流派各自保持六层且每层三个节点', () => {
     for (const path of LINGXIAO_MODULE.definition.paths) {
       expect(path.layers).toHaveLength(6);
       expect(path.presentation?.highlights).toHaveLength(3);
@@ -260,11 +260,11 @@ describe('宗门注册投影', () => {
     )!;
     expect(swift.name).toBe('照影游尘');
     expect(swift.description).toBe(
-      '剑随身走，身随势变；以迅疾剑式连缀攻势，在交锋之间留下剑痕，最终将诸般剑影收束于《此剑平生》。',
+      '灯随身走，身随势变；以迅疾灯式连缀攻势，在交锋之间留下照痕，最终将诸般灯影收束于《照灯平生》。',
     );
     expect(heavy.name).toBe('守拙藏锋');
     expect(heavy.description).toBe(
-      '重剑不争一时之快，以身承势，以守养锋；剑意未足时稳住自身，剑意既成后，以一剑决定胜负。',
+      '重灯不争一时之快，以身承势，以守养焰；香火未足时稳住自身，香火既成后，以一焰决定胜负。',
     );
     expect(
       swift.nodes.find((node) => node.id === 'swift-returning-swallow')?.name,
@@ -280,33 +280,33 @@ describe('宗门注册投影', () => {
     ).toBe('极势');
   });
 
-  it('未激活流派使用基础剑意和基础法术', () => {
-    const projection = projectSectCombat({ sect: state(), realm: '筑基' })!;
+  it('未激活流派使用基础香火和基础灯律', () => {
+    const projection = projectSectCombat({ sect: state(), realm: '守灯' })!;
     expect(projection.resources[0]).toMatchObject({
       id: 'sect.lingxiao.sword-momentum',
-      name: '剑意',
-      icon: '🗡️',
+      name: '香火',
+      icon: '🏮',
       max: 6,
     });
-    expect(projection.defaultAttack?.name).toBe('问剑式');
+    expect(projection.defaultAttack?.name).toBe('燃灯式');
   });
 
   it('照影游尘通过统一解析器生成变体与节点效果', () => {
     const sect = state('swift-sword', ['swift-opening', 'swift-split-light']);
-    const projection = projectSectCombat({ sect, realm: '化神' })!;
+    const projection = projectSectCombat({ sect, realm: '忘川' })!;
     expect(projection.resources[0]).toMatchObject({
-      name: '剑意',
+      name: '香火',
       initial: 2,
       max: 6,
     });
     expect(projection.selectionStrategy).toBeDefined();
     const detail = resolveSectAbility({
       sect,
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'linked-edge',
     });
-    expect(detail.name).toBe('剑荡山河');
-    expect(detail.summary).toBe('剑锋纵横，数势相连；前剑未尽，后剑已越其锋。');
+    expect(detail.name).toBe('灯荡山河');
+    expect(detail.summary).toBe('灯焰纵横，数势相连；前灯未尽，后灯已越其焰。');
     expect(detail.detailRows).toContain('伤害：3段 × 52.6%物攻');
     expect(
       projection.abilities.find(
@@ -315,24 +315,24 @@ describe('宗门注册投影', () => {
     ).toEqual(detail.config);
   });
 
-  it('守拙藏锋沿用宗门剑意并生成独立技能变体和策略', () => {
+  it('守拙藏锋沿用宗门香火并生成独立技能变体和策略', () => {
     const sect = state('heavy-sword', ['heavy-opening', 'heavy-triple-ridge']);
-    const projection = projectSectCombat({ sect, realm: '化神' })!;
+    const projection = projectSectCombat({ sect, realm: '忘川' })!;
     expect(projection.resources[0]).toMatchObject({
       id: 'sect.lingxiao.sword-momentum',
-      name: '剑意',
+      name: '香火',
       initial: 1,
       max: 6,
     });
     expect(projection.selectionStrategy).toBeDefined();
     expect(
-      resolveSectAbility({ sect, realm: '化神', abilityId: 'linked-edge' })
+      resolveSectAbility({ sect, realm: '忘川', abilityId: 'linked-edge' })
         .name,
-    ).toBe('剑荡山河');
+    ).toBe('灯荡山河');
     expect(
-      resolveSectAbility({ sect, realm: '化神', abilityId: 'sect-ultimate' })
+      resolveSectAbility({ sect, realm: '忘川', abilityId: 'sect-ultimate' })
         .name,
-    ).toBe('此剑平生');
+    ).toBe('照灯平生');
   });
 
   it('流派基础变体不再随已解锁层数改变倍率', () => {
@@ -343,12 +343,12 @@ describe('宗门注册投影', () => {
       expect(
         productionSectRuntime.compiler.compile(LINGXIAO_MODULE, {
           sect: firstLayer,
-          realm: '化神',
+          realm: '忘川',
         }),
       ).toEqual(
         productionSectRuntime.compiler.compile(LINGXIAO_MODULE, {
           sect: allLayers,
-          realm: '化神',
+          realm: '忘川',
         }),
       );
     }
@@ -371,7 +371,7 @@ describe('宗门注册投影', () => {
             LINGXIAO_MODULE,
             {
               sect: state(pathId, nodeIds),
-              realm: '渡劫',
+              realm: '渡渊',
             },
           );
           for (const ability of Object.values(compiled.abilities)) {
@@ -406,7 +406,7 @@ describe('宗门注册投影', () => {
       setMethodLevel(sect, level);
       const compiled = productionSectRuntime.compiler.compile(LINGXIAO_MODULE, {
         sect,
-        realm: '化神',
+        realm: '忘川',
       });
       const probing = Object.values(compiled.abilities).find((ability) =>
         ability.config.slug.endsWith('.swift-probing-edge'),
@@ -420,17 +420,17 @@ describe('宗门注册投影', () => {
     },
   );
 
-  it('基础与重剑藏锋为自身蓄势，快剑藏锋仍是命中后获得姿态', () => {
+  it('基础与重灯藏锋为自身蓄势，快灯藏锋仍是命中后获得姿态', () => {
     for (const pathId of [undefined, 'heavy-sword'] as const) {
       const ability = resolveSectAbility({
         sect: state(pathId),
-        realm: '化神',
+        realm: '忘川',
         abilityId: 'turning-body',
       });
       expect(ability.config.targetPolicy?.team).toBe('self');
       expect(ability.detailRows).toEqual(
         expect.arrayContaining([
-          '施展后：蓄势：下一次自身行动发动《听雷》',
+          '施展后：蓄势：下一次自身行动发动《听漏》',
           '后发：必然命中',
           '蓄势：除自身死亡外不可打断',
         ]),
@@ -439,7 +439,7 @@ describe('宗门注册投影', () => {
 
     const swift = resolveSectAbility({
       sect: state('swift-sword'),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'turning-body',
     });
     expect(swift.config.targetPolicy?.team).toBe('enemy');
@@ -467,12 +467,12 @@ describe('宗门注册投影', () => {
       }
       const swiftNodes = resolveSectPathPreview({
         sect: swiftSect,
-        realm: '化神',
+        realm: '忘川',
         pathId: 'swift-sword',
       }).nodes;
       const heavyNodes = resolveSectPathPreview({
         sect: heavySect,
-        realm: '化神',
+        realm: '忘川',
         pathId: 'heavy-sword',
       }).nodes;
       expect(
@@ -492,12 +492,12 @@ describe('宗门注册投影', () => {
     sect.paths.push(heavyPath);
     const swiftNodes = resolveSectPathPreview({
       sect,
-      realm: '化神',
+      realm: '忘川',
       pathId: 'swift-sword',
     }).nodes;
     const heavyNodes = resolveSectPathPreview({
       sect,
-      realm: '化神',
+      realm: '忘川',
       pathId: 'heavy-sword',
     }).nodes;
     const descriptions = new Map(
@@ -519,22 +519,22 @@ describe('宗门注册投影', () => {
   it('最终神通事实正确合并节点倍率、门槛与跨神通被动', () => {
     const shadow = resolveSectAbility({
       sect: state('swift-sword', ['swift-shadow-line']),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'sect-ultimate',
     });
     expect(shadow.cooldown).toBe(5);
-    expect(shadow.detailRows).toContain('施放条件：至少6点剑意');
+    expect(shadow.detailRows).toContain('施放条件：至少6点香火');
     expect(shadow.detailRows).toContain('暴击：整次施法全部伤害段必定暴击');
 
     const returningPeak = resolveSectAbility({
       sect: state('heavy-sword', ['heavy-steady-mountain']),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'sect-ultimate',
     });
     expect(returningPeak.detailRows).toEqual(
       expect.arrayContaining([
-        '伤害：基础相当于80.3%物攻，每点剑意增加26.46%物攻',
-        '命中后：剑意：返还2点',
+        '伤害：基础相当于80.3%物攻，每点香火增加26.46%物攻',
+        '命中后：香火：返还2点',
         '命中后：护盾：相当于38.65%物攻',
       ]),
     );
@@ -544,25 +544,25 @@ describe('宗门注册投影', () => {
         'heavy-steady-mountain',
         'heavy-heaven-cleaving',
       ]),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'sect-ultimate',
     });
     expect(returningHeaven.detailRows).toContain(
-      '6点剑意时总倍率：255.48%物攻',
+      '6点香火时总倍率：255.48%物攻',
     );
     expect(returningHeaven.detailRows).not.toContain(
-      '6点剑意时总倍率：400%物攻',
+      '6点香火时总倍率：400%物攻',
     );
 
     const mountainBreaking = resolveSectAbility({
       sect: state('swift-sword', ['swift-mountain-breaking']),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'sect-ultimate',
     });
     expect(mountainBreaking.detailRows).toEqual(
       expect.arrayContaining([
-        '命中后：状态：消耗全部剑痕',
-        '命中后：每消耗1层剑痕，额外造成相当于12.88%物攻的伤害',
+        '命中后：状态：消耗全部照痕',
+        '命中后：每消耗1层照痕，额外造成相当于12.88%物攻的伤害',
       ]),
     );
 
@@ -572,7 +572,7 @@ describe('宗门注册投影', () => {
         'swift-still-tide',
         'swift-endless-flow',
       ]),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'sect-ultimate',
     }).detailRows.join('；');
     expect(passiveFacts).toContain('参悟·追命');
@@ -589,7 +589,7 @@ describe('宗门注册投影', () => {
       )) {
         const detail = resolveSectAbility({
           sect,
-          realm: '化神',
+          realm: '忘川',
           abilityId: definition.id,
         });
         expect(detail.name).toBe(definition.baseName);
@@ -603,15 +603,15 @@ describe('宗门注册投影', () => {
     (pathId) => {
       const sect = state(pathId);
       const expectedBuffNames = {
-        'turning-body': '藏锋听雷',
-        'shadow-step': '踏雪无痕',
-        'sword-aegis': '剑心通明',
-        'nurturing-sword': '人剑合一',
+        'turning-body': '守灯听漏',
+        'shadow-step': '踏影无痕',
+        'sword-aegis': '灯心通明',
+        'nurturing-sword': '人灯合一',
       } as const;
       for (const [abilityId, buffName] of Object.entries(expectedBuffNames)) {
         const config = resolveSectAbility({
           sect,
-          realm: '化神',
+          realm: '忘川',
           abilityId,
         }).config;
         const buff = [
@@ -626,11 +626,11 @@ describe('宗门注册投影', () => {
   );
 
   it.each([undefined, 'heavy-sword'] as const)(
-    '%s 的藏锋听雷后发攻击统一名为听雷',
+    '%s 的守灯听漏后发攻击统一名为听漏',
     (pathId) => {
       const config = resolveSectAbility({
         sect: state(pathId),
-        realm: '化神',
+        realm: '忘川',
         abilityId: 'turning-body',
       }).config;
       const queued = config.castEffects?.find(
@@ -638,7 +638,7 @@ describe('宗门注册投影', () => {
       );
       expect(
         queued?.type === 'queue_action' ? queued.params.name : undefined,
-      ).toBe('听雷');
+      ).toBe('听漏');
     },
   );
 
@@ -647,7 +647,7 @@ describe('宗门注册投影', () => {
     const before = structuredClone(sect);
     const preview = resolveSectPathPreview({
       sect,
-      realm: '化神',
+      realm: '忘川',
       pathId: 'swift-sword',
     });
 
@@ -663,7 +663,7 @@ describe('宗门注册投影', () => {
     ).toEqual(
       expect.arrayContaining([
         '伤害：3段 × 51.89%物攻',
-        '命中后：剑痕：向目标施加1层，持续目标未来4次行动',
+        '命中后：照痕：向目标施加1层，持续目标未来4次行动',
       ]),
     );
     expect(sect).toEqual(before);
@@ -675,7 +675,7 @@ describe('宗门注册投影', () => {
     sect.paths.push(heavy);
     const preview = resolveSectPathPreview({
       sect,
-      realm: '化神',
+      realm: '忘川',
       pathId: 'heavy-sword',
     });
     const shadow = preview.abilities.find(
@@ -706,7 +706,7 @@ describe('宗门注册投影', () => {
         'swift-split-light',
         'swift-returning-swallow',
       ]),
-      realm: '化神',
+      realm: '忘川',
       pathId: 'swift-sword',
     });
 
@@ -728,7 +728,7 @@ describe('宗门注册投影', () => {
   ])('$pathId 每次构筑只 finalize 一次', ({ pathId, nodes, facade }) => {
     const finalize = vi.spyOn(facade.prototype, 'finalize');
 
-    projectSectCombat({ sect: state(pathId, nodes), realm: '化神' });
+    projectSectCombat({ sect: state(pathId, nodes), realm: '忘川' });
 
     expect(finalize).toHaveBeenCalledTimes(1);
     finalize.mockRestore();
@@ -739,41 +739,41 @@ describe('宗门注册投影', () => {
     expect(
       resolveSectAbility({
         sect: swift,
-        realm: '化神',
+        realm: '忘川',
         abilityId: 'guiding-sword',
       }).detailRows,
     ).toEqual(
       expect.arrayContaining([
         '伤害：相当于83.73%物攻',
-        '追击：自身身法高于目标时，追加相当于27.91%物攻',
+        '追击：自身灯影高于目标时，追加相当于27.91%物攻',
       ]),
     );
     expect(
       resolveSectAbility({
         sect: swift,
-        realm: '化神',
+        realm: '忘川',
         abilityId: 'turning-body',
       }).detailRows,
     ).toContain(
-      '命中后：触发：持续期间首次闪避时，反击造成相当于43.44%物攻的伤害，并获得1点剑意',
+      '命中后：触发：持续期间首次闪避时，反击造成相当于43.44%物攻的伤害，并获得1点香火',
     );
     expect(
       resolveSectAbility({
         sect: swift,
-        realm: '化神',
+        realm: '忘川',
         abilityId: 'shadow-step',
       }).detailRows,
-    ).toContain('施展后：触发：持续期间首次闪避时，获得1点剑意');
+    ).toContain('施展后：触发：持续期间首次闪避时，获得1点香火');
     expect(
       resolveSectAbility({
         sect: swift,
-        realm: '化神',
+        realm: '忘川',
         abilityId: 'sect-ultimate',
       }).detailRows,
-    ).toContain('命中后：消耗全部剑意');
+    ).toContain('命中后：消耗全部香火');
   });
 
-  it('动态详情聚合剑痕并完整描述节点触发效果', () => {
+  it('动态详情聚合照痕并完整描述节点触发效果', () => {
     const swift = state('swift-sword', [
       'swift-retained-force',
       'swift-unending-wind',
@@ -781,41 +781,41 @@ describe('宗门注册投影', () => {
     expect(
       resolveSectAbility({
         sect: swift,
-        realm: '化神',
+        realm: '忘川',
         abilityId: 'linked-edge',
       }).detailRows,
-    ).toContain('命中后：剑痕：向目标施加2层，持续目标未来4次行动');
+    ).toContain('命中后：照痕：向目标施加2层，持续目标未来4次行动');
     const swordMarkRows = resolveSectAbility({
       sect: swift,
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'linked-edge',
     }).detailRows;
-    expect(swordMarkRows).toContain('命中后：剑痕：最多3层');
+    expect(swordMarkRows).toContain('命中后：照痕：最多3层');
     expect(swordMarkRows).toContain(
       '命中后：每层：受到的直接、反击和追击伤害提高2.1%',
     );
     expect(
       resolveSectAbility({
         sect: swift,
-        realm: '化神',
+        realm: '忘川',
         abilityId: 'turning-body',
       }).detailRows,
     ).toContain(
-      '命中后：触发：持续期间首次闪避时，反击造成相当于43.44%物攻的伤害、获得1点剑意、向目标施加1层剑痕，持续目标未来4次行动，并获得相当于43.44%物攻的护盾',
+      '命中后：触发：持续期间首次闪避时，反击造成相当于43.44%物攻的伤害、获得1点香火、向目标施加1层照痕，持续目标未来4次行动，并获得相当于43.44%物攻的护盾',
     );
 
     const heavy = state('heavy-sword', ['heavy-immovable-mountain']);
     const armorRendRows = resolveSectAbility({
       sect: heavy,
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'linked-edge',
     }).detailRows;
-    expect(armorRendRows).toContain('命中后：裂甲：最多3层');
+    expect(armorRendRows).toContain('命中后：灯隙：最多3层');
     expect(armorRendRows).toContain('命中后：每层：物防-3.16%');
     expect(
       resolveSectAbility({
         sect: heavy,
-        realm: '化神',
+        realm: '忘川',
         abilityId: 'sword-aegis',
       }).detailRows,
     ).toContain(
@@ -828,7 +828,7 @@ describe('宗门注册投影', () => {
     expect(
       resolveSectAbility({
         sect: stacking,
-        realm: '化神',
+        realm: '忘川',
         abilityId: 'linked-edge',
       }).detailRows,
     ).toContain('命中后：冷却：当前冷却减少1回合');
@@ -836,7 +836,7 @@ describe('宗门注册投影', () => {
     const echo = state('heavy-sword', ['heavy-mountain-river-echo']);
     const echoRows = resolveSectAbility({
       sect: echo,
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'sect-ultimate',
     }).detailRows;
     expect(echoRows).toEqual(

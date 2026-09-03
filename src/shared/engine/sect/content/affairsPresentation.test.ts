@@ -13,6 +13,7 @@ import { TIANYAN_SECT_PRESENTATION } from './tianyan';
 import { WUXIANG_SECT_PRESENTATION } from './wuxiang';
 import { YOUDU_SECT_PRESENTATION } from './youdu';
 import { JIUJIE_SECT_PRESENTATION } from './jiujie';
+import { BAIXIBAN_SECT_PRESENTATION } from './baixiban';
 
 const taskIds = [
   'gate_sweep',
@@ -40,7 +41,7 @@ const canonicalNpcRoles = [
   },
   {
     sigil: '传',
-    identity: '传功长老',
+    identity: '传灯长老',
     responsibility: '负责晋升试炼。',
   },
 ] as const;
@@ -83,8 +84,8 @@ const expectedFacilityNames: Readonly<Record<string, readonly string[]>> = {
     '邵沉川',
     '秦晚晴',
     '骆长亭',
-    '灵脉矿场',
-    '宗门药田',
+    '梦涎井',
+    '宗门灯下草圃',
     '山门',
   ],
   [TIANYAN_SECT_PRESENTATION.sectId]: [
@@ -103,28 +104,28 @@ const expectedFacilityNames: Readonly<Record<string, readonly string[]>> = {
     '见素',
     '元吉',
     '望舒',
-    '坤元地脉',
+    '镇星地脉',
     '长生圃',
     '观象门',
   ],
   [WUXIANG_SECT_PRESENTATION.sectId]: [
     '慧澄',
     '明济',
-    '寂照禅师',
+    '寂照莲师',
     '行深',
     '明简',
-    '空渡禅师',
+    '空渡莲师',
     '慧照',
-    '法忍禅师',
+    '法忍莲师',
     '行觉',
-    '寂然禅师',
+    '寂然莲师',
     '明恕',
     '法圆',
     '慧海',
     '行愿',
-    '道安禅师',
+    '道安莲师',
     '骨玉窟',
-    '血莲池',
+    '乳母池',
     '不二门',
   ],
   [YOUDU_SECT_PRESENTATION.sectId]: [
@@ -143,12 +144,49 @@ const expectedFacilityNames: Readonly<Record<string, readonly string[]>> = {
     '贺寒川',
     '柳十三',
     '顾长夜',
-    '黑水阴脉',
+    '忘川水阴脉',
     '彼岸圃',
     '无日关',
   ],
   [JIUJIE_SECT_PRESENTATION.sectId]: [
-    '司雷', '听劫', '衡天', '营造监', '捐献使', '掌卷', '引路天官', '演武教习', '执刑', '守静', '听雷丹师', '断劫使', '雷髓监', '守园', '守天阶', '中天雷池', '天听木圃', '九劫天阶',
+    '录事',
+    '发俸',
+    '秤翁',
+    '营造监',
+    '捐献使',
+    '掌卷',
+    '引路吏',
+    '演武教习',
+    '执灯',
+    '守静',
+    '闻香师',
+    '封灵使',
+    '灯油监',
+    '守圃',
+    '守门吏',
+    '灯楼',
+    '灯下草圃',
+    '灯位门',
+  ],
+  [BAIXIBAN_SECT_PRESENTATION.sectId]: [
+    '顾怀真',
+    '柳七',
+    '叶归鸿',
+    '杜长庚',
+    '苗小满',
+    '温不言',
+    '祝平生',
+    '霍千钧',
+    '苏放鹤',
+    '晏无声',
+    '程晚照',
+    '谭折柳',
+    '邵沉川',
+    '秦晚晴',
+    '骆长亭',
+    '梦涎井',
+    '宗门灯下草圃',
+    '山门',
   ],
 };
 
@@ -158,6 +196,7 @@ const productionThemes: readonly SectPresentationTheme[] = [
   WUXIANG_SECT_PRESENTATION,
   YOUDU_SECT_PRESENTATION,
   JIUJIE_SECT_PRESENTATION,
+  BAIXIBAN_SECT_PRESENTATION,
 ];
 
 const canonicalMapNotes: Readonly<Record<string, string>> = {
@@ -167,11 +206,11 @@ const canonicalMapNotes: Readonly<Record<string, string>> = {
   arena: '神通 · 战术 · 小比',
   affairs: '日常 · 周常 · 晋升',
   treasury: '贡献兑换',
-  industries: '设施建设 · 灵石捐献',
-  cultivation: '闭关修炼 · 设施灵效',
-  alchemy: '炼丹 · 设施灵效',
-  refinery: '炼器 · 设施灵效',
-  vein: '矿场巡视 · 灵石收益 · 采矿',
+  industries: '设施建设 · 灯油券捐献',
+  cultivation: '闭关窥悟 · 设施灯效',
+  alchemy: '制香 · 设施灯效',
+  refinery: '封灵 · 设施灯效',
+  vein: '矿场巡视 · 灯油券收益 · 采矿',
   garden: '草木长势 · 产出待开放',
   gate: '山门动态 · 清扫差事',
   cave: '弟子居所',
@@ -180,29 +219,55 @@ const canonicalMapNotes: Readonly<Record<string, string>> = {
 
 describe('production sect affairs presentations', () => {
   it('keeps map notes aligned with current facility responsibilities', () => {
+    const spiritStoneNotes = {
+      ...canonicalMapNotes,
+      industries: '设施建设 · 灯油券捐献',
+      vein: '矿场巡视 · 灯油券收益 · 采矿',
+    };
+    const jiujieNotes = {
+      hall: '身份 · 同门 · 周俸',
+      archive: '功法研习',
+      cliff: '灯焰临身 · 流派参悟',
+      condemnation: '功勋加身 · 流派参悟',
+      affairs: '日常 · 周常 · 晋升',
+      arena: '神通 · 战术 · 小比',
+      treasury: '功勋兑换',
+      industries: '设施建设 · 灯油券捐献',
+      cultivation: '闭关窥悟 · 设施灯效',
+      alchemy: '制香 · 设施灯效',
+      refinery: '封灵 · 设施灯效',
+      vein: '井场巡视 · 灯油券收益 · 采油',
+      garden: '草木长势 · 产出待开放',
+      gate: '门禁动态 · 清扫差事',
+      cave: '签押人居所',
+      formation: '宗门战后续开放',
+    };
     for (const theme of productionThemes) {
       const notes = Object.fromEntries(
         theme.map?.hotspots?.map((hotspot) => [hotspot.id, hotspot.note]) ?? [],
       );
-      expect(notes).toEqual(
+      const expected =
         theme.sectId === 'jiujie'
-          ? { ...canonicalMapNotes, cliff: '劫眼临身 · 流派参悟', condemnation: '天谴加身 · 流派参悟' }
-          : canonicalMapNotes,
-      );
+          ? jiujieNotes
+          : theme.sectId === 'lingxiao' || theme.sectId === 'baixiban'
+            ? spiritStoneNotes
+            : canonicalMapNotes;
+      expect(notes).toEqual(expected);
     }
   });
 
   it('provides twelve named NPCs with canonical roles', () => {
     const expectedNames = [
-      ['陆青崖', '裴守拙', '听剑老人'],
-      ['法明', '慧觉', '空慈方丈'],
+      ['陆青崖', '裴守拙', '掌灯老人'],
+      ['法明', '慧觉', '空慈乳母'],
       ['知微', '玄衡道人', '观澜真人'],
       ['照灯', '守簿翁', '归魂婆婆'],
-      ['照雷执事', '守簿翁', '九门长老'],
+      ['照灯执事', '守簿翁', '掌灯大人'],
+      ['陆青崖', '裴守拙', '听戏老人'],
     ];
     const presentations = Object.values(PRODUCTION_SECT_PRESENTATIONS);
 
-    expect(presentations).toHaveLength(5);
+    expect(presentations).toHaveLength(6);
     expect(
       presentations.map((presentation) =>
         presentation.rooms.affairs.actors.map((npc) => npc.name),
@@ -286,8 +351,14 @@ describe('production sect affairs presentations', () => {
       );
       const allNames = [...affairsNames, ...expectedNames];
       expect(new Set(allNames).size).toBe(21);
+      // 掌灯司主题下人名天然以「灯」为职务字（执灯、灯油监），且守门吏以「门」为职守，
+      // 故对该宗门放宽「灯/门/影」等与主题强绑定的字。
+      const forbiddenFacilityGlyphs =
+        sectId === 'jiujie'
+          ? /[籍禄库仓材脉药炉铸场魂鬼阴]/u
+          : /[籍禄库仓材门脉药炉铸场魂鬼阴灯影]/u;
       expect(expectedNames.slice(0, 15).join('')).not.toMatch(
-        /[籍禄库仓材门脉药炉铸场魂鬼阴灯影]/u,
+        forbiddenFacilityGlyphs,
       );
     }
   });
@@ -304,6 +375,20 @@ describe('production sect affairs presentations', () => {
       });
 
       expect(overrides.map((actor) => actor?.name)).toEqual(expectedNames);
+    }
+  });
+
+  it('defines a complete visual identity (徽记/配色/格言) for every production sect', () => {
+    for (const theme of productionThemes) {
+      const visual = theme.visual;
+      expect(visual, `${theme.sectId} 缺少 visual 印记`).toBeDefined();
+      expect(visual?.sigilLabel?.trim()).not.toBe('');
+      expect(visual?.sigilGlyph).toMatch(/^.$/u);
+      expect(visual?.palette).toHaveLength(3);
+      for (const color of visual?.palette ?? []) {
+        expect(color).toMatch(/^#[0-9a-fA-F]{3,8}$/);
+      }
+      expect(visual?.motto?.trim()).not.toBe('');
     }
   });
 });

@@ -8,8 +8,8 @@ import { PRODUCTION_SECTS } from './productionRuntime';
 
 const EXPECTED_PRESETS = {
   lingxiao: {
-    name: '听剑老人·试炼化身',
-    description: '执一柄旧剑立于场中，只问弟子的剑为何而出。',
+    name: '掌灯老人·试炼化身',
+    description: '执一盏旧灯立于场中，只问弟子的灯为何而点。',
     pathId: 'swift-sword',
     tacticId: 'aggressive',
     methodIds: [
@@ -26,7 +26,7 @@ const EXPECTED_PRESETS = {
       'breaking-edge',
       'sect-ultimate',
     ],
-    artifactNames: ['照尘古剑', '藏锋剑衣', '澄心剑珏'],
+    artifactNames: ['照尘古灯', '藏锋灯衣', '澄心灯珏'],
   },
   tianyan: {
     name: '观澜真人·试炼化身',
@@ -47,11 +47,11 @@ const EXPECTED_PRESETS = {
       'dark-water-return',
       'shift-palace',
     ],
-    artifactNames: ['太白演星尺', '坤舆法袍', '河洛定盘'],
+    artifactNames: ['太白演星尺', '镇星灯袍', '河洛定盘'],
   },
   wuxiang: {
-    name: '空慈方丈·试炼化身',
-    description: '佛魔二相同现，以色身与业火检验来者道心。',
+    name: '空慈乳母·试炼化身',
+    description: '胎血二相同现，以色身与莲火检验来者灯心。',
     pathId: 'mirror-karma',
     tacticId: 'guard',
     methodIds: [
@@ -68,7 +68,7 @@ const EXPECTED_PRESETS = {
       'three-knocks',
       'observe-calamity',
     ],
-    artifactNames: ['降魔金刚杵', '白骨莲衣', '明镜心珠'],
+    artifactNames: ['哺心杵', '皮囊莲衣', '莲镜心珠'],
   },
   youdu: {
     name: '归魂婆婆·试炼化身',
@@ -92,13 +92,34 @@ const EXPECTED_PRESETS = {
     artifactNames: ['镇魂玄铁令', '忘川夜衣', '引魂灯佩'],
   },
   jiujie: {
-    name: '九劫宫主·试炼化身',
-    description: '执劫簿立于雷池中央，以行动问罪，以九霄清算。',
+    name: '掌灯大人·试炼化身',
+    description: '执案簿立于灯楼中央，以行动问罪，以九灯清算。',
     pathId: 'calamity-eye',
     tacticId: 'bear-and-return',
     methodIds: ['jiujie-canon', 'calamity-eye', 'heavenly-record', 'thunder-prison', 'cause-judgment', 'crossing-calamity'],
     abilityLoadout: ['heaven-hearing', 'receive-calamity', 'thunder-prison-question', 'nine-sky-settlement'],
-    artifactNames: ['劫簿天简', '渡厄雷环', '九门宫印'],
+    artifactNames: ['案簿灯简', '渡渊灯环', '九门灯印'],
+  },
+  baixiban: {
+    name: '听戏老人·试炼化身',
+    description: '执一柄旧器立于场中，只问弟子的器为何而出。',
+    pathId: 'swift-sword',
+    tacticId: 'aggressive',
+    methodIds: [
+      'baixiban-canon',
+      'sword-guidance',
+      'void-step',
+      'edge-cleansing',
+      'origin-returning',
+      'sword-nurturing',
+    ],
+    abilityLoadout: [
+      'guiding-sword',
+      'linked-edge',
+      'breaking-edge',
+      'sect-ultimate',
+    ],
+    artifactNames: ['照尘古器', '藏锋器衣', '澄心器珏'],
   },
 } as const;
 
@@ -124,7 +145,7 @@ function playerFixture(): CultivatorCombatInput {
   return {
     id: 'player',
     name: '玩家',
-    realm: '元婴',
+    realm: '蚀体',
     realm_stage: '初期',
     attributes: {
       vitality: 1,
@@ -146,7 +167,7 @@ function playerFixture(): CultivatorCombatInput {
 describe('production sect elder trial presets', () => {
   it('projects every fixed elder through creation-v2 and battle-v5', () => {
     const expectedAttribute = Math.floor(
-      getRealmStageAttributeBudget('元婴', '圆满') / 6,
+      getRealmStageAttributeBudget('蚀体', '圆满') / 6,
     );
 
     for (const { module } of PRODUCTION_SECTS) {
@@ -170,7 +191,7 @@ describe('production sect elder trial presets', () => {
       });
       expect(opponent).toMatchObject({
         name: expected.name,
-        realm: '元婴',
+        realm: '蚀体',
         realm_stage: '圆满',
         attributes: {
           vitality: expectedAttribute,
@@ -213,7 +234,7 @@ describe('production sect elder trial presets', () => {
       ).toEqual(
         ARTIFACT_AFFIX_IDS.map((affixIds) => ({
           quality: '地品',
-          anchorRealm: '元婴',
+          anchorRealm: '蚀体',
           anchorRealmStage: '圆满',
           affixIds,
         })),
