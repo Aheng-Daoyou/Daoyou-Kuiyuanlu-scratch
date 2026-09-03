@@ -28,6 +28,7 @@
   "dependencies": {
     "@ai-sdk/alibaba": "^2.0.32",
     "@ai-sdk/deepseek": "^3.0.24",
+    "@ai-sdk/openai-compatible": "^3.0.41",
     "@better-auth/drizzle-adapter": "^1.6.26",
     "@better-auth/i18n": "^1.6.26",
     "@microfleet/ioredis-lock": "^6.0.1",

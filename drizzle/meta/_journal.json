@@ -239,6 +239,41 @@
       "when": 1788147338302,
       "tag": "0033_spirit_fields",
       "breakpoints": true
+    },
+    {
+      "idx": 34,
+      "version": "7",
+      "when": 1788193077301,
+      "tag": "0034_giant_garia",
+      "breakpoints": true
+    },
+    {
+      "idx": 35,
+      "version": "7",
+      "when": 1788254308607,
+      "tag": "0035_windy_jamie_braddock",
+      "breakpoints": true
+    },
+    {
+      "idx": 36,
+      "version": "7",
+      "when": 1788411500000,
+      "tag": "0036_cultivator_attr_sync",
+      "breakpoints": true
+    },
+    {
+      "idx": 37,
+      "version": "7",
+      "when": 1788412854311,
+      "tag": "0037_spiritual_root_grade_sync",
+      "breakpoints": true
+    },
+    {
+      "idx": 38,
+      "version": "7",
+      "when": 1788413110193,
+      "tag": "0038_condition_sanity_incense_cleanup",
+      "breakpoints": true
     }
   ]
 }
