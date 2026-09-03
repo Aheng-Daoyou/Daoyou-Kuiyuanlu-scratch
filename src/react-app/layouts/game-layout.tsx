@@ -78,7 +78,7 @@ function PlayerShell() {
           </h1>
           <p className="text-ink-secondary mt-3 text-sm leading-7">
             {note ||
-              '当前账号下还没有活跃角色。先完成角色创建，再进入万界修行主流程。'}
+              '当前账号下还没有活跃角色。先完成角色创建，再进入烬洲修行主流程。'}
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <InkButton
@@ -443,7 +443,7 @@ function resolveGenesisSceneDescriptor(
   if (pathname === '/game/reincarnate') {
     return {
       sceneLabel: '转世重修',
-      subtitle: '身死道不灭，握紧前世余荫再闯仙途。',
+      subtitle: '身死道不灭，握紧前世余荫再闯灯途。',
       backAction: {
         label: '返回主界',
         href: '/game',

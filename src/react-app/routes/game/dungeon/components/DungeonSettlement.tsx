@@ -160,13 +160,13 @@ export function DungeonSettlement({
           ))
         ) : (
           <div className="text-ink-secondary bg-ink/5 border-ink/15 border border-dashed px-3 py-4 text-sm sm:col-span-2">
-            此行未见修为精进
+            此行未见灯韵精进
           </div>
         )}
       </div>
 
       <div className="space-y-2">
-        <div className="text-sm font-medium">机缘灵材</div>
+        <div className="text-sm font-medium">机缘灯材</div>
         {displayedMaterials.length > 0 ? (
           <div className="space-y-2">
             {displayedMaterials.map((item, index) => (
@@ -178,7 +178,7 @@ export function DungeonSettlement({
                   <div>
                     <div className="font-medium">{item.name}</div>
                     <div className="text-ink-secondary mt-1 text-xs">
-                      {[item.element ? `五行：${item.element}` : null]
+                      {[item.element ? `属性：${item.element}` : null]
                         .filter(Boolean)
                         .join(' · ')}
                     </div>
@@ -199,14 +199,14 @@ export function DungeonSettlement({
                   </div>
                 </div>
                 <div className="text-ink-secondary mt-2 text-xs leading-relaxed">
-                  描述：{item.description || '此物灵机晦暗，暂难窥其全貌。'}
+                  描述：{item.description || '此物灯机晦暗，暂难窥其全貌。'}
                 </div>
               </div>
             ))}
           </div>
         ) : (
           <div className="text-ink-secondary bg-ink/5 border-ink/15 border border-dashed px-3 py-4 text-sm">
-            此行机缘浅薄，未得可携灵材
+            此行机缘浅薄，未得可携灯材
           </div>
         )}
       </div>

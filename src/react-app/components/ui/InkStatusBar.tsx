@@ -15,7 +15,7 @@ export interface InkStatusBarProps {
 
 /**
  * 状态栏组件
- * 用于显示气血、法力、寿元等状态信息
+ * 用于显示气血、灯焰、寿元等状态信息
  */
 export function InkStatusBar({
   items,

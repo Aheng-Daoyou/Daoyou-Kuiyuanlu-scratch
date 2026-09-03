@@ -31,7 +31,7 @@ export function AdminShell({
             <p className="text-ink-secondary text-xs tracking-[0.2em]">
               OPS CONSOLE
             </p>
-            <h1 className="font-heading text-ink mt-2 text-3xl">万界司天台</h1>
+            <h1 className="font-heading text-ink mt-2 text-3xl">烬洲司天台</h1>
             <p className="text-ink-secondary mt-2 text-sm">{adminEmail}</p>
             <p className="text-ink-secondary/75 mt-1 font-mono text-[11px] break-all">
               ID: {adminUserId}

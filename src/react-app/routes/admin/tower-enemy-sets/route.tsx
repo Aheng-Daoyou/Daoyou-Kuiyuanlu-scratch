@@ -6,7 +6,7 @@ import {
   TOWER_ELIGIBLE_REALMS,
   type TowerPreparedEnemySetStatus,
 } from '@shared/lib/tower';
-import type { EnemyRace, RealmStage, RealmType } from '@shared/types/constants';
+import type { EnemyClan, RealmStage, RealmType } from '@shared/types/constants';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 type TowerSeasonMeta = {
@@ -20,7 +20,7 @@ type TowerEnemySummary = {
   floor: number;
   kind: 'normal' | 'elite' | 'boss';
   difficulty: number;
-  race: EnemyRace;
+  clan: EnemyClan;
   realmStage: RealmStage;
   name: string;
   title: string | null;
@@ -517,7 +517,7 @@ function RealmPanel({
                     ) : null}
                   </td>
                   <td className="px-2 py-2">
-                    {enemy.race} / {enemy.realmStage}
+                    {enemy.clan} / {enemy.realmStage}
                   </td>
                   <td className="px-2 py-2">{enemy.difficulty}</td>
                   <td className="px-2 py-2">{enemy.source}</td>

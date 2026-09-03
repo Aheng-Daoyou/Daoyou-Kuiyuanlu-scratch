@@ -38,7 +38,7 @@ export default function EnlightenmentPage() {
           <GameSceneAsideSection title="参悟分流">
             <div className="space-y-2 text-sm leading-7">
               <p>神通推演：更偏攻伐、辅助与施法方向。</p>
-              <p>功法参悟：更偏根基、修炼速度与长期属性。</p>
+              <p>功法参悟：更偏根基、窥悟速度与长期属性。</p>
             </div>
           </GameSceneAsideSection>
           <GameSceneAsideSection
@@ -87,7 +87,7 @@ export default function EnlightenmentPage() {
             <p className="text-ink-secondary mb-4 min-h-10 text-sm">
               感天地造化，推演攻伐妙术。
               <br />
-              草木、妖骨与辅材皆可为引，神通秘籍最能定法。
+              草木、腌骨与辅材皆可为引，神通秘籍最能定法。
             </p>
             <InkButton href="/game/enlightenment/skill" variant="primary">
               开始推演
@@ -100,9 +100,9 @@ export default function EnlightenmentPage() {
               功法参悟
             </h3>
             <p className="text-ink-secondary mb-4 min-h-10 text-sm">
-              参悟大道法则，创造修炼功法。
+              参悟灯道法则，创造窥悟功法。
               <br />
-              草木、妖骨与辅材可作底稿，功法秘籍最能稳固道基。
+              草木、腌骨与辅材可作底稿，功法秘籍最能稳固道基。
             </p>
             <InkButton href="/game/enlightenment/gongfa" variant="primary">
               开始参悟

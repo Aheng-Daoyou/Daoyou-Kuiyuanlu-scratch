@@ -250,7 +250,7 @@ const STATUS_CATEGORY_LABELS: Record<
   GameHudSnapshot['activeStatuses'][number]['category'],
   string
 > = {
-  pill: '丹药药力',
+  pill: '香品香力',
   breakthrough: '突破准备',
   injury: '伤势与虚弱',
   other: '其他状态',
@@ -396,7 +396,7 @@ export function GameTopHud({ snapshot }: { snapshot: GameHudSnapshot | null }) {
               },
               {
                 label: '提升方式',
-                value: '在静室积累修为并尝试突破',
+                value: '在静室积累窥悟并尝试突破',
               },
               {
                 label: '大境界',
@@ -427,10 +427,10 @@ export function GameTopHud({ snapshot }: { snapshot: GameHudSnapshot | null }) {
           />
           <div className="border-ink/10 bg-bgpaper/60 border border-dashed px-3 py-2 text-xs leading-5">
             <p className="text-ink">
-              提升：服用炼体丹，丹力会进入对应的肉身轨道。
+              提升：服用炼体香，丹力会进入对应的肉身轨道。
             </p>
             <p className="text-ink-secondary mt-1">
-              进阶：轨道等级、修为境界、材料和对应方向炼体丹都满足后，才能提升肉身阶位。
+              进阶：轨道等级、窥悟境界、材料和对应方向炼体香都满足后，才能提升肉身阶位。
             </p>
           </div>
           <MarrowWashSummaryContent
@@ -471,17 +471,17 @@ export function GameTopHud({ snapshot }: { snapshot: GameHudSnapshot | null }) {
         <div className="space-y-3 text-sm leading-7">
           <p>
             {cultivationLabel}
-            是当前小阶段内的积累。闭关、秘境、任务与部分丹药都可能带来
+            是当前小阶段内的积累。闭关、秘境、任务与部分香品都可能带来
             {cultivationLabel}
-            增长；突破成功后会扣除当前阶段所需修为，溢出的积累会带入下一阶段。
+            增长；突破成功后会扣除当前阶段所需窥悟，溢出的积累会带入下一阶段。
           </p>
           <p>
-            进度越接近上限，越适合在静室冲关。未满时也可强行尝试，但失败会折损修为，并可能提高走火入魔风险。
+            进度越接近上限，越适合在静室冲关。未满时也可强行尝试，但失败会折损窥悟，并可能提高走火入魔风险。
           </p>
           <InfoTable
             rows={[
               {
-                label: '当前修为',
+                label: '当前窥悟',
                 value: `${formatHudNumber(progress.current)} / ${formatHudNumber(progress.cap)}`,
               },
               {
@@ -491,7 +491,7 @@ export function GameTopHud({ snapshot }: { snapshot: GameHudSnapshot | null }) {
               ...(progress.overflow > 0
                 ? [
                     {
-                      label: '溢出修为',
+                      label: '溢出窥悟',
                       value: formatHudNumber(progress.overflow),
                     },
                   ]
@@ -502,21 +502,21 @@ export function GameTopHud({ snapshot }: { snapshot: GameHudSnapshot | null }) {
               },
               {
                 label: '强行突破',
-                value: `${formatHudNumber(nextThreshold)} 修为起可尝试（${BREAKTHROUGH_MIN_PROGRESS}%）`,
+                value: `${formatHudNumber(nextThreshold)} 窥悟起可尝试（${BREAKTHROUGH_MIN_PROGRESS}%）`,
               },
               {
                 label: '常规突破',
-                value: `${formatHudNumber(normalThreshold)} 修为起较稳（${NORMAL_BREAKTHROUGH_THRESHOLD}%）`,
+                value: `${formatHudNumber(normalThreshold)} 窥悟起较稳（${NORMAL_BREAKTHROUGH_THRESHOLD}%）`,
               },
               {
                 label: '圆满突破',
-                value: `${formatHudNumber(progress.cap)} 修为且${insightInfo.label} ${PERFECT_BREAKTHROUGH_INSIGHT}+`,
+                value: `${formatHudNumber(progress.cap)} 窥悟且${insightInfo.label} ${PERFECT_BREAKTHROUGH_INSIGHT}+`,
               },
               {
                 label: '瓶颈期',
                 value: progress.bottleneckState
                   ? `已进入，闭关收益衰减（阈值 ${formatHudNumber(bottleneckThreshold)}）`
-                  : `${formatHudNumber(bottleneckThreshold)} 修为后可能进入（${BOTTLENECK_THRESHOLD}%）`,
+                  : `${formatHudNumber(bottleneckThreshold)} 窥悟后可能进入（${BOTTLENECK_THRESHOLD}%）`,
               },
               {
                 label: '冲关失败',
@@ -528,7 +528,7 @@ export function GameTopHud({ snapshot }: { snapshot: GameHudSnapshot | null }) {
               {
                 label: '走火风险',
                 value: progress.innerDemon
-                  ? `心魔缠身，风险 ${progress.deviationRisk}%`
+                  ? `魔障缠身，风险 ${progress.deviationRisk}%`
                   : `${progress.deviationRisk}%`,
               },
             ]}
@@ -561,7 +561,7 @@ export function GameTopHud({ snapshot }: { snapshot: GameHudSnapshot | null }) {
               },
               {
                 label: '获取途径',
-                value: '闭关顿悟、秘境历练、任务或丹药',
+                value: '闭关窥真、秘境历练、任务或香品',
               },
               {
                 label: '主要用途',
@@ -581,7 +581,7 @@ export function GameTopHud({ snapshot }: { snapshot: GameHudSnapshot | null }) {
       title: `${qiInfo.icon} ${qiInfo.label}`,
       content: (
         <div className="space-y-3 text-sm leading-7">
-          <p>进入秘境、闭关修行、突破与造物时需要消耗的一定的天地灵气。</p>
+          <p>进入秘境、闭关修行、突破与造物时需要消耗的一定的灯油。</p>
           <div className="border-ink/10 bg-bgpaper/70 space-y-1 border border-dashed px-3 py-2">
             <p>
               当前{qiInfo.label}：
@@ -624,13 +624,13 @@ export function GameTopHud({ snapshot }: { snapshot: GameHudSnapshot | null }) {
                   </td>
                 </tr>
                 <tr>
-                  <td className="px-3 py-1.5">炼丹</td>
+                  <td className="px-3 py-1.5">制香</td>
                   <td className="text-ink px-3 py-1.5 text-right font-mono">
-                    1～20（每 200 药蕴 1 点）
+                    1～20（每 200 香蕴 1 点）
                   </td>
                 </tr>
                 <tr>
-                  <td className="px-3 py-1.5">炼器</td>
+                  <td className="px-3 py-1.5">封灵</td>
                   <td className="text-ink px-3 py-1.5 text-right font-mono">
                     {QI_ACTION_COSTS.creation_artifact}
                   </td>
@@ -678,17 +678,17 @@ export function GameTopHud({ snapshot }: { snapshot: GameHudSnapshot | null }) {
             <div className="border-ink/10 bg-bgpaper/70 space-y-2 border border-dashed px-3 py-2">
               <p className="text-ink font-medium">安稳</p>
               <p className="text-ink-secondary">
-                当前没有持续伤势、丹药药力或突破准备状态。
+                当前没有持续伤势、香品香力或突破准备状态。
               </p>
               <p className="text-ink-secondary">
-                丹毒无明显压制，闭关与突破会按常规状态结算。
+                香毒无明显压制，闭关与突破会按常规状态结算。
               </p>
             </div>
           ) : null}
 
           {hasToxicity ? (
             <section className="space-y-2">
-              <p className="text-ink text-sm font-medium">丹毒</p>
+              <p className="text-ink text-sm font-medium">香毒</p>
               <div className="border-ink/10 bg-bgpaper/70 space-y-1 border border-dashed px-3 py-2 text-xs leading-5">
                 <p>
                   当前：{snapshot.pillToxicity.label}（

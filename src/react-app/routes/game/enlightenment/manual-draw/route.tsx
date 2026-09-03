@@ -376,7 +376,7 @@ export default function ManualDrawPage() {
       <GameSceneFrame
         variant="lite"
         title="【问法寻卷】"
-        description="需先踏入仙途，方可求取经卷。"
+        description="需先踏入灯途，方可求取经卷。"
       >
         <InkNotice>当前没有活跃角色，暂时无法求卷。</InkNotice>
       </GameSceneFrame>

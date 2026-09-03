@@ -59,7 +59,7 @@ export function getNextNoviceHomeAction(
     ) {
       return {
         title: '📜 战后调息',
-        summary: '第一次探秘已结算，先把气血与法力恢复，再领取入门奖励。',
+        summary: '第一次探秘已结算，先把气血与灯焰恢复，再领取入门奖励。',
         href: '/game/inn',
         label: '调息',
       };
@@ -85,7 +85,7 @@ export function getNextNoviceHomeAction(
   if (task.definitionId === 'tutorial_first_alchemy') {
     return {
       title: '📜 第一炉丹',
-      summary: '去炼丹房使用推荐首炉，完成青露草与凝水花的入门炼制。',
+      summary: '去制香房使用推荐首炉，完成青露草与凝水花的入门炼制。',
       href: '/game/craft/alchemy',
       label: '开炉',
     };
@@ -95,7 +95,7 @@ export function getNextNoviceHomeAction(
     if (hasLowDungeonResource(input.hp, input.mp)) {
       return {
         title: '📜 探秘准备',
-        summary: '首次探秘前先把气血与法力恢复到八成以上。',
+        summary: '首次探秘前先把气血与灯焰恢复到八成以上。',
         href: '/game/inn',
         label: '调息',
       };

@@ -139,7 +139,7 @@ export function FeedbackTable() {
       if (!res.ok) throw new Error(data.error ?? '更新状态失败');
       let message: string;
       if (data.rewardGranted) {
-        message = '状态已更新并通知用户，已发放 8000 灵石奖励';
+        message = '状态已更新并通知用户，已发放 8000 灯油券奖励';
       } else if (data.statusChanged && !data.notifiedUser) {
         message = '状态已更新，但未找到用户角色，站内信未发送';
       } else {
@@ -337,7 +337,7 @@ export function FeedbackTable() {
                                 variant={item.status === s ? 'primary' : 'secondary'}
                               >
                                 {s === 'resolved'
-                                  ? `${STATUS_LABELS[s]} (+8000灵石)`
+                                  ? `${STATUS_LABELS[s]} (+8000灯油券)`
                                   : STATUS_LABELS[s]}
                               </InkButton>
                             ))}

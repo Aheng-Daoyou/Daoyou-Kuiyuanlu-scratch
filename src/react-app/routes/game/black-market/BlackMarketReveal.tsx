@@ -38,7 +38,7 @@ export function BlackMarketRevealPanel({
         <InkBadge tier={reveal.material.rank}>{typeInfo.label}</InkBadge>
       </div>
       <p className="text-ink-secondary mt-4 max-w-2xl text-sm leading-7 sm:text-base">
-        {reveal.material.description || '灵光褪去伪装，真容终于显露。'}
+        {reveal.material.description || '灯晖褪去伪装，真容终于显露。'}
       </p>
 
       {reveal.ownerBeliefSummary ? (
@@ -87,15 +87,15 @@ export function BlackMarketRevealPanel({
       <div className="border-ink/15 mt-8 grid w-full max-w-xl gap-3 border-y py-5 text-sm sm:grid-cols-2 sm:text-base">
         <p>
           货主开价：
-          <strong>{reveal.ownerAskPrice.toLocaleString()} 灵石</strong>
+          <strong>{reveal.ownerAskPrice.toLocaleString()} 灯油券</strong>
         </p>
         <p>
-          成交价：<strong>{reveal.paidPrice.toLocaleString()} 灵石</strong>
+          成交价：<strong>{reveal.paidPrice.toLocaleString()} 灯油券</strong>
         </p>
         <p>
-          真实价值：<strong>{reveal.trueValue.toLocaleString()} 灵石</strong>
+          真实价值：<strong>{reveal.trueValue.toLocaleString()} 灯油券</strong>
         </p>
-        <p>属性：{reveal.material.element || '无明显五行'}</p>
+        <p>属性：{reveal.material.element || '无明显属性'}</p>
         <p>价值比：{reveal.valueRatio.toFixed(2)} 倍</p>
       </div>
 

@@ -6,6 +6,10 @@ import type {
   DungeonState,
 } from '@shared/lib/dungeon/types';
 import { useState } from 'react';
+import {
+  consumeDungeonStream,
+  isDungeonStreamResponse,
+} from './dungeonStream';
 
 function createActionId() {
   return globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random()}`;
@@ -28,6 +32,25 @@ async function readDungeonMutation<T>(
   return consumeResourceMutation<T>(data);
 }
 
+/** SSE 模式下 result 事件 payload 的校验与资源变更消费（与 readDungeonMutation 同语义） */
+async function readDungeonStreamResult<T>(
+  data: unknown,
+): Promise<T | { conflict: true; message?: string }> {
+  const payload = data as {
+    error?: string;
+    message?: string;
+    success?: boolean;
+    state?: unknown;
+  };
+  if (payload?.error) {
+    throw new Error(payload.message || payload.error);
+  }
+  if (!payload?.success || !payload?.state) {
+    throw new Error('副本状态响应协议无效');
+  }
+  return consumeResourceMutation<T>(payload as never);
+}
+
 /**
  * 副本操作Hook
  * 负责处理副本相关的操作（启动、选择选项、退出）
@@ -39,16 +62,34 @@ export function useDungeonActions() {
   /**
    * 启动副本
    */
-  const startDungeon = async (nodeId: string) => {
+  const startDungeon = async (
+    nodeId: string,
+    onNarrative?: (text: string) => void,
+  ) => {
     try {
       setProcessing(true);
       const res = await fetch('/api/dungeon/start', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'text/event-stream',
+        },
         body: JSON.stringify({
           mapNodeId: nodeId,
         }),
       });
+
+      if (res.ok && isDungeonStreamResponse(res)) {
+        const raw = await consumeDungeonStream<unknown>(res, { onNarrative });
+        const data = await readDungeonStreamResult<{ state?: DungeonState }>(
+          raw,
+        );
+        if ('conflict' in data) {
+          throw new Error(data.message ?? '启动秘境失败');
+        }
+        pushToast({ message: '秘境已开启', tone: 'success' });
+        return data.state;
+      }
 
       const data = await readDungeonMutation<{ state?: DungeonState }>(res);
       if ('conflict' in data) {
@@ -71,17 +112,28 @@ export function useDungeonActions() {
   /**
    * 执行选项
    */
-  const performAction = async (option: DungeonOption) => {
+  const performAction = async (
+    option: DungeonOption,
+    onNarrative?: (text: string) => void,
+  ) => {
     try {
       setProcessing(true);
       const res = await fetch('/api/dungeon/action', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'text/event-stream',
+        },
         body: JSON.stringify({
           choiceId: option.id,
           actionId: createActionId(),
         }),
       });
+
+      if (res.ok && isDungeonStreamResponse(res)) {
+        const raw = await consumeDungeonStream<unknown>(res, { onNarrative });
+        return await readDungeonStreamResult(raw);
+      }
 
       return await readDungeonMutation(res);
     } catch (e) {
@@ -136,10 +188,17 @@ export function useDungeonActions() {
   /**
    * 战后休整：继续探索
    */
-  const continueLooting = async () => {
+  const continueLooting = async (onNarrative?: (text: string) => void) => {
     try {
       setProcessing(true);
-      const res = await fetch('/api/dungeon/looting/continue', { method: 'POST' });
+      const res = await fetch('/api/dungeon/looting/continue', {
+        method: 'POST',
+        headers: { Accept: 'text/event-stream' },
+      });
+      if (res.ok && isDungeonStreamResponse(res)) {
+        const raw = await consumeDungeonStream<unknown>(res, { onNarrative });
+        return await readDungeonStreamResult(raw);
+      }
       return await readDungeonMutation(res);
     } catch (e) {
       pushToast({ message: e instanceof Error ? e.message : '操作失败', tone: 'danger' });
@@ -152,10 +211,17 @@ export function useDungeonActions() {
   /**
    * 战后休整：离开秘境
    */
-  const escapeLooting = async () => {
+  const escapeLooting = async (onNarrative?: (text: string) => void) => {
     try {
       setProcessing(true);
-      const res = await fetch('/api/dungeon/looting/escape', { method: 'POST' });
+      const res = await fetch('/api/dungeon/looting/escape', {
+        method: 'POST',
+        headers: { Accept: 'text/event-stream' },
+      });
+      if (res.ok && isDungeonStreamResponse(res)) {
+        const raw = await consumeDungeonStream<unknown>(res, { onNarrative });
+        return await readDungeonStreamResult(raw);
+      }
       return await readDungeonMutation(res);
     } catch (e) {
       pushToast({ message: e instanceof Error ? e.message : '操作失败', tone: 'danger' });
@@ -165,14 +231,24 @@ export function useDungeonActions() {
     }
   };
 
-  const recoverDungeon = async (action: DungeonRecoverAction) => {
+  const recoverDungeon = async (
+    action: DungeonRecoverAction,
+    onNarrative?: (text: string) => void,
+  ) => {
     try {
       setProcessing(true);
       const res = await fetch('/api/dungeon/recover', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'text/event-stream',
+        },
         body: JSON.stringify({ action }),
       });
+      if (res.ok && isDungeonStreamResponse(res)) {
+        const raw = await consumeDungeonStream<unknown>(res, { onNarrative });
+        return await readDungeonStreamResult(raw);
+      }
       return await readDungeonMutation(res);
     } catch (e) {
       pushToast({

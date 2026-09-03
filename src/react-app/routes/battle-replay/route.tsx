@@ -76,7 +76,7 @@ export default function PublicBattleReplayPage() {
             链接可能无效，或原始战绩已不存在。
           </p>
           <Link href="/game" className="text-ink hover:text-crimson">
-            [进入万界道友]
+            [进入窥渊录]
           </Link>
         </div>
       </div>

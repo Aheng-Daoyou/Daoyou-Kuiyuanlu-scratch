@@ -18,7 +18,7 @@ const SPIRIT_STONES = getGameConceptInfo('spirit_stones');
 
 const quickMessages = [
   '仔细观察货物外观',
-  '凝神感知货物灵气',
+  '凝神感知货物香蕴',
   '检查货物破损痕迹',
   '再凑近看看这物件的细节',
   '问问这货的来历',
@@ -217,7 +217,7 @@ export function BlackMarketConversation({
         <span className="text-ink-secondary text-sm">
           当前报价：
           <strong className="text-gold font-normal">
-            {session.currentPrice.toLocaleString()} 灵石
+            {session.currentPrice.toLocaleString()} 灯油券
           </strong>
         </span>
         <InkButton onClick={confirmPurchase} disabled={busy} variant="primary">
@@ -264,7 +264,7 @@ export function BlackMarketConversation({
         isOpen={composerOpen && !dealReady && session.canInteract}
         onClose={() => setComposerOpen(false)}
         title={`与${npc.name}交谈`}
-        description={`当前要价 ${session.currentPrice.toLocaleString()} 灵石。快捷语只会填入说辞，不会直接发送。`}
+        description={`当前要价 ${session.currentPrice.toLocaleString()} 灯油券。快捷语只会填入说辞，不会直接发送。`}
         size="md"
         footer={
           <div className="flex items-center justify-between gap-3">
@@ -336,9 +336,9 @@ export function BlackMarketConversation({
                 disabled={busy || !session.canHaggle}
                 className="text-ink min-w-20 flex-1 bg-transparent px-2 py-1 text-right outline-none"
                 placeholder="输入报价"
-                aria-label="我的灵石出价"
+                aria-label="我的灯油券出价"
               />
-              <span className="text-ink-secondary shrink-0 text-sm">灵石</span>
+              <span className="text-ink-secondary shrink-0 text-sm">灯油券</span>
               <InkButton
                 type="button"
                 variant="ghost"

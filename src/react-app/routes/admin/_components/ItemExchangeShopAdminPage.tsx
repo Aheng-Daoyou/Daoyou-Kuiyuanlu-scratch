@@ -67,7 +67,7 @@ function toMutation(
     '数量',
   );
   if (item?.type === 'artifact' && quantity !== 1) {
-    throw new Error('法宝类商品每次只能发放 1 件');
+    throw new Error('封灵器类商品每次只能发放 1 件');
   }
   if (
     item?.type !== 'artifact' &&
@@ -259,7 +259,7 @@ export function ItemExchangeShopAdminPage({
             disabled={selectedItem?.type === 'artifact'}
             hint={
               selectedItem?.type === 'artifact'
-                ? '法宝固定发放 1 件'
+                ? '封灵器固定发放 1 件'
                 : `材料/消耗品最高 ${ITEM_EXCHANGE_SHOP_MAX_STACK_QUANTITY} 件`
             }
           />

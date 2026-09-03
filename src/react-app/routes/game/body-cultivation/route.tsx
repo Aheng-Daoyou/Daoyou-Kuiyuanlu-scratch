@@ -27,7 +27,7 @@ export default function BodyCultivationPage() {
         <InkNotice>
           尚无角色资料，先创建角色后再查看炼体。
           <InkButton href="/game/create" variant="primary" className="ml-2">
-            觉醒灵根
+            觉醒窍
           </InkButton>
         </InkNotice>
       </div>
@@ -37,7 +37,7 @@ export default function BodyCultivationPage() {
   return (
     <GameSceneFrame
       title="肉身炼体"
-      description="服用炼体丹提升皮肤、筋骨、脏腑、气血与元神五条轨道。满足等级、修为、材料和丹药要求后，可以提升肉身阶位。"
+      description="服用炼体香提升皮肤、筋骨、脏腑、气血与心神五条轨道。满足等级、灯韵、材料和香品要求后，可以提升肉身阶位。"
       headerMeta={
         note ? (
           <GameSceneNote>

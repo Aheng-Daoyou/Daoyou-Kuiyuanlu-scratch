@@ -28,6 +28,8 @@ interface DungeonExploringProps {
   onAction: (option: DungeonOption) => Promise<unknown>;
   onQuit: () => Promise<boolean>;
   processing: boolean;
+  /** 回合叙事流式文本（非 null 表示推演进行中，渐进展示替代静态等待） */
+  streamingNarrative?: string | null;
 }
 
 function OptionCostPreview({ costs }: { costs: DungeonOptionCost[] }) {
@@ -74,8 +76,11 @@ export function DungeonExploring({
   onAction,
   onQuit,
   processing,
+  streamingNarrative,
 }: DungeonExploringProps) {
   const [selectedOptionId, setSelectedOptionId] = useState<number | null>(null);
+  const isStreaming =
+    streamingNarrative !== null && streamingNarrative !== undefined;
 
   if (!lastRound) {
     return null;
@@ -91,11 +96,27 @@ export function DungeonExploring({
       />
 
       <InkCard className="mb-6 flex min-h-50 flex-col justify-center">
-        <p className="text-ink leading-relaxed">
-          {lastRound.scene_description}
-        </p>
+        {isStreaming ? (
+          <>
+            <div className="text-ink-secondary mb-3 text-xs tracking-widest">
+              记档执笔推演中……
+            </div>
+            <p className="text-ink leading-relaxed whitespace-pre-wrap">
+              {streamingNarrative || '烛火微晃，下一幕正在成形——'}
+            </p>
+          </>
+        ) : (
+          <p className="text-ink leading-relaxed">
+            {lastRound.scene_description}
+          </p>
+        )}
       </InkCard>
 
+      {isStreaming ? (
+        <div className="text-ink-secondary py-6 text-center text-sm">
+          抉择正在生成，读罢上文自见分晓……
+        </div>
+      ) : (
       <InkSection title="抉择时刻">
         <div className="space-y-3">
           {lastRound.interaction.options.map((option) => {
@@ -158,6 +179,7 @@ export function DungeonExploring({
           确定抉择
         </InkButton>
       </InkSection>
+      )}
 
       {state.history.length > 0 ? (
         <InkSection title="回顾前路" subdued>

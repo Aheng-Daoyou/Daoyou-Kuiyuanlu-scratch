@@ -1,1 +1,1 @@
-export { LingGen, LingGenMini } from './LingGen';
+export { BaQiao, BaQiaoMini } from './BaQiao';

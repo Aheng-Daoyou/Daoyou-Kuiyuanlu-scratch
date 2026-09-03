@@ -41,9 +41,9 @@ export const gameDockGroups: GameNavGroup[] = [
     scenes: [
       {
         id: 'cave',
-        sceneLabel: '洞府',
+        sceneLabel: '灯宅',
         href: '/game',
-        coreDockLabel: '洞府',
+        coreDockLabel: '灯宅',
       },
       {
         id: 'cultivator',
@@ -65,7 +65,7 @@ export const gameDockGroups: GameNavGroup[] = [
       },
       {
         id: 'retreat',
-        sceneLabel: '修炼室',
+        sceneLabel: '静室',
         href: '/game/retreat',
       },
       {
@@ -75,9 +75,9 @@ export const gameDockGroups: GameNavGroup[] = [
       },
       {
         id: 'spirit-field',
-        sceneLabel: '洞府灵田',
+        sceneLabel: '灯宅灯田',
         href: '/game/spirit-field',
-        expandedDockLabel: '🌱 洞府灵田',
+        expandedDockLabel: '🌱 灯宅灯田',
       },
       {
         id: 'enlightenment',
@@ -119,15 +119,15 @@ export const gameDockGroups: GameNavGroup[] = [
       { id: 'sect-enlightenment-cliff', sceneLabel: '宗门悟道' },
       { id: 'sect-treasury', sceneLabel: '宗门宝库' },
       { id: 'sect-industries', sceneLabel: '宗门建设' },
-      { id: 'sect-cultivation-room', sceneLabel: '宗门修炼室' },
-      { id: 'sect-alchemy', sceneLabel: '宗门丹房' },
+      { id: 'sect-cultivation-room', sceneLabel: '宗门静室' },
+      { id: 'sect-alchemy', sceneLabel: '宗门闻香房' },
       { id: 'sect-refinery', sceneLabel: '宗门器坊' },
-      { id: 'sect-spirit-vein', sceneLabel: '宗门灵脉' },
+      { id: 'sect-spirit-vein', sceneLabel: '宗门灯脉' },
       { id: 'sect-herb-garden', sceneLabel: '宗门药田' },
       { id: 'sect-cave', sceneLabel: '弟子居所' },
       { id: 'sect-gate', sceneLabel: '宗门山门' },
       { id: 'sect-gate-sweep', sceneLabel: '清扫山门' },
-      { id: 'sect-spirit-vein-mining', sceneLabel: '灵矿采掘' },
+      { id: 'sect-spirit-vein-mining', sceneLabel: '灯矿采掘' },
       { id: 'sect-task-battle', sceneLabel: '宗门战局' },
       {
         id: 'training-room',
@@ -206,15 +206,15 @@ export const gameDockGroups: GameNavGroup[] = [
       },
       {
         id: 'alchemy',
-        sceneLabel: '炼丹房',
+        sceneLabel: '制香房',
       },
       {
         id: 'refine',
-        sceneLabel: '炼器室',
+        sceneLabel: '封灵室',
       },
       {
         id: 'map',
-        sceneLabel: '修仙界地图',
+        sceneLabel: '烬洲地图',
       },
     ],
   },
@@ -224,9 +224,9 @@ export const gameDockGroups: GameNavGroup[] = [
     scenes: [
       {
         id: 'market',
-        sceneLabel: '修仙坊市',
+        sceneLabel: '灯下坊市',
         href: '/game/map?intent=market',
-        expandedDockLabel: '🛖 修仙坊市',
+        expandedDockLabel: '🛖 灯下坊市',
       },
       {
         id: 'black-market',

@@ -25,7 +25,7 @@ export function formatDungeonCostName(cost: DungeonOptionCost) {
   if (cost.type === 'battle') {
     const metadata = cost.metadata;
     return metadata
-      ? `遭遇 ${metadata.realm_stage}${metadata.race}${metadata.enemy_name ? `·${metadata.enemy_name}` : ''}`
+      ? `遭遇 ${metadata.realm_stage}${metadata.clan}${metadata.enemy_name ? `·${metadata.enemy_name}` : ''}`
       : '遭遇战';
   }
 

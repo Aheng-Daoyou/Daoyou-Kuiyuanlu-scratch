@@ -45,7 +45,7 @@ export function BattlePreparation({
     openDialog({
       title: '放弃战斗',
       content:
-        '确定要放弃此战吗？你将狼狈退出，但不会受伤。放弃后会直接进入副本结算。',
+        '确定要放弃此战吗？你将狼狈退出，但不会受伤。放弃后会直接进入秘境结算。',
       confirmLabel: '确认放弃',
       cancelLabel: '取消',
       onConfirm: async () => {
@@ -106,7 +106,7 @@ export function BattlePreparation({
             此战避无可避，当速决断！
           </p>
           <p className="text-wood mt-3 text-sm leading-6">
-            新手先点“神识查探”再决定。若属性差距明显，撤退不会受伤；强行战败会结束本轮探秘。
+            新手先点“心神查探”再决定。若属性差距明显，撤退不会受伤；强行战败会结束这一更的探秘。
           </p>
         </div>
       </div>
@@ -119,7 +119,7 @@ export function BattlePreparation({
           pending={!enemy}
           pendingLabel="查探中……"
         >
-          👁️ 神识查探
+          👁️ 心神查探
         </InkButton>
 
         <InkButton

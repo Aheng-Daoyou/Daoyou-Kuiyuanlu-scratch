@@ -19,7 +19,7 @@ import {
 import { SectIdentityDetails } from '@app/components/feature/sect/SectIdentity';
 import { useActiveSectContextQuery } from '@app/components/feature/sect/sectResources';
 import { useSectIdentityDialog } from '@app/components/feature/sect/useSectIdentityDialog';
-import { LingGen } from '@app/components/func/LingGen';
+import { BaQiao } from '@app/components/func/BaQiao';
 import { useInkUI } from '@app/components/providers/InkUIProvider';
 import {
   InkBadge,
@@ -44,7 +44,7 @@ import { GameSceneSection } from './GameSceneSection';
 const PRIMARY_ATTRIBUTE_HELP = [
   {
     label: attrLabel(AttributeType.VITALITY),
-    description: '稳固生命根基，决定最大气血并提供少量法术防御。',
+    description: '稳固生命根基，决定最大气血并提供少量法印防御。',
   },
   {
     label: attrLabel(AttributeType.STRENGTH),
@@ -52,7 +52,7 @@ const PRIMARY_ATTRIBUTE_HELP = [
   },
   {
     label: attrLabel(AttributeType.SPIRIT),
-    description: '滋养术法根基，决定法术攻击并提供少量法力。',
+    description: '滋养灯律根基，决定法印攻击并提供少量灯焰。',
   },
   {
     label: attrLabel(AttributeType.ENDURANCE),
@@ -64,7 +64,7 @@ const PRIMARY_ATTRIBUTE_HELP = [
   },
   {
     label: attrLabel(AttributeType.WILLPOWER),
-    description: '凝练神魂，影响法术防御、法力以及控制命中与抗性。',
+    description: '凝练神魂，影响法印防御、灯焰以及控制命中与抗性。',
   },
 ];
 
@@ -73,7 +73,7 @@ const PRIMARY_ATTRIBUTE_HELP_DIALOG = {
   content: (
     <div className="space-y-3 text-sm leading-7">
       <p className="text-ink-secondary">
-        六维各有明确的主要职责，体魄与根骨额外提供少量交叉生存收益；法宝、功法与状态仍会在此基础上继续增减。
+        六维各有明确的主要职责，灯红与灯骨额外提供少量交叉生存收益；封灵器、功法与状态仍会在此基础上继续增减。
       </p>
       <div className="border-ink/15 overflow-hidden border border-dashed">
         {PRIMARY_ATTRIBUTE_HELP.map((item) => (
@@ -141,7 +141,7 @@ export function CultivatorOverviewPanel() {
   const [isSavingTitle, setIsSavingTitle] = useState(false);
 
   if (!cultivator) {
-    return <InkNotice>尚无角色资料，先去觉醒灵根，再来凝视真形。</InkNotice>;
+    return <InkNotice>尚无角色资料，先去燃灯开窍，再来凝视真形。</InkNotice>;
   }
   const inventory = cultivator.inventory;
   const skills = cultivator.skills;
@@ -159,7 +159,7 @@ export function CultivatorOverviewPanel() {
       navigate('/game/reincarnate');
     } catch (err) {
       pushToast({
-        message: err instanceof Error ? err.message : '兵解失败',
+        message: err instanceof Error ? err.message : '熄灯失败',
         tone: 'danger',
       });
     }
@@ -213,9 +213,9 @@ export function CultivatorOverviewPanel() {
       title: '轮回重修',
       content: (
         <div className="space-y-2">
-          <p className="text-crimson text-lg font-bold">道友当真要轮回重修？</p>
+          <p className="text-crimson text-lg font-bold">守灯人当真要轮回重修？</p>
           <p>
-            轮回后，当前修为将尽数散去，
+            轮回后，当前窥悟将尽数散去，
             <span className="text-crimson">角色状态变为「已陨落」</span>。
           </p>
           <p>但可保留部分前世记忆（名字、故事）进入轮回，开启新的一世。</p>
@@ -288,7 +288,7 @@ export function CultivatorOverviewPanel() {
           {cultivator.balance_notes ? (
             <OverviewDetailItem
               icon="🪶"
-              label="天道评语"
+              label="灯律评语"
               value={cultivator.balance_notes}
             />
           ) : null}
@@ -325,14 +325,14 @@ export function CultivatorOverviewPanel() {
 
       <CultivatorCurrentStatusSection />
 
-      <LingGen
+      <BaQiao
         spiritualRoots={cultivator.spiritual_roots || []}
-        title="灵根"
+        title="窍"
         sectionVariant="scene"
       />
 
       {cultivator.pre_heaven_fates?.length > 0 ? (
-        <GameSceneSection title="先天命格">
+        <GameSceneSection title="先天命数">
           <InkList>
             {cultivator.pre_heaven_fates.map((fate, idx) => {
               const fateDisplay = toFateDisplayModel(fate);
@@ -393,7 +393,7 @@ export function CultivatorOverviewPanel() {
 
       <BodyCultivationEntrySection />
 
-      <GameSceneSection title="所御法宝">
+      <GameSceneSection title="所御封灵器">
         {equippedItems.length > 0 ? (
           <InkList>
             {equippedItems.map((item) => {
@@ -427,7 +427,7 @@ export function CultivatorOverviewPanel() {
             })}
           </InkList>
         ) : (
-          <InkNotice>尚未佩戴法宝</InkNotice>
+          <InkNotice>尚未佩戴封灵器</InkNotice>
         )}
       </GameSceneSection>
 
@@ -494,7 +494,7 @@ export function CultivatorOverviewPanel() {
 
       <div className="bg-ink/5 rounded-sm p-2 text-right">
         <p className="text-ink-secondary text-sm leading-7">
-          若此身道途已尽，可舍去此生，重入轮回。
+          若此身灯路已尽，可舍去此生，重入轮回。
         </p>
         <InkButton className="text-sm" onClick={openReincarnateDialog}>
           转世重修

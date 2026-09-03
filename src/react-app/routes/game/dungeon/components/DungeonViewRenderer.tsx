@@ -46,6 +46,8 @@ interface DungeonViewRendererProps {
   displayResources?: CultivatorDisplaySnapshot['resources'];
   tasks: TaskInstance[];
   processing: boolean;
+  /** 回合叙事流式文本（非 null 表示推演进行中） */
+  streamingNarrative?: string | null;
   actions: {
     startDungeon: (nodeId: string) => Promise<void>;
     performAction: (option: DungeonOption) => Promise<void>;
@@ -108,7 +110,7 @@ function renderPreparationNotice(
       : statusNames
         ? `当前有${statusNames}状态，出行前可先调息。`
         : hpPercent < 60 || mpPercent < 60
-          ? '气血或法力偏低，出行前可先补足。'
+          ? '气血或灯焰偏低，出行前可先补足。'
           : '状态平稳，可以出行；遇险时优先查探再决断。';
 
   return (
@@ -120,12 +122,12 @@ function renderPreparationNotice(
           <div className="space-y-3 text-sm leading-7">
             <p>秘境推进以当前轮次、选项代价、危险度和结算结果为准。</p>
             <p>
-              气血、法力、异常状态用于出行前判断，不作为探索选项的通过条件。
+              气血、灯焰、异常状态用于出行前判断，不作为探索选项的通过条件。
             </p>
             <p>
               遭遇强敌时可先查探；撤退会进入结算或离开流程，继续深入会提高风险与收益预期。
             </p>
-            <p>丹药仍通过储物袋等通用入口使用，不写入当前副本进度。</p>
+            <p>香品仍通过储物袋等通用入口使用，不写入当前秘境进度。</p>
           </div>
         ),
       }}
@@ -148,7 +150,7 @@ function renderPreparationNotice(
           </div>
           <div>
             <div className="mb-1 flex items-center justify-between gap-3 text-xs">
-              <span className="text-ink-secondary">法力</span>
+              <span className="text-ink-secondary">灯焰</span>
               <span className="text-ink tabular-nums">
                 {Math.floor(mp?.current ?? 0)}/{Math.floor(mp?.max ?? 0)}
               </span>
@@ -194,7 +196,7 @@ function renderPreparationNotice(
             去灵眼之泉
           </InkButton>
           <InkButton href="/game/craft/alchemy" variant="secondary">
-            去炼丹房
+            去制香房
           </InkButton>
         </div>
       </div>
@@ -211,6 +213,7 @@ export function DungeonViewRenderer({
   displayResources,
   tasks,
   processing,
+  streamingNarrative,
   actions,
   onSettlementConfirm,
 }: DungeonViewRendererProps) {
@@ -324,7 +327,7 @@ export function DungeonViewRenderer({
       retry_continue: '重试推进',
       retry_settle: '重试结算',
       safe_retreat: '安全撤退',
-      force_quit: '放弃副本',
+      force_quit: '放弃秘境',
     };
     const recoverActionVariants: Record<
       DungeonRecoverAction,
@@ -350,7 +353,7 @@ export function DungeonViewRenderer({
             </h2>
             <p className="text-ink-secondary leading-7">
               {viewState.state.statusReason ||
-                '当前副本状态可恢复，请选择后续处理方式。'}
+                '当前秘境状态可恢复，请选择后续处理方式。'}
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -386,6 +389,7 @@ export function DungeonViewRenderer({
           onAction={actions.performAction}
           onQuit={actions.quitDungeon}
           processing={processing}
+          streamingNarrative={streamingNarrative}
         />
       </DungeonSceneScreen>
     );
@@ -406,7 +410,7 @@ export function DungeonViewRenderer({
       cultivator &&
       selectedNodeRealm &&
       !canChallengeDungeonRealm(cultivator.realm, selectedNodeRealm)
-        ? `当前境界${cultivator.realm}不可挑战${selectedNodeRealm}副本，请先提升大境界。`
+        ? `当前境界${cultivator.realm}不可挑战${selectedNodeRealm}秘境，请先提升大境界。`
         : null;
     const readiness =
       cultivator && displayResources
@@ -426,16 +430,27 @@ export function DungeonViewRenderer({
       <DungeonSceneScreen
         descriptor={resolveDungeonSceneDescriptor('map_selection')}
       >
-        <InkCard className="mb-6 p-6">
-          <div className="space-y-4 text-center">
-            <div className="my-4 text-6xl">🏔️</div>
-            <p>
-              修仙界广袤无垠，机缘与危机并存。
-              <br />
-              道友可愿前往，体悟一段未知的旅程？
+        {streamingNarrative !== null && streamingNarrative !== undefined ? (
+          <InkCard className="mb-6 flex min-h-50 flex-col justify-center p-6">
+            <div className="text-ink-secondary mb-3 text-xs tracking-widest">
+              记档执笔推演中……
+            </div>
+            <p className="text-ink leading-relaxed whitespace-pre-wrap">
+              {streamingNarrative || '烛火初点，卷宗徐展——'}
             </p>
-          </div>
-        </InkCard>
+          </InkCard>
+        ) : (
+          <InkCard className="mb-6 p-6">
+            <div className="space-y-4 text-center">
+              <div className="my-4 text-6xl">🏔️</div>
+              <p>
+                烬洲广袤无垠，机缘与危机并存。
+                <br />
+                道友可愿前往，体悟一段未知的旅程？
+              </p>
+            </div>
+          </InkCard>
+        )}
         <InkSection title="选择秘境">
           <DungeonMapSelector
             selectedNode={selectedNode ?? null}

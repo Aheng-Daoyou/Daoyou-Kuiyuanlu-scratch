@@ -31,7 +31,7 @@ const dungeonSceneDescriptors: Record<
     sceneLabel: '云游探秘',
     subtitle: '天机混沌，正在重整历练轨迹。',
     backAction: {
-      label: '返回洞府',
+      label: '返回灯宅',
       href: '/game',
     },
     density: 'centered',
@@ -41,7 +41,7 @@ const dungeonSceneDescriptors: Record<
     sceneLabel: '云游探秘',
     subtitle: '此处机缘需真身在场方可接引。',
     backAction: {
-      label: '返回洞府',
+      label: '返回灯宅',
       href: '/game',
     },
     density: 'centered',
@@ -51,7 +51,7 @@ const dungeonSceneDescriptors: Record<
     sceneLabel: '云游探秘',
     subtitle: '择一处秘境，定此行的起点与气数。',
     backAction: {
-      label: '返回洞府',
+      label: '返回灯宅',
       href: '/game',
     },
     density: 'wide',
@@ -61,7 +61,7 @@ const dungeonSceneDescriptors: Record<
     sceneLabel: '历练途中',
     subtitle: '前路气机骤变，每一步都在改变结局。',
     backAction: {
-      label: '返回洞府',
+      label: '返回灯宅',
       href: '/game',
     },
     density: 'card',
@@ -78,7 +78,7 @@ const dungeonSceneDescriptors: Record<
     loadingMessage: '正在探查敌手……',
   },
   in_battle: {
-    sceneLabel: '副本战斗',
+    sceneLabel: '秘境战斗',
     subtitle: '此战胜负，直接改写此行所获。',
     backAction: {
       label: '结束历练',
@@ -91,17 +91,17 @@ const dungeonSceneDescriptors: Record<
     sceneLabel: '战后休整',
     subtitle: '余波未散，决定是继续深入，还是及时收手。',
     backAction: {
-      label: '返回洞府',
+      label: '返回灯宅',
       href: '/game',
     },
     density: 'card',
     loadingMessage: '正在整理战后余波……',
   },
   settlement: {
-    sceneLabel: '探索结束',
-    subtitle: '尘埃落定，此行所得已可回带洞府。',
+    sceneLabel: '结案',
+    subtitle: '尘埃落定，此行所得已可回带灯宅。',
     backAction: {
-      label: '返回洞府',
+      label: '返回灯宅',
       href: '/game',
     },
     density: 'wide',

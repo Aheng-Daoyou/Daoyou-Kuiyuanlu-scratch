@@ -110,8 +110,8 @@ const HIGH_VALUE_PURCHASE_CONFIRM_THRESHOLD = 100_000;
 const TYPE_TABS: Array<{ label: string; value: AuctionTypeFilter }> = [
   { label: '全部', value: 'all' },
   { label: '材料', value: 'material' },
-  { label: '法宝', value: 'artifact' },
-  { label: '丹药', value: 'consumable' },
+  { label: '封灵器', value: 'artifact' },
+  { label: '香品', value: 'consumable' },
 ];
 
 const VIEW_TABS: Array<{ label: string; value: AuctionScope }> = [
@@ -495,13 +495,13 @@ export default function AuctionPage() {
     );
     if (settlement.grossAmount > AUCTION_MAX_TRANSACTION_TOTAL) {
       pushToast({
-        message: `单次购买总价不得超过 ${AUCTION_MAX_TRANSACTION_TOTAL.toLocaleString()} 灵石`,
+        message: `单次购买总价不得超过 ${AUCTION_MAX_TRANSACTION_TOTAL.toLocaleString()} 灯油券`,
         tone: 'warning',
       });
       return;
     }
     if (cultivator.spirit_stones < settlement.grossAmount) {
-      pushToast({ message: '囊中羞涩，灵石不足', tone: 'warning' });
+      pushToast({ message: '囊中羞涩，灯油券不足', tone: 'warning' });
       return;
     }
     if (listing.sellerId === cultivator.id) {
@@ -520,7 +520,7 @@ export default function AuctionPage() {
             <p>确定购入「{listing.itemName}」吗？</p>
             <p>
               数量：{requestedQuantity} 件 · 单价：
-              {listing.price.toLocaleString()} 灵石
+              {listing.price.toLocaleString()} 灯油券
             </p>
             <p className="text-gold font-bold">
               将消耗：{SPIRIT_STONES_INFO.icon}{' '}
@@ -936,7 +936,7 @@ export default function AuctionPage() {
     <GameSceneFrame
       variant="workflow"
       title="【拍卖行】"
-      description="各路道友寄售珍材法宝，按类检索后再议价成交。"
+      description="各路道友寄售珍材封灵器，按类检索后再议价成交。"
       aside={
         <>
           <GameSceneAsideSection title="寄售摘要">

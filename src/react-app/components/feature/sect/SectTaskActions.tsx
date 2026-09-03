@@ -235,7 +235,7 @@ export function MiningEntryAction({
     >
       {action.enabled
         ? display === 'conversation'
-          ? '我这就去灵脉采掘'
+          ? '我这就去灯脉采掘'
           : action.label
         : (action.disabledReason ?? '尚未解锁')}
     </InkButton>

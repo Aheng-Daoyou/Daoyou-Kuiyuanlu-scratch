@@ -19,9 +19,9 @@ export default function CultivatorPage() {
     return (
       <div className="flex h-full items-center justify-center px-4">
         <InkNotice>
-          尚无角色资料，先去觉醒灵根，再来凝视真形。
+          尚无角色资料，先去觉醒窍，再来凝视真形。
           <InkButton href="/game/create" variant="primary" className="ml-2">
-            觉醒灵根
+            觉醒窍
           </InkButton>
         </InkNotice>
       </div>

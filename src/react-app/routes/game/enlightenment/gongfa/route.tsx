@@ -223,7 +223,7 @@ export default function GongfaCreationPage() {
 
   const handleSubmit = async () => {
     if (!cultivator) {
-      pushToast({ message: '请先在首页觉醒灵根。', tone: 'warning' });
+      pushToast({ message: '请先在首页觉醒窍。', tone: 'warning' });
       return;
     }
 
@@ -243,7 +243,7 @@ export default function GongfaCreationPage() {
       confirmLabel: '开始参悟',
       onConfirm: async () => {
         setSubmitting(true);
-        setStatus('感悟天地，参悟大道……');
+        setStatus('窥悟天地，参悟灯道……');
         setCreatedResult(null);
         setIsResultModalOpen(false);
 
@@ -311,7 +311,7 @@ export default function GongfaCreationPage() {
               <p>
                 已选材料：{selectedMaterialIds.length} / {MAX_MATERIALS}
               </p>
-              <p>预计感悟：{displayEstimatedCost?.comprehension ?? 0}</p>
+              <p>预计窥悟：{displayEstimatedCost?.comprehension ?? 0}</p>
               <p>待处理新法：{pendingReplaceHref ? '有' : '无'}</p>
             </div>
           </GameSceneAsideSection>
@@ -378,7 +378,7 @@ export default function GongfaCreationPage() {
             <span
               className={`text-xs ${displayCanAfford ? 'text-teal' : 'text-crimson'}`}
             >
-              {displayCanAfford ? '✓ 感悟充足' : '✗ 感悟不足'}
+              {displayCanAfford ? '✓ 窥悟充足' : '✗ 窥悟不足'}
             </span>
           </div>
         ) : (

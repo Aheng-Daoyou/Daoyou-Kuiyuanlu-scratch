@@ -8,10 +8,10 @@ import type {
   AdminBattleScenario,
 } from '@shared/contracts/adminBattleSimulator';
 import {
-  ENEMY_RACE_VALUES,
+  ENEMY_CLAN_VALUES,
   REALM_STAGE_VALUES,
   REALM_VALUES,
-  type EnemyRace,
+  type EnemyClan,
   type RealmStage,
   type RealmType,
 } from '@shared/types/constants';
@@ -220,7 +220,7 @@ export default function AdminBattleSimulatorPage() {
   const [sampleLogLimit, setSampleLogLimit] = useState('3');
   const [templateRealm, setTemplateRealm] = useState('');
   const [templateStage, setTemplateStage] = useState('');
-  const [templateRace, setTemplateRace] = useState('');
+  const [templateClan, setTemplateClan] = useState('');
   const [difficultyMin, setDifficultyMin] = useState('0');
   const [difficultyMax, setDifficultyMax] = useState('100');
   const [liveRealm, setLiveRealm] = useState('');
@@ -263,7 +263,7 @@ export default function AdminBattleSimulatorPage() {
           templateFilters: {
             realms: optionalValue<RealmType>(templateRealm),
             realmStages: optionalValue<RealmStage>(templateStage),
-            races: optionalValue<EnemyRace>(templateRace),
+            clans: optionalValue<EnemyClan>(templateClan),
             difficultyMin: Number(difficultyMin || 0),
             difficultyMax: Number(difficultyMax || 100),
           },
@@ -405,14 +405,14 @@ export default function AdminBattleSimulatorPage() {
               ))}
             </InkSelect>
             <InkSelect
-              label="模板种族"
-              value={templateRace}
-              onChange={setTemplateRace}
+              label="模板三族"
+              value={templateClan}
+              onChange={setTemplateClan}
             >
               <option value="">全部</option>
-              {ENEMY_RACE_VALUES.map((race) => (
-                <option key={race} value={race}>
-                  {race}
+              {ENEMY_CLAN_VALUES.map((clan) => (
+                <option key={clan} value={clan}>
+                  {clan}
                 </option>
               ))}
             </InkSelect>

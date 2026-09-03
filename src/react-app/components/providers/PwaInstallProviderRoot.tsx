@@ -10,7 +10,7 @@ import { PwaInstallContext } from './pwaInstallContext';
 function ManualInstallInstructions({ ios }: { ios: boolean }) {
   return ios ? (
     <ol className="text-ink-secondary list-decimal space-y-2 pl-5 text-sm leading-7">
-      <li>使用 Safari 打开万界道友。</li>
+      <li>使用 Safari 打开窥渊录。</li>
       <li>点击浏览器工具栏中的“分享”。</li>
       <li>选择“添加到主屏幕”，再点击“添加”。</li>
     </ol>

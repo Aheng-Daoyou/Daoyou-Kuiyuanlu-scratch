@@ -284,7 +284,7 @@ export function ItemLibraryPicker({
           <InkSelect label="类型" value={type} onChange={handleTypeChange}>
             <option value="">全部类型</option>
             <option value="consumable">消耗品</option>
-            <option value="artifact">法宝</option>
+            <option value="artifact">封灵器</option>
             <option value="material">材料</option>
           </InkSelect>
           <InkSelect

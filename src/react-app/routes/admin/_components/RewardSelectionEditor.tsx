@@ -78,7 +78,7 @@ export function RewardSelectionEditor({
           onClick={addSpiritStones}
           disabled={disabled}
         >
-          添加灵石
+          添加灯油券
         </InkButton>
         <InkButton
           type="button"

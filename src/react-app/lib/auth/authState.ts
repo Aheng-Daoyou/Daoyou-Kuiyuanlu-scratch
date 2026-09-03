@@ -23,6 +23,7 @@ export interface AuthContextType {
     email: string,
     password: string,
     captchaPayload?: string,
+    inviteCode?: string,
   ) => Promise<{ error: AuthActionError | null }>;
   signInWithPassword: (
     email: string,
@@ -37,6 +38,7 @@ export interface AuthContextType {
     email: string,
     otp: string,
     name?: string,
+    inviteCode?: string,
   ) => Promise<{ error: AuthActionError | null }>;
   signInWithGitHub: (
     callbackURL?: string,

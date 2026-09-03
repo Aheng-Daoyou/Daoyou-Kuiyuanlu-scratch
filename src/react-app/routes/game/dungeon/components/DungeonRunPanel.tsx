@@ -183,7 +183,7 @@ export function DungeonRunPanel({
     async (item: Artifact) => {
       if (!item.id) {
         pushToast({
-          message: '此法宝暂无有效 ID，无法操作。',
+          message: '此封灵器暂无有效 ID，无法操作。',
           tone: 'warning',
         });
         return;
@@ -199,13 +199,13 @@ export function DungeonRunPanel({
           }),
         );
 
-        pushToast({ message: '法宝灵性已调顺。', tone: 'success' });
+        pushToast({ message: '封灵器灵性已调顺。', tone: 'success' });
       } catch (error) {
         pushToast({
           message:
             error instanceof Error
-              ? `法宝操作失败：${error.message}`
-              : '法宝操作失败。',
+              ? `封灵器操作失败：${error.message}`
+              : '封灵器操作失败。',
           tone: 'danger',
         });
       } finally {
@@ -283,7 +283,7 @@ export function DungeonRunPanel({
             </div>
             <div className="col-span-2 flex items-center justify-between gap-3 text-xs md:col-span-1 md:min-w-60">
               <span className="text-ink-secondary">
-                {state.currentRound}/{state.maxRounds}轮 · 危险{' '}
+                {state.currentRound}/{state.maxRounds}更 · 危险{' '}
                 {state.dangerScore}
               </span>
               <span className="text-crimson">
@@ -298,8 +298,8 @@ export function DungeonRunPanel({
       <InkDetailDrawer
         isOpen={drawerOpen}
         onClose={() => setDrawerOpen(false)}
-        title="副本行囊"
-        description={`第 ${state.currentRound}/${state.maxRounds} 轮 · 当前危险 ${state.dangerScore}`}
+        title="秘境行囊"
+        description={`第 ${state.currentRound}/${state.maxRounds} 更 · 当前危险 ${state.dangerScore}`}
         size="lg"
         footer={
           <div className="flex justify-end">
@@ -314,7 +314,7 @@ export function DungeonRunPanel({
           onChange={handleMainTabChange}
           className="text-sm"
           items={[
-            { label: '副本状态', value: 'status' },
+            { label: '秘境状态', value: 'status' },
             { label: '储物袋', value: 'inventory' },
           ]}
         />
@@ -331,7 +331,7 @@ export function DungeonRunPanel({
                 </p>
               </div>
               <div>
-                <div className="text-ink-secondary text-xs">本轮收获</div>
+                <div className="text-ink-secondary text-xs">本更收获</div>
                 <p>
                   {rewardNames.length > 0
                     ? rewardNames.join('、')
@@ -381,9 +381,9 @@ export function DungeonRunPanel({
                     />
                   )
                 ) : !artifactInventory.data && isInventoryLoading ? (
-                  <GameLoadingState message="正在检索法宝……" variant="inline" />
+                  <GameLoadingState message="正在检索封灵器……" variant="inline" />
                 ) : artifacts.length === 0 ? (
-                  <InkNotice className="my-2">暂无法宝。</InkNotice>
+                  <InkNotice className="my-2">暂无封灵器。</InkNotice>
                 ) : (
                   artifacts.map((item) => {
                     const equippedNow = isEquippedArtifact(item, equipped);
@@ -442,7 +442,7 @@ export function DungeonRunPanel({
                   />
                 ) : directUseConsumables.length === 0 ? (
                   <InkNotice className="my-2">
-                    暂无可直接使用的丹药或聚灵符。
+                    暂无可直接使用的香品或灯油补给。
                   </InkNotice>
                 ) : (
                   directUseConsumables.map((item) => {
@@ -472,7 +472,7 @@ export function DungeonRunPanel({
                           <p className="text-ink-secondary line-clamp-2 text-xs leading-5">
                             {pillDisplay?.effectSummary ??
                               item.description ??
-                              '使用后恢复天地灵气。'}
+                              '使用后恢复灯油。'}
                           </p>
                         </div>
                         <InkButton

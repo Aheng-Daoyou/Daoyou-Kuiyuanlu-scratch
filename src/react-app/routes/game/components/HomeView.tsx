@@ -119,6 +119,22 @@ export function HomeView() {
   );
 
   if (isLoading || tasksLoading || !tasks) {
+    const projErrStr =
+      projection.error === null || projection.error === undefined
+        ? 'none'
+        : String(projection.error);
+    const taskErrStr =
+      taskError === null || taskError === undefined
+        ? 'none'
+        : String(taskError);
+    const diag =
+      `proj.loading=${projection.loading} proj.error=${projErrStr} | ` +
+      `progress.loading=${progress.loading} | ` +
+      `tasksLoading=${tasksLoading} taskError=${taskErrStr} | ` +
+      `cultivator=${cultivator ? 'OK' : 'NULL'}`;
+    if (typeof window !== 'undefined') {
+      console.warn('[HomeView loading]', diag);
+    }
     return <GameSceneLoading message="正在推演天机……" />;
   }
 
@@ -126,7 +142,7 @@ export function HomeView() {
     return (
       <div className="flex h-full items-center justify-center px-4">
         <InkNotice>
-          尚未觉醒灵根，无法入驻洞府。
+          尚未觉醒窍，无法入驻灯宅。
           <InkButton href="/game/create" variant="primary" className="ml-2">
             前往觉醒
           </InkButton>
@@ -230,7 +246,7 @@ export function HomeView() {
       <HomeUrgentRow
         key="breakthrough"
         title={<span className="text-crimson">⚡ 突破瓶颈</span>}
-        summary={`修为进度已达 ${Math.min(100, caveStatus?.cultivationPercent ?? 0)}%`}
+        summary={`窥悟进度已达 ${Math.min(100, caveStatus?.cultivationPercent ?? 0)}%`}
         action={
           <InkButton href="/game/retreat" variant="primary">
             突破
@@ -260,7 +276,7 @@ export function HomeView() {
     urgentItems.push(
       <HomeUrgentRow
         key="resource"
-        title={<span className="text-crimson">☯ 道体状态</span>}
+        title={<span className="text-crimson">☯ 灯体状态</span>}
         summary={parts.join(' · ')}
         action={
           <InkButton href="/game/cultivator" variant="primary">
@@ -272,7 +288,7 @@ export function HomeView() {
   }
 
   return (
-    <GameSceneFrame title="洞府" aside={<HomeAside />}>
+    <GameSceneFrame title="灯宅" aside={<HomeAside />}>
       <GameSceneSection title="当下要事">
         <div>
           {urgentItems.length > 0 ? (
@@ -287,7 +303,7 @@ export function HomeView() {
                   variant="primary"
                   className="px-0"
                 >
-                  修炼
+                  窥悟
                 </InkButton>
               }
             />
@@ -295,7 +311,7 @@ export function HomeView() {
         </div>
       </GameSceneSection>
 
-      <GameSceneSection title="洞府各处">
+      <GameSceneSection title="灯宅各处">
         <CaveQuickGrid />
       </GameSceneSection>
     </GameSceneFrame>

@@ -61,6 +61,11 @@ export const adminNavItems: AdminNavItem[] = [
     href: '/admin/redeem-codes',
   },
   {
+    title: '灯引管理',
+    description: '持灯引荐邀请码的创建与停用',
+    href: '/admin/invitation-lamps',
+  },
+  {
     title: '功德簿管理',
     description: '爱发电映射、订单与认领处理',
     href: '/admin/sponsorship',

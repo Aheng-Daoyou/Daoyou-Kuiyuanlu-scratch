@@ -95,7 +95,7 @@ export function GameBottomDock({
       <InkDetailDrawer
         isOpen={drawerOpen}
         onClose={onToggleExpanded}
-        title="万界行止"
+        title="烬洲行止"
         description="前往修行、历练、造物与交易等次级场景。"
         size="md"
         closeOnEscape={dockMode !== 'expanded'}

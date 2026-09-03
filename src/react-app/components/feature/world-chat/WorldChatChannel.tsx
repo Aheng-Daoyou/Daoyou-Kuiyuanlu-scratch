@@ -181,7 +181,7 @@ export function WorldChatChannel() {
       return (
         <div className="flex flex-wrap gap-1">
           {artifact.quality ? (
-            <InkBadge tier={artifact.quality}>法宝</InkBadge>
+            <InkBadge tier={artifact.quality}>封灵器</InkBadge>
           ) : null}
           <InkBadge tone="default">{slotInfo.label}</InkBadge>
           <InkBadge tone="default">{artifact.element}</InkBadge>

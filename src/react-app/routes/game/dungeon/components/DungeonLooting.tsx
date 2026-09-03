@@ -39,10 +39,9 @@ export function DungeonLooting({
           战斗胜利
         </h3>
         <p className="text-ink-secondary mb-6 text-center leading-relaxed">
-          你击退了强敌，有惊无险地度过了此轮。
+          你击退了强敌，有惊无险地度过了这一更。
           <br />
-          目前位于副本第 {state.currentRound}{' '}
-          轮。前方气息变幻，你可以选择继续深入，或就此离去。
+          眼下已至第 {state.currentRound} 更。前方灯影变幻，你可以选择继续深入，或就此离去。
         </p>
       </InkCard>
 

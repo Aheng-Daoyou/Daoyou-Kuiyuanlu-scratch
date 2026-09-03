@@ -233,8 +233,8 @@ export default function DungeonHistoryPage() {
     return (
       <GameSceneFrame
         variant="lite"
-        title="探险札记"
-        description="副本骨架仍保持沉浸式，这页则作为常规卷宗页，专门整理已经发生过的探险过程与收获。"
+        title="探案卷宗"
+        description="秘境骨架仍保持沉浸式，这页则作为掌灯司卷宗，专门整理已经发生过的探案过程与收获。"
       >
         <GameLoadingState message="正在翻阅旧事……" variant="inline" />
       </GameSceneFrame>
@@ -245,8 +245,8 @@ export default function DungeonHistoryPage() {
     return (
       <GameSceneFrame
         variant="lite"
-        title="探险札记"
-        description="副本骨架仍保持沉浸式，这页则作为常规卷宗页，专门整理已经发生过的探险过程与收获。"
+        title="探案卷宗"
+        description="秘境骨架仍保持沉浸式，这页则作为掌灯司卷宗，专门整理已经发生过的探案过程与收获。"
       >
         <InkCard className="p-6 text-center">
           <p className="text-ink-secondary">尚无探险记录</p>
@@ -257,8 +257,8 @@ export default function DungeonHistoryPage() {
 
   return (
     <GameSceneFrame
-      title="探险札记"
-      description="副本骨架仍保持沉浸式，这页则作为常规卷宗页，专门整理已经发生过的探险过程与收获。"
+      title="探案卷宗"
+      description="秘境骨架仍保持沉浸式，这页则作为掌灯司卷宗，专门整理已经发生过的探案过程与收获。"
       aside={
         <>
           <GameSceneAsideSection title="札记摘要">
@@ -340,7 +340,7 @@ export default function DungeonHistoryPage() {
       <InkDetailDrawer
         isOpen={selectedRecord !== null}
         onClose={() => setExpandedId(null)}
-        title={selectedRecord?.theme ?? '探险札记'}
+        title={selectedRecord?.theme ?? '探案卷宗'}
         description={
           selectedRecord
             ? `${formatDate(selectedRecord.createdAt)} · 奖励品阶 ${selectedRecord.result.settlement?.reward_tier || '—'}`

@@ -138,7 +138,7 @@ export function EmailBroadcastForm() {
         label="主题（手动填写）"
         value={subject}
         onChange={(value) => setSubject(value)}
-        placeholder="例如：万界道友版本更新公告"
+        placeholder="例如：窥渊录版本更新公告"
         disabled={loading}
       />
 

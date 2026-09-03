@@ -82,15 +82,15 @@ export function BlackMarketEntryPreview({
               {existingEntry ? (
                 <p className="text-ink-secondary">今日的入场凭证仍然有效，不会再次收费。</p>
               ) : entryCost === 0 ? (
-                <p className="text-teal">今日首次入场，不消耗天地灵气。</p>
+                <p className="text-teal">今日首次入场，不消耗灯油。</p>
               ) : (
                 <div>
                   <p className="text-ink">
                     本次入场需消耗
-                    <span className="text-teal mx-1">5点天地灵气</span>。
+                    <span className="text-teal mx-1">5点灯油</span>。
                   </p>
                   <p className="text-ink-secondary text-xs">
-                    当前灵气：{currentQi ?? '读取中'}
+                    当前灯油：{currentQi ?? '读取中'}
                   </p>
                 </div>
               )}

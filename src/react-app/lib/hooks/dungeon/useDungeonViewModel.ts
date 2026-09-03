@@ -109,6 +109,11 @@ export function useDungeonViewModel(
   const [activeBattleId, setActiveBattleId] = useState<string>();
   const [opponentName, setOpponentName] = useState('神秘敌手');
 
+  // 回合叙事流式文本（非 null 表示正在推演：直接渐进展示，替代静态等待）
+  const [streamingNarrative, setStreamingNarrative] = useState<string | null>(
+    null,
+  );
+
   /**
    * 计算最后一轮数据
    */
@@ -212,9 +217,14 @@ export function useDungeonViewModel(
       qiCost: QI_ACTION_COSTS.dungeon_start,
       confirmLabel: '开始探索',
       onConfirm: async () => {
-        const newState = await startDungeon(nodeId);
-        if (newState) {
-          setState(newState);
+        try {
+          setStreamingNarrative('');
+          const newState = await startDungeon(nodeId, setStreamingNarrative);
+          if (newState) {
+            setState(newState);
+          }
+        } finally {
+          setStreamingNarrative(null);
         }
       },
     });
@@ -224,22 +234,27 @@ export function useDungeonViewModel(
    * 操作：执行选项
    */
   const handlePerformAction = async (option: DungeonOption) => {
-    const data = await performAction(option);
-    await applyMutationResult(data as Parameters<typeof resolveDungeonMutationResult>[0]);
+    try {
+      setStreamingNarrative('');
+      const data = await performAction(option, setStreamingNarrative);
+      await applyMutationResult(data as Parameters<typeof resolveDungeonMutationResult>[0]);
+    } finally {
+      setStreamingNarrative(null);
+    }
   };
 
   const handleContinueLooting = async () => {
-    const data = await continueLooting();
+    const data = await continueLooting(setStreamingNarrative);
     await applyMutationResult(data as Parameters<typeof resolveDungeonMutationResult>[0]);
   };
 
   const handleEscapeLooting = async () => {
-    const data = await escapeLooting();
+    const data = await escapeLooting(setStreamingNarrative);
     await applyMutationResult(data as Parameters<typeof resolveDungeonMutationResult>[0]);
   };
 
   const handleRecoverDungeon = async (action: DungeonRecoverAction) => {
-    const data = await recoverDungeon(action);
+    const data = await recoverDungeon(action, setStreamingNarrative);
     await applyMutationResult(data as Parameters<typeof resolveDungeonMutationResult>[0]);
   };
 
@@ -336,6 +351,7 @@ export function useDungeonViewModel(
   return {
     viewState,
     processing,
+    streamingNarrative,
     actions: {
       startDungeon: handleStartDungeon,
       performAction: handlePerformAction,

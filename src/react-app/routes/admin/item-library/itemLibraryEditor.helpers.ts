@@ -42,27 +42,27 @@ export const ITEM_LIBRARY_STATUS_LABELS = {
 export const ITEM_LIBRARY_TYPE_LABELS = {
   material: '材料',
   consumable: '消耗品',
-  artifact: '法宝',
+  artifact: '封灵器',
 } satisfies Record<ItemLibraryEntry['type'], string>;
 
 export const PILL_FAMILY_LABELS = {
-  healing: '疗伤丹',
-  mana: '回元丹',
-  detox: '解毒/调理丹',
-  cultivation: '修为丹',
-  insight: '悟性丹',
-  breakthrough: '破境辅助丹',
-  tempering: '淬体丹',
-  marrow_wash: '洗髓丹',
-  longevity: '延寿丹',
-  hybrid: '复合丹',
+  healing: '疗伤香',
+  mana: '回元香',
+  detox: '解毒/调理香',
+  cultivation: '灯韵香',
+  insight: '悟性香',
+  breakthrough: '破境辅助香',
+  tempering: '淬体香',
+  marrow_wash: '洗髓香',
+  longevity: '延寿香',
+  hybrid: '复合香',
 } satisfies Record<PillFamily, string>;
 
 export const PILL_QUOTA_LABELS = {
   none: '不占服用额度',
-  long_term: '长期丹药额度',
-  cultivation: '修为丹额度',
-  longevity: '寿元丹额度',
+  long_term: '长期香品额度',
+  cultivation: '灯韵香额度',
+  longevity: '寿元香额度',
 } satisfies Record<PillQuotaCategory, string>;
 
 export const TALISMAN_SESSION_MODE_LABELS = {
@@ -75,15 +75,15 @@ export const TRACK_OPTIONS = [
   { value: 'body.sinew_bone', label: '炼体·筋骨' },
   { value: 'body.organs', label: '炼体·脏腑' },
   { value: 'body.qi_blood', label: '炼体·气血' },
-  { value: 'body.primordial_spirit', label: '炼体·元神' },
+  { value: 'body.primordial_spirit', label: '炼体·心神' },
   { value: 'marrow_wash', label: '洗髓' },
 ] satisfies Array<{ value: ConditionTrackPath; label: string }>;
 
 export const PILL_OPERATION_LABELS = {
-  restore_resource: '恢复气血/法力',
-  gain_progress: '增加感悟/历史修为',
+  restore_resource: '恢复气血/灯焰',
+  gain_progress: '增加窥悟/历史灯韵',
   increase_lifespan: '增加寿元',
-  change_gauge: '增加/降低丹毒',
+  change_gauge: '增加/降低香毒',
   add_status: '添加状态',
   remove_status: '移除状态',
   advance_track: '推进淬体/洗髓',
@@ -501,7 +501,7 @@ function conditionOperationFromVisualOperation(
   operation: VisualPillOperation,
   index: number,
 ): ConditionOperation {
-  const label = `第 ${index + 1} 个丹药效果`;
+  const label = `第 ${index + 1} 个香品效果`;
 
   switch (operation.type) {
     case 'restore_resource': {
@@ -517,7 +517,7 @@ function conditionOperationFromVisualOperation(
       return {
         type: 'change_gauge',
         gauge: 'pillToxicity',
-        delta: parseFiniteNumber(operation.delta, `${label}的丹毒变化`),
+        delta: parseFiniteNumber(operation.delta, `${label}的香毒变化`),
       };
     case 'remove_status':
       if (!operation.status.trim()) {
@@ -549,7 +549,7 @@ function conditionOperationFromVisualOperation(
           ? (() => {
               const boostPercent = percentTextToRate(
                 operation.boostPercent,
-                `${label}的下次闭关修为提升百分比`,
+                `${label}的下次闭关灯韵提升百分比`,
               );
               return {
                 boostPercent,
@@ -567,7 +567,7 @@ function conditionOperationFromVisualOperation(
               ? {
                   failureExpLossReductionPercent: percentTextToRate(
                     operation.failureExpLossReductionPercent,
-                    `${label}的失败修为损失降低百分比`,
+                    `${label}的失败灯韵损失降低百分比`,
                   ),
                 }
               : status === CLEAR_MIND_STATUS_KEY
@@ -680,14 +680,14 @@ export function buildItemLibrarySubmitBody(
     }
 
     if (draft.pillOperations.length === 0) {
-      throw new Error('请至少添加一个丹药效果');
+      throw new Error('请至少添加一个香品效果');
     }
 
     const operations = draft.pillOperations.map(
       conditionOperationFromVisualOperation,
     );
-    const stability = parseFiniteNumber(draft.pillStability, '药性稳定度');
-    const toxicityRating = parseFiniteNumber(draft.pillToxicity, '丹毒');
+    const stability = parseFiniteNumber(draft.pillStability, '香性稳定度');
+    const toxicityRating = parseFiniteNumber(draft.pillToxicity, '香毒');
 
     return {
       itemId: draft.itemId.trim(),
@@ -695,7 +695,7 @@ export function buildItemLibrarySubmitBody(
       status: draft.status,
       payload: {
         name,
-        type: '丹药',
+        type: '香品',
         quality: draft.consumableQuality,
         ...(draft.description.trim()
           ? { description: draft.description.trim() }
@@ -737,7 +737,7 @@ export function buildItemLibrarySubmitBody(
   }
 
   if (!draft.artifactPayload) {
-    throw new Error('请先生成法宝预览');
+    throw new Error('请先生成封灵器预览');
   }
 
   return {

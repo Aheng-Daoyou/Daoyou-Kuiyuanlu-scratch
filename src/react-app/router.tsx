@@ -58,10 +58,10 @@ const scene = (
 
 const mapTitle: RouteTitleResolver = ({ searchParams }) =>
   searchParams.get('intent') === 'market'
-    ? '修仙界地图 · 坊市选址'
+    ? '烬洲地图 · 坊市选址'
     : searchParams.get('intent') === 'sect'
-      ? '修仙界地图 · 诸宗山门'
-      : '修仙界地图 · 历练选址';
+      ? '烬洲地图 · 诸宗山门'
+      : '烬洲地图 · 历练选址';
 
 const sectVisitTitle: RouteTitleResolver = ({ params }) => {
   return resolveSectVisitTitle(params.sectId);
@@ -184,9 +184,9 @@ export const router = createBrowserRouter(
                   id: 'cave',
                   presentation: 'hub',
                   summary:
-                    '石门半掩，纸窗透白。丹火、经卷、器架与玉简都安放在各自的位置',
+                    '石门半掩，纸窗透白。香火、经卷、器架与灯笺都安放在各自的位置',
                 },
-                '洞府',
+                '灯宅',
               )}
             />
             <Route
@@ -226,9 +226,9 @@ export const router = createBrowserRouter(
                 {
                   id: 'spirit-field',
                   presentation: 'workflow',
-                  summary: '在个人洞府药圃中播种，并以三阶段培育等待天地造化成型。',
+                  summary: '在个人灯宅药圃中播种，并以三阶段培育等待天地造化成型。',
                 },
-                '洞府灵田',
+                '灯宅灯田',
               )}
             />
             <Route
@@ -266,7 +266,7 @@ export const router = createBrowserRouter(
               handle={scene(
                 {
                   id: 'marrow-wash',
-                  summary: '洗髓进度、自由属性点与后天灵根加成归于此处。',
+                  summary: '洗髓进度、自由属性点与后天窍加成归于此处。',
                 },
                 '洗髓池',
               )}
@@ -291,9 +291,9 @@ export const router = createBrowserRouter(
               handle={scene(
                 {
                   id: 'alchemy',
-                  summary: '看药材、控炉候、炼丹息身。',
+                  summary: '看香材、控炉候、制香息身。',
                 },
-                '【炼丹房】',
+                '【制香房】',
               )}
             />
             <Route
@@ -305,7 +305,7 @@ export const router = createBrowserRouter(
                   presentation: 'hub',
                   summary: '买卖流转与鉴宝收材皆由此起。',
                 },
-                '修仙坊市',
+                '灯下坊市',
               )}
             />
             <Route
@@ -329,7 +329,7 @@ export const router = createBrowserRouter(
                 {
                   id: 'mail',
                   presentation: 'service',
-                  summary: '往来玉简与好友名录皆归于此。',
+                  summary: '往来灯笺与好友名录皆归于此。',
                 },
                 '道友传音',
               )}
@@ -364,7 +364,7 @@ export const router = createBrowserRouter(
                 {
                   id: 'inn',
                   presentation: 'service',
-                  summary: '借灵眼之泉温养伤势，稳住道体再续行。',
+                  summary: '借灵眼之泉温养伤势，稳住灯体再续行。',
                 },
                 '灵眼之泉',
               )}
@@ -578,9 +578,9 @@ export const router = createBrowserRouter(
               handle={scene(
                 {
                   id: 'sect-cultivation-room',
-                  summary: '宗门聚灵阵为现有闭关结算提供修为加成。',
+                  summary: '宗门聚灯阵为现有闭关结算提供灯韵加成。',
                 },
-                '宗门修炼室',
+                '宗门窥悟室',
               )}
             />
             <Route
@@ -592,7 +592,7 @@ export const router = createBrowserRouter(
                 {
                   id: 'sect',
                   presentation: 'hub',
-                  summary: '旧丹器坊入口将返回宗门总视图。',
+                  summary: '旧封灵坊入口将返回宗门总视图。',
                 },
                 '宗门',
               )}
@@ -606,9 +606,9 @@ export const router = createBrowserRouter(
                 {
                   id: 'sect-alchemy',
                   presentation: 'workflow',
-                  summary: '借宗门丹火完成即兴炼丹与丹方炼制。',
+                  summary: '借宗门香火完成即兴制香与香方炼制。',
                 },
-                '宗门丹房',
+                '宗门闻香房',
               )}
             />
             <Route
@@ -620,7 +620,7 @@ export const router = createBrowserRouter(
                 {
                   id: 'sect-refinery',
                   presentation: 'workflow',
-                  summary: '借宗门地火锻造法宝。',
+                  summary: '借宗门地火锻造封灵器。',
                 },
                 '宗门器坊',
               )}
@@ -634,9 +634,9 @@ export const router = createBrowserRouter(
                 {
                   id: 'sect-spirit-vein',
                   presentation: 'service',
-                  summary: '查看灵脉设施等级与灵石俸禄加成。',
+                  summary: '查看灯脉设施等级与灯油券俸禄加成。',
                 },
-                '宗门灵脉',
+                '宗门灯脉',
               )}
             />
             <Route
@@ -648,7 +648,7 @@ export const router = createBrowserRouter(
                 {
                   id: 'sect-herb-garden',
                   presentation: 'service',
-                  summary: '查看药田等级、每周灵草产出与灵植长势。',
+                  summary: '查看药田等级、每周灯草产出与灯植长势。',
                 },
                 '宗门药田',
               )}
@@ -697,7 +697,7 @@ export const router = createBrowserRouter(
                 {
                   id: 'craft',
                   presentation: 'hub',
-                  summary: '分清炼器与炼丹，再携灵材入炉。',
+                  summary: '分清封灵与制香，再携灯材入炉。',
                 },
                 '【造物仙炉】',
               )}
@@ -712,7 +712,7 @@ export const router = createBrowserRouter(
                   id: 'refine',
                   summary: '铸器成兵，先校料再落锤火。',
                 },
-                '【炼器室】',
+                '【封灵室】',
               )}
             />
             <Route
@@ -932,7 +932,7 @@ export const router = createBrowserRouter(
                 {
                   id: 'redeem',
                   presentation: 'service',
-                  summary: '持契兑缘，所得会经玉简投递。',
+                  summary: '持契兑缘，所得会经灯笺投递。',
                 },
                 '兑换码',
               )}
@@ -1005,7 +1005,7 @@ export const router = createBrowserRouter(
                   chrome: 'immersive',
                   dock: 'hidden',
                 },
-                '灵矿采掘',
+                '灯矿采掘',
               )}
             />
           </Route>
@@ -1202,7 +1202,7 @@ export const router = createBrowserRouter(
       <Route
         path="/admin"
         lazy={lazyRoute(() => import('@app/routes/admin/layout'))}
-        handle={title('万界司天台')}
+        handle={title('烬洲司天台')}
       >
         <Route
           index

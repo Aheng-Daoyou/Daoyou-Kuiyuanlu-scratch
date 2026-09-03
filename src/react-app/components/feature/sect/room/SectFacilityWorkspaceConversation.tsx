@@ -82,7 +82,7 @@ export function SectFacilityWorkspaceConversation({
       options={[
         {
           id: 'status',
-          label: readText(parameters, 'statusReply') ?? '请说说此地设施灵效',
+          label: readText(parameters, 'statusReply') ?? '请说说此地设施灯效',
         },
         {
           id: 'workspace',

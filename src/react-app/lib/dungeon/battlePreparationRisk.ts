@@ -44,7 +44,7 @@ export function evaluateBattlePreparationRisk(
     message: enemyRealmHigher
       ? '对方境界高过你。第一次探秘建议直接撤退，撤退不会受伤。仍要开战吗？'
       : enemyAttributePressure
-        ? '对方六维气机明显压过你。第一次探秘建议撤退，先调息、装备或炼丹后再来。仍要开战吗？'
+        ? '对方六维气机明显压过你。第一次探秘建议撤退，先调息、装备或制香后再来。仍要开战吗？'
         : null,
   };
 }

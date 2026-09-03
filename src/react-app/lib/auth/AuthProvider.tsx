@@ -24,13 +24,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     email,
     password,
     captchaPayload,
+    inviteCode,
   ) => {
+    const trimmedInvite = inviteCode?.trim();
     const { error } = await authClient.signUp.email({
       name: name.trim(),
       email: normalizeEmail(email),
       password,
+      ...(trimmedInvite
+        ? { inviteCode: trimmedInvite }
+        : {}),
       callbackURL: getDefaultGameRedirectUrl(),
       fetchOptions: getCaptchaFetchOptions(captchaPayload),
+    } as Parameters<typeof authClient.signUp.email>[0] & {
+      inviteCode?: string;
     });
 
     if (!error) {
@@ -82,11 +89,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     email,
     otp,
     name,
+    inviteCode,
   ) => {
+    const trimmedInvite = inviteCode?.trim();
     const { error } = await authClient.signIn.emailOtp({
       email: normalizeEmail(email),
       otp: otp.trim(),
       name: name?.trim() || undefined,
+      ...(trimmedInvite
+        ? { inviteCode: trimmedInvite }
+        : {}),
+    } as Parameters<typeof authClient.signIn.emailOtp>[0] & {
+      inviteCode?: string;
     });
 
     if (!error) {

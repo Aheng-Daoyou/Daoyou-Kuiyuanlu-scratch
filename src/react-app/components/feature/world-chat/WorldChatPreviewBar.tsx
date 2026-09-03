@@ -13,7 +13,7 @@ export function WorldChatPreviewBar() {
   const previewBody = latestMessage
     ? getWorldChatMessageBody(latestMessage)
     : '暂无新声';
-  const sender = latestMessage?.senderName ?? '万界频道';
+  const sender = latestMessage?.senderName ?? '烬洲频道';
   const channelLabel = latestMessage?.channel === 'system' ? '系统' : '世界';
 
   return (

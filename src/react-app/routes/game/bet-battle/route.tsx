@@ -157,7 +157,7 @@ function countChars(input: string): number {
 
 function formatStake(stake: BetStakeSnapshot): string {
   if (stake.stakeType === 'spirit_stones') {
-    return `灵石 ${stake.spiritStones}`;
+    return `灯油券 ${stake.spiritStones}`;
   }
   if (!stake.item) return '无';
   return `${stake.item.name} x${stake.item.quantity} (${stake.item.quality})`;
@@ -494,12 +494,12 @@ export default function BetBattlePage() {
       });
       const result = await response.json();
       if (!response.ok || !result.success) {
-        throw new Error(result.error || '神识查探失败');
+        throw new Error(result.error || '心神查探失败');
       }
       setInspectedCultivator(result.data.cultivator);
     } catch (error) {
       pushToast({
-        message: error instanceof Error ? error.message : '神识查探失败',
+        message: error instanceof Error ? error.message : '心神查探失败',
         tone: 'danger',
       });
     } finally {
@@ -530,7 +530,7 @@ export default function BetBattlePage() {
     let stakeSummary: ReactNode = '无';
 
     if (stake.stakeType === 'spirit_stones') {
-      stakeSummary = `灵石 ${stake.spiritStones}`;
+      stakeSummary = `灯油券 ${stake.spiritStones}`;
     } else if (stake.item) {
       const stakeItem = stake.item;
       const stakeItemTierClass =
@@ -607,7 +607,7 @@ export default function BetBattlePage() {
                 pending={probingId === item.creatorId}
                 pendingLabel="查探中……"
               >
-                神识查探
+                心神查探
               </InkButton>
             )}
             {canChallenge && (
@@ -658,10 +658,10 @@ export default function BetBattlePage() {
                 赌战大厅
               </h1>
               <p className="text-ink-secondary mt-3 max-w-3xl text-sm leading-7">
-                以灵石或器物为筹，邀天下道友一战分高下。胜者得赌注，败者留名于台。
+                以灯油券或器物为筹，邀天下道友一战分高下。胜者得赌注，败者留名于台。
               </p>
               <div className="text-battle-muted mt-3 text-sm">
-                当前灵石：
+                当前灯油券：
                 {spiritStones ?? '读取中…'}
               </div>
             </div>
@@ -795,8 +795,8 @@ function BetBattleCreateModal({
   const [selectedItem, setSelectedItem] = useState<SelectedStake | null>(null);
   const [spiritStones, setSpiritStones] = useState('');
   const [taunt, setTaunt] = useState('');
-  const [minRealm, setMinRealm] = useState<RealmType>('炼气');
-  const [maxRealm, setMaxRealm] = useState<RealmType>('渡劫');
+  const [minRealm, setMinRealm] = useState<RealmType>('闻腥');
+  const [maxRealm, setMaxRealm] = useState<RealmType>('渡渊');
   const [step, setStep] = useState<1 | 2>(1);
   const [submitting, setSubmitting] = useState(false);
   const {
@@ -846,7 +846,7 @@ function BetBattleCreateModal({
     const normalizedTaunt = taunt.trim();
 
     if (isStoneMode && spiritStoneValue <= 0) {
-      pushToast({ message: '灵石押注需大于0', tone: 'warning' });
+      pushToast({ message: '灯油券押注需大于0', tone: 'warning' });
       return;
     }
 
@@ -914,7 +914,7 @@ function BetBattleCreateModal({
                   pushToast({
                     message:
                       selectedStakeType === 'spirit_stones'
-                        ? '灵石押注需大于0'
+                        ? '灯油券押注需大于0'
                         : '请先选择押注道具',
                     tone: 'warning',
                   });
@@ -968,10 +968,10 @@ function BetBattleCreateModal({
 
           {selectedStakeType === 'spirit_stones' ? (
             <InkInput
-              label="灵石押注"
+              label="灯油券押注"
               value={spiritStones}
               onChange={(value) => setSpiritStones(value)}
-              placeholder="输入灵石数量"
+              placeholder="输入灯油券数量"
             />
           ) : (
             <>
@@ -1122,7 +1122,7 @@ function BetBattleCreateModal({
             当前押注：
             <br />
             {selectedStakeType === 'spirit_stones'
-              ? `灵石：${Math.max(0, Number(spiritStones) || 0)}`
+              ? `灯油券：${Math.max(0, Number(spiritStones) || 0)}`
               : selectedItem
                 ? `${selectedItem.name} x${selectedItem.quantity}(${selectedItem.quality})`
                 : '未选择道具'}
@@ -1289,7 +1289,7 @@ function BetBattleChallengeModal({
 
         {creatorStake.stakeType === 'spirit_stones' ? (
           <InkInput
-            label="灵石押注（需与对方一致）"
+            label="灯油券押注（需与对方一致）"
             value={spiritStones}
             onChange={(value) => setSpiritStones(value)}
           />
@@ -1389,7 +1389,7 @@ function BetBattleChallengeModal({
         <div className="text-sm">
           当前选择：
           {creatorStake.stakeType === 'spirit_stones'
-            ? ` 灵石 ${Math.max(0, Number(spiritStones) || 0)}`
+            ? ` 灯油券 ${Math.max(0, Number(spiritStones) || 0)}`
             : selectedItem
               ? ` ${selectedItem.name} x${selectedItem.quantity}`
               : ' 无'}

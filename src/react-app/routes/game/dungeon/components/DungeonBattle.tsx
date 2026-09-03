@@ -61,7 +61,7 @@ export function DungeonBattle({
 
   return (
     <BattlePageLayout
-      title="副本战斗"
+      title="秘境战斗"
       subtitle="查看双方状态、技能变化和实时战斗日志。"
       variant="immersive-battle"
       loading={loading && !battleResult}
@@ -88,8 +88,8 @@ export function DungeonBattle({
         content={
           <p className="leading-8">
             {battleResult?.outcome.winner.id === player.id
-              ? '你已经击败当前敌人，可以继续推进副本。'
-              : '你在这场战斗中落败，本轮探索到此结束。'}
+              ? '你已经击退当前敌人，可以继续推进秘境。'
+              : '你在这场战斗中落败，这一更的探索到此结束。'}
           </p>
         }
       />

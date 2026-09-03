@@ -276,7 +276,7 @@ export default function ItemLibraryAdminPage() {
   const previewArtifact = async () => {
     if (draft.type !== 'artifact') return null;
     if (draft.artifactAffixIds.length === 0) {
-      throw new Error('请至少选择一个法宝词缀');
+      throw new Error('请至少选择一个封灵器词缀');
     }
 
     const response = await fetch('/api/admin/item-library/artifact/preview', {
@@ -295,7 +295,7 @@ export default function ItemLibraryAdminPage() {
     });
     const data = (await response.json()) as ItemLibraryResponse;
     if (!response.ok || !data.payload) {
-      throw new Error(data.error ?? '生成法宝预览失败');
+      throw new Error(data.error ?? '生成封灵器预览失败');
     }
     setDraftField('artifactPayload', data.payload);
     return data.payload;
@@ -430,7 +430,7 @@ export default function ItemLibraryAdminPage() {
   const generateSpiritSeeds = async () => {
     const count = Number(seedGenerateCount);
     if (!Number.isInteger(count) || count < 1 || count > 50) {
-      pushToast({ message: '灵种生成数量必须为 1 至 50 的整数', tone: 'warning' });
+      pushToast({ message: '灯种生成数量必须为 1 至 50 的整数', tone: 'warning' });
       return;
     }
     setSaving(true);
@@ -447,10 +447,10 @@ export default function ItemLibraryAdminPage() {
       });
       const data = (await response.json()) as ItemLibraryResponse;
       if (!response.ok) {
-        throw new Error(data.error ?? '批量生成灵种失败');
+        throw new Error(data.error ?? '批量生成灯种失败');
       }
       pushToast({
-        message: `已生成 ${data.generated ?? data.items?.length ?? 0} 枚灵种并写入道具库`,
+        message: `已生成 ${data.generated ?? data.items?.length ?? 0} 枚灯种并写入道具库`,
         tone: 'success',
       });
       setTypeFilter('material');
@@ -459,7 +459,7 @@ export default function ItemLibraryAdminPage() {
       await loadItems();
     } catch (error) {
       pushToast({
-        message: error instanceof Error ? error.message : '批量生成灵种失败',
+        message: error instanceof Error ? error.message : '批量生成灯种失败',
         tone: 'danger',
       });
     } finally {
@@ -670,9 +670,9 @@ export default function ItemLibraryAdminPage() {
 
           <div className="border-ink/15 bg-paper/70 space-y-3 border border-dashed p-3">
             <div>
-              <p className="text-ink font-semibold">批量生成灵植种子</p>
+              <p className="text-ink font-semibold">批量生成灯植种子</p>
               <p className="text-ink-secondary mt-1 text-xs leading-5">
-                使用灵种专用生成规则写入完整隐藏习性，可直接作为奖励发放并播种。
+                使用灯种专用生成规则写入完整隐藏习性，可直接作为奖励发放并播种。
               </p>
             </div>
             <InkInput
@@ -714,7 +714,7 @@ export default function ItemLibraryAdminPage() {
               onClick={generateSpiritSeeds}
               disabled={saving}
             >
-              生成灵种入库
+              生成灯种入库
             </InkButton>
           </div>
 
@@ -881,7 +881,7 @@ export default function ItemLibraryAdminPage() {
                 }
               >
                 {draft.materialType === 'seed' ? (
-                  <option value="seed">灵植种子（专用生成）</option>
+                  <option value="seed">灯植种子（专用生成）</option>
                 ) : null}
                 {MATERIAL_TYPE_VALUES.filter((value) => value !== 'seed').map((value) => (
                   <option key={value} value={value}>
@@ -938,7 +938,7 @@ export default function ItemLibraryAdminPage() {
                     )
                   }
                 >
-                  <option value="pill">丹药</option>
+                  <option value="pill">香品</option>
                   <option value="talisman">符箓</option>
                 </InkSelect>
                 <InkSelect
@@ -987,7 +987,7 @@ export default function ItemLibraryAdminPage() {
                 <div className="space-y-4">
                   <div className="grid gap-3 md:grid-cols-5">
                     <InkSelect
-                      label="丹药用途"
+                      label="香品用途"
                       value={draft.pillFamily}
                       onChange={(value) =>
                         setDraft((current) =>
@@ -1038,7 +1038,7 @@ export default function ItemLibraryAdminPage() {
                       ))}
                     </InkSelect>
                     <InkInput
-                      label="药性稳定度"
+                      label="香性稳定度"
                       value={draft.pillStability}
                       onChange={(value) =>
                         setDraftField('pillStability', value)
@@ -1047,7 +1047,7 @@ export default function ItemLibraryAdminPage() {
                       placeholder="例如：80"
                     />
                     <InkInput
-                      label="丹毒"
+                      label="香毒"
                       value={draft.pillToxicity}
                       onChange={(value) => setDraftField('pillToxicity', value)}
                       type="number"
@@ -1066,7 +1066,7 @@ export default function ItemLibraryAdminPage() {
                   <div className="border-ink/12 bg-paper/70 space-y-3 border border-dashed p-4">
                     <div className="flex flex-wrap items-center justify-between gap-3">
                       <h3 className="text-ink font-heading text-lg">
-                        丹药效果
+                        香品效果
                       </h3>
                       <InkButton
                         type="button"
@@ -1079,7 +1079,7 @@ export default function ItemLibraryAdminPage() {
 
                     {draft.pillOperations.length === 0 ? (
                       <InkNotice tone="warning">
-                        请至少添加一个丹药效果。
+                        请至少添加一个香品效果。
                       </InkNotice>
                     ) : null}
 
@@ -1133,7 +1133,7 @@ export default function ItemLibraryAdminPage() {
                               }
                             >
                               <option value="hp">气血</option>
-                              <option value="mp">法力</option>
+                              <option value="mp">灯焰</option>
                             </InkSelect>
                             <InkSelect
                               label="恢复方式"
@@ -1184,7 +1184,7 @@ export default function ItemLibraryAdminPage() {
                               }
                             >
                               <option value="cultivation_exp">
-                                修为（历史丹药）
+                                灯韵（历史香品）
                               </option>
                               <option value="comprehension_insight">
                                 悟性
@@ -1202,7 +1202,7 @@ export default function ItemLibraryAdminPage() {
                               type="number"
                               hint={
                                 operation.target === 'cultivation_exp'
-                                  ? '仅用于历史丹药，不建议新建修为丹使用。'
+                                  ? '仅用于历史香品，不建议新建灯韵香使用。'
                                   : undefined
                               }
                             />
@@ -1225,7 +1225,7 @@ export default function ItemLibraryAdminPage() {
 
                         {operation.type === 'change_gauge' ? (
                           <InkInput
-                            label="丹毒变化"
+                            label="香毒变化"
                             value={operation.delta}
                             onChange={(value) =>
                               updatePillOperation(index, {
@@ -1234,7 +1234,7 @@ export default function ItemLibraryAdminPage() {
                               })
                             }
                             type="number"
-                            hint="正数增加丹毒，负数降低丹毒。"
+                            hint="正数增加香毒，负数降低香毒。"
                           />
                         ) : null}
 
@@ -1260,7 +1260,7 @@ export default function ItemLibraryAdminPage() {
                             {operation.status ===
                             CULTIVATION_BOOST_STATUS_KEY ? (
                               <InkInput
-                                label="下次闭关修为提升百分比"
+                                label="下次闭关灯韵提升百分比"
                                 value={operation.boostPercent}
                                 onChange={(value) =>
                                   updatePillOperation(index, {
@@ -1269,7 +1269,7 @@ export default function ItemLibraryAdminPage() {
                                   })
                                 }
                                 type="number"
-                                hint="填写 20 表示下次闭关修为提升 20%。"
+                                hint="填写 20 表示下次闭关灯韵提升 20%。"
                               />
                             ) : null}
 
@@ -1292,7 +1292,7 @@ export default function ItemLibraryAdminPage() {
                             {operation.status ===
                             PROTECT_MERIDIANS_STATUS_KEY ? (
                               <InkInput
-                                label="失败修为损失降低百分比"
+                                label="失败灯韵损失降低百分比"
                                 value={operation.failureExpLossReductionPercent}
                                 onChange={(value) =>
                                   updatePillOperation(index, {
@@ -1301,7 +1301,7 @@ export default function ItemLibraryAdminPage() {
                                   })
                                 }
                                 type="number"
-                                hint="填写 40 表示失败修为损失降低 40%。"
+                                hint="填写 40 表示失败灯韵损失降低 40%。"
                               />
                             ) : null}
 
@@ -1635,7 +1635,7 @@ export default function ItemLibraryAdminPage() {
                 <div className="max-h-[420px] space-y-2 overflow-auto">
                   {filteredAffixOptions.length === 0 ? (
                     <InkNotice tone="warning">
-                      没有符合筛选条件的法宝词缀。
+                      没有符合筛选条件的封灵器词缀。
                     </InkNotice>
                   ) : null}
                   {filteredAffixOptions.map((affix) => (
@@ -1672,7 +1672,7 @@ export default function ItemLibraryAdminPage() {
                     void previewArtifact()
                       .then(() =>
                         pushToast({
-                          message: '法宝预览已生成',
+                          message: '封灵器预览已生成',
                           tone: 'success',
                         }),
                       )
@@ -1681,13 +1681,13 @@ export default function ItemLibraryAdminPage() {
                           message:
                             error instanceof Error
                               ? error.message
-                              : '生成法宝预览失败',
+                              : '生成封灵器预览失败',
                           tone: 'danger',
                         }),
                       )
                   }
                 >
-                  生成法宝预览
+                  生成封灵器预览
                 </InkButton>
                 {draft.artifactPayload ? (
                   <span className="text-ink-secondary text-sm">

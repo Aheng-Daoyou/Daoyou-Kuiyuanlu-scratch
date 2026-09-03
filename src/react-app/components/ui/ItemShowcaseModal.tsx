@@ -3,7 +3,7 @@
  *
  * 作为所有道具与能力详情的统一承载容器：
  * - 材料 / 消耗品使用基础信息区域
- * - 神通 / 功法 / 法宝可通过 summary / metaSection / footer 组装更丰富的展示内容
+ * - 神通 / 功法 / 封灵器可通过 summary / metaSection / footer 组装更丰富的展示内容
  */
 
 import { InkModal } from '@app/components/layout';

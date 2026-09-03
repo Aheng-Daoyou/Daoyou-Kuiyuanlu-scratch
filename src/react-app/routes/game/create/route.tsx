@@ -7,7 +7,7 @@ import {
   toProductDisplayModel,
   type ProductRecordLike,
 } from '@app/components/feature/products';
-import { LingGen } from '@app/components/func/LingGen';
+import { BaQiao } from '@app/components/func/BaQiao';
 import { GameLoadingState } from '@app/components/game-shell/GameLoadingState';
 import { InkSection } from '@app/components/layout';
 import { useInkUI } from '@app/components/providers/InkUIProvider';
@@ -129,7 +129,7 @@ function chunkPairs<T>(items: T[]): T[][] {
 }
 
 /**
- * 角色创建页 —— 「凝气篇」
+ * 角色创建页 —— 「守灯立传」
  */
 export default function CreatePage() {
   const navigate = useNavigate();
@@ -206,7 +206,7 @@ export default function CreatePage() {
     };
   }, [hasActiveCultivator, isLoading]);
 
-  // 生成气运
+  // 生成命数
   const handleGenerateFates = async (tempId: string) => {
     setIsGeneratingFates(true);
     setAvailableFates([]);
@@ -221,17 +221,17 @@ export default function CreatePage() {
       const result = await response.json();
 
       if (!response.ok || !result.success) {
-        throw new Error(result.error || '生成气运失败');
+        throw new Error(result.error || '生成命数失败');
       }
 
       setAvailableFates(result.data.fates);
       setRemainingRerolls(result.data.remainingRerolls);
       if (result.data.remainingRerolls < 5) {
-        pushToast({ message: '天机变幻，气运已更易。', tone: 'success' });
+        pushToast({ message: '命签已更易，灯外之物又望了过来。', tone: 'success' });
       }
     } catch (error) {
       const errorMessage =
-        error instanceof Error ? error.message : '生成气运失败';
+        error instanceof Error ? error.message : '生成命数失败';
       pushToast({ message: errorMessage, tone: 'danger' });
     } finally {
       setIsGeneratingFates(false);
@@ -310,11 +310,11 @@ export default function CreatePage() {
       setGenerationQuota(aiResult.data.quota);
 
       pushToast({
-        message: '灵气汇聚，真形初现。正在推演气运……',
+        message: '灯焰汇聚，真形初现。正在推演命数……',
         tone: 'success',
       });
 
-      // 自动生成第一次气运
+      // 自动生成第一次命数
       await handleGenerateFates(aiResult.data.tempCultivatorId);
     } catch (error) {
       const errorMessage =
@@ -325,7 +325,7 @@ export default function CreatePage() {
     }
   };
 
-  // 切换气运选择
+  // 切换命数选择
   const toggleFateSelection = (index: number) => {
     setSelectedFateIndices((prev) => {
       if (prev.includes(index)) {
@@ -344,7 +344,7 @@ export default function CreatePage() {
     }
 
     if (selectedFateIndices.length !== 3) {
-      pushToast({ message: '请选择3个先天气运', tone: 'warning' });
+      pushToast({ message: '请选择3个先天命数', tone: 'warning' });
       return;
     }
 
@@ -366,7 +366,7 @@ export default function CreatePage() {
       await consumeResourceMutation(saveResponse);
 
       pushToast({
-        message: '道友真形已落地，山门正在云外相候。',
+        message: '真形已落地，掌灯司的烛籍上多了一笔。',
         tone: 'success',
       });
       navigate('/game/sect/onboarding', { replace: true });
@@ -385,7 +385,7 @@ export default function CreatePage() {
     }
 
     if (selectedFateIndices.length !== 3) {
-      pushToast({ message: '请选择3个先天气运', tone: 'warning' });
+      pushToast({ message: '请选择3个先天命数', tone: 'warning' });
       return;
     }
 
@@ -399,7 +399,7 @@ export default function CreatePage() {
             {player.realm_stage}
           </p>
           <p>
-            灵根：
+            窍：
             {player.spiritual_roots.length > 0
               ? player.spiritual_roots
                   .map(
@@ -481,13 +481,13 @@ export default function CreatePage() {
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(300px,0.85fr)]">
         <div className="space-y-4">
           <section className={genesisPanelClassName}>
-            <InkSection title="【以心念唤道】">
+              <InkSection title="【以灯念立传】">
               <InkInput
                 multiline
                 rows={6}
                 value={userPrompt}
                 onChange={(value) => setUserPrompt(value)}
-                placeholder="例：我想成为一位靠炼丹逆袭的废柴少主……"
+                placeholder="例：我想成为一位靠制香逆袭的废柴少主……"
                 hint={promptHint}
                 error={promptError}
                 onKeyDown={(event) => {
@@ -512,9 +512,9 @@ export default function CreatePage() {
                       quotaExhausted
                     }
                     pending={isGenerating}
-                    pendingLabel="灵气汇聚中……"
+                    pendingLabel="灯焰汇聚中……"
                   >
-                    凝气成形
+                    燃灯定形
                   </InkButton>
                 )}
                 {player && (
@@ -528,7 +528,7 @@ export default function CreatePage() {
 
           {player ? (
             <section className={genesisPanelClassName}>
-              <InkSection title="【先天命格】">
+              <InkSection title="【先天命数】">
                 <div className="mb-4 flex items-center justify-between">
                   <span className="text-ink-secondary text-sm">{`已选 ${selectedFateIndices.length}/3`}</span>
                   {tempCultivatorId && (
@@ -539,13 +539,13 @@ export default function CreatePage() {
                       pendingLabel="推演中……"
                       onClick={() => handleGenerateFates(tempCultivatorId)}
                     >
-                      {`逆天改命 (${remainingRerolls})`}
+                      {`重演命数 (${remainingRerolls})`}
                     </InkButton>
                   )}
                 </div>
 
                 {isGeneratingFates ? (
-                  <GameLoadingState message="正在推演天机……" variant="inline" />
+                  <GameLoadingState message="正在推演命签……" variant="inline" />
                 ) : availableFates.length > 0 ? (
                   <InkList>
                     {availableFates.map((fate, idx) => {
@@ -604,14 +604,14 @@ export default function CreatePage() {
                   </InkList>
                 ) : (
                   <div className="text-ink-secondary py-4 text-center">
-                    <p>暂无气运，请尝试逆天改命</p>
+                    <p>暂无命数，请尝试重演命数</p>
                   </div>
                 )}
               </InkSection>
             </section>
           ) : (
             <section className={genesisPanelClassName}>
-              <InkNotice>以心念描摹真身，生成后即可参阅。</InkNotice>
+              <InkNotice>以灯念描摹真身，燃灯定形后即可参阅。</InkNotice>
             </section>
           )}
         </div>
@@ -638,8 +638,11 @@ export default function CreatePage() {
                           {player.background ? (
                             <p>背景：{player.background}</p>
                           ) : null}
+                          {player.lineage_lore ? (
+                            <p>家系异闻：{player.lineage_lore}</p>
+                          ) : null}
                           {player.balance_notes ? (
-                            <p>天道评语：{player.balance_notes}</p>
+                            <p>灯律评语：{player.balance_notes}</p>
                           ) : null}
                         </div>
                       }
@@ -677,7 +680,7 @@ export default function CreatePage() {
               </section>
 
               <section className={genesisPanelClassName}>
-                <LingGen spiritualRoots={player.spiritual_roots || []} />
+                <BaQiao spiritualRoots={player.spiritual_roots || []} />
               </section>
 
               <section className={genesisPanelClassName}>
@@ -864,12 +867,12 @@ export default function CreatePage() {
           ) : (
             <section className={genesisPanelClassName}>
               <div className="text-battle-muted text-[0.72rem] tracking-[0.18em]">
-                入道须知
+                守灯须知
               </div>
               <div className="text-ink mt-3 space-y-3 text-sm leading-7">
-                <p>先以一句心念描出真身，再从天机推演出的命格中择三而取。</p>
+                <p>先以一句灯念描出真身，再自命签推演出的命数中择三而取。</p>
                 <p>
-                  生成结果会展示根基属性、灵根、功法与神通预览，确认无误后再正式入世。
+                  燃灯定形后会展示根基属性、窍、功法与神通预览，确认无误后再正式入世。
                 </p>
               </div>
             </section>

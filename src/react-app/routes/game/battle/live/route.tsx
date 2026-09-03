@@ -599,7 +599,7 @@ export default function LiveBattleMatchPage() {
         return;
       }
       if (targetAbility) {
-        setActionError('该单位不是此术法的合法目标，可取消后重新选招。');
+        setActionError('该单位不是此灯律的合法目标，可取消后重新选招。');
         return;
       }
       setInspectedUnitId(entityId);
@@ -996,7 +996,7 @@ export default function LiveBattleMatchPage() {
               onClick={() => setDrawerOpen(true)}
               className="min-h-14 min-w-28 rounded-lg border border-dashed border-[#2c1810]/30 bg-white/15 px-3 py-2 text-left text-sm text-[#2c1810]/65 transition-colors hover:border-[#2c1810]/50 disabled:opacity-40"
             >
-              全部术法
+              全部灯律
               <br />
               <span className="text-xs">
                 {activeAbilities.length} 项 · {BATTLE_QUICKBAR_MAX_SLOTS}{' '}

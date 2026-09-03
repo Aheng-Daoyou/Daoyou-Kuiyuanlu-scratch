@@ -1,12 +1,14 @@
 import type { Params, UIMatch } from 'react-router';
 
-export const APP_TITLE = '万界道友';
+export const APP_TITLE = '窥渊录';
 
 const SECT_VISIT_TITLES: Readonly<Record<string, string>> = {
-  lingxiao: '红尘剑宗舆图',
-  wuxiang: '无相禅宗舆图',
-  tianyan: '天衍圣地舆图',
-  youdu: '幽都舆图',
+  lingxiao: '太乙清都观舆图',
+  wuxiang: '白莲乳母教舆图',
+  tianyan: '观星台舆图',
+  youdu: '幽都·地藏殿舆图',
+  jiujie: '掌灯司舆图',
+  baixiban: '百戏班舆图',
 };
 
 export type GameSceneGroup =

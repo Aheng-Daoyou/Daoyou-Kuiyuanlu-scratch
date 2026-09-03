@@ -2,27 +2,27 @@ export const ALCHEMY_INTENT_SUGGESTIONS = [
   {
     id: 'gentle-healing',
     label: '温和疗伤',
-    prompt: '疗伤回元，药性温和，不求猛烈。',
+    prompt: '疗伤回元，香性温和，不求猛烈。',
   },
   {
     id: 'restore-mana',
     label: '回气养神',
-    prompt: '补益法力，宁心养神，希望药性平和易吸收。',
+    prompt: '补益灯焰，宁心养神，希望香性平和易吸收。',
   },
   {
     id: 'detox-meridian',
     label: '清毒护脉',
-    prompt: '化解丹毒，温养经脉，优先考虑药性稳定。',
+    prompt: '化解香毒，温养灯脉，优先考虑香性稳定。',
   },
   {
     id: 'steady-cultivation',
     label: '稳固修行',
-    prompt: '辅助日常修行，药性均衡，适合长期服用。',
+    prompt: '辅助日常修行，香性均衡，适合长期服用。',
   },
   {
     id: 'breakthrough-support',
     label: '冲关辅道',
-    prompt: '辅助突破当前瓶颈，药性稳健，以护持根基为先。',
+    prompt: '辅助突破当前瓶颈，香性稳健，以护持根基为先。',
   },
   {
     id: 'body-tempering',
@@ -32,7 +32,7 @@ export const ALCHEMY_INTENT_SUGGESTIONS = [
   {
     id: 'marrow-wash',
     label: '洗髓固本',
-    prompt: '温和洗髓，改善根骨，优先保证药力稳定与经脉承受。',
+    prompt: '温和洗髓，改善根骨，优先保证香力稳定与灯脉承受。',
   },
   {
     id: 'clear-mind',
@@ -42,11 +42,11 @@ export const ALCHEMY_INTENT_SUGGESTIONS = [
   {
     id: 'longevity',
     label: '养元延寿',
-    prompt: '滋养本源，延缓损耗，药性平和，适合长期调养。',
+    prompt: '滋养本源，延缓损耗，香性平和，适合长期调养。',
   },
   {
     id: 'balanced-hybrid',
     label: '调和诸药',
-    prompt: '调和多种药性，兼顾恢复与稳定，不追求单一效果极致。',
+    prompt: '调和多种香性，兼顾恢复与稳定，不追求单一效果极致。',
   },
 ] as const;

@@ -48,7 +48,7 @@ export function MiningSessionOutcome({
   const interaction = useSectTaskInteraction();
   return (
     <InkNotice className="mt-4">
-      「{task.presentation.title}」采掘场已在灵脉开启。
+      「{task.presentation.title}」采掘场已在灯脉开启。
       <InkButton
         variant="secondary"
         onClick={() =>
@@ -57,7 +57,7 @@ export function MiningSessionOutcome({
           )
         }
       >
-        前往灵脉
+        前往灯脉
       </InkButton>
     </InkNotice>
   );

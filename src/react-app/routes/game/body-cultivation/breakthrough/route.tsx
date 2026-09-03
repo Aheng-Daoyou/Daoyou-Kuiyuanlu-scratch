@@ -314,7 +314,7 @@ function SelectionModal({
           <span className="text-ink-secondary text-xs leading-8">
             已选 {buildRequestBody(selections).materialSelections.length}{' '}
             类材料，
-            {buildRequestBody(selections).consumableSelections.length} 类丹药
+            {buildRequestBody(selections).consumableSelections.length} 类香品
           </span>
           <InkButton variant="primary" onClick={onClose}>
             完成选取
@@ -384,9 +384,9 @@ function SelectionModal({
             </section>
 
             <section className="space-y-2">
-              <h3 className="text-ink text-sm font-semibold">丹药</h3>
+              <h3 className="text-ink text-sm font-semibold">香品</h3>
               {eligible.consumables.length === 0 ? (
-                <InkNotice>暂无符合本次破限要求的丹药。</InkNotice>
+                <InkNotice>暂无符合本次破限要求的香品。</InkNotice>
               ) : (
                 <div className="space-y-2">
                   {eligible.consumables.map((item) => {
@@ -665,7 +665,7 @@ export default function BodyCultivationBreakthroughPage() {
         <InkNotice>
           尚无角色资料，先创建角色后再准备肉身破限。
           <InkButton href="/game/create" variant="primary" className="ml-2">
-            觉醒灵根
+            觉醒窍
           </InkButton>
         </InkNotice>
       </div>
@@ -676,7 +676,7 @@ export default function BodyCultivationBreakthroughPage() {
     return (
       <GameSceneFrame
         title="肉身破限"
-        description="肉身破限只在五轨根基与修为境界都满足后开启。"
+        description="肉身破限只在五轨根基与窥悟境界都满足后开启。"
       >
         <GameSceneSection title="破限未成">
           <div className="space-y-3">

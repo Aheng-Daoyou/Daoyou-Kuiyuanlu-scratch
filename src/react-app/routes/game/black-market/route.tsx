@@ -128,9 +128,9 @@ export default function BlackMarketPage() {
     const optimisticId = `${activeSession.id}:${activeSession.version}:optimistic`;
     const optimisticBody = message?.trim()
       ? offeredPrice != null
-        ? `${message.trim()}（报价：${offeredPrice.toLocaleString()}灵石）`
+        ? `${message.trim()}（报价：${offeredPrice.toLocaleString()}灯油券）`
         : message.trim()
-      : `我出${offeredPrice?.toLocaleString()}灵石。`;
+      : `我出${offeredPrice?.toLocaleString()}灯油券。`;
     setSession((current) =>
       current
         ? {
@@ -221,9 +221,9 @@ export default function BlackMarketPage() {
       } else if (offeredPrice != null) {
         const feedback =
           result.outcome === 'accepted'
-            ? `摊主点头认价：${result.session.currentPrice.toLocaleString()} 灵石。`
+            ? `摊主点头认价：${result.session.currentPrice.toLocaleString()} 灯油券。`
             : result.outcome === 'countered'
-              ? `摊主松了口：现在要价 ${result.session.currentPrice.toLocaleString()} 灵石。`
+              ? `摊主松了口：现在要价 ${result.session.currentPrice.toLocaleString()} 灯油券。`
               : result.outcome === 'locked'
                 ? '这一下压得太狠，摊主把价彻底咬死了。'
                 : result.outcome === 'rejected'
@@ -304,10 +304,10 @@ export default function BlackMarketPage() {
         <div className="space-y-2 text-sm leading-7">
           <p>
             今日的免费机会已用，此次入场需消耗
-            <span className="text-teal mx-1">5点天地灵气</span>。
+            <span className="text-teal mx-1">5点灯油</span>。
           </p>
           <p className="text-ink-secondary">
-            当前灵气：{currency.data?.qi ?? '读取中'}
+            当前灯油：{currency.data?.qi ?? '读取中'}
           </p>
         </div>
       ),
@@ -429,7 +429,7 @@ export default function BlackMarketPage() {
         aside={
           <GameSceneAsideSection title="随身资用">
             <p className="text-sm leading-7">
-              灵石余额：{currency.data?.spiritStones ?? '读取中'}
+              灯油券余额：{currency.data?.spiritStones ?? '读取中'}
             </p>
           </GameSceneAsideSection>
         }

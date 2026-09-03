@@ -50,11 +50,8 @@ function DungeonContent() {
   const navigate = useNavigate();
 
   // 使用 ViewModel Hook 管理所有业务逻辑和状态
-  const { viewState, processing, actions } = useDungeonViewModel(
-    !!cultivator,
-    cultivator?.id,
-    preSelectedNodeId,
-  );
+  const { viewState, processing, streamingNarrative, actions } =
+    useDungeonViewModel(!!cultivator, cultivator?.id, preSelectedNodeId);
 
   // 结算确认回调：刷新库存后跳转首页
   const handleSettlementConfirm = useCallback(() => {
@@ -80,6 +77,7 @@ function DungeonContent() {
       displayResources={battleEntryResources}
       tasks={tasks}
       processing={processing}
+      streamingNarrative={streamingNarrative}
       actions={actions}
       onSettlementConfirm={handleSettlementConfirm}
     />
