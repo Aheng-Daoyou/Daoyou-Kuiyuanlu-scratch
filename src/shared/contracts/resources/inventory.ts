@@ -478,6 +478,8 @@ const pillAlchemyMetaBaseShape = {
   version: z.union([z.literal(3), z.literal(4)]).optional(),
   breakthroughTargetRealm: z.enum(REALM_VALUES).optional(),
   breakthroughLabel: z.string().optional(),
+  /** 香变失败品标记：本炉香变，产出不可用的「坏香」诡异异物。 */
+  isBadIncense: z.boolean().optional(),
 };
 const pillAlchemyMetaSchema = z.discriminatedUnion('source', [
   z

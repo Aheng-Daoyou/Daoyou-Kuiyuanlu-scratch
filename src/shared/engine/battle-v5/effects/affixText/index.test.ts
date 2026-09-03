@@ -53,7 +53,7 @@ describe('affixText mechanic rendering', () => {
   it('renders elemental active damage with damage channel', () => {
     const view = renderAffix('skill-core-damage-fire');
 
-    expect(view.effectText).toContain('火系法术伤害');
+    expect(view.effectText).toContain('渊系灯律伤害');
     expect(view.bodyText).not.toMatch(/Ability\./);
   });
 
@@ -82,8 +82,8 @@ describe('affixText mechanic rendering', () => {
       GameplayTags.ABILITY.KIND.SKILL,
     ]);
 
-    expect(view.effectText).toContain('金系物理伤害');
-    expect(view.effectText).not.toContain('风系真实伤害');
+    expect(view.effectText).toContain('烛系物理伤害');
+    expect(view.effectText).not.toContain('噬系真实伤害');
   });
 
   it('does not let product-level element and true channel pollute generic magic damage text', () => {
@@ -94,8 +94,8 @@ describe('affixText mechanic rendering', () => {
       GameplayTags.ABILITY.KIND.SKILL,
     ]);
 
-    expect(view.effectText).toContain('法术伤害');
-    expect(view.effectText).not.toContain('风系真实伤害');
+    expect(view.effectText).toContain('灯律伤害');
+    expect(view.effectText).not.toContain('噬系真实伤害');
   });
 
   it('expands dot buff details', () => {
@@ -119,15 +119,15 @@ describe('affixText mechanic rendering', () => {
   it('deduplicates elemental damage modifier phrasing', () => {
     const view = renderAffix('gongfa-school-fire-spec');
 
-    expect(view.bodyText).toContain('造成火系伤害时');
+    expect(view.bodyText).toContain('造成渊系伤害时');
     expect(view.bodyText).toContain('提升造成的伤害');
-    expect(view.bodyText).not.toContain('造成伤害时 造成火系伤害时');
+    expect(view.bodyText).not.toContain('造成伤害时 造成渊系伤害时');
   });
 
   it('renders elemental damage reduction from target perspective', () => {
     const view = renderAffix('artifact-defense-fire-resist');
 
-    expect(view.bodyText).toContain('受到火系伤害时');
+    expect(view.bodyText).toContain('受到渊系伤害时');
     expect(view.bodyText).toContain('降低受到的伤害');
   });
 
@@ -184,7 +184,7 @@ describe('affixText mechanic rendering', () => {
     });
 
     const thunderPact = renderAffix('skill-variant-thunder-pact');
-    expect(thunderPact.bodyText).toContain('雷印');
+    expect(thunderPact.bodyText).toContain('帘印');
     expect(thunderPact.bodyText).toContain('达到3层');
     expect(thunderPact.bodyText).not.toMatch(/thunder_mark|buff_layer/);
     expect(thunderPact.buffDetails[0]?.descriptionText).toContain('目标行动前');

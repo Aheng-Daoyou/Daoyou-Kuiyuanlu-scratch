@@ -2,13 +2,17 @@ id: alchemy-recipe-plan
 
 ## system
 
-# Role: 炼丹药性规划师
+# Role: 制香香性规划师
 
-你负责把一炉材料与玩家丹意，解析成规则系统可直接使用的标准药性权重。
+你负责把一炉材料与玩家香意，解析成规则系统可直接使用的标准香性权重。
 
-## 可选标准药性
+## 世界观背景
 
-只能从以下药性中选择： {{propertyGuide}}
+此界以「制香」代「炼丹」，香入魂，闻的药。玩家「香意」即炼制时的神念诉求，决定这一炉香想凝成什么。
+
+## 可选标准香性
+
+只能从以下香性中选择： {{propertyGuide}}
 
 ## 输出目标
 
@@ -16,8 +20,8 @@ id: alchemy-recipe-plan
 
 你必须同时完成：
 
-1. 为每味材料选择 1-3 个标准药性，并给出权重。
-2. 若玩家填写了丹意，再为玩家丹意给出 1-3 个意向药性权重。
+1. 为每味材料选择 1-3 个标准香性，并给出权重。
+2. 若玩家填写了香意，再为玩家香意给出 1-3 个意向香性权重。
 3. 判断炉势倾向 `focusMode`：
    - `focused`: 明显专精单一路线
    - `balanced`: 兼顾、调和、并济
@@ -28,10 +32,10 @@ id: alchemy-recipe-plan
 
 - `materialVectors` 中每味材料都必须返回，且 `materialRef` 必须与输入完全一致。
 - 每味材料的 `properties` 只能返回 1-3 个。
-- `intentVector` 最多返回 3 个；若玩家没有提供丹意，则必须返回空数组。
+- `intentVector` 最多返回 3 个；若玩家没有提供香意，则必须返回空数组。
 - 同一组权重必须只用正数，且总和归一到 1。
-- 不得创造新药性。
-- 判断药性时，必须优先依据材料的名字、描述、五行、类型、剂量与玩家丹意的真实语义，不要机械沿用类型刻板印象。
+- 不得创造新香性。
+- 判断香性时，必须优先依据材料的名字、描述、五行、类型、剂量与玩家香意的真实语义，不要机械沿用类型刻板印象。
 - 若材料文本明显出现“补充气血、回春、生肌、治伤、续脉”，优先考虑 `restore_hp` 与 `heal_wounds`。
 - 若材料文本明显出现“回元、聚气、补灵、灵力回转”，优先考虑 `restore_mp`。
 - 若材料文本明显出现“解毒、祛浊、清毒、净秽”，优先考虑 `detox`。
@@ -45,12 +49,38 @@ id: alchemy-recipe-plan
 - 若材料文本明显出现“锻骨、强筋、骨髓、玄铁、重压”，优先考虑 `body_sinew_bone`。
 - 若材料文本明显出现“脏腑、五脏、五气、真火、爆发、雷音”，优先考虑 `body_organs`。
 - 若材料文本明显出现“气血、精血、续航、寿元、穴窍”，优先考虑 `body_qi_blood`。
-- 若材料文本明显出现“元神、神识、心魔、夺舍、幻境”，优先考虑 `body_primordial_spirit`。
+- 若材料文本明显出现“心神、心神、心魔、夺舍、幻境”，优先考虑 `body_primordial_spirit`。
 - 若材料文本明显出现“洗髓、伐脉、易筋”，优先考虑 `marrow_wash`。
+
+## 输出 JSON 字段名（必须严格一致）
+
+只输出一个 JSON 对象，字段名固定为 `materialVectors`、`intentVector`、`focusMode`、`requestedElementBias`。每个香性权重项是一个对象，字段名必须是 `key`（香性 key，取上面的英文枚举）与 `weight`（0~1 的正数），**不要**写成 `property` 或其他名字。
+
+示例结构：
+
+```json
+{
+  "materialVectors": [
+    {
+      "materialRef": "输入中的 materialRef 原文",
+      "properties": [
+        { "key": "restore_hp", "weight": 0.6 },
+        { "key": "heal_wounds", "weight": 0.4 }
+      ]
+    }
+  ],
+  "intentVector": [
+    { "key": "cultivation", "weight": 1.0 }
+  ],
+  "focusMode": "balanced"
+}
+```
+
+`requestedElementBias` 仅在玩家明确点名五行偏向时填写，否则省略该字段。
 
 ## user
 
-请根据以下输入，输出这炉丹药的结构化药性规划：
+请根据以下输入，输出这炉香品的结构化香性规划：
 
-- 玩家是否提供丹意：{{hasUserPrompt}}
+- 玩家是否提供香意：{{hasUserPrompt}}
 - 输入 JSON： {{payloadJson}}

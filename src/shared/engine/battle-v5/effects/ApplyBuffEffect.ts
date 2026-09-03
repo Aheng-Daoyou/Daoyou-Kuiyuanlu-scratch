@@ -80,7 +80,7 @@ export class ApplyBuffEffect extends GameplayEffect {
       }
     }
 
-    // 控制类 Buff：根据目标神识抗性缩短持续时间。无限持续 (permanent) 不受影响。
+    // 控制类 Buff：根据目标心神抗性缩短持续时间。无限持续 (permanent) 不受影响。
     if (buff.type === BuffType.CONTROL && !buff.isPermanent()) {
       const controlResistance = target.attributes.getValue(
         AttributeType.CONTROL_RESISTANCE,

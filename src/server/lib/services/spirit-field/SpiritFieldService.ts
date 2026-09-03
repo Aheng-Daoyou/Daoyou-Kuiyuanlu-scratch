@@ -47,15 +47,15 @@ async function resolveResource(actor: SpiritFieldActor, method: SpiritFieldCulti
       const root = facts?.spiritual_roots
         .slice()
         .sort((left, right) => right.strength - left.strength)[0];
-      if (!root) throw new SpiritFieldServiceError('当前没有可用于本命灌注的灵根');
-      return { name: `${root.element}灵根` };
+      if (!root) throw new SpiritFieldServiceError('当前没有可用于本命灌注的窍');
+      return { name: `${root.element}窍` };
     }
     return {};
   }
   if (!resourceId) throw new SpiritFieldServiceError('请选择本次培育要消耗的物品');
   if (kind === 'pill') {
     const [row] = await q.select().from(consumables).where(and(eq(consumables.id, resourceId), eq(consumables.cultivatorId, actor.cultivatorId))).limit(1);
-    if (!row || !isPillConsumable(mapConsumableRow(row))) throw new SpiritFieldServiceError('所选物品不是可用于化丹培元的丹药');
+    if (!row || !isPillConsumable(mapConsumableRow(row))) throw new SpiritFieldServiceError('所选物品不是可用于化香培元的香品');
     return { name: row.name };
   }
   const [row] = await q.select().from(materials).where(and(eq(materials.id, resourceId), eq(materials.cultivatorId, actor.cultivatorId), eq(materials.type, kind))).limit(1);
@@ -101,10 +101,10 @@ export async function claimSpiritFieldStarterSeeds(actor: SpiritFieldActor) {
   return playerCommandExecutor.executeWithLock({ userId: actor.userId, cultivatorId: actor.cultivatorId, source: 'spirit_field_starter', command: async (tx) => {
     await loadCultivator(actor, tx);
     const field = await getOrCreateSpiritField(actor.cultivatorId, tx);
-    if (field.starterClaimed) throw new SpiritFieldServiceError('初始灵种已经领取过了', 409);
+    if (field.starterClaimed) throw new SpiritFieldServiceError('初始灯种已经领取过了', 409);
     for (const material of starterMaterials) await addMaterial(tx, actor.cultivatorId, material);
     await updateSpiritField(tx, field.id, { starterClaimed: true });
-    return { result: { message: '已领取初始灵种' }, resourceChanges: [{ resourceTopic: 'inventory.materials' as const, eventType: 'inventory.spirit-field.starter', operation: 'invalidate' as const }] };
+    return { result: { message: '已领取初始灯种' }, resourceChanges: [{ resourceTopic: 'inventory.materials' as const, eventType: 'inventory.spirit-field.starter', operation: 'invalidate' as const }] };
   } });
 }
 
@@ -114,12 +114,12 @@ export async function sowSpiritField(actor: SpiritFieldActor, input: SpiritField
     const field = await getOrCreateSpiritField(actor.cultivatorId, tx);
     const plot = field.plots[input.plotIndex];
     if (!plot) throw new SpiritFieldServiceError('田块不存在', 404);
-    if (plot.plant) throw new SpiritFieldServiceError('这块灵田已经种有灵植', 409);
+    if (plot.plant) throw new SpiritFieldServiceError('这块灯田已经种有灯植', 409);
     const [seed] = await tx.select().from(materials).where(and(eq(materials.id, input.seedMaterialId), eq(materials.cultivatorId, actor.cultivatorId), eq(materials.type, 'seed'))).limit(1);
     const spec = seed ? readSpiritFieldSeedSpec(seed.details) : null;
-    if (!seed || !spec) throw new SpiritFieldServiceError('没有找到可播种的灵植种子', 404);
-    if (seed.rank !== spec.plant.quality) throw new SpiritFieldServiceError('灵种品质快照异常，请重新获取该灵种');
-    if (!canPlantSpiritFieldSeed(row.realm as RealmType, spec.plant)) throw new SpiritFieldServiceError('当前境界还不足以驾驭这枚灵种', 409);
+    if (!seed || !spec) throw new SpiritFieldServiceError('没有找到可播种的灯植种子', 404);
+    if (seed.rank !== spec.plant.quality) throw new SpiritFieldServiceError('灯种品质快照异常，请重新获取该灯种');
+    if (!canPlantSpiritFieldSeed(row.realm as RealmType, spec.plant)) throw new SpiritFieldServiceError('当前境界还不足以驾驭这枚灯种', 409);
     await consumeMaterialById(actor.userId, actor.cultivatorId, seed.id, 1, tx);
     const plantedAt = new Date().toISOString();
     const plots = [...field.plots];
@@ -150,7 +150,7 @@ async function consumeCultivationCost(actor: SpiritFieldActor, tx: DbTransaction
     const facts = await loadPlayerConsumableOperationFacts(actor.userId, actor.cultivatorId, tx);
     if (!facts) throw new SpiritFieldServiceError('角色状态不存在', 404);
     const current = ConditionService.tickNaturalRecovery(facts, facts.condition);
-    if (current.resources.mp.current < cost.amount) throw new SpiritFieldServiceError(`法力不足，需要 ${cost.amount} 点`, 409);
+    if (current.resources.mp.current < cost.amount) throw new SpiritFieldServiceError(`灯焰不足，需要 ${cost.amount} 点`, 409);
     condition = ConditionService.applyExternalResourceLoss(facts, current, { mpFlat: cost.amount });
     await tx.update(cultivators).set({ condition }).where(eq(cultivators.id, actor.cultivatorId));
   }
@@ -189,7 +189,7 @@ export async function cultivateSpiritField(actor: SpiritFieldActor, input: Spiri
     const field = await getOrCreateSpiritField(actor.cultivatorId, tx);
     const plot = advanceSpiritFieldPlotToDecision(field.plots[input.plotIndex]!);
     const runtime = getSpiritFieldPlotRuntime(plot);
-    if (!plot.plant || runtime.status !== 'awaiting_cultivation' || runtime.stage !== definition.stage) throw new SpiritFieldServiceError('这株灵植已经不在待培育状态', 409);
+    if (!plot.plant || runtime.status !== 'awaiting_cultivation' || runtime.stage !== definition.stage) throw new SpiritFieldServiceError('这株灯植已经不在待培育状态', 409);
     await resolveResource(actor, input.method, input.resourceId, tx);
     const { cost, qiChange, spiritStones, condition } = await consumeCultivationCost(actor, tx, plot, input.method, input.resourceId, input.requestId);
     const startedAt = new Date();
@@ -226,13 +226,13 @@ export async function harvestSpiritField(actor: SpiritFieldActor, input: SpiritF
         })()
       : null;
   return playerCommandExecutor.executeWithLock({ userId: actor.userId, cultivatorId: actor.cultivatorId, source: 'spirit_field_harvest', requestId: input.requestId, idempotency: { key: input.requestId, fingerprint: JSON.stringify(input) }, command: async (tx) => {
-    if (!preparation) throw new SpiritFieldServiceError('灵植尚未成型，暂不可采摘', 409);
+    if (!preparation) throw new SpiritFieldServiceError('灯植尚未成型，暂不可采摘', 409);
     await loadCultivator(actor, tx);
     const field = await getOrCreateSpiritField(actor.cultivatorId, tx);
     const plot = field.plots[input.plotIndex];
-    if (!plot?.plant || getSpiritFieldPlotRuntime(plot).status !== 'ready_to_harvest') throw new SpiritFieldServiceError('灵植尚未成型，暂不可采摘', 409);
+    if (!plot?.plant || getSpiritFieldPlotRuntime(plot).status !== 'ready_to_harvest') throw new SpiritFieldServiceError('灯植尚未成型，暂不可采摘', 409);
     const verified = settleSpiritFieldHarvest(plot, `${field.id}:${input.plotIndex}:${plot.plantedAt}:${plot.plant.id}`);
-    if (JSON.stringify(verified) !== JSON.stringify(preparation.settlement)) throw new SpiritFieldServiceError('造化结果已经变化，请重新查看灵田', 409);
+    if (JSON.stringify(verified) !== JSON.stringify(preparation.settlement)) throw new SpiritFieldServiceError('造化结果已经变化，请重新查看灯田', 409);
     if (preparation.settlement.outcomeKind === 'spirit_fruit') {
       const fruit: Consumable = { name: preparation.identity.name, type: '灵果', quality: preparation.settlement.quality, quantity: preparation.settlement.quantity, description: preparation.identity.description, score: 0, spec: buildSpiritFruitSpec({ family: preparation.settlement.fruitFamily!, quality: preparation.settlement.quality }) };
       await addConsumableToInventoryInTransaction(actor.cultivatorId, fruit, tx);

@@ -22,18 +22,18 @@ export interface CombatEvent {
 // ===== 六维属性类型 =====
 export enum AttributeType {
   // ── 主属性（六维）──
-  VITALITY = 'vitality', // 体魄：气血上限、少量法术防御
+  VITALITY = 'vitality', // 体魄：气血上限、少量灯律防御
   STRENGTH = 'strength', // 力道：物理攻击
-  SPIRIT = 'spirit', // 灵力：法术攻击、少量法力
+  SPIRIT = 'spirit', // 梦涎：灯律攻击、少量灯焰
   ENDURANCE = 'endurance', // 根骨：物理防御、少量气血上限
-  SPEED = 'speed', // 身法：行动速度、闪避率、命中
-  WILLPOWER = 'willpower', // 神识：法防、法力、控制命中与抗性
+  SPEED = 'speed', // 灯影：行动速度、闪避率、命中
+  WILLPOWER = 'willpower', // 心神：法防、灯焰、控制命中与抗性
 
   // ── 派生型二级属性（base 由主属性公式推算，modifier 可叠加）──
   ATK = 'atk', // 物理攻击：40 + STRENGTH×3.5
   DEF = 'def', // 物理防御：10 + ENDURANCE×1.75
-  MAGIC_ATK = 'magicAtk', // 法术攻击：40 + SPIRIT×3.5
-  MAGIC_DEF = 'magicDef', // 法术防御：10 + WILLPOWER×1.75 + VITALITY×0.25
+  MAGIC_ATK = 'magicAtk', // 灯律攻击：40 + SPIRIT×3.5
+  MAGIC_DEF = 'magicDef', // 灯律防御：10 + WILLPOWER×1.75 + VITALITY×0.25
   ACTION_SPEED = 'actionSpeed', // 行动速度：SPEED
   CRIT_RATE = 'critRate', // 暴击率：基础 5%，外部构筑注入
   CRIT_DAMAGE_MULT = 'critDamageMult', // 暴击伤害倍率：基础 1.5
@@ -42,11 +42,11 @@ export enum AttributeType {
   CONTROL_HIT = 'controlHit', // 控制命中：0.04 + curve(WILLPOWER, 240, 0.30)
   CONTROL_RESISTANCE = 'controlResistance', // 控制抗性：0.04 + curve(WILLPOWER, 240, 0.34)
   MAX_HP = 'maxHp', // 最大气血：400 + VITALITY×20 + ENDURANCE×3
-  MAX_MP = 'maxMp', // 最大法力：200 + SPIRIT×4 + WILLPOWER×10
+  MAX_MP = 'maxMp', // 最大灯焰：200 + SPIRIT×4 + WILLPOWER×10
 
   // ── 外部注入型二级属性（base=0，完全由装备/Buff/命格提供）──
   ARMOR_PENETRATION = 'armorPenetration', // 破防：抵消目标减伤率 (0~1)
-  MAGIC_PENETRATION = 'magicPenetration', // 法术穿透：削减目标法防 (0~1)
+  MAGIC_PENETRATION = 'magicPenetration', // 灯律穿透：削减目标法防 (0~1)
   CRIT_RESIST = 'critResist', // 暴击韧性：降低对手暴击率 (0~1)
   CRIT_DAMAGE_REDUCTION = 'critDamageReduction', // 暴击减伤：降低受到暴击倍率 (0~0.5)
   HEAL_AMPLIFY = 'healAmplify', // 治疗增强 (≥0)

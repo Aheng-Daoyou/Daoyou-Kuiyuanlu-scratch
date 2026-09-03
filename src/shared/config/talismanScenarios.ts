@@ -37,19 +37,19 @@ export const TALISMAN_SCENARIO_OPTIONS = [
   },
   {
     value: 'qi_restore_small',
-    label: '小聚灵符·恢复灵气',
+    label: '短芯香·添灯油',
   },
   {
     value: 'qi_restore_medium',
-    label: '中聚灵符·恢复灵气',
+    label: '续灯香·添灯油',
   },
   {
     value: 'qi_restore_large',
-    label: '大聚灵符·恢复灵气',
+    label: '长明香·添灯油',
   },
   {
     value: 'qi_restore_fill_to_max',
-    label: '天地引气符·补满灵气',
+    label: '引灯大香·补满灯油',
   },
 ] as const;
 

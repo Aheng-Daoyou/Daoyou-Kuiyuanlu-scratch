@@ -1,73 +1,123 @@
 {
-  "world_name": "凡人修仙界·人界",
+  "world_name": "烬洲",
   "map_nodes": [
     {
       "id": "TN_YUE_01",
-      "name": "越国·太岳山脉",
-      "region": "天南",
-      "realm_requirement": "炼气",
+      "name": "京畿·烛京",
+      "region": "京畿",
+      "realm_requirement": "闻腥",
       "market_config": {
         "enabled": true,
-        "allowed_layers": ["common", "treasure", "heaven", "black"],
+        "allowed_layers": [
+          "common",
+          "treasure",
+          "heaven",
+          "black"
+        ],
         "region_profile": "tiannan"
       },
-      "tags": ["黄枫谷", "灵气中等", "新手区"],
-      "description": "越国七大派割据之地，黄枫谷所在地，山势雄奇。",
-      "connections": ["TN_YUE_02", "TN_YW_01", "TN_XI_01", "TN_BAICAO_01", "TN_BORDER_01"],
+      "tags": [
+        "掌灯司",
+        "灯下稀薄",
+        "新手区"
+      ],
+      "description": "烛京是天下最大的「灯」，皇城与掌灯司总部所在，灯下安全，坊市昼夜不息。",
+      "connections": [
+        "TN_YUE_02",
+        "TN_YW_01",
+        "TN_XI_01",
+        "TN_BAICAO_01",
+        "TN_BORDER_01"
+      ],
       "x": 84,
       "y": 85
     },
     {
       "id": "TN_YUE_02",
-      "name": "血色禁地",
-      "region": "天南",
-      "realm_requirement": "筑基",
-      "tags": ["副本", "筑基丹主药", "空间禁制"],
-      "description": "每六十年开启一次，内部奇草无数，也伴随极高陨落风险。",
-      "connections": ["TN_YUE_01"],
+      "name": "灰巷灯影地",
+      "region": "京畿",
+      "realm_requirement": "守灯",
+      "tags": [
+        "灯影地",
+        "雾锁旧巷",
+        "诡案高发"
+      ],
+      "description": "烛京城郊灯照不到的老巷，雾起时旧物易主、旧人重现，诡案委托常指向此处。",
+      "connections": [
+        "TN_YUE_01"
+      ],
       "x": 80,
       "y": 90
     },
     {
       "id": "TN_YW_01",
-      "name": "元武国",
-      "region": "天南",
-      "realm_requirement": "炼气",
+      "name": "泽州·天枢峰",
+      "region": "泽州",
+      "realm_requirement": "闻腥",
       "market_config": {
         "enabled": true,
-        "allowed_layers": ["common", "treasure", "heaven", "black"],
+        "allowed_layers": [
+          "common",
+          "treasure",
+          "heaven",
+          "black"
+        ],
         "region_profile": "tiannan"
       },
-      "tags": ["天星宗", "阵法交易", "齐云霄"],
-      "description": "阵法之道极其发达，许多珍稀阵盘均产自此地。",
-      "connections": ["TN_YUE_01", "TN_BAICAO_01", "TN_WE_01"],
+      "tags": [
+        "太乙清都观",
+        "燃灯道场",
+        "泽国水乡"
+      ],
+      "description": "太乙清都观山门所在的半山，俯瞰泽国水乡；山下灯火与渔火连成一片。",
+      "connections": [
+        "TN_YUE_01",
+        "TN_BAICAO_01"
+      ],
       "x": 88,
       "y": 77
     },
     {
       "id": "TN_XI_01",
-      "name": "溪国·云梦山脉",
-      "region": "天南",
-      "realm_requirement": "筑基",
+      "name": "泽州·烟波泽",
+      "region": "泽州",
+      "realm_requirement": "守灯",
       "market_config": {
         "enabled": true,
-        "allowed_layers": ["common", "treasure", "heaven", "black"],
+        "allowed_layers": [
+          "common",
+          "treasure",
+          "heaven",
+          "black"
+        ],
         "region_profile": "tiannan"
       },
-      "tags": ["落云宗", "古剑门", "百巧院"],
-      "description": "天南灵气最浓郁的三个地点之一，三派共治。",
-      "connections": ["TN_YUE_01", "TN_BAICAO_01", "TN_ZMG_01"],
+      "tags": [
+        "渔盐",
+        "沉水香",
+        "渊珠"
+      ],
+      "description": "泽州水乡腹地，渔盐与沉水香在此集散；水下的旧物比岸上的更老。",
+      "connections": [
+        "TN_YUE_01",
+        "TN_BAICAO_01",
+        "TN_ZMG_01"
+      ],
       "x": 88,
       "y": 70
     },
     {
       "id": "TN_BAICAO_01",
-      "name": "天南·百草集",
-      "region": "天南",
-      "realm_requirement": "炼气",
+      "name": "京畿·灯草集",
+      "region": "京畿",
+      "realm_requirement": "闻腥",
       "market_config": {
         "enabled": true,
-        "allowed_layers": ["common", "treasure", "heaven"],
+        "allowed_layers": [
+          "common",
+          "treasure",
+          "heaven"
+        ],
         "region_profile": "baicao",
         "seed_ratio": {
           "common": 0.75,
@@ -75,189 +125,313 @@
           "heaven": 0.5
         }
       },
-      "tags": ["灵植商盟", "百草苗圃", "灵种集散地"],
-      "description": "天南诸家灵植夫与采药人共同经营的山谷集市，苗圃连绵，四方灵种在此分级封存、交换流通。",
-      "connections": ["TN_YUE_01", "TN_YW_01", "TN_XI_01"],
+      "tags": [
+        "灯下草圃",
+        "草种集散",
+        "掌灯司苗圃"
+      ],
+      "description": "京畿外围的草市圩集，灯下草标准种在此分级封存、交换流通。",
+      "connections": [
+        "TN_YUE_01",
+        "TN_YW_01",
+        "TN_XI_01"
+      ],
       "x": 82,
       "y": 74
     },
     {
       "id": "TN_ZMG_01",
-      "name": "坠魔谷",
-      "region": "天南",
-      "realm_requirement": "元婴",
-      "tags": ["顶级副本", "空间裂缝", "古魔遗迹"],
-      "description": "天南第一禁地，内部充斥着空间裂缝，传闻有上古修士宝藏。",
-      "connections": ["TN_XI_01"],
+      "name": "九禁·天裂口",
+      "region": "泽州",
+      "realm_requirement": "蚀体",
+      "tags": [
+        "九禁地",
+        "天裂",
+        "灯照不到"
+      ],
+      "description": "天幕上撕开的一道旧裂口，灯照不进，风从里面吹出来，带着旧纪元的味道。",
+      "connections": [
+        "TN_XI_01"
+      ],
       "x": 94,
       "y": 75
     },
     {
       "id": "TN_BORDER_01",
-      "name": "矿区·灵石矿",
-      "region": "天南",
-      "realm_requirement": "筑基",
-      "tags": ["魔道入侵", "古传送阵", "转折点"],
-      "description": "废弃灵石矿脉，深处隐藏着通往乱星海的古传送阵。",
-      "connections": ["TN_YUE_01", "LX_INNER_01"],
+      "name": "雍州·万骨驿",
+      "region": "雍州",
+      "realm_requirement": "守灯",
+      "tags": [
+        "古道驿站",
+        "战场腌物",
+        "封灯材料"
+      ],
+      "description": "古道上废弃的驿站，昔日战场的腌物残渣时有出土，是封灵的上品材料。",
+      "connections": [
+        "TN_YUE_01",
+        "LX_INNER_01"
+      ],
       "x": 92,
       "y": 84
     },
     {
       "id": "ML_PLAINS_01",
-      "name": "慕兰草原",
-      "region": "慕兰",
-      "realm_requirement": "金丹",
-      "tags": ["法士", "部落", "边境战争"],
-      "description": "天南修士与慕兰法士对峙的广袤草原，民风剽悍。",
-      "connections": ["TN_WE_01", "DJ_NORTH_01"],
+      "name": "雍州·长平旧道",
+      "region": "雍州",
+      "realm_requirement": "窥渊",
+      "tags": [
+        "碑林",
+        "守碑翁",
+        "战场遗种"
+      ],
+      "description": "古道战场的遗迹，碑林沿路绵延；守碑翁日夜巡走，不许人碰碑。",
+      "connections": [
+        "DJ_NORTH_01"
+      ],
       "x": 90,
       "y": 42
     },
     {
       "id": "LX_INNER_01",
-      "name": "乱星海·天星城",
-      "region": "乱星海",
-      "realm_requirement": "筑基",
+      "name": "灯外海·灯塔港",
+      "region": "灯外海",
+      "realm_requirement": "守灯",
       "market_config": {
         "enabled": true,
-        "allowed_layers": ["common", "treasure", "heaven", "black"],
+        "allowed_layers": [
+          "common",
+          "treasure",
+          "heaven",
+          "black"
+        ],
         "region_profile": "luanxinghai"
       },
-      "tags": ["枢纽", "星宫", "圣山", "修仙圣地"],
-      "description": "乱星海核心，围绕巨型灵脉建立的城市，严禁私斗。",
-      "connections": ["TN_BORDER_01", "LX_INNER_02", "LX_OUTER_01"],
+      "tags": [
+        "枢纽",
+        "灯塔",
+        "出港即渊"
+      ],
+      "description": "灯外海边缘最后一座港城，灯塔彻夜不熄；严禁私斗，出港便是渊的领地。",
+      "connections": [
+        "TN_BORDER_01",
+        "LX_INNER_02",
+        "LX_OUTER_01"
+      ],
       "x": 55,
       "y": 72
     },
     {
       "id": "LX_INNER_02",
-      "name": "魁星岛",
-      "region": "乱星海",
-      "realm_requirement": "炼气",
-      "tags": ["初期发育", "六连殿", "猎妖"],
-      "description": "内星海边缘岛屿，韩立初入乱星海的落脚点。",
-      "connections": ["LX_INNER_01"],
+      "name": "灯外海·退潮屿",
+      "region": "灯外海",
+      "realm_requirement": "闻腥",
+      "tags": [
+        "渔村",
+        "退潮礁洞",
+        "初阶历练"
+      ],
+      "description": "外海边缘的渔岛，退潮后礁洞显露；渔人说潮水偶尔会送来不属于海的东西。",
+      "connections": [
+        "LX_INNER_01"
+      ],
       "x": 45,
       "y": 84
     },
     {
       "id": "LX_OUTER_01",
-      "name": "外星海·奇渊岛",
-      "region": "乱星海",
-      "realm_requirement": "金丹",
+      "name": "幽都·鬼市",
+      "region": "幽都",
+      "realm_requirement": "窥渊",
       "market_config": {
         "enabled": true,
-        "allowed_layers": ["common", "treasure", "heaven", "black"],
+        "allowed_layers": [
+          "common",
+          "treasure",
+          "heaven",
+          "black"
+        ],
         "region_profile": "luanxinghai"
       },
-      "tags": ["高阶妖兽", "猎妖营地", "黑市"],
-      "description": "深入妖兽腹地的孤岛，是猎取高阶妖丹的绝佳去处。",
-      "connections": ["LX_INNER_01", "LX_VOID_01"],
+      "tags": [
+        "鬼市",
+        "记忆交易",
+        "秤翁"
+      ],
+      "description": "幽都亡者之城的外围市集，秤翁以「信」称量记忆与诡珍；深处不许点灯。",
+      "connections": [
+        "LX_INNER_01",
+        "LX_VOID_01"
+      ],
       "x": 37,
       "y": 92
     },
     {
       "id": "LX_VOID_01",
-      "name": "虚天殿",
-      "region": "乱星海",
-      "realm_requirement": "金丹",
-      "tags": ["史诗副本", "虚天鼎", "极阴祖师"],
-      "description": "每数百年现世一次的上古秘殿，非结丹以上不可入。",
-      "connections": ["LX_INNER_01"],
+      "name": "九禁·万灯楼",
+      "region": "灯外海",
+      "realm_requirement": "窥渊",
+      "tags": [
+        "九禁地",
+        "万灯长明",
+        "旧纪元遗楼"
+      ],
+      "description": "每逢海上大雾便浮出灯影的旧纪元高楼，楼中万灯长明，却照不见来路。",
+      "connections": [
+        "LX_INNER_01"
+      ],
       "x": 55,
       "y": 60
     },
     {
       "id": "DJ_CENTRAL_01",
-      "name": "大晋·晋京",
-      "region": "大晋",
-      "realm_requirement": "筑基",
+      "name": "雍州·班底庄",
+      "region": "雍州",
+      "realm_requirement": "守灯",
       "market_config": {
         "enabled": true,
-        "allowed_layers": ["common", "treasure", "heaven", "black"],
+        "allowed_layers": [
+          "common",
+          "treasure",
+          "heaven",
+          "black"
+        ],
         "region_profile": "dajin"
       },
-      "tags": ["人界巅峰", "顶级拍卖会", "皇权"],
-      "description": "大晋帝都，商贸发达，元婴修士多如牛毛。",
-      "connections": ["ML_PLAINS_01", "DJ_SOUTH_01", "DJ_NORTH_01", "DJ_KW_01"],
+      "tags": [
+        "百戏班",
+        "戏台连绵",
+        "商旅辐辏"
+      ],
+      "description": "百戏班班底所在，戏台连绵、商旅辐辏，掌灯司雍州边司亦设于此。",
+      "connections": [
+        "ML_PLAINS_01",
+        "DJ_SOUTH_01",
+        "DJ_NORTH_01",
+        "DJ_KW_01"
+      ],
       "x": 40,
       "y": 25
     },
     {
       "id": "DJ_KW_01",
-      "name": "昆吾山",
-      "region": "大晋",
-      "realm_requirement": "化神",
-      "tags": ["终极副本", "封印", "通天灵宝"],
-      "description": "上古被封印的圣山，内部灵气已液化，镇压着元刹分魂。",
-      "connections": ["DJ_CENTRAL_01", "DJ_RIFT_01"],
+      "name": "北荒·倒悬观星台",
+      "region": "北荒",
+      "realm_requirement": "忘川",
+      "tags": [
+        "九禁地",
+        "观星台",
+        "星图"
+      ],
+      "description": "北荒雪原深处倒悬于崖壁上的观星台，学者在此推演星图；知道的真相越多，疯得越彻底。",
+      "connections": [
+        "DJ_CENTRAL_01",
+        "DJ_RIFT_01"
+      ],
       "x": 45,
       "y": 40
     },
     {
       "id": "DJ_NORTH_01",
-      "name": "北夜小极宫",
-      "region": "大晋",
-      "realm_requirement": "元婴",
-      "tags": ["冰属性", "寒髓", "传送阵"],
-      "description": "极北寒冷之地，擅长冰系功法，守卫着通往虚空殿的节点。",
-      "connections": ["DJ_CENTRAL_01"],
+      "name": "南疆·乳母腹地",
+      "region": "南疆",
+      "realm_requirement": "蚀体",
+      "tags": [
+        "九禁地",
+        "疫窍",
+        "雾瘴"
+      ],
+      "description": "雾瘴最深处的乳母庙旧地，庙后腹地与雾连成一片，疫气经年不散。",
+      "connections": [
+        "DJ_CENTRAL_01"
+      ],
       "x": 45,
       "y": 5
     },
     {
       "id": "DJ_SOUTH_01",
-      "name": "南疆·十万大山",
-      "region": "大晋",
-      "realm_requirement": "金丹",
-      "tags": ["毒瘴", "阴气", "天鬼门"],
-      "description": "大晋南方的蛮荒之地，各种秘术和毒物横行。",
-      "connections": ["DJ_CENTRAL_01"],
+      "name": "南疆·雾瘴三十七家村",
+      "region": "南疆",
+      "realm_requirement": "窥渊",
+      "tags": [
+        "白莲乳母教",
+        "莲灯",
+        "雾瘴"
+      ],
+      "description": "雾瘴弥漫的蛮荒之地，山间灯影地密布；白莲乳母教的莲灯在雾中终年不熄。",
+      "connections": [
+        "DJ_CENTRAL_01"
+      ],
       "x": 60,
       "y": 20
     },
     {
       "id": "DJ_RIFT_01",
-      "name": "玄黄裂渊",
-      "region": "大晋",
-      "realm_requirement": "炼虚",
-      "tags": ["神话副本", "界面裂隙", "太古凶兽"],
-      "description": "昆吾山封印外侧撕开的巨渊，空间乱流化作刀罡，唯有炼虚修士方可深入。",
-      "connections": ["DJ_KW_01", "DJ_VOID_01"],
+      "name": "九禁·无昼渊",
+      "region": "北荒",
+      "realm_requirement": "执灯",
+      "tags": [
+        "九禁地",
+        "永夜",
+        "渊底回声"
+      ],
+      "description": "终年不见天光的巨渊，灯照不到渊底；下探的人说渊里有人应答你的名字。",
+      "connections": [
+        "DJ_KW_01",
+        "DJ_VOID_01"
+      ],
       "x": 35,
       "y": 42
     },
     {
       "id": "DJ_VOID_01",
-      "name": "九幽冥海",
-      "region": "大晋",
-      "realm_requirement": "合体",
-      "tags": ["远古副本", "冥海潮汐", "真魔遗蜕"],
-      "description": "深不见底的黑潮之海，传闻每次潮汐都会卷出上古真魔遗蜕，杀机与机缘并存。",
-      "connections": ["DJ_RIFT_01", "DJ_SKY_01"],
+      "name": "幽都·忘川渡",
+      "region": "幽都",
+      "realm_requirement": "掌灯",
+      "tags": [
+        "幽都",
+        "忘川水",
+        "魂契"
+      ],
+      "description": "地下亡者之城的门户渡口，忘川水穿城而过；亡者排队入城，生人需执魂契。",
+      "connections": [
+        "DJ_RIFT_01",
+        "DJ_SKY_01"
+      ],
       "x": 8,
       "y": 28
     },
     {
       "id": "DJ_SKY_01",
-      "name": "太虚天关",
-      "region": "大晋",
-      "realm_requirement": "大乘",
-      "tags": ["传说副本", "天罡雷域", "古仙战场"],
-      "description": "悬于九天罡风层的破碎关隘，古仙与真魔曾在此鏖战，残留法则仍可斩魂。",
-      "connections": ["DJ_VOID_01", "DJ_TRIB_01"],
+      "name": "九禁·天翁井",
+      "region": "灯外海",
+      "realm_requirement": "近神",
+      "tags": [
+        "九禁地",
+        "天翁",
+        "井绳"
+      ],
+      "description": "荒原中央的巨井，井绳永远是湿的，而今天并没有下雨；井底通向「天翁」的传闻无人证实。",
+      "connections": [
+        "DJ_VOID_01",
+        "DJ_TRIB_01"
+      ],
       "x": 26,
       "y": 8
     },
     {
       "id": "DJ_TRIB_01",
-      "name": "飞升台·万劫雷狱",
-      "region": "大晋",
-      "realm_requirement": "渡劫",
-      "tags": ["终焉副本", "天劫化形", "飞升契机"],
-      "description": "传说中的飞升古台已化为万劫雷狱，唯有渡劫大能可在此搏一线飞升之机。",
-      "connections": ["DJ_SKY_01"],
+      "name": "九禁·长夜古道",
+      "region": "灯外海",
+      "realm_requirement": "渡渊",
+      "tags": [
+        "九禁地",
+        "长夜",
+        "真相"
+      ],
+      "description": "通往旧纪元尽头的古道，走完全程者可窥渡渊真相；至今无人带回完整的答案。",
+      "connections": [
+        "DJ_SKY_01"
+      ],
       "x": 5,
       "y": 7
     }
@@ -268,9 +442,13 @@
       "kind": "sect",
       "sect_id": "lingxiao",
       "parent_id": "TN_YW_01",
-      "name": "红尘剑宗",
-      "description": "山门立于城郭外的半山，门人负剑往来于红尘与山野之间。",
-      "tags": ["四大宗门", "入世问剑", "剑修"],
+      "name": "太乙清都观",
+      "description": "天下正道之首，山门立于城郭外的半山，门人燃心灯往来于红尘与山野之间。",
+      "tags": [
+        "六大传承",
+        "正道之首",
+        "守灯七章"
+      ],
       "x": 84,
       "y": 74
     },
@@ -279,9 +457,13 @@
       "kind": "sect",
       "sect_id": "tianyan",
       "parent_id": "DJ_KW_01",
-      "name": "天衍圣地",
-      "description": "云上五峰环抱中宫，五行灵机沿山川院落周流不息。",
-      "tags": ["四大宗门", "五行推演", "云上圣地"],
+      "name": "观星台",
+      "description": "隐世学者藏身雪原星野，星图沿山势铺开，知道的真相越多，疯得也越彻底。",
+      "tags": [
+        "六大传承",
+        "星象推演",
+        "隐世学者"
+      ],
       "x": 50,
       "y": 36
     },
@@ -290,9 +472,13 @@
       "kind": "sect",
       "sect_id": "wuxiang",
       "parent_id": "DJ_SOUTH_01",
-      "name": "无相禅宗",
-      "description": "黑白双峰隔着血莲池相望，不二门的未合圆环终年隐在雾中。",
-      "tags": ["四大宗门", "佛魔同修", "色身道场"],
+      "name": "白莲乳母教",
+      "description": "雾瘴深处的邪教，莲灯终年不熄，收容乱世孤女；它作恶，但被收容的人无处可去。",
+      "tags": [
+        "六大传承",
+        "莲灯收容",
+        "道德灰域"
+      ],
       "x": 66,
       "y": 25
     },
@@ -301,9 +487,13 @@
       "kind": "sect",
       "sect_id": "youdu",
       "parent_id": "DJ_VOID_01",
-      "name": "幽都",
-      "description": "黑水穿山而过，三盏魂灯在无日关外为来客照出归路。",
-      "tags": ["四大宗门", "三魂七魄", "黑水魂灯"],
+      "name": "幽都·地藏殿",
+      "description": "亡者之城中的守序势力，忘川水穿殿而过，三盏魂灯在无日关外为来客照出归路。",
+      "tags": [
+        "六大传承",
+        "亡者之城",
+        "记忆交易"
+      ],
       "x": 13,
       "y": 24
     },
@@ -311,460 +501,766 @@
       "id": "SECT_JIUJIE",
       "kind": "sect",
       "sect_id": "jiujie",
-      "parent_id": "DJ_TRIB_01",
-      "name": "九劫天宫",
-      "description": "雷墟天阙悬于万劫雷狱之上，九重天门在雷池尽头等待后来者。",
-      "tags": ["正统天道", "劫雷审判", "雷墟天阙"],
-      "x": 25,
-      "y": 12
+      "parent_id": "TN_YUE_01",
+      "name": "掌灯司",
+      "description": "朝廷机构悬于京畿，登记、编号、镇压诡异；猎诡委托与职级晋升皆在此落卷。",
+      "tags": [
+        "六大传承",
+        "朝廷机构",
+        "猎诡委托"
+      ],
+      "x": 85,
+      "y": 82
+    },
+    {
+      "id": "SECT_BAIXIBAN",
+      "kind": "sect",
+      "sect_id": "baixiban",
+      "parent_id": "DJ_CENTRAL_01",
+      "name": "百戏班",
+      "description": "游走市井的江湖艺人，是封灵器铸造世家与散修情报网；执《守灯》第三章，以戏念行走红尘。",
+      "tags": [
+        "六大传承",
+        "封灵器世家",
+        "散修之家"
+      ],
+      "x": 48,
+      "y": 22
     }
   ],
   "satellite_nodes": [
     {
       "id": "SAT_TN_01",
-      "name": "太岳山·无名古修士洞府",
+      "name": "烛京郊外·无名旧宅",
       "parent_id": "TN_YUE_01",
       "type": "隐秘地点",
-      "realm_requirement": "筑基",
+      "realm_requirement": "守灯",
       "environmental_status": null,
-      "tags": ["单人副本", "阵法破解", "坐化遗骸", "古宝", "功法玉简"],
-      "description": "掩映在瀑布后的隐秘洞穴，洞口禁制已然残破，透着一股岁月腐朽的气息。",
-      "dungeon_config": { "difficulty": "normal" },
-      "connections": ["TN_YUE_01"],
+      "tags": [
+        "单人副本",
+        "旧宅禁制",
+        "纳秽遗骸",
+        "旧纪元遗物",
+        "正法残卷"
+      ],
+      "description": "掩映在旧坊墙后的老宅，门口的封条残破不全，透着一股岁月腐朽的气息。",
+      "dungeon_config": {
+        "difficulty": "normal"
+      },
+      "connections": [
+        "TN_YUE_01"
+      ],
       "x": 82,
       "y": 88
     },
     {
       "id": "SAT_TN_02",
-      "name": "云梦山·崩塌的上古宗门",
+      "name": "烟波泽·半沉的旧灯楼",
       "parent_id": "TN_XI_01",
       "type": "遗迹",
-      "realm_requirement": "金丹",
+      "realm_requirement": "窥渊",
       "environmental_status": "formation_suppressed",
-      "tags": ["断壁残垣", "残魂", "功法残页", "多重禁制"],
-      "description": "昔日鼎盛的剑宗遗址，即便崩塌多年，空气中仍残留着令人心悸的剑意。",
-      "dungeon_config": { "difficulty": "hard" },
-      "connections": ["TN_XI_01"],
+      "tags": [
+        "断壁残垣",
+        "残魂",
+        "水下灯楼",
+        "多重禁制"
+      ],
+      "description": "昔日灯楼沉入泽底，只余楼顶露出水面；即便如此，夜里仍有人看见楼中亮灯。",
+      "dungeon_config": {
+        "difficulty": "hard"
+      },
+      "connections": [
+        "TN_XI_01"
+      ],
       "x": 88,
       "y": 68
     },
     {
       "id": "SAT_LX_01",
-      "name": "乱星海·无名荒岛",
+      "name": "鬼市外·灯照不到的滩涂",
       "parent_id": "LX_OUTER_01",
       "type": "荒野",
-      "realm_requirement": "金丹",
+      "realm_requirement": "窥渊",
       "environmental_status": "abundant_qi",
-      "tags": ["偏僻", "高阶灵草", "妖兽巢穴", "闭关地"],
-      "description": "一座在海图上没有任何标记的孤岛，岛上怪石嶙峋，偶有惊人妖气冲天而起。",
-      "dungeon_config": { "difficulty": "hard" },
-      "connections": ["LX_OUTER_01"],
+      "tags": [
+        "偏僻",
+        "高阶香材",
+        "诡异巢穴",
+        "闭关地"
+      ],
+      "description": "鬼市外围一片海图上没有标记的滩涂，怪石嶙峋，偶有不属于潮汐的水声。",
+      "dungeon_config": {
+        "difficulty": "hard"
+      },
+      "connections": [
+        "LX_OUTER_01"
+      ],
       "x": 64,
       "y": 75
     },
     {
       "id": "SAT_LX_02",
-      "name": "深海·沉船遗迹",
+      "name": "灯外海·沉船遗迹",
       "parent_id": "LX_INNER_01",
       "type": "水下遗迹",
-      "realm_requirement": "筑基",
+      "realm_requirement": "守灯",
       "environmental_status": "freezing",
-      "tags": ["水属性", "禁制宝箱", "海兽袭击"],
-      "description": "数百年前大型商船的沉没之地，被密集的珊瑚与海草覆盖，幽暗中似有眼睛在窥视。",
-      "dungeon_config": { "difficulty": "normal" },
-      "connections": ["LX_INNER_01"],
+      "tags": [
+        "星属性",
+        "禁制宝箱",
+        "深海窥视"
+      ],
+      "description": "数百年前商船的沉没之地，被密集的珊瑚与海草覆盖，幽暗中似有眼睛在窥视。",
+      "dungeon_config": {
+        "difficulty": "normal"
+      },
+      "connections": [
+        "LX_INNER_01"
+      ],
       "x": 65,
       "y": 92
     },
     {
       "id": "SAT_ZMG_01",
-      "name": "坠魔谷外围·空间断层带",
+      "name": "天裂口外缘·裂隙带",
       "parent_id": "TN_ZMG_01",
       "type": "极度危险区",
-      "realm_requirement": "化神",
+      "realm_requirement": "忘川",
       "environmental_status": null,
-      "tags": ["空间裂缝", "古魔气", "瞬移危险"],
-      "description": "此处空间极不稳定，肉眼可见道道漆黑裂缝如蛛网般蔓延，稍有不慎便会形神俱灭。",
-      "dungeon_config": { "difficulty": "boss" },
-      "connections": ["TN_ZMG_01"],
+      "tags": [
+        "空间裂缝",
+        "旧纪元气息",
+        "瞬移危险"
+      ],
+      "description": "裂口外缘的空间极不稳定，肉眼可见道道漆黑裂缝如蛛网般蔓延，稍有不慎便会形神俱灭。",
+      "dungeon_config": {
+        "difficulty": "boss"
+      },
+      "connections": [
+        "TN_ZMG_01"
+      ],
       "x": 97,
       "y": 74
     },
     {
       "id": "SAT_DJ_01",
-      "name": "南疆·无名古墓",
+      "name": "三十七家村·无名义冢",
       "parent_id": "DJ_SOUTH_01",
       "type": "阴冢",
-      "realm_requirement": "元婴",
+      "realm_requirement": "蚀体",
       "environmental_status": "toxic_air",
-      "tags": ["炼尸", "阴气滔天", "万年尸熊", "阴属性材料"],
-      "description": "藏于沼泽深处的古老石墓，石门上刻满了镇邪符文，却掩盖不住内部溢出的尸气。",
-      "dungeon_config": { "difficulty": "hard" },
-      "connections": ["DJ_SOUTH_01"],
+      "tags": [
+        "腌物巢",
+        "阴气滔天",
+        "阴属性材料"
+      ],
+      "description": "藏在沼泽深处的义冢，石门上刻满镇邪符文，却掩盖不住内部溢出的尸气。",
+      "dungeon_config": {
+        "difficulty": "hard"
+      },
+      "connections": [
+        "DJ_SOUTH_01"
+      ],
       "x": 58,
       "y": 18
     },
     {
       "id": "SAT_ML_01",
-      "name": "草原·法士秘密祭坛",
+      "name": "长平旧道·遗种巢穴",
       "parent_id": "ML_PLAINS_01",
-      "type": "敌对营地",
-      "realm_requirement": "元婴",
+      "type": "诡异巢穴",
+      "realm_requirement": "蚀体",
       "environmental_status": null,
-      "tags": ["潜入", "圣兽分身", "慕兰灵石"],
-      "description": "慕兰法士秘密举行祭祀的简易阵地，戒备森严，似乎在酝酿某种阴谋。",
-      "dungeon_config": { "difficulty": "normal" },
-      "connections": ["ML_PLAINS_01"],
+      "tags": [
+        "潜入",
+        "战场遗种",
+        "守碑翁的警告"
+      ],
+      "description": "旧道旁的废弃营地，如今被战场遗种占据；守碑翁路过时从不多看一眼。",
+      "dungeon_config": {
+        "difficulty": "normal"
+      },
+      "connections": [
+        "ML_PLAINS_01"
+      ],
       "x": 90,
       "y": 38
     },
     {
       "id": "SAT_TN_03",
-      "name": "落日森林·废弃药园",
+      "name": "灰巷·废弃草圃",
       "parent_id": "TN_YUE_02",
       "type": "资源点",
-      "realm_requirement": "炼气",
+      "realm_requirement": "闻腥",
       "environmental_status": null,
-      "tags": ["灵药残存", "木灵气", "陷阱"],
-      "description": "血色禁地边缘的一处荒废园子，虽然杂草丛生，但偶尔能惊鸿一瞥地看到年份久远的药草。",
-      "dungeon_config": { "difficulty": "easy" },
-      "connections": ["TN_YUE_02"],
+      "tags": [
+        "香材残存",
+        "灯下草",
+        "陷阱"
+      ],
+      "description": "灯影地边缘一处荒废园子，杂草丛生，偶尔能惊鸿一瞥地看到年份久远的灯下草。",
+      "dungeon_config": {
+        "difficulty": "easy"
+      },
+      "connections": [
+        "TN_YUE_02"
+      ],
       "x": 85,
       "y": 89
     },
     {
       "id": "SAT_TN_08",
-      "name": "太岳山·青溪灵草坡",
+      "name": "烛京近郊·灯下草坡",
       "parent_id": "TN_YUE_01",
       "type": "浅层资源点",
-      "realm_requirement": "炼气",
+      "realm_requirement": "闻腥",
       "environmental_status": null,
-      "tags": ["单人副本", "入门采药", "灵草坡", "低危历练"],
-      "description": "太岳山外缘一处被溪水环绕的缓坡，灵草年份不高，却适合初入道途者熟悉秘境采集与轻度禁制。",
-      "dungeon_config": { "difficulty": "easy" },
-      "connections": ["TN_YUE_01"],
+      "tags": [
+        "单人副本",
+        "入门采草",
+        "草坡",
+        "低危历练"
+      ],
+      "description": "烛京城外一处缓坡，灯下草年份不高，却适合初入灯途者熟悉秘境采集与轻度禁制。",
+      "dungeon_config": {
+        "difficulty": "easy"
+      },
+      "connections": [
+        "TN_YUE_01"
+      ],
       "x": 81,
       "y": 86
     },
     {
       "id": "SAT_LX_07",
-      "name": "魁星岛·礁洞妖影",
+      "name": "退潮屿·礁洞怪影",
       "parent_id": "LX_INNER_02",
       "type": "近海礁洞",
-      "realm_requirement": "炼气",
+      "realm_requirement": "闻腥",
       "environmental_status": "freezing",
-      "tags": ["单人副本", "近海妖兽", "潮汐礁洞", "炼气试炼"],
-      "description": "魁星岛外海退潮后显露的礁洞，洞内多见低阶海兽踪迹，也藏着被潮水冲刷出的贝晶与水行材料。",
-      "dungeon_config": { "difficulty": "normal" },
-      "connections": ["LX_INNER_02"],
+      "tags": [
+        "单人副本",
+        "近海腌物",
+        "潮汐礁洞",
+        "闻腥试炼"
+      ],
+      "description": "退潮屿外海退潮后显露的礁洞，洞内多见低阶腌物踪迹，也藏着被潮水冲刷出的贝晶与水行材料。",
+      "dungeon_config": {
+        "difficulty": "normal"
+      },
+      "connections": [
+        "LX_INNER_02"
+      ],
       "x": 43,
       "y": 86
     },
     {
       "id": "SAT_DJ_02",
-      "name": "玄黄裂渊·逆鳞祭坛",
+      "name": "无昼渊·渊壁祭坛",
       "parent_id": "DJ_RIFT_01",
       "type": "古祭坛",
-      "realm_requirement": "合体",
+      "realm_requirement": "掌灯",
       "environmental_status": "formation_suppressed",
-      "tags": ["单人副本", "古龙逆鳞", "阵眼崩坏", "高危夺宝"],
-      "description": "裂渊深处裸露出的古祭坛，阵纹已被岁月磨损，却仍在吞吐骇人的龙威。",
-      "dungeon_config": { "difficulty": "boss" },
-      "connections": ["DJ_RIFT_01"],
+      "tags": [
+        "单人副本",
+        "旧纪元甲片",
+        "阵眼崩坏",
+        "高危夺宝"
+      ],
+      "description": "渊壁深处裸露出的古祭坛，阵纹已被岁月磨损，却仍在吞吐骇人的威压。",
+      "dungeon_config": {
+        "difficulty": "boss"
+      },
+      "connections": [
+        "DJ_RIFT_01"
+      ],
       "x": 33,
       "y": 44
     },
     {
       "id": "SAT_DJ_10",
-      "name": "玄黄裂渊·碎鳞石林",
+      "name": "无昼渊·碎甲石林",
       "parent_id": "DJ_RIFT_01",
-      "type": "裂渊石林",
-      "realm_requirement": "合体",
+      "type": "渊壁石林",
+      "realm_requirement": "掌灯",
       "environmental_status": "formation_suppressed",
-      "tags": ["单人副本", "碎鳞石林", "界隙罡风", "合体历练"],
-      "description": "逆鳞祭坛外侧散布着大片黑色石林，石面残留古龙鳞纹，罡风虽烈，却未触及祭坛核心杀机。",
-      "dungeon_config": { "difficulty": "hard" },
-      "connections": ["DJ_RIFT_01"],
+      "tags": [
+        "单人副本",
+        "碎甲石林",
+        "渊底罡风",
+        "掌灯历练"
+      ],
+      "description": "祭坛外侧散布着大片黑色石林，石面残留旧纪元甲片纹理，罡风虽烈，却未触及祭坛核心杀机。",
+      "dungeon_config": {
+        "difficulty": "hard"
+      },
+      "connections": [
+        "DJ_RIFT_01"
+      ],
       "x": 31,
       "y": 47
     },
     {
       "id": "SAT_DJ_03",
-      "name": "九幽冥海·沉日神殿",
+      "name": "忘川渡·沉灯神殿",
       "parent_id": "DJ_VOID_01",
-      "type": "海底神殿",
-      "realm_requirement": "大乘",
+      "type": "川底神殿",
+      "realm_requirement": "近神",
       "environmental_status": "freezing",
-      "tags": ["单人副本", "神殿守卫", "法则碎片", "深海禁制"],
-      "description": "沉没在黑潮最深处的神殿废墟，殿门未启已闻雷鸣，仿佛仍有古神在沉睡。",
-      "dungeon_config": { "difficulty": "boss" },
-      "connections": ["DJ_VOID_01"],
+      "tags": [
+        "单人副本",
+        "神殿守卫",
+        "法则碎片",
+        "忘川禁制"
+      ],
+      "description": "沉没在忘川水最深处的神殿废墟，殿门未启已闻水声，仿佛仍有旧神在沉睡。",
+      "dungeon_config": {
+        "difficulty": "boss"
+      },
+      "connections": [
+        "DJ_VOID_01"
+      ],
       "x": 12,
       "y": 28
     },
     {
       "id": "SAT_DJ_11",
-      "name": "九幽冥海·黑潮贝场",
+      "name": "忘川渡·忘川贝场",
       "parent_id": "DJ_VOID_01",
-      "type": "冥海资源带",
-      "realm_requirement": "大乘",
+      "type": "忘川资源带",
+      "realm_requirement": "近神",
       "environmental_status": "freezing",
-      "tags": ["单人副本", "黑潮贝场", "冥海灵贝", "法则潮汐"],
-      "description": "沉日神殿外围的黑潮贝场随冥海潮汐开合，灵贝与残破法则碎屑偶尔被卷上礁台。",
-      "dungeon_config": { "difficulty": "hard" },
-      "connections": ["DJ_VOID_01"],
+      "tags": [
+        "单人副本",
+        "忘川贝场",
+        "忘川魂贝",
+        "法则潮汐"
+      ],
+      "description": "沉灯神殿外围的贝场随忘川潮汐开合，魂贝与残破法则碎屑偶尔被卷上礁台。",
+      "dungeon_config": {
+        "difficulty": "hard"
+      },
+      "connections": [
+        "DJ_VOID_01"
+      ],
       "x": 10,
       "y": 31
     },
     {
       "id": "SAT_DJ_04",
-      "name": "飞升台·劫火回廊",
+      "name": "长夜古道·灯烬回廊",
       "parent_id": "DJ_TRIB_01",
-      "type": "天劫秘境",
-      "realm_requirement": "渡劫",
+      "type": "古道秘境",
+      "realm_requirement": "渡渊",
       "environmental_status": "scorching",
-      "tags": ["单人副本", "劫火炼体", "天道投影", "飞升残卷"],
-      "description": "飞升台外围回廊燃烧着不灭劫火，踏错一步便会被天道投影当场抹杀。",
-      "dungeon_config": { "difficulty": "boss" },
-      "connections": ["DJ_TRIB_01"],
+      "tags": [
+        "单人副本",
+        "灯烬炼体",
+        "天翁注视",
+        "古道残卷"
+      ],
+      "description": "古道外围回廊残留着不灭的灯烬，踏错一步便会被注视者当场抹杀。",
+      "dungeon_config": {
+        "difficulty": "boss"
+      },
+      "connections": [
+        "DJ_TRIB_01"
+      ],
       "x": 4,
       "y": 12
     },
     {
       "id": "SAT_DJ_12",
-      "name": "飞升台·残雷碑林",
+      "name": "长夜古道·残灯碑林",
       "parent_id": "DJ_TRIB_01",
-      "type": "天劫碑林",
-      "realm_requirement": "渡劫",
+      "type": "古道碑林",
+      "realm_requirement": "渡渊",
       "environmental_status": "scorching",
-      "tags": ["单人副本", "残雷碑林", "劫纹参悟", "渡劫试炼"],
-      "description": "飞升台边缘残立着成片雷碑，碑面劫纹时明时灭，可供渡劫修士参悟雷劫余韵。",
-      "dungeon_config": { "difficulty": "elite" },
-      "connections": ["DJ_TRIB_01"],
+      "tags": [
+        "单人副本",
+        "残灯碑林",
+        "渡渊参悟",
+        "渡渊试炼"
+      ],
+      "description": "古道边缘残立着成片石碑，碑面灯纹时明时灭，可供渡渊修士参悟灯烬余韵。",
+      "dungeon_config": {
+        "difficulty": "elite"
+      },
+      "connections": [
+        "DJ_TRIB_01"
+      ],
       "x": 8,
       "y": 10
     },
     {
       "id": "SAT_TN_04",
-      "name": "越国·黄枫谷后山禁地",
+      "name": "烛京·旧署试炼场",
       "parent_id": "TN_YUE_01",
-      "type": "宗门禁地",
-      "realm_requirement": "筑基",
+      "type": "官署禁地",
+      "realm_requirement": "守灯",
       "environmental_status": null,
-      "tags": ["单人副本", "试炼阵", "木灵脉", "宗门秘库", "藏经残卷"],
-      "description": "黄枫谷后山深处封存多年的试炼禁地，灵雾常年不散，偶有古阵自鸣。",
-      "dungeon_config": { "difficulty": "normal" },
-      "connections": ["TN_YUE_01"],
+      "tags": [
+        "单人副本",
+        "试炼阵",
+        "木灯脉",
+        "掌灯司秘库",
+        "档案残卷"
+      ],
+      "description": "掌灯司旧署深处封存多年的试炼场，灯雾常年不散，偶有古阵自鸣。",
+      "dungeon_config": {
+        "difficulty": "normal"
+      },
+      "connections": [
+        "TN_YUE_01"
+      ],
       "x": 83,
       "y": 83
     },
     {
       "id": "SAT_TN_05",
-      "name": "灵石矿·古传送阵核心井",
+      "name": "万骨驿·古灯道井",
       "parent_id": "TN_BORDER_01",
       "type": "地下遗迹",
-      "realm_requirement": "金丹",
+      "realm_requirement": "窥渊",
       "environmental_status": "formation_suppressed",
-      "tags": ["单人副本", "传送残阵", "空间乱流", "跨海线索"],
-      "description": "废矿最深处的巨井中埋着古传送阵核心，阵纹残破却仍偶尔闪烁跨域灵光。",
-      "dungeon_config": { "difficulty": "hard" },
-      "connections": ["TN_BORDER_01"],
+      "tags": [
+        "单人副本",
+        "古灯道",
+        "空间乱流",
+        "跨域线索"
+      ],
+      "description": "驿站地下深处的巨井中埋着旧纪元的灯道核心，阵纹残破却仍偶尔闪烁跨域灯晖。",
+      "dungeon_config": {
+        "difficulty": "hard"
+      },
+      "connections": [
+        "TN_BORDER_01"
+      ],
       "x": 93,
       "y": 82
     },
     {
       "id": "SAT_TN_06",
-      "name": "坠魔谷·古魔祭坛群",
+      "name": "天裂口·旧纪元祭坛群",
       "parent_id": "TN_ZMG_01",
-      "type": "魔域遗址",
-      "realm_requirement": "化神",
+      "type": "旧纪元遗址",
+      "realm_requirement": "忘川",
       "environmental_status": "toxic_air",
-      "tags": ["单人副本", "古魔印记", "魔气潮汐", "高危机缘"],
-      "description": "坠魔谷深处散落着多座古魔祭坛，黑色魔纹时隐时现，令人神魂不宁。",
-      "dungeon_config": { "difficulty": "hard" },
-      "connections": ["TN_ZMG_01"],
+      "tags": [
+        "单人副本",
+        "旧纪元印记",
+        "低语潮汐",
+        "高危机缘"
+      ],
+      "description": "裂口下方散落着多座旧纪元祭坛，黑色纹路时隐时现，令人神魂不宁。",
+      "dungeon_config": {
+        "difficulty": "hard"
+      },
+      "connections": [
+        "TN_ZMG_01"
+      ],
       "x": 95,
       "y": 72
     },
     {
       "id": "SAT_YW_01",
-      "name": "元武国·天星宗旧阵库",
+      "name": "天枢峰·旧阵库",
       "parent_id": "TN_YW_01",
       "type": "阵道遗库",
-      "realm_requirement": "筑基",
+      "realm_requirement": "守灯",
       "environmental_status": null,
-      "tags": ["单人副本", "阵旗残卷", "傀儡守卫", "炼器材料"],
-      "description": "天星宗封存旧阵盘的地下库房，禁制层层叠叠，稍有差池便会触发阵灵反噬。",
-      "dungeon_config": { "difficulty": "normal" },
-      "connections": ["TN_YW_01"],
+      "tags": [
+        "单人副本",
+        "阵旗残卷",
+        "傀儡守卫",
+        "器坯材料"
+      ],
+      "description": "清都观封存旧阵盘的地下库房，禁制层层叠叠，稍有差池便会触发阵灵反噬。",
+      "dungeon_config": {
+        "difficulty": "normal"
+      },
+      "connections": [
+        "TN_YW_01"
+      ],
       "x": 90,
       "y": 76
     },
     {
       "id": "SAT_LX_03",
-      "name": "天星城·圣山地脉秘窟",
+      "name": "灯塔港·老灯脉地窟",
       "parent_id": "LX_INNER_01",
-      "type": "圣山秘窟",
-      "realm_requirement": "元婴",
+      "type": "灯脉地窟",
+      "realm_requirement": "蚀体",
       "environmental_status": "abundant_qi",
-      "tags": ["单人副本", "星宫禁卫", "地脉结晶", "灵脉争夺"],
-      "description": "圣山下方天然地脉形成的秘窟，灵气如潮，亦有星宫遗留禁卫巡弋。",
-      "dungeon_config": { "difficulty": "normal" },
-      "connections": ["LX_INNER_01"],
+      "tags": [
+        "单人副本",
+        "灯塔禁卫",
+        "地脉结晶",
+        "灯脉争夺"
+      ],
+      "description": "灯塔下方天然灯脉形成的地窟，灯焰如潮，亦有港城遗留禁卫巡弋。",
+      "dungeon_config": {
+        "difficulty": "normal"
+      },
+      "connections": [
+        "LX_INNER_01"
+      ],
       "x": 57,
       "y": 70
     },
     {
       "id": "SAT_LX_04",
-      "name": "魁星岛·六连殿地底回廊",
+      "name": "退潮屿·沉殿地宫",
       "parent_id": "LX_INNER_02",
       "type": "古殿地宫",
-      "realm_requirement": "筑基",
+      "realm_requirement": "守灯",
       "environmental_status": "freezing",
-      "tags": ["单人副本", "妖兽伏击", "古殿残图", "寒煞之气"],
-      "description": "六连殿下方被海潮浸蚀的古回廊，阴寒灵压交错，暗处潜伏大量海妖。",
-      "dungeon_config": { "difficulty": "normal" },
-      "connections": ["LX_INNER_02"],
+      "tags": [
+        "单人副本",
+        "腌物伏击",
+        "古殿残图",
+        "寒煞之气"
+      ],
+      "description": "旧殿下方被海潮浸蚀的地宫，阴寒灯压交错，暗处潜伏大量海中腌物。",
+      "dungeon_config": {
+        "difficulty": "normal"
+      },
+      "connections": [
+        "LX_INNER_02"
+      ],
       "x": 47,
       "y": 82
     },
     {
       "id": "SAT_LX_05",
-      "name": "虚天殿·内殿星辰阶",
+      "name": "万灯楼·灯阶长廊",
       "parent_id": "LX_VOID_01",
-      "type": "上古内殿",
-      "realm_requirement": "元婴",
+      "type": "楼内高阁",
+      "realm_requirement": "蚀体",
       "environmental_status": "formation_suppressed",
-      "tags": ["单人副本", "虚天鼎残影", "上古傀儡", "夺鼎线索", "上古秘术"],
-      "description": "虚天殿深处的星辰石阶漂浮于虚空，越往上禁制越强，常有修士在此陨落。",
-      "dungeon_config": { "difficulty": "elite" },
-      "connections": ["LX_VOID_01"],
+      "tags": [
+        "单人副本",
+        "万灯残影",
+        "旧纪元傀儡",
+        "登楼线索"
+      ],
+      "description": "万灯楼上层的石阶漂浮于雾中，越往上灯越亮，也越照不清自己的影子。",
+      "dungeon_config": {
+        "difficulty": "elite"
+      },
+      "connections": [
+        "LX_VOID_01"
+      ],
       "x": 53,
       "y": 58
     },
     {
       "id": "SAT_ML_02",
-      "name": "慕兰草原·圣禽祭天台",
+      "name": "长平旧道·守碑祭台",
       "parent_id": "ML_PLAINS_01",
-      "type": "法士祭场",
-      "realm_requirement": "化神",
+      "type": "古祭场",
+      "realm_requirement": "忘川",
       "environmental_status": "scorching",
-      "tags": ["单人副本", "圣禽图腾", "法士军阵", "边境冲突"],
-      "description": "慕兰法士供奉圣禽的古老祭台，祭阵发动时天地灵机紊乱，杀机四伏。",
-      "dungeon_config": { "difficulty": "normal" },
-      "connections": ["ML_PLAINS_01"],
+      "tags": [
+        "单人副本",
+        "碑纹图腾",
+        "遗种军阵",
+        "边境冲突"
+      ],
+      "description": "守碑翁供奉旧碑的古老祭台，祭阵发动时天地灯机紊乱，杀机四伏。",
+      "dungeon_config": {
+        "difficulty": "normal"
+      },
+      "connections": [
+        "ML_PLAINS_01"
+      ],
       "x": 87,
       "y": 40
     },
     {
       "id": "SAT_DJ_05",
-      "name": "北夜小极宫·万年玄冰库",
+      "name": "乳母腹地·白乳古窖",
       "parent_id": "DJ_NORTH_01",
-      "type": "极寒禁区",
-      "realm_requirement": "化神",
+      "type": "雾瘴禁区",
+      "realm_requirement": "忘川",
       "environmental_status": "freezing",
-      "tags": ["单人副本", "玄冰妖灵", "寒髓矿脉", "冰系传承", "冰系功法"],
-      "description": "小极宫最深层的玄冰库封印了万年寒气，连神识都可能在此被冻结。",
-      "dungeon_config": { "difficulty": "hard" },
-      "connections": ["DJ_NORTH_01"],
+      "tags": [
+        "单人副本",
+        "疫雾腌物",
+        "乳白窖藏",
+        "疫窍材料",
+        "疫系功法"
+      ],
+      "description": "腹地最深处的古窖封存着经年疫气，窖壁上凝着乳白色渗出物，连心神都可能在此被粘住。",
+      "dungeon_config": {
+        "difficulty": "hard"
+      },
+      "connections": [
+        "DJ_NORTH_01"
+      ],
       "x": 43,
       "y": 7
     },
     {
       "id": "SAT_DJ_06",
-      "name": "昆吾山·镇魔古塔",
+      "name": "倒悬观星台·封星古塔",
       "parent_id": "DJ_KW_01",
       "type": "封印塔域",
-      "realm_requirement": "炼虚",
+      "realm_requirement": "执灯",
       "environmental_status": "formation_suppressed",
-      "tags": ["单人副本", "镇魔符印", "塔灵试炼", "通天灵宝残片"],
-      "description": "昆吾山腹地耸立的古塔镇压着多重魔魂，塔层越高，封印反噬越猛烈。",
-      "dungeon_config": { "difficulty": "boss" },
-      "connections": ["DJ_KW_01"],
+      "tags": [
+        "单人副本",
+        "镇星符印",
+        "塔灵试炼",
+        "旧纪元残片"
+      ],
+      "description": "观星台下方倒悬的古塔镇压着多重旧影，塔层越深，封印反噬越猛烈。",
+      "dungeon_config": {
+        "difficulty": "boss"
+      },
+      "connections": [
+        "DJ_KW_01"
+      ],
       "x": 43,
       "y": 38
     },
     {
       "id": "SAT_DJ_13",
-      "name": "昆吾山·灵液暗河",
+      "name": "倒悬观星台·星髓暗河",
       "parent_id": "DJ_KW_01",
-      "type": "山腹暗河",
-      "realm_requirement": "炼虚",
+      "type": "崖腹暗河",
+      "realm_requirement": "执灯",
       "environmental_status": "abundant_qi",
-      "tags": ["单人副本", "灵液暗河", "山腹禁制", "炼虚资源"],
-      "description": "昆吾山封印外层有灵液暗河穿行山腹，河道禁制尚可周旋，偶能寻得被灵液浸润的古材。",
-      "dungeon_config": { "difficulty": "hard" },
-      "connections": ["DJ_KW_01"],
+      "tags": [
+        "单人副本",
+        "星髓暗河",
+        "崖腹禁制",
+        "执灯资源"
+      ],
+      "description": "观星台崖腹有星髓暗河穿行，河道禁制尚可周旋，偶能寻得被星髓浸润的古材。",
+      "dungeon_config": {
+        "difficulty": "hard"
+      },
+      "connections": [
+        "DJ_KW_01"
+      ],
       "x": 47,
       "y": 39
     },
     {
       "id": "SAT_DJ_07",
-      "name": "大晋·天机阁旧址",
+      "name": "班底庄·百戏机关楼",
       "parent_id": "DJ_CENTRAL_01",
-      "type": "上古楼阁",
-      "realm_requirement": "元婴",
+      "type": "旧戏楼",
+      "realm_requirement": "蚀体",
       "environmental_status": null,
-      "tags": ["单人副本", "机关傀儡", "古卷秘档", "星象推演", "秘术典籍"],
-      "description": "昔日名震人界的天机阁遗址，如今机关错乱，仍残存大量推演秘术。",
-      "dungeon_config": { "difficulty": "hard" },
-      "connections": ["DJ_CENTRAL_01"],
+      "tags": [
+        "单人副本",
+        "机关戏偶",
+        "戏本秘档",
+        "星象推演",
+        "秘术典籍"
+      ],
+      "description": "昔日名震烬洲的百戏机关楼旧址，如今戏偶错乱，仍残存大量推演秘术。",
+      "dungeon_config": {
+        "difficulty": "hard"
+      },
+      "connections": [
+        "DJ_CENTRAL_01"
+      ],
       "x": 38,
       "y": 27
     },
     {
       "id": "SAT_TN_07",
-      "name": "黄枫谷·藏经阁地窖",
+      "name": "烛京·旧书馆藏书地窖",
       "parent_id": "TN_YUE_01",
-      "type": "宗门遗库",
-      "realm_requirement": "筑基",
+      "type": "书库地窖",
+      "realm_requirement": "守灯",
       "environmental_status": "formation_suppressed",
-      "tags": ["单人副本", "藏经阁", "功法残卷", "禁制书架"],
-      "description": "黄枫谷旧藏经阁下方的封闭地窖，书架与玉简多有残缺，仍可寻到可修炼的基础功法。",
-      "dungeon_config": { "difficulty": "easy" },
-      "connections": ["TN_YUE_01"],
+      "tags": [
+        "单人副本",
+        "旧书馆",
+        "正法残卷",
+        "禁制书架"
+      ],
+      "description": "旧书馆下方的封闭地窖，书架与册页多有残缺，仍可寻到可修炼的基础正法。",
+      "dungeon_config": {
+        "difficulty": "easy"
+      },
+      "connections": [
+        "TN_YUE_01"
+      ],
       "x": 86,
       "y": 84
     },
     {
       "id": "SAT_LX_06",
-      "name": "虚天殿·偏殿玉简廊",
+      "name": "万灯楼·记忆书廊",
       "parent_id": "LX_VOID_01",
       "type": "上古书廊",
-      "realm_requirement": "元婴",
+      "realm_requirement": "蚀体",
       "environmental_status": "formation_suppressed",
-      "tags": ["单人副本", "玉简密室", "神通刻痕", "上古秘术传承"],
-      "description": "虚天殿侧翼封存玉简的回廊，墙壁刻有残缺术式轨迹，常伴随傀儡巡守与禁制反噬。",
-      "dungeon_config": { "difficulty": "elite" },
-      "connections": ["LX_VOID_01"],
+      "tags": [
+        "单人副本",
+        "记忆密室",
+        "神通刻痕",
+        "旧纪元秘术"
+      ],
+      "description": "万灯楼侧翼封存记忆册页的回廊，墙上刻有残缺术式轨迹，常伴随傀儡巡守与禁制反噬。",
+      "dungeon_config": {
+        "difficulty": "elite"
+      },
+      "connections": [
+        "LX_VOID_01"
+      ],
       "x": 57,
       "y": 56
     },
     {
       "id": "SAT_DJ_09",
-      "name": "北夜小极宫·玄冰藏经窟",
+      "name": "乳母腹地·乳母庙经窟",
       "parent_id": "DJ_NORTH_01",
       "type": "宗门藏经窟",
-      "realm_requirement": "化神",
+      "realm_requirement": "忘川",
       "environmental_status": "freezing",
-      "tags": ["单人副本", "冰系功法玉简", "神识试炼", "长老封印"],
-      "description": "小极宫历代长老封存冰系典籍之地，入内需以神识破封，失败则会被寒煞反噬。",
-      "dungeon_config": { "difficulty": "elite" },
-      "connections": ["DJ_NORTH_01"],
+      "tags": [
+        "单人副本",
+        "疫系正法残卷",
+        "心神试炼",
+        "乳母封印"
+      ],
+      "description": "乳母庙历代乳母封存疫系典籍之地，入内需以心神破封，失败则会被疫气反噬。",
+      "dungeon_config": {
+        "difficulty": "elite"
+      },
+      "connections": [
+        "DJ_NORTH_01"
+      ],
       "x": 46,
       "y": 9
     },
     {
       "id": "SAT_DJ_08",
-      "name": "太虚天关·碎空战场",
+      "name": "天翁井·井底旧战场",
       "parent_id": "DJ_SKY_01",
       "type": "法则战场",
-      "realm_requirement": "渡劫",
+      "realm_requirement": "渡渊",
       "environmental_status": "scorching",
-      "tags": ["单人副本", "法则风暴", "古仙残兵", "天关遗宝"],
-      "description": "天关之外漂浮着破碎战场，法则风暴昼夜不息，稍有分神便会形神俱灭。",
-      "dungeon_config": { "difficulty": "boss" },
-      "connections": ["DJ_SKY_01"],
+      "tags": [
+        "单人副本",
+        "法则风暴",
+        "旧纪元残兵",
+        "井底遗宝"
+      ],
+      "description": "井底之下漂浮着破碎战场，法则风暴昼夜不息，稍有分神便会形神俱灭。",
+      "dungeon_config": {
+        "difficulty": "boss"
+      },
+      "connections": [
+        "DJ_SKY_01"
+      ],
       "x": 25,
       "y": 4
     }

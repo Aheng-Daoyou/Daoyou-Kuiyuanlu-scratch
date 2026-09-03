@@ -128,7 +128,7 @@ describe('通用分层状态与伤害行为原语', () => {
     }, () => '');
 
     expect(summary).toContain(
-      '物攻、法攻、物防、法防、身法：1层-3%，2层-5%，3层-8%，4～5层-12%',
+      '物攻、律攻、物防、律防、灯影：1层-3%，2层-5%，3层-8%，4～5层-12%',
     );
     expect(summary).toContain(
       '受治疗削弱：1层0%，2层15%，3层30%，4层50%，5层100%',
@@ -137,7 +137,7 @@ describe('通用分层状态与伤害行为原语', () => {
     expect(summary.join('；')).not.toContain('+0');
   });
 
-  it('受治疗削弱在 Unit.heal 统一封顶，不影响法力恢复', () => {
+  it('受治疗削弱在 Unit.heal 统一封顶，不影响灯焰恢复', () => {
     const unit = new Unit('unit', '单位', {});
     unit.setHp(unit.getMaxHp() - 100);
     unit.takeMp(100);

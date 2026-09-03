@@ -50,12 +50,12 @@ export const QUALITY_STABILITY_BONUS: Record<Quality, number> = {
 };
 
 export const ELEMENT_PREFIX_MAP: Record<ElementType, string> = {
-  金: '庚金',
-  木: '青木',
-  水: '玄水',
-  火: '炎阳',
-  土: '厚土',
-  风: '罡风',
-  雷: '惊雷',
-  冰: '寒霜',
+  烛: '庚金',
+  尸: '青木',
+  星: '玄水',
+  渊: '炎阳',
+  梦: '厚土',
+  噬: '罡风',
+  帘: '幕隙',
+  疫: '寒霜',
 };

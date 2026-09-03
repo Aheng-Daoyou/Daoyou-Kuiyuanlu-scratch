@@ -1,7 +1,7 @@
 /**
  * 新版突破概率计算系统
  *
- * 基于修为进度 + 感悟值的全新突破算法
+ * 基于修为进度 + 窥悟值的全新突破算法
  * 取代原 breakthroughEngine.ts 中的 calculateBreakthroughChance
  */
 
@@ -45,14 +45,14 @@ const REALM_ORDER = [...REALM_VALUES];
 const STAGE_ORDER = [...REALM_STAGE_VALUES];
 
 const LIFESPAN_BONUS_BY_REALM: Partial<Record<RealmType, number>> = {
-  筑基: 200,
-  金丹: 500,
-  元婴: 1200,
-  化神: 2000,
-  炼虚: 3000,
-  合体: 4000,
-  大乘: 5000,
-  渡劫: 8000,
+  守灯: 200,
+  窥渊: 500,
+  蚀体: 1200,
+  忘川: 2000,
+  执灯: 3000,
+  掌灯: 4000,
+  近神: 5000,
+  渡渊: 8000,
 };
 
 /**
@@ -61,13 +61,13 @@ const LIFESPAN_BONUS_BY_REALM: Partial<Record<RealmType, number>> = {
 export interface BreakthroughModifiers {
   baseChance: number; // 基础成功率
   realmDifficulty: number; // 境界难度系数
-  progressMultiplier: number; // 修为进度系数
-  insightMultiplier: number; // 感悟系数
-  demonPenalty: number; // 心魔惩罚
+  progressMultiplier: number; // 灯韵进度系数
+  insightMultiplier: number; // 窥悟系数
+  demonPenalty: number; // 魔障惩罚
   adjustedBaseChance: number; // 乘算修正后的综合基础成功率
   fateBonus: number; // 命格加成
-  pillBonus: number; // 破境丹残留加成
-  toxicityPenalty: number; // 丹毒惩罚
+  pillBonus: number; // 破境香残留加成
+  toxicityPenalty: number; // 香毒惩罚
   finalChance: number; // 最终成功率
 }
 
@@ -106,7 +106,7 @@ export function calculateBreakthroughChance(
   // 获取修为进度数据
   const progress = cultivator.cultivation_progress;
   if (!progress) {
-    throw new Error('角色缺少修为进度数据');
+    throw new Error('角色缺少灯韵进度数据');
   }
 
   // 检查是否可以突破（修为至少60%）
@@ -143,7 +143,7 @@ export function calculateBreakthroughChance(
   // 3. 修为进度系数
   const progressMultiplier = calculateProgressMultiplier(expProgress);
 
-  // 4. 感悟系数（新系统核心）
+  // 4. 窥悟系数（新系统核心）
   const insightMultiplier = calculateInsightMultiplier(
     progress.comprehension_insight,
   );
@@ -265,10 +265,10 @@ function getBaseChanceByType(
  * 计算境界难度系数
  *
  * 境界越高，突破越难
- * 炼气：1.0
- * 筑基：0.85
- * 金丹：0.7225
- * 元婴：0.6141
+ * 闻腥：1.0
+ * 守灯：0.85
+ * 窥渊：0.7225
+ * 蚀体：0.6141
  * ...
  */
 function calculateRealmDifficulty(realm: RealmType): number {
@@ -295,14 +295,14 @@ function calculateProgressMultiplier(progress: number): number {
 }
 
 /**
- * 计算感悟系数（新系统核心）
+ * 计算窥悟系数（新系统核心）
  *
- * 感悟值越高，成功率加成越大
- * 公式：1.0 + (感悟值 / 100) × 0.25
+ * 窥悟值越高，成功率加成越大
+ * 公式：1.0 + (窥悟值 / 100) × 0.25
  *
- * 0感悟：  1.0倍（无加成）
- * 50感悟： 1.125倍
- * 100感悟：1.25倍
+ * 0窥悟：  1.0倍（无加成）
+ * 50窥悟： 1.125倍
+ * 100窥悟：1.25倍
  */
 function calculateInsightMultiplier(insight: number): number {
   return 1.0 + (insight / 100) * 0.25;
@@ -329,7 +329,7 @@ function generateRecommendation(
 
   if (finalChance >= 0.4) {
     if (type === 'forced') {
-      return '强行突破风险较大，建议继续积累修为。';
+      return '强行突破风险较大，建议继续积累灯韵。';
     }
     return '成功率一般，可尝试突破或继续积累。';
   }
@@ -338,15 +338,15 @@ function generateRecommendation(
   const suggestions: string[] = [];
 
   if (expProgress < 100) {
-    suggestions.push('修为未满');
+    suggestions.push('灯韵未满');
   }
 
   if (insight < 50) {
-    suggestions.push('感悟不足');
+    suggestions.push('窥悟不足');
   }
 
   if (bottleneck) {
-    suggestions.push('处于瓶颈期，建议通过副本、战斗提升感悟');
+    suggestions.push('处于瓶颈期，建议通过副本、战斗提升窥悟');
   }
 
   if (suggestions.length > 0) {
@@ -379,7 +379,7 @@ function createInsufficientExpResult(
     breakthroughType: 'forced',
     nextStage: null,
     canAttempt: false,
-    recommendation: `修为不足，需达到60%以上才可尝试突破（当前${calculateExpProgress(progress)}%）`,
+    recommendation: `灯韵不足，需达到60%以上才可尝试突破（当前${calculateExpProgress(progress)}%）`,
   };
 }
 
@@ -432,13 +432,13 @@ export function getBreakthroughChanceExplanation(
 【各项系数】
 • 基础成功率：${format('.0%')(modifiers.baseChance)}
 • 境界难度：×${format('.2f')(modifiers.realmDifficulty)}
-• 修为进度：×${format('.2f')(modifiers.progressMultiplier)}
-• 感悟加成：×${format('.2f')(modifiers.insightMultiplier)}
-${modifiers.demonPenalty < 1.0 ? `• 心魔惩罚：×${format('.2f')(modifiers.demonPenalty)}\n` : ''}
+• 灯韵进度：×${format('.2f')(modifiers.progressMultiplier)}
+• 窥悟加成：×${format('.2f')(modifiers.insightMultiplier)}
+${modifiers.demonPenalty < 1.0 ? `• 魔障惩罚：×${format('.2f')(modifiers.demonPenalty)}\n` : ''}
 • 综合基础成功率：${format('.1%')(modifiers.adjustedBaseChance)}
 • 命格机缘：${format('+.1%')(modifiers.fateBonus)}
-• 破境药力：${format('+.1%')(modifiers.pillBonus)}
-• 丹毒惩罚：-${format('.1%')(modifiers.toxicityPenalty)}
+• 破境香力：${format('+.1%')(modifiers.pillBonus)}
+• 香毒惩罚：-${format('.1%')(modifiers.toxicityPenalty)}
 【建议】${result.recommendation}
   `.trim();
 }

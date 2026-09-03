@@ -11,34 +11,34 @@ import {
 
 describe('realmProgression', () => {
   it('calculates fixed attribute budgets by realm and stage', () => {
-    expect(getRealmStageAttributeBudget('炼气', '初期')).toBe(60);
-    expect(getRealmStageAttributeBudget('筑基', '初期')).toBe(170);
-    expect(getRealmStageAttributeBudget('金丹', '初期')).toBe(280);
-    expect(getRealmStageAttributeBudget('渡劫', '初期')).toBe(940);
-    expect(getRealmStageAttributeBudget('渡劫', '圆满')).toBe(1006);
+    expect(getRealmStageAttributeBudget('闻腥', '初期')).toBe(60);
+    expect(getRealmStageAttributeBudget('守灯', '初期')).toBe(170);
+    expect(getRealmStageAttributeBudget('窥渊', '初期')).toBe(280);
+    expect(getRealmStageAttributeBudget('渡渊', '初期')).toBe(940);
+    expect(getRealmStageAttributeBudget('渡渊', '圆满')).toBe(1006);
   });
 
   it('splits attribute budget into natural values and allocatable points', () => {
-    expect(getRealmStageNaturalAttributeValue('炼气', '初期')).toBe(10);
-    expect(getRealmStageUnallocatedAttributeBudget('炼气', '初期')).toBe(0);
+    expect(getRealmStageNaturalAttributeValue('闻腥', '初期')).toBe(10);
+    expect(getRealmStageUnallocatedAttributeBudget('闻腥', '初期')).toBe(0);
 
-    expect(getRealmStageNaturalAttributeValue('筑基', '初期')).toBe(20);
-    expect(getRealmStageUnallocatedAttributeBudget('筑基', '初期')).toBe(50);
+    expect(getRealmStageNaturalAttributeValue('守灯', '初期')).toBe(20);
+    expect(getRealmStageUnallocatedAttributeBudget('守灯', '初期')).toBe(50);
 
-    expect(getRealmStageNaturalAttributeValue('渡劫', '圆满')).toBe(96);
-    expect(getRealmStageUnallocatedAttributeBudget('渡劫', '圆满')).toBe(430);
+    expect(getRealmStageNaturalAttributeValue('渡渊', '圆满')).toBe(96);
+    expect(getRealmStageUnallocatedAttributeBudget('渡渊', '圆满')).toBe(430);
   });
 
   it('calculates realm stage rank and breakthrough rewards', () => {
-    expect(getRealmStageRank('炼气', '初期')).toBe(0);
-    expect(getRealmStageRank('筑基', '初期')).toBe(4);
+    expect(getRealmStageRank('闻腥', '初期')).toBe(0);
+    expect(getRealmStageRank('守灯', '初期')).toBe(4);
     expect(getBreakthroughAttributeGrowthReward(
-      { realm: '炼气', stage: '初期' },
-      { realm: '炼气', stage: '中期' },
+      { realm: '闻腥', stage: '初期' },
+      { realm: '闻腥', stage: '中期' },
     )).toEqual({ naturalPerAttribute: 2, attributePointReward: 10 });
     expect(getBreakthroughAttributeGrowthReward(
-      { realm: '炼气', stage: '圆满' },
-      { realm: '筑基', stage: '初期' },
+      { realm: '闻腥', stage: '圆满' },
+      { realm: '守灯', stage: '初期' },
     )).toEqual({ naturalPerAttribute: 4, attributePointReward: 20 });
   });
 

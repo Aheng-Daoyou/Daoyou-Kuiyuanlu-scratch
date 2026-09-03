@@ -39,7 +39,7 @@ export function isAuctionListableQuality(quality: Quality): boolean {
   return QUALITY_ORDER[quality] >= QUALITY_ORDER[AUCTION_MIN_QUALITY];
 }
 
-/** 所有材料（包括灵植种子）均须达到玄品才可寄售。 */
+/** 所有材料（包括灯植种子）均须达到玄品才可寄售。 */
 export function isAuctionListableMaterial(material: {
   rank: Quality;
   type?: unknown;

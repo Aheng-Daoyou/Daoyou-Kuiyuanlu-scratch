@@ -1,26 +1,26 @@
 import type { Quality } from '@shared/types/constants';
 
 /**
- * 丹药修为收益配置。
+ * 香品修为收益配置。
  *
- * 丹药不纳入通用 daily budget 经验模型；炼丹/丹药系统可以按品质、
- * 契合度、毒性、服用限制等独立调参。
+ * 香品不纳入通用 daily budget 经验模型；制香/香品系统可以按品质、
+ * 契合度、香性、服用限制等独立调参。
  *
  * 兼容计算公式：
- *   丹药经验 = expCap
+ *   香品经验 = expCap
  *            × percentByQuality[quality]
  *            × fitMultiplier
  *
  * 当旧调用方传 qualityScalar 时：
- *   丹药经验 = expCap
+ *   香品经验 = expCap
  *            × percentByQuality['凡品']
  *            × qualityScalar
  *            × fitMultiplier
  *
  * 调参建议：
- * - 此处只保留丹药修为数值的品质基础表。
- * - 丹药的最终强度、毒性、服用次数限制、炼丹契合度应继续在丹药/炼丹系统处理。
- * - 不要把这里重新接回 REALM_DAILY_EXP_BUDGET，否则丹药会再次参与通用经验节奏。
+ * - 此处只保留香品修为数值的品质基础表。
+ * - 香品的最终强度、香性、服用次数限制、制香契合度应继续在香品/制香系统处理。
+ * - 不要把这里重新接回 REALM_DAILY_EXP_BUDGET，否则香品会再次参与通用经验节奏。
  */
 export const PILL_EXP_BUDGET = {
   percentByQuality: {

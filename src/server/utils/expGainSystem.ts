@@ -17,10 +17,10 @@ import {
  * 修为增加来源
  */
 export type ExpGainSource =
-  | 'retreat' // 闭关修炼
+  | 'retreat' // 闭关窥悟
   | 'battle' // 战斗获胜
   | 'dungeon' // 副本探索
-  | 'pill' // 炼丹服用
+  | 'pill' // 制香服用
   | 'event' // 奇遇事件
   | 'reward' // 系统奖励
   | 'daily_task'; // 日常任务
@@ -30,9 +30,9 @@ export type ExpGainSource =
  */
 export interface ExpGainResult {
   success: boolean;
-  exp_gained: number; // 实际获得的修为
-  exp_before: number; // 原有修为
-  exp_after: number; // 新修为
+  exp_gained: number; // 实际获得的灯韵
+  exp_before: number; // 原有灯韵
+  exp_after: number; // 新灯韵
   progress: number; // 进度百分比
   capped: boolean; // 是否达到上限
   bottleneck_entered: boolean; // 是否进入瓶颈期
@@ -45,10 +45,10 @@ export interface ExpGainResult {
  */
 export interface ExpGainOptions {
   source: ExpGainSource;
-  base_amount: number; // 基础修为数量
+  base_amount: number; // 基础灯韵数量
   bypass_bottleneck?: boolean; // 是否绕过瓶颈期限制（特殊事件可用）
-  bypass_cap_limit?: boolean; // 是否绕过30%丹药限制（高级丹药可用）
-  insight_gain?: number; // 同时获得的感悟值（可选）
+  bypass_cap_limit?: boolean; // 是否绕过30%香品限制（高级香品可用）
+  insight_gain?: number; // 同时获得的窥悟值（可选）
 }
 
 /**
@@ -92,7 +92,7 @@ export function addCultivationExp(
   // 更新修为
   progress.cultivation_exp = exp_before + exp_gained;
 
-  // 更新感悟值（如果有）
+  // 更新窥悟值（如果有）
   if (options.insight_gain && options.insight_gain > 0) {
     progress.comprehension_insight = Math.min(
       100,
@@ -107,10 +107,10 @@ export function addCultivationExp(
   // 生成提示信息
   let message = '';
   if (capped) {
-    message = '修为已达当前境界上限，可尝试突破。';
+    message = '灯韵已达当前境界上限，可尝试突破。';
   } else if (bottleneck_entered && options.source === 'retreat') {
     message =
-      '修为渐近圆满，已入瓶颈期。闭关效率降低，建议通过其他方式积累感悟。';
+      '灯韵渐近圆满，已入瓶颈期。闭关效率降低，建议通过其他方式积累窥悟。';
   }
 
   return {
@@ -178,9 +178,9 @@ export function calculateDungeonExpGain(
 }
 
 /**
- * 丹药修为增加的辅助函数
+ * 香品修为增加的辅助函数
  * @param cultivator 角色
- * @param pill_quality 丹药品质
+ * @param pill_quality 香品品质
  */
 export function calculatePillExpGain(
   cultivator: Cultivator,
@@ -191,10 +191,10 @@ export function calculatePillExpGain(
   reason?: string;
 } {
   if (!cultivator.cultivation_progress) {
-    return { exp_gain: 0, can_use: false, reason: '修为数据异常' };
+    return { exp_gain: 0, can_use: false, reason: '灯韵数据异常' };
   }
 
-  // 检查丹药使用限制（当前境界服药获得的修为不超过30%）
+  // 检查香品使用限制（当前境界服药获得的修为不超过30%）
   // TODO: 需要在cultivation_progress中添加pill_exp_gained字段来追踪
   // 此处暂时允许使用
 

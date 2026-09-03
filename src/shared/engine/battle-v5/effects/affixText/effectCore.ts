@@ -6,7 +6,7 @@
  *
  * 例：
  *   reflect 34%            → "反弹 34% 伤害"
- *   shield {base=38, ...}  → "获得护盾 38 + 神识×29%"
+ *   shield {base=38, ...}  → "获得护盾 38 + 心神×29%"
  *   heal mp                → "回复法力 12 + 灵力×40%"
  */
 import { getResourceLabel } from '@shared/lib/gameConceptDisplay';
@@ -56,14 +56,14 @@ export function describeEffectCore(
       return `获得护盾 ${formatScalableValue(effect.params.value)}`;
 
     case 'mana_burn':
-      return `削减法力 ${formatScalableValue(effect.params.value)}`;
+      return `削减灯焰 ${formatScalableValue(effect.params.value)}`;
 
     case 'reflect':
       return `反弹 ${formatAffixPercent(effect.params.ratio)} 伤害`;
 
     case 'resource_drain': {
       const source =
-        effect.params.sourceType === 'hp' ? '伤害' : '法力消耗';
+        effect.params.sourceType === 'hp' ? '伤害' : '灯焰消耗';
       const target = getResourceLabel(effect.params.targetType);
       return `将 ${formatAffixPercent(effect.params.ratio)} ${source}转化为${target}`;
     }
@@ -88,7 +88,7 @@ export function describeEffectCore(
       return `免疫状态：${labelTagList(effect.params.tags)}`;
 
     case 'skill_immunity':
-      return '有概率免疫整个主动法术';
+      return '有概率免疫整个主动灯律';
 
     case 'dispel':
       return effect.params.targetTag
@@ -96,7 +96,7 @@ export function describeEffectCore(
         : `驱散 ${effect.params.maxCount ?? 1} 个状态`;
 
     case 'magic_shield':
-      return `优先使用法力吸收受到的伤害，吸收比例 ${formatAffixPercent(effect.params.absorbRatio ?? 0.98)}`;
+      return `优先使用灯焰吸收受到的伤害，吸收比例 ${formatAffixPercent(effect.params.absorbRatio ?? 0.98)}`;
 
     case 'apply_buff': {
       return describeApplyBuffText(
@@ -160,7 +160,7 @@ export function describeEffectCore(
       return effect.params.forceCritical ? '下一次命中必定暴击' : '强化下一次命中';
 
     case 'dynamic_scalar':
-      return `根据${effect.params.resource === 'hp' ? '气血' : '法力'}动态修正伤害`;
+      return `根据${effect.params.resource === 'hp' ? '气血' : '灯焰'}动态修正伤害`;
 
     case 'turn_state_counter':
       return `累计 ${effect.params.threshold} 次${effect.params.event === 'no_damage_dealt' ? '未造成伤害' : '造成伤害'}后${describeChildren(effect.params.effects)}`;
@@ -204,8 +204,8 @@ export function describeEffectCore(
 
     case 'refund_paid_cost':
       return typeof effect.params.amount === 'number'
-        ? `返还本次实际支付的 ${formatAffixNumber(effect.params.amount)} 点法力`
-        : `返还本次实际支付法力的 ${formatAffixPercent(effect.params.ratio)}`;
+        ? `返还本次实际支付的 ${formatAffixNumber(effect.params.amount)} 点灯焰`
+        : `返还本次实际支付灯焰的 ${formatAffixPercent(effect.params.ratio)}`;
 
     case 'mechanic_log':
       return `触发「${effect.params.displayName}」`;
@@ -294,8 +294,8 @@ function describeTransform(params: {
     params.trueDamage ? '转为真实伤害' : '',
     params.forceCritical ? '必定暴击' : '',
     params.addDispel ? '附带驱散' : '',
-    params.mpCostToHp ? '法力消耗改为气血消耗' : '',
-    params.freeManaCost ? '不消耗法力' : '',
+    params.mpCostToHp ? '灯焰消耗改为气血消耗' : '',
+    params.freeManaCost ? '不消耗灯焰' : '',
     params.cooldownModify !== undefined
       ? `冷却${params.cooldownModify >= 0 ? '增加' : '减少'} ${formatAffixNumber(Math.abs(params.cooldownModify))} 回合`
       : '',

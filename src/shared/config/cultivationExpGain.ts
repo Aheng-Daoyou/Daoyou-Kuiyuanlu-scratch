@@ -12,15 +12,15 @@ import type { RealmStage, RealmType } from '@shared/types/constants';
  * - 改这里通常也要同步重算 EXP_CAP_TABLE，否则目标天数只作为文档参考。
  */
 export const REALM_TARGET_DAYS = {
-  炼气: 3,
-  筑基: 7,
-  金丹: 21,
-  元婴: 42,
-  化神: 70,
-  炼虚: 98,
-  合体: 126,
-  大乘: 154,
-  渡劫: 182,
+  闻腥: 3,
+  守灯: 7,
+  窥渊: 21,
+  蚀体: 42,
+  忘川: 70,
+  执灯: 98,
+  掌灯: 126,
+  近神: 154,
+  渡渊: 182,
 } satisfies Record<RealmType, number>;
 
 /**
@@ -42,15 +42,15 @@ export const REALM_TARGET_DAYS = {
  * - 不建议用它调单个玩法强弱；单玩法应改对应 EXP_BUDGET。
  */
 export const REALM_DAILY_EXP_BUDGET = {
-  炼气: 1_000,
-  筑基: 1_800,
-  金丹: 3_200,
-  元婴: 5_600,
-  化神: 9_000,
-  炼虚: 14_000,
-  合体: 21_000,
-  大乘: 30_000,
-  渡劫: 42_000,
+  闻腥: 1_000,
+  守灯: 1_800,
+  窥渊: 3_200,
+  蚀体: 5_600,
+  忘川: 9_000,
+  执灯: 14_000,
+  掌灯: 21_000,
+  近神: 30_000,
+  渡渊: 42_000,
 } satisfies Record<RealmType, number>;
 
 /**
@@ -79,7 +79,7 @@ export const STAGE_EXP_WEIGHT = {
  *   闭关基础经验 = dailyBudget × dailyFractionPerYear × min(years, maxYears)
  *
  * 注意：这里算出的只是“闭关基础经验”。服务端闭关还会继续叠加：
- *   灵根倍率 × 功法倍率 × 年限倍率 × 随机波动 × 顿悟倍率 × 瓶颈惩罚
+ *   窍倍率 × 功法倍率 × 年限倍率 × 随机波动 × 窥真倍率 × 瓶颈惩罚
  *
  * 调参建议：
  * - dailyFractionPerYear 控制每闭关 1 年相当于多少“每日预算”。

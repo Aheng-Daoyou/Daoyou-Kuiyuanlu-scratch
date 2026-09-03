@@ -74,7 +74,7 @@ router.get('/formulas', requireActiveCultivatorRef(), async (c) => {
     if (error instanceof AlchemyServiceError) {
       return jsonWithStatus(c, { error: error.message }, error.status);
     }
-    return c.json({ error: '丹方列表读取失败，请稍后再试。' }, 500);
+    return c.json({ error: '香方列表读取失败，请稍后再试。' }, 500);
   }
 });
 
@@ -90,7 +90,7 @@ router.delete('/formulas/:formulaId', requireActiveCultivatorRef(), async (c) =>
 
     return c.json({
       success: true,
-      message: '丹方已删除',
+      message: '香方已删除',
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
@@ -103,7 +103,7 @@ router.delete('/formulas/:formulaId', requireActiveCultivatorRef(), async (c) =>
         error.status,
       );
     }
-    return c.json({ error: '丹方删除失败，请稍后再试。' }, 500);
+    return c.json({ error: '香方删除失败，请稍后再试。' }, 500);
   }
 });
 
@@ -140,7 +140,7 @@ router.post('/formulas/:formulaId/analyze', requireActiveCultivatorRef(), async 
         error.status,
       );
     }
-    return c.json({ error: '推演药路失败，请稍后再试。' }, 500);
+    return c.json({ error: '推演香路失败，请稍后再试。' }, 500);
   }
 });
 
@@ -169,7 +169,7 @@ router.post('/formulas/discovery/confirm', requireActiveCultivatorRef(), async (
         error.status,
       );
     }
-    return c.json({ error: '丹方确认失败，请稍后再试。' }, 500);
+    return c.json({ error: '香方确认失败，请稍后再试。' }, 500);
   }
 });
 

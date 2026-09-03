@@ -71,7 +71,7 @@ function buildFeedbackStatusMailContent(params: {
   if (params.status === 'resolved') {
     lines.push(
       '',
-      `奖励发放：你的问题已解决，特发放 ${FEEDBACK_RESOLVE_REWARD} 灵石作为奖励。`,
+      `奖励发放：你的问题已解决，特发放 ${FEEDBACK_RESOLVE_REWARD} 灯油券作为奖励。`,
     );
   }
 
@@ -194,7 +194,7 @@ router.patch('/:id/status', requireAdmin(), async (c) => {
       existing.cultivatorId ?? fallbackCultivator?.id;
 
     if (recipientCultivatorId) {
-      // 发放奖励：仅当状态变为 resolved 时固定发放 8000 灵石
+      // 发放奖励：仅当状态变为 resolved 时固定发放 8000 灯油券
       if (status === 'resolved') {
         try {
           await updateSpiritStones(

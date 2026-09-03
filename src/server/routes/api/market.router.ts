@@ -74,7 +74,7 @@ const PreviewSchema = z
     if (value.itemType === 'artifact' && hasMaterialIds && !hasItemIds) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: '法宝回收请使用 itemIds 参数',
+        message: '封灵器回收请使用 itemIds 参数',
       });
     }
   });

@@ -853,7 +853,7 @@ describe('Advanced battle effects', () => {
 
     const first = new Buff(
       'thunder_mark_log',
-      '雷印',
+      '帘印',
       BuffType.DEBUFF,
       3,
       StackRule.STACK_LAYER,
@@ -861,7 +861,7 @@ describe('Advanced battle effects', () => {
     first.tags.addTags([GameplayTags.BUFF.ELEMENT.THUNDER]);
     const second = new Buff(
       'thunder_mark_log',
-      '雷印',
+      '帘印',
       BuffType.DEBUFF,
       3,
       StackRule.STACK_LAYER,

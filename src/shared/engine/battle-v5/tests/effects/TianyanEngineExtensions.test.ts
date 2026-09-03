@@ -33,9 +33,9 @@ describe('天衍所需通用 battle-v5 扩展', () => {
     EventBus.instance.reset();
   });
 
-  it('灵根匹配优先于异灵根失配豁免', () => {
+  it('窍匹配优先于异窍失配豁免', () => {
     const caster = unit('caster');
-    caster.setSpiritualRoots([{ element: '火', strength: 80 }]);
+    caster.setSpiritualRoots([{ element: '渊', strength: 80 }]);
     const ability = new Ability('fire', '火法', AbilityType.ACTIVE_SKILL);
     ability.tags.addTags([
       GameplayTags.ABILITY.ELEMENT.FIRE,
@@ -47,7 +47,7 @@ describe('天衍所需通用 battle-v5 扩展', () => {
 
   it('元素失配统一按1.0结算且兼容旧豁免标签', () => {
     const caster = unit('caster');
-    caster.setSpiritualRoots([{ element: '水', strength: 80 }]);
+    caster.setSpiritualRoots([{ element: '星', strength: 80 }]);
     const exempt = new Ability('fire-exempt', '火法', AbilityType.ACTIVE_SKILL);
     exempt.tags.addTags([
       GameplayTags.ABILITY.ELEMENT.FIRE,
@@ -60,11 +60,11 @@ describe('天衍所需通用 battle-v5 扩展', () => {
     expect(calculateSpiritualRootDamageMultiplier({ caster, ability: ordinary })).toBe(1);
   });
 
-  it('无属性伤害取最高灵根正常共鸣加成的30%', () => {
+  it('无属性伤害取最高窍正常共鸣加成的30%', () => {
     const caster = unit('caster');
     caster.setSpiritualRoots([
-      { element: '水', strength: 80 },
-      { element: '雷', strength: 95 },
+      { element: '星', strength: 80 },
+      { element: '帘', strength: 95 },
     ]);
     const ability = new Ability('neutral', '无属性法', AbilityType.ACTIVE_SKILL);
 
@@ -174,7 +174,7 @@ describe('天衍所需通用 battle-v5 扩展', () => {
     expect(caster.attributes.getValue(AttributeType.CONTROL_HIT)).toBe(before);
   });
 
-  it('兼容按施法快照比例返还实际支付法力', () => {
+  it('兼容按施法快照比例返还实际支付灯焰', () => {
     const caster = unit('caster');
     const target = unit('target');
     const before = caster.getCurrentMp();
@@ -206,7 +206,7 @@ describe('天衍所需通用 battle-v5 扩展', () => {
     expect(events.at(-1)).toMatchObject({ healAmount: 10, healType: 'mp' });
   });
 
-  it('固定返还不超过本次实际支付法力', () => {
+  it('固定返还不超过本次实际支付灯焰', () => {
     const caster = unit('caster');
     const target = unit('target');
     const before = caster.getCurrentMp();
@@ -242,7 +242,7 @@ describe('天衍所需通用 battle-v5 扩展', () => {
     });
   });
 
-  it('未实际支付法力时固定返还不产生回蓝事件', () => {
+  it('未实际支付灯焰时固定返还不产生回蓝事件', () => {
     const caster = unit('caster');
     const target = unit('target');
     const before = caster.getCurrentMp();
@@ -273,7 +273,7 @@ describe('天衍所需通用 battle-v5 扩展', () => {
     expect(events).toHaveLength(0);
   });
 
-  it('固定返还受到最大法力上限截断', () => {
+  it('固定返还受到最大灯焰上限截断', () => {
     const caster = unit('caster');
     const target = unit('target');
     const before = caster.getCurrentMp();

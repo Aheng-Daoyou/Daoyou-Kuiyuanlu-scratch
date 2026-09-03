@@ -14,7 +14,7 @@ export const REWARD_TIER_CONFIG = {
     consumableCount: { min: 3, max: 5 },
     artifactCount: { min: 2, max: 3 },
     qualityBonus: 2, // 品质加成等级
-    spiritStoneMultiplier: 2.0, // 灵石倍率
+    spiritStoneMultiplier: 2.0, // 灯油券倍率
   },
   A: {
     consumableCount: { min: 2, max: 4 },
@@ -45,140 +45,140 @@ export const REWARD_TIER_CONFIG = {
 /**
  * 消耗品池配置
  * 按境界分类的消耗品模板，用于生成随机奖励
- * 注意：type字段统一为'丹药'以符合schema定义，baseEffect存储效果类型
+ * 注意：type字段统一为'香品'以符合schema定义，baseEffect存储效果类型
  */
 export const CONSUMABLE_POOLS = {
-  炼气期: [
+  闻腥期: [
     {
-      name: '回春丹',
-      type: '丹药' as const,
-      description: '恢复50点生命值的基础丹药',
+      name: '回春香',
+      type: '香品' as const,
+      description: '恢复50点生命值的基础香品',
       baseEffect: { type: 'healing', hp: 50 },
       basePrice: 10,
     },
     {
-      name: '聚灵丹',
-      type: '丹药' as const,
-      description: '恢复30点法力的基础丹药',
+      name: '聚蕴香',
+      type: '香品' as const,
+      description: '恢复30点灯焰的基础香品',
       baseEffect: { type: 'mana', mp: 30 },
       basePrice: 8,
     },
     {
-      name: '辟谷丸',
-      type: '丹药' as const,
-      description: '可替代三日食物的丹药',
+      name: '辟谷香',
+      type: '香品' as const,
+      description: '可替代三日食物的香品',
       baseEffect: { type: 'sustenance', satiety: 72 },
       basePrice: 5,
     },
     {
-      name: '解毒散',
-      type: '丹药' as const,
+      name: '解毒香',
+      type: '香品' as const,
       description: '解除轻度毒素',
       baseEffect: { type: 'detox', removeToxin: 'minor' },
       basePrice: 12,
     },
   ],
-  筑基期: [
+  守灯期: [
     {
-      name: '大回春丹',
-      type: '丹药' as const,
-      description: '恢复150点生命值的中级丹药',
+      name: '大回春香',
+      type: '香品' as const,
+      description: '恢复150点生命值的中级香品',
       baseEffect: { type: 'healing', hp: 150 },
       basePrice: 30,
     },
     {
-      name: '大聚灵丹',
-      type: '丹药' as const,
-      description: '恢复100点法力的中级丹药',
+      name: '大聚蕴香',
+      type: '香品' as const,
+      description: '恢复100点灯焰的中级香品',
       baseEffect: { type: 'mana', mp: 100 },
       basePrice: 25,
     },
     {
-      name: '凝神丹',
-      type: '丹药' as const,
-      description: '提升10%法术威力，持续1小时',
+      name: '凝神香',
+      type: '香品' as const,
+      description: '提升10%灯律威力，持续1小时',
       baseEffect: { type: 'focus', spellPowerBonus: 0.1, duration: 3600 },
       basePrice: 40,
     },
     {
-      name: '金刚丸',
-      type: '丹药' as const,
+      name: '金刚香',
+      type: '香品' as const,
       description: '提升20点防御，持续1小时',
       baseEffect: { type: 'defense', defenseBonus: 20, duration: 3600 },
       basePrice: 35,
     },
   ],
-  金丹期: [
+  窥渊期: [
     {
-      name: '极品回春丹',
-      type: '丹药' as const,
-      description: '恢复500点生命值的高级丹药',
+      name: '极品回春香',
+      type: '香品' as const,
+      description: '恢复500点生命值的高级香品',
       baseEffect: { type: 'healing', hp: 500 },
       basePrice: 100,
     },
     {
-      name: '极品聚灵丹',
-      type: '丹药' as const,
-      description: '恢复300点法力的高级丹药',
+      name: '极品聚蕴香',
+      type: '香品' as const,
+      description: '恢复300点灯焰的高级香品',
       baseEffect: { type: 'mana', mp: 300 },
       basePrice: 80,
     },
     {
-      name: '破境丹',
-      type: '丹药' as const,
-      description: '增加5%突破几率的珍贵丹药',
+      name: '破境香',
+      type: '香品' as const,
+      description: '增加5%突破几率的珍贵香品',
       baseEffect: { type: 'breakthrough', breakthroughChance: 0.05 },
       basePrice: 500,
     },
     {
-      name: '天罡护体丹',
-      type: '丹药' as const,
+      name: '天罡护体香',
+      type: '香品' as const,
       description: '免疫一次致命伤害',
       baseEffect: { type: 'protection', deathProtection: 1 },
       basePrice: 300,
     },
   ],
-  元婴期: [
+  蚀体期: [
     {
-      name: '仙品回春丹',
-      type: '丹药' as const,
-      description: '恢复2000点生命值的顶级丹药',
+      name: '仙品回春香',
+      type: '香品' as const,
+      description: '恢复2000点生命值的顶级香品',
       baseEffect: { type: 'healing', hp: 2000 },
       basePrice: 500,
     },
     {
-      name: '仙品聚灵丹',
-      type: '丹药' as const,
-      description: '恢复1000点法力的顶级丹药',
+      name: '仙品聚蕴香',
+      type: '香品' as const,
+      description: '恢复1000点灯焰的顶级香品',
       baseEffect: { type: 'mana', mp: 1000 },
       basePrice: 400,
     },
     {
-      name: '涅槃重生丹',
-      type: '丹药' as const,
+      name: '涅槃重生香',
+      type: '香品' as const,
       description: '死亡时自动复活并恢复50%生命',
       baseEffect: { type: 'rebirth', autoRevive: true, reviveHpPercent: 0.5 },
       basePrice: 2000,
     },
   ],
-  化神期: [
+  忘川期: [
     {
-      name: '九转还魂丹',
-      type: '丹药' as const,
+      name: '九转还魂香',
+      type: '香品' as const,
       description: '瞬间恢复全部生命值',
       baseEffect: { type: 'healing', hpPercent: 1.0 },
       basePrice: 5000,
     },
     {
-      name: '天地灵丹',
-      type: '丹药' as const,
-      description: '瞬间恢复全部法力',
+      name: '天地灵香',
+      type: '香品' as const,
+      description: '瞬间恢复全部灯焰',
       baseEffect: { type: 'mana', mpPercent: 1.0 },
       basePrice: 4000,
     },
     {
-      name: '化神至宝丹',
-      type: '丹药' as const,
+      name: '忘川至宝香',
+      type: '香品' as const,
       description: '全属性提升20%，持续24小时',
       baseEffect: {
         type: 'transcendence',
@@ -241,18 +241,18 @@ export const QUALITY_ATTRIBUTE_BONUS: Record<
 } as const;
 
 /**
- * 境界对应的灵石基础奖励
+ * 境界对应的灯油券基础奖励
  */
 export const REALM_SPIRIT_STONE_BASE = {
-  炼气期: { min: 10, max: 30 },
-  筑基期: { min: 50, max: 100 },
-  金丹期: { min: 200, max: 400 },
-  元婴期: { min: 1000, max: 2000 },
-  化神期: { min: 5000, max: 10000 },
+  闻腥期: { min: 10, max: 30 },
+  守灯期: { min: 50, max: 100 },
+  窥渊期: { min: 200, max: 400 },
+  蚀体期: { min: 1000, max: 2000 },
+  忘川期: { min: 5000, max: 10000 },
 } as const;
 
 /**
- * 法器类型定义（对齐schema.ts中artifacts表的slot字段）
+ * 封灵器类型定义（对齐schema.ts中artifacts表的slot字段）
  */
 export const ARTIFACT_TYPES = [
   'weapon', // 武器
@@ -265,117 +265,117 @@ export const ARTIFACT_TYPES = [
  * 按境界分类的材料模板
  */
 export const MATERIAL_POOLS = {
-  炼气期: [
+  闻腥期: [
     {
-      name: '青灵草',
+      name: '青灯草',
       type: 'herb' as MaterialType,
       rank: '凡品' as Quality,
-      element: '木',
-      description: '最基础的灵草，用于炼制低阶丹药',
+      element: '尸',
+      description: '最基础的灯草，用于炼制低阶香品',
       basePrice: 5,
     },
     {
       name: '赤铜矿',
       type: 'ore' as MaterialType,
       rank: '凡品' as Quality,
-      element: '金',
-      description: '炼器的基础矿石',
+      element: '烛',
+      description: '封灵的基础矿石',
       basePrice: 8,
     },
     {
-      name: '妖兽皮',
+      name: '诡异皮',
       type: 'monster' as MaterialType,
       rank: '凡品' as Quality,
       element: null,
-      description: '低阶妖兽的皮毛，用于制作护甲',
+      description: '低阶诡异的皮毛，用于制作护甲',
       basePrice: 10,
     },
   ],
-  筑基期: [
+  守灯期: [
     {
       name: '紫雾芝',
       type: 'herb' as MaterialType,
       rank: '灵品' as Quality,
-      element: '木',
-      description: '中阶灵药，药力醇厚',
+      element: '尸',
+      description: '中阶灯药，香力醇厚',
       basePrice: 30,
     },
     {
       name: '寒铁精',
       type: 'ore' as MaterialType,
       rank: '灵品' as Quality,
-      element: '水',
-      description: '含有寒气的灵铁，炼器佳材',
+      element: '星',
+      description: '含有寒气的灵铁，封灵佳材',
       basePrice: 50,
     },
     {
-      name: '妖丹碎片',
+      name: '诡核碎片',
       type: 'monster' as MaterialType,
       rank: '灵品' as Quality,
       element: null,
-      description: '筑基期妖兽的妖丹碎片',
+      description: '守灯期诡异的诡核碎片',
       basePrice: 80,
     },
   ],
-  金丹期: [
+  窥渊期: [
     {
       name: '千年雪莲',
       type: 'herb' as MaterialType,
       rank: '玄品' as Quality,
-      element: '水',
-      description: '千年灵药，药力强劲',
+      element: '星',
+      description: '千年灯药，香力强劲',
       basePrice: 200,
     },
     {
       name: '玄铁精华',
       type: 'ore' as MaterialType,
       rank: '玄品' as Quality,
-      element: '金',
-      description: '稀有的炼器材料',
+      element: '烛',
+      description: '稀有的封灵材料',
       basePrice: 300,
     },
     {
-      name: '完整妖丹',
+      name: '完整诡核',
       type: 'monster' as MaterialType,
       rank: '玄品' as Quality,
       element: null,
-      description: '金丹期妖兽的完整妖丹',
+      description: '窥渊期诡异的完整诡核',
       basePrice: 500,
     },
   ],
-  元婴期: [
+  蚀体期: [
     {
       name: '七彩灵芝',
       type: 'herb' as MaterialType,
       rank: '真品' as Quality,
       element: null,
-      description: '天地灵药，万年难遇',
+      description: '天地灯药，万年难遇',
       basePrice: 1000,
     },
     {
       name: '星辰精铁',
       type: 'ore' as MaterialType,
       rank: '真品' as Quality,
-      element: '金',
-      description: '天外陨铁，炼制法宝的顶级材料',
+      element: '烛',
+      description: '天外陨铁，炼制封灵器的顶级材料',
       basePrice: 1500,
     },
     {
-      name: '元婴本源',
+      name: '蚀体本源',
       type: 'monster' as MaterialType,
       rank: '真品' as Quality,
       element: null,
-      description: '元婴期妖兽的元婴本源',
+      description: '蚀体期诡异的蚀体本源',
       basePrice: 2000,
     },
   ],
-  化神期: [
+  忘川期: [
     {
-      name: '混沌灵根',
+      name: '混沌窍',
       type: 'herb' as MaterialType,
       rank: '地品' as Quality,
       element: null,
-      description: '天地初开时诞生的灵根',
+      description: '天地初开时诞生的窍',
       basePrice: 5000,
     },
     {
@@ -383,15 +383,15 @@ export const MATERIAL_POOLS = {
       type: 'ore' as MaterialType,
       rank: '地品' as Quality,
       element: null,
-      description: '蕴含大道法则的神金',
+      description: '蕴含灯道法则的神金',
       basePrice: 8000,
     },
     {
-      name: '化神真髓',
+      name: '忘川真髓',
       type: 'monster' as MaterialType,
       rank: '地品' as Quality,
       element: null,
-      description: '化神期妖兽的真髓精华',
+      description: '忘川期诡异的真髓精华',
       basePrice: 10000,
     },
   ],

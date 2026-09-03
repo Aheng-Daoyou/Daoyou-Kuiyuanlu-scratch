@@ -19,8 +19,8 @@ type EffectTextFormatter = (
 
 const BUFF_ID_LABELS: Record<string, string> = {
   karma_mirror_ready: '业镜',
-  thunder_devour_charge: '蓄雷',
-  thunder_mark: '雷印',
+  thunder_devour_charge: '蓄帘',
+  thunder_mark: '帘印',
   blood_ink_talisman: '血墨符',
   wind_exchange_step: '借风',
   heaven_jealousy: '天妒',

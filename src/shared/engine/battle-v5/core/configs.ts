@@ -116,6 +116,8 @@ export interface ConditionConfig {
     | 'attribute_compare'
     | 'combat_resource_at_least'
     | 'combat_resource_below'
+    | 'combat_resource_ratio_at_least'
+    | 'combat_resource_ratio_below'
     | 'runtime_counter_compare'
     | 'ability_mode_is'
     | 'ability_cost_crossed'
@@ -426,6 +428,13 @@ export interface CombatResourceModifyParams {
   resourceId: string;
   operation: 'add' | 'subtract' | 'set' | 'consume_all';
   amount?: number;
+  /**
+   * 按目标资源「当前值」的比例计算扣减量（仅 subtract 语义下有意义）。
+   * 例如 0.06 表示每次扣掉目标当前神智的 6%。与 amount 互斥；存在时优先。
+   * 用于「诡异烧神智」：修为越高上限越低，但每次烧的是「当前」神智的比例，
+   * 越接近灯灭，扣得越少（天然防瞬间归零的暴走）。
+   */
+  ratioOfCurrent?: number;
   target?: 'caster' | 'target';
   effects?: EffectConfig[];
   scaleEffectsByAmount?: boolean;

@@ -170,7 +170,7 @@ router.get('/', requireActiveCultivatorRef(), async (c) => {
     }
     if (craftType === 'alchemy') {
       if (alchemyMode !== 'improvised' && alchemyMode !== 'formula') {
-        return c.json({ error: '无效的炼丹模式' }, 400);
+        return c.json({ error: '无效的制香模式' }, 400);
       }
       if (!materialIdsParam || materialIdsParam.length === 0) {
         return c.json({ error: '请选择材料以查询消耗' }, 400);
@@ -181,7 +181,7 @@ router.get('/', requireActiveCultivatorRef(), async (c) => {
         alchemyMode === 'formula'
           ? await (() => {
               if (!formulaId) {
-                throw new AlchemyServiceError('请选择丹方后再校验炉材。');
+                throw new AlchemyServiceError('请选择香方后再校验炉材。');
               }
               return previewFormulaCraft(
                 cultivator.cultivatorId,

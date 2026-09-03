@@ -75,7 +75,7 @@ function parseRealmQuery(raw: string | undefined | null): RealmType | null {
 
 publicRouter.get('/', async (c) => {
   try {
-    const realm = parseRealmQuery(c.req.query('realm')) ?? '炼气';
+    const realm = parseRealmQuery(c.req.query('realm')) ?? '闻腥';
     const rankings = await getRankingList(realm);
     return c.json({
       success: true,
@@ -213,7 +213,7 @@ publicRouter.get('/items', async (c) => {
         .where(
           and(
             isNotNull(consumables.cultivatorId),
-            eq(consumables.type, '丹药'),
+            eq(consumables.type, '香品'),
             inArray(consumables.quality, validQualities as string[]),
           ),
         )
@@ -225,7 +225,7 @@ publicRouter.get('/items', async (c) => {
         rank: index + 1,
         name: item.name,
         itemType: 'elixir',
-        type: getConsumableTypeLabel('丹药'),
+        type: getConsumableTypeLabel('香品'),
         quality: item.quality ?? undefined,
         ownerName: owner?.name || '未知',
         score: item.score || 0,
@@ -367,13 +367,13 @@ challengeRouter.post('/probe', requireActiveCultivatorRef(), async (c) => {
       data: { cultivator: inspection },
     });
   } catch (error) {
-    console.error('神识查探错误:', error);
+    console.error('心神查探错误:', error);
     const errorMessage =
       process.env.NODE_ENV === 'development'
         ? error instanceof Error
           ? error.message
-          : '神识查探失败'
-        : '神识查探失败，请稍后重试';
+          : '心神查探失败'
+        : '心神查探失败，请稍后重试';
 
     return c.json({ error: errorMessage }, 500);
   }

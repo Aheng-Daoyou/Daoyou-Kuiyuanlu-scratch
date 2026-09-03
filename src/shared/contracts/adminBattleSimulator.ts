@@ -4,10 +4,10 @@ import type {
   CombatSequenceV3,
 } from '@shared/engine/battle-v5/v3';
 import {
-  ENEMY_RACE_VALUES,
+  ENEMY_CLAN_VALUES,
   REALM_STAGE_VALUES,
   REALM_VALUES,
-  type EnemyRace,
+  type EnemyClan,
   type RealmStage,
   type RealmType,
 } from '@shared/types/constants';
@@ -36,7 +36,7 @@ export const AdminBattleTemplateFiltersSchema = z
   .object({
     realms: z.array(z.enum(REALM_VALUES)).min(1).optional(),
     realmStages: z.array(z.enum(REALM_STAGE_VALUES)).min(1).optional(),
-    races: z.array(z.enum(ENEMY_RACE_VALUES)).min(1).optional(),
+    clans: z.array(z.enum(ENEMY_CLAN_VALUES)).min(1).optional(),
     difficultyMin: z.number().int().min(0).max(100).optional(),
     difficultyMax: z.number().int().min(0).max(100).optional(),
     bossRate: z.number().min(0).max(1).optional(),
@@ -117,7 +117,7 @@ export interface AdminBattleParticipantSummary {
   title: string | null;
   realm: RealmType;
   realmStage: RealmStage;
-  race?: EnemyRace;
+  clan?: EnemyClan;
   template?: {
     difficulty: number;
     difficultyBand: 'core' | 'variant' | 'advanced' | 'legendary';

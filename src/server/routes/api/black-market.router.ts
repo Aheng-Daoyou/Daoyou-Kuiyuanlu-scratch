@@ -38,7 +38,7 @@ const InteractSchema = z
     if (!value.message && !value.offeredPrice) {
       context.addIssue({
         code: 'custom',
-        message: '请说点什么，或给出灵石报价',
+        message: '请说点什么，或给出灯油券报价',
       });
     }
   });

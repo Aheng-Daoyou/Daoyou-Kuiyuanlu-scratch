@@ -132,7 +132,7 @@ export class DamageSystem {
         hitCheckEvent.isHit = false;
       }
 
-      // 神识抵抗在 ApplyBuffEffect 内按控制效果逐个结算，不能阻断伤害链。
+      // 心神抵抗在 ApplyBuffEffect 内按控制效果逐个结算，不能阻断伤害链。
     }
 
     // 发布命中判定事件
@@ -193,7 +193,7 @@ export class DamageSystem {
    * ① 按伤害类型计算有效防御（物理DEF/法术DEF/真伤）
    * ② 应用平滑防御 A²/(A+D)
    * ③ 应用现有增伤/减伤乘区
-   * ④ 应用灵根共鸣/失配倍率
+   * ④ 应用窍共鸣/失配倍率
    * ⑤ 暴击判定（减伤后）
    * ⑥ 随机浮动 (0.9~1.1)
    * ⑦ 最小伤害保证 + 四舍五入
@@ -267,7 +267,7 @@ export class DamageSystem {
     // ===== ④ 境界威压倍率 =====
     event.finalDamage *= this._getRealmDamageMultiplier(event);
 
-    // ===== ⑤ 灵根共鸣/失配倍率 =====
+    // ===== ⑤ 窍共鸣/失配倍率 =====
     event.finalDamage *= calculateSpiritualRootDamageMultiplier(event);
 
     // ===== ⑥ 暴击判定（减伤后） =====

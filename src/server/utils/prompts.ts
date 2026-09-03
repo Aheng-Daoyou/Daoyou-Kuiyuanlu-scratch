@@ -252,7 +252,7 @@ export function sanitizePrompt(input: string): string {
   // 6. （可选）压缩连续非文字字符（防止符号残留组合）
   // cleaned = cleaned.replace(/[^a-zA-Z\u4e00-\u9fa5·—。！？；：、“”‘’（）【】《》]+/g, '');
 
-  // 7. 移除可能因关键词删除产生的多余连续符号（如“炼丹！！！” → “炼丹”）
+  // 7. 移除可能因关键词删除产生的多余连续符号（如“制香！！！” → “制香”）
   cleaned = cleaned.replace(/([·—。！？；：、“”‘’（）【】《》])\1+/g, '$1');
 
   return cleaned;

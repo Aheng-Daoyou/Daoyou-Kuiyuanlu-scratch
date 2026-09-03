@@ -14,7 +14,7 @@ export interface AlchemyEffectQualityBase {
   positiveToxicity: number;
 }
 
-/** v4 炼丹的唯一品质基础表。 */
+/** v4 制香的唯一品质基础表。 */
 export const ALCHEMY_EFFECT_BASE_BY_QUALITY: Record<
   Quality,
   AlchemyEffectQualityBase

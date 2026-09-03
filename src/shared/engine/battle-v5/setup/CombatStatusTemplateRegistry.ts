@@ -142,7 +142,7 @@ combatStatusTemplateRegistry.register({
   description: getGameConceptInfo('status_mana_depleted').description ?? '',
   display: {
     icon: getGameConceptInfo('status_mana_depleted').icon,
-    shortDesc: '法力未复',
+    shortDesc: '灯焰未复',
     showUses: false,
     showExpiry: false,
   },

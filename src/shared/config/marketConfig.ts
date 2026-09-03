@@ -57,7 +57,7 @@ export const APPRAISAL_KEYWORD_BONUS_MAX = 0.12;
 
 export const APPRAISAL_SESSION_TTL_SEC = 180;
 
-// 法宝回收锚定：以“同品质材料基础价格”作为锚点
+// 封灵器回收锚定：以“同品质材料基础价格”作为锚点
 export const ARTIFACT_MATERIAL_ANCHOR_FACTOR: Record<Quality, number> = {
   凡品: 0.6,
   灵品: 0.58,

@@ -43,7 +43,7 @@ export class MagicShieldEffect extends GameplayEffect {
       type: 'defense',
       defense: 'mana_shield',
       amount: Math.round(mpConsumed),
-      detail: `消耗${Math.round(mpConsumed)}点法力`,
+      detail: `消耗${Math.round(mpConsumed)}点灯焰`,
     });
 
     context.emit<ManaShieldAbsorbEvent>({

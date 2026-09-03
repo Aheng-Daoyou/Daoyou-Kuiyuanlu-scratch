@@ -317,7 +317,7 @@ export class MiningGameTaskExecutor extends BaseTaskExecutor<
     input: Record<string, unknown>,
   ): Promise<SectTaskExecutionDecision> {
     if (actionKey === 'start') return this.start(context);
-    if (actionKey !== 'complete') invalid('灵矿采掘不支持该操作');
+    if (actionKey !== 'complete') invalid('灯矿采掘不支持该操作');
     return this.complete(context, input as z.infer<typeof miningCompleteInput>);
   }
 
@@ -325,7 +325,7 @@ export class MiningGameTaskExecutor extends BaseTaskExecutor<
     context: SectTaskExecutionContext,
   ): Promise<SectTaskExecutionDecision> {
     const baseReward = context.record.payload.offer.reward;
-    if (!baseReward) invalid('灵矿采掘奖励配置缺失', 500);
+    if (!baseReward) invalid('灯矿采掘奖励配置缺失', 500);
     const sessionId = context.ports.ids.next();
     const seed = `${context.record.id}:${sessionId}`;
     const startedAt = context.ports.clock.now();
@@ -339,7 +339,7 @@ export class MiningGameTaskExecutor extends BaseTaskExecutor<
         `${seed}:${tier}`,
       );
       if (!candidate)
-        invalid('宗门材料库暂无可供采掘结算的灵矿，请稍后再试', 503);
+        invalid('宗门材料库暂无可供采掘结算的灯矿，请稍后再试', 503);
       rewardCandidateEntries.push([tier, candidate] as const);
     }
     const rewardCandidates = Object.fromEntries(rewardCandidateEntries);
@@ -382,13 +382,13 @@ export class MiningGameTaskExecutor extends BaseTaskExecutor<
     const parsedSession = miningSessionSchema.safeParse(
       context.record.payload.executorData.miningSession,
     );
-    if (!parsedSession.success) invalid('灵矿采掘场次数据缺失');
+    if (!parsedSession.success) invalid('灯矿采掘场次数据缺失');
     const session = parsedSession.data;
     if (session.sessionId !== input.sessionId)
-      invalid('灵矿采掘场次与当前任务不匹配');
+      invalid('灯矿采掘场次与当前任务不匹配');
     const now = context.ports.clock.now();
     if (new Date(session.expiresAt) < now)
-      invalid('灵矿采掘场次已过期，请重新开始');
+      invalid('灯矿采掘场次已过期，请重新开始');
     const simulation = simulateMiningTranscript(session.seed, input.casts);
     if (!simulation.valid) {
       const messages = {
@@ -400,12 +400,12 @@ export class MiningGameTaskExecutor extends BaseTaskExecutor<
       invalid(
         simulation.reason
           ? messages[simulation.reason]
-          : '灵矿采掘记录无法验收',
+          : '灯矿采掘记录无法验收',
       );
     }
     const elapsedMs = now.getTime() - new Date(session.startedAt).getTime();
     if (elapsedMs + 1_500 < simulation.completedAtMs)
-      invalid('本轮灵矿采掘尚未结束');
+      invalid('本轮灯矿采掘尚未结束');
 
     const outcomeBase = {
       score: simulation.score,
@@ -428,7 +428,7 @@ export class MiningGameTaskExecutor extends BaseTaskExecutor<
       };
 
     const baseReward = context.record.payload.offer.reward;
-    if (!baseReward) invalid('灵矿采掘奖励配置缺失', 500);
+    if (!baseReward) invalid('灯矿采掘奖励配置缺失', 500);
     const candidate = session.rewardCandidates[simulation.tier];
     const numeric = scaleMiningTaskReward(baseReward, simulation.tier);
     const quantity = MINING_TIER_MATERIAL_QUANTITY[simulation.tier];
@@ -437,8 +437,8 @@ export class MiningGameTaskExecutor extends BaseTaskExecutor<
       ...numeric,
       summary: [
         `宗门贡献 +${numeric.contribution}`,
-        `修为 +${numeric.cultivationExp}`,
-        `灵石 +${numeric.spiritStones}`,
+        `灯韵 +${numeric.cultivationExp}`,
+        `灯油券 +${numeric.spiritStones}`,
         `${candidate.name}（${candidate.quality}）×${quantity}`,
       ],
       grants: [
@@ -700,7 +700,7 @@ export class PillDeliveryTaskExecutor extends DeliveryTaskExecutor {
     context: SectTaskExecutionContext,
     input: SectTaskSubmissionInput,
   ): Promise<SectTaskExecutionDecision> {
-    if (actionKey !== 'execute') invalid('丹药交付不支持该操作');
+    if (actionKey !== 'execute') invalid('香品交付不支持该操作');
     const requirement = this.requirement(context.record);
     const selection = input.items[0];
     if (
@@ -714,10 +714,10 @@ export class PillDeliveryTaskExecutor extends DeliveryTaskExecutor {
       'pill',
       selection.itemId,
     );
-    if (!item) invalid('未找到所选丹药');
+    if (!item) invalid('未找到所选香品');
     const match = matchSectDeliveryRequirement(requirement, item);
     if (!match.eligible)
-      invalid(match.violations[0]?.message ?? '丹药不符合要求');
+      invalid(match.violations[0]?.message ?? '香品不符合要求');
     const settlement =
       await context.ports.submissionInventory.consumeSubmissionItem({
         cultivatorId: context.cultivatorId,
@@ -725,7 +725,7 @@ export class PillDeliveryTaskExecutor extends DeliveryTaskExecutor {
         itemId: item.id,
         quantity: selection.quantity,
       });
-    if (!settlement.consumed) invalid('丹药数量不足');
+    if (!settlement.consumed) invalid('香品数量不足');
     const effects = inventorySettlementEffects(settlement);
     return {
       completed: true,
@@ -747,7 +747,7 @@ export class ArtifactDeliveryTaskExecutor extends DeliveryTaskExecutor {
     context: SectTaskExecutionContext,
     input: SectTaskSubmissionInput,
   ): Promise<SectTaskExecutionDecision> {
-    if (actionKey !== 'execute') invalid('法宝交付不支持该操作');
+    if (actionKey !== 'execute') invalid('封灵器交付不支持该操作');
     const requirement = this.requirement(context.record);
     const selection = input.items[0];
     if (
@@ -761,10 +761,10 @@ export class ArtifactDeliveryTaskExecutor extends DeliveryTaskExecutor {
       'artifact',
       selection.itemId,
     );
-    if (!item) invalid('未找到该法宝');
+    if (!item) invalid('未找到该封灵器');
     const match = matchSectDeliveryRequirement(requirement, item);
     if (!match.eligible)
-      invalid(match.violations[0]?.message ?? '法宝不符合要求');
+      invalid(match.violations[0]?.message ?? '封灵器不符合要求');
     const settlement =
       await context.ports.submissionInventory.consumeSubmissionItem({
         cultivatorId: context.cultivatorId,
@@ -772,7 +772,7 @@ export class ArtifactDeliveryTaskExecutor extends DeliveryTaskExecutor {
         itemId: item.id,
         quantity: selection.quantity,
       });
-    if (!settlement.consumed) invalid('法宝状态已变化，请重试');
+    if (!settlement.consumed) invalid('封灵器状态已变化，请重试');
     const effects = inventorySettlementEffects(settlement);
     return {
       completed: true,

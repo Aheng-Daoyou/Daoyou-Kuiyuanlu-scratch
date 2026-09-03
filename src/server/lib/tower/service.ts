@@ -392,7 +392,7 @@ export class TowerService {
 
     const cultivatorBundle = await loadCultivatorCombatInput(cultivatorId);
     if (!cultivatorBundle?.cultivator) {
-      throw new Error('未找到修真者数据');
+      throw new Error('未找到修士数据');
     }
     if (!isTowerRealmEligible(cultivatorBundle.cultivator.realm)) {
       throw new Error(`蜃楼幻境仅向${TOWER_MIN_REALM}及以上境界开放`);
@@ -490,7 +490,7 @@ export class TowerService {
 
     const cultivatorBundle = await loadCultivatorCombatInput(cultivatorId);
     if (!cultivatorBundle?.cultivator) {
-      throw new Error('未找到修真者数据');
+      throw new Error('未找到修士数据');
     }
 
     const session = await this.createBattleSession(
@@ -570,7 +570,7 @@ export class TowerService {
 
     const cultivatorBundle = await loadCultivatorCombatInput(cultivatorId);
     if (!cultivatorBundle?.cultivator) {
-      throw new Error('未找到修真者数据');
+      throw new Error('未找到修士数据');
     }
     const { normalizedCondition } = buildTowerBattleInit({
       cultivator: cultivatorBundle.cultivator,
@@ -607,7 +607,7 @@ export class TowerService {
 
     const cultivatorBundle = await loadCultivatorCombatInput(cultivatorId, tx);
     if (!cultivatorBundle?.cultivator) {
-      throw new Error('未找到修真者数据');
+      throw new Error('未找到修士数据');
     }
     const challengeRealm = this.resolveChallengeRealm(
       state,

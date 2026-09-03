@@ -212,7 +212,7 @@ export class SectTraditionApplicationService {
     } catch (error) {
       throw new SectError(
         'SECT_INVALID_MERIDIAN',
-        error instanceof Error ? error.message : '经脉方案无效',
+        error instanceof Error ? error.message : '参悟方案无效',
         400,
       );
     }
@@ -436,7 +436,7 @@ export class SectTraditionApplicationService {
 
   private requireEnabledSlot(slot: number): 1 | 2 | 3 {
     if (slot !== 1 && slot !== 2 && slot !== 3)
-      throw new SectError('SECT_INVALID_MERIDIAN', '经脉方案槽无效', 400);
+      throw new SectError('SECT_INVALID_MERIDIAN', '参悟方案槽无效', 400);
     if (
       !(
         StandardSectRules.enabledMeridianLoadoutSlots as readonly number[]
@@ -465,11 +465,11 @@ export class SectTraditionApplicationService {
     cost: SectTrainingCost,
   ): Promise<SectTrainingResourceSnapshot> {
     if (cultivator.cultivationExp < cost.cultivationExp)
-      throw new SectError('SECT_INSUFFICIENT_RESOURCES', '修为不足');
+      throw new SectError('SECT_INSUFFICIENT_RESOURCES', '灯韵不足');
     if (cultivator.comprehensionInsight < cost.comprehensionInsight)
-      throw new SectError('SECT_INSUFFICIENT_RESOURCES', '道心感悟不足');
+      throw new SectError('SECT_INSUFFICIENT_RESOURCES', '灯心窥悟不足');
     if (cultivator.stones < cost.spiritStones)
-      throw new SectError('SECT_INSUFFICIENT_RESOURCES', '灵石不足');
+      throw new SectError('SECT_INSUFFICIENT_RESOURCES', '灯油券不足');
     if (!(await this.resources.spend(cultivatorId, cost)))
       throw new SectError('SECT_INSUFFICIENT_RESOURCES', '研习所需资源不足');
     return this.requireProgress(cultivatorId);

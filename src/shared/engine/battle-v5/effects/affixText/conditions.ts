@@ -137,7 +137,7 @@ function describeOne(
  * 将条件数组翻译成中文短句（无末尾"时"字），例如：
  * [is_critical]                             → "被暴击"
  * [hp_below 0.3, chance 0.35]               → "气血低于30% 且 35%概率"
- * [ability_has_tag: Ability.Element.Fire]   → "受到「火系」伤害"
+ * [ability_has_tag: Ability.Element.Fire]   → "受到「渊系」伤害"
  */
 export function describeConditions(
   conditions: ConditionConfig[] | undefined,

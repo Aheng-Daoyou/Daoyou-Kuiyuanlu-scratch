@@ -1,4 +1,5 @@
 import { GameplayTags } from '@shared/engine/shared/tag-domain';
+import { isMaddened } from '../core/sanity';
 import type { AbilitySelectionStrategy } from '../abilities/AbilitySelectionStrategy';
 import { ActiveSkill } from '../abilities/ActiveSkill';
 import { BattleRoster } from '../core/BattleRoster';
@@ -196,9 +197,15 @@ function createAutomaticIntent(
           );
         return target ? [{ ability, target, order }] : [];
       });
-    const opponent = allUnits.find(
-      (candidate) => candidate.teamId !== unit.teamId && candidate.isAlive(),
-    ) ?? null;
+    // 入魔者敌我不分：参照目标从「敌方存活单位」改为「场上任意存活单位」
+    //（含友方），供技能评分策略判定治疗/输出意图时不被敌方边界误导。
+    const opponent = isMaddened(unit)
+      ? (allUnits.find(
+          (candidate) => candidate !== unit && candidate.isAlive(),
+        ) ?? null)
+      : (allUnits.find(
+          (candidate) => candidate.teamId !== unit.teamId && candidate.isAlive(),
+        ) ?? null);
     const selected = unit.abilities.getSelectionStrategy().select({
       caster: unit,
       opponent,

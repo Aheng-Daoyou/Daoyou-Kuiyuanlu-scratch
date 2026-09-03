@@ -15,6 +15,7 @@ import {
   type TeamSlot,
 } from '../core/types';
 import type { AbilityConfig } from '../core/configs';
+import { buildSanityResource, buildSanityStateAbility, buildGuixiSanityBurnAbility, buildInvokeTruenameAbility, buildLampFlickerStateAbility } from '../core/sanity';
 import { Unit } from '../units/Unit';
 import { createSectAbilitySelectionStrategy } from '@shared/engine/sect';
 import { projectSectCombat } from '@shared/engine/sect/content';
@@ -24,6 +25,7 @@ export type CultivatorCombatInput = Pick<
   Cultivator,
   | 'id'
   | 'name'
+  | 'clan'
   | 'realm'
   | 'realm_stage'
   | 'attributes'
@@ -90,6 +92,21 @@ export function createCombatUnitFromCultivator(
     realmStage: cultivator.realm_stage,
     realmRank: getRealmStageRank(cultivator.realm, cultivator.realm_stage),
   });
+
+  // 神智轴：所有战斗单位（玩家与敌人）均持有神智资源，上限由境界决定。
+  // 「力量↑则理智↓」——修为越高，神智永久上限越低。
+  unit.combatResources.define(buildSanityResource(cultivator.realm));
+  // 神智状态机：灯晃（<30%）与入魔（=0）由通用被动能力监听神智资源变化驱动。
+  unit.abilities.addAbility(AbilityFactory.create(buildSanityStateAbility()));
+  // 心灯将熄（克苏鲁恐怖感增强 28.6）：灯油 < 10% 时施加心灯摇曳 debuff。
+  unit.abilities.addAbility(AbilityFactory.create(buildLampFlickerStateAbility()));
+  // 呼真名处置动作：所有战斗单位通用挂载，念出真名灼烧目标神智并使其受缚。
+  unit.abilities.addAbility(AbilityFactory.create(buildInvokeTruenameAbility()));
+  // 诡异烧神智：诡异类敌人每次造成伤害，附带按比例灼烧目标神智。
+  // 窥渊录中所有敌人皆属诡异三族（腌物/遗种/投影），故有 clan 字段即视为诡异。
+  if (cultivator.clan) {
+    unit.abilities.addAbility(AbilityFactory.create(buildGuixiSanityBurnAbility()));
+  }
 
   const sectProjection = cultivator.sect
     ? projectSectCombat({ sect: cultivator.sect, realm: cultivator.realm })

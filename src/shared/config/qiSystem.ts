@@ -9,7 +9,7 @@ export const QI_ACTION_COSTS = {
   dungeon_start: 50,
   retreat_10_years: 4,
   breakthrough_attempt: 20,
-  // 炼丹会按本炉原始药蕴动态计费；这里仅保留最低消耗作为通用兜底。
+  // 制香会按本炉原始香蕴动态计费；这里仅保留最低消耗作为通用兜底。
   alchemy_improvised: 1,
   alchemy_formula: 1,
   creation_artifact: 8,
@@ -24,10 +24,10 @@ export const QI_ACTION_COSTS = {
 export type QiAction = keyof typeof QI_ACTION_COSTS;
 
 export const QI_RESTORE_TALISMAN_SCENARIOS = {
-  qi_restore_small: { amount: 50, label: '小聚灵符' },
-  qi_restore_medium: { amount: 100, label: '中聚灵符' },
-  qi_restore_large: { amount: 200, label: '大聚灵符' },
-  qi_restore_fill_to_max: { amount: 'fill_to_max', label: '天地引气符' },
+  qi_restore_small: { amount: 50, label: '短芯香' },
+  qi_restore_medium: { amount: 100, label: '续灯香' },
+  qi_restore_large: { amount: 200, label: '长明香' },
+  qi_restore_fill_to_max: { amount: 'fill_to_max', label: '引灯大香' },
 } as const;
 
 export type QiRestoreTalismanScenario =

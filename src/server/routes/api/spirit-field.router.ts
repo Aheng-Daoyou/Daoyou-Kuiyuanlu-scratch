@@ -83,7 +83,7 @@ function errorResponse(c: Context<AppEnv>, error: unknown) {
 
   console.error('spirit field api error:', error);
   return c.json(
-    { success: false, error: '灵田灵机暂乱，请稍后再试' },
+    { success: false, error: '灯田灯机暂乱，请稍后再试' },
     500,
   );
 }

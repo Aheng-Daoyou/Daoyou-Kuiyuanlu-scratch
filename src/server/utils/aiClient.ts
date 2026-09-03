@@ -173,8 +173,22 @@ function listConfiguredServerRoutes(): LlmRoute[] {
     availableProviders: {
       alibaba: Boolean(process.env.ALIBABA_API_KEY?.trim()),
       deepseek: Boolean(process.env.DEEPSEEK_API_KEY?.trim()),
+      zhipu: Boolean(process.env.ZHIPU_API_KEY?.trim()),
     },
   });
+}
+
+/**
+ * 是否有任何服务端 LLM Provider 已配置。
+ * 用于调用方在无 Provider 时走模板降级（本地开发可不配 key）。
+ */
+export function hasAnyServerLlmProviderConfigured(): boolean {
+  if (process.env.LLM_PROVIDER?.trim()) return true;
+  return Boolean(
+    process.env.ALIBABA_API_KEY?.trim() ||
+      process.env.DEEPSEEK_API_KEY?.trim() ||
+      process.env.ZHIPU_API_KEY?.trim(),
+  );
 }
 
 function resolveServerRoute(): LlmRoute {
@@ -211,6 +225,25 @@ function resolveModel(sceneId: LlmSceneId): ResolvedModel {
     provider: providerId,
     modelName,
   };
+}
+
+/**
+ * 决定默认推理模式。
+ * - 智谱 glm-4 系列为非思考模型（glm-4-flash / glm-4-air 等），默认关闭思考
+ *   （'none'）；GLM-5 思考系列必须显式指定 low/high/max，传 'low' 兜底。
+ * - 其余 provider 默认关闭思考（'none'），保持原有行为。
+ */
+function resolveDefaultReasoning(
+  provider: LlmProviderId,
+  modelName: string,
+): AiReasoning {
+  if (provider === 'zhipu') {
+    // glm-5/zero/...为思考模型；glm-4-* / airx / cogviewx 等非思考模型可关闭
+    return /^glm-5/i.test(modelName) || /^glm-zero/i.test(modelName)
+      ? 'low'
+      : 'none';
+  }
+  return 'none';
 }
 
 function setFiniteUsageValue(
@@ -482,7 +515,7 @@ export async function generateAiText(options: AiTextOptions) {
       prompt: options.prompt,
       abortSignal: options.abortSignal,
       maxOutputTokens: options.maxOutputTokens,
-      reasoning: options.reasoning ?? 'none',
+      reasoning: options.reasoning ?? resolveDefaultReasoning(provider, modelName),
     });
     recordMetrics(metrics, {
       status: 'success',
@@ -518,7 +551,7 @@ export function streamAiText(options: AiTextOptions) {
       prompt: options.prompt,
       abortSignal: options.abortSignal,
       maxOutputTokens: options.maxOutputTokens,
-      reasoning: options.reasoning ?? 'none',
+      reasoning: options.reasoning ?? resolveDefaultReasoning(provider, modelName),
       onError: () => recordTerminalMetric('failure'),
       onAbort: ({ steps }) => {
         const usage: Record<string, number> = {};
@@ -558,7 +591,9 @@ async function generateStructured<
   let generationAttempt = initialAttempt;
   let retryFailure: StructuredFailureDetails | undefined;
 
-  for (let attempt = 0; attempt < 2; attempt += 1) {
+  // 重试链路：初次 + 最多 2 次有针对性的修复尝试（共 3 次）。副本叙事/角色推演等
+  // 复杂结构化输出对长 JSON 容错要求更高，单次长 retry 易带出同样错误。
+  for (let attempt = 0; attempt < 3; attempt += 1) {
     let attemptUsage: Record<string, number> = {};
     try {
       const generationResult = await generate(generationAttempt);
@@ -674,7 +709,7 @@ export async function generateAiObject<GENERATED, RESULT = GENERATED>(
         prompt: attempt.prompt,
         abortSignal: options.abortSignal,
         maxOutputTokens: attempt.maxOutputTokens,
-        reasoning: options.reasoning ?? 'none',
+        reasoning: options.reasoning ?? resolveDefaultReasoning(provider, modelName),
         output,
       }),
     (generated) =>
@@ -682,6 +717,106 @@ export async function generateAiObject<GENERATED, RESULT = GENERATED>(
         ? options.resultSchema.parse(generated)
         : (generated as unknown as RESULT),
   );
+}
+
+export interface AiStreamObjectOptions<GENERATED, RESULT = GENERATED>
+  extends AiObjectOptions<GENERATED, RESULT> {
+  /**
+   * 流式生成过程中每次解析到新的部分对象时回调（累积式，非增量）。
+   * 调用方通常从中提取文本字段（如 scene_description）做渐进展示。
+   */
+  onPartial?: (partial: unknown) => void;
+}
+
+/**
+ * 流式结构化生成：与 generateAiObject 同样的 schema 校验与结果语义，
+ * 但在生成过程中通过 onPartial 回调累积式部分对象，用于长文本场景的渐进展示。
+ *
+ * 降级策略：流式路径失败（含最终结构化校验失败）且非调用方主动中止时，
+ * 回退到 generateAiObject（内部自带一次纠错重试），保证产出语义不变。
+ */
+export async function streamAiObject<GENERATED, RESULT = GENERATED>(
+  options: AiStreamObjectOptions<GENERATED, RESULT>,
+): Promise<{ output: RESULT; usage: Record<string, number> }> {
+  const { model, modelName, provider } = resolveModel(options.sceneId);
+  const metrics = createMetricContext(
+    options,
+    provider,
+    modelName,
+    getSchemaChars(options.schema),
+  );
+  const output = Output.object({
+    schema: options.schema,
+    name: options.name,
+    description: options.description,
+  });
+
+  try {
+    const result = streamText({
+      model,
+      system: options.system,
+      prompt: options.prompt,
+      abortSignal: options.abortSignal,
+      maxOutputTokens: options.maxOutputTokens,
+      reasoning: options.reasoning ?? resolveDefaultReasoning(provider, modelName),
+      output,
+    });
+
+    for await (const partial of result.partialOutputStream) {
+      options.onPartial?.(partial);
+    }
+
+    const generated = (await result.output) as GENERATED;
+    const parsed = options.resultSchema
+      ? options.resultSchema.parse(generated)
+      : (generated as unknown as RESULT);
+    recordMetrics(metrics, {
+      status: 'success',
+      usage: summarizeUsage(await result.usage),
+    });
+    return { output: parsed, usage: summarizeUsage(await result.usage) };
+  } catch (error) {
+    recordMetrics(metrics, { status: 'failure' });
+    if (options.abortSignal?.aborted) {
+      throw error;
+    }
+    // 流式失败回退：非流式生成（自带一次结构化纠错重试）
+    const fallback = await generateAiObject(options);
+    return {
+      output: fallback.output,
+      usage: summarizeUsage(fallback.usage),
+    };
+  }
+}
+
+/** 从模型输出文本中提取 JSON 对象（剥离 Markdown 代码块，取首个 { 到末个 } 区间）。 */
+export function extractJsonObjectFromText(text: string): unknown | null {
+  const stripped = text
+    .replace(/```(?:json)?\s*/gi, '')
+    .replace(/```/g, '')
+    .trim();
+  const start = stripped.indexOf('{');
+  const end = stripped.lastIndexOf('}');
+  if (start === -1 || end <= start) return null;
+  try {
+    return JSON.parse(stripped.slice(start, end + 1));
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * 从累积文本中渐进提取 "scene_description":"..." 的当前值（流式展示用，容忍未闭合）。
+ * 配合纯文本模式的 streamAiText 使用：调用方消费 textStream 累积后自行提取。
+ */
+export function extractSceneDescriptionProgress(accum: string): string {
+  const match = accum.match(/"scene_description"\s*:\s*"((?:[^"\\]|\\.)*)/);
+  if (!match) return '';
+  return match[1]
+    .replace(/\\n/g, '\n')
+    .replace(/\\r/g, '')
+    .replace(/\\"/g, '"')
+    .replace(/\\\\/g, '\\');
 }
 
 export async function generateAiArray<ELEMENT, RESULT = ELEMENT[]>(
@@ -713,7 +848,7 @@ export async function generateAiArray<ELEMENT, RESULT = ELEMENT[]>(
         prompt: attempt.prompt,
         abortSignal: options.abortSignal,
         maxOutputTokens: attempt.maxOutputTokens,
-        reasoning: options.reasoning ?? 'none',
+        reasoning: options.reasoning ?? resolveDefaultReasoning(provider, modelName),
         output,
       }),
     (generated) =>

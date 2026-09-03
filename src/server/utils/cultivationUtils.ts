@@ -41,7 +41,7 @@ export function resolveLiveExpCap(
   realm: RealmType,
   realm_stage: RealmStage,
 ): number {
-  return EXP_CAP_TABLE[realm]?.[realm_stage] ?? EXP_CAP_TABLE['炼气']['初期'];
+  return EXP_CAP_TABLE[realm]?.[realm_stage] ?? EXP_CAP_TABLE['闻腥']['初期'];
 }
 
 /**
@@ -123,7 +123,7 @@ export function createDefaultCultivationProgress(
 }
 
 /**
- * 获取主灵根强度（最高strength的灵根）
+ * 获取主窍强度（最高strength的窍）
  */
 export function getMainSpiritualRootStrength(
   spiritual_roots: SpiritualRoot[],
@@ -143,8 +143,8 @@ export function getMainSpiritualRootStrength(
 }
 
 /**
- * 计算灵根系数
- * 公式：SPIRITUAL_ROOT_BASE + (主灵根强度 / 100)
+ * 计算窍系数
+ * 公式：SPIRITUAL_ROOT_BASE + (主窍强度 / 100)
  */
 export function calculateSpiritualRootMultiplier(
   spiritual_roots: SpiritualRoot[],
@@ -186,14 +186,14 @@ export function calculateYearsMultiplier(years: number): number {
 }
 
 /**
- * 顿悟触发概率（固定 EPIPHANY_CHANCE）
+ * 窥真触发概率（固定 EPIPHANY_CHANCE）
  */
 export function calculateEpiphanyChance(): number {
   return EPIPHANY_CHANCE;
 }
 
 /**
- * 计算非顿悟时的常规感悟值获取
+ * 计算非窥真时的常规窥悟值获取
  * 公式：min(MAX_NORMAL_INSIGHT, floor(√years × NORMAL_INSIGHT_SCALE × rng))
  */
 export function calculateNormalInsightGain(
@@ -207,12 +207,12 @@ export function calculateNormalInsightGain(
 
 /**
  * 计算单次闭关获得的修为
- * 公式：基础修为 × 灵根系数 × 功法系数 × 年限系数 × 随机波动
+ * 公式：基础修为 × 窍系数 × 功法系数 × 年限系数 × 随机波动
  */
 export interface CultivationExpResult {
-  exp_gained: number; // 获得的修为
-  epiphany_triggered: boolean; // 是否触发顿悟
-  insight_gained: number; // 获得的感悟值
+  exp_gained: number; // 获得的灯韵
+  epiphany_triggered: boolean; // 是否触发窥真
+  insight_gained: number; // 获得的窥悟值
 }
 
 export function calculateCultivationExp(
@@ -235,7 +235,7 @@ export function calculateCultivationExp(
     cultivator.cultivation_progress?.exp_cap,
   );
 
-  // 2. 灵根系数
+  // 2. 窍系数
   const spiritualRootMultiplier = calculateSpiritualRootMultiplier(
     cultivator.spiritual_roots,
   );
@@ -249,7 +249,7 @@ export function calculateCultivationExp(
   // 5. 随机波动
   const randomFactor = RANDOM_FACTOR_LOW + rng() * RANDOM_FACTOR_RANGE;
 
-  // 6. 顿悟判定
+  // 6. 窥真判定
   const epiphanyChance = calculateEpiphanyChance();
   const epiphany_triggered = rng() < epiphanyChance;
 
@@ -261,13 +261,13 @@ export function calculateCultivationExp(
     yearsMultiplier *
     randomFactor;
 
-  // 8. 顿悟加成：修为翻倍 + 感悟值
+  // 8. 窥真加成：修为翻倍 + 窥悟值
   let insight_gained: number;
   if (epiphany_triggered) {
     exp_gained *= EPIPHANY_EXP_MULTIPLIER;
     insight_gained = Math.floor(EPIPHANY_INSIGHT_MIN + rng() * EPIPHANY_INSIGHT_RANGE);
   } else {
-    // 9. 非顿悟时的常规感悟值
+    // 9. 非窥真时的常规窥悟值
     insight_gained = calculateNormalInsightGain(years, rng);
   }
 

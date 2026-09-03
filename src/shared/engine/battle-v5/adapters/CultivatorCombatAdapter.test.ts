@@ -13,7 +13,7 @@ function createCultivatorFixture(): Cultivator {
     name: '测试道友',
     title: null,
     gender: '男',
-    realm: '炼气',
+    realm: '闻腥',
     realm_stage: '初期',
     age: 18,
     lifespan: 120,
@@ -25,7 +25,7 @@ function createCultivatorFixture(): Cultivator {
       speed: 10,
       willpower: 10,
     },
-    spiritual_roots: [{ element: '火', strength: 82, grade: '真灵根' }],
+    spiritual_roots: [{ element: '渊', strength: 82, grade: '真窍' }],
     pre_heaven_fates: [],
     cultivations: [],
     skills: [],
@@ -35,7 +35,7 @@ function createCultivatorFixture(): Cultivator {
           id: 'artifact-equipped',
           name: '太虚戒',
           slot: 'accessory',
-          element: '金',
+          element: '烛',
           abilityConfig: {
             slug: 'artifact-equipped',
             name: '太虚戒',
@@ -57,7 +57,7 @@ function createCultivatorFixture(): Cultivator {
           productModel: {
             productType: 'artifact',
             metadata: {
-              anchorRealm: '金丹',
+              anchorRealm: '窥渊',
               anchorRealmStage: '圆满',
             },
           },
@@ -76,11 +76,40 @@ function createCultivatorFixture(): Cultivator {
 }
 
 describe('CultivatorCombatAdapter', () => {
+  it('mounts the sanity resource on every combat unit with realm-driven max', () => {
+    const unit = createCombatUnitFromCultivator(createCultivatorFixture());
+    const snapshot = unit.combatResources.snapshots();
+
+    const sanity = snapshot.find((r) => r.id === 'core.sanity');
+    expect(sanity).toBeDefined();
+    expect(sanity?.name).toBe('神智');
+    expect(sanity?.max).toBe(100); // 闻腥境界
+    expect(sanity?.current).toBe(100); // 开战满神智
+  });
+
+  it('lowers the sanity max as realm rises (力量↑则理智↓)', () => {
+    const low = createCombatUnitFromCultivator(createCultivatorFixture());
+    const high = createCombatUnitFromCultivator({
+      ...createCultivatorFixture(),
+      realm: '渡渊',
+    });
+
+    const lowSanity = low.combatResources
+      .snapshots()
+      .find((r) => r.id === 'core.sanity');
+    const highSanity = high.combatResources
+      .snapshots()
+      .find((r) => r.id === 'core.sanity');
+
+    expect(lowSanity?.max).toBe(100);
+    expect(highSanity?.max).toBe(60);
+  });
+
   it('applies cross-realm decay only to main panel fixed modifiers', () => {
     const unit = createCombatUnitFromCultivator(createCultivatorFixture());
-    const factor = getArtifactWearerRealmFactor('金丹', '圆满', '炼气', '初期');
+    const factor = getArtifactWearerRealmFactor('窥渊', '圆满', '闻腥', '初期');
 
-    // 金丹圆满->炼气初期 uses inverse anchor/wearer factor.
+    // 窥渊圆满->闻腥初期 uses inverse anchor/wearer factor.
     expect(unit.attributes.getValue(AttributeType.ATK)).toBeCloseTo(
       75 + 100 * factor,
       6,
@@ -97,7 +126,7 @@ describe('CultivatorCombatAdapter', () => {
     const clone = unit.clone();
 
     expect(unit.getSpiritualRoots()).toEqual([
-      { element: '火', strength: 82, grade: '真灵根' },
+      { element: '渊', strength: 82, grade: '真窍' },
     ]);
     expect(clone.getSpiritualRoots()).toEqual(unit.getSpiritualRoots());
   });
@@ -157,7 +186,7 @@ describe('CultivatorCombatAdapter', () => {
     const eventBus = EventBus.instance;
     eventBus.reset();
     const cultivator = createCultivatorFixture();
-    cultivator.realm = '化神';
+    cultivator.realm = '忘川';
     cultivator.realm_stage = '初期';
     cultivator.sect = {
       membershipId: 'member-1',
@@ -261,7 +290,7 @@ describe('CultivatorCombatAdapter', () => {
     const baseline = createCultivatorFixture();
     baseline.inventory.artifacts = [];
     baseline.equipped.accessory = null;
-    baseline.realm = '化神';
+    baseline.realm = '忘川';
     baseline.realm_stage = '圆满';
     baseline.sect = {
       membershipId: 'wuxiang-member', sectId: 'wuxiang', status: 'active',

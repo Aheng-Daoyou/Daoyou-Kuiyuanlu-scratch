@@ -13,7 +13,7 @@ function createCultivatorFixture(): Cultivator {
     name: '测试道友',
     title: null,
     gender: '男',
-    realm: '炼气',
+    realm: '闻腥',
     realm_stage: '初期',
     age: 18,
     lifespan: 120,
@@ -47,7 +47,7 @@ function createCultivatorFixture(): Cultivator {
           id: 'artifact-equipped',
           name: '玄木佩',
           slot: 'accessory',
-          element: '木',
+          element: '尸',
           attributeModifiers: [
             {
               attrType: AttributeType.SPIRIT,
@@ -60,7 +60,7 @@ function createCultivatorFixture(): Cultivator {
           id: 'artifact-idle',
           name: '离火环',
           slot: 'weapon',
-          element: '火',
+          element: '渊',
           attributeModifiers: [
             {
               attrType: AttributeType.SPEED,
@@ -292,13 +292,13 @@ describe('CultivatorDisplayAdapter', () => {
     ];
     cultivator.inventory.artifacts[0].productModel = {
       productType: 'artifact',
-      metadata: { anchorRealm: '金丹', anchorRealmStage: '圆满' },
+      metadata: { anchorRealm: '窥渊', anchorRealmStage: '圆满' },
     };
 
     const unit = createDisplayUnitFromCultivator(cultivator);
-    const factor = getArtifactWearerRealmFactor('金丹', '圆满', '炼气', '初期');
+    const factor = getArtifactWearerRealmFactor('窥渊', '圆满', '闻腥', '初期');
 
-    // 金丹圆满->炼气初期 uses inverse anchor/wearer factor.
+    // 窥渊圆满->闻腥初期 uses inverse anchor/wearer factor.
     expect(unit.attributes.getValue(AttributeType.SPIRIT)).toBe(
       Math.floor(10 + 100 * factor),
     );

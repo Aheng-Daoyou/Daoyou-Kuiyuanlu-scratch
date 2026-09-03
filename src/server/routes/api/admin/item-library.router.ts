@@ -51,7 +51,7 @@ function validateArtifactAffixes(affixIds: string[]): string | null {
     const def = DEFAULT_AFFIX_REGISTRY.queryById(affixId);
     if (!def) return `未知词缀：${affixId}`;
     if (!def.applicableTo.includes('artifact')) {
-      return `词缀不可用于法宝：${affixId}`;
+      return `词缀不可用于封灵器：${affixId}`;
     }
   }
   return null;
@@ -82,7 +82,7 @@ function buildArtifactPayload(
   const rehydrated = rehydrateStoredProductModel(productModel, artifact.element);
 
   if (!rehydrated) {
-    throw new Error('法宝 productModel 无法校验');
+    throw new Error('封灵器 productModel 无法校验');
   }
 
   return ItemLibraryArtifactPayloadSchema.parse({
@@ -180,7 +180,7 @@ router.post('/seeds/generate', requireAdmin(), async (c) => {
     return c.json({ success: true, items, generated: items.length });
   } catch (error) {
     return c.json(
-      { error: error instanceof Error ? error.message : '批量生成灵种失败' },
+      { error: error instanceof Error ? error.message : '批量生成灯种失败' },
       500,
     );
   }
@@ -312,7 +312,7 @@ router.post('/artifact/preview', requireAdmin(), async (c) => {
     });
   } catch (error) {
     return c.json(
-      { error: error instanceof Error ? error.message : '生成法宝预览失败' },
+      { error: error instanceof Error ? error.message : '生成封灵器预览失败' },
       400,
     );
   }

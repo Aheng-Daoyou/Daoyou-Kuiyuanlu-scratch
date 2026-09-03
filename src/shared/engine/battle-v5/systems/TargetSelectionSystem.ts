@@ -3,6 +3,7 @@
 import { Unit } from '../units/Unit';
 import { TargetPolicy, TargetFilter } from '../abilities/TargetPolicy';
 import { AttributeType } from '../core';
+import { isMaddened } from '../core/sanity';
 
 /**
  * TargetSelectionSystem - 目标选择系统
@@ -72,6 +73,11 @@ export class TargetSelectionSystem {
       case 'self':
         return [caster];
       case 'enemy':
+        // 入魔者敌我不分：神智归零后不再区分敌我，攻击场上任意存活单位
+        //（含友方）。仅影响 AI 自动选敌，不改变玩家手动选目标。
+        if (isMaddened(caster)) {
+          return allUnits.filter((unit) => unit !== caster);
+        }
         return allUnits.filter((unit) => unit.teamId !== caster.teamId);
       case 'ally':
         return allUnits.filter(

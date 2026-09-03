@@ -3,7 +3,7 @@ import {
   buildTowerEnemyVariantSeed,
   getNextTowerSeasonMeta,
   getTowerSeasonMeta,
-  pickTowerRace,
+  pickTowerClan,
   resolveTowerDifficulty,
   resolveTowerFloorKind,
   resolveTowerRealmStage,
@@ -53,7 +53,7 @@ export type TowerEnemySetAdminEnemySummary = {
   floor: number;
   kind: TowerEncounter['kind'];
   difficulty: number;
-  race: TowerEncounter['race'];
+  clan: TowerEncounter['clan'];
   realmStage: TowerEncounter['realmStage'];
   name: string;
   title: string | null;
@@ -104,7 +104,7 @@ function buildTowerEncounter(args: {
     floor: args.floor,
     kind,
     difficulty: resolveTowerDifficulty(args.floor),
-    race: pickTowerRace(`${args.seasonKey}:${args.realm}`, args.floor),
+    clan: pickTowerClan(`${args.seasonKey}:${args.realm}`, args.floor),
     realm: args.realm,
     realmStage: resolveTowerRealmStage(args.floor),
     isBoss: kind === 'boss',
@@ -342,7 +342,7 @@ export class TowerEnemySetService {
         floor: enemy.floor,
         kind: enemy.encounter.kind,
         difficulty: enemy.encounter.difficulty,
-        race: enemy.encounter.race,
+        clan: enemy.encounter.clan,
         realmStage: enemy.encounter.realmStage,
         name: enemy.enemy.name,
         title: enemy.enemy.title ?? null,
@@ -412,7 +412,7 @@ export class TowerEnemySetService {
       this.generator.buildDraft({
         realm: encounter.realm,
         realmStage: encounter.realmStage,
-        race: encounter.race,
+        clan: encounter.clan,
         difficulty: encounter.difficulty,
         isBoss: encounter.isBoss,
         variantSeed,
@@ -441,7 +441,7 @@ export class TowerEnemySetService {
     const draft = this.fallbackGenerator.buildDraft({
       realm: encounter.realm,
       realmStage: encounter.realmStage,
-      race: encounter.race,
+      clan: encounter.clan,
       difficulty: encounter.difficulty,
       isBoss: encounter.isBoss,
       variantSeed,

@@ -303,6 +303,22 @@ export function evaluateCondition(
         cond.params.resourceId &&
         scopedUnit.combatResources.getCurrent(cond.params.resourceId) < threshold
       );
+    case 'combat_resource_ratio_at_least':
+      return !!(
+        scopedUnit &&
+        cond.params.resourceId &&
+        scopedUnit.combatResources.getCurrent(cond.params.resourceId) /
+          Math.max(1, scopedUnit.combatResources.getMax(cond.params.resourceId)) >=
+          threshold
+      );
+    case 'combat_resource_ratio_below':
+      return !!(
+        scopedUnit &&
+        cond.params.resourceId &&
+        scopedUnit.combatResources.getCurrent(cond.params.resourceId) /
+          Math.max(1, scopedUnit.combatResources.getMax(cond.params.resourceId)) <
+          threshold
+      );
     case 'runtime_counter_compare': {
       if (!scopedUnit || !cond.params.key) return false;
       const value = readRuntimeCounter(scopedUnit, cond.params.key);

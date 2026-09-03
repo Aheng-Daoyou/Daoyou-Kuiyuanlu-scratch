@@ -8,7 +8,7 @@ const GAMEPLAY_TAG_LABELS: Record<string, string> = {
   [GameplayTags.ABILITY.FUNCTION.HEAL]: getGameConceptLabel('skill_type_heal'),
   [GameplayTags.ABILITY.FUNCTION.BUFF]: getGameConceptLabel('skill_type_buff'),
   [GameplayTags.ABILITY.FUNCTION.DEBUFF]: '负面技能',
-  [GameplayTags.ABILITY.CHANNEL.MAGIC]: '法术',
+  [GameplayTags.ABILITY.CHANNEL.MAGIC]: '灯律',
   [GameplayTags.ABILITY.CHANNEL.PHYSICAL]: '物理',
   [GameplayTags.ABILITY.CHANNEL.TRUE]: '真实',
   [GameplayTags.ABILITY.KIND.SKILL]: getGameConceptLabel('skill'),
@@ -27,7 +27,7 @@ const GAMEPLAY_TAG_LABELS: Record<string, string> = {
   [GameplayTags.ABILITY.TARGET.AOE]: '群体',
   [GameplayTags.STATUS.IMMUNE.CONTROL]: '控制免疫',
   [GameplayTags.STATUS.IMMUNE.DEBUFF]: '减益免疫',
-  [GameplayTags.STATUS.IMMUNE.FIRE]: '火系免疫',
+  [GameplayTags.STATUS.IMMUNE.FIRE]: '渊系免疫',
   [GameplayTags.STATUS.STATE.POISONED]: getGameConceptLabel('status_poison'),
   [GameplayTags.STATUS.STATE.BURNED]: getGameConceptLabel('status_burn'),
   [GameplayTags.STATUS.STATE.FROZEN]: '冻结',
@@ -40,7 +40,7 @@ const GAMEPLAY_TAG_LABELS: Record<string, string> = {
   [GameplayTags.STATUS.CATEGORY.DEF_DEBUFF]: '防御削弱状态',
   [GameplayTags.STATUS.CATEGORY.MYTHIC]: '神话状态',
   [GameplayTags.STATUS.CATEGORY.COMBO]: '连携状态',
-  [GameplayTags.STATUS.CATEGORY.MANA_EFF]: '法力效率状态',
+  [GameplayTags.STATUS.CATEGORY.MANA_EFF]: '灯焰效率状态',
   [GameplayTags.STATUS.CONTROL.ROOT]: '控制状态',
   [GameplayTags.STATUS.CONTROL.STUNNED]: getGameConceptLabel('status_stun'),
   [GameplayTags.STATUS.CONTROL.NO_ACTION]: '无法行动',
@@ -74,7 +74,7 @@ const GAMEPLAY_TAG_LABELS: Record<string, string> = {
 
 const DAMAGE_TYPE_LABELS: Record<string, string> = {
   [DamageType.PHYSICAL]: '物理',
-  [DamageType.MAGICAL]: '法术',
+  [DamageType.MAGICAL]: '灯律',
   [DamageType.TRUE]: '真实',
   [DamageType.DOT]: '持续伤害（DOT）',
 };

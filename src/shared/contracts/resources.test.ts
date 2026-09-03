@@ -376,7 +376,7 @@ describe('multi-scope resource contracts', () => {
           {
             id: crypto.randomUUID(),
             name: '测试丹',
-            type: '丹药',
+            type: '香品',
             quality: '玄品',
             quantity: 1,
             spec: {

@@ -13,7 +13,7 @@ import { formatAffixNumber, formatAffixPercent } from './format';
 /**
  * 格式化一个 ScalableValue，例如：
  *   { base: 38 }                                  → "38"
- *   { base: 38, attribute: 'willpower', coefficient: 0.29 } → "38 + 神识×29%"
+ *   { base: 38, attribute: 'willpower', coefficient: 0.29 } → "38 + 心神×29%"
  *   { attribute: 'spirit', coefficient: 0.5 }     → "灵力×50%"
  *   { targetMaxHpRatio: 0.08 }                    → "目标气血8%"
  *   { targetMaxMpRatio: 0.08 }                    → "目标法力8%"
@@ -37,7 +37,7 @@ export function formatScalableValue(value: ScalableValue): string {
   }
 
   if (value.targetMaxMpRatio && value.targetMaxMpRatio > 0) {
-    parts.push(`目标法力${formatAffixPercent(value.targetMaxMpRatio)}`);
+    parts.push(`目标灯焰${formatAffixPercent(value.targetMaxMpRatio)}`);
   }
 
   if (parts.length === 0) {

@@ -13,6 +13,7 @@ import {
   requireActiveCultivatorRef,
 } from '@server/lib/hono/middleware';
 import { jsonWithStatus } from '@server/lib/hono/response';
+import { streamSseEvents } from '@server/lib/hono/streaming';
 import type { AppEnv } from '@server/lib/hono/types';
 import {
   DungeonStartError,
@@ -51,6 +52,81 @@ const limitRouter = new Hono<AppEnv>();
 const lootingRouter = new Hono<AppEnv>();
 const battleRouter = new Hono<AppEnv>();
 
+/** 客户端请求 SSE 流式响应（副本回合叙事渐进展示） */
+function wantsSse(acceptHeader: string | undefined): boolean {
+  return Boolean(acceptHeader?.includes('text/event-stream'));
+}
+
+/** 副本命令错误统一序列化为 SSE error 事件 payload */
+function serializeDungeonCommandError(error: unknown): {
+  error: string;
+  status: number;
+  code?: string;
+  readiness?: unknown;
+} {
+  if (error instanceof DungeonStartError) {
+    return {
+      error: error.message,
+      status: error.status,
+      ...(error.readiness ? { readiness: error.readiness } : {}),
+    };
+  }
+  if (error instanceof DungeonFlowError) {
+    return { error: error.message, status: error.status, code: error.code };
+  }
+  if (error instanceof QiInsufficientError) {
+    return {
+      error: error.message,
+      status: 409,
+      code: error.code,
+    };
+  }
+  if (error instanceof QiServiceError) {
+    return { error: error.message, status: error.status };
+  }
+  const message = error instanceof Error ? error.message : '副本推进失败';
+  const status = /不足|没有符合条件|资源消耗失败/.test(message) ? 409 : 500;
+  return { error: message, status };
+}
+
+/**
+ * SSE 模式执行副本命令：LLM 回合叙事通过 narrative 事件累积推送，
+ * 最终结果以 result 事件下发（payload 与 JSON 模式一致）。
+ */
+function executeDungeonCommandSse(
+  c: Parameters<typeof streamSseEvents>[0],
+  command: Parameters<typeof executeDungeonCommand>[0]['command'],
+  userId: string,
+  cultivatorId: string,
+): Response {
+  return streamSseEvents(c, async (stream, isAborted) => {
+    try {
+      const data = await executeDungeonCommand({
+        userId,
+        cultivatorId,
+        command,
+        abortSignal: c.req.raw.signal,
+        narrativeStream: (text) => {
+          if (isAborted()) return;
+          void stream
+            .writeSSE({ data: JSON.stringify({ type: 'narrative', text }) })
+            .catch(() => undefined);
+        },
+      });
+      if (isAborted()) return;
+      await stream.writeSSE({
+        data: JSON.stringify({ type: 'result', data }),
+      });
+    } catch (error) {
+      if (isAborted()) return;
+      const payload = serializeDungeonCommandError(error);
+      await stream.writeSSE({
+        data: JSON.stringify({ type: 'error', ...payload }),
+      });
+    }
+  });
+}
+
 const BattleIdQuerySchema = z.object({
   battleId: z.string().min(1),
 });
@@ -68,6 +144,15 @@ router.post('/start', requireActiveCultivatorRef(), async (c) => {
   }
 
   const { mapNodeId } = StartSchema.parse(await c.req.json());
+
+  if (wantsSse(c.req.header('accept'))) {
+    return executeDungeonCommandSse(
+      c,
+      { kind: 'start', mapNodeId },
+      user.id,
+      cultivator.cultivatorId,
+    );
+  }
 
   try {
     return c.json(
@@ -135,6 +220,16 @@ router.post('/action', requireActiveCultivatorRef(), async (c) => {
     }
 
     const { choiceId, actionId } = ActionSchema.parse(await c.req.json());
+
+    if (wantsSse(c.req.header('accept'))) {
+      return executeDungeonCommandSse(
+        c,
+        { kind: 'action', choiceId, actionId },
+        user.id,
+        cultivator.cultivatorId,
+      );
+    }
+
     return c.json(
       await executeDungeonCommand({
         userId: user.id,
@@ -167,6 +262,16 @@ router.post('/recover', requireActiveCultivatorRef(), async (c) => {
     }
 
     const { action } = RecoverSchema.parse(await c.req.json());
+
+    if (wantsSse(c.req.header('accept'))) {
+      return executeDungeonCommandSse(
+        c,
+        { kind: 'recover', action },
+        user.id,
+        cultivator.cultivatorId,
+      );
+    }
+
     return c.json(
       await executeDungeonCommand({
         userId: user.id,
@@ -292,6 +397,15 @@ lootingRouter.post('/continue', requireActiveCultivatorRef(), async (c) => {
       return c.json({ error: '未授权访问' }, 401);
     }
 
+    if (wantsSse(c.req.header('accept'))) {
+      return executeDungeonCommandSse(
+        c,
+        { kind: 'looting-continue' },
+        user.id,
+        cultivator.cultivatorId,
+      );
+    }
+
     return c.json(
       await executeDungeonCommand({
         userId: user.id,
@@ -320,6 +434,15 @@ lootingRouter.post('/escape', requireActiveCultivatorRef(), async (c) => {
     const user = c.get('user');
     if (!user || !cultivator) {
       return c.json({ error: '未授权访问' }, 401);
+    }
+
+    if (wantsSse(c.req.header('accept'))) {
+      return executeDungeonCommandSse(
+        c,
+        { kind: 'looting-escape' },
+        user.id,
+        cultivator.cultivatorId,
+      );
     }
 
     return c.json(
@@ -365,7 +488,7 @@ battleRouter.get('/probe', requireActiveCultivatorRef(), async (c) => {
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : '遭遇战查探失败';
-    const status = /遭遇战|修真者/.test(message) ? 404 : 500;
+    const status = /遭遇战|修士/.test(message) ? 404 : 500;
     return c.json({ error: message }, status);
   }
 });
@@ -397,7 +520,7 @@ battleRouter.post('/abandon', requireActiveCultivatorRef(), async (c) => {
       );
     }
     const message = error instanceof Error ? error.message : '放弃遭遇战失败';
-    const status = /遭遇战|修真者/.test(message) ? 404 : 500;
+    const status = /遭遇战|修士/.test(message) ? 404 : 500;
     return c.json({ error: message }, status);
   }
 });
@@ -430,7 +553,7 @@ battleRouter.post('/execute/v5', requireActiveCultivatorRef(), async (c) => {
       );
     }
     const message = error instanceof Error ? error.message : '遭遇战执行失败';
-    const status = /遭遇战|修真者/.test(message) ? 404 : 500;
+    const status = /遭遇战|修士/.test(message) ? 404 : 500;
     return c.json({ error: message }, status);
   }
 });

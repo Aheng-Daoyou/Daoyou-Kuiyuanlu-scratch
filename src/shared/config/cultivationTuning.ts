@@ -9,22 +9,22 @@ import type { Quality } from '@shared/types/constants';
  *  修改任一常量即可全局生效，无需深入公式函数内部。
  *
  *  核心公式：
- *    修为 = 基础修为 × 闭关年限 × 灵根系数 × 功法系数
+ *    修为 = 基础修为 × 闭关年限 × 窍系数 × 功法系数
  *          × 年限系数 × 随机波动
- *    若触发顿悟，修为 ×1.5，额外获得 20~50 感悟值。
+ *    若触发窥真，修为 ×1.5，额外获得 20~50 窥悟值。
  *    若处于瓶颈期，修为减半。
- *    非顿悟时也可获得 0~MAX_NORMAL_INSIGHT 点感悟值。
+ *    非窥真时也可获得 0~MAX_NORMAL_INSIGHT 点窥悟值。
  * ============================================================
  */
 
 // ──────────────────────────────────────────────
-//  1. 灵根系数
+//  1. 窍系数
 // ──────────────────────────────────────────────
 
-/** 灵根系数基础偏移量。公式：BASE + 主灵根强度 / 100 */
+/** 窍系数基础偏移量。公式：BASE + 主窍强度 / 100 */
 export const SPIRITUAL_ROOT_BASE = 0.5;
 
-/** 无灵根时的默认灵根强度（兜底值） */
+/** 无窍时的默认窍强度（兜底值） */
 export const DEFAULT_SPIRITUAL_ROOT_STRENGTH = 50;
 
 // ──────────────────────────────────────────────
@@ -83,34 +83,34 @@ export const RANDOM_FACTOR_LOW = 0.8;
 export const RANDOM_FACTOR_RANGE = 0.3;
 
 // ──────────────────────────────────────────────
-//  5. 顿悟
+//  5. 窥真
 // ──────────────────────────────────────────────
 
-/** 顿悟触发概率（固定百分比） */
+/** 窥真触发概率（固定百分比） */
 export const EPIPHANY_CHANCE = 0.05;
 
-/** 顿悟时修为乘数（1.5 倍） */
+/** 窥真时修为乘数（1.5 倍） */
 export const EPIPHANY_EXP_MULTIPLIER = 1.5;
 
-/** 顿悟时额外感悟值的下限（含） */
+/** 窥真时额外窥悟值的下限（含） */
 export const EPIPHANY_INSIGHT_MIN = 20;
 
 /**
- * 顿悟时额外感悟值的随机区间宽度。
+ * 窥真时额外窥悟值的随机区间宽度。
  * 实际值 = EPIPHANY_INSIGHT_MIN + floor(rng × EPIPHANY_INSIGHT_RANGE)
  * 当前：20 + [0, 30] = 20~50
  */
 export const EPIPHANY_INSIGHT_RANGE = 31;
 
 // ──────────────────────────────────────────────
-//  6. 常规感悟值（非顿悟）
+//  6. 常规窥悟值（非窥真）
 // ──────────────────────────────────────────────
 
-/** 常规感悟值上限 */
+/** 常规窥悟值上限 */
 export const MAX_NORMAL_INSIGHT = 40;
 
 /**
- * 常规感悟值缩放因子。
+ * 常规窥悟值缩放因子。
  * 公式：min(MAX, floor(√years × SCALE × rng))
  */
 export const NORMAL_INSIGHT_SCALE = 1.8;
@@ -135,7 +135,7 @@ export const BREAKTHROUGH_MIN_PROGRESS = 60;
 /** 常规突破进度阈值（百分比） */
 export const NORMAL_BREAKTHROUGH_THRESHOLD = 80;
 
-/** 圆满突破所需的最低感悟值 */
+/** 圆满突破所需的最低窥悟值 */
 export const PERFECT_BREAKTHROUGH_INSIGHT = 50;
 
 // ──────────────────────────────────────────────
@@ -145,7 +145,7 @@ export const PERFECT_BREAKTHROUGH_INSIGHT = 50;
 /**
  * 各突破类型的失败损失参数。
  * baseLow / baseRange 决定基础损失比：baseLow + rng × baseRange
- * insightDivisor 决定感悟保护力度：实际损失 = 基础损失 × (1 - insight / divisor)
+ * insightDivisor 决定窥悟保护力度：实际损失 = 基础损失 × (1 - insight / divisor)
  */
 export const FAILURE_LOSS_PARAMS = {
   forced:  { baseLow: 0.5, baseRange: 0.2, insightDivisor: 500 },

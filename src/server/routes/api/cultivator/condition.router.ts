@@ -125,7 +125,7 @@ conditionRouter.post(
     } catch (error) {
       if (
         !(error instanceof Error) ||
-        !error.message.startsWith('囊中羞涩，灵石不足')
+        !error.message.startsWith('囊中羞涩，灯油券不足')
       ) {
         throw error;
       }

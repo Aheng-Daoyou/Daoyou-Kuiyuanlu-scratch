@@ -31,15 +31,15 @@ describe('auctionConfig', () => {
     expect(quote.grossAmount).toBe(32_000_000);
   });
 
-  it('灵植种子同样只有玄品及以上可以寄售', () => {
+  it('灯植种子同样只有玄品及以上可以寄售', () => {
     const seed = buildSpiritFieldSeedMaterialFromPlant({
       id: 'seed-test',
-      seedName: '青芽草灵种',
+      seedName: '青芽草灯种',
       seedDescription: '一枚青色种籽。',
-      clueTexts: ['遇到温和灵机时微微发热', '似乎喜爱山间清气'],
+      clueTexts: ['遇到温和灯机时微微发热', '似乎喜爱山间清气'],
       quality: '凡品',
-      element: '木',
-      minRealm: '炼气',
+      element: '尸',
+      minRealm: '闻腥',
       stageDurationMs: { germination: 4 * 60_000, nourishing: 4 * 60_000, forming: 4 * 60_000 },
       growthForm: 'herb',
       harvestPart: 'leaf',

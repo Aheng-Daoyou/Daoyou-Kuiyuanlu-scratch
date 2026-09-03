@@ -43,7 +43,7 @@ yieldRouter.post('/', requireActiveCultivatorRef(), async (c) => {
         amount: result.amount,
         extraYieldText: (() => {
           const extra = [
-            result.expGain ? `修为精进 ${result.expGain} 点` : '',
+            result.expGain ? `灯韵精进 ${result.expGain} 点` : '',
             result.insightGain
               ? `${getGameConceptLabel('comprehension_insight')} ${result.insightGain} 点`
               : '',

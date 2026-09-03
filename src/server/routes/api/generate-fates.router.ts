@@ -2,6 +2,7 @@ import { requireUser } from '@server/lib/hono/middleware';
 import type { AppEnv } from '@server/lib/hono/types';
 import { FATE_REROLL_LIMIT } from '@server/lib/services/FateConfig';
 import { FateEngine } from '@server/lib/services/FateEngine';
+import { applyFateNaming } from '@server/lib/services/FateNamingService';
 import {
   checkAndIncrementReroll,
   getTempCharacter,
@@ -48,12 +49,14 @@ router.post('/', requireUser(), async (c) => {
   }
 
   const fates = await FateEngine.generateCandidatePool();
-  await saveTempFates(tempId, fates);
+  // 命案执笔 AI 命名：为候选命格批量起名/补全描述，失败自动降级为本地预设。
+  const namedFates = await applyFateNaming(fates);
+  await saveTempFates(tempId, namedFates);
 
   return c.json({
     success: true,
     data: {
-      fates,
+      fates: namedFates,
       remainingRerolls,
     },
   });
