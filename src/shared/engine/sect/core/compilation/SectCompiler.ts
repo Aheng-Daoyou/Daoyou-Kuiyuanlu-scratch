@@ -204,7 +204,7 @@ export class SectCompiler {
     const costs = config.costs ?? [];
     if (costs.length === 0) {
       return (config.mpCost ?? 0) > 0
-        ? `法力：${config.mpCost}`
+        ? `灯焰：${config.mpCost}`
         : '不消耗战斗资源';
     }
     return costs
@@ -212,7 +212,7 @@ export class SectCompiler {
         if (cost.mode !== 'flat') {
           return `当前气血：${Number((cost.ratio * 100).toFixed(2))}%`;
         }
-        return `${cost.resource === 'hp' ? '气血' : '法力'}：${cost.amount}`;
+        return `${cost.resource === 'hp' ? '气血' : '灯焰'}：${cost.amount}`;
       })
       .join('；');
   }

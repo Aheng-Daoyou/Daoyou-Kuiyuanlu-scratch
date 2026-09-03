@@ -31,7 +31,7 @@ export const TIANYAN_LUOSHU_NODES = [
     (facade) => facade.observeSealGap(),
   ),
   luoshuNode(
-    { id: 'luoshu-first-change', layerId: '1', name: '第一变', description: '每场战斗首次落印命中无印目标后返还80点实付法力，并使新印持续3回合。' },
+    { id: 'luoshu-first-change', layerId: '1', name: '第一变', description: '每场战斗首次落印命中无印目标后返还80点实付灯焰，并使新印持续3回合。' },
     (facade) => facade.enableFirstChange(),
   ),
   luoshuNode(
@@ -43,23 +43,23 @@ export const TIANYAN_LUOSHU_NODES = [
     (facade) => facade.reverseTwoPalaces(),
   ),
   luoshuNode(
-    { id: 'luoshu-hidden-counter', layerId: '2', name: '藏印为筹', description: '五气归藏数值收益提高25%，并获得1点衍数。' },
+    { id: 'luoshu-hidden-counter', layerId: '2', name: '藏印为筹', description: '五曜归藏数值收益提高25%，并获得1点衍数。' },
     (facade) => facade.empowerRepository(1.25, 1),
   ),
   luoshuNode(
-    { id: 'luoshu-flame-flow', layerId: '3', name: '炎流相激', description: '强化燎原、蒸发与熔金。' },
+    { id: 'luoshu-flame-flow', layerId: '3', name: '荧惑相激', description: '强化荧惑接岁、辰星掩荧与荧惑销白。' },
     (facade) => facade.strengthenFlameFlow(),
   ),
   luoshuNode(
-    { id: 'luoshu-mountain-wood', layerId: '3', name: '山木倾覆', description: '强化熔岩、泥沼与崩根。' },
+    { id: 'luoshu-mountain-wood', layerId: '3', name: '镇岁倾覆', description: '强化镇星承火、镇星没辰与岁星倾镇。' },
     (facade) => facade.strengthenMountainWood(),
   ),
   luoshuNode(
-    { id: 'luoshu-metal-water', layerId: '3', name: '金水决机', description: '强化锻锋、寒泉与断脉。' },
+    { id: 'luoshu-metal-water', layerId: '3', name: '太白辰星决机', description: '强化太白承镇、辰星承白与太白断岁。' },
     (facade) => facade.strengthenMetalWater(),
   ),
   luoshuNode(
-    { id: 'luoshu-lock-position', layerId: '4', name: '定势锁机', description: '提高泥沼与断脉控制命中，并强化抵抗后的替代削弱。' },
+    { id: 'luoshu-lock-position', layerId: '4', name: '定势锁机', description: '提高镇星没辰与太白断岁控制命中，并强化抵抗后的替代削弱。' },
     (facade) => facade.lockPosition(),
   ),
   luoshuNode(

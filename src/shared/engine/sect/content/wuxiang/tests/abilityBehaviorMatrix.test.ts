@@ -29,20 +29,20 @@ type Form = 'buddha' | 'demon' | 'formless';
 
 const names: Record<PathId, Record<string, [string, string, string]>> = {
   'mirror-karma': {
-    'flower-heart': ['拈花叩心', '花落问罪', '心花两忘'],
-    'blood-tide': ['血海听潮', '血海回澜', '海月同潮'],
-    'three-knocks': ['三叩业门', '业门倒叩', '门内无人'],
+    'flower-heart': ['拈莲叩心', '莲落问罪', '心莲两忘'],
+    'blood-tide': ['血莲听潮', '血莲回澜', '莲月同潮'],
+    'three-knocks': ['三叩莲门', '莲门倒叩', '门内无莲'],
     'observe-calamity': ['闭目观劫', '开眼见劫', '劫相俱寂'],
-    'five-skandhas': ['照见五蕴', '五蕴还照', '五蕴皆空'],
+    'five-skandhas': ['照见胎蕴', '胎蕴还照', '胎蕴皆空'],
     'reed-crossing': ['一苇横江', '一苇倒渡', '此岸非岸'],
   },
   'demon-crossing': {
-    'flower-heart': ['拈花叩心', '摘心问魔', '心魔两忘'],
-    'blood-tide': ['血海听潮', '血海倒悬', '血海无涯'],
-    'three-knocks': ['三叩业门', '三叩魔关', '业门无生'],
-    'observe-calamity': ['闭目观劫', '开眼见魔', '劫火自明'],
-    'five-skandhas': ['照见五蕴', '焚尽五蕴', '蕴空身在'],
-    'reed-crossing': ['一苇横江', '一苇渡厄', '苦海无舟'],
+    'flower-heart': ['拈莲叩心', '摘心问哺', '哺心两忘'],
+    'blood-tide': ['血莲听潮', '血莲倒悬', '血莲无涯'],
+    'three-knocks': ['三叩莲门', '三叩血关', '莲门无生'],
+    'observe-calamity': ['闭目观劫', '开眼见莲', '莲火自明'],
+    'five-skandhas': ['照见胎蕴', '焚尽胎蕴', '胎空身在'],
+    'reed-crossing': ['一苇横江', '一苇哺渡', '苦海无舟'],
   },
 };
 
@@ -208,7 +208,7 @@ const cases = (['mirror-karma', 'demon-crossing'] as PathId[]).flatMap(
     ),
 );
 
-describe('无相禅宗36格实际结算矩阵', () => {
+describe('白莲乳母教36格实际结算矩阵', () => {
   beforeEach(() => EventBus.instance.reset());
   afterEach(() => EventBus.instance.reset());
 
@@ -217,7 +217,7 @@ describe('无相禅宗36格实际结算矩阵', () => {
     ({ pathId, abilityId, form }) => {
       const projection = projectSectCombat({
         sect: state(pathId),
-        realm: '化神',
+        realm: '忘川',
       })!;
       const owner = unit('owner');
       const enemy = unit('enemy');
@@ -232,7 +232,7 @@ describe('无相禅宗36格实际结算矩阵', () => {
         owner.combatResources.define(resource);
       const config = resolveSectAbility({
         sect: state(pathId),
-        realm: '化神',
+        realm: '忘川',
         abilityId,
       }).config;
       const skill = AbilityFactory.create(config) as ActiveSkill;
@@ -244,13 +244,13 @@ describe('无相禅宗36格实际结算矩阵', () => {
           key: WUXIANG_FORM_MODE,
           mode: form,
           remainingUses: form === 'demon' ? 2 : 1,
-          displayName: form === 'demon' ? '魔相' : '无相',
+          displayName: form === 'demon' ? '血相' : '莲相',
         });
         if (pathId === 'mirror-karma') {
           owner.buffs.addBuff(
             BuffFactory.create({
               id: WUXIANG_KARMA_BUFF,
-              name: '业痕',
+              name: '莲印',
               type: BuffType.BUFF,
               duration: -1,
               stackRule: StackRule.STACK_LAYER,
@@ -262,7 +262,7 @@ describe('无相禅宗36格实际结算矩阵', () => {
             enemy.buffs.addBuff(
               BuffFactory.create({
                 id: 'sect.wuxiang.mirror.karma-door',
-                name: '旧业门',
+                name: '旧莲门',
                 type: BuffType.DEBUFF,
                 duration: 4,
                 stackRule: StackRule.STACK_LAYER,
@@ -359,10 +359,10 @@ describe('无相禅宗36格实际结算矩阵', () => {
     },
   );
 
-  it('未命中不执行完成效果，也不消费魔相次数', () => {
+  it('未命中不执行完成效果，也不消费血相次数', () => {
     const projection = projectSectCombat({
       sect: state('mirror-karma'),
-      realm: '化神',
+      realm: '忘川',
     })!;
     const owner = unit('owner');
     const enemy = unit('enemy');
@@ -376,7 +376,7 @@ describe('无相禅宗36格实际结算矩阵', () => {
       key: WUXIANG_FORM_MODE,
       mode: 'demon',
       remainingUses: 2,
-      displayName: '魔相',
+      displayName: '血相',
     });
 
     skill.prepareCast({ caster: owner, target: enemy });

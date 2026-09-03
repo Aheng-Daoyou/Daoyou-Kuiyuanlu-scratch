@@ -21,7 +21,7 @@ describe('sect delivery requirement matcher', () => {
       {
         kind: 'pill',
         id: 'pill-1',
-        name: '寿元丹',
+        name: '寿元香',
         quality: '玄品',
         quantity: 1,
         family: 'longevity',
@@ -144,7 +144,7 @@ describe('sect delivery requirement matcher', () => {
       quantity: 3,
       minQuality: '灵品' as const,
       materialType: 'ore' as const,
-      element: '金' as const,
+      element: '烛' as const,
     };
     const first: SectMaterialSubmissionFacts = {
       kind: 'material',
@@ -153,7 +153,7 @@ describe('sect delivery requirement matcher', () => {
       quality: '玄品',
       quantity: 1,
       materialType: 'ore',
-      element: '金',
+      element: '烛',
     };
     const second: SectMaterialSubmissionFacts = {
       kind: 'material',
@@ -162,7 +162,7 @@ describe('sect delivery requirement matcher', () => {
       quality: '玄品',
       quantity: 2,
       materialType: 'ore',
-      element: '金',
+      element: '烛',
     };
 
     expect(matchSectDeliveryCandidate(requirement, first).eligible).toBe(true);

@@ -220,8 +220,8 @@ const clearBuff = (
 });
 const addKarma = (): EffectConfig =>
   selfBuff(
-    buff(WUXIANG_KARMA_BUFF, '业痕', -1, [], {
-      description: '佛相承受来力留下的因；魔相神通可逐层现报。',
+    buff(WUXIANG_KARMA_BUFF, '莲印', -1, [], {
+      description: '胎相承受来力留下的因；血相神通可逐层现报。',
       stackRule: StackRule.STACK_LAYER,
       maxLayers: 3,
       dispelPolicy: 'protected',
@@ -404,7 +404,7 @@ function definition(id: WuxiangTechniqueId | 'turn-form') {
     (ability) => ability.id === id && ability.kind !== 'passive',
   );
   if (!found || found.kind === 'passive')
-    throw new Error(`无相神通未定义: ${id}`);
+    throw new Error(`乳母神通未定义: ${id}`);
   return found;
 }
 
@@ -413,7 +413,7 @@ function foundationDefinition() {
     (ability) => ability.id === WUXIANG_BASE_DEFINITION.foundationPassiveId,
   );
   if (!found || found.kind !== 'passive')
-    throw new Error('无相禅宗根基被动未定义');
+    throw new Error('乳母教根基被动未定义');
   return found;
 }
 
@@ -479,13 +479,13 @@ function layeredAbility(spec: LayeredAbilitySpec): SectCompiledAbility {
   const layers: AbilityEffectLayerConfig[] = [
     {
       id: 'demon',
-      displayName: '魔相显化时',
+      displayName: '血相显化时',
       effects: spec.demonEffects,
       completionEffects: spec.demonCompletionEffects,
     },
     {
       id: 'formless',
-      displayName: '无相显化时',
+      displayName: '莲相显化时',
       effects: spec.formlessEffects,
       completionEffects: spec.formlessCompletionEffects,
     },
@@ -529,7 +529,7 @@ function layeredAbility(spec: LayeredAbilitySpec): SectCompiledAbility {
     targetPolicy: { team: spec.target, scope: 'single' },
     effects: spec.effects,
     completionEffects: buddhistCompletion,
-    baseEffectDisplayName: '佛相',
+    baseEffectDisplayName: '胎相',
     effectLayers: layers,
     effectPlans: plans,
     extraTags: [techniqueTag],
@@ -558,7 +558,7 @@ function mirrorPresent(
     type: 'consume_status_trigger',
     params: {
       match: { id: WUXIANG_KARMA_BUFF },
-      displayName: '业痕',
+      displayName: '莲印',
       consume: 1,
       target: 'caster',
       effects: reward,
@@ -600,7 +600,7 @@ function allKarmaEffect(
       type: 'consume_status_trigger',
       params: {
         match: { id: WUXIANG_KARMA_BUFF },
-        displayName: '业痕',
+        displayName: '莲印',
         consume: 1,
         target: 'caster',
         effects: [target === 'enemy' ? physical(0.6) : shield(0.08)],
@@ -613,7 +613,7 @@ function heartVow(reduction: number): EffectConfig {
   return targetBuff(
     buff(
       'sect.wuxiang.mirror.heart-vow',
-      '叩心戒',
+      '哺心戒',
       1,
       [
         {
@@ -648,7 +648,7 @@ function tideGuard(reduction: number): EffectConfig {
   return selfBuff(
     buff(
       'sect.wuxiang.mirror.tide',
-      '听潮',
+      '听莲',
       1,
       [
         {
@@ -703,7 +703,7 @@ function tideGuard(reduction: number): EffectConfig {
 function karmaDoors(layers: number): EffectConfig[] {
   const door = buff(
     KARMA_DOOR,
-    '业门',
+    '莲门',
     4,
     [
       {
@@ -828,7 +828,7 @@ function heartGap(bonus: number): EffectConfig {
   return targetBuff(
     buff(
       HEART_GAP,
-      '心隙',
+      '哺隙',
       2,
       [
         {
@@ -890,7 +890,7 @@ function firstThoughtBonus(target: 'enemy' | 'self'): EffectConfig {
     type: 'consume_status_trigger',
     params: {
       match: { id: DEMON_FIRST_THOUGHT },
-      displayName: '第一念',
+      displayName: '初哺',
       consume: 1,
       target: 'caster',
       effects: [target === 'enemy' ? physical(0.35) : shield(0.05)],
@@ -946,7 +946,7 @@ function turnForm(
         operation: 'set',
         mode: 'demon',
         remainingUses: 2,
-        displayName: isMirror ? '魔相·止观' : '魔相·渡厄',
+        displayName: isMirror ? '血相·守胎' : '血相·哺渡',
         cleanupBuffIds: guardIds,
       },
     },
@@ -954,7 +954,7 @@ function turnForm(
       ? [
           persistentDirectReduction(
             MIRROR_GUARD,
-            '止观',
+            '守胎',
             features.mirrorDemonReduction,
           ),
         ]
@@ -963,7 +963,7 @@ function turnForm(
             ? [
                 persistentDirectReduction(
                   DEMON_GUARD,
-                  '渡厄',
+                  '哺渡',
                   features.demonPublicReduction,
                 ),
               ]
@@ -971,7 +971,7 @@ function turnForm(
           selfBuff(
             buff(
               DEMON_CONTROL_GUARD,
-              '渡厄·免控',
+              '哺渡·免控',
               -1,
               [
                 {
@@ -995,7 +995,7 @@ function turnForm(
     ...(isMirror && features.mirrorFreePresent
       ? [
           selfBuff(
-            buff(MIRROR_FREE_PRESENT, '镜背生魔', -1, [], {
+            buff(MIRROR_FREE_PRESENT, '莲背生血', -1, [], {
               dispelPolicy: 'protected',
               stackRule: StackRule.STACK_LAYER,
               maxLayers: 1,
@@ -1016,7 +1016,7 @@ function turnForm(
     ...(!isMirror && features.demonFirstThought
       ? [
           selfBuff(
-            buff(DEMON_FIRST_THOUGHT, '第一念', -1, [], {
+            buff(DEMON_FIRST_THOUGHT, '初哺', -1, [], {
               dispelPolicy: 'protected',
               stackRule: StackRule.STACK_LAYER,
               maxLayers: 1,
@@ -1051,7 +1051,7 @@ function turnForm(
         operation: 'set',
         mode: 'formless',
         remainingUses: 1,
-        displayName: '一念无间',
+        displayName: '一念生莲',
         cleanupBuffIds: guardIds,
       },
     },
@@ -1105,18 +1105,18 @@ function turnForm(
     targetPolicy: { team: 'self', scope: 'single' },
     costs,
     effects: [],
-    baseEffectDisplayName: '佛相',
+    baseEffectDisplayName: '胎相',
     effectLayers: [
-      { id: 'demon', displayName: '魔相显化时', effects: demonEffects },
-      { id: 'formless', displayName: '无相显化时', effects: formlessEffects },
+      { id: 'demon', displayName: '血相显化时', effects: demonEffects },
+      { id: 'formless', displayName: '莲相显化时', effects: formlessEffects },
     ],
     effectPlans: [
       {
         id: 'formless',
-        name: '一念无间',
+        name: '一念生莲',
         priority: 300,
         description:
-          '消耗全部心念与少量气血，使下一门宗门神通显化无相，兼具佛相本式与魔相变化。',
+          '消耗全部莲念与少量气血，使下一门宗门神通显化莲相，兼具胎相本式与血相变化。',
         conditions: [
           {
             type: 'combat_resource_at_least',
@@ -1131,11 +1131,11 @@ function turnForm(
       },
       {
         id: 'demon',
-        name: '魔相入身',
+        name: '血相入身',
         priority: 200,
         description: isMirror
-          ? '消耗3点心念与少量气血，使之后两门宗门神通在原有效果之外显化魔相变化。'
-          : '消耗3点心念，使之后两门宗门神通在原有效果之外显化魔相变化，并获得渡厄护盾。',
+          ? '消耗3点莲念与少量气血，使之后两门宗门神通在原有效果之外显化血相变化。'
+          : '消耗3点莲念，使之后两门宗门神通在原有效果之外显化血相变化，并获得哺渡护盾。',
         conditions: [
           {
             type: 'combat_resource_at_least',

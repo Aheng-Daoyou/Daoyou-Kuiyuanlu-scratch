@@ -31,11 +31,11 @@ export const TIANYAN_HETU_NODES = [
     (facade) => facade.extendSeals(),
   ),
   hetuNode(
-    { id: 'hetu-blank-breath', layerId: '1', name: '太初留白', description: '每回合首次以太初玄光命中带印目标时，回复3%最大法力。' },
+    { id: 'hetu-blank-breath', layerId: '1', name: '太初留白', description: '每回合首次以太初玄光命中带印目标时，回复3%最大灯焰。' },
     (facade) => facade.enableBlankBreath(),
   ),
   hetuNode(
-    { id: 'hetu-flow-refund', layerId: '2', name: '法随气转', description: '成功触发反应后，返还本次落印术实际支付的20点法力。' },
+    { id: 'hetu-flow-refund', layerId: '2', name: '法随气转', description: '成功触发反应后，返还本次落印术实际支付的20点灯焰。' },
     (facade) => facade.enableReactionRefund(),
   ),
   hetuNode(
@@ -43,19 +43,19 @@ export const TIANYAN_HETU_NODES = [
     (facade) => facade.enableShiftFlow(),
   ),
   hetuNode(
-    { id: 'hetu-repository-remnant', layerId: '2', name: '归藏纳余', description: '五气归藏数值收益提高20%，并获得1点衍数。' },
+    { id: 'hetu-repository-remnant', layerId: '2', name: '归藏纳余', description: '五曜归藏数值收益提高20%，并获得1点衍数。' },
     (facade) => facade.empowerRepository(1.2, 1),
   ),
   hetuNode(
-    { id: 'hetu-verdant-endless', layerId: '3', name: '青华不竭', description: '木行治疗提高25%；首次令目标满血时获得护盾。' },
+    { id: 'hetu-verdant-endless', layerId: '3', name: '岁华不竭', description: '岁星治疗提高25%；首次令目标满血时获得护盾。' },
     (facade) => facade.strengthenWoodHealing(),
   ),
   hetuNode(
-    { id: 'hetu-fire-earth-shelter', layerId: '3', name: '火土相庇', description: '降低火里种莲成本并强化地载无疆。' },
+    { id: 'hetu-fire-earth-shelter', layerId: '3', name: '荧镇相庇', description: '降低火里种莲成本并强化地载无疆。' },
     (facade) => facade.strengthenFireEarthShelter(),
   ),
   hetuNode(
-    { id: 'hetu-river-cleansing', layerId: '3', name: '天河洗尘', description: '天河洗心净化3个状态，回复12%最大法力并提高30%控制抗性。' },
+    { id: 'hetu-river-cleansing', layerId: '3', name: '辰星洗尘', description: '辰星洗心净化3个状态，回复12%最大灯焰并提高30%控制抗性。' },
     (facade) => facade.strengthenRiverCleansing(),
   ),
   hetuNode(
@@ -87,7 +87,7 @@ export const TIANYAN_HETU_NODES = [
     (facade) => facade.drawFirstLine(),
   ),
   hetuNode(
-    { id: 'hetu-endless-life', layerId: 'ultimate', name: '生生无穷', description: '河图周天额外回复气血与法力，并保留1点衍数。' },
+    { id: 'hetu-endless-life', layerId: 'ultimate', name: '生生无穷', description: '河图周天额外回复气血与灯焰，并保留1点衍数。' },
     (facade) => facade.grantEndlessLife(),
   ),
   hetuNode(

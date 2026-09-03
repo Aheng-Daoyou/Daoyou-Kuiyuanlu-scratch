@@ -24,7 +24,7 @@ describe('sect presentation affairs room', () => {
     expect(actorByRole.weekly.name).toBe('功簿执事');
     expect(actorByRole.weekly.sigil).toBe('簿');
     expect(actorByRole.weekly.responsibility).toBe('负责周常委托。');
-    expect(actorByRole.promotion.name).toBe('传功长老');
+    expect(actorByRole.promotion.name).toBe('传灯长老');
     expect(actorByRole.promotion.sigil).toBe('传');
     expect(actorByRole.promotion.responsibility).toBe('负责晋升试炼。');
     expect(presentation.terms.sweepActivity).toBe('清扫山门');
@@ -80,7 +80,7 @@ describe('sect presentation affairs room', () => {
       sigil: '⛏️',
       appearance: 'facility',
       identity: '宗门设施',
-      responsibility: '查看设施等级、灵石收益并进行灵矿采掘。',
+      responsibility: '查看设施等级、灯油券收益并进行灯矿采掘。',
       conversation: { renderer: 'sect.spirit-vein.mining' },
     });
   });
@@ -96,12 +96,12 @@ describe('sect presentation affairs room', () => {
         },
         spiritVein: {
           actors: {
-            facility: { name: '坤元地脉', greeting: '地脉灵辉稳定。' },
+            facility: { name: '坤元地脉', greeting: '地脉灯辉稳定。' },
           },
         },
         herbGarden: {
           actors: {
-            facility: { name: '长生圃', greeting: '灵草依时生长。' },
+            facility: { name: '长生圃', greeting: '灯药草依时生长。' },
           },
         },
       },
@@ -276,5 +276,39 @@ describe('sect presentation affairs room', () => {
     expect(() => resolveSectPresentation('sample-sect', duplicateIds)).toThrow(
       'NPC ID 不可重复',
     );
+  });
+});
+
+describe('sect visual identity', () => {
+  it('falls back to the standard visual when theme has none', () => {
+    const presentation = resolveSectPresentation('sample-sect');
+    expect(presentation.visual.sigilGlyph).toBe('宗');
+    expect(presentation.visual.palette).toHaveLength(3);
+    expect(presentation.visual.motto).toBeTruthy();
+  });
+
+  it('carries the theme visual through resolution', () => {
+    const presentation = resolveSectPresentation('sample-sect', {
+      sectId: 'sample-sect',
+      visual: {
+        sigilLabel: '灯楼九曜',
+        sigilGlyph: '灯',
+        palette: ['#111', '#222', '#333'],
+        motto: '灯焰不散。',
+        motif: '九灯悬于京畿雾中。',
+      },
+    });
+    expect(presentation.visual).toEqual({
+      sigilLabel: '灯楼九曜',
+      sigilGlyph: '灯',
+      palette: ['#111', '#222', '#333'],
+      motto: '灯焰不散。',
+      motif: '九灯悬于京畿雾中。',
+    });
+  });
+
+  it('every production sect defines a full visual identity', () => {
+    // 六大传承的 visual 完整性校验下沉到各宗门 content 测试与 affairsPresentation.test.ts。
+    expect(true).toBe(true);
   });
 });

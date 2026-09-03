@@ -18,10 +18,10 @@ describe('sect stipend', () => {
       },
       roundUnit: 100,
     });
-    expect(calculateStandardSectStipendBase('registered', '炼气')).toBe(1_500);
-    expect(calculateStandardSectStipendBase('outer', '金丹')).toBe(6_400);
-    expect(calculateStandardSectStipendBase('inner', '化神')).toBe(22_500);
-    expect(calculateStandardSectStipendBase('true', '渡劫')).toBe(126_000);
+    expect(calculateStandardSectStipendBase('registered', '闻腥')).toBe(1_500);
+    expect(calculateStandardSectStipendBase('outer', '窥渊')).toBe(6_400);
+    expect(calculateStandardSectStipendBase('inner', '忘川')).toBe(22_500);
+    expect(calculateStandardSectStipendBase('true', '渡渊')).toBe(126_000);
   });
 
   it('keeps an outer-disciple stipend above one normal daily task', () => {

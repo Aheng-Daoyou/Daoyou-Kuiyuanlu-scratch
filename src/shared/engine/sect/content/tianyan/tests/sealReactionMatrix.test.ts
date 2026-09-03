@@ -6,7 +6,7 @@ import {
 } from '../shared/reactions';
 import { createElementSeal } from '../shared/seals';
 
-describe('天衍五行反应矩阵', () => {
+describe('天衍五曜反应矩阵', () => {
   it('五种形态共用单一受保护法印，不计入普通状态数', () => {
     const seals = TIANYAN_ELEMENTS.map((element) => createElementSeal(element, 2));
     expect(new Set(seals.map((seal) => seal.id))).toEqual(

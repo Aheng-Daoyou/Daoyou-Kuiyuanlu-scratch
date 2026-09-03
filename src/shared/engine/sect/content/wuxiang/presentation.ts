@@ -26,60 +26,67 @@ const hotspot = (
 export const WUXIANG_SECT_PRESENTATION: SectPresentationTheme = {
   sectId: WUXIANG_SECT_ID,
   announcement:
-    '晨钟后将开一场无相问心会，愿照见本念者可赴旧铜镜前静坐，不拘佛魔二途。',
+    '晨雾后将开一场莲灯收容会，愿照见本念者可赴旧莲灯前静坐，不拘正邪二途。',
+  visual: {
+    sigilLabel: '莲灯慈航',
+    sigilGlyph: '莲',
+    palette: ['#1b1310', '#5d2f3a', '#b8a06a'],
+    motto: '以身哺渡，视苦为灯。',
+    motif: '一盏旧莲灯悬于雾瘴之间，灯下坐着愿横渡苦海的人。',
+  },
   onboarding: {
-    summary: '把色身视作道场，在佛相、魔相与无相之间照见苦、承受苦、横渡苦。',
-    traits: ['佛魔同修', '以身渡厄', '临危转念'],
+    summary: '把色身视作道场，在胎相、血相与莲灯之间照见苦、承受苦、横渡苦。',
+    traits: ['正邪同修', '以身哺渡', '临危转念'],
     script: {
       id: 'wuxiang-onboarding',
-      title: '无相照身',
+      title: '莲灯照身',
       theme: 'ember',
       backdrop: {
         src: '/assets/sect/onboarding/wuxiang.webp',
-        alt: '黑白双峰与血莲池之间，一座未合圆环形山门立在雾中',
+        alt: '黑白双峰与乳母池之间，一座未合圆环形山门立在雾中',
       },
       acts: [
         {
           id: 'nondual-gate',
           title: '不二门',
-          scene: '无相禅宗 · 不二门',
-          body: '山门没有门扇，门额只留着一道未合的圆。钟声越过黑白双峰，也越过山间那片暗红莲池；知客僧向你合掌。',
-          speaker: '知客僧：“不必先证明清净，肯照见自己，便可入门。”',
+          scene: '白莲乳母教 · 不二门',
+          body: '山门没有门扇，门额只留着一道未合的圆。钟声越过黑白双峰，也越过山间那片暗红莲池；接引乳母向你欠身。',
+          speaker: '接引乳母：“不必先证明清净，肯照见自己，便可入门。”',
           backgroundPosition: '52% 40%',
           tone: 'stillness',
         },
         {
           id: 'bronze-mirror',
           title: '铜镜照身',
-          scene: '无相禅宗 · 旧镜前',
-          body: '旧铜镜里没有佛光，也没有魔影，只有一路跋涉至此的你。灯火照过衣上的尘，也照过每一道尚未说出口的迟疑。',
-          speaker: '知客僧：“你怕的是痛苦，还是那个会在痛苦里变得陌生的自己？”',
+          scene: '白莲乳母教 · 旧镜前',
+          body: '旧莲灯里没有佛光，也没有魔影，只有一路跋涉至此的你。灯火照过衣上的尘，也照过每一道尚未说出口的迟疑。',
+          speaker: '接引乳母：“你怕的是痛苦，还是那个会在痛苦里变得陌生的自己？”',
           backgroundPosition: '72% 56%',
           tone: 'stillness',
         },
         {
           id: 'buddha-and-demon',
-          title: '佛与魔',
-          scene: '无相禅宗 · 问身场',
-          body: '白衣门人迎着来势，把因果稳稳留在身前；红衣门人踏进险境，以自身作舟，强渡将倾的一刻。这里的佛与魔不是善恶两张面具，而是面对苦难时都要付诸本心的选择。',
+          title: '胎与血',
+          scene: '白莲乳母教 · 问身场',
+          body: '白衣门人迎着来势，把因果稳稳留在身前；红衣门人踏进险境，以自身作舟，强渡将倾的一刻。这里的胎相与血相不是善恶两张面具，而是面对苦难时都要付诸本心的选择。',
           backgroundPosition: '40% 48%',
           tone: 'ember',
         },
         {
           id: 'body-as-dojo',
           title: '色身道场',
-          scene: '无相禅宗 · 诸院',
-          body: '药师从血莲池采露，火供院的锤声慢而不绝，面壁窟里有人静坐到天明。无相门人不厌弃身体，也不纵容欲念；皮囊会痛、会倦、会留下痕迹，正因如此，它才是最诚实的道场。',
+          scene: '白莲乳母教 · 诸院',
+          body: '药师从乳母池采露，火供院的锤声慢而不绝，面壁窟里有人静坐到天明。莲灯门人不厌弃身体，也不纵容欲念；皮囊会痛、会倦、会留下痕迹，正因如此，它才是最诚实的道场。',
           backgroundPosition: '30% 58%',
           tone: 'mist',
         },
         {
           id: 'unfinished-circle',
           title: '圆未合',
-          scene: '无相禅宗 · 名牒前',
-          body: '知客僧在你的名牒旁落下一点墨。钟声再起，那道未完的圆仿佛正等你迈入其中。',
+          scene: '白莲乳母教 · 名牒前',
+          body: '接引乳母在你的名牒旁落下一点墨。钟声再起，那道未完的圆仿佛正等你迈入其中。',
           speaker:
-            '知客僧：“能见诸苦，不必逃；能借诸苦，不可欺心。最后这一笔，由你自己来合。”',
+            '接引乳母：“能见诸苦，不必逃；能借诸苦，不可欺心。最后这一笔，由你自己来合。”',
           backgroundPosition: '52% 35%',
           tone: 'ember',
         },
@@ -88,11 +95,11 @@ export const WUXIANG_SECT_PRESENTATION: SectPresentationTheme = {
   },
   map: {
     image: '/assets/sect/wuxiang-map.webp',
-    alt: '无相禅宗黑白双峰、血池、佛窟与诸院落的水墨鸟瞰图',
+    alt: '白莲乳母教黑白双峰、血池、乳窟与诸院落的水墨鸟瞰图',
     hotspots: [
       hotspot(
         'hall',
-        '无相殿',
+        '莲灯殿',
         '48%',
         '22%',
         '/game/sect/hall',
@@ -152,16 +159,16 @@ export const WUXIANG_SECT_PRESENTATION: SectPresentationTheme = {
         '78%',
         '/game/sect/industries',
         'sect.construction.view',
-        '设施建设 · 灵石捐献',
+        '设施建设 · 灯油券捐献',
       ),
       hotspot(
         'cultivation',
-        '止观室',
+        '守胎室',
         '13%',
         '62%',
         '/game/sect/cultivation-room',
         'sect.facility.cultivation.use',
-        '闭关修炼 · 设施灵效',
+        '闭关窥悟 · 设施灯效',
         'cultivation_room',
       ),
       hotspot(
@@ -171,7 +178,7 @@ export const WUXIANG_SECT_PRESENTATION: SectPresentationTheme = {
         '51%',
         '/game/sect/alchemy',
         'sect.facility.alchemy.use',
-        '炼丹 · 设施灵效',
+        '制香 · 设施灯效',
         'workshop',
       ),
       hotspot(
@@ -181,7 +188,7 @@ export const WUXIANG_SECT_PRESENTATION: SectPresentationTheme = {
         '71%',
         '/game/sect/refinery',
         'sect.facility.refinery.use',
-        '炼器 · 设施灵效',
+        '封灵 · 设施灯效',
         'workshop',
       ),
       hotspot(
@@ -191,12 +198,12 @@ export const WUXIANG_SECT_PRESENTATION: SectPresentationTheme = {
         '45%',
         '/game/sect/spirit-vein',
         'sect.spirit_vein.view',
-        '矿场巡视 · 灵石收益 · 采矿',
+        '矿场巡视 · 灯油券收益 · 采矿',
         'spirit_vein',
       ),
       hotspot(
         'garden',
-        '血莲池',
+        '乳母池',
         '70%',
         '39%',
         '/game/sect/herb-garden',
@@ -214,7 +221,7 @@ export const WUXIANG_SECT_PRESENTATION: SectPresentationTheme = {
         '山门动态 · 清扫差事',
         undefined,
         {
-          description: '不二门没有门扇，知客僧在未合圆环下为外客验明拜帖。',
+          description: '不二门没有门扇，接引乳母在未合圆环下为外客验明拜帖。',
         },
       ),
       hotspot(
@@ -237,31 +244,31 @@ export const WUXIANG_SECT_PRESENTATION: SectPresentationTheme = {
         locked: true,
         visitor: {
           description:
-            '黑白双峰与血莲池共同构成阵势，来客立于界外，只能看见未合圆环缓慢转动。',
+            '黑白双峰与乳母池共同构成阵势，来客立于界外，只能看见未合圆环缓慢转动。',
         },
       },
     ],
   },
   facilityLabels: {
     archive: '贝叶藏',
-    cultivation_room: '止观室',
+    cultivation_room: '守胎室',
     workshop: '火供院',
     spirit_vein: '骨玉窟',
-    herb_garden: '血莲池',
+    herb_garden: '乳母池',
     formation: '两界曼荼罗',
   },
   lockedFacilities: ['formation'],
   scenes: {
     map: {
-      title: '无相禅宗舆图',
+      title: '白莲乳母教舆图',
       description:
-        '黑白二峰隔血池相望，诸院不分佛魔，只依门人当下一念显出不同面目。',
+        '黑白二峰隔血池相望，诸院不分正邪，只依门人当下一念显出不同面目。',
       loadingText: '钟声正从血池上渡来……',
     },
     hall: {
-      title: '无相殿',
+      title: '莲灯殿',
       description:
-        '殿中不塑金身，只有一面照见来者全身的旧铜镜；身份玉牒与周俸名册置于镜下。',
+        '殿中不塑金身，只有一面照见来者全身的旧莲灯；身份玉牒与周俸名册置于镜下。',
     },
     affairs: {
       title: '知客寮',
@@ -271,38 +278,38 @@ export const WUXIANG_SECT_PRESENTATION: SectPresentationTheme = {
     archive: {
       title: '贝叶藏',
       description:
-        '六卷心法分别藏在六只旧木匣中，贝叶上既有朱砂佛偈，也有后来人以血补下的旁注。',
+        '六卷心法分别藏在六只旧木匣中，贝叶上既有朱砂偈语，也有后来人以血补下的旁注。',
     },
     paths: {
       title: '照业壁',
       description:
-        '石壁正面如镜，背面焦黑。明镜照业与魔心渡厄并非善恶二路，只是承受与偿还的先后不同。',
+        '石壁正面如镜，背面焦黑。莲镜照业与哺心渡厄并非善恶二路，只是承受与偿还的先后不同。',
     },
     arena: {
       title: '问身场',
       description:
-        '场中木人不会退让。佛相留下因，魔相兑现果，无相只在心念圆满的一念间显现。',
+        '场中木人不会退让。胎相留下因，血相兑现果，莲灯只在莲念圆满的一念间显现。',
     },
     cultivation: {
-      title: '止观室',
+      title: '守胎室',
       description:
         '室内只容一席一灯。呼吸落在皮肉，念头落在灯芯，直到两者都不再需要命名。',
     },
     alchemy: {
       title: '药师寮',
-      description: '血莲、骨玉与寻常灵草分柜存放，药师只问药性，不问净秽。',
+      description: '血莲、骨玉与寻常灯药草分柜存放，香师只问香性，不问净秽。',
     },
     refinery: {
       title: '火供院',
       description:
-        '炉火映出忿怒相，锤声却始终缓慢；每一件法器都要在火中去掉多余的名字。',
+        '炉火映出忿怒相，锤声却始终缓慢；每一件封灵器都要在火中去掉多余的名字。',
     },
     spiritVein: {
       title: '骨玉窟',
       description: '白色矿髓沿黑岩生长，如同山腹中的巨大骨骼。',
     },
     herbGarden: {
-      title: '血莲池',
+      title: '乳母池',
       description: '暗红池水并无腥气，莲叶托着晨露；药田产出玩法后续开放。',
     },
     gate: {
@@ -318,7 +325,7 @@ export const WUXIANG_SECT_PRESENTATION: SectPresentationTheme = {
   rooms: {
     affairs: {
       description:
-        '晨钟余音尚在，白榜上的差事由三位僧人分掌；领下一事，便结下一段今日之因。',
+        '晨钟余音尚在，白榜上的差事由三位乳母分掌；领下一事，便结下一段今日之因。',
       actors: {
         daily: {
           id: 'wuxiang-mingchen',
@@ -332,7 +339,7 @@ export const WUXIANG_SECT_PRESENTATION: SectPresentationTheme = {
         },
         promotion: {
           id: 'wuxiang-due',
-          name: '空慈方丈',
+          name: '空慈乳母',
           greeting: '要过此关，先要肯照见自己带来的业。',
         },
       },
@@ -342,7 +349,7 @@ export const WUXIANG_SECT_PRESENTATION: SectPresentationTheme = {
         registry: {
           id: 'wuxiang-huiming',
           name: '慧澄',
-          greeting: '玉牒与僧录皆在案前，想查哪一项便问。',
+          greeting: '玉牒与莲籍皆在案前，想查哪一项便问。',
         },
         stipend: {
           id: 'wuxiang-mingji',
@@ -355,7 +362,7 @@ export const WUXIANG_SECT_PRESENTATION: SectPresentationTheme = {
       actors: {
         keeper: {
           id: 'wuxiang-kongzang',
-          name: '寂照禅师',
+          name: '寂照莲师',
           greeting: '诸物各待其用，你想看哪一件？',
         },
       },
@@ -370,7 +377,7 @@ export const WUXIANG_SECT_PRESENTATION: SectPresentationTheme = {
         donation: {
           id: 'wuxiang-xingcang',
           name: '明简',
-          greeting: '今日可择一处设施布施灵石，再记入册中。',
+          greeting: '今日可择一处设施布施灯油券，再记入册中。',
         },
       },
     },
@@ -378,7 +385,7 @@ export const WUXIANG_SECT_PRESENTATION: SectPresentationTheme = {
       actors: {
         keeper: {
           id: 'wuxiang-kongdu',
-          name: '空渡禅师',
+          name: '空渡莲师',
           greeting: '贝叶六匣都在这里，你想先读哪一卷？',
         },
       },
@@ -396,7 +403,7 @@ export const WUXIANG_SECT_PRESENTATION: SectPresentationTheme = {
       actors: {
         instructor: {
           id: 'wuxiang-jiefeng',
-          name: '法忍禅师',
+          name: '法忍莲师',
           greeting: '神通发于身心，若要调整，先看你当下如何运用。',
         },
         marshal: {
@@ -410,8 +417,8 @@ export const WUXIANG_SECT_PRESENTATION: SectPresentationTheme = {
       actors: {
         keeper: {
           id: 'wuxiang-zhiguan',
-          name: '寂然禅师',
-          greeting: '一席一灯都已备好，想先问灵效，还是就此入静？',
+          name: '寂然莲师',
+          greeting: '一席一灯都已备好，想先问灯效，还是就此入静？',
         },
       },
     },
@@ -420,7 +427,7 @@ export const WUXIANG_SECT_PRESENTATION: SectPresentationTheme = {
         keeper: {
           id: 'wuxiang-faming-yaoshi',
           name: '明恕',
-          greeting: '药性无分净秽，炉火正稳，要问灵效还是开炉？',
+          greeting: '香性无分净秽，炉火正稳，要问灯效还是开炉？',
         },
       },
     },
@@ -429,7 +436,7 @@ export const WUXIANG_SECT_PRESENTATION: SectPresentationTheme = {
         keeper: {
           id: 'wuxiang-huoyuan',
           name: '法圆',
-          greeting: '火候已足，材料也可查验，要问灵效还是炼器？',
+          greeting: '火候已足，材料也可查验，要问灯效还是封灵？',
         },
       },
     },
@@ -456,7 +463,7 @@ export const WUXIANG_SECT_PRESENTATION: SectPresentationTheme = {
         },
         facility: {
           id: 'wuxiang-xuelian-chi',
-          name: '血莲池',
+          name: '乳母池',
           greeting: '暗红池水静映晨光，莲叶托着露珠缓缓舒展。',
         },
       },
@@ -465,7 +472,7 @@ export const WUXIANG_SECT_PRESENTATION: SectPresentationTheme = {
       actors: {
         keeper: {
           id: 'wuxiang-mingmen',
-          name: '道安禅师',
+          name: '道安莲师',
           greeting: '钟声已过，今日来往与山门近况都可在此问。',
         },
         facility: {

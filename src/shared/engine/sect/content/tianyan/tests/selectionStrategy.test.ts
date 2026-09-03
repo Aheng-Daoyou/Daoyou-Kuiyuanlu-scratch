@@ -33,7 +33,7 @@ function context(pathId: TianyanPathId | undefined, abilityIds: string[]) {
   const candidates: AbilitySelectionCandidate[] = abilityIds.map(
     (abilityId, order) => {
       const ability = AbilityFactory.create(
-        resolveSectAbility({ sect, realm: '化神', abilityId }).config,
+        resolveSectAbility({ sect, realm: '忘川', abilityId }).config,
       ) as ActiveSkill;
       ability.setOwner(caster);
       ability.setActive(true);
@@ -64,7 +64,7 @@ describe('天衍基础施法策略', () => {
     expect(
       projectSectCombat({
         sect: tianyanState(),
-        realm: '化神',
+        realm: '忘川',
       })?.selectionStrategy,
     ).toBeInstanceOf(TianyanBaseSelectionStrategy);
     const battle = context(undefined, ['flowing-flame', 'verdant-pulse']);
@@ -156,7 +156,7 @@ describe('天衍六套自动战术', () => {
     expect(selectedId(result)).toBe('dark-water-return');
   });
 
-  it('小周天无印时选择实际法力消耗最低的落印术', () => {
+  it('小周天无印时选择实际灯焰消耗最低的落印术', () => {
     const battle = context(TIANYAN_HETU_PATH_ID, [
       'white-star-breaker',
       'metal-cloud-cutter',
@@ -271,7 +271,7 @@ describe('天衍六套自动战术', () => {
     expect(selectedId(result)).toBe('myriad-wood-renewal');
   });
 
-  it('养元在低法且目标不是水印时不误用五气归藏', () => {
+  it('养元在低法且目标不是辰星印时不误用五曜归藏', () => {
     const battle = context(TIANYAN_HETU_PATH_ID, [
       'five-qi-repository',
       'dark-water-return',
@@ -336,7 +336,7 @@ describe('天衍六套自动战术', () => {
     expect(selectedId(result)).toBe('shift-palace');
   });
 
-  it('锁机未装配土金落印术时不为空转法印，改用当前合法反应', () => {
+  it('锁机未装配镇星太白落印术时不为空转法印，改用当前合法反应', () => {
     const battle = context(TIANYAN_LUOSHU_PATH_ID, [
       'shift-palace',
       'flowing-flame',
@@ -371,7 +371,7 @@ describe('天衍六套自动战术', () => {
     expect(selectedId(result)).toBe('earth-bearing-seal');
   });
 
-  it('断局在水印下选择预期伤害更高的滋荣而非泥沼', () => {
+  it('断局在辰星印下选择预期伤害更高的岁星承辰而非镇星没辰', () => {
     const battle = context(TIANYAN_LUOSHU_PATH_ID, [
       'earth-bearing-seal',
       'verdant-pulse',

@@ -12,7 +12,7 @@ function offer(args: {
 }) {
   return createSectTaskOfferSnapshot({
     rulesVersion: 1,
-    anchorRealm: '金丹',
+    anchorRealm: '窥渊',
     anchorRealmStage: '中期',
     periodKey: '2026-07-26',
     executorKey: args.executorKey,
@@ -43,9 +43,9 @@ describe('sect task dialogue presentation', () => {
     });
     const text = dialogue.instruction.map((segment) => segment.text).join('');
 
-    expect(dialogue.offeredReply).toBe('丹房所需之物，我来寻');
+    expect(dialogue.offeredReply).toBe('闻香房所需之物，我来寻');
     expect(text).toBe(
-      '替丹房寻来1颗玄品以上、具有增加寿元功效的延寿丹，品相不可低于中品，取得后直接带回事务堂即可。',
+      '替闻香房寻来1颗玄品以上、具有增加寿元功效的延寿香，品相不可低于中品，取得后直接带回事务堂即可。',
     );
     expect(text).not.toMatch(/longevity|increase_lifespan|middle|_/);
   });

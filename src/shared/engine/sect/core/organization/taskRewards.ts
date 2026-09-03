@@ -138,13 +138,13 @@ export function calculateRealmSectTaskReward(input: {
       realmStoneBase * cadenceMultiplier * difficultyBps,
       STANDARD_SECT_TASK_REWARD_CURVE.spiritStoneRoundUnit,
     ),
-    '灵石',
+    '灯油券',
   );
   const cultivationExp = safeFloor(
     REALM_DAILY_EXP_BUDGET[input.realm] *
       STANDARD_SECT_TASK_REWARD_CURVE.cultivationFraction[input.difficulty] *
       cadenceMultiplier,
-    '修为',
+    '灯韵',
   );
   const spiritStones = Math.max(
     spiritStoneFloor,
@@ -162,8 +162,8 @@ export function calculateRealmSectTaskReward(input: {
     spiritStones,
     summary: [
       `宗门贡献 +${contribution}`,
-      `修为 +${cultivationExp}`,
-      `灵石 +${spiritStones}`,
+      `灯韵 +${cultivationExp}`,
+      `灯油券 +${spiritStones}`,
     ],
     grants: [],
   });

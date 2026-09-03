@@ -54,7 +54,7 @@ function unit(id: string): Unit {
 
 function setup(pathId: TianyanPathId, nodes: string[] = []) {
   const sect = tianyanState(pathId, nodes);
-  const projection = projectSectCombat({ sect, realm: '化神' })!;
+  const projection = projectSectCombat({ sect, realm: '忘川' })!;
   const owner = unit('owner');
   const enemy = unit('enemy');
   for (const resource of projection.resources) owner.combatResources.define(resource);
@@ -63,7 +63,7 @@ function setup(pathId: TianyanPathId, nodes: string[] = []) {
     owner.abilities.addAbility(AbilityFactory.create(config));
   }
   const skill = (abilityId: string) => {
-    const config = resolveSectAbility({ sect, realm: '化神', abilityId }).config;
+    const config = resolveSectAbility({ sect, realm: '忘川', abilityId }).config;
     const result = AbilityFactory.create(config) as ActiveSkill;
     result.setOwner(owner);
     result.setActive(true);
@@ -153,7 +153,7 @@ describe('天衍衍数与双道途实际结算', () => {
     ).toBe(3);
   });
 
-  it('生生无穷将河图周天法力回复提高到8%最大法力', () => {
+  it('生生无穷将河图周天灯焰回复提高到8%最大灯焰', () => {
     const { owner, enemy, skill } = setup(TIANYAN_HETU_PATH_ID, [
       'hetu-endless-life',
     ]);
@@ -185,13 +185,13 @@ describe('天衍衍数与双道途实际结算', () => {
     cast(skill('dark-water-return'), owner, enemy);
 
     expect(followUps.map((event) => event.cause?.displayName)).toEqual([
-      '冲克·蒸发',
+      '冲克·辰星掩荧',
       '洛书断局',
     ]);
     expect(owner.combatResources.getCurrent(TIANYAN_DERIVATION)).toBe(0);
   });
 
-  it('第一变只在首次命中无印目标时固定返还80点法力并留下3回合法印', () => {
+  it('第一变只在首次命中无印目标时固定返还80点灯焰并留下3回合法印', () => {
     const { owner, enemy, skill } = setup(TIANYAN_LUOSHU_PATH_ID, [
       'luoshu-first-change',
     ]);
@@ -239,7 +239,7 @@ describe('天衍衍数与双道途实际结算', () => {
     ).toBe(3);
   });
 
-  it('太初留白同一回合只在首次命中带印目标时回复法力', () => {
+  it('太初留白同一回合只在首次命中带印目标时回复灯焰', () => {
     const { owner, enemy, skill } = setup(TIANYAN_HETU_PATH_ID, [
       'hetu-blank-breath',
     ]);
@@ -264,7 +264,7 @@ describe('天衍衍数与双道途实际结算', () => {
     );
   });
 
-  it('法随气转在触发反应后固定返还20点实付法力', () => {
+  it('法随气转在触发反应后固定返还20点实付灯焰', () => {
     const { owner, enemy, skill } = setup(TIANYAN_HETU_PATH_ID, [
       'hetu-flow-refund',
     ]);
@@ -276,7 +276,7 @@ describe('天衍衍数与双道途实际结算', () => {
     expect(owner.getCurrentMp()).toBe(before - 80);
   });
 
-  it('天河洗尘将天河洗心法力回复提高到12%最大法力', () => {
+  it('辰星洗尘将辰星洗心灯焰回复提高到12%最大灯焰', () => {
     const { owner, skill } = setup(TIANYAN_HETU_PATH_ID, [
       'hetu-river-cleansing',
     ]);
@@ -476,7 +476,7 @@ describe('天衍衍数与双道途实际结算', () => {
     expect(belowThreshold - aboveThreshold).toBeCloseTo(expectedBonus, 0);
   });
 
-  it('青华不竭只在木行治疗回满时于同一行动产生一次施术者护盾', () => {
+  it('岁华不竭只在岁星治疗回满时于同一行动产生一次施术者护盾', () => {
     const { owner, enemy, skill } = setup(TIANYAN_HETU_PATH_ID, [
       'hetu-verdant-endless',
     ]);
@@ -495,7 +495,7 @@ describe('天衍衍数与双道途实际结算', () => {
     expect(owner.getCurrentShield()).toBe(afterFirst);
   });
 
-  it('青华不竭也识别回春HOT作为木行来源，并在回满时给予护盾', () => {
+  it('岁华不竭也识别回春HOT作为岁星来源，并在回满时给予护盾', () => {
     const { owner, skill } = setup(TIANYAN_HETU_PATH_ID, [
       'hetu-verdant-endless',
     ]);
@@ -539,7 +539,7 @@ describe('天衍衍数与双道途实际结算', () => {
       'dark-water-return',
     ]);
     const config = (sect: ReturnType<typeof makeSect>, abilityId: string) =>
-      resolveSectAbility({ sect, realm: '化神', abilityId }).config;
+      resolveSectAbility({ sect, realm: '忘川', abilityId }).config;
     const directCoefficient = (sect: ReturnType<typeof makeSect>) => {
       const effect = config(sect, 'primordial-ray').effects?.find(
         (entry) => entry.type === 'damage',
@@ -578,7 +578,7 @@ describe('天衍衍数与双道途实际结算', () => {
     expect(owner.getCurrentMp()).toBe(before);
   });
 
-  it('五气归藏消费木印并按印型结算收益，不触发反应或三数效果', () => {
+  it('五曜归藏消费岁星印并按印型结算收益，不触发反应或三数效果', () => {
     const { owner, enemy, skill } = setup(TIANYAN_HETU_PATH_ID);
     owner.setHp(Math.floor(owner.getMaxHp() * 0.5));
     enemy.buffs.addBuff(BuffFactory.create(createElementSeal('wood', 2)), owner);

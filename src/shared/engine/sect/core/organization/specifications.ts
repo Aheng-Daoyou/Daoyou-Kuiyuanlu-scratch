@@ -95,21 +95,21 @@ export class PillDeliverySpecification implements DeliverySpecification<{
   ): string[] {
     const violations: string[] = [];
     if (!isPillSpec(candidate.spec as ConsumableSpec))
-      violations.push('所选物品不是有效丹药');
+      violations.push('所选物品不是有效香品');
     if (
       (QUALITY_ORDER[candidate.quality as Quality] ?? -1) <
       QUALITY_ORDER[requirement.minQuality]
     )
-      violations.push('丹药品质不足');
+      violations.push('香品品质不足');
     if (candidate.quantity < requirement.quantity)
-      violations.push('丹药数量不足');
+      violations.push('香品数量不足');
     if (
       requirement.pillFamily &&
       isPillSpec(candidate.spec as ConsumableSpec) &&
       (candidate.spec as ConsumableSpec & { family?: string }).family !==
         requirement.pillFamily
     )
-      violations.push('丹药类型不符合委托要求');
+      violations.push('香品类型不符合委托要求');
     return violations;
   }
 }
@@ -123,13 +123,13 @@ export class ArtifactDeliverySpecification implements DeliverySpecification<{
     requirement: ItemDeliveryRequirement,
   ): string[] {
     const violations: string[] = [];
-    if (candidate.isEquipped) violations.push('已装备法宝不能提交');
+    if (candidate.isEquipped) violations.push('已装备封灵器不能提交');
     if (
       (QUALITY_ORDER[candidate.quality as Quality] ?? -1) <
       QUALITY_ORDER[requirement.minQuality]
     )
-      violations.push('法宝品阶不足');
-    if (requirement.quantity !== 1) violations.push('每次只能提交一件法宝');
+      violations.push('封灵器品阶不足');
+    if (requirement.quantity !== 1) violations.push('每次只能提交一件封灵器');
     return violations;
   }
 }

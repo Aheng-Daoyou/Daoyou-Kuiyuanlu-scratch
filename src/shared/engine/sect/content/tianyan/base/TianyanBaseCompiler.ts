@@ -118,7 +118,7 @@ const definition = (id: string) => {
   const result = TIANYAN_BASE_DEFINITION.abilities.find(
     (entry) => entry.id === id,
   );
-  if (!result) throw new Error(`天衍神通定义缺失: ${id}`);
+  if (!result) throw new Error(`观星神通定义缺失: ${id}`);
   return result;
 };
 
@@ -278,7 +278,7 @@ function periodicDamageBuff(
     },
   };
   return buff(id, name, BuffType.DEBUFF, 2, {
-    description: `${name}每回合结束造成持续法术伤害。`,
+    description: `${name}每回合结束造成持续灯律伤害。`,
     durationUnit: 'round',
     tags: [
       GameplayTags.BUFF.TYPE.DEBUFF,
@@ -355,7 +355,7 @@ function magicAttackDownBuff(
 }
 
 function incomingDamageGuard(id: string, reduction: number): BuffConfig {
-  return buff(id, '地载', BuffType.BUFF, 2, {
+  return buff(id, '镇星承护', BuffType.BUFF, 2, {
     listeners: [
       {
         id: `${id}.direct-reduction`,
@@ -578,7 +578,7 @@ function reactionLog(reaction: TianyanReactionDefinition): EffectConfig {
     params: {
       mechanic: 'named_trigger',
       internalKey: `sect.tianyan.reaction.${reaction.id}`,
-      displayName: reaction.name ?? '五行反应',
+      displayName: reaction.name ?? '星象反应',
       target: 'target',
     },
   };
@@ -641,7 +641,7 @@ function reactionEffects(
               cause: {
                 kind: 'mechanic',
                 id: 'sect.tianyan.reaction.wildfire',
-                displayName: '燎原',
+                displayName: '荧惑接岁',
               },
             },
           },
@@ -651,7 +651,7 @@ function reactionEffects(
           targetBuff(
             periodicDamageBuff(
               TIANYAN_LAVA,
-              '熔岩',
+              '镇星承火',
               settings.lavaDotCoefficient * valueBonus,
               'fire',
             ),
@@ -699,7 +699,7 @@ function reactionEffects(
             cause: {
               kind: 'mechanic',
               id: 'sect.tianyan.reaction.vaporize',
-              displayName: '蒸发',
+              displayName: '辰星掩荧',
             },
           },
         },
@@ -725,7 +725,7 @@ function reactionEffects(
             cause: {
               kind: 'mechanic',
               id: 'sect.tianyan.reaction.vaporize',
-              displayName: '蒸发',
+              displayName: '辰星掩荧',
             },
           },
         },
@@ -763,7 +763,7 @@ function reactionEffects(
     case 'root-collapse': {
       const basic = buff(
         'sect.tianyan.root-collapse',
-        '崩根',
+        '岁星倾镇',
         BuffType.DEBUFF,
         2,
         {
@@ -779,7 +779,7 @@ function reactionEffects(
       );
       const empowered = buff(
         'sect.tianyan.root-collapse',
-        '崩根',
+        '岁星倾镇',
         BuffType.DEBUFF,
         2,
         {
@@ -824,7 +824,7 @@ function reactionEffects(
     }
     case 'melt-metal': {
       const make = (value: number) =>
-        buff('sect.tianyan.melt-metal', '熔金', BuffType.DEBUFF, 2, {
+        buff('sect.tianyan.melt-metal', '荧惑销白', BuffType.DEBUFF, 2, {
           stackPriority: value,
           modifiers: [
             {
@@ -1483,17 +1483,17 @@ function compileUtilityAbilities(
       ],
       extraTags: [],
       selectionProfile: { intents: ['damage'] },
-      notes: ['无属性法术，不施加、触发、消费或覆盖法印。'],
+      notes: ['无属性灯律，不施加、触发、消费或覆盖法印。'],
     }),
   );
 
   const renewal = definition('myriad-wood-renewal');
-  if (renewal.kind === 'passive') throw new Error('万木回春定义错误');
+  if (renewal.kind === 'passive') throw new Error('岁华回春定义错误');
   const renewalRatio =
     0.12 * settings.woodHealingMultiplier * settings.loadoutMultiplier;
   const renewalTick =
     0.03 * settings.woodHealingMultiplier * settings.loadoutMultiplier;
-  const renewalBuff = buff('sect.tianyan.renewal', '回春', BuffType.BUFF, 2, {
+  const renewalBuff = buff('sect.tianyan.renewal', '岁华回春', BuffType.BUFF, 2, {
     durationUnit: 'round',
     tags: [
       GameplayTags.BUFF.TYPE.BUFF,
@@ -1540,13 +1540,12 @@ function compileUtilityAbilities(
       ],
       extraTags: [innerArtTag, TIANYAN_ELEMENT_ABILITY_TAGS.wood],
       selectionProfile: { intents: ['heal_hp'] },
-      notes: ['内景法·木'],
+      notes: ['内景法·岁星'],
     }),
   );
 
   const lotus = definition('lotus-in-fire');
-  if (lotus.kind === 'passive') throw new Error('火里种莲定义错误');
-  builder.setAbility(
+  if (lotus.kind === 'passive') throw new Error('火里种莲定义错误');  builder.setAbility(
     'lotus-in-fire',
     factory.active({
       definition: lotus,
@@ -1567,8 +1566,7 @@ function compileUtilityAbilities(
           params: { recipient: 'caster', status: 'negative', maxCount: 2 },
         },
         selfBuff(
-          buff('sect.tianyan.lotus', '种莲', BuffType.BUFF, 2, {
-            modifiers: [
+          buff('sect.tianyan.lotus', '种莲', BuffType.BUFF, 2, {            modifiers: [
               {
                 attrType: AttributeType.MAGIC_ATK,
                 type: ModifierType.ADD,
@@ -1581,7 +1579,7 @@ function compileUtilityAbilities(
       ],
       extraTags: [innerArtTag, TIANYAN_ELEMENT_ABILITY_TAGS.fire],
       selectionProfile: { intents: ['buff'] },
-      notes: ['内景法·火'],
+      notes: ['内景法·荧惑'],
     }),
   );
 
@@ -1616,12 +1614,12 @@ function compileUtilityAbilities(
       ],
       extraTags: [innerArtTag, TIANYAN_ELEMENT_ABILITY_TAGS.earth],
       selectionProfile: { intents: ['defensive'] },
-      notes: ['内景法·土'],
+      notes: ['内景法·镇星'],
     }),
   );
 
   const river = definition('heavenly-river-cleansing');
-  if (river.kind === 'passive') throw new Error('天河洗心定义错误');
+  if (river.kind === 'passive') throw new Error('辰星洗心定义错误');
   builder.setAbility(
     'heavenly-river-cleansing',
     factory.active({
@@ -1639,7 +1637,7 @@ function compileUtilityAbilities(
         },
         healMp(settings.riverMpRatio),
         selfBuff(
-          buff('sect.tianyan.river-mind', '天河洗心', BuffType.BUFF, 2, {
+          buff('sect.tianyan.river-mind', '辰星洗心', BuffType.BUFF, 2, {
             modifiers: [
               {
                 attrType: AttributeType.CONTROL_RESISTANCE,
@@ -1653,7 +1651,7 @@ function compileUtilityAbilities(
       ],
       extraTags: [innerArtTag, TIANYAN_ELEMENT_ABILITY_TAGS.water],
       selectionProfile: { intents: ['restore_mp', 'buff'] },
-      notes: ['内景法·水'],
+      notes: ['内景法·辰星'],
     }),
   );
 }
@@ -1717,12 +1715,12 @@ function compileSecrets(
       })),
       extraTags: [secretArtTag],
       selectionProfile: { intents: ['buff'] },
-      notes: ['天衍秘法'],
+      notes: ['观星秘法'],
     }),
   );
 
   const repository = definition('five-qi-repository');
-  if (repository.kind === 'passive') throw new Error('五气归藏定义错误');
+  if (repository.kind === 'passive') throw new Error('五曜归藏定义错误');
   const multiplier = settings.repositoryMultiplier;
   const repositoryEffects: Record<TianyanElement, EffectConfig[]> = {
     wood: [healHp(0.1 * multiplier, undefined, settings.loadoutMultiplier)],
@@ -1730,7 +1728,7 @@ function compileSecrets(
       selfBuff(
         oneUseDamageBuff(
           TIANYAN_HIDDEN_FIRE,
-          '藏火',
+          '藏焰',
           hiddenFireState,
           0.25 * multiplier,
         ),
@@ -1741,7 +1739,7 @@ function compileSecrets(
     ],
     metal: [
       selfBuff(
-        buff(TIANYAN_HIDDEN_EDGE, '藏锋', BuffType.BUFF, -1, {
+        buff(TIANYAN_HIDDEN_EDGE, '藏白', BuffType.BUFF, -1, {
           dispelPolicy: 'protected',
           countsAsStatus: false,
           statusTags: [hiddenEdgeState],
@@ -1782,7 +1780,7 @@ function compileSecrets(
       })),
       extraTags: [secretArtTag],
       selectionProfile: { intents: ['buff', 'heal_hp', 'restore_mp'] },
-      notes: ['天衍秘法'],
+      notes: ['观星秘法'],
     }),
   );
 }

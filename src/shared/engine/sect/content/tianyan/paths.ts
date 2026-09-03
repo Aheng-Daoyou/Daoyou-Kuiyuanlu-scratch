@@ -27,14 +27,14 @@ const hetuDefinition: SectPathDefinitionWithoutNodes = {
   id: TIANYAN_HETU_PATH_ID,
   name: '河图演生',
   description:
-    '河图示其流，前法不灭，后法由此而生。三数成图之后，伤势、气血与法力都在同一轮转中得到续接。',
-  minRealm: '筑基',
+    '河图示其流，前法不灭，后法由此而生。三数成图之后，伤势、气血与灯焰都在同一轮转中得到续接。',
+  minRealm: '守灯',
   minRealmStage: '中期',
   layers: [...STANDARD_PATH_LAYERS],
   defaultTacticId: 'small-cycle',
   tactics: [
-    { id: 'small-cycle', name: '小周天', description: '优先选择能够继续反应的落印术，以三行闭环维持周天。' },
-    { id: 'nourish-origin', name: '养元', description: '血线或法力不足时优先内景法，其余时间维持反应。' },
+    { id: 'small-cycle', name: '小周天', description: '优先选择能够继续反应的落印术，以三曜闭环维持周天。' },
+    { id: 'nourish-origin', name: '养元', description: '血线或灯焰不足时优先内景法，其余时间维持反应。' },
     { id: 'unbroken-flow', name: '不绝', description: '有印而无可用反应时优先移宫，否则以太初玄光保留法印。' },
   ],
   presentation: {
@@ -44,7 +44,7 @@ const hetuDefinition: SectPathDefinitionWithoutNodes = {
       { name: '留白不断', description: '太初玄光可以等待时机而不破坏法印。' },
     ],
     abilityChanges: {
-      'tianyan-runtime': '第三次反应触发河图周天，强化主伤害并回复气血与法力。',
+      'tianyan-runtime': '第三次反应触发河图周天，强化主伤害并回复气血与灯焰。',
     },
   },
 };
@@ -54,13 +54,13 @@ const luoshuDefinition: SectPathDefinitionWithoutNodes = {
   name: '洛书制化',
   description:
     '洛书定其位，不等万法自然流转。移一宫、断一势、藏一印，在敌势真正成形之前先改写它的去处。',
-  minRealm: '筑基',
+  minRealm: '守灯',
   minRealmStage: '中期',
   layers: [...STANDARD_PATH_LAYERS],
   defaultTacticId: 'break-pattern',
   tactics: [
     { id: 'break-pattern', name: '破阵', description: '优先触发冲克并利用太白破阵驱散敌方增益。' },
-    { id: 'lock-meridian', name: '锁机', description: '优先准备并触发断脉或泥沼，压缩敌方行动。' },
+    { id: 'lock-meridian', name: '锁机', description: '优先准备并触发太白断岁或镇星没辰，压缩敌方行动。' },
     { id: 'decisive-derivation', name: '断局', description: '优先预期直接伤害最高的反应，必要时移宫或归藏。' },
   ],
   presentation: {

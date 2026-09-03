@@ -16,7 +16,7 @@ describe('天衍双道途与36参悟节点', () => {
       for (const node of path.nodes) {
         expect(() => projectSectCombat({
           sect: tianyanState(pathId, [node.id]),
-          realm: '化神',
+          realm: '忘川',
         })).not.toThrow();
       }
     },
@@ -31,10 +31,10 @@ describe('天衍双道途与36参悟节点', () => {
       'hetu-number-remains',
       'hetu-endless-life',
     ]);
-    const projection = projectSectCombat({ sect, realm: '化神' })!;
+    const projection = projectSectCombat({ sect, realm: '忘川' })!;
     expect(projection.resources[0].initial).toBe(1);
     const fire = resolveSectAbility({
-      sect, realm: '化神', abilityId: 'flowing-flame',
+      sect, realm: '忘川', abilityId: 'flowing-flame',
     }).config;
     expect(fire.effectPlans).toHaveLength(6);
     expect(JSON.stringify(fire)).toContain('河图周天');
@@ -50,11 +50,11 @@ describe('天衍双道途与36参悟节点', () => {
       'luoshu-nine-changes',
     ]);
     const shift = resolveSectAbility({
-      sect, realm: '化神', abilityId: 'shift-palace',
+      sect, realm: '忘川', abilityId: 'shift-palace',
     }).config;
     expect(shift.mpCost).toBe(80);
     expect(shift.cooldown).toBe(1);
-    const projection = projectSectCombat({ sect, realm: '化神' })!;
+    const projection = projectSectCombat({ sect, realm: '忘川' })!;
     const runtime = projection.abilities.find(
       (ability) => ability.slug === 'sect.tianyan.luoshu-runtime',
     );
@@ -62,15 +62,15 @@ describe('天衍双道途与36参悟节点', () => {
       expect.objectContaining({ attrType: AttributeType.CONTROL_HIT }),
     );
     const earth = resolveSectAbility({
-      sect, realm: '化神', abilityId: 'earth-bearing-seal',
+      sect, realm: '忘川', abilityId: 'earth-bearing-seal',
     }).config;
     const whiteStar = resolveSectAbility({
-      sect, realm: '化神', abilityId: 'white-star-breaker',
+      sect, realm: '忘川', abilityId: 'white-star-breaker',
     }).config;
     expect(JSON.stringify(earth)).toContain('"controlHitBonus":0.15');
     expect(JSON.stringify(whiteStar)).toContain('"controlHitBonus":0.15');
     expect(JSON.stringify(resolveSectAbility({
-      sect, realm: '化神', abilityId: 'dark-water-return',
+      sect, realm: '忘川', abilityId: 'dark-water-return',
     }).config)).toContain('0.95');
   });
 
@@ -78,7 +78,7 @@ describe('天衍双道途与36参悟节点', () => {
     const sect = tianyanState(TIANYAN_LUOSHU_PATH_ID);
     const water = resolveSectAbility({
       sect,
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'dark-water-return',
     }).config;
     const priorities = water.effectLayers

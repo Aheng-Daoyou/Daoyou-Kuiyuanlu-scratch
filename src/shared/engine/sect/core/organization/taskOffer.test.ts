@@ -10,7 +10,7 @@ describe('sect task offer snapshot', () => {
   const build = (rulesVersion: number) =>
     createSectTaskOfferSnapshot({
       rulesVersion,
-      anchorRealm: '金丹',
+      anchorRealm: '窥渊',
       anchorRealmStage: '中期',
       periodKey: '2026-07-23',
       executorKey: 'sect.delivery.pill',
@@ -24,7 +24,7 @@ describe('sect task offer snapshot', () => {
       },
       difficulty: 'hard',
       reward: calculateRealmSectTaskReward({
-        realm: '金丹',
+        realm: '窥渊',
         realmStage: '中期',
         difficulty: 'hard',
         cadence: 'daily',

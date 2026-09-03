@@ -12,7 +12,7 @@ function combatantFixture(): CultivatorCombatInput {
   return {
     id: '1e05106f-b997-4c77-a523-4a5191dc3f24',
     name: '锁定目标',
-    realm: '金丹',
+    realm: '窥渊',
     realm_stage: '后期',
     attributes: {
       vitality: 70,
@@ -21,7 +21,7 @@ function combatantFixture(): CultivatorCombatInput {
       speed: 100,
       willpower: 110,
     },
-    spiritual_roots: [{ element: '水', strength: 90 }],
+    spiritual_roots: [{ element: '星', strength: 90 }],
     pre_heaven_fates: [{ name: '静水流深' }],
     cultivations: [],
     skills: [],
@@ -32,12 +32,12 @@ function combatantFixture(): CultivatorCombatInput {
 
 describe('sect battle target snapshot', () => {
   it.each([
-    ['preset', '金丹', ['金丹']],
-    ['same-sect', '炼气', ['炼气']],
-    ['same-sect', '金丹', ['金丹', '筑基']],
-    ['other-sect', '炼气', ['炼气']],
-    ['other-sect', '金丹', ['金丹', '筑基']],
-    ['other-sect', '渡劫', ['渡劫', '大乘']],
+    ['preset', '窥渊', ['窥渊']],
+    ['same-sect', '闻腥', ['闻腥']],
+    ['same-sect', '窥渊', ['窥渊', '守灯']],
+    ['other-sect', '闻腥', ['闻腥']],
+    ['other-sect', '窥渊', ['窥渊', '守灯']],
+    ['other-sect', '渡渊', ['渡渊', '近神']],
   ] as const)(
     'resolves %s target realm candidates from %s',
     (acquisition, realm, expected) => {
@@ -58,7 +58,7 @@ describe('sect battle target snapshot', () => {
       challengeTitle: '悬赏令·讨伐',
       name: '锁定目标',
       description: '领取时锁定的外宗目标。',
-      realm: '金丹',
+      realm: '窥渊',
       realmStage: '后期',
       combatant: structuredClone(combatantFixture()),
     });
@@ -71,7 +71,7 @@ describe('sect battle target snapshot', () => {
       kind: 'cultivator',
       name: '锁定目标',
       description: '领取时锁定的外宗目标。',
-      realm: '金丹',
+      realm: '窥渊',
       realmStage: '后期',
       sectId: 'source-sect',
       sectName: '来源宗门',

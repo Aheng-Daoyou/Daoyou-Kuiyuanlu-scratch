@@ -1090,7 +1090,7 @@ function compileAbilities(
     ],
     extraTags: [erosionGeneratorTag],
     detailRows: [
-      `${coefficient(0.65)} × 法术攻击（术伤）`,
+      `${coefficient(0.65)} × 灯律攻击（术伤）`,
       ...(settings.sighForgetBonus > 0
         ? [`目标有忘川时伤害提高${percentage(settings.sighForgetBonus)}`]
         : []),
@@ -1100,16 +1100,16 @@ function compileAbilities(
       '命中后增加1层蚀魂',
       ...erosionDetailRows(settings),
       ...(settings.cleanseToll
-        ? ['敌人驱散蚀魂后受到0.12 × 法术攻击魂伤，自身获得1点魂火，每次行动最多一次']
+        ? ['敌人驱散蚀魂后受到0.12 × 灯律攻击魂伤，自身获得1点魂火，每次行动最多一次']
         : []),
       ...(settings.hundredGhosts
-        ? ['目标进入5层时追加0.30 × 法术攻击魂伤，同一目标每3回合最多一次']
+        ? ['目标进入5层时追加0.30 × 灯律攻击魂伤，同一目标每3回合最多一次']
         : []),
       ...(settings.dreamInvasion
-        ? [`目标进入5层时刷新忘川，并立即追加${coefficient(settings.forgetDotCoefficient)} × 法术攻击魂伤`]
+        ? [`目标进入5层时刷新忘川，并立即追加${coefficient(settings.forgetDotCoefficient)} × 灯律攻击魂伤`]
         : []),
       ...(settings.lastFerry
-        ? ['带有忘川的目标进入5层时失去10%最大法力']
+        ? ['带有忘川的目标进入5层时失去10%最大灯焰']
         : []),
     ],
   }));
@@ -1159,7 +1159,7 @@ function compileAbilities(
     extraTags: [soulDamageTag, soulFireConsumerTag, erosionGeneratorTag],
     selectionProfile: { intents: ['damage'] },
     detailRows: [
-      `${coefficient(0.60)} × 法术攻击（魂伤）`,
+      `${coefficient(0.60)} × 灯律攻击（魂伤）`,
       `施法前至少3层蚀魂时魂伤提高${percentage(settings.severHighLayerBonus)}`,
       '命中后增加2层蚀魂',
       soulFireDetail(settings),
@@ -1220,8 +1220,8 @@ function compileAbilities(
     ],
     extraTags: [soulDamageTag, erosionGeneratorTag],
     detailRows: [
-      `${settings.forgetDirectCoefficient.toFixed(2)} × 法术攻击（魂伤）`,
-      `忘川持续${settings.forgetDuration}回合，每回合结束造成${coefficient(settings.forgetDotCoefficient)} × 法术攻击（魂伤）`,
+      `${settings.forgetDirectCoefficient.toFixed(2)} × 灯律攻击（魂伤）`,
+      `忘川持续${settings.forgetDuration}回合，每回合结束造成${coefficient(settings.forgetDotCoefficient)} × 灯律攻击（魂伤）`,
       `受治疗效果额外降低${Math.round(settings.forgetHealReduction * 100)}%`,
       ...(settings.forgetSpeedReduction < 0
         ? [`忘川期间速度降低${percentage(-settings.forgetSpeedReduction)}`]
@@ -1233,7 +1233,7 @@ function compileAbilities(
         ? [`至少4层蚀魂时持续魂伤总计提高${percentage(settings.forgetHighLayerBonus + settings.forgetFourLayerBonus)}`]
         : []),
       ...(settings.crossingEcho
-        ? ['每回合首次对至少4层目标结算忘川时，追加0.12 × 法术攻击魂伤']
+        ? ['每回合首次对至少4层目标结算忘川时，追加0.12 × 灯律攻击魂伤']
         : []),
       '命中后增加1层蚀魂',
       ...(settings.pathId === 'tide'
@@ -1283,7 +1283,7 @@ function compileAbilities(
     ],
     extraTags: [soulDamageTag, soulFireConsumerTag, erosionGeneratorTag],
     detailRows: [
-      `术伤与魂伤各${coefficient(0.20 * settings.mixedDamageMultiplier)} × 法术攻击`,
+      `术伤与魂伤各${coefficient(0.20 * settings.mixedDamageMultiplier)} × 灯律攻击`,
       '命中后增加2层蚀魂',
       `攻击降低${percentage(-settings.seizeAttackReduction)}，持续${settings.seizeDuration}回合`,
       soulFireDetail(settings),
@@ -1372,7 +1372,7 @@ function compileAbilities(
     extraTags: [soulDamageTag, soulFireConsumerTag, erosionGeneratorTag],
     selectionProfile: { intents: ['damage', 'control'] },
     detailRows: [
-      `术伤与魂伤各${coefficient(0.20 * settings.mixedDamageMultiplier)} × 法术攻击`,
+      `术伤与魂伤各${coefficient(0.20 * settings.mixedDamageMultiplier)} × 灯律攻击`,
       '命中后增加2层蚀魂',
       `封印1回合；施法前至少4层时延长至2回合${settings.highLayerControlHitBonus > 0 ? `，本次控制命中提高${percentage(settings.highLayerControlHitBonus)}` : ''}`,
       '镇魂钉期间无法施展主动技能，且受到的气血治疗降低100%',
@@ -1380,7 +1380,7 @@ function compileAbilities(
         ? ['施法前至少4层时，目标速度降低20%，持续2回合']
         : []),
       ...(settings.pinHighLayerSoulDamage > 0
-        ? [`施法前至少4层时，追加${coefficient(settings.pinHighLayerSoulDamage)} × 法术攻击（魂伤）`]
+        ? [`施法前至少4层时，追加${coefficient(settings.pinHighLayerSoulDamage)} × 灯律攻击（魂伤）`]
         : []),
       soulFireDetail(settings),
     ],
@@ -1549,7 +1549,7 @@ function compileAbilities(
     completionEffects: finishCompletion,
     extraTags: [soulDamageTag, soulFireConsumerTag],
     detailRows: [
-      `(${settings.finishBaseCoefficient.toFixed(2)} + ${settings.finishPerLayerCoefficient.toFixed(2)} × 蚀魂层数) × 法术攻击（魂伤）`,
+      `(${settings.finishBaseCoefficient.toFixed(2)} + ${settings.finishPerLayerCoefficient.toFixed(2)} × 蚀魂层数) × 灯律攻击（魂伤）`,
       `施放条件：目标至少${settings.finishMinLayers}层蚀魂`,
       settings.finishRetainedLayers > 0 ? '结算后保留2层蚀魂' : '伤害后清除全部蚀魂',
       '施加不归2回合',
@@ -1561,7 +1561,7 @@ function compileAbilities(
         ? ['命中后额外获得1点魂火']
         : []),
       ...(settings.oneNameOneJudgment
-        ? ['目标每场首次进入4层时获得标记；下一次终结命中后返还60点已支付法力并消耗标记']
+        ? ['目标每场首次进入4层时获得标记；下一次终结命中后返还60点已支付灯焰并消耗标记']
         : []),
       ...(settings.nameInYoudu
         ? [`结算后若目标气血低于${percentage(settings.nameInYouduHpThreshold)}，获得3点魂火并减少2回合冷却，每场一次`]

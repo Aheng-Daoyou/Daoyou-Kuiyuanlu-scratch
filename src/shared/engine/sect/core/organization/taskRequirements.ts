@@ -43,24 +43,24 @@ export type SectPillTraitKey = (typeof SECT_PILL_TRAIT_KEYS)[number];
 export type SectSubmissionItemKind = 'pill' | 'artifact' | 'material';
 
 const SECT_PILL_FAMILY_LABELS: Record<PillFamily, string> = {
-  healing: '疗伤丹',
-  mana: '回元丹',
-  detox: '解毒丹',
-  cultivation: '修为丹',
-  insight: '悟性丹',
-  breakthrough: '破境辅助丹',
-  tempering: '淬体丹',
-  marrow_wash: '洗髓丹',
-  longevity: '延寿丹',
-  hybrid: '复合丹',
+  healing: '疗伤香',
+  mana: '回元香',
+  detox: '解毒香',
+  cultivation: '灯韵香',
+  insight: '悟性香',
+  breakthrough: '破境辅助香',
+  tempering: '淬体香',
+  marrow_wash: '洗髓香',
+  longevity: '延寿香',
+  hybrid: '复合香',
 };
 
 const SECT_PILL_TRAIT_LABELS: Record<SectPillTraitKey, string> = {
   restore_hp: '恢复气血',
-  restore_mp: '恢复法力',
+  restore_mp: '恢复灯焰',
   detox: '解毒祛浊',
-  gain_cultivation: '增加修为',
-  gain_insight: '增加感悟',
+  gain_cultivation: '增加灯韵',
+  gain_insight: '增加窥悟',
   breakthrough_support: '辅助突破',
   tempering: '淬炼体魄',
   marrow_wash: '洗髓伐脉',
@@ -170,7 +170,7 @@ export function assertStandardSectTaskRequirementCurve(): void {
     ) ||
     appearanceWeights.reduce((sum, entry) => sum + entry.weight, 0) !== 100
   )
-    throw new Error('宗门任务丹药品相权重配置无效');
+    throw new Error('宗门任务香品品相权重配置无效');
 
   if (
     Object.values(curve.optionalConditionChance).some(
@@ -235,7 +235,7 @@ export const SectMaterialDeliveryRequirementSchema = z
     minQuality: QualitySchema,
     materialType: z.enum(MATERIAL_TYPE_VALUES),
     element: z
-      .enum(['金', '木', '水', '火', '土', '风', '雷', '冰'])
+      .enum(['烛', '尸', '星', '渊', '梦', '噬', '帘', '疫'])
       .optional(),
   })
   .strict();
@@ -266,15 +266,15 @@ export interface SectRealmQualityRule {
 export const SECT_REALM_QUALITY_RULES: Readonly<
   Record<RealmType, SectRealmQualityRule>
 > = {
-  炼气: { weights: { 凡品: 70, 灵品: 30 } },
-  筑基: { weights: { 灵品: 70, 玄品: 30 } },
-  金丹: { weights: { 玄品: 75, 真品: 25 } },
-  元婴: { weights: { 玄品: 55, 真品: 30, 地品: 15 } },
-  化神: { weights: { 玄品: 45, 真品: 30, 地品: 18, 天品: 7 } },
-  炼虚: { weights: { 玄品: 40, 真品: 28, 地品: 18, 天品: 11, 仙品: 3 } },
-  合体: { weights: { 玄品: 35, 真品: 28, 地品: 20, 天品: 13, 仙品: 4 } },
-  大乘: { weights: { 玄品: 30, 真品: 27, 地品: 22, 天品: 16, 仙品: 5 } },
-  渡劫: { weights: { 玄品: 25, 真品: 25, 地品: 23, 天品: 20, 仙品: 7 } },
+  闻腥: { weights: { 凡品: 70, 灵品: 30 } },
+  守灯: { weights: { 灵品: 70, 玄品: 30 } },
+  窥渊: { weights: { 玄品: 75, 真品: 25 } },
+  蚀体: { weights: { 玄品: 55, 真品: 30, 地品: 15 } },
+  忘川: { weights: { 玄品: 45, 真品: 30, 地品: 18, 天品: 7 } },
+  执灯: { weights: { 玄品: 40, 真品: 28, 地品: 18, 天品: 11, 仙品: 3 } },
+  掌灯: { weights: { 玄品: 35, 真品: 28, 地品: 20, 天品: 13, 仙品: 4 } },
+  近神: { weights: { 玄品: 30, 真品: 27, 地品: 22, 天品: 16, 仙品: 5 } },
+  渡渊: { weights: { 玄品: 25, 真品: 25, 地品: 23, 天品: 20, 仙品: 7 } },
 };
 
 export function assertSectRealmQualityRules(
@@ -300,12 +300,12 @@ export function assertSectRealmQualityRules(
     if (entries.reduce((sum, [, weight]) => sum + weight, 0) !== 100)
       throw new Error(`宗门任务品质权重总和必须为 100：${realm}`);
     if (
-      REALM_ORDER[realm] >= REALM_ORDER['金丹'] &&
+      REALM_ORDER[realm] >= REALM_ORDER['窥渊'] &&
       entries.some(
         ([quality]) => QUALITY_ORDER[quality] < QUALITY_ORDER['玄品'],
       )
     )
-      throw new Error(`金丹及以上不得要求玄品以下物品：${realm}`);
+      throw new Error(`窥渊及以上不得要求玄品以下物品：${realm}`);
     if (
       entries.some(
         ([quality]) => QUALITY_ORDER[quality] > QUALITY_ORDER['仙品'],
@@ -385,14 +385,14 @@ const MATERIAL_TYPES: readonly MaterialType[] = [
   'aux',
 ];
 const ELEMENTS: readonly ElementType[] = [
-  '金',
-  '木',
-  '水',
-  '火',
-  '土',
-  '风',
-  '雷',
-  '冰',
+  '烛',
+  '尸',
+  '星',
+  '渊',
+  '梦',
+  '噬',
+  '帘',
+  '疫',
 ];
 
 function pickPillAppearanceRequirement(

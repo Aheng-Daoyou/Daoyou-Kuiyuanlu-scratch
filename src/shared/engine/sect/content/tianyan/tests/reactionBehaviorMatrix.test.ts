@@ -8,7 +8,7 @@ function rawBuild() {
   const sect = tianyanState();
   return TIANYAN_MODULE.createBaseBuilder({
     sect,
-    realm: '化神',
+    realm: '忘川',
     methodGrowth: TIANYAN_MODULE.methodGrowth,
   }).build();
 }
@@ -65,7 +65,7 @@ describe('天衍十种反应配置矩阵', () => {
     },
   );
 
-  it('锻锋把40%穿防并入唯一主伤害配置', () => {
+  it('太白承镇把40%穿防并入唯一主伤害配置', () => {
     const direct = layerEffects('metal-cloud-cutter', 'earth').find(
       (effect) => effect.type === 'damage',
     );
@@ -75,7 +75,7 @@ describe('天衍十种反应配置矩阵', () => {
     });
   });
 
-  it('燎原追加一次固定灼烧系数伤害，不包含扩散效果', () => {
+  it('荧惑接岁追加一次固定灼烧系数伤害，不包含扩散效果', () => {
     const effects = layerEffects('flowing-flame', 'wood');
     expect(effects).toContainEqual(
       expect.objectContaining({
@@ -122,7 +122,7 @@ describe('天衍十种反应配置矩阵', () => {
     },
   );
 
-  it('泥沼和断脉分别使用定身、禁法并配置控制抵抗替代效果', () => {
+  it('镇星没辰和太白断岁分别使用定身、禁法并配置控制抵抗替代效果', () => {
     const quagmire = layerEffects('earth-bearing-seal', 'water').find(
       (effect) => effect.type === 'apply_buff' &&
         effect.params.buffConfig.type === 'control',
@@ -147,7 +147,7 @@ describe('天衍十种反应配置矩阵', () => {
     });
   });
 
-  it('蒸发按灼烧一层/两层生成互斥固定伤害并只清除灼烧', () => {
+  it('辰星掩荧按灼烧一层/两层生成互斥固定伤害并只清除灼烧', () => {
     const effects = layerEffects('dark-water-return', 'fire');
     const settlements = effects.filter((effect) =>
       effect.type === 'damage' &&

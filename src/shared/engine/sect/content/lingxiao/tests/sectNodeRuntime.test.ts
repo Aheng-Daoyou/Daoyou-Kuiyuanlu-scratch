@@ -93,7 +93,7 @@ function combatUnit(id: string): Unit {
 
 function install(pathId: 'swift-sword' | 'heavy-sword', nodes: string[]) {
   const sect = sectState(pathId, nodes);
-  const projection = projectSectCombat({ sect, realm: '化神' })!;
+  const projection = projectSectCombat({ sect, realm: '忘川' })!;
   const owner = combatUnit('owner');
   const enemy = combatUnit('enemy');
   for (const resource of projection.resources)
@@ -109,11 +109,11 @@ function install(pathId: 'swift-sword' | 'heavy-sword', nodes: string[]) {
   return { sect, projection, owner, enemy };
 }
 
-describe('红尘剑宗参悟运行时语义', () => {
+describe('太乙清都观参悟运行时语义', () => {
   beforeEach(() => EventBus.instance.reset());
   afterEach(() => EventBus.instance.reset());
 
-  it('极限照影收束将剑意与剑痕合并结算且不超过4段', () => {
+  it('极限照影收束将香火与照痕合并结算且不超过4段', () => {
     const { owner, enemy } = install('swift-sword', [
       'swift-mountain-breaking',
       'swift-endless-flow',
@@ -136,7 +136,7 @@ describe('红尘剑宗参悟运行时语义', () => {
     expect(requests.length).toBeLessThanOrEqual(4);
   });
 
-  it('留痕使剑荡山河施加两层剑痕', () => {
+  it('留痕使灯荡山河施加两层照痕', () => {
     const { owner, enemy } = install('swift-sword', ['swift-retained-force']);
     const linked = owner.abilities.getAbility(
       'sect.lingxiao.linked-edge',
@@ -154,7 +154,7 @@ describe('红尘剑宗参悟运行时语义', () => {
     const { sect } = install('heavy-sword', ['heavy-retained-frame']);
     const ability = resolveSectAbility({
       sect,
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'turning-body',
     }).config;
     expect(ability.castEffects).toContainEqual(
@@ -171,13 +171,13 @@ describe('红尘剑宗参悟运行时语义', () => {
     });
   });
 
-  it('回风的附加护盾每次藏锋听雷持续期间最多触发一次', () => {
+  it('回风的附加护盾每次守灯听漏持续期间最多触发一次', () => {
     const { sect, owner, enemy } = install('swift-sword', [
       'swift-unending-wind',
     ]);
     const turning = resolveSectAbility({
       sect,
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'turning-body',
     }).config;
     const stance = turning.effects?.find(
@@ -227,7 +227,7 @@ describe('红尘剑宗参悟运行时语义', () => {
     expect(owner.combatResources.getCurrent(LINGXIAO_SWORD_MOMENTUM)).toBe(3);
 
     const finisher = AbilityFactory.create(
-      resolveSectAbility({ sect, realm: '化神', abilityId: 'sect-ultimate' })
+      resolveSectAbility({ sect, realm: '忘川', abilityId: 'sect-ultimate' })
         .config,
     );
     const request: DamageSegmentRequestedEvent = {
@@ -246,7 +246,7 @@ describe('红尘剑宗参悟运行时语义', () => {
     expect(request.damageIncreasePctBucket).toBeCloseTo(0.15);
   });
 
-  it('承锋只降低整场战斗第一次直接伤害并获得2点剑意', () => {
+  it('承锋只降低整场战斗第一次直接伤害并获得2点香火', () => {
     vi.spyOn(Math, 'random').mockReturnValue(0.5);
     const { owner, enemy } = install('heavy-sword', ['heavy-hidden-weight']);
     const damageSystem = new DamageSystem();
@@ -273,10 +273,10 @@ describe('红尘剑宗参悟运行时语义', () => {
     damageSystem.destroy();
   });
 
-  it('藏锋听雷把减伤与后发登记给施法者而不立即攻击目标', () => {
+  it('守灯听漏把减伤与后发登记给施法者而不立即攻击目标', () => {
     const { sect, owner, enemy } = install('heavy-sword', []);
     const turning = AbilityFactory.create(
-      resolveSectAbility({ sect, realm: '化神', abilityId: 'turning-body' })
+      resolveSectAbility({ sect, realm: '忘川', abilityId: 'turning-body' })
         .config,
     ) as ActiveSkill;
 
@@ -289,10 +289,10 @@ describe('红尘剑宗参悟运行时语义', () => {
     expect(enemy.getCurrentShield()).toBe(0);
   });
 
-  it('快剑藏锋未命中时整条普通效果链失效', () => {
+  it('快灯藏锋未命中时整条普通效果链失效', () => {
     const { sect, owner, enemy } = install('swift-sword', []);
     const turning = AbilityFactory.create(
-      resolveSectAbility({ sect, realm: '化神', abilityId: 'turning-body' })
+      resolveSectAbility({ sect, realm: '忘川', abilityId: 'turning-body' })
         .config,
     ) as ActiveSkill;
     const hpBefore = enemy.getCurrentHp();
@@ -306,15 +306,15 @@ describe('红尘剑宗参悟运行时语义', () => {
     expect(owner.combatResources.getCurrent(LINGXIAO_SWORD_MOMENTUM)).toBe(0);
   });
 
-  it('基础与重剑藏锋不依赖前置命中并正常登记后发', () => {
+  it('基础与重灯藏锋不依赖前置命中并正常登记后发', () => {
     for (const pathId of ['heavy-sword'] as const) {
       const { sect, owner, enemy } = install(pathId, []);
       const turning = AbilityFactory.create(
-        resolveSectAbility({ sect, realm: '化神', abilityId: 'turning-body' })
+        resolveSectAbility({ sect, realm: '忘川', abilityId: 'turning-body' })
           .config,
       ) as ActiveSkill;
       executeSkill(turning, owner, enemy, false);
-      expect(consumeQueuedAction(owner)?.ability.name).toBe('听雷');
+      expect(consumeQueuedAction(owner)?.ability.name).toBe('听漏');
       expect(owner.buffs.getAllBuffIds()).toContain(
         'sect.lingxiao.heavy.hidden-edge',
       );
@@ -323,24 +323,24 @@ describe('红尘剑宗参悟运行时语义', () => {
     const sect = sectState('heavy-sword', []);
     sect.activePathId = undefined;
     sect.paths = [];
-    const projection = projectSectCombat({ sect, realm: '化神' })!;
+    const projection = projectSectCombat({ sect, realm: '忘川' })!;
     const owner = combatUnit('base-owner');
     const enemy = combatUnit('base-enemy');
     for (const resource of projection.resources)
       owner.combatResources.define(resource);
     const turning = AbilityFactory.create(
-      resolveSectAbility({ sect, realm: '化神', abilityId: 'turning-body' })
+      resolveSectAbility({ sect, realm: '忘川', abilityId: 'turning-body' })
         .config,
     ) as ActiveSkill;
     executeSkill(turning, owner, enemy, false);
-    expect(consumeQueuedAction(owner)?.ability.name).toBe('听雷');
+    expect(consumeQueuedAction(owner)?.ability.name).toBe('听漏');
   });
 
-  it('重剑攻击未命中时不获得护盾和剑意，一剑破妄也不驱散', () => {
+  it('重灯攻击未命中时不获得护盾和香火，一灯破妄也不驱散', () => {
     const { sect, owner, enemy } = install('heavy-sword', []);
     for (const abilityId of ['guiding-sword', 'linked-edge']) {
       const ability = AbilityFactory.create(
-        resolveSectAbility({ sect, realm: '化神', abilityId }).config,
+        resolveSectAbility({ sect, realm: '忘川', abilityId }).config,
       ) as ActiveSkill;
       executeSkill(ability, owner, enemy, false);
     }
@@ -359,18 +359,18 @@ describe('红尘剑宗参悟运行时语义', () => {
       enemy,
     );
     const breaking = AbilityFactory.create(
-      resolveSectAbility({ sect, realm: '化神', abilityId: 'breaking-edge' })
+      resolveSectAbility({ sect, realm: '忘川', abilityId: 'breaking-edge' })
         .config,
     ) as ActiveSkill;
     executeSkill(breaking, owner, enemy, false);
     expect(enemy.buffs.getAllBuffIds()).toContain('test.positive');
   });
 
-  it('快剑姿态提前重施会替换旧修改器并重置首次闪避预算', () => {
+  it('快灯姿态提前重施会替换旧修改器并重置首次闪避预算', () => {
     for (const abilityId of ['turning-body', 'shadow-step']) {
       const { sect, owner, enemy } = install('swift-sword', []);
       const ability = AbilityFactory.create(
-        resolveSectAbility({ sect, realm: '化神', abilityId }).config,
+        resolveSectAbility({ sect, realm: '忘川', abilityId }).config,
       ) as ActiveSkill;
       const target = abilityId === 'shadow-step' ? owner : enemy;
       const dodge = (): void =>

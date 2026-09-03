@@ -60,7 +60,7 @@ function unit(id: string): Unit {
   });
 }
 
-describe('无相禅宗根基被动', () => {
+describe('白莲乳母教根基被动', () => {
   beforeEach(() => EventBus.instance.reset());
   afterEach(() => EventBus.instance.reset());
 
@@ -70,7 +70,7 @@ describe('无相禅宗根基被动', () => {
       const sect = state(pathId);
       const detail = resolveSectAbility({
         sect,
-        realm: '化神',
+        realm: '忘川',
         abilityId: 'wuxiang-runtime',
       });
       expect(detail.config.modifiers).toEqual([
@@ -84,7 +84,7 @@ describe('无相禅宗根基被动', () => {
         '常驻：最大气血+10%',
         '承伤：自身气血低于50%且受到直接伤害时，受到的直接伤害降低10%',
       ]);
-      const projection = projectSectCombat({ sect, realm: '化神' })!;
+      const projection = projectSectCombat({ sect, realm: '忘川' })!;
       expect(
         projection.abilities.filter(
           (ability) => ability.slug === 'sect.wuxiang.wuxiang-runtime',
@@ -96,7 +96,7 @@ describe('无相禅宗根基被动', () => {
   it('只在气血严格低于50%时降低10%直接伤害', () => {
     const config = resolveSectAbility({
       sect: state('mirror-karma'),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'wuxiang-runtime',
     }).config;
     const owner = unit('owner');

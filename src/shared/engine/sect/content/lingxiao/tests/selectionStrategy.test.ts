@@ -71,14 +71,14 @@ function context(pathId: PathId, abilityIds: string[]) {
   const opponent = unit('opponent');
   caster.combatResources.define({
     id: LINGXIAO_SWORD_MOMENTUM,
-    name: '剑意',
+    name: '香火',
     initial: 0,
     max: 6,
   });
   const candidates: AbilitySelectionCandidate[] = abilityIds.map(
     (abilityId, order) => {
       const ability = AbilityFactory.create(
-        resolveSectAbility({ sect, realm: '化神', abilityId }).config,
+        resolveSectAbility({ sect, realm: '忘川', abilityId }).config,
       ) as ActiveSkill;
       ability.setOwner(caster);
       ability.setActive(true);
@@ -127,7 +127,7 @@ describe('流派策略插件', () => {
       new LingxiaoHeavySelectionStrategy('heavy-break'),
     ],
   ] as const)(
-    '%s在目标存在可驱散增益时使用一剑破妄',
+    '%s在目标存在可驱散增益时使用一灯破妄',
     (_label, pathId, strategy) => {
       const battle = context(pathId, ['guiding-sword', 'breaking-edge']);
       battle.opponent.buffs.addBuff(
@@ -146,7 +146,7 @@ describe('流派策略插件', () => {
     },
   );
 
-  it('快剑普通回退使用通用评分，不因槽位顺序改变结果', () => {
+  it('快灯普通回退使用通用评分，不因槽位顺序改变结果', () => {
     const strategy = new LingxiaoSwiftSelectionStrategy('aggressive');
     const first = strategy.select(
       context('swift-sword', ['sword-aegis', 'breaking-edge']),

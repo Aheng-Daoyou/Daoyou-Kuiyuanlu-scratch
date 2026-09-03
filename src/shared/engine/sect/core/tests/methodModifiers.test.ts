@@ -79,7 +79,7 @@ describe('宗门心法属性投影', () => {
   it.each([
     [45, 0.008],
     [180, 0.08],
-  ])('天衍太白心法%i级提供精确法术穿透', (level, expected) => {
+  ])('天衍太白心法%i级提供精确灯律穿透', (level, expected) => {
     const projection = projectSectMethodModifiers(
       {
         ...state,

@@ -40,11 +40,11 @@ export interface TianyanReactionDefinition {
 }
 
 export const TIANYAN_ELEMENT_NAMES: Record<TianyanElement, string> = {
-  wood: '木',
-  fire: '火',
-  earth: '土',
-  metal: '金',
-  water: '水',
+  wood: '岁星',
+  fire: '荧惑',
+  earth: '镇星',
+  metal: '太白',
+  water: '辰星',
 };
 
 export const TIANYAN_ELEMENT_ABILITY_TAGS: Record<TianyanElement, string> = {
@@ -116,34 +116,34 @@ const OVERCOMING: Record<TianyanElement, TianyanElement> = {
 
 const REACTION_DETAILS = {
   'wood:fire': {
-    id: 'wildfire', name: '燎原', mainDamageBonus: 0.5,
+    id: 'wildfire', name: '荧惑接岁', mainDamageBonus: 0.5,
   },
   'fire:earth': {
-    id: 'lava', name: '熔岩', mainDamageBonus: 0.4,
+    id: 'lava', name: '镇星承火', mainDamageBonus: 0.4,
   },
   'earth:metal': {
-    id: 'forge-edge', name: '锻锋', mainDamageBonus: 0.4,
+    id: 'forge-edge', name: '太白承镇', mainDamageBonus: 0.4,
   },
   'metal:water': {
-    id: 'cold-spring', name: '寒泉', mainDamageBonus: 0.4,
+    id: 'cold-spring', name: '辰星承白', mainDamageBonus: 0.4,
   },
   'water:wood': {
-    id: 'flourish', name: '滋荣', mainDamageBonus: 0.4,
+    id: 'flourish', name: '岁星承辰', mainDamageBonus: 0.4,
   },
   'fire:water': {
-    id: 'vaporize', name: '蒸发', followUpRatio: 0.8,
+    id: 'vaporize', name: '辰星掩荧', followUpRatio: 0.8,
   },
   'water:earth': {
-    id: 'quagmire', name: '泥沼', followUpRatio: 0.4,
+    id: 'quagmire', name: '镇星没辰', followUpRatio: 0.4,
   },
   'earth:wood': {
-    id: 'root-collapse', name: '崩根', followUpRatio: 0.5,
+    id: 'root-collapse', name: '岁星倾镇', followUpRatio: 0.5,
   },
   'wood:metal': {
-    id: 'sever-meridian', name: '断脉', followUpRatio: 0.4,
+    id: 'sever-meridian', name: '太白断岁', followUpRatio: 0.4,
   },
   'metal:fire': {
-    id: 'melt-metal', name: '熔金', followUpRatio: 0.5,
+    id: 'melt-metal', name: '荧惑销白', followUpRatio: 0.5,
   },
 } as const;
 

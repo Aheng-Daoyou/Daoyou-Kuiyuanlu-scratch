@@ -21,15 +21,15 @@ export const TIANYAN_ORGANIZATION_THEME: SectOrganizationTheme = {
       'dark-water-return',
       'shift-palace',
     ],
-    artifactNames: ['太白演星尺', '坤舆法袍', '河洛定盘'],
+    artifactNames: ['太白演星尺', '镇星灯袍', '河洛定盘'],
     artifactDescriptions: [
       '星纹沿尺身流转，攻守变化皆可归入推演。',
-      '厚土阵纹承接来势，在死局前留下一线生机。',
+      '镇星阵纹承接来势，在死局前留下一线生机。',
       '河洛刻度定住心神，使外邪难乱推演。',
     ],
   },
   facilityNames: {
-    archive: '五经阁',
+    archive: '五曜阁',
     cultivation_room: '太初静室',
     workshop: '太白铸府',
   },

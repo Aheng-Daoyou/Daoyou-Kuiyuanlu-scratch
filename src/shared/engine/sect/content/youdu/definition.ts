@@ -16,9 +16,9 @@ const durationMilestones = [
 
 export const YOUDU_BASE_DEFINITION: SectDefinitionWithoutPaths = {
   id: YOUDU_SECT_ID,
-  name: '幽都',
+  name: '幽都·地藏殿',
   description:
-    '幽都门人通晓三魂七魄，以术伤侵形、魂伤越防，并用蚀魂逐层削弱敌人的气血上限、攻防与治疗。其术起势缓慢，却最擅长让强敌在不知不觉间失去还手之力。',
+    '亡者之城中的守序势力，执《守灯》第四章，忘川水独家产地。门人通晓三魂七魄，以术伤侵形、魂伤越防，交易物是记忆。',
   raceIds: ['human'],
   configVersion: 1,
   foundationPassiveId: 'youdu-runtime',

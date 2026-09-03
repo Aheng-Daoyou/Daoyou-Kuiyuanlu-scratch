@@ -36,7 +36,7 @@ describe('production sect onboarding presentations', () => {
       };
       const projection = productionSectRuntime.compiler.projectCombat(module, {
         sect,
-        realm: '炼气',
+        realm: '闻腥',
       })!;
       expect(
         projection.abilities.filter(

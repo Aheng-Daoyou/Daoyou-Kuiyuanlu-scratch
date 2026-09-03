@@ -8,13 +8,13 @@ describe('describeSectPromotionStatus', () => {
       status: {
         nextRank: 'inner' as const,
         missingRequirements: [
-          '境界达到筑基',
+          '境界达到守灯',
           '当前贡献达到500',
           '完成一次宗门小比',
         ],
       },
       expected:
-        '你若想晋升内门弟子，尚需境界达到筑基、当前贡献达到500、完成一次宗门小比。',
+        '你若想晋升内门弟子，尚需境界达到守灯、当前贡献达到500、完成一次宗门小比。',
     },
     {
       name: 'directs an eligible disciple to the existing promotion scene',

@@ -10,18 +10,18 @@ import {
 
 describe('sect spirit mining rewards', () => {
   it('maps score tiers through each realm quality ladder', () => {
-    expect(miningRealmQualities('炼气')).toEqual(['凡品', '灵品']);
+    expect(miningRealmQualities('闻腥')).toEqual(['凡品', '灵品']);
     expect(
       ['D', 'C', 'B', 'A', 'S'].map((tier) =>
-        miningRewardQuality('炼气', tier as 'D' | 'C' | 'B' | 'A' | 'S'),
+        miningRewardQuality('闻腥', tier as 'D' | 'C' | 'B' | 'A' | 'S'),
       ),
     ).toEqual(['凡品', '凡品', '灵品', '灵品', '灵品']);
     expect(
       ['D', 'C', 'B', 'A', 'S'].map((tier) =>
-        miningRewardQuality('炼虚', tier as 'D' | 'C' | 'B' | 'A' | 'S'),
+        miningRewardQuality('执灯', tier as 'D' | 'C' | 'B' | 'A' | 'S'),
       ),
     ).toEqual(['玄品', '真品', '地品', '天品', '仙品']);
-    expect(miningRewardQualityPreference('炼虚', 'B')).toEqual([
+    expect(miningRewardQualityPreference('执灯', 'B')).toEqual([
       '地品',
       '真品',
       '天品',
@@ -39,7 +39,7 @@ describe('sect spirit mining rewards', () => {
 
   it('scales all numeric rewards monotonically and preserves stone floor', () => {
     const base = calculateRealmSectTaskReward({
-      realm: '金丹',
+      realm: '窥渊',
       realmStage: '初期',
       difficulty: 'normal',
       cadence: 'daily',

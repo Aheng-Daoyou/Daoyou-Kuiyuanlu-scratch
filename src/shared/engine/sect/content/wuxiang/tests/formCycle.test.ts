@@ -82,7 +82,7 @@ function unit(id: string): Unit {
 function install(pathId: PathId, nodes: string[] = []) {
   const projection = projectSectCombat({
     sect: state(pathId, nodes),
-    realm: '化神',
+    realm: '忘川',
   })!;
   const owner = unit('owner');
   const enemy = unit('enemy');
@@ -100,7 +100,7 @@ function install(pathId: PathId, nodes: string[] = []) {
     if (installed) return installed as ActiveSkill;
     const config = resolveSectAbility({
       sect: state(pathId, nodes),
-      realm: '化神',
+      realm: '忘川',
       abilityId: id,
     }).config;
     const created = AbilityFactory.create(config) as ActiveSkill;
@@ -158,11 +158,11 @@ function addLayeredBuff(
   }
 }
 
-describe('无相禅宗三相循环', () => {
+describe('白莲乳母教三相循环', () => {
   beforeEach(() => EventBus.instance.reset());
   afterEach(() => EventBus.instance.reset());
 
-  it('3至5点心念进入两次魔相；未命中和非宗门技能都不消费次数', () => {
+  it('3至5点莲念进入两次血相；未命中和非宗门技能都不消费次数', () => {
     const { owner, enemy, defaultAttack, skill } = install('demon-crossing');
     owner.combatResources.modify(WUXIANG_WAR_INTENT, 3);
     const hpBeforeTurn = owner.getCurrentHp();
@@ -196,21 +196,21 @@ describe('无相禅宗三相循环', () => {
     expect(owner.combatResources.getCurrent(WUXIANG_WAR_INTENT)).toBe(0);
   });
 
-  it('6点心念优先进入一次无相，下一门神通执行 A+B+C 后恢复佛相', () => {
+  it('6点莲念优先进入一次莲相，下一门神通执行 A+B+C 后恢复胎相', () => {
     const { owner, enemy, defaultAttack, skill } = install('mirror-karma');
     owner.combatResources.modify(WUXIANG_WAR_INTENT, 6);
-    expect(skill('turn-form').name).toBe('一念无间');
+    expect(skill('turn-form').name).toBe('一念生莲');
     cast(skill('turn-form'), owner, owner);
     expect(readAbilityMode(owner, WUXIANG_FORM_MODE)).toMatchObject({
       mode: 'formless',
       remainingUses: 1,
     });
-    expect(defaultAttack.name).toBe('心花两忘');
+    expect(defaultAttack.name).toBe('心莲两忘');
 
     cast(defaultAttack, owner, enemy);
 
     expect(readAbilityMode(owner, WUXIANG_FORM_MODE)).toBeUndefined();
-    expect(defaultAttack.name).toBe('拈花叩心');
+    expect(defaultAttack.name).toBe('拈莲叩心');
     expect(owner.combatResources.getCurrent(WUXIANG_WAR_INTENT)).toBe(0);
     expect(
       owner.buffs
@@ -220,7 +220,7 @@ describe('无相禅宗三相循环', () => {
     ).toBe(1);
   });
 
-  it('第一念与三叩魔关合并结算后，低血无相仍不超过4段伤害', () => {
+  it('初哺与三叩血关合并结算后，低血莲相仍不超过4段伤害', () => {
     const { owner, enemy, skill } = install('demon-crossing', [
       'demon-first-thought',
     ]);
@@ -246,7 +246,7 @@ describe('无相禅宗三相循环', () => {
     );
     const karma = BuffFactory.create({
       id: WUXIANG_KARMA_BUFF,
-      name: '业痕',
+      name: '莲印',
       type: BuffType.BUFF,
       duration: -1,
       stackRule: StackRule.STACK_LAYER,
@@ -257,7 +257,7 @@ describe('无相禅宗三相循环', () => {
       key: WUXIANG_FORM_MODE,
       mode: 'demon',
       remainingUses: 2,
-      displayName: '魔相',
+      displayName: '血相',
     });
     defaultAttack.prepareCast({ caster: owner, target: enemy });
     clearAbilityMode(owner, WUXIANG_FORM_MODE);
@@ -277,13 +277,13 @@ describe('无相禅宗三相循环', () => {
     expect(owner.buffs.getAllBuffIds()).not.toContain(WUXIANG_KARMA_BUFF);
   });
 
-  it('明镜魔相没有业痕时只跳过 B 的消费后效果，A 与完成效果仍完整结算', () => {
+  it('莲镜血相没有莲印时只跳过 B 的消费后效果，A 与完成效果仍完整结算', () => {
     const { owner, enemy, defaultAttack } = install('mirror-karma');
     setAbilityMode(owner, {
       key: WUXIANG_FORM_MODE,
       mode: 'demon',
       remainingUses: 2,
-      displayName: '魔相',
+      displayName: '血相',
     });
 
     const segments = damageSegments(defaultAttack, () =>
@@ -316,21 +316,21 @@ describe('无相禅宗三相循环', () => {
     expect(owner.getCurrentHp()).toBe(afterTurn - Math.ceil(afterTurn * 0.05));
   });
 
-  it('倒叩先原子消费旧业门，随后佛相完成效果再留下全新的业门', () => {
+  it('倒叩先原子消费旧莲门，随后胎相完成效果再留下全新的莲门', () => {
     const { owner, enemy, skill } = install('mirror-karma');
     addLayeredBuff(
       enemy,
       'sect.wuxiang.mirror.karma-door',
-      '旧业门',
+      '旧莲门',
       BuffType.DEBUFF,
       2,
     );
-    addLayeredBuff(owner, WUXIANG_KARMA_BUFF, '业痕', BuffType.BUFF, 1);
+    addLayeredBuff(owner, WUXIANG_KARMA_BUFF, '莲印', BuffType.BUFF, 1);
     setAbilityMode(owner, {
       key: WUXIANG_FORM_MODE,
       mode: 'formless',
       remainingUses: 1,
-      displayName: '无相',
+      displayName: '莲相',
     });
     const threeKnocks = skill('three-knocks');
 
@@ -347,14 +347,14 @@ describe('无相禅宗三相循环', () => {
     ).toBe(3);
   });
 
-  it('无相观劫的两次直接减伤都生效，并各自触发一次魔相反击', () => {
+  it('莲相观劫的两次直接减伤都生效，并各自触发一次血相反击', () => {
     const { owner, enemy, skill } = install('mirror-karma');
-    addLayeredBuff(owner, WUXIANG_KARMA_BUFF, '业痕', BuffType.BUFF, 1);
+    addLayeredBuff(owner, WUXIANG_KARMA_BUFF, '莲印', BuffType.BUFF, 1);
     setAbilityMode(owner, {
       key: WUXIANG_FORM_MODE,
       mode: 'formless',
       remainingUses: 1,
-      displayName: '无相',
+      displayName: '莲相',
     });
     cast(skill('observe-calamity'), owner, owner);
 
@@ -418,13 +418,13 @@ describe('无相禅宗三相循环', () => {
     ).toEqual([0.4502, 0.4502]);
   });
 
-  it('净化没有可选目标仍是合法结算，并消费一次魔相', () => {
+  it('净化没有可选目标仍是合法结算，并消费一次血相', () => {
     const { owner, skill } = install('demon-crossing');
     setAbilityMode(owner, {
       key: WUXIANG_FORM_MODE,
       mode: 'demon',
       remainingUses: 2,
-      displayName: '魔相',
+      displayName: '血相',
     });
 
     cast(skill('five-skandhas'), owner, owner);
@@ -434,7 +434,7 @@ describe('无相禅宗三相循环', () => {
     });
   });
 
-  it('明镜仅在佛相响应敌方直接伤害，并按敌方行动首次受击留下业痕', () => {
+  it('莲镜仅在胎相响应敌方直接伤害，并按敌方行动首次受击留下莲印', () => {
     const { owner, enemy } = install('mirror-karma');
     const reflected: DamageSegmentRequestedEvent[] = [];
     EventBus.instance.subscribe<DamageSegmentRequestedEvent>(
@@ -479,7 +479,7 @@ describe('无相禅宗三相循环', () => {
       key: WUXIANG_FORM_MODE,
       mode: 'demon',
       remainingUses: 2,
-      displayName: '魔相',
+      displayName: '血相',
     });
     beginRuntimeAction(enemy);
     hit(DamageSource.DIRECT);
@@ -492,13 +492,13 @@ describe('无相禅宗三相循环', () => {
     expect(reflected).toHaveLength(2);
   });
 
-  it('万业同门让无相明确尝试消费第二层业痕，不使用递归数值缩放', () => {
+  it('万印同门让莲相明确尝试消费第二层莲印，不使用递归数值缩放', () => {
     const { owner, enemy, defaultAttack } = install('mirror-karma', [
       'mirror-all-karma',
     ]);
     const karma = BuffFactory.create({
       id: WUXIANG_KARMA_BUFF,
-      name: '业痕',
+      name: '莲印',
       type: BuffType.BUFF,
       duration: -1,
       stackRule: StackRule.STACK_LAYER,
@@ -510,7 +510,7 @@ describe('无相禅宗三相循环', () => {
       key: WUXIANG_FORM_MODE,
       mode: 'formless',
       remainingUses: 1,
-      displayName: '无相',
+      displayName: '莲相',
     });
     const segments: number[] = [];
     EventBus.instance.subscribe<DamageSegmentRequestedEvent>(
@@ -535,7 +535,7 @@ describe('无相禅宗三相循环', () => {
     ).toBe(1);
   });
 
-  it('第二岸苦在魔相每门恢复一次，在无相 A+B+C 中也只恢复一次', () => {
+  it('第二岸苦在血相每门恢复一次，在莲相 A+B+C 中也只恢复一次', () => {
     const execute = (mode: 'demon' | 'formless') => {
       const { owner, enemy, defaultAttack } = install('demon-crossing', [
         'demon-second-shore',
@@ -574,13 +574,13 @@ describe('无相禅宗三相循环', () => {
     expect(executeAt(0.48)).toEqual([0.8413, 0.2804]);
   });
 
-  it('连续两次魔相使用同一 B，不存在第一门与第二门分支', () => {
+  it('连续两次血相使用同一 B，不存在第一门与第二门分支', () => {
     const { owner, enemy, defaultAttack } = install('demon-crossing');
     setAbilityMode(owner, {
       key: WUXIANG_FORM_MODE,
       mode: 'demon',
       remainingUses: 2,
-      displayName: '魔相',
+      displayName: '血相',
     });
 
     const first = damageSegments(defaultAttack, () =>
@@ -595,7 +595,7 @@ describe('无相禅宗三相循环', () => {
     expect(readAbilityMode(owner, WUXIANG_FORM_MODE)).toBeUndefined();
   });
 
-  it('渡厄吸血按宗门直接伤害标签触发，防御神通不会误触发吸血', () => {
+  it('哺渡吸血按宗门直接伤害标签触发，防御神通不会误触发吸血', () => {
     const { owner, enemy, skill } = install('demon-crossing');
     owner.setHp(Math.floor(owner.getMaxHp() * 0.4));
     owner.combatResources.modify(WUXIANG_WAR_INTENT, 3);
@@ -625,7 +625,7 @@ describe('无相禅宗三相循环', () => {
     );
   });
 
-  it('魔心佛相防御神通获得2点心念，攻击神通仍获得1点', () => {
+  it('哺心胎相防御神通获得2点莲念，攻击神通仍获得1点', () => {
     const { owner, enemy, defaultAttack, skill } = install('demon-crossing');
 
     cast(defaultAttack, owner, enemy);
@@ -635,7 +635,7 @@ describe('无相禅宗三相循环', () => {
     expect(owner.combatResources.getCurrent(WUXIANG_WAR_INTENT)).toBe(3);
   });
 
-  it('两门同渡把基础入魔护盾由6%提高到10%', () => {
+  it('两门同渡把基础入血护盾由6%提高到10%', () => {
     const enter = (nodes: string[] = []) => {
       const { owner, skill } = install('demon-crossing', nodes);
       owner.combatResources.modify(WUXIANG_WAR_INTENT, 3);
@@ -647,7 +647,7 @@ describe('无相禅宗三相循环', () => {
     expect(enter(['demon-two-gates'])).toBeCloseTo(0.1, 2);
   });
 
-  it('一息无间把渡厄减伤由20%降低至10%而非完全移除', () => {
+  it('一息无间把哺渡减伤由20%降低至10%而非完全移除', () => {
     const reduction = (nodes: string[] = []) => {
       const { owner, enemy, skill } = install('demon-crossing', nodes);
       owner.combatResources.modify(WUXIANG_WAR_INTENT, 3);
@@ -742,7 +742,7 @@ describe('无相禅宗三相循环', () => {
         (entry) => entry.skillId === 'sect.wuxiang.flower-heart',
       );
 
-    expect(defaultSkill?.skillName).toBe('心花两忘');
+    expect(defaultSkill?.skillName).toBe('心莲两忘');
     expect(defaultSkill?.runtimePlanId).toBe('formless');
     expect(defaultSkill?.costs?.[0]).toMatchObject({
       resource: 'hp',

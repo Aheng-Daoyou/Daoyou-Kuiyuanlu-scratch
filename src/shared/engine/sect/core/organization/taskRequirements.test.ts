@@ -58,20 +58,20 @@ describe('sect task requirement generation', () => {
   it('is stable for the same seed and changes across task seeds', () => {
     const first = generateSectDeliveryRequirement({
       kind: 'pill',
-      realm: '元婴',
+      realm: '蚀体',
       seed: 'member:task-a:2026-07-23:1',
     });
     expect(
       generateSectDeliveryRequirement({
         kind: 'pill',
-        realm: '元婴',
+        realm: '蚀体',
         seed: 'member:task-a:2026-07-23:1',
       }),
     ).toEqual(first);
     expect(
       generateSectDeliveryRequirement({
         kind: 'pill',
-        realm: '元婴',
+        realm: '蚀体',
         seed: 'member:task-b:2026-07-23:1',
       }),
     ).not.toEqual(first);
@@ -119,7 +119,7 @@ describe('sect task requirement generation', () => {
     for (let index = 0; index < samples; index += 1) {
       const requirement = generateSectDeliveryRequirement({
         kind: 'pill',
-        realm: '金丹',
+        realm: '窥渊',
         seed: `appearance:${index}`,
       });
       if (requirement.kind !== 'pill' || !requirement.appearance)
@@ -146,12 +146,12 @@ describe('sect task requirement generation', () => {
     for (let index = 0; index < samples; index += 1) {
       const artifact = generateSectDeliveryRequirement({
         kind: 'artifact',
-        realm: '元婴',
+        realm: '蚀体',
         seed: `artifact-extra:${index}`,
       });
       const material = generateSectDeliveryRequirement({
         kind: 'material',
-        realm: '元婴',
+        realm: '蚀体',
         seed: `material-extra:${index}`,
       });
       if (artifact.kind === 'artifact' && artifact.minPerfectAffixCount)
@@ -164,7 +164,7 @@ describe('sect task requirement generation', () => {
     expect(elementCount / samples).toBeLessThan(0.37);
   });
 
-  it('never generates below 玄品 from 金丹 or above 仙品', () => {
+  it('never generates below 玄品 from 窥渊 or above 仙品', () => {
     for (const realm of REALM_VALUES)
       for (let index = 0; index < 2_000; index += 1) {
         const quality = pickSectTaskMinimumQuality(
@@ -176,7 +176,7 @@ describe('sect task requirement generation', () => {
         );
         if (
           QUALITY_ORDER[
-            realm === '炼气' ? '凡品' : realm === '筑基' ? '灵品' : '玄品'
+            realm === '闻腥' ? '凡品' : realm === '守灯' ? '灵品' : '玄品'
           ] >= QUALITY_ORDER['玄品']
         )
           expect(QUALITY_ORDER[quality]).toBeGreaterThanOrEqual(
@@ -189,8 +189,8 @@ describe('sect task requirement generation', () => {
     const samples = 10_000;
     const immortalCount = Array.from({ length: samples }, (_, index) =>
       pickSectTaskMinimumQuality(
-        '渡劫',
-        new SectTaskRandomSource(`渡劫:${index}`),
+        '渡渊',
+        new SectTaskRandomSource(`渡渊:${index}`),
       ),
     ).filter((quality) => quality === '仙品').length;
     expect(immortalCount / samples).toBeGreaterThan(0.055);
@@ -230,7 +230,7 @@ describe('sect task requirement generation', () => {
         trait: 'increase_lifespan' as const,
         appearance: { mode: 'at_least' as const, grade: 'middle' as const },
       },
-      text: '1颗玄品以上、具有增加寿元功效的延寿丹，品相不可低于中品',
+      text: '1颗玄品以上、具有增加寿元功效的延寿香，品相不可低于中品',
       rawTerms: ['longevity', 'increase_lifespan', 'middle'],
       emphasis: ['quantity', 'quality', 'effect', 'effect', 'appearance'],
     },
@@ -243,7 +243,7 @@ describe('sect task requirement generation', () => {
         mustBeUnequipped: true as const,
         minPerfectAffixCount: 2,
       },
-      text: '1件灵品以上的攻击法宝，必须处于未装备状态，并带有至少2条完美词条',
+      text: '1件灵品以上的攻伐封灵器，必须处于未装备状态，并带有至少2条完美词条',
       rawTerms: ['weapon'],
       emphasis: ['quantity', 'quality', 'effect', 'warning', 'quantity'],
     },
@@ -253,9 +253,9 @@ describe('sect task requirement generation', () => {
         quantity: 3,
         minQuality: '真品' as const,
         materialType: 'ore' as const,
-        element: '火' as const,
+        element: '渊' as const,
       },
-      text: '3份真品以上的矿石类火属性材料',
+      text: '3份真品以上的矿石类渊属性材料',
       rawTerms: ['ore'],
       emphasis: ['quantity', 'quality', 'effect', 'effect'],
     },

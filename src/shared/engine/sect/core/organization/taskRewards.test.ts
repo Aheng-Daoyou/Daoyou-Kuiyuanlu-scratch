@@ -40,11 +40,11 @@ describe('sect task rewards', () => {
     ['weekly', 'hard', 1_152, 12_200, 54],
     ['weekly', 'elite', 1_728, 14_400, 64],
   ] as const)(
-    'calculates 金丹 %s %s rewards',
+    'calculates 窥渊 %s %s rewards',
     (cadence, difficulty, cultivationExp, spiritStones, contribution) => {
       expect(
         calculateRealmSectTaskReward({
-          realm: '金丹',
+          realm: '窥渊',
           realmStage: '初期',
           difficulty,
           cadence,
@@ -63,7 +63,7 @@ describe('sect task rewards', () => {
   it('applies the weekly cadence before deriving the spirit-stone reward', () => {
     expect(
       calculateRealmSectTaskReward({
-        realm: '渡劫',
+        realm: '渡渊',
         realmStage: '圆满',
         difficulty: 'elite',
         cadence: 'weekly',
@@ -94,7 +94,7 @@ describe('sect task rewards', () => {
     }
     expect(
       calculateRealmSectTaskReward({
-        realm: '炼气',
+        realm: '闻腥',
         realmStage: '初期',
         difficulty: 'easy',
         cadence: 'daily',
@@ -103,7 +103,7 @@ describe('sect task rewards', () => {
     ).toBe(1_000);
     expect(
       calculateRealmSectTaskReward({
-        realm: '渡劫',
+        realm: '渡渊',
         realmStage: '初期',
         difficulty: 'easy',
         cadence: 'daily',
@@ -125,7 +125,7 @@ describe('sect task rewards', () => {
       cadence: 'daily' | 'weekly',
     ) =>
       calculateRealmSectTaskReward({
-        realm: '金丹',
+        realm: '窥渊',
         realmStage: '初期',
         difficulty,
         cadence,
@@ -139,7 +139,7 @@ describe('sect task rewards', () => {
       taskContribution('mine_patrol', 'normal', 'daily') +
       scaleMiningTaskReward(
         calculateRealmSectTaskReward({
-          realm: '金丹',
+          realm: '窥渊',
           realmStage: '初期',
           difficulty: 'normal',
           cadence: 'daily',
@@ -157,7 +157,7 @@ describe('sect task rewards', () => {
       taskContribution('mine_patrol', 'normal', 'daily') +
       scaleMiningTaskReward(
         calculateRealmSectTaskReward({
-          realm: '金丹',
+          realm: '窥渊',
           realmStage: '初期',
           difficulty: 'normal',
           cadence: 'daily',

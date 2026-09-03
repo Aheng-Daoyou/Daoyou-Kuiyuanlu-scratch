@@ -2,8 +2,8 @@ import type { SectOrganizationTheme } from '../../core';
 
 export const WUXIANG_ORGANIZATION_THEME: SectOrganizationTheme = {
   elderTrial: {
-    name: '空慈方丈·试炼化身',
-    description: '佛魔二相同现，以色身与业火检验来者道心。',
+    name: '空慈乳母·试炼化身',
+    description: '胎血二相同现，以色身与莲火检验来者灯心。',
     configVersion: 2,
     methodIds: [
       'wuxiang-canon',
@@ -21,16 +21,16 @@ export const WUXIANG_ORGANIZATION_THEME: SectOrganizationTheme = {
       'three-knocks',
       'observe-calamity',
     ],
-    artifactNames: ['降魔金刚杵', '白骨莲衣', '明镜心珠'],
+    artifactNames: ['哺心杵', '皮囊莲衣', '莲镜心珠'],
     artifactDescriptions: [
-      '金刚杵饮下敌势，以佛魔二力反照来处。',
-      '白骨与血莲交织成衣，危急时护住色身。',
-      '明镜照业，令侵入心识的诸相无所遁形。',
+      '哺心杵饮下敌势，以胎血二力反照来处。',
+      '皮囊与血莲交织成衣，危急时护住色身。',
+      '莲镜照业，令侵入心识的诸相无所遁形。',
     ],
   },
   facilityNames: {
     archive: '贝叶藏',
-    cultivation_room: '止观室',
+    cultivation_room: '守胎室',
     workshop: '火供院',
   },
 };

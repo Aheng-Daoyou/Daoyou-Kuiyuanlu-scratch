@@ -23,7 +23,7 @@ const tideDefinition: SectPathDefinitionWithoutNodes = {
   id: YOUDU_TIDE_PATH_ID,
   name: '招魂渡夜',
   description: '一声唤名落入黑水，千里游魂都听见自己的回音。此道让忘川一寸寸漫过归路。',
-  minRealm: '筑基', minRealmStage: '中期',
+  minRealm: '守灯', minRealmStage: '中期',
   layers: [...STANDARD_PATH_LAYERS],
   defaultTacticId: 'tide-cycle',
   tactics: [
@@ -48,7 +48,7 @@ const decreeDefinition: SectPathDefinitionWithoutNodes = {
   id: YOUDU_DECREE_PATH_ID,
   name: '镇魄司命',
   description: '见影而知魂，知魂而书名；铁钉落下之前，门人已量过每一道离身缝隙。',
-  minRealm: '筑基', minRealmStage: '中期',
+  minRealm: '守灯', minRealmStage: '中期',
   layers: [...STANDARD_PATH_LAYERS],
   defaultTacticId: 'pin-the-caster',
   tactics: [
@@ -64,7 +64,7 @@ const decreeDefinition: SectPathDefinitionWithoutNodes = {
     ],
     abilityChanges: {
       'reveal-shadow': '成功施加照影时获得1点魂火；自身对照影目标造成魂伤时，每层蚀魂额外提高1%。',
-      'pin-soul': '节点可强化高层镇魂的命中、速度压制与法力效率。',
+      'pin-soul': '节点可强化高层镇魂的命中、速度压制与灯焰效率。',
       'soul-shall-not-return': '节点可强化逐层魂伤、把最低终结层数提前到3层，并提供裁决后的资源回转。',
     },
   },

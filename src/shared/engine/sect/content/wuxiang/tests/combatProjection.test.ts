@@ -61,19 +61,19 @@ const abilityTable: Record<
 > = {
   'mirror-karma': {
     'flower-heart': {
-      names: ['拈花叩心', '花落问罪', '心花两忘'],
+      names: ['拈莲叩心', '莲落问罪', '心莲两忘'],
       target: 'enemy',
       cost: 0.05,
       cooldown: 0,
     },
     'blood-tide': {
-      names: ['血海听潮', '血海回澜', '海月同潮'],
+      names: ['血莲听潮', '血莲回澜', '莲月同潮'],
       target: 'self',
       cost: 0.08,
       cooldown: 3,
     },
     'three-knocks': {
-      names: ['三叩业门', '业门倒叩', '门内无人'],
+      names: ['三叩莲门', '莲门倒叩', '门内无莲'],
       target: 'enemy',
       cost: 0.07,
       cooldown: 2,
@@ -85,7 +85,7 @@ const abilityTable: Record<
       cooldown: 4,
     },
     'five-skandhas': {
-      names: ['照见五蕴', '五蕴还照', '五蕴皆空'],
+      names: ['照见胎蕴', '胎蕴还照', '胎蕴皆空'],
       target: 'enemy',
       cost: 0.06,
       cooldown: 3,
@@ -99,37 +99,37 @@ const abilityTable: Record<
   },
   'demon-crossing': {
     'flower-heart': {
-      names: ['拈花叩心', '摘心问魔', '心魔两忘'],
+      names: ['拈莲叩心', '摘心问哺', '哺心两忘'],
       target: 'enemy',
       cost: 0.06,
       cooldown: 0,
     },
     'blood-tide': {
-      names: ['血海听潮', '血海倒悬', '血海无涯'],
+      names: ['血莲听潮', '血莲倒悬', '血莲无涯'],
       target: 'self',
       cost: 0.14,
       cooldown: 3,
     },
     'three-knocks': {
-      names: ['三叩业门', '三叩魔关', '业门无生'],
+      names: ['三叩莲门', '三叩血关', '莲门无生'],
       target: 'enemy',
       cost: 0.09,
       cooldown: 2,
     },
     'observe-calamity': {
-      names: ['闭目观劫', '开眼见魔', '劫火自明'],
+      names: ['闭目观劫', '开眼见莲', '莲火自明'],
       target: 'self',
       cost: 0.11,
       cooldown: 4,
     },
     'five-skandhas': {
-      names: ['照见五蕴', '焚尽五蕴', '蕴空身在'],
+      names: ['照见胎蕴', '焚尽胎蕴', '胎空身在'],
       target: 'self',
       cost: 0.07,
       cooldown: 3,
     },
     'reed-crossing': {
-      names: ['一苇横江', '一苇渡厄', '苦海无舟'],
+      names: ['一苇横江', '一苇哺渡', '苦海无舟'],
       target: 'self',
       cost: 0.1,
       cooldown: 5,
@@ -137,7 +137,7 @@ const abilityTable: Record<
   },
 };
 
-describe('无相禅宗战斗投影', () => {
+describe('白莲乳母教战斗投影', () => {
   it('作为独立宗门进入生产目录，并保持双道途各六层三选一', () => {
     expect(PRODUCTION_SECT_IDS).toContain('wuxiang');
     expect(WUXIANG_MODULE.definition.configVersion).toBe(2);
@@ -170,9 +170,9 @@ describe('无相禅宗战斗投影', () => {
     '%s 的六门神通只使用 A、B、C 效果层，不再生成完整变体',
     (pathId) => {
       const sect = state(pathId);
-      const projection = projectSectCombat({ sect, realm: '化神' })!;
+      const projection = projectSectCombat({ sect, realm: '忘川' })!;
       expect(projection.resources[0]).toMatchObject({
-        name: '心念',
+        name: '莲念',
         initial: 0,
         max: 6,
       });
@@ -181,7 +181,7 @@ describe('无相禅宗战斗投影', () => {
       for (const abilityId of WUXIANG_TECHNIQUE_IDS) {
         const config = resolveSectAbility({
           sect,
-          realm: '化神',
+          realm: '忘川',
           abilityId,
         }).config;
         expect('variants' in config).toBe(false);
@@ -221,7 +221,7 @@ describe('无相禅宗战斗投影', () => {
       const expected = abilityTable[pathId][abilityId];
       const config = resolveSectAbility({
         sect: state(pathId),
-        realm: '化神',
+        realm: '忘川',
         abilityId,
       }).config;
       expect(config.slug).toBe(`sect.wuxiang.${abilityId}`);
@@ -251,11 +251,11 @@ describe('无相禅宗战斗投影', () => {
     { pathId: 'mirror-karma' as const, costs: [0.04, 0.08] },
     { pathId: 'demon-crossing' as const, costs: [0.04] },
   ])(
-    '$pathId 的转相只在两种受限效果计划间选择，费用按心念条件固定',
+    '$pathId 的转相只在两种受限效果计划间选择，费用按莲念条件固定',
     ({ pathId, costs }) => {
       const config = resolveSectAbility({
         sect: state(pathId),
-        realm: '化神',
+        realm: '忘川',
         abilityId: 'turn-form',
       }).config;
       expect(config.targetPolicy).toEqual({ team: 'self', scope: 'single' });
@@ -271,8 +271,8 @@ describe('无相禅宗战斗投影', () => {
           layers: plan.layerIds,
         })),
       ).toEqual([
-        { name: '一念无间', layers: ['demon', 'formless'] },
-        { name: '魔相入身', layers: ['demon'] },
+        { name: '一念生莲', layers: ['demon', 'formless'] },
+        { name: '血相入身', layers: ['demon'] },
       ]);
     },
   );
@@ -280,25 +280,25 @@ describe('无相禅宗战斗投影', () => {
   it('技能详情用玩家可理解的三相变化描述，不暴露效果计划或内部层术语', () => {
     const flower = resolveSectAbility({
       sect: state('mirror-karma'),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'flower-heart',
     });
     expect(flower.detailRows).toContain(
-      '魔相变化《花落问罪》：先叩心伤敌并留下叩心戒；若目标带有业痕，花落问罪再发一击，并封住其一门伤害神通。',
+      '血相变化《莲落问罪》：先叩心伤敌并留下哺心戒；若目标带有莲印，莲落问罪再发一击，并封住其一门伤害神通。',
     );
     expect(flower.detailRows).toContain(
-      '无相变化《心花两忘》：一念之中兼得叩心与问罪之效，并再发一击；施展后，无论业痕是否触发，自身都会获得1层业痕。',
+      '莲相变化《心莲两忘》：一念之中兼得叩心与问罪之效，并再发一击；施展后，无论莲印是否触发，自身都会获得1层莲印。',
     );
-    expect(flower.detailRows).toContain('佛相：造成相当于60.1%物攻的伤害');
+    expect(flower.detailRows).toContain('胎相：造成相当于60.1%物攻的伤害');
     expect(flower.detailRows).toContain(
-      '魔相显化时·命中后：每消耗1层业痕，额外造成相当于35.06%物攻的伤害',
+      '血相显化时·命中后：每消耗1层莲印，额外造成相当于35.06%物攻的伤害',
     );
     expect(flower.detailRows).toContain(
-      '无相显化时：额外造成相当于30.05%物攻的伤害',
+      '莲相显化时：额外造成相当于30.05%物攻的伤害',
     );
     expect(
       flower.detailRows.some((row) =>
-        /效果计划|佛相主体|佛相完成|魔相追加|无相追加|A\+B|demon|formless/.test(
+        /效果计划|胎相主体|胎相完成|血相追加|莲相追加|A\+B|demon|formless/.test(
           row,
         ),
       ),
@@ -306,27 +306,27 @@ describe('无相禅宗战斗投影', () => {
 
     const mirrorSkandhas = resolveSectAbility({
       sect: state('mirror-karma'),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'five-skandhas',
     });
     expect(mirrorSkandhas.detailRows).toContain(
-      '佛相·命中后：驱散目标1个正面状态',
+      '胎相·命中后：驱散目标1个正面状态',
     );
     const demonSkandhas = resolveSectAbility({
       sect: state('demon-crossing'),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'five-skandhas',
     });
     expect(demonSkandhas.detailRows).toContain(
-      '佛相·施展后：净化自身1个负面状态',
+      '胎相·施展后：净化自身1个负面状态',
     );
   });
 
-  it('佛魔同炉只逐门修改六项明确的无相 C 字段', () => {
+  it('胎血同炉只逐门修改六项明确的莲相 C 字段', () => {
     const formlessEffects = (abilityId: string, nodes: string[] = []) =>
       resolveSectAbility({
         sect: state('demon-crossing', nodes),
-        realm: '化神',
+        realm: '忘川',
         abilityId,
       }).config.effectLayers?.find((layer) => layer.id === 'formless')
         ?.effects ?? [];
@@ -418,7 +418,7 @@ describe('无相禅宗战斗投影', () => {
           (abilityId) =>
             resolveSectAbility({
               sect: state(pathId, nodes),
-              realm: '化神',
+              realm: '忘川',
               abilityId,
             }).config,
         );

@@ -58,7 +58,7 @@ function context(abilityIds: string[]) {
   const opponent = unit('opponent');
   caster.combatResources.define({
     id: WUXIANG_WAR_INTENT,
-    name: '心念',
+    name: '莲念',
     initial: 0,
     max: 6,
   });
@@ -67,7 +67,7 @@ function context(abilityIds: string[]) {
       const ability = AbilityFactory.create(
         resolveSectAbility({
           sect: state(),
-          realm: '化神',
+          realm: '忘川',
           abilityId,
         }).config,
       ) as ActiveSkill;
@@ -83,12 +83,12 @@ function context(abilityIds: string[]) {
   return { caster, opponent, candidates };
 }
 
-describe('无相基础施法策略', () => {
+describe('莲相基础施法策略', () => {
   const strategy = new WuxiangBaseSelectionStrategy();
 
-  it('未选择流派时投影基础策略，三点心念不会提前转相', () => {
+  it('未选择流派时投影基础策略，三点莲念不会提前转相', () => {
     expect(
-      projectSectCombat({ sect: state(), realm: '化神' })?.selectionStrategy,
+      projectSectCombat({ sect: state(), realm: '忘川' })?.selectionStrategy,
     ).toBeInstanceOf(WuxiangBaseSelectionStrategy);
     const battle = context(['turn-form', 'three-knocks']);
     battle.caster.combatResources.set(WUXIANG_WAR_INTENT, 3);
@@ -98,7 +98,7 @@ describe('无相基础施法策略', () => {
     );
   });
 
-  it('心念达到六点时进入无相', () => {
+  it('莲念达到六点时进入莲相', () => {
     const battle = context(['three-knocks', 'turn-form']);
     battle.caster.combatResources.set(WUXIANG_WAR_INTENT, 6);
 
@@ -112,13 +112,13 @@ describe('无相基础施法策略', () => {
     expect(strategy.select(battle)?.ability.id).toBe('sect.wuxiang.blood-tide');
   });
 
-  it('无相显化后按血线选择进攻或防御神通', () => {
+  it('莲相显化后按血线选择进攻或防御神通', () => {
     const offensive = context(['blood-tide', 'three-knocks']);
     setAbilityMode(offensive.caster, {
       key: WUXIANG_FORM_MODE,
       mode: 'formless',
       remainingUses: 1,
-      displayName: '一念无间',
+      displayName: '一念生莲',
     });
     expect(strategy.select(offensive)?.ability.id).toBe(
       'sect.wuxiang.three-knocks',
@@ -130,7 +130,7 @@ describe('无相基础施法策略', () => {
       key: WUXIANG_FORM_MODE,
       mode: 'formless',
       remainingUses: 1,
-      displayName: '一念无间',
+      displayName: '一念生莲',
     });
     expect(strategy.select(defensive)?.ability.id).toBe(
       'sect.wuxiang.blood-tide',
@@ -147,7 +147,7 @@ describe('无相基础施法策略', () => {
   });
 
   it.each(['trial-fire', 'sink-boat', 'one-thought'])(
-    '魔心%s战术在6点心念时无条件转无相',
+    '哺心%s战术在6点莲念时无条件转莲相',
     (tacticId) => {
       const battle = context(['three-knocks', 'turn-form']);
       battle.caster.combatResources.set(WUXIANG_WAR_INTENT, 6);
@@ -159,14 +159,14 @@ describe('无相基础施法策略', () => {
     },
   );
 
-  it('魔心20%至30%气血在魔相优先攻击以触发吸血', () => {
+  it('哺心20%至30%气血在血相优先攻击以触发吸血', () => {
     const battle = context(['three-knocks', 'reed-crossing']);
     battle.caster.setHp(Math.floor(battle.caster.getMaxHp() * 0.25));
     setAbilityMode(battle.caster, {
       key: WUXIANG_FORM_MODE,
       mode: 'demon',
       remainingUses: 2,
-      displayName: '魔相',
+      displayName: '血相',
     });
 
     expect(
@@ -175,14 +175,14 @@ describe('无相基础施法策略', () => {
     ).toBe('sect.wuxiang.three-knocks');
   });
 
-  it('明镜守镜战术在3层业痕与3点心念时提前转相', () => {
+  it('莲镜守镜战术在3层莲印与3点莲念时提前转相', () => {
     const battle = context(['three-knocks', 'turn-form']);
     battle.caster.combatResources.set(WUXIANG_WAR_INTENT, 3);
     for (let layer = 0; layer < 3; layer += 1) {
       battle.caster.buffs.addBuff(
         BuffFactory.create({
           id: WUXIANG_KARMA_BUFF,
-          name: '业痕',
+          name: '莲印',
           type: BuffType.BUFF,
           duration: -1,
           stackRule: StackRule.STACK_LAYER,

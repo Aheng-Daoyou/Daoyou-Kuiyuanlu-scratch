@@ -78,7 +78,7 @@ export class SectTradition {
   activateMeridianLoadout(pathId: string, slot: 1 | 2 | 3): void {
     const path = this.requirePath(pathId);
     if (!path.meridianLoadouts.some((entry) => entry.slot === slot))
-      throw new SectDomainError('经脉方案不存在');
+      throw new SectDomainError('参悟方案不存在');
     path.activeMeridianSlot = slot;
   }
 

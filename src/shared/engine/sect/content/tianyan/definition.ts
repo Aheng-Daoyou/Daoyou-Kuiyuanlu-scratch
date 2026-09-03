@@ -18,15 +18,15 @@ const durationMilestones = [
 
 export const TIANYAN_BASE_DEFINITION: SectDefinitionWithoutPaths = {
   id: TIANYAN_SECT_ID,
-  name: '天衍圣地',
+  name: '观星台',
   description:
-    '以五行法印推演前后术式的圣地。门人兼修金木水火土，却只能携四门主动神通入阵；胜负不在单法强弱，而在每一次留印之后如何落下下一子。',
+    '隐世学者执《守灯》第六章，以星象推演前后命数的观星之地。门人知道得最多，疯得也最彻底；胜负不在单法强弱，而在每一次观星之后如何落下下一子。',
   raceIds: ['human'],
   configVersion: 1,
   foundationPassiveId: 'tianyan-runtime',
   combatResource: {
     id: TIANYAN_DERIVATION,
-    name: '衍数',
+    name: '星衍',
     icon: '✨',
     max: 3,
   },
@@ -34,18 +34,18 @@ export const TIANYAN_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'tianyan-canon',
       slot: 1,
-      name: '《天衍五行真经》',
+      name: '《观星太初经》',
       isPrimary: true,
       description:
-        '以太初为纸，以五行为字。经中不求写尽天数，只教门人辨明一法之后仍有多少去处。',
+        '以太初为纸，以星象为字。经中不求写尽命数，只教门人辨明一着落下之后仍有多少去处。',
       growthProfile: { curve: 'balanced', effects, durationMilestones },
     },
     {
       id: 'wood-vitality',
       slot: 2,
-      name: '《青华生元录》',
+      name: '《岁星生华录》',
       description:
-        '草木荣枯并非两事；生机藏在未尽之处，也藏在愿意重新开始的一息里。',
+        '岁星主生，荣枯并非两事；生机藏在未尽之处，也藏在愿意重新起卦的一息里。',
       growthProfile: {
         curve: 'early', effects, durationMilestones,
         panelModifier: {
@@ -57,9 +57,9 @@ export const TIANYAN_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'fire-illumination',
       slot: 3,
-      name: '《离明流火章》',
+      name: '《荧惑流火章》',
       description:
-        '火能照见，也能焚去。持火者先辨所燃为何，方知余烬应当归向何处。',
+        '荧惑照见，也能焚去。持火者先辨所燃为何，方知余烬应当归向何处。',
       growthProfile: {
         curve: 'balanced', effects, durationMilestones,
         panelModifier: {
@@ -71,9 +71,9 @@ export const TIANYAN_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'earth-bearing',
       slot: 4,
-      name: '《坤舆载物篇》',
+      name: '《镇星载物篇》',
       description:
-        '地不与万物争先，却承受每一次落下的重量；能载其重，才能改其势。',
+        '镇星不与群星争先，却承受每一次落下的重量；能载其重，才能改其势。',
       growthProfile: {
         curve: 'early', effects, durationMilestones,
         panelModifier: {
@@ -85,9 +85,9 @@ export const TIANYAN_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'metal-severing',
       slot: 5,
-      name: '《太白裁虚诀》',
+      name: '《烛火辨真诀》',
       description:
-        '金气不只断形，也裁去遮蔽与虚妄。锋芒所至，应先知道何物不必留下。',
+        '烛光不只照形，也照去遮蔽与虚妄。焰芒所至，应先知道何物不必留下。',
       growthProfile: {
         curve: 'late', effects, durationMilestones,
         panelModifier: {
@@ -99,8 +99,8 @@ export const TIANYAN_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'water-flowing',
       slot: 6,
-      name: '《玄冥行川法》',
-      description: '水无常形，不与一岸相争。去路既改，仍能在曲折中守住归处。',
+      name: '《辰星行川法》',
+      description: '辰星无常位，不与一宫相争。去路既改，仍能在落子间守住归处。',
       growthProfile: {
         curve: 'balanced', effects, durationMilestones,
         panelModifier: {
@@ -116,7 +116,7 @@ export const TIANYAN_BASE_DEFINITION: SectDefinitionWithoutPaths = {
       kind: 'default',
       baseName: '太初玄光',
       description:
-        '太初灵气无色无形，不入五行。指间玄光只问命中，不替之后的变化作答。',
+        '太初梦涎无色无形，不入五窍。指间玄光只问命中，不替之后的变化作答。',
       role: 'generator',
       unlock: { type: 'method', methodId: 'tianyan-canon', level: 1 },
       mpCost: 0,
@@ -125,8 +125,8 @@ export const TIANYAN_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'verdant-pulse',
       kind: 'active',
-      baseName: '青萝生脉',
-      description: '青萝循气而生，一端缠住敌势，一端牵回施术者尚未断绝的生机。',
+      baseName: '岁华生脉',
+      description: '岁星循息而生，一端缠住敌势，一端牵回施术者尚未断绝的生机。',
       role: 'generator',
       unlock: { type: 'method', methodId: 'wood-vitality', level: 1 },
       mpCost: 80,
@@ -135,7 +135,7 @@ export const TIANYAN_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'myriad-wood-renewal',
       kind: 'active',
-      baseName: '万木回春',
+      baseName: '岁华回春',
       description:
         '不催枯枝强生新叶，只把散落的生机逐寸引回，使该续的一息重新接上。',
       role: 'defensive',
@@ -146,9 +146,9 @@ export const TIANYAN_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'flowing-flame',
       kind: 'active',
-      baseName: '离火流照',
+      baseName: '荧惑流照',
       description:
-        '离火不作一瞬暴烈，沿气机流照而过；光所及处，余焰仍在暗中寻找可燃之物。',
+        '荧惑不作一瞬暴烈，沿息机流照而过；光所及处，余焰仍在暗中寻找可燃之物。',
       role: 'combo',
       unlock: { type: 'method', methodId: 'fire-illumination', level: 1 },
       mpCost: 100,
@@ -175,9 +175,9 @@ export const TIANYAN_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'earth-bearing-seal',
       kind: 'active',
-      baseName: '坤岳镇形',
+      baseName: '镇星镇形',
       description:
-        '坤气落下，不急于压碎敌形，先在施术者身前立住一座可承来力的山岳。',
+        '镇星之气落下，不急于压碎敌形，先在施术者身前立住一座可承来力的星岳。',
       role: 'defensive',
       unlock: { type: 'method', methodId: 'earth-bearing', level: 1 },
       mpCost: 100,
@@ -197,8 +197,8 @@ export const TIANYAN_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'metal-cloud-cutter',
       kind: 'active',
-      baseName: '庚金裁云',
-      description: '庚金凝成一线，所裁并非云气，而是藏在云后的护持与虚势。',
+      baseName: '太白裁云',
+      description: '太白凝成一线，所裁并非云气，而是藏在云后的护持与虚势。',
       role: 'finisher',
       unlock: { type: 'method', methodId: 'metal-severing', level: 1 },
       mpCost: 120,
@@ -209,7 +209,7 @@ export const TIANYAN_BASE_DEFINITION: SectDefinitionWithoutPaths = {
       kind: 'active',
       baseName: '太白破阵',
       description:
-        '太白一线照入阵眼，先去遮蔽，再断灵机；锋芒不求伤重，只求所见再无虚假。',
+        '太白一线照入阵眼，先去遮蔽，再断灯机；锋芒不求伤重，只求所见再无虚假。',
       role: 'utility',
       unlock: { type: 'method', methodId: 'metal-severing', level: 5 },
       mpCost: 160,
@@ -218,9 +218,9 @@ export const TIANYAN_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'dark-water-return',
       kind: 'active',
-      baseName: '玄水回澜',
+      baseName: '辰星回澜',
       description:
-        '玄水不与来势正争，只在回澜时带走立足之力，使快者迟、满者退。',
+        '辰星不与来势正争，只在回澜时带走立足之力，使快者迟、满者退。',
       role: 'utility',
       unlock: { type: 'method', methodId: 'water-flowing', level: 1 },
       mpCost: 100,
@@ -229,9 +229,9 @@ export const TIANYAN_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'heavenly-river-cleansing',
       kind: 'active',
-      baseName: '天河洗心',
+      baseName: '辰星洗心',
       description:
-        '引天河过心窍，不洗记忆，也不洗选择，只带走此刻不应继续停留的浊意。',
+        '引辰星过心窍，不洗记忆，也不洗选择，只带走此刻不应继续停留的浊意。',
       role: 'utility',
       unlock: { type: 'method', methodId: 'water-flowing', level: 5 },
       mpCost: 180,
@@ -251,7 +251,7 @@ export const TIANYAN_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'five-qi-repository',
       kind: 'active',
-      baseName: '五气归藏',
+      baseName: '五曜归藏',
       description:
         '推演不必每次走到尽头。将尚未用尽的法印收回太初，余势仍可归为护身、养气与下一法的凭依。',
       role: 'utility',
@@ -264,7 +264,7 @@ export const TIANYAN_BASE_DEFINITION: SectDefinitionWithoutPaths = {
       kind: 'passive',
       baseName: '太初衍脉',
       description:
-        '太初灵气本无定色。天衍神通不受异灵根失配影响；与本命灵根相同的法术仍可获得灵根共鸣。',
+        '太初梦涎本无定色。天衍神通不受异窍失配影响；与本命窍相同的灯律仍可获得窍共鸣。',
       role: 'combo',
       unlock: { type: 'always' },
       visibility: 'internal',
@@ -273,7 +273,7 @@ export const TIANYAN_BASE_DEFINITION: SectDefinitionWithoutPaths = {
       id: 'hetu-runtime',
       kind: 'passive',
       baseName: '河图周天',
-      description: '三数成图，令伤势、气血与法力在同一轮转中续接。',
+      description: '三数成图，令伤势、气血与灯焰在同一轮转中续接。',
       role: 'combo',
       unlock: { type: 'active_path', pathId: TIANYAN_HETU_PATH_ID },
       visibility: 'internal',

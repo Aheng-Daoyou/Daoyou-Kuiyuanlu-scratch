@@ -154,9 +154,9 @@ export function matchSectDeliveryRequirement(
     // the effects actually projected from operations.
     const hasRequiredTrait = candidate.traits.includes(requirement.trait);
     if (!hasRequiredTrait && candidate.family !== requirement.family)
-      add('wrong_family', '丹药主类别不符合要求');
+      add('wrong_family', '香品主类别不符合要求');
     if (!hasRequiredTrait)
-      add('missing_trait', '丹药不具备指定功效');
+      add('missing_trait', '香品不具备指定功效');
     const actual = candidate.appearance;
     const matches =
       actual !== undefined &&
@@ -164,11 +164,11 @@ export function matchSectDeliveryRequirement(
         ? actual === requirement.appearance.grade
         : APPEARANCE_ORDER[actual] >=
           APPEARANCE_ORDER[requirement.appearance.grade]);
-    if (!matches) add('appearance_mismatch', '丹药品相不符合要求');
+    if (!matches) add('appearance_mismatch', '香品品相不符合要求');
   } else if (requirement.kind === 'artifact' && candidate.kind === 'artifact') {
-    if (candidate.isEquipped) add('item_equipped', '已装备法宝不能提交');
+    if (candidate.isEquipped) add('item_equipped', '已装备封灵器不能提交');
     if (candidate.slot !== requirement.slot)
-      add('wrong_slot', '法宝部位不符合要求');
+      add('wrong_slot', '封灵器部位不符合要求');
     if (
       requirement.minPerfectAffixCount &&
       candidate.perfectAffixCount < requirement.minPerfectAffixCount

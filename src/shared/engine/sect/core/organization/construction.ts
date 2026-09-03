@@ -28,7 +28,7 @@ export function quoteSectConstructionDonation(
   const option = SECT_CONSTRUCTION_DONATION_OPTIONS.find(
     (candidate) => candidate.spiritStones === spiritStones,
   );
-  if (!option) throw new Error('建设灵石档位无效');
+  if (!option) throw new Error('建设灯油券档位无效');
   return option;
 }
 

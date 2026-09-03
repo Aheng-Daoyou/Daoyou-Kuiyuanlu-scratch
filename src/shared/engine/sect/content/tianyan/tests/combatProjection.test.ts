@@ -71,7 +71,7 @@ describe('天衍圣地战斗投影', () => {
 
     for (const [abilityId, mpCost] of Object.entries(expected)) {
       expect(
-        resolveSectAbility({ sect, realm: '化神', abilityId }).config.mpCost ?? 0,
+        resolveSectAbility({ sect, realm: '忘川', abilityId }).config.mpCost ?? 0,
       ).toBe(mpCost);
     }
   });
@@ -81,11 +81,11 @@ describe('天衍圣地战斗投影', () => {
     const localId = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
     expect(definition.id).toBe('tianyan');
-    expect(definition.name).toBe('天衍圣地');
+    expect(definition.name).toBe('观星台');
     expect(definition.raceIds).toEqual(['human']);
     expect(definition.combatResource).toMatchObject({
       id: 'sect.tianyan.derivation',
-      name: '衍数',
+      name: '星衍',
       max: 3,
     });
     expect(definition.onboarding).toMatchObject({
@@ -184,12 +184,12 @@ describe('天衍圣地战斗投影', () => {
       expect(() =>
         new SectStateValidator().validate(TIANYAN_MODULE, sect),
       ).not.toThrow();
-      const projection = projectSectCombat({ sect, realm: '化神' });
+      const projection = projectSectCombat({ sect, realm: '忘川' });
       expect(projection).not.toBeNull();
       expect(projection?.resources).toEqual([
         {
           id: 'sect.tianyan.derivation',
-          name: '衍数',
+          name: '星衍',
           icon: '✨',
           initial: 0,
           max: 3,
@@ -199,12 +199,12 @@ describe('天衍圣地战斗投影', () => {
     },
   );
 
-  it('六门落印术共享无印与五旧印六分支，并携带元素及灵根失配豁免', () => {
+  it('六门落印术共享无印与五旧印六分支，并携带元素及窍失配豁免', () => {
     const sect = tianyanState(TIANYAN_HETU_PATH_ID);
     for (const abilityId of TIANYAN_LANDING_ABILITY_IDS) {
       const config = resolveSectAbility({
         sect,
-        realm: '化神',
+        realm: '忘川',
         abilityId,
       }).config;
       expect(config.effectLayers?.map((layer) => layer.id)).toEqual([
@@ -227,10 +227,10 @@ describe('天衍圣地战斗投影', () => {
     }
   });
 
-  it('太初玄光是无属性、零耗且不具备落印或灵根失配豁免标签', () => {
+  it('太初玄光是无属性、零耗且不具备落印或窍失配豁免标签', () => {
     const config = resolveSectAbility({
       sect: tianyanState(),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'primordial-ray',
     }).config;
     expect(config.mpCost).toBe(0);
@@ -245,12 +245,12 @@ describe('天衍圣地战斗投影', () => {
     ).toBe(false);
   });
 
-  it('灼烧与熔岩来源Buff携带火元素及异灵根失配豁免标签', () => {
+  it('灼烧与熔岩来源Buff携带火元素及异窍失配豁免标签', () => {
     const sect = tianyanState(TIANYAN_HETU_PATH_ID);
     const buffTags = (abilityId: string, layerId: string, buffId: string) => {
       const config = resolveSectAbility({
         sect,
-        realm: '化神',
+        realm: '忘川',
         abilityId,
       }).config;
       const effect = config.effectLayers
@@ -284,7 +284,7 @@ describe('天衍圣地战斗投影', () => {
   it('基础态可完整解析全部定义能力且只有13门列入玩家列表', () => {
     const resolved = resolveSectAbilities({
       sect: tianyanState(),
-      realm: '化神',
+      realm: '忘川',
     });
     expect(resolved).toHaveLength(
       TIANYAN_MODULE.definition.abilities.length - 2,
@@ -298,24 +298,24 @@ describe('天衍圣地战斗投影', () => {
     ).toHaveLength(13);
   });
 
-  it('技能详情区分落印术、内景法与天衍秘法', () => {
+  it('技能详情区分落印术、内景法与观星秘法', () => {
     const sect = tianyanState(TIANYAN_HETU_PATH_ID);
     const notes = (abilityId: string) =>
-      resolveSectAbility({ sect, realm: '化神', abilityId }).notes;
+      resolveSectAbility({ sect, realm: '忘川', abilityId }).notes;
 
-    expect(notes('verdant-pulse')).toContain('落印术·木');
-    expect(notes('myriad-wood-renewal')).toContain('内景法·木');
-    expect(notes('lotus-in-fire')).toContain('内景法·火');
-    expect(notes('boundless-earth')).toContain('内景法·土');
-    expect(notes('heavenly-river-cleansing')).toContain('内景法·水');
-    expect(notes('shift-palace')).toContain('天衍秘法');
-    expect(notes('five-qi-repository')).toContain('天衍秘法');
+    expect(notes('verdant-pulse')).toContain('落印术·岁星');
+    expect(notes('myriad-wood-renewal')).toContain('内景法·岁星');
+    expect(notes('lotus-in-fire')).toContain('内景法·荧惑');
+    expect(notes('boundless-earth')).toContain('内景法·镇星');
+    expect(notes('heavenly-river-cleansing')).toContain('内景法·辰星');
+    expect(notes('shift-palace')).toContain('观星秘法');
+    expect(notes('five-qi-repository')).toContain('观星秘法');
   });
 
   it('技能详情不暴露仅用于保护死亡目标的存活条件', () => {
     const details = resolveSectAbilities({
       sect: tianyanState(TIANYAN_HETU_PATH_ID),
-      realm: '化神',
+      realm: '忘川',
     })
       .flatMap((ability) => ability.detailRows)
       .join('；');

@@ -6,11 +6,11 @@ import { youduState, type YouduPathId } from './testState';
 function runtimeFingerprint(pathId: YouduPathId, nodes: string[]): string {
   const projection = projectSectCombat({
     sect: youduState(pathId, nodes),
-    realm: '化神',
+    realm: '忘川',
   })!;
   const abilities = resolveSectAbilities({
     sect: youduState(pathId, nodes),
-    realm: '化神',
+    realm: '忘川',
   });
   return JSON.stringify({
     defaultAttack: projection.defaultAttack,
@@ -24,7 +24,7 @@ describe('幽都36参悟节点编译矩阵', () => {
   const finisherCoefficients = (pathId?: YouduPathId, nodes: string[] = []) => {
     const config = resolveSectAbility({
       sect: youduState(pathId, nodes),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'soul-shall-not-return',
     }).config;
     const coefficient = (layerId: string) => {
@@ -68,7 +68,7 @@ describe('幽都36参悟节点编译矩阵', () => {
     ];
     const state = youduState(YOUDU_TIDE_PATH_ID, nodes);
     const forget = resolveSectAbility({
-      sect: state, realm: '化神', abilityId: 'forgetful-river-tide',
+      sect: state, realm: '忘川', abilityId: 'forgetful-river-tide',
     }).config;
     const direct = forget.effects?.find((effect) => effect.type === 'damage');
     expect(direct?.type === 'damage' && direct.params.value.coefficient)
@@ -78,7 +78,7 @@ describe('幽都36参悟节点编译矩阵', () => {
     expect(forgetBuff?.type === 'apply_buff' && forgetBuff.params.buffConfig.duration).toBe(3);
 
     const finish = resolveSectAbility({
-      sect: state, realm: '化神', abilityId: 'soul-shall-not-return',
+      sect: state, realm: '忘川', abilityId: 'soul-shall-not-return',
     }).config;
     const finishFour = finish.effectLayers?.find((layer) => layer.id === 'finish-four')
       ?.effects?.find((effect) => effect.type === 'damage');
@@ -90,7 +90,7 @@ describe('幽都36参悟节点编译矩阵', () => {
       .toBe(1.9074);
   });
 
-  it('镇魄司命代表完整方案落实混合增伤、法力、抗性、控制与终结强化', () => {
+  it('镇魄司命代表完整方案落实混合增伤、灯焰、抗性、控制与终结强化', () => {
     const nodes = [
       'decree-iron-enters-shadow',
       'decree-silent-nail',
@@ -101,7 +101,7 @@ describe('幽都36参悟节点编译矩阵', () => {
     ];
     const state = youduState(YOUDU_DECREE_PATH_ID, nodes);
     const seize = resolveSectAbility({
-      sect: state, realm: '化神', abilityId: 'seize-soul',
+      sect: state, realm: '忘川', abilityId: 'seize-soul',
     }).config;
     const coefficients = seize.effects
       ?.filter((effect) => effect.type === 'damage')
@@ -109,7 +109,7 @@ describe('幽都36参悟节点编译矩阵', () => {
     expect(coefficients).toEqual([0.2409, 0.2409]);
 
     const pin = resolveSectAbility({
-      sect: state, realm: '化神', abilityId: 'pin-soul',
+      sect: state, realm: '忘川', abilityId: 'pin-soul',
     }).config;
     expect(pin.mpCost).toBe(140);
     const highPin = pin.effectLayers?.find((layer) => layer.id === 'pin-high')
@@ -117,7 +117,7 @@ describe('幽都36参悟节点编译矩阵', () => {
     expect(highPin?.type === 'apply_buff' && highPin.params.controlHitBonus).toBe(0.15);
 
     const finish = resolveSectAbility({
-      sect: state, realm: '化神', abilityId: 'soul-shall-not-return',
+      sect: state, realm: '忘川', abilityId: 'soul-shall-not-return',
     }).config;
     const damage = finish.effectLayers?.find((layer) => layer.id === 'finish-four')
       ?.effects?.find((effect) => effect.type === 'damage');
@@ -148,10 +148,10 @@ describe('幽都36参悟节点编译矩阵', () => {
     const tideState = youduState(YOUDU_TIDE_PATH_ID, ['tide-first-ripple']);
     const decreeState = youduState(YOUDU_DECREE_PATH_ID, ['decree-iron-enters-shadow']);
     const tideSeize = resolveSectAbility({
-      sect: tideState, realm: '化神', abilityId: 'seize-soul',
+      sect: tideState, realm: '忘川', abilityId: 'seize-soul',
     }).config.effects?.filter((effect) => effect.type === 'damage');
     const decreeForget = resolveSectAbility({
-      sect: decreeState, realm: '化神', abilityId: 'forgetful-river-tide',
+      sect: decreeState, realm: '忘川', abilityId: 'forgetful-river-tide',
     }).config.effects?.find((effect) => effect.type === 'damage');
 
     expect(tideSeize?.map((effect) => effect.type === 'damage'

@@ -15,7 +15,7 @@ describe('sect facility construction', () => {
       { spiritStones: 400_000, constructionPoints: 40, contribution: 20 },
     ]);
     expect(() => quoteSectConstructionDonation(30_000)).toThrow(
-      '建设灵石档位无效',
+      '建设灯油券档位无效',
     );
   });
 

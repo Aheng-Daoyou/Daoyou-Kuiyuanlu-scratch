@@ -11,10 +11,10 @@ import {
 import { HEAVY_SWORD_PATH, SWIFT_SWORD_PATH } from '../../content/lingxiao';
 
 describe('通用宗门成长', () => {
-  it('每个境界阶段开放五级并在渡劫圆满达到180级', () => {
-    expect(getSectMethodLevelCap('炼气', '初期')).toBe(5);
-    expect(getSectMethodLevelCap('筑基', '初期')).toBe(25);
-    expect(getSectMethodLevelCap('渡劫', '圆满')).toBe(180);
+  it('每个境界阶段开放五级并在渡渊圆满达到180级', () => {
+    expect(getSectMethodLevelCap('闻腥', '初期')).toBe(5);
+    expect(getSectMethodLevelCap('守灯', '初期')).toBe(25);
+    expect(getSectMethodLevelCap('渡渊', '圆满')).toBe(180);
   });
 
   it.each([
@@ -25,7 +25,7 @@ describe('通用宗门成长', () => {
     [150, 71_810, 215_500],
     [180, 310_360, 931_100],
   ])(
-    '%i级按独立指数曲线计算单级修为与灵石',
+    '%i级按独立指数曲线计算单级灯韵与灯油券',
     (level, cultivationExp, spiritStones) => {
       expect(getSectMethodTrainingCost(level - 1, level)).toEqual({
         cultivationExp,
@@ -61,7 +61,7 @@ describe('通用宗门成长', () => {
     expect(first.comprehensionInsight + second.comprehensionInsight).toBe(0);
   });
 
-  it('所有可用等级的灵石成本均高于修为成本', () => {
+  it('所有可用等级的灯油券成本均高于灯韵成本', () => {
     for (let level = 1; level <= 180; level += 1) {
       const cost = getSectMethodTrainingCost(level - 1, level);
       expect(cost.spiritStones).toBeGreaterThan(cost.cultivationExp);
@@ -104,7 +104,7 @@ describe('通用宗门成长', () => {
       })),
     ).toEqual([
       {
-        realm: '筑基中期',
+        realm: '守灯中期',
         cost: {
           cultivationExp: 5_000,
           comprehensionInsight: 100,
@@ -112,7 +112,7 @@ describe('通用宗门成长', () => {
         },
       },
       {
-        realm: '金丹圆满',
+        realm: '窥渊圆满',
         cost: {
           cultivationExp: 20_000,
           comprehensionInsight: 100,
@@ -120,7 +120,7 @@ describe('通用宗门成长', () => {
         },
       },
       {
-        realm: '化神中期',
+        realm: '忘川中期',
         cost: {
           cultivationExp: 80_000,
           comprehensionInsight: 100,
@@ -128,7 +128,7 @@ describe('通用宗门成长', () => {
         },
       },
       {
-        realm: '炼虚圆满',
+        realm: '执灯圆满',
         cost: {
           cultivationExp: 320_000,
           comprehensionInsight: 100,
@@ -136,7 +136,7 @@ describe('通用宗门成长', () => {
         },
       },
       {
-        realm: '大乘中期',
+        realm: '近神中期',
         cost: {
           cultivationExp: 1_280_000,
           comprehensionInsight: 100,
@@ -144,7 +144,7 @@ describe('通用宗门成长', () => {
         },
       },
       {
-        realm: '渡劫圆满',
+        realm: '渡渊圆满',
         cost: {
           cultivationExp: 5_120_000,
           comprehensionInsight: 100,
@@ -155,7 +155,7 @@ describe('通用宗门成长', () => {
     const progress = getPathProgress({
       path: HEAVY_SWORD_PATH,
       unlockedLayerIds: ['1', '2', '3', '4'],
-      realm: '大乘',
+      realm: '近神',
       stage: '中期',
     });
     expect(progress.unlockedLayers.map((layer) => layer.id)).toEqual([
@@ -171,7 +171,7 @@ describe('通用宗门成长', () => {
         path: HEAVY_SWORD_PATH,
         unlockedLayerIds: ['1'],
         layerId: '3',
-        realm: '金丹',
+        realm: '窥渊',
         stage: '圆满',
         methods: {},
       }),
@@ -182,33 +182,33 @@ describe('通用宗门成长', () => {
     const gates = [
       {
         layerId: '1',
-        before: ['筑基', '初期'],
-        reached: ['筑基', '中期'],
+        before: ['守灯', '初期'],
+        reached: ['守灯', '中期'],
       },
       {
         layerId: '2',
-        before: ['金丹', '后期'],
-        reached: ['金丹', '圆满'],
+        before: ['窥渊', '后期'],
+        reached: ['窥渊', '圆满'],
       },
       {
         layerId: '3',
-        before: ['化神', '初期'],
-        reached: ['化神', '中期'],
+        before: ['忘川', '初期'],
+        reached: ['忘川', '中期'],
       },
       {
         layerId: '4',
-        before: ['炼虚', '后期'],
-        reached: ['炼虚', '圆满'],
+        before: ['执灯', '后期'],
+        reached: ['执灯', '圆满'],
       },
       {
         layerId: '5',
-        before: ['大乘', '初期'],
-        reached: ['大乘', '中期'],
+        before: ['近神', '初期'],
+        reached: ['近神', '中期'],
       },
       {
         layerId: 'ultimate',
-        before: ['渡劫', '后期'],
-        reached: ['渡劫', '圆满'],
+        before: ['渡渊', '后期'],
+        reached: ['渡渊', '圆满'],
       },
     ] as const;
 
@@ -237,7 +237,7 @@ describe('通用宗门成长', () => {
     }
   });
 
-  it('流派指数成本累计正确且每层均消耗满额道心感悟', () => {
+  it('流派指数成本累计正确且每层均消耗满额灯心窥悟', () => {
     const onePath = HEAVY_SWORD_PATH.layers.reduce(
       (total, layer) => ({
         cultivationExp: total.cultivationExp + layer.cost.cultivationExp,

@@ -113,7 +113,7 @@ function runtimeFingerprint(
   EventBus.instance.reset();
   const projection = productionSectRuntime.compiler.compile(LINGXIAO_MODULE, {
     sect: sectState(pathId, nodeId),
-    realm: '化神',
+    realm: '忘川',
   });
   const owner = unit('owner');
   const enemy = unit('enemy');
@@ -377,7 +377,7 @@ const NODE_CASES = [
   })),
 ];
 
-describe('红尘剑宗36参悟节点运行时矩阵', () => {
+describe('太乙清都观36参悟节点运行时矩阵', () => {
   afterEach(() => EventBus.instance.reset());
 
   it('节点清单保持快重各18个', () => {

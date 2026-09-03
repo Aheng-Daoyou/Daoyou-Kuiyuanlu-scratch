@@ -15,7 +15,7 @@ function demonNode(
     apply(
       builder.requireExtension<DemonBuildFacade>(
         DEMON_BUILD_FACADE,
-        '魔心渡厄构筑',
+        '哺心渡厄构筑',
       ),
     );
   });
@@ -28,7 +28,7 @@ export const WUXIANG_DEMON_NODES = [
       layerId: '1',
       name: '血作灯油',
       description:
-        '所有佛相神通气血成本提高1个百分点；成功施展后获得2%最大气血护盾。',
+        '所有胎相神通气血成本提高1个百分点；成功施展后获得2%最大气血护盾。',
     },
     (demon) => demon.strengthenBuddhistBody(),
   ),
@@ -47,7 +47,7 @@ export const WUXIANG_DEMON_NODES = [
       id: 'demon-bone-tide',
       layerId: '1',
       name: '潮伏骨中',
-      description: '血海听潮获得的基础护盾由10%提高至15%最大气血。',
+      description: '血莲听潮获得的基础护盾由10%提高至15%最大气血。',
     },
     (demon) => demon.strengthenTideShield(),
   ),
@@ -56,7 +56,7 @@ export const WUXIANG_DEMON_NODES = [
       id: 'demon-flower-inward',
       layerId: '2',
       name: '花开向内',
-      description: '心隙令下一次宗门直接伤害提高25%。',
+      description: '哺隙令下一次宗门直接伤害提高25%。',
     },
     (demon) => demon.strengthenHeartGap(),
   ),
@@ -66,7 +66,7 @@ export const WUXIANG_DEMON_NODES = [
       layerId: '2',
       name: '潮不回头',
       description:
-        '血海听潮生成的下一门宗门直接伤害加成由20%提高至30%；无相仍以30%为准。',
+        '血莲听潮生成的下一门宗门直接伤害加成由20%提高至30%；莲相仍以30%为准。',
     },
     (demon) => demon.strengthenTideDamage(),
   ),
@@ -75,7 +75,7 @@ export const WUXIANG_DEMON_NODES = [
       id: 'demon-third-outside',
       layerId: '2',
       name: '门外三声',
-      description: '三叩业门强化第三击的气血线由45%提高至55%。',
+      description: '三叩莲门强化第三击的气血线由45%提高至55%。',
     },
     (demon) => demon.raiseThirdHitThreshold(),
   ),
@@ -83,7 +83,7 @@ export const WUXIANG_DEMON_NODES = [
     {
       id: 'demon-slow-fire',
       layerId: '3',
-      name: '劫火缓行',
+      name: '莲火缓行',
       description: '闭目观劫的直接伤害减免由40%提高至50%。',
     },
     (demon) => demon.strengthenObserveGuard(),
@@ -92,9 +92,9 @@ export const WUXIANG_DEMON_NODES = [
     {
       id: 'demon-skandhas-fuel',
       layerId: '3',
-      name: '五蕴作薪',
+      name: '胎蕴作薪',
       description:
-        '照见五蕴的佛相净化数量由1提高至2；显化无相时共净化3个减益。',
+        '照见胎蕴的胎相净化数量由1提高至2；显化莲相时共净化3个减益。',
     },
     (demon) => demon.addCleanse(),
   ),
@@ -104,7 +104,7 @@ export const WUXIANG_DEMON_NODES = [
       layerId: '3',
       name: '苇短水长',
       description:
-        '一苇横江的佛相直接伤害减免由20%提高至30%；魔相最终提高到40%。',
+        '一苇横江的胎相直接伤害减免由20%提高至30%；血相最终提高到40%。',
     },
     (demon) => demon.strengthenReedGuard(),
   ),
@@ -112,9 +112,9 @@ export const WUXIANG_DEMON_NODES = [
     {
       id: 'demon-first-thought',
       layerId: '4',
-      name: '第一念魔',
+      name: '初哺显化',
       description:
-        '进入魔相或无相时获得第一念：下一门攻击神通额外造成0.35倍物攻伤害，防御神通获得5%最大气血护盾。',
+        '进入血相或莲相时获得初哺：下一门攻击神通额外造成0.35倍物攻伤害，防御神通获得5%最大气血护盾。',
     },
     (demon) => demon.grantFirstThought(),
   ),
@@ -124,7 +124,7 @@ export const WUXIANG_DEMON_NODES = [
       layerId: '4',
       name: '第二岸苦',
       description:
-        '魔相期间每成功施展一门宗门神通，恢复2.5%最大气血；无相仅触发一次。',
+        '血相期间每成功施展一门宗门神通，恢复2.5%最大气血；莲相仅触发一次。',
     },
     (demon) => demon.healAfterDemonSkill(),
   ),
@@ -133,7 +133,7 @@ export const WUXIANG_DEMON_NODES = [
       id: 'demon-two-gates',
       layerId: '4',
       name: '两门同渡',
-      description: '进入魔相时获得的护盾由6%提高至10%最大气血。',
+      description: '进入血相时获得的护盾由6%提高至10%最大气血。',
     },
     (demon) => demon.shieldOnDemonEntry(),
   ),
@@ -162,7 +162,7 @@ export const WUXIANG_DEMON_NODES = [
       id: 'demon-leave-boat',
       layerId: '5',
       name: '渡后留舟',
-      description: '魔相结束时获得6%最大气血护盾；无相结束不触发。',
+      description: '血相结束时获得6%最大气血护盾；莲相结束不触发。',
     },
     (demon) => demon.shieldOnDemonExit(),
   ),
@@ -170,9 +170,9 @@ export const WUXIANG_DEMON_NODES = [
     {
       id: 'demon-one-furnace',
       layerId: 'ultimate',
-      name: '佛魔同炉',
+      name: '胎血同炉',
       description:
-        '强化六门神通的无相变化，使收束伤害、恢复、护盾或净化获得提升。',
+        '强化六门神通的莲相变化，使收束伤害、恢复、护盾或净化获得提升。',
     },
     (demon) => demon.strengthenFormlessLayers(),
   ),
@@ -182,7 +182,7 @@ export const WUXIANG_DEMON_NODES = [
       layerId: 'ultimate',
       name: '一息无间',
       description:
-        '魔相与无相的单行动吸血上限提高至12%最大气血，但渡厄直接伤害减免由20%降低至10%。',
+        '血相与莲相的单行动吸血上限提高至12%最大气血，但哺渡直接伤害减免由20%降低至10%。',
     },
     (demon) => demon.tradeGuardForLifesteal(),
   ),
@@ -192,7 +192,7 @@ export const WUXIANG_DEMON_NODES = [
       layerId: 'ultimate',
       name: '回首彼岸',
       description:
-        '魔相或无相结束时，若存活且低于20%气血，恢复5%最大气血；每次转相最多一次。',
+        '血相或莲相结束时，若存活且低于20%气血，恢复5%最大气血；每次转相最多一次。',
     },
     (demon) => demon.healAfterCrossing(),
   ),

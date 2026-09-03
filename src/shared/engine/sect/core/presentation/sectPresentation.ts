@@ -104,6 +104,8 @@ export interface SectPresentationTheme {
     aspectRatio?: number;
     hotspots?: readonly SectMapHotspot[];
   };
+  /** 宗门视觉印记（立绘/徽记数据层）：用于生成程序化宗门徽记与深墨风视觉锚点。 */
+  visual?: SectVisualIdentity;
   facilityLabels?: Readonly<Record<string, string>>;
   lockedFacilities?: readonly string[];
   scenes?: Partial<Record<SectSceneKey, Partial<SectScenePresentation>>>;
@@ -111,6 +113,20 @@ export interface SectPresentationTheme {
   terms?: Partial<
     Omit<SectPresentationTerms, 'sweepActivity' | 'sweepCanvasLabel'>
   >;
+}
+
+/** 宗门视觉印记：程序化徽记所需的确定性数据（不依赖运行时 AI 生成）。 */
+export interface SectVisualIdentity {
+  /** 徽记称谓（如「灯楼九曜」）。 */
+  sigilLabel: string;
+  /** 徽记字形（单字，绘于徽记中央）。 */
+  sigilGlyph: string;
+  /** 深墨配色三元组（主/衬/血）。 */
+  palette: readonly [string, string, string];
+  /** 宗门格言（深墨底上一行白描）。 */
+  motto: string;
+  /** 意象注脚（一句白描，呼应徽记来历）。 */
+  motif?: string;
 }
 
 export interface ResolvedSectPresentation {
@@ -123,6 +139,7 @@ export interface ResolvedSectPresentation {
     aspectRatio: number;
     hotspots: readonly SectMapHotspot[];
   };
+  visual: SectVisualIdentity;
   facilityLabels: Readonly<Record<string, string>>;
   lockedFacilities: readonly string[];
   scenes: Readonly<Record<SectSceneKey, SectScenePresentation>>;
@@ -207,27 +224,27 @@ const STANDARD_HOTSPOTS: readonly SectMapHotspot[] = [
     permission: 'sect.construction.view',
     left: '0',
     top: '0',
-    note: '设施建设 · 灵石捐献',
+    note: '设施建设 · 灯油券捐献',
   },
   {
     id: 'cultivation',
-    label: '修炼室',
+    label: '窥悟室',
     route: '/game/sect/cultivation-room',
     facility: 'cultivation_room',
     permission: 'sect.facility.cultivation.use',
     left: '0',
     top: '0',
-    note: '闭关修炼 · 设施灵效',
+    note: '闭关窥悟 · 设施灯效',
   },
   {
     id: 'alchemy',
-    label: '丹房',
+    label: '闻香房',
     route: '/game/sect/alchemy',
     facility: 'workshop',
     permission: 'sect.facility.alchemy.use',
     left: '0',
     top: '0',
-    note: '炼丹 · 设施灵效',
+    note: '制香 · 设施灯效',
   },
   {
     id: 'refinery',
@@ -237,17 +254,17 @@ const STANDARD_HOTSPOTS: readonly SectMapHotspot[] = [
     permission: 'sect.facility.refinery.use',
     left: '0',
     top: '0',
-    note: '炼器 · 设施灵效',
+    note: '封灵 · 设施灯效',
   },
   {
     id: 'vein',
-    label: '灵脉',
+    label: '灯脉',
     route: '/game/sect/spirit-vein',
     facility: 'spirit_vein',
     permission: 'sect.spirit_vein.view',
     left: '0',
     top: '0',
-    note: '矿场巡视 · 灵石收益 · 采矿',
+    note: '矿场巡视 · 灯油券收益 · 采矿',
   },
   {
     id: 'garden',
@@ -317,20 +334,20 @@ const STANDARD_SCENES: Record<SectSceneKey, SectScenePresentation> = {
   ),
   industries: scene(
     '建设院',
-    '选择宗门设施并捐献灵石，推进常态建设。',
+    '选择宗门设施并捐献灯油券，推进常态建设。',
     '设施建设进度正在汇总……',
   ),
   cultivation: scene(
-    '修炼室',
-    '使用宗门修炼设施进行闭关。',
-    '聚灵设施正在启动……',
+    '窥悟室',
+    '使用宗门窥悟设施进行闭关。',
+    '聚灯设施正在启动……',
   ),
-  alchemy: scene('丹房', '使用宗门丹房炼制丹药。', '炼丹设施正在启动……'),
-  refinery: scene('器坊', '使用宗门器坊炼制法器。', '炼器设施正在启动……'),
+  alchemy: scene('闻香房', '使用宗门闻香房炼制香品。', '制香设施正在启动……'),
+  refinery: scene('器坊', '使用宗门封灵坊炼制封灵器。', '封灵设施正在启动……'),
   spiritVein: scene(
-    '灵脉',
-    '查看灵脉设施收益并办理矿场事务。',
-    '灵脉记录正在读取……',
+    '灯脉',
+    '查看灯脉设施收益并办理矿场事务。',
+    '灯脉记录正在读取……',
   ),
   herbGarden: scene(
     '药田',
@@ -401,8 +418,8 @@ const STANDARD_ROOMS: Readonly<Record<string, SectRoomDefinition>> =
         roomActor(
           'promotion',
           '传',
-          '传功长老',
-          '传功长老',
+          '传灯长老',
+          '传灯长老',
           '负责晋升试炼。',
           '晋升不可躁进。先看看你当前应过的关。',
           'sect.affairs.tasks',
@@ -468,8 +485,8 @@ const STANDARD_ROOMS: Readonly<Record<string, SectRoomDefinition>> =
           '石',
           '建设执事',
           '建设执事',
-          '负责灵石捐献与建设登记。',
-          '每日可择一处设施捐献灵石，你想建设哪一处？',
+          '负责灯油券捐献与建设登记。',
+          '每日可择一处设施捐献灯油券，你想建设哪一处？',
           'sect.industries.donation',
         ),
       ],
@@ -543,53 +560,53 @@ const STANDARD_ROOMS: Readonly<Record<string, SectRoomDefinition>> =
     },
     cultivation: {
       key: 'cultivation',
-      description: '聚灵阵息在静室中缓缓流转，守阵执事候在阵枢旁。',
+      description: '聚灯阵息在静室中缓缓流转，守阵执事候在阵枢旁。',
       actors: [
         roomActor(
           'keeper',
           '阵',
           '守阵执事',
           '守阵执事',
-          '负责聚灵阵与闭关安排。',
-          '阵息平稳。你要查问此地灵效，还是就此入静？',
+          '负责聚灯阵与闭关安排。',
+          '阵息平稳。你要查问此地灯效，还是就此入静？',
           'sect.cultivation.retreat',
         ),
       ],
     },
     alchemy: {
       key: 'alchemy',
-      description: '丹炉灵焰未熄，药柜依次封存。丹房执事正在炉前值守。',
+      description: '香炉灯焰未熄，香柜依次封存。闻香房执事正在炉前值守。',
       actors: [
         roomActor(
           'keeper',
           '丹',
-          '丹房执事',
-          '丹房执事',
-          '负责丹房状态与炼丹安排。',
-          '炉火正稳。你要先问丹房灵效，还是直接开炉？',
+          '闻香房执事',
+          '闻香房执事',
+          '负责闻香房状态与制香安排。',
+          '炉火正稳。你要先问闻香房灯效，还是直接开炉？',
           'sect.alchemy.craft',
           {
             facilityKey: 'workshop',
             effectKey: 'alchemy',
             workspaceHref: '/game/sect/alchemy?workspace=craft',
-            statusReply: '请执事说说丹房灵效',
-            workspaceReply: '有劳执事为我开炉炼丹',
+            statusReply: '请执事说说闻香房灯效',
+            workspaceReply: '有劳执事为我开炉制香',
           },
         ),
         roomActor(
           'furnace',
           '鼎',
-          '宗门丹炉',
-          '炼丹设施',
-          '纳药、引火、聚蕴、凝丹。',
-          '炉腹传来低沉回响，地火阵纹正等待灵石与药气。',
+          '宗门香炉',
+          '制香设施',
+          '纳药、引火、聚蕴、凝香。',
+          '炉腹传来低沉回响，地火阵纹正等待灯油券与药气。',
           'sect.alchemy.craft',
           {
             facilityKey: 'workshop',
             effectKey: 'alchemy',
             workspaceHref: '/game/sect/alchemy?workspace=craft',
-            statusReply: '以神识察看丹炉灵效',
-            workspaceReply: '唤醒丹炉，开始炼丹',
+            statusReply: '以心神察看香炉灯效',
+            workspaceReply: '唤醒香炉，开始制香',
           },
           'sect-alchemy-furnace',
           'facility',
@@ -605,22 +622,22 @@ const STANDARD_ROOMS: Readonly<Record<string, SectRoomDefinition>> =
           '器',
           '器坊执事',
           '器坊执事',
-          '负责器坊状态与炼器安排。',
-          '地火可用。你要先问器坊灵效，还是就此开炉？',
+          '负责器坊状态与封灵安排。',
+          '地火可用。你要先问器坊灯效，还是就此开炉？',
           'sect.refinery.craft',
           {
             facilityKey: 'workshop',
             effectKey: 'refinery',
             workspaceHref: '/game/sect/refinery?workspace=craft',
-            statusReply: '请执事说说器坊灵效',
-            workspaceReply: '有劳执事为我开炉炼器',
+            statusReply: '请执事说说器坊灯效',
+            workspaceReply: '有劳执事为我开炉封灵',
           },
         ),
       ],
     },
     spiritVein: {
       key: 'spiritVein',
-      description: '矿道灵辉沿岩隙流转，守脉执事在井口整理今日的巡视封签。',
+      description: '矿道灯辉沿岩隙流转，守脉执事在井口整理今日的巡视封签。',
       actors: [
         roomActor(
           'keeper',
@@ -637,15 +654,15 @@ const STANDARD_ROOMS: Readonly<Record<string, SectRoomDefinition>> =
         roomActor(
           'facility',
           '⛏️',
-          '宗门灵脉',
+          '宗门灯脉',
           '宗门设施',
-          '查看设施等级、灵石收益并进行灵矿采掘。',
-          '矿壁中的灵辉依旧沿岩隙缓缓流转。',
+          '查看设施等级、灯油券收益并进行灯矿采掘。',
+          '矿壁中的灯辉依旧沿岩隙缓缓流转。',
           'sect.spirit-vein.mining',
           {
             facilityKey: 'spirit_vein',
             effectKey: 'spirit_vein',
-            detail: '灵石收益会随周俸一并核算，无需在矿场另行采收。',
+            detail: '灯油券收益会随周俸一并核算，无需在矿场另行采收。',
           },
           'spirit-vein-facility',
           'facility',
@@ -654,7 +671,7 @@ const STANDARD_ROOMS: Readonly<Record<string, SectRoomDefinition>> =
     },
     herbGarden: {
       key: 'herbGarden',
-      description: '灵泉沿畦垄缓缓流过，药园执事正在田边查验草木长势。',
+      description: '灯泉沿畦垄缓缓流过，药园执事正在田边查验草木长势。',
       actors: [
         roomActor(
           'keeper',
@@ -682,7 +699,7 @@ const STANDARD_ROOMS: Readonly<Record<string, SectRoomDefinition>> =
           '宗门药田',
           '宗门设施',
           '查看设施等级与药田近况。',
-          '灵泉润过畦垄，草木依照时序生长。',
+          '灯泉润过畦垄，草木依照时序生长。',
           'sect.herb-garden.status',
           {
             facilityKey: 'herb_garden',
@@ -748,11 +765,17 @@ export const STANDARD_SECT_PRESENTATION: Omit<
     aspectRatio: 1672 / 941,
     hotspots: STANDARD_HOTSPOTS,
   }),
+  visual: Object.freeze<SectVisualIdentity>({
+    sigilLabel: '宗门徽记',
+    sigilGlyph: '宗',
+    palette: ['#1a140f', '#7a3b2e', '#b0452f'],
+    motto: '以心照灯，以灯照夜。',
+  }),
   facilityLabels: Object.freeze({
     archive: '传承阁',
-    cultivation_room: '修炼室',
-    workshop: '丹器坊',
-    spirit_vein: '灵脉',
+    cultivation_room: '窥悟室',
+    workshop: '封灵坊',
+    spirit_vein: '灯脉',
     herb_garden: '药田',
     formation: '护宗大阵',
   }),
@@ -826,6 +849,7 @@ export function resolveSectPresentation(
       theme?.announcement ?? STANDARD_SECT_PRESENTATION.announcement,
     onboarding: theme?.onboarding,
     map,
+    visual: theme?.visual ?? STANDARD_SECT_PRESENTATION.visual,
     facilityLabels: {
       ...STANDARD_SECT_PRESENTATION.facilityLabels,
       ...theme?.facilityLabels,

@@ -95,7 +95,7 @@ describe('幽都战斗与展示投影', () => {
       expect(() =>
         new SectStateValidator().validate(YOUDU_MODULE, state),
       ).not.toThrow();
-      const projection = projectSectCombat({ sect: state, realm: '化神' })!;
+      const projection = projectSectCombat({ sect: state, realm: '忘川' })!;
       expect(projection.resources).toEqual([
         {
           id: YOUDU_SOUL_FIRE,
@@ -115,7 +115,7 @@ describe('幽都战斗与展示投影', () => {
   it('魂灯初照将魂火入场值设为1，不改变资源上限', () => {
     const projection = projectSectCombat({
       sect: youduState(YOUDU_TIDE_PATH_ID, ['tide-soul-lantern']),
-      realm: '化神',
+      realm: '忘川',
     })!;
 
     expect(projection.resources).toContainEqual({
@@ -140,14 +140,14 @@ describe('幽都战斗与展示投影', () => {
       sect.methods['dead-heart-living-spirit'] = 0;
       const detail = resolveSectAbility({
         sect,
-        realm: '化神',
+        realm: '忘川',
         abilityId: 'youdu-runtime',
       });
       expect(detail.unlocked).toBe(true);
       expect(detail.config.tags).not.toContain(
         GameplayTags.ABILITY.SECT.path('youdu', pathId),
       );
-      const projection = projectSectCombat({ sect, realm: '化神' })!;
+      const projection = projectSectCombat({ sect, realm: '忘川' })!;
       expect(
         projection.abilities.filter(
           (ability) => ability.slug === 'sect.youdu.youdu-runtime',
@@ -170,7 +170,7 @@ describe('幽都战斗与展示投影', () => {
     for (const [abilityId, [mpCost, cooldown]] of Object.entries(expected)) {
       const config = resolveSectAbility({
         sect: state,
-        realm: '化神',
+        realm: '忘川',
         abilityId,
       }).config;
       expect(config.mpCost ?? 0).toBe(mpCost);
@@ -178,13 +178,13 @@ describe('幽都战斗与展示投影', () => {
     }
     const shadow = resolveSectAbility({
       sect: state,
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'reveal-shadow',
     }).config;
     expect(shadow.hitPolicy).toBe('guaranteed');
     const finish = resolveSectAbility({
       sect: state,
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'soul-shall-not-return',
     }).config;
     expect(finish.castConditions).toContainEqual(
@@ -196,7 +196,7 @@ describe('幽都战斗与展示投影', () => {
     expect(finish.tags).toContain(GameplayTags.ABILITY.CHANNEL.TRUE);
     const sever = resolveSectAbility({
       sect: state,
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'soul-severing-call',
     }).config;
     const severLow = sever.effectLayers
@@ -215,27 +215,27 @@ describe('幽都战斗与展示投影', () => {
     ]);
     const sever = resolveSectAbility({
       sect: decree,
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'soul-severing-call',
     }).detailRows.join('；');
     const seize = resolveSectAbility({
       sect: decree,
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'seize-soul',
     }).detailRows.join('；');
     const pin = resolveSectAbility({
       sect: decree,
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'pin-soul',
     }).detailRows.join('；');
     const heart = resolveSectAbility({
       sect: youduState(YOUDU_DECREE_PATH_ID, ['decree-guard-the-spirit']),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'youdu-runtime',
     }).detailRows.join('；');
     const slowPin = resolveSectAbility({
       sect: youduState(YOUDU_DECREE_PATH_ID, ['decree-four-gates-closed']),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'pin-soul',
     }).detailRows.join('；');
 
@@ -243,7 +243,7 @@ describe('幽都战斗与展示投影', () => {
     expect(sever).toContain('命中后增加2层蚀魂');
     expect(sever).toContain('本次魂伤提高35%');
     expect(sever).toContain('拥有3点魂火时');
-    expect(seize).toContain('术伤与魂伤各0.24 × 法术攻击');
+    expect(seize).toContain('术伤与魂伤各0.24 × 灯律攻击');
     expect(pin).toContain('命中后增加2层蚀魂');
     expect(pin).toContain('本次控制命中提高15%');
     expect(pin).toContain('受到的气血治疗降低100%');
@@ -260,7 +260,7 @@ describe('幽都战斗与展示投影', () => {
         'decree-one-name-one-judgment',
         'decree-name-in-youdu',
       ]),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'soul-shall-not-return',
     }).detailRows.join('；');
     const forget = resolveSectAbility({
@@ -268,7 +268,7 @@ describe('幽都战斗与展示投影', () => {
         'tide-black-water',
         'tide-no-return-current',
       ]),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'forgetful-river-tide',
     }).detailRows.join('；');
 
@@ -276,7 +276,7 @@ describe('幽都战斗与展示投影', () => {
     expect(finish).toContain('受到的气血治疗降低80%');
     expect(finish).toContain('速度降低30%');
     expect(finish).toContain(
-      '目标每场首次进入4层时获得标记；下一次终结命中后返还60点已支付法力并消耗标记',
+      '目标每场首次进入4层时获得标记；下一次终结命中后返还60点已支付灯焰并消耗标记',
     );
     expect(finish).toContain('目标气血低于35%');
     expect(finish).toContain('每场一次');
@@ -289,12 +289,12 @@ describe('幽都战斗与展示投影', () => {
   it('司命判词独立开放三层终结计划', () => {
     const verdict = resolveSectAbility({
       sect: youduState(YOUDU_DECREE_PATH_ID, ['decree-verdict']),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'soul-shall-not-return',
     }).config;
     const ordinary = resolveSectAbility({
       sect: youduState(YOUDU_DECREE_PATH_ID, ['decree-seven-inch-severance']),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'soul-shall-not-return',
     }).config;
 
@@ -309,22 +309,22 @@ describe('幽都战斗与展示投影', () => {
   it('重平节点投影出攻击、控制与续火的最终数值', () => {
     const seize = resolveSectAbility({
       sect: youduState(YOUDU_DECREE_PATH_ID, ['decree-first-soul-taken']),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'seize-soul',
     });
     const pin = resolveSectAbility({
       sect: youduState(YOUDU_DECREE_PATH_ID, ['decree-four-gates-closed']),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'pin-soul',
     });
     const shoreless = resolveSectAbility({
       sect: youduState(YOUDU_TIDE_PATH_ID, ['tide-shoreless']),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'soul-shall-not-return',
     });
 
     expect(seize.detailRows.join('；')).toContain('攻击降低25%，持续3回合');
-    expect(pin.detailRows.join('；')).toContain('追加0.20 × 法术攻击（魂伤）');
+    expect(pin.detailRows.join('；')).toContain('追加0.20 × 灯律攻击（魂伤）');
     expect(shoreless.detailRows.join('；')).toContain('命中后额外获得1点魂火');
   });
 
@@ -333,7 +333,7 @@ describe('幽都战斗与展示投影', () => {
     const coefficientOf = (abilityId: string, layerId?: string) => {
       const ability = resolveSectAbility({
         sect: state,
-        realm: '化神',
+        realm: '忘川',
         abilityId,
       }).config;
       const effects = layerId
@@ -356,7 +356,7 @@ describe('幽都战斗与展示投影', () => {
   it('蚀魂详情展示完整五层曲线、逐层驱散且不出现零值占位', () => {
     const sigh = resolveSectAbility({
       sect: youduState(),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'one-sigh',
     }).detailRows.join('；');
 
@@ -373,7 +373,7 @@ describe('幽都战斗与展示投影', () => {
   it('照影分别说明通用承伤与敕魂魂伤增幅，不合并成错误倍率', () => {
     const shadow = resolveSectAbility({
       sect: youduState(YOUDU_DECREE_PATH_ID),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'reveal-shadow',
     }).detailRows.join('；');
 
@@ -389,7 +389,7 @@ describe('幽都战斗与展示投影', () => {
     ]);
     const tideRuntime = resolveSectAbility({
       sect: youduState(YOUDU_TIDE_PATH_ID),
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'youdu-runtime',
     }).detailRows.join('；');
     const tideSigh = [
@@ -402,22 +402,22 @@ describe('幽都战斗与展示投影', () => {
         (nodeId) =>
           resolveSectAbility({
             sect: youduState(YOUDU_TIDE_PATH_ID, [nodeId]),
-            realm: '化神',
+            realm: '忘川',
             abilityId: 'one-sigh',
           }).detailRows,
       )
       .join('；');
     const decreeRuntime = resolveSectAbility({
       sect: decree,
-      realm: '化神',
+      realm: '忘川',
       abilityId: 'youdu-runtime',
     }).detailRows.join('；');
 
     expect(tideRuntime).toContain('每回合首次忘川有效伤害获得1点魂火');
-    expect(tideSigh).toContain('驱散蚀魂后受到0.12 × 法术攻击魂伤，自身获得1点魂火');
-    expect(tideSigh).toContain('目标进入5层时追加0.30 × 法术攻击魂伤');
+    expect(tideSigh).toContain('驱散蚀魂后受到0.12 × 灯律攻击魂伤，自身获得1点魂火');
+    expect(tideSigh).toContain('目标进入5层时追加0.30 × 灯律攻击魂伤');
     expect(tideSigh).toContain('目标进入5层时刷新忘川');
-    expect(tideSigh).toContain('带有忘川的目标进入5层时失去10%最大法力');
+    expect(tideSigh).toContain('带有忘川的目标进入5层时失去10%最大灯焰');
     expect(decreeRuntime).toContain('3层及以上时，自身直接魂伤提高10%');
     expect(decreeRuntime).toContain('失魂被抵抗或控制免疫阻止时，目标攻击与速度降低20%');
     expect(decreeRuntime).toContain('失魂结束或被主动解除时，目标攻击降低15%');
@@ -426,7 +426,7 @@ describe('幽都战斗与展示投影', () => {
   it('运行时 listener ID 唯一，共享触发次数只通过预算组表达', () => {
     const projection = projectSectCombat({
       sect: youduState(YOUDU_DECREE_PATH_ID),
-      realm: '化神',
+      realm: '忘川',
     })!;
     const listeners = projection.abilities.flatMap(
       (ability) => ability.listeners ?? [],

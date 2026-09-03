@@ -55,7 +55,7 @@ function unit(id: string): Unit {
 function config(abilityId: string, pathId?: YouduPathId, nodes: string[] = []) {
   return resolveSectAbility({
     sect: youduState(pathId, nodes),
-    realm: '化神',
+    realm: '忘川',
     abilityId,
   }).config;
 }
@@ -939,7 +939,7 @@ describe('幽都核心机制实际结算', () => {
     expect(request?.damageIncreasePctBucket ?? 0).toBe(0);
   });
 
-  it('法术伤害回蓝只响应混合技能的术伤包，魂伤仍不可暴击与吸血', () => {
+  it('灯律伤害回蓝只响应混合技能的术伤包，魂伤仍不可暴击与吸血', () => {
     const system = new DamageSystem();
     const caster = unit('caster');
     const target = unit('target');

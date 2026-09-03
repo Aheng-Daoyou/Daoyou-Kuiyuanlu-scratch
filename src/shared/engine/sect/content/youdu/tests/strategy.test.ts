@@ -90,7 +90,7 @@ function selectionContext(
       ability: AbilityFactory.create(
         resolveSectAbility({
           sect: youduState(pathId === 'base' ? undefined : pathId),
-          realm: '化神',
+          realm: '忘川',
           abilityId,
         }).config,
       ) as ActiveSkill,
@@ -158,7 +158,7 @@ describe('幽都基础施法策略', () => {
     expect(
       projectSectCombat({
         sect: youduState(undefined),
-        realm: '化神',
+        realm: '忘川',
       })?.selectionStrategy,
     ).toBeInstanceOf(YouduBaseSelectionStrategy);
     const context = selectionContext(

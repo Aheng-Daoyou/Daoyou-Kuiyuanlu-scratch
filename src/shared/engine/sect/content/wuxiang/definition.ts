@@ -18,15 +18,15 @@ const durationMilestones = [
 
 export const WUXIANG_BASE_DEFINITION: SectDefinitionWithoutPaths = {
   id: WUXIANG_SECT_ID,
-  name: '无相禅宗',
+  name: '白莲乳母教',
   description:
-    '此宗不避魔心，不弃色身。门人以皮囊为道场，以气血燃业火；佛法用来照见诸苦，魔功用来横渡诸苦。',
+    '邪教，信奉「乳母」，执《守灯》第五章（残）。此教收容乱世孤女，它作恶，但它收容的人确实无处可去；门人以皮囊为道场，以气血燃莲灯，在胎相、血相、莲相三相中自证哺身。',
   raceIds: ['human'],
   configVersion: 2,
   foundationPassiveId: 'wuxiang-runtime',
   combatResource: {
     id: WUXIANG_WAR_INTENT,
-    name: '心念',
+    name: '莲念',
     icon: '👹',
     max: 6,
   },
@@ -34,16 +34,16 @@ export const WUXIANG_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'wuxiang-canon',
       slot: 1,
-      name: '《无相真解》',
+      name: '《乳母哺真解》',
       isPrimary: true,
-      description: '观色身诸相皆无定相，于一念之间容佛、容魔，亦容无相。',
+      description: '观色身如皮囊，胎藏乳母之念；于一念之间容胎、容血，亦容莲。',
       growthProfile: { curve: 'balanced', effects, durationMilestones },
     },
     {
       id: 'blood-lotus',
       slot: 2,
-      name: '《血海生莲》',
-      description: '血海不净，莲亦由此而生；知其污浊，方能借之渡身。',
+      name: '《血渊生莲》',
+      description: '血渊不净，莲亦由此而生；知其污浊，方能借之渡身。',
       growthProfile: {
         curve: 'balanced', effects, durationMilestones,
         panelModifier: {
@@ -55,8 +55,8 @@ export const WUXIANG_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'white-bone',
       slot: 3,
-      name: '《白骨照身》',
-      description: '去皮肉浮相，见白骨本真；以朽坏之身承受来力。',
+      name: '《皮囊照身》',
+      description: '去皮肉浮相，见皮囊本真；以朽坏之身承受来力。',
       growthProfile: {
         curve: 'early', effects, durationMilestones,
         panelModifier: {
@@ -68,8 +68,8 @@ export const WUXIANG_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'wrathful-ming',
       slot: 4,
-      name: '《明王降魔》',
-      description: '明王怒目，不为嗔心，只借烈相斩断迟疑。',
+      name: '《嗔王显相》',
+      description: '嗔王怒目，不为嗔心，只借烈相斩断迟疑。',
       growthProfile: {
         curve: 'late', effects, durationMilestones,
         panelModifier: {
@@ -81,8 +81,8 @@ export const WUXIANG_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'six-senses',
       slot: 5,
-      name: '《六根守识》',
-      description: '声色香味触法皆至于前，心识自守，不随外境转移。',
+      name: '《六感守胎》',
+      description: '声色香味触法皆至于前，胎识自守，不随外境转移。',
       growthProfile: {
         curve: 'early', effects, durationMilestones,
         panelModifier: {
@@ -109,9 +109,9 @@ export const WUXIANG_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'flower-heart',
       kind: 'default',
-      baseName: '拈花叩心',
+      baseName: '拈莲叩心',
       description:
-        '指间拈花，叩问的却是敌我同一颗心。佛相立其因，魔相照其果，无相令因果同现。',
+        '指间拈莲，叩问的却是敌我同一颗心。胎相立其因，血相照其果，莲相令因果同现。',
       role: 'generator',
       unlock: { type: 'method', methodId: 'wuxiang-canon', level: 1 },
       cooldown: 0,
@@ -119,9 +119,9 @@ export const WUXIANG_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'blood-tide',
       kind: 'active',
-      baseName: '血海听潮',
+      baseName: '血莲听潮',
       description:
-        '不拒血海来潮，先听清每一道苦声从何处生，再于回澜时借势渡身。',
+        '不拒血莲来潮，先听清每一道苦声从何处生，再于回澜时借势渡身。',
       role: 'defensive',
       unlock: { type: 'method', methodId: 'blood-lotus', level: 1 },
       cooldown: 3,
@@ -129,7 +129,7 @@ export const WUXIANG_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'three-knocks',
       kind: 'active',
-      baseName: '三叩业门',
+      baseName: '三叩莲门',
       description: '一叩问因，二叩问果，三叩之后，门内门外皆由一念开合。',
       role: 'combo',
       unlock: { type: 'method', methodId: 'white-bone', level: 3 },
@@ -147,9 +147,9 @@ export const WUXIANG_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'five-skandhas',
       kind: 'active',
-      baseName: '照见五蕴',
+      baseName: '照见胎蕴',
       description:
-        '色受想行识逐一照破。佛相辨其虚实，魔相借火自渡，无相令诸蕴俱空。',
+        '色受想行识逐一照破。胎相辨其虚实，血相借火自渡，莲相令诸蕴俱空。',
       role: 'utility',
       unlock: { type: 'method', methodId: 'six-senses', level: 3 },
       cooldown: 3,
@@ -159,7 +159,7 @@ export const WUXIANG_BASE_DEFINITION: SectDefinitionWithoutPaths = {
       kind: 'active',
       baseName: '一苇横江',
       description:
-        '江阔浪急，脚下只留一苇；佛相守住此岸，魔相强渡彼岸，无相则知两岸非岸。',
+        '江阔浪急，脚下只留一苇；胎相守住此岸，血相强渡彼岸，莲相则知两岸非岸。',
       role: 'defensive',
       unlock: { type: 'method', methodId: 'reed-crossing-method', level: 3 },
       cooldown: 5,
@@ -167,9 +167,9 @@ export const WUXIANG_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'turn-form',
       kind: 'active',
-      baseName: '一念未生',
+      baseName: '一念生莲',
       description:
-        '心念未足时，一念尚伏于心；心念既成，佛、魔与无相只在翻掌之间。',
+        '莲念未足时，一念尚伏于心；莲念既成，胎、血与莲只在翻掌之间。',
       role: 'finisher',
       unlock: { type: 'method', methodId: 'wuxiang-canon', level: 5 },
       cooldown: 0,
@@ -177,9 +177,9 @@ export const WUXIANG_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'wuxiang-runtime',
       kind: 'passive',
-      baseName: '不坏色身',
+      baseName: '不坏皮囊',
       description:
-        '色身即是道场：最大气血提高，身陷危境时更能承受迎面而来的伤害。',
+        '皮囊即是道场：最大气血提高，身陷危境时更能承受迎面而来的伤害。',
       role: 'defensive',
       unlock: { type: 'always' },
       visibility: 'internal',
@@ -187,7 +187,7 @@ export const WUXIANG_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'mirror-core',
       kind: 'passive',
-      baseName: '明镜照业',
+      baseName: '莲镜照业',
       description: '来力皆留其痕，因满果熟时照还来处。',
       role: 'defensive',
       unlock: { type: 'active_path', pathId: WUXIANG_MIRROR_PATH_ID },
@@ -196,8 +196,8 @@ export const WUXIANG_BASE_DEFINITION: SectDefinitionWithoutPaths = {
     {
       id: 'demon-core',
       kind: 'passive',
-      baseName: '魔心渡厄',
-      description: '以气血作舟、心念作楫，于一息将尽之际横渡生死。',
+      baseName: '哺心渡厄',
+      description: '以气血作舟、莲念作楫，于一息将尽之际横渡生死。',
       role: 'combo',
       unlock: { type: 'active_path', pathId: WUXIANG_DEMON_PATH_ID },
       visibility: 'internal',

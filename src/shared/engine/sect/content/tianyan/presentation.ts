@@ -26,43 +26,50 @@ const hotspot = (
 export const TIANYAN_SECT_PRESENTATION: SectPresentationTheme = {
   sectId: TIANYAN_SECT_ID,
   announcement:
-    '五峰水脉本旬将依新阵图调度，诸弟子行经中宫时请勿挪动地刻与测算标记。',
+    '北荒星野本旬将依新星图调度，诸弟子行经观星台时请勿挪动星刻与测算标记。',
+  visual: {
+    sigilLabel: '星野观命',
+    sigilGlyph: '星',
+    palette: ['#11131c', '#3b4a78', '#c8d0e8'],
+    motto: '观星不命，星影为缺。',
+    motif: '北荒夜穹压得很低，星刻之间总有一道尚未应验的裂痕。',
+  },
   onboarding: {
-    summary: '以无色太初灵气推演五行，让前一法留下的余势决定后一法的变化。',
-    traits: ['五行推演', '法印衔术', '四法择局'],
+    summary: '以无色星海观星命数，让前一观留下的余势决定后一观的星象。',
+    traits: ['星象观星', '星印衔术', '四法择局'],
     script: {
       id: 'tianyan-onboarding',
       title: '天衍有缺',
       theme: 'mist',
       backdrop: {
         src: '/assets/sect/onboarding/tianyan.webp',
-        alt: '雨后中宫演法台上，一名新弟子沿石阶走向等候在五行汇流地刻前的执教，五峰殿宇隐于云雾',
+        alt: '雨后观星厅上，一名新弟子沿石阶走向等候在星象汇流星刻前的执教，星台殿宇隐于云雾',
       },
       acts: [
         {
           id: 'five-peaks-above-clouds',
-          title: '云上五峰',
-          scene: '天衍圣地 · 观象阶',
-          body: '石阶越过云海，五座外峰渐次显出轮廓。玄水自墨青山壁流入药圃，木架与药篓沿廊桥送往暗朱炉院；窑灰归入赭土，矿路再通向覆着白铜屋面的冷峰。所有去路都没有停在一峰，最终绕回雨后的中宫。',
+          title: '云上星台',
+          scene: '观星台 · 观象阶',
+          body: '石阶越过云海，五座外峰渐次显出轮廓。辰星之水自墨青山壁流入药圃，木架与药篓沿廊桥送往暗朱炉院；窑灰归入赭土，矿路再通向覆着白铜屋面的冷峰。所有去路都没有停在一峰，最终绕回雨后的观星厅。',
           speaker:
-            '执教：“先看它们如何相接。记住，五行从来不是五座互不相干的院子。”',
+            '执教：“先看它们如何相接。记住，星象从来不是五座互不相干的院子。”',
           backgroundPosition: '50% 38%',
           tone: 'mist',
         },
         {
           id: 'primordial-without-color',
-          title: '太初无色',
-          scene: '天衍圣地 · 中宫演法台',
-          body: '执教站在汇流地刻中央，抬手送出一线无色玄光。灵光越过湿润石面，只留下转瞬即逝的浅白痕迹；它没有火的炽烈，也没有金的锋响，更没有惊动地刻中缓缓流动的水。',
+          title: '星海无色',
+          scene: '观星台 · 观星厅',
+          body: '执教站在汇流星刻中央，抬手送出一线无色玄光。星辉越过湿润石面，只留下转瞬即逝的浅白痕迹；它没有火的炽烈，也没有金的锋响，更没有惊动星刻中缓缓流动的水。',
           speaker:
-            '执教：“这是太初。它不替你选择，所以也不会扰乱你已经留下的答案。”',
+            '执教：“这是星海。它不替你选择，所以也不会扰乱你已经留下的答案。”',
           backgroundPosition: '50% 64%',
           tone: 'stillness',
         },
         {
           id: 'one-art-leaves-mark',
           title: '一法留痕',
-          scene: '天衍圣地 · 五行地刻',
+          scene: '观星台 · 星象刻盘',
           body: '木气先在傀儡胸前结成一枚青印。下一刻，火光沿印纹展开，不再只是一束直焰；余火映入雨水，沿石缝中原有的细流照亮了另一段去路。',
           speaker: '执教：“第一法不是未完成的失败。它是在替第二法留下去处。”',
           backgroundPosition: '72% 58%',
@@ -71,20 +78,20 @@ export const TIANYAN_SECT_PRESENTATION: SectPresentationTheme = {
         {
           id: 'the-escaped-one',
           title: '遁去其一',
-          scene: '天衍圣地 · 五经阁前',
+          scene: '观星台 · 五曜阁前',
           body: '五枚经简在案上依次展开，执教却只将四枚推到你面前。余下的一枚没有收走，只被放在灯影之外。',
           speaker:
-            '执教：“五行皆可学，临敌不可尽携。肯留下一个未知，才算真正开始推演。”',
+            '执教：“星象皆可学，临敌不可尽携。肯留下一个未知，才算真正开始观星。”',
           backgroundPosition: '28% 42%',
           tone: 'steel',
         },
         {
           id: 'derivation-remains-open',
           title: '天衍有缺',
-          scene: '天衍圣地 · 衍天殿',
-          body: '你走到执教面前，将本命灵气送入中宫汇流地刻。灵光先随浅水掠过根须，又映过远处炉火与赭色泥沙，最后在白铜冷光中卸去原有偏向，归入一条从未走过的无色经路。五峰没有同时显威，只在云雾之间依次传来回应。',
+          scene: '观星台 · 衍天殿',
+          body: '你走到执教面前，将本命灯油送入观星厅汇流星刻。星辉先随浅水掠过根须，又映过远处炉火与赭色泥沙，最后在白铜冷光中卸去原有偏向，归入一条从未走过的无色经路。星台没有同时显威，只在云雾之间依次传来回应。',
           speaker:
-            '掌教：“天机从不因推演而失去变化。今日入门，愿你知其可为，也知其不可尽为。”',
+            '掌教：“天机从不因观星而失去变化。今日入门，愿你知其可为，也知其不可尽为。”',
           backgroundPosition: '50% 56%',
           tone: 'mist',
         },
@@ -93,7 +100,7 @@ export const TIANYAN_SECT_PRESENTATION: SectPresentationTheme = {
   },
   map: {
     image: '/assets/sect/tianyan-map.webp',
-    alt: '天衍圣地五峰环绕中宫，水脉、药圃、炉院、土台与矿路首尾相接的云海舆图',
+    alt: '观星台星台环绕观星厅，星图、药圃、炉院、土台与矿路首尾相接的云海舆图',
     hotspots: [
       hotspot(
         'hall',
@@ -106,7 +113,7 @@ export const TIANYAN_SECT_PRESENTATION: SectPresentationTheme = {
       ),
       hotspot(
         'archive',
-        '五经阁',
+        '五曜阁',
         '29%',
         '22%',
         '/game/sect/archive',
@@ -125,7 +132,7 @@ export const TIANYAN_SECT_PRESENTATION: SectPresentationTheme = {
       ),
       hotspot(
         'arena',
-        '中宫演法台',
+        '观星厅',
         '50%',
         '49%',
         '/game/sect/arena',
@@ -157,26 +164,26 @@ export const TIANYAN_SECT_PRESENTATION: SectPresentationTheme = {
         '60%',
         '/game/sect/industries',
         'sect.construction.view',
-        '设施建设 · 灵石捐献',
+        '设施建设 · 灯油券捐献',
       ),
       hotspot(
         'cultivation',
-        '太初静室',
+        '星海静室',
         '15%',
         '57%',
         '/game/sect/cultivation-room',
         'sect.facility.cultivation.use',
-        '闭关修炼 · 设施灵效',
+        '闭关窥悟 · 设施灯效',
         'cultivation_room',
       ),
       hotspot(
         'alchemy',
-        '青华丹院',
+        '岁华香院',
         '30%',
         '29%',
         '/game/sect/alchemy',
         'sect.facility.alchemy.use',
-        '炼丹 · 设施灵效',
+        '制香 · 设施灯效',
         'workshop',
       ),
       hotspot(
@@ -186,17 +193,17 @@ export const TIANYAN_SECT_PRESENTATION: SectPresentationTheme = {
         '75%',
         '/game/sect/refinery',
         'sect.facility.refinery.use',
-        '炼器 · 设施灵效',
+        '封灵 · 设施灯效',
         'workshop',
       ),
       hotspot(
         'vein',
-        '坤元地脉',
+        '镇星地脉',
         '82%',
         '54%',
         '/game/sect/spirit-vein',
         'sect.spirit_vein.view',
-        '矿场巡视 · 灵石收益 · 采矿',
+        '矿场巡视 · 灯油券收益 · 采矿',
         'spirit_vein',
       ),
       hotspot(
@@ -225,7 +232,7 @@ export const TIANYAN_SECT_PRESENTATION: SectPresentationTheme = {
       ),
       hotspot(
         'cave',
-        '云衡洞府',
+        '云衡灯宅',
         '13%',
         '50%',
         '/game/sect/cave',
@@ -234,7 +241,7 @@ export const TIANYAN_SECT_PRESENTATION: SectPresentationTheme = {
       ),
       {
         id: 'formation',
-        label: '五峰归流阵眼',
+        label: '星野归流阵眼',
         left: '50%',
         top: '53%',
         permission: 'sect.formation.view',
@@ -243,31 +250,31 @@ export const TIANYAN_SECT_PRESENTATION: SectPresentationTheme = {
         locked: true,
         visitor: {
           description:
-            '五峰灵机经水脉、炉院与矿路汇入中宫，外客可观其势，不得踏入阵眼。',
+            '星台灯机经星图、炉院与矿路汇入观星厅，外客可观其势，不得踏入阵眼。',
         },
       },
     ],
   },
   facilityLabels: {
-    archive: '五经阁',
-    cultivation_room: '太初静室',
-    workshop: '太白铸府',
-    spirit_vein: '坤元地脉',
-    herb_garden: '长生圃',
-    formation: '五峰归流阵眼',
+    archive: '星经阁',
+    cultivation_room: '守灯静室',
+    workshop: '封灵坊',
+    spirit_vein: '梦涎井',
+    herb_garden: '灯下草圃',
+    formation: '星野归流阵眼',
   },
   lockedFacilities: ['formation'],
   scenes: {
     map: {
-      title: '天衍圣地舆图',
+      title: '观星台舆图',
       description:
-        '五峰环绕中宫，水脉、药圃、炉院、土台与矿路首尾相接；诸峰各有所长，却始终在同一轮推演中运转。',
-      loadingText: '五峰水脉正在归流中宫……',
+        '星台环抱观星厅，星图、草圃、坊院、土台与梦涎井首尾相接；诸台各有所长，却始终在同一轮观星中运转。',
+      loadingText: '星野正在归流观星厅……',
     },
     hall: {
       title: '衍天殿',
       description:
-        '大殿不悬天命判词，只陈历代推演中被事实改写的旧卷。身份玉牒与周俸名册置于中宫汇流地刻之后，雨水沿殿前石槽缓缓分入五峰。',
+        '大殿不悬天命判词，只陈历代观星中被事实改写的旧卷。身份玉牒与周俸名册置于观星厅汇流星刻之后，雨水沿殿前石槽缓缓分入星台。',
     },
     affairs: {
       title: '司算院',
@@ -275,29 +282,29 @@ export const TIANYAN_SECT_PRESENTATION: SectPresentationTheme = {
         '新差事依时辰、地脉与人手写入长卷；执事会标出已知条件，却从不替接取者写下唯一答案。',
     },
     archive: {
-      title: '五经阁',
+      title: '五曜阁',
       description:
-        '六卷真经分藏于中央与五行书架。卷册之间留有大量空白，供后来者记录术法相接时出现的新变化。',
+        '六卷真经分藏于中央与星象书架。卷册之间留有大量空白，供后来者记录灯律相接时出现的新变化。',
     },
     paths: {
       title: '河洛台',
       description:
-        '河图刻流，洛书定位。两条道途同观五行，一条顺势成图，一条移宫断局。',
+        '星河流转，星图定位。两条道途同观星象，一条顺势成图，一条移宫断局。',
     },
     arena: {
-      title: '中宫演法台',
+      title: '观星厅',
       description:
-        '五道地刻汇于圆台。弟子在此更换神通、校验法印，也复盘每一次被错误次序覆盖的余势。',
+        '五道星刻汇于圆台。弟子在此更换神通、校验星印，也复盘每一次被错误次序覆盖的余势。',
     },
     cultivation: {
-      title: '太初静室',
+      title: '星海静室',
       description:
-        '静室内没有五色阵光，只留一线无色灵气。门人需先让本命之气安静下来，才能重走太初衍脉。',
+        '静室内没有五色阵光，只留一线无色灯油。门人需先让本命之气安静下来，才能重走星海衍脉。',
     },
     alchemy: {
-      title: '青华丹院',
+      title: '岁华香院',
       description:
-        '木架、活水与温炉依次相连。药师记录的不只是药性，也包括采时、火候和前一炉留下的余温。',
+        '木架、活水与温炉依次相连。香师记录的不只是香性，也包括采时、火候和前一炉留下的余温。',
     },
     refinery: {
       title: '太白铸府',
@@ -305,14 +312,14 @@ export const TIANYAN_SECT_PRESENTATION: SectPresentationTheme = {
         '金石在炉火与水渠之间往复，锤下每一道锋面都有明确去处；废料也会归入下一炉，而非弃在山外。',
     },
     spiritVein: {
-      title: '坤元地脉',
+      title: '镇星地脉',
       description:
-        '山腹地脉托住五峰阵基。厚土不显于天际，却决定廊桥、水渠与炉道能否在云雨之后仍守住原位。',
+        '山腹地脉托住星台阵基。厚土不显于天际，却决定廊桥、水渠与炉道能否在云雨之后仍守住原位。',
     },
     herbGarden: {
       title: '长生圃',
       description:
-        '灵草依水位与日照分层种植。圃中没有永远固定的田垄，每一季都会按照观象记录重新调整。',
+        '灯药草依水位与日照分层种植。圃中没有永远固定的田垄，每一季都会按照观象记录重新调整。',
     },
     gate: {
       title: '观象门',
@@ -320,9 +327,9 @@ export const TIANYAN_SECT_PRESENTATION: SectPresentationTheme = {
         '山门正对云海，门侧刻着历年天象与实际结果。偏差没有被抹去，反而比准确的预言保存得更久。',
     },
     cave: {
-      title: '云衡洞府',
+      title: '云衡灯宅',
       description:
-        '洞府散在玄冥、青华二峰之间。每处门前都嵌一片集露白铜，清晨水痕会留下不同走向，提醒主人今日的判断也会随明日天光改变。',
+        '灯宅散在辰星、岁华二峰之间。每处门前都嵌一片集露白铜，清晨水痕会留下不同走向，提醒主人今日的判断也会随明日天光改变。',
     },
   },
   rooms: {
@@ -379,7 +386,7 @@ export const TIANYAN_SECT_PRESENTATION: SectPresentationTheme = {
         donation: {
           id: 'tianyan-ducai',
           name: '履霜',
-          greeting: '灵石数目须与建设档位相合，你想投向哪处设施？',
+          greeting: '灯油券数目须与建设档位相合，你想投向哪处设施？',
         },
       },
     },
@@ -397,7 +404,7 @@ export const TIANYAN_SECT_PRESENTATION: SectPresentationTheme = {
         guide: {
           id: 'tianyan-heluozhi',
           name: '观复真人',
-          greeting: '推演先看已有之势，你想从哪条道途开始辨明？',
+          greeting: '观星先看已有之势，你想从哪条道途开始辨明？',
         },
       },
     },
@@ -420,7 +427,7 @@ export const TIANYAN_SECT_PRESENTATION: SectPresentationTheme = {
         keeper: {
           id: 'tianyan-shouyi',
           name: '抱一真人',
-          greeting: '阵中灵气已经归稳，想先查灵效，还是开始闭关？',
+          greeting: '阵中灯油已经归稳，想先查灯效，还是开始闭关？',
         },
       },
     },
@@ -429,7 +436,7 @@ export const TIANYAN_SECT_PRESENTATION: SectPresentationTheme = {
         keeper: {
           id: 'tianyan-qinghe',
           name: '允中道人',
-          greeting: '炉温与水候均在合宜范围，要查灵效还是开炉？',
+          greeting: '炉温与水候均在合宜范围，要查灯效还是开炉？',
         },
       },
     },
@@ -438,7 +445,7 @@ export const TIANYAN_SECT_PRESENTATION: SectPresentationTheme = {
         keeper: {
           id: 'tianyan-baishi',
           name: '松乔道人',
-          greeting: '金石与地火都已就位，要查灵效还是开始炼器？',
+          greeting: '金石与地火都已就位，要查灯效还是开始封灵？',
         },
       },
     },
@@ -451,8 +458,8 @@ export const TIANYAN_SECT_PRESENTATION: SectPresentationTheme = {
         },
         facility: {
           id: 'tianyan-kunyuan-dimai',
-          name: '坤元地脉',
-          greeting: '厚土地脉沉在五峰之下，灵辉沿测线缓缓明灭。',
+          name: '镇星地脉',
+          greeting: '厚土地脉沉在星台之下，灯辉沿测线缓缓明灭。',
         },
       },
     },
@@ -466,7 +473,7 @@ export const TIANYAN_SECT_PRESENTATION: SectPresentationTheme = {
         facility: {
           id: 'tianyan-changsheng-pu',
           name: '长生圃',
-          greeting: '田垄依照水位与日照铺开，新一季灵草正在生长。',
+          greeting: '田垄依照水位与日照铺开，新一季灯药草正在生长。',
         },
       },
     },
@@ -488,7 +495,7 @@ export const TIANYAN_SECT_PRESENTATION: SectPresentationTheme = {
   terms: {
     pathChanges: '河洛变化',
     meridianPractice: '天衍参悟',
-    meridianLoadout: '推演方案',
+    meridianLoadout: '观星方案',
     abilityChanges: '神通衍变',
     returnToAffairs: '返回司算院',
   },

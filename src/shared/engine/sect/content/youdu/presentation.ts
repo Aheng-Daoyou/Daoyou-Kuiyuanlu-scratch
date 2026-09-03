@@ -26,32 +26,39 @@ const hotspot = (
 export const YOUDU_SECT_PRESENTATION: SectPresentationTheme = {
   sectId: YOUDU_SECT_ID,
   announcement:
-    '黑水沿岸近来魂灯摇曳，夜巡弟子须两人同行；若见失名游魂，先引至招魂司登记。',
+    '忘川水沿岸近来魂灯摇曳，夜巡弟子须两人同行；若见失名游魂，先引至引魂殿登记。',
+  visual: {
+    sigilLabel: '忘川引魂',
+    sigilGlyph: '幽',
+    palette: ['#120f14', '#3a2b46', '#7d86a8'],
+    motto: '引魂归名，忘川照影。',
+    motif: '忘川水没有倒影，只有一盏盏魂灯逆流而上。',
+  },
   onboarding: {
     summary:
-      '黑水照影，幽灯唤魂。你将在敌人仍然站立时，一层层取走支撑其形神的力量。',
+      '忘川水照影，幽灯唤魂。你将在敌人仍然站立时，一层层取走支撑其形神的力量。',
     traits: ['蚀魂叠层', '魂伤越防', '禁疗耐控'],
     script: {
       id: 'youdu-onboarding',
-      title: '一叹入幽都',
+      title: '一叹入幽都·地藏殿',
       theme: 'stillness',
       backdrop: {
         src: '/assets/sect/onboarding/youdu.webp',
-        alt: '幽都山门前，弟子沿三盏魂灯照亮的黑水石径入山，水中倒影与本人错开半步',
+        alt: '地藏殿门前，弟子沿三盏魂灯照亮的忘川水石径入山，水中倒影与本人错开半步',
       },
       acts: [
         {
           id: 'black-water-shadow',
-          title: '黑水有影',
-          scene: '幽都 · 黑水石径',
-          body: '你沿北海石径入山。天上没有月，黑水却照出你的脸。水中那张脸比你迟了一息才抬眼。',
+          title: '忘川水有影',
+          scene: '幽都·地藏殿 · 忘川水石径',
+          body: '你沿北海石径入山。天上没有月，忘川水却照出你的脸。水中那张脸比你迟了一息才抬眼。',
           backgroundPosition: '48% 54%',
           tone: 'stillness',
         },
         {
           id: 'three-calls',
           title: '三声唤名',
-          scene: '幽都 · 无日关',
+          scene: '幽都·地藏殿 · 无日关',
           body: '山门内有人依次唤出你的姓名、来处与心中最不愿失去之物。前两声都有回音，第三声落下时，身后的影子轻轻动了一下。',
           speaker:
             '引路人：“莫回头。能随一声呼唤离身的，未必是鬼，也可能是你自己。”',
@@ -61,7 +68,7 @@ export const YOUDU_SECT_PRESENTATION: SectPresentationTheme = {
         {
           id: 'seven-lamps',
           title: '七灯照身',
-          scene: '幽都 · 七魄台',
+          scene: '幽都·地藏殿 · 七魄台',
           body: '七盏灯从暗处逐一亮起。你每走过一盏，脚步便轻一分，直到分不清是身体在前行，还是影子拖着身体。',
           backgroundPosition: '35% 48%',
           tone: 'stillness',
@@ -69,16 +76,16 @@ export const YOUDU_SECT_PRESENTATION: SectPresentationTheme = {
         {
           id: 'where-soul-returns',
           title: '魂归何处',
-          scene: '幽都 · 幽都殿',
-          body: '殿中没有神像，只有一面黑水。掌门问你：若能唤走仇敌的魂，也能唤回他的魂，你以哪一声为本事？你承认自己尚不知道答案。',
+          scene: '幽都·地藏殿 · 地藏殿正殿',
+          body: '殿中没有神像，只有一面忘川水。掌门问你：若能唤走仇敌的魂，也能唤回他的魂，你以哪一声为本事？你承认自己尚不知道答案。',
           backgroundPosition: '50% 38%',
           tone: 'mist',
         },
         {
           id: 'one-sigh-entry',
           title: '一叹入门',
-          scene: '幽都 · 魂灯前',
-          body: '掌门吹灭其中一盏灯，灯焰却出现在你掌心。黑水里的倒影终于与你同时抬头。',
+          scene: '幽都·地藏殿 · 魂灯前',
+          body: '掌门吹灭其中一盏灯，灯焰却出现在你掌心。忘川水里的倒影终于与你同时抬头。',
           speaker:
             '掌门：“先学叹息。唯有一声叹息，最容易让人忘记守住自己的魂。”',
           backgroundPosition: '52% 44%',
@@ -89,11 +96,11 @@ export const YOUDU_SECT_PRESENTATION: SectPresentationTheme = {
   },
   map: {
     image: '/assets/sect/youdu-map.webp',
-    alt: '幽都宗门舆图，黑水穿过幽都殿、七魄台、照影场与山中诸院',
+    alt: '幽都·地藏殿宗门舆图，忘川水穿过地藏殿正殿、七魄台、照影场与山中诸院',
     hotspots: [
       hotspot(
         'hall',
-        '幽都殿',
+        '地藏殿正殿',
         '49%',
         '20%',
         '/game/sect/hall',
@@ -130,7 +137,7 @@ export const YOUDU_SECT_PRESENTATION: SectPresentationTheme = {
       ),
       hotspot(
         'affairs',
-        '招魂司',
+        '引魂殿',
         '34%',
         '46%',
         '/game/sect/affairs',
@@ -148,12 +155,12 @@ export const YOUDU_SECT_PRESENTATION: SectPresentationTheme = {
       ),
       hotspot(
         'industries',
-        '黑水坊',
+        '忘川水坊',
         '48%',
         '78%',
         '/game/sect/industries',
         'sect.construction.view',
-        '设施建设 · 灵石捐献',
+        '设施建设 · 灯油券捐献',
       ),
       hotspot(
         'cultivation',
@@ -162,7 +169,7 @@ export const YOUDU_SECT_PRESENTATION: SectPresentationTheme = {
         '62%',
         '/game/sect/cultivation-room',
         'sect.facility.cultivation.use',
-        '闭关修炼 · 设施灵效',
+        '闭关窥悟 · 设施灯效',
         'cultivation_room',
       ),
       hotspot(
@@ -172,7 +179,7 @@ export const YOUDU_SECT_PRESENTATION: SectPresentationTheme = {
         '50%',
         '/game/sect/alchemy',
         'sect.facility.alchemy.use',
-        '炼丹 · 设施灵效',
+        '制香 · 设施灯效',
         'workshop',
       ),
       hotspot(
@@ -182,17 +189,17 @@ export const YOUDU_SECT_PRESENTATION: SectPresentationTheme = {
         '71%',
         '/game/sect/refinery',
         'sect.facility.refinery.use',
-        '炼器 · 设施灵效',
+        '封灵 · 设施灯效',
         'workshop',
       ),
       hotspot(
         'vein',
-        '黑水阴脉',
+        '忘川水阴脉',
         '90%',
         '44%',
         '/game/sect/spirit-vein',
         'sect.spirit_vein.view',
-        '矿场巡视 · 灵石收益 · 采矿',
+        '矿场巡视 · 灯油券收益 · 采矿',
         'spirit_vein',
       ),
       hotspot(
@@ -239,7 +246,7 @@ export const YOUDU_SECT_PRESENTATION: SectPresentationTheme = {
         locked: true,
         visitor: {
           description:
-            '黑水与魂灯牵引归路，外客只能在灯外辨认阵纹，不能越过无日关。',
+            '忘川水与魂灯牵引归路，外客只能在灯外辨认阵纹，不能越过无日关。',
         },
       },
     ],
@@ -250,23 +257,23 @@ export const YOUDU_SECT_PRESENTATION: SectPresentationTheme = {
     workshop: '镇铁炉',
     alchemy: '还魂药庐',
     refinery: '镇铁炉',
-    spirit_vein: '黑水阴脉',
+    spirit_vein: '忘川水阴脉',
     herb_garden: '彼岸圃',
     formation: '万魂归窍阵',
   },
   lockedFacilities: ['formation'],
   scenes: {
     map: {
-      title: '幽都舆图',
-      description: '黑水自山腹流过两岸诸院，灯影与人影总错开半步。',
-      loadingText: '魂灯正沿黑水次第亮起……',
+      title: '幽都·地藏殿舆图',
+      description: '忘川水自山腹流过两岸诸院，灯影与人影总错开半步。',
+      loadingText: '魂灯正沿忘川水次第亮起……',
     },
     hall: {
-      title: '幽都殿',
-      description: '殿中无神像，只有映照姓名、来处与归路的一面黑水。',
+      title: '地藏殿正殿',
+      description: '殿中无神像，只有映照姓名、来处与归路的一面忘川水。',
     },
     affairs: {
-      title: '招魂司',
+      title: '引魂殿',
       description: '门人记录失名者、游魂与界隙回声，也护送愿意归去的魂。',
     },
     archive: {
@@ -276,11 +283,11 @@ export const YOUDU_SECT_PRESENTATION: SectPresentationTheme = {
     paths: {
       title: '七魄台',
       description:
-        '招魂渡夜与镇魄司命由此分途：一者让黑水漫长，一者令铁钉落准。',
+        '招魂渡夜与镇魄司命由此分途：一者让忘川水漫长，一者令铁钉落准。',
     },
     arena: {
       title: '照影场',
-      description: '场中不立木人，只以黑水映出每一门神通落在影上的痕迹。',
+      description: '场中不立木人，只以忘川水映出每一门神通落在影上的痕迹。',
     },
     cultivation: {
       title: '返照室',
@@ -292,15 +299,15 @@ export const YOUDU_SECT_PRESENTATION: SectPresentationTheme = {
     },
     refinery: {
       title: '镇铁炉',
-      description: '黑水旧铁在低焰中缓慢成形，专用来定影稳神。',
+      description: '忘川水旧铁在低焰中缓慢成形，专用来定影稳神。',
     },
     spiritVein: {
-      title: '黑水阴脉',
-      description: '灵石沿湿冷岩层生长，表面映不出开采者的面孔。',
+      title: '忘川水阴脉',
+      description: '灯油券沿湿冷岩层生长，表面映不出开采者的面孔。',
     },
     herbGarden: {
       title: '彼岸圃',
-      description: '深色花叶沿黑水两岸生长；药田产出玩法后续开放。',
+      description: '深色花叶沿忘川水两岸生长；药田产出玩法后续开放。',
     },
     gate: {
       title: '无日关',
@@ -313,7 +320,7 @@ export const YOUDU_SECT_PRESENTATION: SectPresentationTheme = {
   },
   rooms: {
     affairs: {
-      description: '招魂司内灯影不灭，日常、周常与晋升事务各由一席经办。',
+      description: '引魂殿内灯影不灭，日常、周常与晋升事务各由一席经办。',
       actors: {
         daily: {
           id: 'youdu-shen-zhaodeng',
@@ -365,7 +372,7 @@ export const YOUDU_SECT_PRESENTATION: SectPresentationTheme = {
         donation: {
           id: 'youdu-duwu',
           name: '阿七',
-          greeting: '今日选好一处设施，我替你把灵石记入建设簿。',
+          greeting: '今日选好一处设施，我替你把灯油券记入建设簿。',
         },
       },
     },
@@ -406,7 +413,7 @@ export const YOUDU_SECT_PRESENTATION: SectPresentationTheme = {
         keeper: {
           id: 'youdu-shoudeng',
           name: '宁无恙',
-          greeting: '室中一切安稳，想先问灵效，还是现在闭关？',
+          greeting: '室中一切安稳，想先问灯效，还是现在闭关？',
         },
       },
     },
@@ -415,7 +422,7 @@ export const YOUDU_SECT_PRESENTATION: SectPresentationTheme = {
         keeper: {
           id: 'youdu-huansheng',
           name: '白蘅',
-          greeting: '香火未断，炉温也合适，要先问灵效还是开炉？',
+          greeting: '香火未断，炉温也合适，要先问灯效还是开炉？',
         },
       },
     },
@@ -424,7 +431,7 @@ export const YOUDU_SECT_PRESENTATION: SectPresentationTheme = {
         keeper: {
           id: 'youdu-zhentie',
           name: '祝余',
-          greeting: '低焰正稳，材料也都归位，要先问灵效还是炼器？',
+          greeting: '低焰正稳，材料也都归位，要先问灯效还是封灵？',
         },
       },
     },
@@ -437,8 +444,8 @@ export const YOUDU_SECT_PRESENTATION: SectPresentationTheme = {
         },
         facility: {
           id: 'youdu-heishui-yinmai',
-          name: '黑水阴脉',
-          greeting: '湿冷岩层间灵光幽微，黑水映不出矿壁的深处。',
+          name: '忘川水阴脉',
+          greeting: '湿冷岩层间灯辉幽微，忘川水映不出矿壁的深处。',
         },
       },
     },
@@ -452,7 +459,7 @@ export const YOUDU_SECT_PRESENTATION: SectPresentationTheme = {
         facility: {
           id: 'youdu-bian-pu',
           name: '彼岸圃',
-          greeting: '深色花叶沿黑水两岸舒展，水气停在叶尖未散。',
+          greeting: '深色花叶沿忘川水两岸舒展，水气停在叶尖未散。',
         },
       },
     },
@@ -476,6 +483,6 @@ export const YOUDU_SECT_PRESENTATION: SectPresentationTheme = {
     meridianPractice: '七魄参悟',
     meridianLoadout: '参悟方案',
     abilityChanges: '魂术变化',
-    returnToAffairs: '返回招魂司',
+    returnToAffairs: '返回引魂殿',
   },
 };

@@ -154,7 +154,7 @@ const tasks: readonly SectTaskDefinition[] = [
     fulfillment: taskFulfillment('daily'),
     presentation: taskPresentation(
       '巡视矿场',
-      '前往宗门矿脉驱逐侵扰妖兽。',
+      '前往宗门矿脉驱逐侵扰诡异。',
       '开始巡逻',
       {
         offeredReply: '矿场巡视交给我',
@@ -162,7 +162,7 @@ const tasks: readonly SectTaskDefinition[] = [
         claimableReply: '矿场侵扰已经平息，请执事查验',
         claimedReply: '请替我查查矿场巡视的功簿',
         instruction: {
-          text: '去宗门矿脉巡视一趟，将侵扰矿场的妖兽驱逐干净，再回来复命。',
+          text: '去宗门矿脉巡视一趟，将侵扰矿场的诡异驱逐干净，再回来复命。',
         },
       },
     ),
@@ -183,16 +183,16 @@ const tasks: readonly SectTaskDefinition[] = [
     },
     fulfillment: taskFulfillment('daily'),
     presentation: taskPresentation(
-      '灵矿采掘',
-      '进入宗门灵脉，以灵索采集一轮矿藏。',
+      '灯矿采掘',
+      '进入宗门灯脉，以灵索采集一轮矿藏。',
       '开始采掘',
       {
-        offeredReply: '今日灵矿采掘便交给我吧',
-        activeReply: '灵矿采掘的封签，请再替我核对一遍',
+        offeredReply: '今日灯矿采掘便交给我吧',
+        activeReply: '灯矿采掘的封签，请再替我核对一遍',
         claimableReply: '今日采掘已经结束，请执事验收回执',
-        claimedReply: '请替我查查灵矿采掘的功簿',
+        claimedReply: '请替我查查灯矿采掘的功簿',
         instruction: {
-          text: '去宗门灵脉开启采掘封签，以灵索带回足够矿藏，再回来复命。',
+          text: '去宗门灯脉开启采掘封签，以灵索带回足够矿藏，再回来复命。',
         },
       },
     ),
@@ -217,17 +217,17 @@ const tasks: readonly SectTaskDefinition[] = [
     },
     fulfillment: taskFulfillment('daily'),
     presentation: taskPresentation(
-      '丹药委托',
-      '寻来符合要求的丹药，补充宗门日常储备。',
-      '选择丹药',
+      '香品委托',
+      '寻来符合要求的香品，补充宗门日常储备。',
+      '选择香品',
       {
-        offeredReply: '丹房所需之物，我来寻',
-        activeReply: '丹房那桩委托，请再说一遍',
-        claimableReply: '丹药已经带回，请执事查验',
-        claimedReply: '请替我查查丹药委托的功簿',
+        offeredReply: '闻香房所需之物，我来寻',
+        activeReply: '闻香房那桩委托，请再说一遍',
+        claimableReply: '香品已经带回，请执事查验',
+        claimedReply: '请替我查查香品委托的功簿',
         instruction: {
-          text: '替丹房寻来一枚合用的丹药，取得后直接带回事务堂即可。',
-          requirementPrefix: '替丹房寻来',
+          text: '替闻香房寻来一枚合用的香品，取得后直接带回事务堂即可。',
+          requirementPrefix: '替闻香房寻来',
           requirementSuffix: '，取得后直接带回事务堂即可。',
         },
       },
@@ -254,16 +254,16 @@ const tasks: readonly SectTaskDefinition[] = [
     },
     fulfillment: taskFulfillment('daily'),
     presentation: taskPresentation(
-      '法宝委托',
-      '寻来符合要求且未装备的法宝，交由宗门统一调度。',
-      '选择法宝',
+      '封灵器委托',
+      '寻来符合要求且未装备的封灵器，交由宗门统一调度。',
+      '选择封灵器',
       {
-        offeredReply: '法宝调度一事，我可以接下',
-        activeReply: '法宝那桩委托，请再说一遍',
-        claimableReply: '法宝已经移交，请执事查验',
-        claimedReply: '请替我查查法宝委托的功簿',
+        offeredReply: '封灵器调度一事，我可以接下',
+        activeReply: '封灵器那桩委托，请再说一遍',
+        claimableReply: '封灵器已经移交，请执事查验',
+        claimedReply: '请替我查查封灵器委托的功簿',
         instruction: {
-          text: '替宗门寻来一件合用的未装备法宝，带回事务堂核验。',
+          text: '替宗门寻来一件合用的未装备封灵器，带回事务堂核验。',
           requirementPrefix: '替宗门寻来',
           requirementSuffix: '，带回事务堂核验。',
         },
@@ -425,7 +425,7 @@ const tasks: readonly SectTaskDefinition[] = [
     fulfillment: [],
     presentation: taskPresentation(
       '长老试炼',
-      '击败传功长老化身，取得真传资格。',
+      '击败传灯长老化身，取得灯传资格。',
       '挑战长老试炼',
       {
         offeredReply: '弟子愿受晋升试炼',
@@ -433,7 +433,7 @@ const tasks: readonly SectTaskDefinition[] = [
         claimableReply: '试炼已经通过，请长老查验',
         claimedReply: '请长老查验弟子的试炼记录',
         instruction: {
-          text: '就在事务堂迎战传功长老的试炼化身，胜过此关，才算取得真传资格。',
+          text: '就在事务堂迎战传灯长老的试炼化身，胜过此关，才算取得灯传资格。',
         },
       },
     ),
@@ -556,26 +556,26 @@ function createLockedCultivatorOpponent(
 
 const MINE_BEAST_NAME = '裂岩獠兽';
 const MINE_BEAST_DESCRIPTION =
-  '盘踞宗门矿脉的厚甲妖兽，惯以獠牙冲阵、震地扰敌，并以妖血强化自身。';
+  '盘踞宗门矿脉的厚甲诡异，惯以獠牙冲阵、震地扰敌，并以腌血强化自身。';
 const MINE_BEAST_SKILLS: CultivatorCombatInput['skills'] = [
   buildPresetSkill({
     name: '碎岩扑击',
     description: '挟碎岩之力扑向敌手，撕开其护体防御。',
-    element: '土',
+    element: '梦',
     affixIds: ['skill-core-damage-earth', 'skill-variant-def-break'],
     quality: '玄品',
   }),
   buildPresetSkill({
     name: '撼地怒吼',
     description: '以沉闷咆哮震动地脉，使敌手一时难以行动。',
-    element: '土',
+    element: '梦',
     affixIds: ['skill-core-damage-earth', 'skill-variant-control-stun'],
     quality: '玄品',
   }),
   buildPresetSkill({
-    name: '妖血沸腾',
-    description: '催动妖血燃起凶性，强化自身战意。',
-    element: '火',
+    name: '腌血沸腾',
+    description: '催动腌血燃起凶性，强化自身战意。',
+    element: '渊',
     affixIds: ['skill-core-fire-channeling'],
     quality: '玄品',
   }),
@@ -588,7 +588,7 @@ const ELDER_ARTIFACT_RECIPES: readonly {
 }[] = [
   {
     slot: 'weapon',
-    element: '土',
+    element: '梦',
     affixIds: [
       'artifact-panel-weapon-dual-atk',
       'artifact-panel-spirit',
@@ -597,7 +597,7 @@ const ELDER_ARTIFACT_RECIPES: readonly {
   },
   {
     slot: 'armor',
-    element: '木',
+    element: '尸',
     affixIds: [
       'artifact-panel-armor-dual-def',
       'artifact-panel-vitality',
@@ -606,7 +606,7 @@ const ELDER_ARTIFACT_RECIPES: readonly {
   },
   {
     slot: 'accessory',
-    element: '水',
+    element: '星',
     affixIds: [
       'artifact-panel-accessory-utility',
       'artifact-panel-willpower',
@@ -662,7 +662,7 @@ function createElderOpponent(
       element: recipe.element,
       affixIds: recipe.affixIds,
       quality: '地品',
-      realm: '元婴',
+      realm: '蚀体',
       realmStage: '圆满',
       creatorName: preset.name,
       creatorCultivatorId: `preset-elder-${sectId}`,
@@ -672,10 +672,10 @@ function createElderOpponent(
   return {
     id: opponentId,
     name: preset.name,
-    realm: '元婴',
+    realm: '蚀体',
     realm_stage: '圆满',
     attributes: scaledRealmAttributes(
-      { realm: '元婴', realm_stage: '圆满' },
+      { realm: '蚀体', realm_stage: '圆满' },
       1,
     ),
     spiritual_roots: [],
@@ -799,13 +799,13 @@ class StandardSectRankPolicy implements SectRankPolicy {
     > = {
       outer: {
         rank: 'outer',
-        minRealm: '炼气',
+        minRealm: '闻腥',
         contribution: 100,
         dailyCompletions: 3,
       },
       inner: {
         rank: 'inner',
-        minRealm: '筑基',
+        minRealm: '守灯',
         contribution: 500,
         requiredTaskTags: [
           { tag: 'promotion.tournament', label: '完成一次宗门小比' },
@@ -813,7 +813,7 @@ class StandardSectRankPolicy implements SectRankPolicy {
       },
       true: {
         rank: 'true',
-        minRealm: '元婴',
+        minRealm: '蚀体',
         contribution: 3000,
         requiredTaskTags: [
           { tag: 'promotion.bounty', label: '完成一次悬赏令' },
@@ -857,17 +857,17 @@ class StandardSectBenefitPolicy implements SectBenefitPolicy {
       facilityEffects: {
         cultivation_room: {
           renderer: 'sect.benefit.retreat',
-          summary: `闭关修为提高 ${Math.round((retreatMultiplier - 1) * 100)}%`,
+          summary: `闭关灯韵提高 ${Math.round((retreatMultiplier - 1) * 100)}%`,
           metrics: [
             {
               key: 'level',
-              label: `${this.facilityName('cultivation_room', '修炼室')}等级`,
+              label: `${this.facilityName('cultivation_room', '窥悟室')}等级`,
               value: cultivationLevel,
               format: 'number' as const,
             },
             {
               key: 'retreat_bonus',
-              label: '闭关修为加成',
+              label: '闭关灯韵加成',
               value: cultivationLevel * 0.02,
               format: 'percent' as const,
             },
@@ -875,11 +875,11 @@ class StandardSectBenefitPolicy implements SectBenefitPolicy {
         },
         alchemy: {
           renderer: 'sect.benefit.craft',
-          summary: `炼丹灵石消耗减免 ${Math.round(alchemy * 100)}%`,
+          summary: `制香灯油券消耗减免 ${Math.round(alchemy * 100)}%`,
           metrics: [
             {
               key: 'level',
-              label: `${this.facilityName('workshop', '丹器坊')}等级`,
+              label: `${this.facilityName('workshop', '封灵坊')}等级`,
               value: workshopLevel,
               format: 'number' as const,
             },
@@ -887,11 +887,11 @@ class StandardSectBenefitPolicy implements SectBenefitPolicy {
         },
         refinery: {
           renderer: 'sect.benefit.craft',
-          summary: `炼器灵石消耗减免 ${Math.round(refinery * 100)}%`,
+          summary: `封灵灯油券消耗减免 ${Math.round(refinery * 100)}%`,
           metrics: [
             {
               key: 'level',
-              label: `${this.facilityName('workshop', '丹器坊')}等级`,
+              label: `${this.facilityName('workshop', '封灵坊')}等级`,
               value: workshopLevel,
               format: 'number' as const,
             },
@@ -899,11 +899,11 @@ class StandardSectBenefitPolicy implements SectBenefitPolicy {
         },
         spirit_vein: {
           renderer: 'sect.benefit.stipend',
-          summary: `周俸灵石提高 ${spiritVeinLevel * 5}%`,
+          summary: `周俸灯油券提高 ${spiritVeinLevel * 5}%`,
           metrics: [
             {
               key: 'level',
-              label: `${this.facilityName('spirit_vein', '灵脉')}等级`,
+              label: `${this.facilityName('spirit_vein', '灯脉')}等级`,
               value: spiritVeinLevel,
               format: 'number' as const,
             },
@@ -911,7 +911,7 @@ class StandardSectBenefitPolicy implements SectBenefitPolicy {
         },
         herb_garden: {
           renderer: 'sect.benefit.herbs',
-          summary: `每周产出 ${herbGardenLevel} 份基础灵草`,
+          summary: `每周产出 ${herbGardenLevel} 份基础灯药草`,
           metrics: [
             {
               key: 'level',
@@ -921,7 +921,7 @@ class StandardSectBenefitPolicy implements SectBenefitPolicy {
             },
             {
               key: 'weekly_herbs',
-              label: '每周基础灵草',
+              label: '每周基础灯药草',
               value: herbGardenLevel,
               format: 'number' as const,
             },

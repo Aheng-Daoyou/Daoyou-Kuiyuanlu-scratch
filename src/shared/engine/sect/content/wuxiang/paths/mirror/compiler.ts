@@ -46,7 +46,7 @@ export function compileMirrorAbilities(
             type: 'consume_status_trigger',
             params: {
               match: { id: WUXIANG_KARMA_BUFF },
-              displayName: '业痕',
+              displayName: '莲印',
               consume: 1,
               target: 'caster',
               effects: [physical(coefficient + 0.6)],
@@ -75,9 +75,9 @@ export function compileMirrorAbilities(
     features,
     effects: [physical(0.6)],
     completionEffects: [heartVow(features.mirrorVowReduction)],
-    demonName: '花落问罪',
+    demonName: '莲落问罪',
     demonDescription:
-      '先叩心伤敌并留下叩心戒；若目标带有业痕，花落问罪再发一击，并封住其一门伤害神通。',
+      '先叩心伤敌并留下哺心戒；若目标带有莲印，莲落问罪再发一击，并封住其一门伤害神通。',
     demonEffects: mirrorPresent(
       [
         physical(0.35),
@@ -93,9 +93,9 @@ export function compileMirrorAbilities(
       features,
       'enemy',
     ),
-    formlessName: '心花两忘',
+    formlessName: '心莲两忘',
     formlessDescription:
-      '一念之中兼得叩心与问罪之效，并再发一击；施展后，无论业痕是否触发，自身都会获得1层业痕。',
+      '一念之中兼得叩心与问罪之效，并再发一击；施展后，无论莲印是否触发，自身都会获得1层莲印。',
     formlessEffects: combinedFormlessStrike(0.3),
     formlessCompletionEffects: formDone([addKarma()]),
   });
@@ -106,9 +106,9 @@ export function compileMirrorAbilities(
     target: 'self',
     features,
     effects: [shield(0.08), tideGuard(features.mirrorTideReduction)],
-    demonName: '血海回澜',
+    demonName: '血莲回澜',
     demonDescription:
-      '先以听潮护身；若自身带有业痕，随后恢复气血，并在听潮成功减伤后反击。',
+      '先以听莲护身；若自身带有莲印，随后恢复气血，并在听莲成功减伤后反击。',
     demonEffects: mirrorPresent(
       [
         heal(0.03),
@@ -119,9 +119,9 @@ export function compileMirrorAbilities(
       features,
       'self',
     ),
-    formlessName: '海月同潮',
+    formlessName: '莲月同潮',
     formlessDescription:
-      '兼得听潮护身与回澜之效，并额外获得护盾，使此身在潮中仍有立足之处。',
+      '兼得听莲护身与回澜之效，并额外获得护盾，使此身在潮中仍有立足之处。',
     formlessEffects: [shield(0.06), ...allKarmaEffect(features, 'self')],
     formlessCompletionEffects: formDone(),
   });
@@ -134,16 +134,16 @@ export function compileMirrorAbilities(
     features,
     effects: [physical(0.84)],
     completionEffects: karmaDoors(doorLayers),
-    demonName: '业门倒叩',
+    demonName: '莲门倒叩',
     demonDescription:
-      '先将三叩凝为一击；若目标带有业痕，再引爆其原有的全部业门并合并结算伤害。',
+      '先将三叩凝为一击；若目标带有莲印，再引爆其原有的全部莲门并合并结算伤害。',
     demonEffects: mirrorPresent(
       [
         {
           type: 'consume_status_trigger',
           params: {
             match: { id: KARMA_DOOR },
-            displayName: '业门',
+            displayName: '莲门',
             consume: 'all',
             target: 'target',
             effects: [physical(0.25)],
@@ -154,9 +154,9 @@ export function compileMirrorAbilities(
       features,
       'enemy',
     ),
-    formlessName: '门内无人',
+    formlessName: '门内无莲',
     formlessDescription:
-      '三叩与倒叩同发，引爆旧业门后再发一击；施展结束时，重新留下新的业门。',
+      '三叩与倒叩同发，引爆旧莲门后再发一击；施展结束时，重新留下新的莲门。',
     formlessEffects: combinedFormlessStrike(0.35),
     formlessCompletionEffects: formDone(),
   });
@@ -176,7 +176,7 @@ export function compileMirrorAbilities(
     ],
     demonName: '开眼见劫',
     demonDescription:
-      '观劫护身期间，若自身带有业痕，每次成功减免直接伤害后都会反击。',
+      '观劫护身期间，若自身带有莲印，每次成功减免直接伤害后都会反击。',
     demonEffects: mirrorPresent(
       [
         selfBuff(
@@ -213,7 +213,7 @@ export function compileMirrorAbilities(
   const fade = targetBuff(
     buff(
       'sect.wuxiang.mirror.skandhas-fade',
-      '五蕴衰',
+      '胎蕴衰',
       1,
       [
         {
@@ -259,9 +259,9 @@ export function compileMirrorAbilities(
         },
       },
     ],
-    demonName: '五蕴还照',
+    demonName: '胎蕴还照',
     demonDescription:
-      '先伤敌并驱散目标1个增益；若自身带有业痕，再以镜光净化自身1个减益。',
+      '先伤敌并驱散目标1个增益；若自身带有莲印，再以镜光净化自身1个减益。',
     demonEffects: mirrorPresent(
       [
         {
@@ -272,7 +272,7 @@ export function compileMirrorAbilities(
       features,
       'enemy',
     ),
-    formlessName: '五蕴皆空',
+    formlessName: '胎蕴皆空',
     formlessDescription:
       '外法、内执一并照空：驱散目标增益、净化自身减益，并额外伤敌、获得护盾。',
     formlessEffects: [...combinedFormlessStrike(0.4), shield(0.05)],
@@ -293,7 +293,7 @@ export function compileMirrorAbilities(
       ),
     ],
     demonName: '一苇倒渡',
-    demonDescription: '以彼岸承受来力；若自身带有业痕，成功减伤后立即反击。',
+    demonDescription: '以彼岸承受来力；若自身带有莲印，成功减伤后立即反击。',
     demonEffects: mirrorPresent(
       [
         selfBuff(

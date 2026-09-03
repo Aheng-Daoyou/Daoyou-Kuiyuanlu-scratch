@@ -22,7 +22,7 @@ export function createElementSeal(
   return {
     id: TIANYAN_ELEMENT_SEAL,
     name,
-    description: `天衍圣地留下的${name}，可与下一门落印术形成化生或冲克。`,
+    description: `观星台留下的${name}，可与下一门落印术形成接续或掩没。`,
     type: BuffType.BUFF,
     duration,
     logVisibility: 'debug',

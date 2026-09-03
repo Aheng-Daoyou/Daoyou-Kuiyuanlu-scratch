@@ -41,7 +41,7 @@ export function compileDemonAbilities(
             type: 'consume_status_trigger',
             params: {
               match: { id: DEMON_FIRST_THOUGHT },
-              displayName: '第一念',
+              displayName: '初哺',
               consume: 1,
               target: 'caster',
               effects: [physical(coefficient + 0.35)],
@@ -59,14 +59,14 @@ export function compileDemonAbilities(
     features,
     effects: [physical(0.65)],
     completionEffects: [heartGap(heartBonus)],
-    demonName: '摘心问魔',
+    demonName: '摘心问哺',
     demonDescription:
-      '先叩心伤敌并留下心隙，再以摘心重击追袭；施展后，目标额外获得1层心隙。',
+      '先叩心伤敌并留下哺隙，再以摘心重击追袭；施展后，目标额外获得1层哺隙。',
     demonEffects: [...first('enemy'), physical(0.5)],
     demonCompletionEffects: [heartGap(heartBonus), ...bDone()],
-    formlessName: '心魔两忘',
+    formlessName: '哺心两忘',
     formlessDescription:
-      '叩心与摘心同发，再根据目标已损气血造成收束伤害；施展后留下2层心隙。',
+      '叩心与摘心同发，再根据目标已损气血造成收束伤害；施展后留下2层哺隙。',
     formlessEffects: [
       physical(0, undefined, {
         dynamicMissingHpCap: features.demonOneFurnace ? 0.6 : 0.4,
@@ -90,7 +90,7 @@ export function compileDemonAbilities(
         tideBaseBonus,
       ),
     ],
-    demonName: '血海倒悬',
+    demonName: '血莲倒悬',
     demonDescription:
       '先获得护盾与血潮之力，再加厚护盾；下一次直接伤害命中时恢复部分气血。',
     demonEffects: [
@@ -105,13 +105,13 @@ export function compileDemonAbilities(
       ),
     ],
     demonCompletionEffects: bDone(),
-    formlessName: '血海无涯',
+    formlessName: '血莲无涯',
     formlessDescription:
-      '血海无涯，沉血与回生同在；获得护盾并恢复气血，下一门直接伤害还会得到更强的血潮之力。',
+      '血莲无涯，沉血与回生同在；获得护盾并恢复气血，下一门直接伤害还会得到更强的血潮之力。',
     formlessEffects: [
       heal(features.demonOneFurnace ? 0.08 : 0.05),
       clearBuff('sect.wuxiang.demon.blood-tide-boost'),
-      outgoingBoost('sect.wuxiang.demon.blood-tide-boost', '血海无涯', 0.3, {
+      outgoingBoost('sect.wuxiang.demon.blood-tide-boost', '血莲无涯', 0.3, {
         healOnHit: 0.03,
       }),
     ],
@@ -131,13 +131,13 @@ export function compileDemonAbilities(
     target: 'enemy',
     features,
     effects: [physical(0.84), physical(0.28, lowCondition)],
-    demonName: '三叩魔关',
-    demonDescription: '完成三叩后，再以一记重击强渡魔关。',
+    demonName: '三叩血关',
+    demonDescription: '完成三叩后，再以一记重击强渡血关。',
     demonEffects: firstThoughtStrike(0.6),
     demonCompletionEffects: bDone(),
-    formlessName: '业门无生',
+    formlessName: '莲门无生',
     formlessDescription:
-      '三叩与魔关一并出手；自身气血低于40%时，再发动一记必定暴击的无生之击。',
+      '三叩与血关一并出手；自身气血低于40%时，再发动一记必定暴击的无生之击。',
     formlessEffects: [
       physical(
         features.demonOneFurnace ? 0.85 : 0.65,
@@ -166,20 +166,20 @@ export function compileDemonAbilities(
         { counter: 0.4, counterMarker: 'sect.wuxiang.demon.observe-counter' },
       ),
     ],
-    demonName: '开眼见魔',
+    demonName: '开眼见莲',
     demonDescription: '开眼承劫，减免下一次直接伤害，并在成功减伤后立即反击。',
     demonEffects: [
       ...first('self'),
       selfBuff(
-        buff('sect.wuxiang.demon.observe-counter', '开眼见魔', 1, [], {
+        buff('sect.wuxiang.demon.observe-counter', '开眼见莲', 1, [], {
           dispelPolicy: 'protected',
         }),
       ),
     ],
     demonCompletionEffects: bDone(),
-    formlessName: '劫火自明',
+    formlessName: '莲火自明',
     formlessDescription:
-      '劫火照明自身：获得护盾，减免下一次直接伤害，并在成功减伤后立即反击。',
+      '莲火照明自身：获得护盾，减免下一次直接伤害，并在成功减伤后立即反击。',
     formlessEffects: [shield(features.demonOneFurnace ? 0.12 : 0.08)],
     formlessCompletionEffects: cDone(),
   });
@@ -201,18 +201,18 @@ export function compileDemonAbilities(
         },
       },
     ],
-    demonName: '焚尽五蕴',
+    demonName: '焚尽胎蕴',
     demonDescription:
-      '净化自身减益后，以五蕴作薪获得护盾，并强化下一门宗门直接伤害。',
+      '净化自身减益后，以胎蕴作薪获得护盾，并强化下一门宗门直接伤害。',
     demonEffects: [
       ...first('self'),
       shield(0.06),
-      outgoingBoost('sect.wuxiang.demon.skandhas-boost', '焚尽五蕴', 0.2),
+      outgoingBoost('sect.wuxiang.demon.skandhas-boost', '焚尽胎蕴', 0.2),
     ],
     demonCompletionEffects: bDone(),
-    formlessName: '蕴空身在',
+    formlessName: '胎空身在',
     formlessDescription:
-      '净化自身减益，获得护盾并强化下一门宗门直接伤害；同时再净化1个减益，诸蕴虽空，色身仍在。',
+      '净化自身减益，获得护盾并强化下一门宗门直接伤害；同时再净化1个减益，诸蕴虽空，皮囊仍在。',
     formlessEffects: [
       {
         type: 'dispel',
@@ -233,18 +233,18 @@ export function compileDemonAbilities(
       shield(0.1),
       directGuard('sect.wuxiang.demon.reed', '血舟', baseReedReduction),
     ],
-    demonName: '一苇渡厄',
+    demonName: '一苇哺渡',
     demonDescription:
       '以血舟护身并减免下一次直接伤害；强渡之后，护盾与减伤都会进一步提高。',
     demonEffects: [
       ...first('self'),
       shield(0.05),
-      directGuard('sect.wuxiang.demon.reed-extra', '一苇渡厄', 0.1),
+      directGuard('sect.wuxiang.demon.reed-extra', '一苇哺渡', 0.1),
     ],
     demonCompletionEffects: bDone(),
     formlessName: '苦海无舟',
     formlessDescription:
-      '有舟无舟皆可横渡；濒危时恢复气血，并同时获得佛相与魔相的双重防护。',
+      '有舟无舟皆可横渡；濒危时恢复气血，并同时获得胎相与血相的双重防护。',
     formlessEffects: [
       heal(features.demonOneFurnace ? 0.08 : 0.05, [
         {

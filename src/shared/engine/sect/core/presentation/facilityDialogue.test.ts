@@ -13,21 +13,21 @@ const facility = (key: string, level: number) => ({
 describe('sect facility dialogue projection', () => {
   it('formats facility level and semantic metrics as player-facing Chinese', () => {
     const segments = describeSectFacilityStatus({
-      facilityLabel: '灵脉',
+      facilityLabel: '灯脉',
       facility: facility('spirit_vein', 3),
       effect: {
         renderer: 'sect.benefit.stipend',
-        summary: '周俸灵石提高 15%',
+        summary: '周俸灯油券提高 15%',
         metrics: [
           {
             key: 'level',
-            label: '灵脉等级',
+            label: '灯脉等级',
             value: 3,
             format: 'number',
           },
           {
             key: 'stipend_bonus',
-            label: '俸禄灵石加成',
+            label: '俸禄灯油券加成',
             value: 0.15,
             format: 'percent',
           },
@@ -36,22 +36,22 @@ describe('sect facility dialogue projection', () => {
     });
     const text = segments.map((segment) => segment.text).join('');
 
-    expect(text).toContain('灵脉如今是3级');
-    expect(text).toContain('俸禄灵石加成15%');
+    expect(text).toContain('灯脉如今是3级');
+    expect(text).toContain('俸禄灯油券加成15%');
     expect(text).not.toMatch(/spirit_vein|stipend_bonus|renderer|_/u);
   });
 
   it('preserves zero benefits and falls back when the effect is absent', () => {
     const zeroText = describeSectFacilityStatus({
-      facilityLabel: '修炼室',
+      facilityLabel: '窥悟室',
       facility: facility('cultivation_room', 1),
       effect: {
         renderer: 'sect.benefit.retreat',
-        summary: '闭关修为提高 0%',
+        summary: '闭关灯韵提高 0%',
         metrics: [
           {
             key: 'retreat_bonus',
-            label: '闭关修为加成',
+            label: '闭关灯韵加成',
             value: 0,
             format: 'percent',
           },
@@ -67,7 +67,7 @@ describe('sect facility dialogue projection', () => {
       .map((segment) => segment.text)
       .join('');
 
-    expect(zeroText).toContain('闭关修为加成0%');
+    expect(zeroText).toContain('闭关灯韵加成0%');
     expect(fallbackText).toBe('药田如今是2级。');
   });
 

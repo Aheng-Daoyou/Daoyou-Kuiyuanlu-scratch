@@ -6,7 +6,7 @@ describe('PromotionRequirementSpecification', () => {
     const specification = new PromotionRequirementSpecification();
     const requirement = {
       rank: 'inner' as const,
-      minRealm: '筑基' as const,
+      minRealm: '守灯' as const,
       contribution: 500,
       dailyCompletions: 3,
       requiredTaskTags: [{ tag: 'fixture.trial', label: '完成夹具试炼' }],
@@ -14,7 +14,7 @@ describe('PromotionRequirementSpecification', () => {
     expect(
       specification.violations(
         {
-          realm: '筑基',
+          realm: '守灯',
           stage: '初期',
           contribution: 500,
           lifetimeContribution: 500,
@@ -28,7 +28,7 @@ describe('PromotionRequirementSpecification', () => {
       specification
         .violations(
           {
-            realm: '炼气',
+            realm: '闻腥',
             stage: '初期',
             contribution: 10,
             lifetimeContribution: 10,
@@ -51,7 +51,7 @@ describe('PromotionRequirementSpecification', () => {
     expect(
       specification.violations(
         {
-          realm: '筑基',
+          realm: '守灯',
           stage: '初期',
           contribution: 0,
           lifetimeContribution: 500,
@@ -60,7 +60,7 @@ describe('PromotionRequirementSpecification', () => {
         },
         {
           rank: 'inner',
-          minRealm: '筑基',
+          minRealm: '守灯',
           contribution: 500,
           dailyCompletions: 3,
           requiredTaskTags: [{ tag: 'fixture.trial', label: '完成夹具试炼' }],

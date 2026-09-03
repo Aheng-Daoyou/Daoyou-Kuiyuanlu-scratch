@@ -58,7 +58,7 @@ function unit(id: string): Unit {
 
 function setup(path: 'hetu-evolution' | 'luoshu-control' = 'hetu-evolution') {
   const sect = tianyanState(path);
-  const projection = projectSectCombat({ sect, realm: '化神' })!;
+  const projection = projectSectCombat({ sect, realm: '忘川' })!;
   const owner = unit('owner');
   const enemy = unit('enemy');
   for (const resource of projection.resources)
@@ -71,7 +71,7 @@ function setup(path: 'hetu-evolution' | 'luoshu-control' = 'hetu-evolution') {
   const skill = (abilityId: string) => {
     const config = resolveSectAbility({
       sect,
-      realm: '化神',
+      realm: '忘川',
       abilityId,
     }).config;
     const result = AbilityFactory.create(config) as ActiveSkill;
@@ -218,7 +218,7 @@ describe('天衍落印术与反应实际结算', () => {
     },
   );
 
-  it('木印遇火术触发燎原，追加固定灼烧伤害且保留两层自然跳数', () => {
+  it('岁星印遇荧惑术触发荧惑接岁，追加固定灼烧伤害且保留两层自然跳数', () => {
     const { owner, enemy, skill } = setup();
     enemy.buffs.addBuff(
       BuffFactory.create(createElementSeal('wood', 2)),
@@ -245,7 +245,7 @@ describe('天衍落印术与反应实际结算', () => {
     expect(
       damages.find((event) => event.damageSource === DamageSource.FOLLOW_UP)
         ?.cause,
-    ).toMatchObject({ displayName: '燎原' });
+    ).toMatchObject({ displayName: '荧惑接岁' });
     const burn = () =>
       enemy.buffs
         .getAllBuffs()
@@ -274,7 +274,7 @@ describe('天衍落印术与反应实际结算', () => {
     [1, 0.16],
     [2, 0.32],
   ] as const)(
-    '蒸发按剩余%i层灼烧追加固定系数%s并清除灼烧',
+    '辰星掩荧按剩余%i层灼烧追加固定系数%s并清除灼烧',
     (layers, coefficient) => {
       const { owner, enemy, skill } = setup('luoshu-control');
       cast(skill('flowing-flame'), owner, enemy);
@@ -315,7 +315,7 @@ describe('天衍落印术与反应实际结算', () => {
     },
   );
 
-  it('火印遇水术触发蒸发，追加固定终值追伤并明确归因为冲克·蒸发', () => {
+  it('荧惑印遇辰星术触发辰星掩荧，追加固定终值追伤并明确归因为冲克·辰星掩荧', () => {
     const { owner, enemy, skill } = setup('luoshu-control');
     enemy.buffs.addBuff(
       BuffFactory.create(createElementSeal('fire', 2)),
@@ -341,7 +341,7 @@ describe('天衍落印术与反应实际结算', () => {
     expect(followUp?.damageTaken).toBe(
       Math.round((direct?.damageTaken ?? 0) * 0.8),
     );
-    expect(followUp?.cause).toMatchObject({ displayName: '冲克·蒸发' });
+    expect(followUp?.cause).toMatchObject({ displayName: '冲克·辰星掩荧' });
     expect(owner.combatResources.getCurrent(TIANYAN_DERIVATION)).toBe(1);
     expect(enemy.tags.hasTag(TIANYAN_SEAL_STATE_TAGS.water)).toBe(true);
   });
@@ -542,7 +542,7 @@ describe('天衍落印术与反应实际结算', () => {
     expect(owner.buffs.getAllBuffIds()).toContain('sect.tianyan.lotus');
   });
 
-  it('坤岳镇形护盾连续施展时直接加入当前总护盾', () => {
+  it('镇星镇形护盾连续施展时直接加入当前总护盾', () => {
     const { owner, enemy, skill } = setup();
 
     cast(skill('earth-bearing-seal'), owner, enemy);
@@ -553,7 +553,7 @@ describe('天衍落印术与反应实际结算', () => {
     expect(owner.getCurrentShield()).toBe(once * 2);
   });
 
-  it('万木回春结算即时治疗与两次木行持续治疗', () => {
+  it('岁华回春结算即时治疗与两次岁星持续治疗', () => {
     const { owner, skill } = setup();
     owner.setHp(Math.floor(owner.getMaxHp() * 0.5));
     const before = owner.getCurrentHp();
@@ -574,7 +574,7 @@ describe('天衍落印术与反应实际结算', () => {
     expect(owner.buffs.getAllBuffIds()).toContain('sect.tianyan.renewal');
   });
 
-  it('天河洗心在空净化时仍回复8%最大法力并获得控制抗性', () => {
+  it('辰星洗心在空净化时仍回复8%最大灯焰并获得控制抗性', () => {
     const { owner, skill } = setup();
     owner.takeMp(Math.floor(owner.getMaxMp() * 0.5));
     const before = owner.getCurrentMp();
@@ -587,7 +587,7 @@ describe('天衍落印术与反应实际结算', () => {
     expect(owner.buffs.getAllBuffIds()).toContain('sect.tianyan.river-mind');
   });
 
-  it('蒸发将两层灼烧近似兑现为一次固定追伤并移除灼烧', () => {
+  it('辰星掩荧将两层灼烧近似兑现为一次固定追伤并移除灼烧', () => {
     const { owner, enemy, skill } = setup('luoshu-control');
     const settlements: DamageSegmentAppliedEvent[] = [];
     EventBus.instance.subscribe<DamageSegmentAppliedEvent>(
@@ -612,12 +612,12 @@ describe('天衍落印术与反应实际结算', () => {
     expect(settlements).toHaveLength(1);
     expect(settlements[0]).toMatchObject({
       damageSource: DamageSource.FOLLOW_UP,
-      cause: { displayName: '蒸发' },
+      cause: { displayName: '辰星掩荧' },
     });
     expect(enemy.buffs.getAllBuffIds()).not.toContain('sect.tianyan.burn');
   });
 
-  it('熔岩是独立DOT，不会被蒸发当作灼烧消费', () => {
+  it('镇星承火是独立DOT，不会被辰星掩荧当作灼烧消费', () => {
     const { owner, enemy, skill } = setup('luoshu-control');
     enemy.buffs.addBuff(
       BuffFactory.create(createElementSeal('fire', 2)),

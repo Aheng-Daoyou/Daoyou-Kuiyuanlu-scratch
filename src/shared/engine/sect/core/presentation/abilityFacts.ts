@@ -21,7 +21,7 @@ const ATTRIBUTE_LABELS: Partial<Record<AttributeType, string>> = {
   [AttributeType.DEF]: '物防',
   [AttributeType.MAGIC_ATK]: '法攻',
   [AttributeType.MAGIC_DEF]: '法防',
-  [AttributeType.SPEED]: '身法',
+  [AttributeType.SPEED]: '灯影',
   [AttributeType.ACTION_SPEED]: '速度',
   [AttributeType.CRIT_RATE]: '暴击率',
   [AttributeType.EVASION_RATE]: '闪避',
@@ -82,7 +82,7 @@ function conditionText(
   if (condition.type === 'damage_type_is' && condition.params.damageType) {
     const labels = {
       physical: '物理伤害',
-      magical: '法术伤害',
+      magical: '灯律伤害',
       true: '真实伤害',
       dot: '持续伤害',
     } as const;
@@ -133,7 +133,7 @@ function scalableValue(value: ScalableValue): string {
   if (value.targetMaxHpRatio)
     parts.push(`${percent(value.targetMaxHpRatio)}目标最大气血`);
   if (value.targetMaxMpRatio)
-    parts.push(`${percent(value.targetMaxMpRatio)}目标最大法力`);
+    parts.push(`${percent(value.targetMaxMpRatio)}目标最大灯焰`);
   return parts.join(' + ') || '0';
 }
 
