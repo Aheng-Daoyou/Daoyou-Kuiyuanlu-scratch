@@ -1,0 +1,2 @@
+ALTER TABLE "wanjiedaoyou_cultivators" ADD COLUMN "strength" integer DEFAULT 10 NOT NULL;--> statement-breakpoint
+ALTER TABLE "wanjiedaoyou_cultivators" ADD COLUMN "endurance" integer DEFAULT 10 NOT NULL;

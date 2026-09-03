@@ -1,0 +1,1 @@
+ALTER TABLE "wanjiedaoyou_cultivators" DROP COLUMN "wisdom";
