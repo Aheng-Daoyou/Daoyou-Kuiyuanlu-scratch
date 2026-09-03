@@ -27,7 +27,7 @@ export default function NotFound() {
             ┈┈┈
           </div>
           <p className="text-ink-secondary text-lg leading-relaxed">
-            道友请留步。此处乃天地裂隙，神识所及尽是虚无。
+            道友请留步。此处乃天地裂隙，心神所及尽是虚无。
             <br />
             你寻觅的机缘或许已随天机隐去，亦或尚未在此界显现。
           </p>
@@ -35,10 +35,10 @@ export default function NotFound() {
 
         <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <InkButton variant="primary" href="/">
-            重返仙界（首页）
+            重返烬洲（首页）
           </InkButton>
           <InkButton variant="secondary" href="/game">
-            继续仙途
+            继续灯途
           </InkButton>
         </div>
 

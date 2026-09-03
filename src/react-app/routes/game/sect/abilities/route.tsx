@@ -448,7 +448,7 @@ function SectAbilitiesBody() {
               isOpen={pickerOpen}
               onClose={() => setPickerOpen(false)}
               title="选择宗门神通"
-              description="配置出战神通并查看当前流派与经脉下的实际效果。"
+              description="配置出战神通并查看当前流派与灯脉下的实际效果。"
               size="xl"
               footer={
                 <div className="flex items-center justify-between gap-3">

@@ -272,7 +272,7 @@ export default function TrainingRoomPage() {
         skills: [],
         inventory: { artifacts: [] },
         equipped: { weapon: null, armor: null, accessory: null },
-        realm: '炼气',
+        realm: '闻腥',
         realm_stage: '初期',
       };
 
@@ -350,7 +350,7 @@ export default function TrainingRoomPage() {
   };
 
   if (isLoading) {
-    return <GameImmersiveLoading message="识海构筑中……" />;
+    return <GameImmersiveLoading message="心海构筑中……" />;
   }
 
   const opponentUnitId = battleResult?.participants.opponent.id || 'dummy';

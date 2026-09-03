@@ -18,7 +18,7 @@ interface ArtifactsTabProps {
 }
 
 /**
- * 法宝 Tab 组件
+ * 封灵器 Tab 组件
  */
 export function ArtifactsTab({
   artifacts,
@@ -31,7 +31,7 @@ export function ArtifactsTab({
 }: ArtifactsTabProps) {
   if (isLoading) {
     return (
-      <GameLoadingState message="正在检索法宝记录，请稍候……" variant="inline" />
+      <GameLoadingState message="正在检索封灵器记录，请稍候……" variant="inline" />
     );
   }
 

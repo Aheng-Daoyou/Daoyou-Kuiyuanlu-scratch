@@ -64,7 +64,7 @@ export default function FeedbackPage() {
     <GameSceneFrame
       variant="lite"
       title="意见反馈"
-      description="广纳良言，共筑仙途。这里保留表单本体，把反馈类型、内容与外链提交整合进统一服务场景。"
+      description="广纳良言，共筑灯途。这里保留表单本体，把反馈类型、内容与外链提交整合进统一服务场景。"
       aside={
         <>
           <GameSceneAsideSection

@@ -4,6 +4,7 @@ import { betterAuth } from 'better-auth';
 import { admin } from 'better-auth/plugins/admin';
 import { emailOTP } from 'better-auth/plugins/email-otp';
 import { sendViaSmtp } from '../admin/smtp';
+import { isReservedEmailForTest } from '../admin/smtp';
 import { db } from '../drizzle/db';
 import { getPublicWebOrigins } from '../http/origins';
 import {
@@ -106,9 +107,9 @@ export const auth = betterAuth({
     sendVerificationEmail: async ({ user, url }) => {
       await sendViaSmtp(
         user.email,
-        '【万界道友】验证邮箱',
+        '【窥渊录】验证邮箱',
         [
-          `${user.name || '玩家'}，欢迎来到万界道友。`,
+          `${user.name || '玩家'}，欢迎来到窥渊录。`,
           '',
           '请点击下方链接验证邮箱，验证完成后即可进入游戏：',
           url,
@@ -128,7 +129,7 @@ export const auth = betterAuth({
     sendResetPassword: async ({ user, url }) => {
       await sendViaSmtp(
         user.email,
-        '【万界道友】重置密码',
+        '【窥渊录】重置密码',
         [
           `${user.name || '玩家'}，你正在申请重置密码。`,
           '',
@@ -184,13 +185,22 @@ export const auth = betterAuth({
       sendVerificationOTP: async ({ email, otp, type }) => {
         const subject =
           type === 'forget-password'
-            ? '【万界道友】重置密码验证码'
-            : '【万界道友】邮箱验证码';
+            ? '【窥渊录】重置密码验证码'
+            : '【窥渊录】邮箱验证码';
 
         const headline =
           type === 'forget-password'
             ? '你正在重置密码。'
             : '你正在获取登录验证码。首次使用该邮箱时，验证后会自动注册账号。';
+
+        // 双层防护：保留域邮箱在 OTP 入口直接拒绝，绝不进入 SMTP 流程。
+        // 即便 smtp.ts 拦截层因 watch 热重载未生效，本拦截也保证不会真发邮件。
+        if (isReservedEmailForTest(email)) {
+          console.warn(
+            `[auth] 拒绝向保留域邮箱 ${email} 发送验证码（已拦截）`,
+          );
+          return;
+        }
 
         await sendViaSmtp(
           email,

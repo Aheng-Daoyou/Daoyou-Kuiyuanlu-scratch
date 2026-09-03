@@ -32,20 +32,27 @@ export default function SignupPasswordRoute() {
     searchParams.get('name') ?? '',
   );
   const [email, setEmail] = useState(searchParams.get('email') ?? '');
+  const [inviteCode, setInviteCode] = useState(searchParams.get('invite') ?? '');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<{
     displayName?: string;
     email?: string;
+    inviteCode?: string;
     password?: string;
     confirmPassword?: string;
   }>({});
 
   const handleSubmit = async () => {
+    const trimmedInvite = inviteCode.trim();
     const nextErrors = {
       displayName: validateRequiredField(displayName, '请输入昵称'),
       email: validateEmailField(email),
+      inviteCode:
+        trimmedInvite && !/^[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(trimmedInvite.toUpperCase())
+          ? '灯引格式错误（如 ABCD-EFGH）'
+          : undefined,
       password: validateRequiredField(password, '请输入密码'),
       confirmPassword: validatePasswordConfirmation(password, confirmPassword),
     };
@@ -54,6 +61,7 @@ export default function SignupPasswordRoute() {
     if (
       nextErrors.displayName ||
       nextErrors.email ||
+      nextErrors.inviteCode ||
       nextErrors.password ||
       nextErrors.confirmPassword
     ) {
@@ -73,6 +81,7 @@ export default function SignupPasswordRoute() {
         email,
         password,
         verifiedCaptchaToken || undefined,
+        trimmedInvite || undefined,
       );
 
       if (error) {
@@ -107,6 +116,7 @@ export default function SignupPasswordRoute() {
               email,
               displayName,
               source: 'signup',
+              inviteCode,
             })}
             variant="ghost"
           >
@@ -173,6 +183,18 @@ export default function SignupPasswordRoute() {
           }}
           placeholder="请再次输入密码"
           error={errors.confirmPassword}
+          disabled={loading}
+        />
+        <InkInput
+          label="灯引（选填）"
+          value={inviteCode}
+          onChange={(value) => {
+            setInviteCode(value);
+            setErrors((current) => ({ ...current, inviteCode: undefined }));
+          }}
+          placeholder="例：ABCD-EFGH"
+          hint="持灯人引荐之信物。填写则须为有效灯引，方可入道；未填写亦可注册。"
+          error={errors.inviteCode}
           disabled={loading}
         />
         <AuthCaptchaField

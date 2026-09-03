@@ -13,7 +13,7 @@ import { QiLogsTab } from './components/QiLogsTab';
 
 const SETTINGS_TABS = [
   { label: '游戏设置', value: 'game' },
-  { label: '天地灵气', value: 'qi' },
+  { label: '灯油', value: 'qi' },
   { label: '账号管理', value: 'account' },
   { label: '模型配置', value: 'llm' },
   { label: '连接状态', value: 'connection' },

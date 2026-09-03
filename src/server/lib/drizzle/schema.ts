@@ -36,7 +36,7 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 
-// ===== 新一代修仙游戏数据库 Schema =====
+// ===== 新一代克苏鲁修仙数据库 Schema =====
 // 基于 basic.md 中的新 Cultivator 模型设计
 
 // 角色主表
@@ -51,6 +51,7 @@ export const cultivators = pgTable(
     origin: varchar('origin', { length: 100 }),
     personality: text('personality'),
     background: text('background'),
+    lineageLore: text('lineage_lore'),
     prompt: text('prompt').notNull(), // 用户原始输入
     playerRace: varchar('player_race', { length: 32 })
       .notNull()
@@ -58,7 +59,7 @@ export const cultivators = pgTable(
     raceNarrative: text('race_narrative'),
 
     // 境界相关
-    realm: varchar('realm', { length: 20 }).notNull(), // 炼气 | 筑基 | 金丹 | ...
+    realm: varchar('realm', { length: 20 }).notNull(), // 闻腥 | 守灯 | 窥渊 | ...
     realm_stage: varchar('realm_stage', { length: 10 }).notNull(), // 初期 | 中期 | 后期 | 圆满
     age: integer('age').notNull().default(18),
     lifespan: integer('lifespan').notNull().default(100),
@@ -77,9 +78,9 @@ export const cultivators = pgTable(
       .notNull()
       .default(0),
 
-    spirit_stones: integer('spirit_stones').notNull().default(0), // 灵石
+    spirit_stones: integer('spirit_stones').notNull().default(0), // 灯油券
     reputation: integer('reputation').notNull().default(0), // 声望
-    qi: integer('qi').notNull().default(200), // 天地灵气
+    qi: integer('qi').notNull().default(200), // 灯油
     qiLastRefreshedAt: timestamp('qi_last_refreshed_at').notNull().defaultNow(),
     last_yield_at: timestamp('last_yield_at').defaultNow(),
     lastActiveAt: timestamp('last_active_at'),
@@ -113,7 +114,7 @@ export const cultivators = pgTable(
 );
 
 
-// 个人灵田领域聚合：不再寄生 cultivators.game_settings。
+// 个人灯田领域聚合：不再寄生 cultivators.game_settings。
 export const spiritFields = pgTable(
   'wanjiedaoyou_spirit_fields',
   {
@@ -574,7 +575,7 @@ export const playerMutationRequests = pgTable(
   ],
 );
 
-// 灵根表（1对多）
+// 窍表（1对多）
 export const spiritualRoots = pgTable(
   'wanjiedaoyou_spiritual_roots',
   {
@@ -585,7 +586,7 @@ export const spiritualRoots = pgTable(
     element: varchar('element', { length: 10 }).notNull(), // 金 | 木 | 水 | 火 | 土 | 风 | 雷 | 冰 | 无
     strength: integer('strength').notNull(), // 0-100
     marrowWashBonus: integer('marrow_wash_bonus').notNull().default(0),
-    grade: varchar('grade', { length: 20 }), // 天灵根 | 真灵根 | 伪灵根 | 变异灵根
+    grade: varchar('grade', { length: 20 }), // 天窍 | 真窍 | 伪窍 | 变异窍
     createdAt: timestamp('created_at').defaultNow(),
   },
   (table) => [index('spiritual_roots_cultivator_idx').on(table.cultivatorId)],
@@ -645,7 +646,7 @@ export const consumables = pgTable(
       .references(() => cultivators.id, { onDelete: 'cascade' })
       .notNull(),
     name: varchar('name', { length: 100 }).notNull(),
-    type: varchar('type', { length: 20 }).notNull(), // 丹药 | 符箓
+    type: varchar('type', { length: 20 }).notNull(), // 香品 | 符箓
     prompt: varchar('prompt', { length: 200 }).notNull().default(''), // 提示词
     quality: varchar('quality', { length: 20 }).notNull().default('凡品'), // 凡品 | 下品 | 中品 | 上品 | 极品 | 仙品 | 神品
     spec: jsonb('spec').notNull().default({}),
@@ -858,7 +859,7 @@ export const battleReplayArchives = pgTable(
   ],
 );
 
-// 邮件/传音玉简表
+// 邮件/传音灯笺表
 export const mails = pgTable(
   'wanjiedaoyou_mails',
   {
@@ -1539,7 +1540,7 @@ export const auctionListings = pgTable(
     itemSnapshot: jsonb('item_snapshot').notNull(),
 
     // 价格与状态
-    price: integer('price').notNull(), // 单件一口价（灵石）
+    price: integer('price').notNull(), // 单件一口价（灯油券）
     initialQuantity: integer('initial_quantity').notNull().default(1),
     remainingQuantity: integer('remaining_quantity').notNull().default(1),
     status: varchar('status', { length: 20 }).notNull().default('active'), // active | sold | expired | cancelled
@@ -1719,7 +1720,7 @@ export const creationProducts = pgTable(
     quality: varchar('quality', { length: 20 }), // 品质等级，从 balanceMetrics 推算
     slot: varchar('slot', { length: 20 }), // 仅 artifact: weapon | armor | accessory
     score: integer('score').notNull().default(0), // 排行榜评分
-    isEquipped: boolean('is_equipped').notNull().default(false), // 三类产物通用生效态；法宝表示装备状态
+    isEquipped: boolean('is_equipped').notNull().default(false), // 三类产物通用生效态；封灵器表示装备状态
     productModel: jsonb('product_model').notNull(), // 完整 CreationProductModel 快照
     createdAt: timestamp('created_at').defaultNow(),
     updatedAt: timestamp('updated_at')
@@ -1739,5 +1740,78 @@ export const creationProducts = pgTable(
       table.cultivatorId,
       table.isEquipped,
     ),
+  ],
+);
+
+// 记债台账：无灯巷 / 鬼市的「以过去作抵押」信用记录。
+// 违约后果由引擎判定，服务层落地（减寿元 / 改名字 / 记异化）。
+export const debtLedgers = pgTable(
+  'wanjiedaoyou_debt_ledgers',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    cultivatorId: uuid('cultivator_id')
+      .references(() => cultivators.id, { onDelete: 'cascade' })
+      .notNull(),
+    creditor: varchar('creditor', { length: 32 }).notNull(), // black_alley | ghost_market | sect_renewal
+    collateral: varchar('collateral', { length: 16 }).notNull(), // memory | lifespan | name | bond
+    principal: integer('principal').notNull(), // 本金（灯油券）
+    outstanding: integer('outstanding').notNull(), // 未清偿余额（含利息）
+    annual_interest_rate: doublePrecision('annual_interest_rate')
+      .notNull()
+      .default(0),
+    status: varchar('status', { length: 16 }).notNull().default('active'), // active | settled | defaulted
+    incurred_at: timestamp('incurred_at').notNull().defaultNow(),
+    due_at: timestamp('due_at').notNull(),
+    default_consequence: jsonb('default_consequence'), // 违约后果快照
+    settled_at: timestamp('settled_at'),
+    version: integer('version').notNull().default(1),
+    created_at: timestamp('created_at').notNull().defaultNow(),
+    updated_at: timestamp('updated_at')
+      .notNull()
+      .defaultNow()
+      .$onUpdate(() => new Date()),
+  },
+  (table) => [
+    index('debt_ledgers_cultivator_status_idx').on(
+      table.cultivatorId,
+      table.status,
+    ),
+    index('debt_ledgers_status_due_idx').on(table.status, table.due_at),
+    index('debt_ledgers_cultivator_creditor_idx').on(
+      table.cultivatorId,
+      table.creditor,
+    ),
+  ],
+);
+
+// 持灯引荐：邀请制注册门槛的「灯引」。
+// 持灯人（老玩家）以一枚灯引引荐新人入道；新人注册时可选填写。
+// 填写则须为有效（active / 未超名额 / 未过期）灯引，否则拒绝注册。
+export const invitationLamps = pgTable(
+  'wanjiedaoyou_invitation_lamps',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    code: varchar('code', { length: 40 }).notNull(),
+    referrerUserId: uuid('referrer_user_id'), // 引荐人（持灯人），可空
+    note: varchar('note', { length: 200 }), // 备注（如用途/渠道）
+    status: varchar('status', { length: 16 })
+      .notNull()
+      .default('active'), // active | disabled
+    totalLimit: integer('total_limit').notNull().default(1), // 可引荐次数
+    usedCount: integer('used_count').notNull().default(0),
+    usedByUserId: uuid('used_by_user_id'), // 最近一次使用者
+    usedAt: timestamp('used_at'),
+    expiresAt: timestamp('expires_at'), // 过期时间（可空=永不过期）
+    createdBy: uuid('created_by').notNull(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at')
+      .defaultNow()
+      .$onUpdate(() => new Date())
+      .notNull(),
+  },
+  (table) => [
+    uniqueIndex('invitation_lamps_code_unique').on(table.code),
+    index('invitation_lamps_status_created_idx').on(table.status, table.createdAt),
+    index('invitation_lamps_referrer_idx').on(table.referrerUserId),
   ],
 );

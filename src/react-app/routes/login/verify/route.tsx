@@ -26,6 +26,7 @@ export default function LoginVerifyRoute() {
     (location.state as { displayName?: string } | null)?.displayName ??
     searchParams.get('name') ??
     '';
+  const presetInviteCode = searchParams.get('invite') ?? '';
 
   if (!email) {
     return (
@@ -38,7 +39,12 @@ export default function LoginVerifyRoute() {
   }
 
   return (
-    <LoginVerifyPage email={email} presetName={presetName} source={source} />
+    <LoginVerifyPage
+      email={email}
+      presetName={presetName}
+      source={source}
+      presetInviteCode={presetInviteCode}
+    />
   );
 }
 
@@ -46,44 +52,64 @@ function LoginVerifyPage({
   email,
   presetName,
   source,
+  presetInviteCode,
 }: {
   email: string;
   presetName: string;
   source: 'login' | 'signup';
+  presetInviteCode: string;
 }) {
   const navigate = useNavigate();
   const { verifyEmailOtp } = useAuth();
   const { showErrorDialog } = useAuthFeedback();
   const [displayName, setDisplayName] = useState(presetName);
+  const [inviteCode, setInviteCode] = useState(presetInviteCode);
   const [otp, setOtp] = useState('');
   const [loading, setLoading] = useState(false);
   const [displayNameRequired, setDisplayNameRequired] = useState(false);
-  const [errors, setErrors] = useState<{ displayName?: string; otp?: string }>(
-    {},
-  );
+  const [errors, setErrors] = useState<{
+    displayName?: string;
+    otp?: string;
+    inviteCode?: string;
+  }>({});
 
   const editAddressHref = buildEmailOtpTarget('/login/email', {
     email,
     displayName,
     source,
+    inviteCode,
   });
 
   const handleSubmit = async () => {
+    const trimmedInvite = inviteCode.trim();
     const nextErrors = getEmailOtpVerifyFieldErrors({
       otp,
       displayName,
       displayNameRequired,
     });
-    setErrors(nextErrors);
+    setErrors({
+      ...nextErrors,
+      inviteCode:
+        source === 'signup' &&
+        trimmedInvite &&
+        !/^[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(trimmedInvite.toUpperCase())
+          ? '灯引格式错误（如 ABCD-EFGH）'
+          : undefined,
+    });
 
-    if (nextErrors.otp || nextErrors.displayName) {
+    if (nextErrors.otp || nextErrors.displayName || errors.inviteCode) {
       return;
     }
 
     setLoading(true);
 
     try {
-      const { error } = await verifyEmailOtp(email, otp, displayName);
+      const { error } = await verifyEmailOtp(
+        email,
+        otp,
+        displayName,
+        source === 'signup' ? trimmedInvite || undefined : undefined,
+      );
 
       if (error) {
         throw error;
@@ -128,6 +154,7 @@ function LoginVerifyPage({
                 ? buildEmailOtpTarget('/signup/password', {
                     email,
                     displayName,
+                    inviteCode,
                   })
                 : buildEmailOtpTarget('/login/password', { email })
             }
@@ -172,6 +199,20 @@ function LoginVerifyPage({
           error={errors.displayName}
           disabled={loading}
         />
+        {source === 'signup' ? (
+          <InkInput
+            label="灯引（选填）"
+            value={inviteCode}
+            onChange={(value) => {
+              setInviteCode(value);
+              setErrors((current) => ({ ...current, inviteCode: undefined }));
+            }}
+            placeholder="例：ABCD-EFGH"
+            hint="持灯人引荐之信物。填写则须为有效灯引，方可入道；未填写亦可注册。"
+            error={errors.inviteCode}
+            disabled={loading}
+          />
+        ) : null}
         <InkButton
           type="submit"
           variant="primary"

@@ -39,13 +39,13 @@ import type { RewardBlueprint, RewardRangeConfig, ValueRange } from './types';
  */
 export class RewardFactory {
   /**
-   * 根据评级生成基础奖励（灵石、修为、感悟值）
+   * 根据评级生成基础奖励（灯油券、修为、窥悟值）
    *
-   * S: 大量灵石+修为+感悟
-   * A: 中等灵石+修为
-   * B: 少量灵石+修为
-   * C: 少量灵石
-   * D: 少量灵石
+   * S: 大量灯油券+修为+窥悟
+   * A: 中等灯油券+修为
+   * B: 少量灯油券+修为
+   * C: 少量灯油券
+   * D: 少量灯油券
    *
    * @param mapRealm 地图境界门槛
    * @param tier 副本评级 (S/A/B/C/D)
@@ -60,12 +60,12 @@ export class RewardFactory {
     playerInfo: PlayerInfo,
     difficultyTier?: DungeonDifficultyTier,
   ): ResourceOperation[] {
-    const config = REALM_REWARD_CONFIG[mapRealm] || REALM_REWARD_CONFIG['筑基'];
+    const config = REALM_REWARD_CONFIG[mapRealm] || REALM_REWARD_CONFIG['守灯'];
     const dangerBonus = this.getDangerBonus(dangerScore);
     const rewardBonus = getDungeonRewardBonus(difficultyTier);
     const rewards: ResourceOperation[] = [];
 
-    // 1. 灵石奖励 (基于挂机收益)
+    // 1. 灯油券奖励 (基于挂机收益)
     const rewardHours = this.rollRewardHoursByTier(tier);
     const yieldOps = YieldCalculator.calculateRealmYield(mapRealm, rewardHours);
     const spiritStones =
@@ -96,7 +96,7 @@ export class RewardFactory {
       });
     }
 
-    // 3. 感悟奖励 (A 级少量产出，S 级完整产出)
+    // 3. 窥悟奖励 (A 级少量产出，S 级完整产出)
     if (tier === 'S' || tier === 'A') {
       const multiplier = TIER_MULTIPLIER[tier] || TIER_MULTIPLIER['C'];
       const insightValue = this.randomInRange(
@@ -168,7 +168,7 @@ export class RewardFactory {
     playerInfo: PlayerInfo,
     difficultyTier?: DungeonDifficultyTier,
   ): ResourceOperation[] {
-    // 生成基础奖励（灵石、修为、感悟值）
+    // 生成基础奖励（灯油券、修为、窥悟值）
     const baseRewards = this.generateBaseRewards(
       mapRealm,
       tier,
@@ -198,7 +198,7 @@ export class RewardFactory {
     tier: string,
     dangerScore: number,
   ): ResourceOperation {
-    const config = REALM_REWARD_CONFIG[mapRealm] || REALM_REWARD_CONFIG['筑基'];
+    const config = REALM_REWARD_CONFIG[mapRealm] || REALM_REWARD_CONFIG['守灯'];
     const multiplier = TIER_MULTIPLIER[tier] || TIER_MULTIPLIER['C'];
     const dangerBonus = this.getDangerBonus(dangerScore);
     return this.createMaterial(
@@ -293,32 +293,32 @@ export class RewardFactory {
   private static inferElement(description: string): ElementType {
     const lowerDesc = description.toLowerCase();
     const elementMap: Record<string, ElementType> = {
-      火: '火',
-      焰: '火',
-      炎: '火',
-      焚: '火',
-      水: '水',
-      冰: '冰',
-      寒: '冰',
-      霜: '冰',
-      木: '木',
-      草: '木',
-      藤: '木',
-      林: '木',
-      花: '木',
-      铁: '金',
-      剑: '金',
-      锐: '金',
-      土: '土',
-      石: '土',
-      岩: '土',
-      山: '土',
-      雷: '雷',
-      电: '雷',
-      霆: '雷',
-      风: '风',
-      气: '风',
-      云: '风',
+      火: '渊',
+      焰: '渊',
+      炎: '渊',
+      焚: '渊',
+      水: '星',
+      冰: '疫',
+      寒: '疫',
+      霜: '疫',
+      木: '尸',
+      草: '尸',
+      藤: '尸',
+      林: '尸',
+      花: '尸',
+      铁: '烛',
+      剑: '烛',
+      锐: '烛',
+      土: '梦',
+      石: '梦',
+      岩: '梦',
+      山: '梦',
+      雷: '帘',
+      电: '帘',
+      霆: '帘',
+      风: '噬',
+      气: '噬',
+      云: '噬',
     };
 
     for (const [keyword, element] of Object.entries(elementMap)) {
@@ -326,7 +326,7 @@ export class RewardFactory {
     }
 
     // 默认随机返回一个元素
-    const elements: ElementType[] = ['金', '木', '水', '火', '土'];
+    const elements: ElementType[] = ['烛', '尸', '星', '渊', '梦'];
     return elements[Math.floor(Math.random() * elements.length)];
   }
 
@@ -409,7 +409,7 @@ export class RewardFactory {
     if (
       lowerDesc.includes('神通') ||
       lowerDesc.includes('秘术') ||
-      lowerDesc.includes('术法')
+      lowerDesc.includes('灯律')
     ) {
       return 'skill_manual';
     }
@@ -444,10 +444,11 @@ export class RewardFactory {
       return 'ore';
     }
 
-    // 妖兽
+    // 诡异
     if (
       lowerDesc.includes('兽') ||
-      lowerDesc.includes('妖') ||
+      lowerDesc.includes('诡') ||
+      lowerDesc.includes('腌') ||
       lowerDesc.includes('血') ||
       lowerDesc.includes('骨')
     ) {

@@ -6,6 +6,10 @@ import {
   type AltchaAction,
 } from '@server/lib/auth/altcha';
 import { db } from '@server/lib/drizzle/db';
+import {
+  consumeInvitationLamp,
+  invitationErrorMessage,
+} from '@server/lib/invitation/service';
 import { eq } from 'drizzle-orm';
 import type { Context } from 'hono';
 
@@ -109,6 +113,33 @@ async function validateOtpSignUpName(context: Context): Promise<Response | null>
   return null;
 }
 
+// 持灯引荐：注册时校验可选的「灯引」邀请码。
+// 只作用于真正「创建账号」的请求点：
+//   - /api/auth/sign-up/email（密码注册）
+//   - /api/auth/sign-in/email-otp（邮箱验证码验证，首次邮箱在此创建账号）
+// 未填写灯引则直接放行（选填门槛）；填写则原子校验并消耗，无效即拒绝注册。
+async function validateInvitationOnSignUp(context: Context): Promise<Response | null> {
+  const path = context.req.path;
+  if (path !== '/api/auth/sign-up/email' && path !== '/api/auth/sign-in/email-otp') {
+    return null;
+  }
+
+  const body = await readRequestBody(context.req.raw);
+  const inviteCode =
+    typeof body.inviteCode === 'string'
+      ? body.inviteCode
+      : typeof body.invitationCode === 'string'
+        ? body.invitationCode
+        : '';
+
+  const result = await consumeInvitationLamp(inviteCode);
+  if (result.status === 'invalid') {
+    return authError(invitationErrorMessage(result));
+  }
+
+  return null;
+}
+
 export async function handleAuthRequest(context: Context): Promise<Response> {
   if (
     context.req.path === ADMIN_AUTH_PATH ||
@@ -126,6 +157,11 @@ export async function handleAuthRequest(context: Context): Promise<Response> {
     const otpNameError = await validateOtpSignUpName(context);
     if (otpNameError) {
       return otpNameError;
+    }
+
+    const invitationError = await validateInvitationOnSignUp(context);
+    if (invitationError) {
+      return invitationError;
     }
   }
 

@@ -67,8 +67,8 @@ function getMethodDisabledReason(args: {
   ) {
     return `分卷不可超过${primary.name}`;
   }
-  if (args.cultivationExp < args.cost.cultivationExp) return '修为不足';
-  if (args.spiritStones < args.cost.spiritStones) return '灵石不足';
+  if (args.cultivationExp < args.cost.cultivationExp) return '灯韵不足';
+  if (args.spiritStones < args.cost.spiritStones) return '灯油券不足';
   return undefined;
 }
 
@@ -93,7 +93,7 @@ export function MethodsTab({
     return error ? (
       <InkNotice>{error}</InkNotice>
     ) : (
-      <GameLoadingState message="正在读取修炼资源……" variant="inline" />
+      <GameLoadingState message="正在读取窥悟资源……" variant="inline" />
     );
   }
   const sect = data.sect;
@@ -187,11 +187,11 @@ export function MethodsTab({
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div className="text-sm leading-6">
                   <p>
-                    本次：{selectedCost.cultivationExp}修为 ·{' '}
-                    {selectedCost.spiritStones}灵石
+                    本次：{selectedCost.cultivationExp}灯韵 ·{' '}
+                    {selectedCost.spiritStones}灯油券
                   </p>
                   <p className="text-ink-secondary">
-                    持有：{cultivationExp}修为 · {spiritStones}灵石
+                    持有：{cultivationExp}灯韵 · {spiritStones}灯油券
                   </p>
                   {selectedDisabledReason ? (
                     <p className="text-crimson">{selectedDisabledReason}</p>

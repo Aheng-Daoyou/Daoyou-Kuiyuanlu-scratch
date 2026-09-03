@@ -249,7 +249,7 @@ export default function MarketRecyclePage() {
               <span className="text-wood mx-1 font-bold">
                 {result.gainedSpiritStones}
               </span>
-              灵石。
+              灯油券。
             </p>
           ),
           confirmLabel: '知晓',
@@ -292,12 +292,12 @@ export default function MarketRecyclePage() {
         id: `sell-preview-${preview.sessionId}`,
         title: isHighTier
           ? isArtifact
-            ? '法宝鉴评'
+            ? '封灵器鉴评'
             : isConsumable
-              ? '高阶丹药回收确认'
+              ? '高阶香品回收确认'
               : '鉴宝师评估'
           : isArtifact
-            ? '法宝回收确认'
+            ? '封灵器回收确认'
             : isConsumable
               ? '废丹回收确认'
               : '废料回收确认',
@@ -328,18 +328,18 @@ export default function MarketRecyclePage() {
                   <span className="ml-1 font-bold">
                     {preview.totalSpiritStones}
                   </span>{' '}
-                  灵石
+                  灯油券
                 </p>
               </>
             ) : (
               <p className="text-center leading-7">
                 本次将清理 <span className="font-bold">{totalCount}</span>{' '}
-                {isArtifact ? '件法宝' : isConsumable ? '枚丹药' : '份废料'}
+                {isArtifact ? '件封灵器' : isConsumable ? '枚香品' : '份废料'}
                 ，预计获得{' '}
                 <span className="font-bold">
                   {preview.totalSpiritStones}
                 </span>{' '}
-                灵石。
+                灯油券。
               </p>
             )}
           </div>
@@ -388,7 +388,7 @@ export default function MarketRecyclePage() {
           title: '不可回收',
           content: (
             <p className="text-crimson py-3 text-center">
-              已装备法宝不可回收，请先卸下。
+              已装备封灵器不可回收，请先卸下。
             </p>
           ),
           confirmLabel: '知晓',
@@ -547,25 +547,25 @@ export default function MarketRecyclePage() {
     <GameSceneFrame
       variant="workflow"
       title="【坊市鉴宝司】"
-      description="鉴宝司按品相估价材料、法宝与丹药，确认货单后当场结算灵石。"
+      description="鉴宝司按品相估价材料、封灵器与香品，确认货单后当场结算灯油券。"
       aside={
         <>
           <GameSceneAsideSection title="鉴宝摘要">
             <div className="space-y-2 text-sm leading-7">
-              <p>灵石余额：{currency.data?.spiritStones ?? '读取中'}</p>
+              <p>灯油券余额：{currency.data?.spiritStones ?? '读取中'}</p>
               <p>
                 当前页签：
                 {isMaterialTab
                   ? '材料回收'
                   : isArtifactTab
-                    ? '法宝回收'
-                    : '丹药回收'}
+                    ? '封灵器回收'
+                    : '香品回收'}
               </p>
               <p>
                 当前页次：{pagination.page} /{' '}
                 {Math.max(pagination.totalPages, 1)}
               </p>
-              {isArtifactTab ? <p>已装备法宝：{equippedIds.size} 件</p> : null}
+              {isArtifactTab ? <p>已装备封灵器：{equippedIds.size} 件</p> : null}
             </div>
           </GameSceneAsideSection>
           <GameSceneAsideSection
@@ -584,13 +584,13 @@ export default function MarketRecyclePage() {
                     </>
                   ) : isArtifactTab ? (
                     <>
-                      <p>已装备法宝不可回收；高阶法宝仅支持单件鉴评。</p>
-                      <p>凡、灵、玄品法宝可直接纳入批量清理。</p>
+                      <p>已装备封灵器不可回收；高阶封灵器仅支持单件鉴评。</p>
+                      <p>凡、灵、玄品封灵器可直接纳入批量清理。</p>
                     </>
                   ) : (
                     <>
-                      <p>仅回收有效丹药，符箓等其他消耗品不纳入。</p>
-                      <p>可选择单组数量；凡、灵、玄品丹药可批量清理。</p>
+                      <p>仅回收有效香品，符箓等其他消耗品不纳入。</p>
+                      <p>可选择单组数量；凡、灵、玄品香品可批量清理。</p>
                     </>
                   )}
                 </div>
@@ -605,8 +605,8 @@ export default function MarketRecyclePage() {
         onChange={(value) => setActiveTab(value as RecycleTab)}
         items={[
           { label: '材料回收', value: 'materials' },
-          { label: '法宝回收', value: 'artifacts' },
-          { label: '丹药回收', value: 'consumables' },
+          { label: '封灵器回收', value: 'artifacts' },
+          { label: '香品回收', value: 'consumables' },
         ]}
       />
 
@@ -618,12 +618,12 @@ export default function MarketRecyclePage() {
           </p>
         ) : isArtifactTab ? (
           <p className="text-ink-secondary text-sm leading-7">
-            真品及以上法宝仅支持单件鉴评回收；凡、灵、玄品可批量清理。
-            已装备法宝不可回收，需先卸下。
+            真品及以上封灵器仅支持单件鉴评回收；凡、灵、玄品可批量清理。
+            已装备封灵器不可回收，需先卸下。
           </p>
         ) : (
           <p className="text-ink-secondary text-sm leading-7">
-            丹药按品质、品相、评分和实际功效保守估价；可先选数量，再确认回收。
+            香品按品质、品相、评分和实际功效保守估价；可先选数量，再确认回收。
           </p>
         )}
 
@@ -638,8 +638,8 @@ export default function MarketRecyclePage() {
             {isMaterialTab
               ? '一键出售低阶材料'
               : isArtifactTab
-                ? '一键出售低阶法宝'
-                : '一键回收低阶丹药'}
+                ? '一键出售低阶封灵器'
+                : '一键回收低阶香品'}
           </InkButton>
           <InkButton
             variant="secondary"
@@ -651,8 +651,8 @@ export default function MarketRecyclePage() {
             {isMaterialTab
               ? '刷新材料'
               : isArtifactTab
-                ? '刷新法宝'
-                : '刷新丹药'}
+                ? '刷新封灵器'
+                : '刷新香品'}
           </InkButton>
         </div>
       </div>
@@ -667,8 +667,8 @@ export default function MarketRecyclePage() {
               isMaterialTab
                 ? '鉴宝师正在清点货架，请稍候……'
                 : isArtifactTab
-                  ? '鉴宝师正在核对法宝名录，请稍候……'
-                  : '药师正在核对丹药名录，请稍候……'
+                  ? '鉴宝师正在核对封灵器名录，请稍候……'
+                  : '药师正在核对香品名录，请稍候……'
             }
             variant="inline"
           />
@@ -679,8 +679,8 @@ export default function MarketRecyclePage() {
             {isMaterialTab
               ? '储物袋暂无材料，先去历练再来坊市吧。'
               : isArtifactTab
-                ? '储物袋暂无法宝，先去炼器或探险再来坊市吧。'
-                : '储物袋暂无可回收丹药。'}
+                ? '储物袋暂无封灵器，先去封灵或探险再来坊市吧。'
+                : '储物袋暂无可回收香品。'}
           </InkNotice>
         ) : isMaterialTab ? (
           <InkList>

@@ -15,15 +15,15 @@ const ACTION_LABELS: Record<string, string> = {
   dungeon_start: '秘境探索',
   retreat_10_years: '闭关修行',
   breakthrough_attempt: '突破',
-  alchemy_improvised: '即兴炼丹',
-  alchemy_formula: '丹方炼丹',
-  creation_artifact: '炼器',
+  alchemy_improvised: '即兴制香',
+  alchemy_formula: '香方制香',
+  creation_artifact: '封灵',
   creation_gongfa: '创造功法',
   creation_skill: '创造神通',
-  qi_restore_small: '小聚灵符',
-  qi_restore_medium: '中聚灵符',
-  qi_restore_large: '大聚灵符',
-  qi_restore_fill_to_max: '天地引气符',
+  qi_restore_small: '短芯香',
+  qi_restore_medium: '续灯香',
+  qi_restore_large: '长明香',
+  qi_restore_fill_to_max: '引灯大香',
   market_identify: '神秘物品鉴定',
 };
 
@@ -79,7 +79,7 @@ export function QiLogsTab() {
         };
 
         if (!response.ok || !json.success || !json.data) {
-          throw new Error(json.error || '读取天地灵气日志失败');
+          throw new Error(json.error || '读取灯油日志失败');
         }
         if (!cancelled) {
           setData(json.data);
@@ -87,7 +87,7 @@ export function QiLogsTab() {
       } catch (err) {
         if (!cancelled) {
           setData(null);
-          setError(err instanceof Error ? err.message : '读取天地灵气日志失败');
+          setError(err instanceof Error ? err.message : '读取灯油日志失败');
         }
       } finally {
         if (!cancelled) {
@@ -108,8 +108,8 @@ export function QiLogsTab() {
 
   return (
     <SettingsSection
-      title="天地灵气审计"
-      description="查看当前角色的灵气扣减、恢复与退还记录。"
+      title="灯油审计"
+      description="查看当前角色的灯油扣减、恢复与退还记录。"
       aside={
         <span className="text-battle-muted text-sm">
           第 {data?.page ?? page} / {totalPages} 页
@@ -119,10 +119,10 @@ export function QiLogsTab() {
       <div className="grid gap-4">
         {error ? <SettingsMessage type="error">{error}</SettingsMessage> : null}
         {isLoading && logs.length === 0 ? (
-          <GameLoadingState message="正在读取灵气审计……" variant="inline" />
+          <GameLoadingState message="正在读取灯油审计……" variant="inline" />
         ) : null}
         {!isLoading && !error && logs.length === 0 ? (
-          <SettingsMessage>暂无天地灵气审计日志</SettingsMessage>
+          <SettingsMessage>暂无灯油审计日志</SettingsMessage>
         ) : null}
 
         {logs.length > 0 ? (

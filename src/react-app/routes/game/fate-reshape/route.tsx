@@ -295,7 +295,7 @@ export default function FateReshapePage() {
       <GameSceneFrame
         variant="lite"
         title="【命格重塑】"
-        description="需先踏入仙途，方能拨动天机。"
+        description="需先踏入灯途，方能拨动天机。"
       >
         <InkNotice>当前没有活跃角色，暂无法进行命格重塑。</InkNotice>
       </GameSceneFrame>

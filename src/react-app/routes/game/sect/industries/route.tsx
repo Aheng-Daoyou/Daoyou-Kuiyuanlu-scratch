@@ -123,7 +123,7 @@ function DonationConversation({
       member: member.data,
     },
     perform: async () => {
-      if (!facility || !quote) throw new Error('请先选择设施和灵石档位。');
+      if (!facility || !quote) throw new Error('请先选择设施和灯油券档位。');
       await mutate(
         fetch(
           '/api/sects/current/construction/donate',
@@ -148,7 +148,7 @@ function DonationConversation({
     messages.push({
       id: 'used',
       speaker: actor.name,
-      body: `今日建设已经完成：向${presentation.facilityLabels[member.data.facilityKey ?? ''] ?? '所选设施'}捐献${formatSpiritStones(member.data.spiritStones ?? 0)}灵石，获得${member.data.contribution ?? 0}点宗门贡献。`,
+      body: `今日建设已经完成：向${presentation.facilityLabels[member.data.facilityKey ?? ''] ?? '所选设施'}捐献${formatSpiritStones(member.data.spiritStones ?? 0)}灯油券，获得${member.data.contribution ?? 0}点宗门贡献。`,
       tone: 'attention',
     });
   else if (facility)
@@ -161,13 +161,13 @@ function DonationConversation({
     messages.push({
       id: 'quote',
       speaker: actor.name,
-      body: `本次需要捐献${formatSpiritStones(quote.spiritStones)}灵石，可增加${quote.constructionPoints}点建设进度并获得${quote.contribution}点宗门贡献。`,
+      body: `本次需要捐献${formatSpiritStones(quote.spiritStones)}灯油券，可增加${quote.constructionPoints}点建设进度并获得${quote.contribution}点宗门贡献。`,
     });
   if (session.result)
     messages.push({
       id: 'result',
       speaker: actor.name,
-      body: `${session.result}的建设已经登记，灵石与贡献均已结算。`,
+      body: `${session.result}的建设已经登记，灯油券与贡献均已结算。`,
       tone: 'attention',
     });
 
@@ -256,7 +256,7 @@ function donationOptions(input: {
     return [
       ...SECT_CONSTRUCTION_DONATION_OPTIONS.map((option) => ({
         id: `amount:${option.spiritStones}`,
-        label: `捐献${formatSpiritStones(option.spiritStones)}灵石`,
+        label: `捐献${formatSpiritStones(option.spiritStones)}灯油券`,
       })),
       { id: 'back-facility', label: '改选设施' },
       { id: 'leave', label: '弟子告退', tone: 'muted' as const },
@@ -267,7 +267,7 @@ function donationOptions(input: {
       label: '确认建设',
       tone: 'primary',
     },
-    { id: 'back-amount', label: '改选灵石档位' },
+    { id: 'back-amount', label: '改选灯油券档位' },
     { id: 'back-facility', label: '改选设施' },
     { id: 'leave', label: '弟子告退', tone: 'muted' },
   ];

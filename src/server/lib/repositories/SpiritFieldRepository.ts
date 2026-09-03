@@ -46,7 +46,7 @@ export async function getOrCreateSpiritField(
     .from(spiritFields)
     .where(eq(spiritFields.cultivatorId, cultivatorId))
     .limit(1);
-  if (!row) throw new Error('灵田初始化失败');
+  if (!row) throw new Error('灯田初始化失败');
   return mapRow(row);
 }
 

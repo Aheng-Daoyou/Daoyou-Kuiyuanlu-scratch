@@ -17,6 +17,7 @@ import {
 const PROVIDER_LABELS: Record<LlmProviderId, string> = {
   deepseek: 'DeepSeek',
   alibaba: '阿里云百炼（Qwen）',
+  zhipu: '智谱（GLM）',
 };
 
 export function ModelConfigTab() {
@@ -88,6 +89,7 @@ export function ModelConfigTab() {
       >
         <option value="deepseek">{PROVIDER_LABELS.deepseek}</option>
         <option value="alibaba">{PROVIDER_LABELS.alibaba}</option>
+        <option value="zhipu">{PROVIDER_LABELS.zhipu}</option>
       </InkSelect>
 
       <InkInput
@@ -137,8 +139,8 @@ export function ModelConfigTab() {
 
       <SettingsSection>
         <p className="text-ink-secondary text-sm leading-6">
-          支持 DeepSeek 与阿里云百炼（Qwen）。配置保存在浏览器 localStorage
-          中，仅当前设备生效，更换浏览器或清除缓存后需要重新配置。
+          支持 DeepSeek、阿里云百炼（Qwen）与智谱（GLM）。配置保存在浏览器
+          localStorage 中，仅当前设备生效，更换浏览器或清除缓存后需要重新配置。
           <br />
           API Key
           仅在前端本地存储，服务端通过请求头获取并调用，不会在服务器持久化保存。

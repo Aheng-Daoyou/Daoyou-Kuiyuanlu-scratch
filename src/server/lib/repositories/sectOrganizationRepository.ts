@@ -451,7 +451,7 @@ export async function addCultivatorSpiritStones(
     .set({ spirit_stones: sql`${cultivators.spirit_stones} + ${amount}` })
     .where(eq(cultivators.id, cultivatorId))
     .returning({ spiritStones: cultivators.spirit_stones });
-  if (!row) throw new Error('修真者不存在');
+  if (!row) throw new Error('修士不存在');
   return row.spiritStones;
 }
 
@@ -556,7 +556,7 @@ export async function listOwnedSubmissionConsumables(
 ) {
   const condition = and(
     eq(consumables.cultivatorId, cultivatorId),
-    eq(consumables.type, '丹药'),
+    eq(consumables.type, '香品'),
     sql`${consumables.spec} ->> 'kind' = 'pill'`,
   );
   const [rows, totals] = await runDbTasks(q, [
@@ -641,7 +641,7 @@ export async function consumeOwnedSubmissionConsumable(
       and(
         eq(consumables.id, itemId),
         eq(consumables.cultivatorId, cultivatorId),
-        eq(consumables.type, '丹药'),
+        eq(consumables.type, '香品'),
         gte(consumables.quantity, quantity),
       ),
     )

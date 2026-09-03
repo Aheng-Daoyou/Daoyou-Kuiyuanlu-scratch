@@ -18,6 +18,7 @@ import materialGenerationPrompt from '@server/prompts/material-generation.md?raw
 import spiritSeedGenerationPrompt from '@server/prompts/spirit-seed-generation.md?raw';
 import materialSemanticEnrichmentPrompt from '@server/prompts/material-semantic-enrichment.md?raw';
 import productNamingPrompt from '@server/prompts/product-naming.md?raw';
+import sampleScenariosPrompt from '@server/prompts/sample-scenarios.md?raw';
 import spiritFieldStageJudgmentPrompt from '@server/prompts/spirit-field-stage-judgment.md?raw';
 import spiritFieldFinalizationPrompt from '@server/prompts/spirit-field-finalization.md?raw';
 import yieldStoryPrompt from '@server/prompts/yield-story.md?raw';
@@ -57,6 +58,7 @@ const bundledPromptSources: Record<string, string> = {
   'spirit-seed-generation.md': spiritSeedGenerationPrompt,
   'material-semantic-enrichment.md': materialSemanticEnrichmentPrompt,
   'product-naming.md': productNamingPrompt,
+  'sample-scenarios.md': sampleScenariosPrompt,
   'spirit-field-stage-judgment.md': spiritFieldStageJudgmentPrompt,
   'spirit-field-finalization.md': spiritFieldFinalizationPrompt,
   'yield-story.md': yieldStoryPrompt,

@@ -87,7 +87,7 @@ function SectAlchemyBody() {
       <SectRoutedRoom
         roomKey="alchemy"
         registry={registry}
-        eyebrow="丹炉火候 · 药柜封签"
+        eyebrow="香炉火候 · 香柜封签"
       />
     </SectScene>
   );

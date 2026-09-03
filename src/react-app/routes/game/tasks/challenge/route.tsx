@@ -83,7 +83,7 @@ function TaskChallengePageContent() {
   return (
     <BattlePageLayout
       title={challengeTitle}
-      subtitle="以斗法验道心，以胜负问前路。"
+      subtitle="以斗法验灯心，以胜负问前路。"
       variant="immersive-battle"
       loading={loading}
       battleResult={battleResult}

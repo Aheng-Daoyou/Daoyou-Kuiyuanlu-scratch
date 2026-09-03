@@ -88,7 +88,7 @@ export function InventoryView() {
     <>
       <GameSceneAsideSection title="行囊摘要">
         <div className="space-y-2 text-sm leading-7">
-          <p>灵石：{spiritStones ?? '读取中…'}</p>
+          <p>灯油券：{spiritStones ?? '读取中…'}</p>
           <p>
             当前分页：{pagination.page} / {pagination.totalPages}
           </p>
@@ -104,7 +104,7 @@ export function InventoryView() {
           <div className="space-y-2 text-sm leading-7">
             <p>品阶：{materialFilters.rank || '全部'}</p>
             <p>类别：{materialFilters.type || '全部'}</p>
-            <p>五行：{materialFilters.element || '全部'}</p>
+            <p>属性：{materialFilters.element || '全部'}</p>
             <p>
               排序：{materialFilters.sortBy} / {materialFilters.sortOrder}
             </p>
@@ -117,7 +117,7 @@ export function InventoryView() {
   return (
     <GameSceneFrame
       title="【储物袋】"
-      description="法宝、材料与消耗品都在此汇总。先点清手头资源，再决定是佩装、炼造，还是送去坊市流转。"
+      description="封灵器、材料与消耗品都在此汇总。先点清手头资源，再决定是佩装、炼造，还是送去坊市流转。"
       headerMeta={
         note ? (
           <GameSceneNote>

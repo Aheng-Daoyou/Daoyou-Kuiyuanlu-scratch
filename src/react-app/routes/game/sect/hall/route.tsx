@@ -133,7 +133,7 @@ function HallRegistryConversation({
           <span className="text-crimson font-medium">
             {sect.contribution.toLocaleString('zh-CN')}点贡献
           </span>
-          。若要问晋升条件或正式晋升，去事务堂请教传功长老即可。
+          。若要问晋升条件或正式晋升，去事务堂请教传灯长老即可。
         </>
       ),
     });
@@ -360,7 +360,7 @@ function HallStipendConversation({
           <>
             本周周俸已经入账，实际领取
             <span className="text-crimson font-medium">
-              {stipend.spiritStones.toLocaleString('zh-CN')}枚灵石
+              {stipend.spiritStones.toLocaleString('zh-CN')}枚灯油券
             </span>
             。
           </>
@@ -371,7 +371,7 @@ function HallStipendConversation({
         <>
           本周应发
           <span className="text-crimson font-medium">
-            {stipend.spiritStones.toLocaleString('zh-CN')}枚灵石
+            {stipend.spiritStones.toLocaleString('zh-CN')}枚灯油券
           </span>
           。核对无误便可领取。
         </>

@@ -57,10 +57,10 @@ function getUnlockDisabledReason(args: {
     return args.missingRequirements.length
       ? `尚需：${args.missingRequirements.join('、')}`
       : '尚未满足参悟条件';
-  if (args.cultivationExp < args.layer.cost.cultivationExp) return '修为不足';
+  if (args.cultivationExp < args.layer.cost.cultivationExp) return '灯韵不足';
   if (args.comprehensionInsight < args.layer.cost.comprehensionInsight)
-    return '道心感悟不足';
-  if (args.spiritStones < args.layer.cost.spiritStones) return '灵石不足';
+    return '灯心窥悟不足';
+  if (args.spiritStones < args.layer.cost.spiritStones) return '灯油券不足';
   return undefined;
 }
 
@@ -275,7 +275,7 @@ function PathDrawer({
         {error ? (
           <InkNotice>{error}</InkNotice>
         ) : (
-          <GameLoadingState message="正在读取修炼资源……" variant="inline" />
+          <GameLoadingState message="正在读取窥悟资源……" variant="inline" />
         )}
       </InkDetailDrawer>
     );
@@ -681,13 +681,13 @@ function TrainingCost({
   return (
     <div className="text-sm leading-6">
       <p>
-        本次：{layer.cost.cultivationExp}修为 ·{' '}
+        本次：{layer.cost.cultivationExp}灯韵 ·{' '}
         {layer.cost.comprehensionInsight}
-        道心感悟 · {layer.cost.spiritStones}灵石
+        灯心窥悟 · {layer.cost.spiritStones}灯油券
       </p>
       <p className="text-ink-secondary">
-        持有：{cultivationExp}修为 · {comprehensionInsight}道心感悟 ·{' '}
-        {spiritStones}灵石
+        持有：{cultivationExp}灯韵 · {comprehensionInsight}灯心窥悟 ·{' '}
+        {spiritStones}灯油券
       </p>
       {disabledReason ? <p className="text-crimson">{disabledReason}</p> : null}
     </div>

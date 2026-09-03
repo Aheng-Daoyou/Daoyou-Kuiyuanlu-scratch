@@ -84,13 +84,13 @@ export default function ReincarnatePage() {
             轮回引导
           </div>
           <div className="text-ink mt-3 space-y-3 text-sm leading-7">
-            <p>轮回之门已开，前世故事只作为入道文案参考，本世根骨与机缘仍将重新推演。</p>
-            <p>确认后会返回凝气篇，以新身重新定名、择命、入世。</p>
+            <p>轮回之门已开，前世故事只作为入道文案参考，本世灯骨与机缘仍将重新推演。</p>
+            <p>确认后会返回守灯立传，以新身重新定名、择命、入世。</p>
           </div>
         </section>
 
         <section className={genesisPanelClassName}>
-          <InkSection title="【再踏仙途】">
+          <InkSection title="【再踏灯途】">
             <p className="text-sm leading-6">
               握紧前世余音，重新凝聚真身，继续此段道途。
             </p>

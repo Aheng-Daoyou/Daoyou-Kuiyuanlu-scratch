@@ -190,7 +190,7 @@ export async function equipArtifact(
   slot: string,
   q: DbExecutor = getExecutor(),
 ): Promise<void> {
-  // 先卸下同槽位已装备的法宝
+  // 先卸下同槽位已装备的封灵器
   await q
     .update(schema.creationProducts)
     .set({ isEquipped: false })
@@ -202,7 +202,7 @@ export async function equipArtifact(
         eq(schema.creationProducts.isEquipped, true),
       ),
     );
-  // 装备新法宝
+  // 装备新封灵器
   await q
     .update(schema.creationProducts)
     .set({ isEquipped: true })

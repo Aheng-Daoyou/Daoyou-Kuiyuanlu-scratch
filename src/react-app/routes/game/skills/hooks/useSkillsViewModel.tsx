@@ -168,7 +168,7 @@ export function useSkillsViewModel(): UseSkillsViewModelReturn {
             道友当真要将【{skill.name}】化为尘埃？此举不可逆转。
           </p>
         ),
-        confirmLabel: '道心已决',
+        confirmLabel: '灯心已决',
         cancelLabel: '再思量',
         onConfirm: async () => {
           try {

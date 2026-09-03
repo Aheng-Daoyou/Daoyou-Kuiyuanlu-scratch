@@ -308,7 +308,7 @@ export default function MarketPage() {
       return;
     }
     if (cultivator.spiritStones < item.price) {
-      pushToast({ message: '囊中羞涩，灵石不足', tone: 'warning' });
+      pushToast({ message: '囊中羞涩，灯油券不足', tone: 'warning' });
       return;
     }
     if (item.price > HIGH_VALUE_PURCHASE_CONFIRM_THRESHOLD) {
@@ -352,7 +352,7 @@ export default function MarketPage() {
     const totalCost = selectedItems.reduce((acc, curr) => acc + curr.price, 0);
 
     if (cultivator.spiritStones < totalCost) {
-      pushToast({ message: '囊中羞涩，灵石不足', tone: 'warning' });
+      pushToast({ message: '囊中羞涩，灯油券不足', tone: 'warning' });
       return;
     }
 

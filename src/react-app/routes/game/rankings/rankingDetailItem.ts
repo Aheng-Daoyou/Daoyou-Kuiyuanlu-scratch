@@ -14,7 +14,7 @@ export function toRankingDetailItem(item: ItemRankingEntry): ItemDetailPayload {
       id: item.id,
       name: item.name,
       slot: (item.slot as Artifact['slot']) || 'weapon',
-      element: (item.element as Artifact['element']) || '金',
+      element: (item.element as Artifact['element']) || '烛',
       quality: item.quality as Artifact['quality'],
       description: item.description,
       score: item.score,
@@ -28,7 +28,7 @@ export function toRankingDetailItem(item: ItemRankingEntry): ItemDetailPayload {
     const skill: Skill = {
       id: item.id,
       name: item.name,
-      element: (item.element as Skill['element']) || '金',
+      element: (item.element as Skill['element']) || '烛',
       quality: item.quality as Skill['quality'],
       score: item.score,
       cost: item.cost || 0,
@@ -57,7 +57,7 @@ export function toRankingDetailItem(item: ItemRankingEntry): ItemDetailPayload {
   const consumable: Consumable = {
     id: item.id,
     name: item.name,
-    type: (item.type as Consumable['type']) || '丹药',
+    type: (item.type as Consumable['type']) || '香品',
     quality: item.quality as Consumable['quality'],
     quantity: item.quantity || 1,
     description: item.description,

@@ -176,7 +176,7 @@ export function MaterialsTab({
           variant="inline"
         />
       ) : !materials || materials.length === 0 ? (
-        <InkNotice>暂无符合筛选条件的修炼材料。</InkNotice>
+        <InkNotice>暂无符合筛选条件的窥悟材料。</InkNotice>
       ) : (
         <InkList>
           {materials.map((item, idx) => {

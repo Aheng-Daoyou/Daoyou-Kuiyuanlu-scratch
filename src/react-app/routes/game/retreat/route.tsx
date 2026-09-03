@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 
 export default function RetreatPage() {
   return (
-    <Suspense fallback={<GameSceneLoading message="洞府封闭中……" />}>
+    <Suspense fallback={<GameSceneLoading message="灯宅封闭中……" />}>
       <RetreatView />
     </Suspense>
   );

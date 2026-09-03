@@ -93,10 +93,10 @@ function localPracticeResult(
 }
 
 const MINING_ORE_LABELS = {
-  spirit_crystal: '小型灵晶',
-  copper_ore: '赤铜灵矿',
+  spirit_crystal: '小型灯晶',
+  copper_ore: '赤铜灯矿',
   dark_iron: '玄铁矿团',
-  earth_essence: '地脉灵髓',
+  earth_essence: '地脉灯髓',
 } as const;
 
 function nextTierTarget(score: number, maxScore: number): string {
@@ -182,7 +182,7 @@ export default function SectSpiritVeinMiningPage() {
         const decoded = decodeSectTaskOutcome(result.outcome);
         if (!decoded.ok) throw new Error(decoded.error);
         const server = readMiningSessionOutcome(decoded.value);
-        if (!server) throw new Error('宗门返回的灵矿采掘场次无法识别');
+        if (!server) throw new Error('宗门返回的灯矿采掘场次无法识别');
         setSession({
           kind: 'reward',
           seed: server.seed,
@@ -191,7 +191,7 @@ export default function SectSpiritVeinMiningPage() {
         });
       } catch (reason) {
         setOperationError(
-          reason instanceof Error ? reason.message : '灵矿采掘场开启失败',
+          reason instanceof Error ? reason.message : '灯矿采掘场开启失败',
         );
       } finally {
         setStarting(false);
@@ -239,13 +239,13 @@ export default function SectSpiritVeinMiningPage() {
         setSettlement({ kind: 'reward', ...miningResult });
         pushToast({
           message: miningResult.qualified
-            ? `灵矿采掘评定为 ${miningResult.tier} 档`
+            ? `灯矿采掘评定为 ${miningResult.tier} 档`
             : '本轮采掘尚未达到验收线',
           tone: miningResult.qualified ? 'success' : 'warning',
         });
       } catch (reason) {
         setOperationError(
-          reason instanceof Error ? reason.message : '灵矿采掘结果提交失败',
+          reason instanceof Error ? reason.message : '灯矿采掘结果提交失败',
         );
       } finally {
         setSubmitting(false);
@@ -260,7 +260,7 @@ export default function SectSpiritVeinMiningPage() {
     const controller = attachMiningPhaser({
       root,
       seed: session.seed,
-      canvasLabel: `${presentation.facilityLabels.spirit_vein ?? '宗门灵脉'}灵索采矿游戏画布`,
+      canvasLabel: `${presentation.facilityLabels.spirit_vein ?? '宗门灯脉'}灵索采矿游戏画布`,
       onState: setProgress,
       onComplete: (casts, finalProgress) => void complete(casts, finalProgress),
       onError: setOperationError,
@@ -323,7 +323,7 @@ export default function SectSpiritVeinMiningPage() {
             {viewport.coarsePointer ? '分' : '得分'} {progress?.score ?? 0}
           </span>
           <span className="ml-3">
-            {viewport.coarsePointer ? '矿' : '灵矿'} {progress?.collected ?? 0}
+            {viewport.coarsePointer ? '矿' : '灯矿'} {progress?.collected ?? 0}
             /16
           </span>
           {progress?.destroyed ? (
@@ -369,7 +369,7 @@ export default function SectSpiritVeinMiningPage() {
           instructions={
             <p>等待灵索对准矿藏，点击“放索”；炸药会波及周围矿石。</p>
           }
-          exitLabel="返回灵脉"
+          exitLabel="返回灯脉"
           onRetry={retryImmersive}
           onContinue={() => setFallbackAccepted(true)}
           onExit={() => void exit()}
@@ -387,7 +387,7 @@ export default function SectSpiritVeinMiningPage() {
               改为自由练习
             </InkButton>
             <InkButton variant="secondary" onClick={() => void exit()}>
-              返回灵脉
+              返回灯脉
             </InkButton>
           </div>
         </GameActivityOverlay>
@@ -413,11 +413,11 @@ export default function SectSpiritVeinMiningPage() {
                 .join('、')}
             </p>
           ) : (
-            <p className="mt-2 text-sm text-stone-400">本轮未采得灵矿。</p>
+            <p className="mt-2 text-sm text-stone-400">本轮未采得灯矿。</p>
           )}
           {settlement.destroyed ? (
             <p className="mt-2 text-sm text-orange-200/80">
-              爆破波及灵矿 ×{settlement.destroyed}，不会计入得分。
+              爆破波及灯矿 ×{settlement.destroyed}，不会计入得分。
             </p>
           ) : null}
           {settlement.rewardSummary?.length ? (
@@ -436,7 +436,7 @@ export default function SectSpiritVeinMiningPage() {
           </p>
           <div className="mt-5 flex flex-wrap justify-center gap-3">
             <InkButton variant="primary" onClick={() => void exit()}>
-              返回灵脉
+              返回灯脉
             </InkButton>
             <InkButton
               variant="secondary"

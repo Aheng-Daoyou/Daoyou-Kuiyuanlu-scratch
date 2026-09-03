@@ -1,6 +1,9 @@
 import { createDomainEvent } from '@server/lib/mq/domainEventWriter';
 import { publishTransactionalMessageBestEffort } from '@server/lib/mq/transactionalMessagePublisher';
-import { renderPrompt } from '@server/lib/prompts';
+import {
+  renderPrompt,
+  renderPromptSystem,
+} from '@server/lib/prompts';
 import { findActiveCultivatorOwnerId } from '@server/lib/repositories/cultivatorRepository';
 import type { BattleRecordV3 } from '@server/lib/services/battleResult';
 import {
@@ -10,7 +13,14 @@ import {
 import { getPaginatedInventoryByType } from '@server/lib/services/cultivator/CultivatorInventoryRepository';
 import { updateCultivator } from '@server/lib/services/cultivator/CultivatorStateRepository';
 import { resourceEngine } from '@server/lib/services/resource/ResourceEngine';
-import { generateAiObject } from '@server/utils/aiClient';
+import {
+  extractJsonObjectFromText,
+  extractSceneDescriptionProgress,
+  generateAiObject,
+  generateAiText,
+  hasAnyServerLlmProviderConfigured,
+  streamAiText,
+} from '@server/utils/aiClient';
 import { stableCompactStringify } from '@server/utils/llmPayload';
 import { getRealmStageNaturalAttributeValue } from '@shared/config/realmProgression';
 import type { CultivatorDisplayInput } from '@shared/engine/battle-v5/adapters/CultivatorDisplayAdapter';
@@ -83,6 +93,7 @@ import {
   DungeonRecoverAction,
   DungeonRound,
   DungeonRoundLlmContext,
+  DungeonRoundLlmOutput,
   DungeonRoundSchema,
   DungeonSettlement,
   DungeonSettlementGeneratedSchema,
@@ -151,6 +162,10 @@ type DungeonSettlementOptions = {
 type DungeonFlowOptions = {
   deferPersistence?: boolean;
   lease?: RedisLeaseContext;
+  /** 回合叙事流式回调：收到累积式 scene_description 文本（渐进展示用） */
+  narrativeStream?: (text: string) => void;
+  /** 客户端断开时中止 LLM 生成，避免空跑 */
+  abortSignal?: AbortSignal;
 };
 
 type DungeonPersistenceHooks = {
@@ -387,7 +402,7 @@ function assertDungeonRealmEligible(
 ) {
   if (!canChallengeDungeonRealm(playerRealm, dungeonRealm)) {
     throw new Error(
-      `当前境界${playerRealm}不可挑战${dungeonRealm}副本，请先提升大境界`,
+      `当前境界${playerRealm}不可挑战${dungeonRealm}秘境，请先提升大境界`,
     );
   }
 }
@@ -429,8 +444,8 @@ export class DungeonService {
     return {
       id: 1,
       text: isFinalRound
-        ? '稳住心神，清点本轮所得并结束探索。'
-        : '稳住心神，沿着当前线索继续探索。',
+        ? '稳住心神，清点本更所得并结案收束。'
+        : '稳住心神，沿着当前线索继续勘察。',
       risk_level: 'low' as const,
       costs: [],
       costPreview: [],
@@ -682,7 +697,7 @@ export class DungeonService {
 
     const bundle = await loadCultivatorCombatInput(cultivatorId, tx);
     if (!bundle?.cultivator) {
-      throw new Error('未找到修真者数据');
+      throw new Error('未找到修士数据');
     }
 
     const nextCondition = ConditionService.applyExternalResourceLoss(
@@ -835,7 +850,7 @@ export class DungeonService {
 
   /**
    * 计算境界差距
-   * @param playerRealm 玩家境界字符串，如 "化神 中期"
+   * @param playerRealm 玩家境界字符串，如 "忘川 中期"
    * @param mapRealm 地图要求境界
    * @returns 境界差距（正数表示玩家更强，负数表示地图更难）
    */
@@ -854,7 +869,7 @@ export class DungeonService {
     return playerIndex - mapIndex;
   }
 
-  // 核心配置：定义每个轮次对应的副本相位
+  // 核心配置：定义每个更次对应的诡案相位（五更制：点境→试探→深入→现真→处置→天明）
   private getPhase(
     currentRound: number,
     maxRounds: number,
@@ -862,18 +877,18 @@ export class DungeonService {
   ): string {
     // 境界碾压场景：简化剧情，降低风险
     if (realmGap >= 2) {
-      if (currentRound === 1) return '探索期：境界占优，宜顺势探查。';
-      if (currentRound < maxRounds - 1) return '收获期：可稳取资源，代价宜轻。';
-      if (currentRound === maxRounds - 1) return '收尾期：阻碍将尽，风险应低。';
-      return '圆满期：可稳妥结局，满载而归。';
+      if (currentRound === 1) return '点境期：境界占优，宜顺势勘察。';
+      if (currentRound < maxRounds - 1) return '取证期：可稳取线索，代价宜轻。';
+      if (currentRound === maxRounds - 1) return '现真期：阻碍将尽，风险应低。';
+      return '处置期：可稳妥结案，满载而归。';
     }
 
     // 正常场景
-    if (currentRound === 1) return '潜入期：先探环境、阵法与入口。';
-    if (currentRound < maxRounds - 1) return '变局期：引入转折，开始消耗资源。';
+    if (currentRound === 1) return '点境期：先发下规矩、勘察环境与入口。';
+    if (currentRound < maxRounds - 1) return '深入期：引入转折，投放线索并开始消耗资源。';
     if (currentRound === maxRounds - 1)
-      return '夺宝期：副本高潮，风险应显著抬升。';
-    return '结尾期：根据前情收束结局与余波。';
+      return '现真期：诡异本体现身，风险应显著抬升。';
+    return '处置期：根据前情收束因果与余波。';
   }
 
   /**
@@ -944,12 +959,18 @@ export class DungeonService {
         accumulatedRewards: [],
         status: 'EXPLORING',
         accumulatedHpLoss: 0, // 累积气血损失百分比 (0-1)
-        accumulatedMpLoss: 0, // 累积法力损失百分比 (0-1)
+        accumulatedMpLoss: 0, // 累积灯焰损失百分比 (0-1)
       };
 
       // 3. 首次 AI 调用
       const roundData = await this.previewRoundResourceLoss(
-        this.normalizeRoundOptions(await this.callAI(state), state),
+        this.normalizeRoundOptions(
+          await this.callAI(state, {
+            narrativeStream: options.narrativeStream,
+            abortSignal: options.abortSignal,
+          }),
+          state,
+        ),
         cultivatorId,
       );
 
@@ -983,7 +1004,7 @@ export class DungeonService {
           roundData,
           persist: async (tx: DbTransaction) => {
             if (!qiActionInstanceId) {
-              throw new Error('副本灵气预扣标识缺失');
+              throw new Error('副本灯油预扣标识缺失');
             }
             const reservation = await QiService.reserveQi({
               cultivatorId,
@@ -1028,7 +1049,7 @@ export class DungeonService {
             },
           });
         } catch (refundError) {
-          console.error('[DungeonService] 回滚灵气预扣失败:', refundError);
+          console.error('[DungeonService] 回滚灯油预扣失败:', refundError);
         }
       }
       throw error;
@@ -1079,7 +1100,7 @@ export class DungeonService {
       // 获取 userId
       const userId = await findActiveCultivatorOwnerId(cultivatorId);
       if (!userId) {
-        throw new Error('无法获取修真者所属用户');
+        throw new Error('无法获取修士所属用户');
       }
 
       // 动态匹配材料
@@ -1235,7 +1256,7 @@ export class DungeonService {
           persist: async (tx: DbTransaction) => {
             const userId = await findActiveCultivatorOwnerId(cultivatorId);
             if (!userId) {
-              throw new Error('无法获取修真者所属用户');
+              throw new Error('无法获取修士所属用户');
             }
             const consumeResult = await resourceEngine.applyInTransaction({
               userId,
@@ -1320,7 +1341,13 @@ export class DungeonService {
     let roundData: DungeonRound;
     try {
       roundData = await this.previewRoundResourceLoss(
-        this.normalizeRoundOptions(await this.callAI(state), state),
+        this.normalizeRoundOptions(
+          await this.callAI(state, {
+            narrativeStream: options.narrativeStream,
+            abortSignal: options.abortSignal,
+          }),
+          state,
+        ),
         cultivatorId,
       );
     } catch (error) {
@@ -1386,7 +1413,7 @@ export class DungeonService {
         persist: async (tx: DbTransaction) => {
           const userId = await findActiveCultivatorOwnerId(cultivatorId);
           if (!userId) {
-            throw new Error('无法获取修真者所属用户');
+            throw new Error('无法获取修士所属用户');
           }
           const consumeResult = await resourceEngine.applyInTransaction({
             userId,
@@ -1443,8 +1470,8 @@ export class DungeonService {
       .realm_requirement;
     const mapConfig = resolveDungeonMapConfig(mapNode);
     const metadata = battleCost.metadata;
-    if (!metadata?.race || !metadata.realm_stage) {
-      throw new Error('Battle cost metadata must include race and realm_stage');
+    if (!metadata?.clan || !metadata.realm_stage) {
+      throw new Error('Battle cost metadata must include clan and realm_stage');
     }
 
     const enemyDifficulty = mapConfig.enemyDifficulty;
@@ -1457,7 +1484,7 @@ export class DungeonService {
       dungeonEnemyGenerator.buildDraft({
         realm: realmRequirement as import('@shared/types/constants').RealmType,
         realmStage: enemyRealmStage,
-        race: metadata.race,
+        clan: metadata.clan,
         difficulty: enemyDifficulty,
         name: metadata.enemy_name,
         background: metadata.background,
@@ -1534,7 +1561,7 @@ export class DungeonService {
 
     // 战斗失败处理：生成伤势状态
     if (!isWin) {
-      const outcomeText = `你终究是不敵 ${enemyName}，在其重击下狼狈遁走，侮幸捡回一条命。但你已无力再战，只得退出副本。`;
+      const outcomeText = `你终究不敌 ${enemyName}，在其重击下狼狈遁走，侥幸捡回一条命。但你已无力再战，只得退出秘境。`;
       lastHistory.outcome = outcomeText;
 
       const settled = await this.settleDungeon(state, {
@@ -1625,7 +1652,7 @@ export class DungeonService {
 
     const cultivatorBundle = await loadCultivatorCombatInput(cultivatorId);
     if (!cultivatorBundle?.cultivator) {
-      throw new Error('未找到修真者数据');
+      throw new Error('未找到修士数据');
     }
 
     const execution = executePersistentWorldBattle({
@@ -1804,7 +1831,13 @@ export class DungeonService {
     let roundData: DungeonRound;
     try {
       roundData = await this.previewRoundResourceLoss(
-        this.normalizeRoundOptions(await this.callAI(state), state),
+        this.normalizeRoundOptions(
+          await this.callAI(state, {
+            narrativeStream: options.narrativeStream,
+            abortSignal: options.abortSignal,
+          }),
+          state,
+        ),
         cultivatorId,
       );
     } catch (error) {
@@ -2036,7 +2069,7 @@ export class DungeonService {
     const mapRealm =
       mapNode && 'realm_requirement' in mapNode
         ? (mapNode as SatelliteNode).realm_requirement
-        : ('筑基' as RealmType);
+        : ('守灯' as RealmType);
 
     const endDisposition =
       options?.endDisposition ??
@@ -2070,6 +2103,7 @@ export class DungeonService {
         }),
         name: 'DungeonSettlement',
         sceneId: 'dungeon-settlement',
+        maxOutputTokens: 1600,
       });
       const generatedSettlement = DungeonSettlementGeneratedSchema.parse({
         ending_narrative: aiRes.output.ending_narrative,
@@ -2110,7 +2144,7 @@ export class DungeonService {
     if (pendingActionToCommit) {
       const userId = await findActiveCultivatorOwnerId(state.cultivatorId);
       if (!userId) {
-        throw new Error('无法获取修真者所属用户');
+        throw new Error('无法获取修士所属用户');
       }
       if (!deferPersistence) {
         const result = await getExecutor().transaction(async (tx) => {
@@ -2170,7 +2204,7 @@ export class DungeonService {
         mapRealm,
         settlement.settlement.reward_tier,
         state.dangerScore, // 传递危险分数用于奖励计算
-        state.playerInfo, // 传递玩家信息用于修为计算
+        state.playerInfo, // 传递玩家信息用于灯韵计算
         mapNode ? resolveDungeonMapConfig(mapNode).difficultyTier : undefined,
       );
     state.realGains = realGains;
@@ -2181,7 +2215,7 @@ export class DungeonService {
     // 获取 userId
     const userId = await findActiveCultivatorOwnerId(state.cultivatorId);
     if (!userId) {
-      throw new Error('无法获取修真者所属用户');
+      throw new Error('无法获取修士所属用户');
     }
 
     let nextGainLedger = state.gainLedger ?? [];
@@ -2351,14 +2385,25 @@ export class DungeonService {
   }
 
   /**
-   * 内部工具：调用 AI 并处理上下文压缩
+   * 内部工具：调用 AI 并处理上下文压缩。
+   * 未配置 LLM 时降级到内置模板生成副本回合（与角色生成降级策略一致）。
    */
-  private async callAI(state: DungeonState): Promise<DungeonRound> {
+  private async callAI(
+    state: DungeonState,
+    stream?: Pick<DungeonFlowOptions, 'narrativeStream' | 'abortSignal'>,
+  ): Promise<DungeonRound> {
+    if (!hasAnyServerLlmProviderConfigured()) {
+      console.warn(
+        '[DungeonService] 未配置 LLM Provider，使用内置模板生成副本回合',
+      );
+      return this.buildTemplateRound(state);
+    }
+
     const mapNode = getMapNode(state.mapNodeId);
     const mapRealm =
       mapNode && 'realm_requirement' in mapNode
         ? (mapNode as SatelliteNode).realm_requirement
-        : ('筑基' as RealmType);
+        : ('守灯' as RealmType);
     const mapConfig = mapNode
       ? resolveDungeonMapConfig(mapNode)
       : resolveDungeonMapConfig({
@@ -2393,34 +2438,102 @@ export class DungeonService {
         userContextJson: stableCompactStringify(userContext),
       },
     );
-    const aiRes = await generateAiObject({
-      system: roundPrompt,
+    const sampleSystem = renderPromptSystem('sample-scenarios');
+    const llmRequest = {
+      system: [roundPrompt, sampleSystem].filter(Boolean).join('\n\n'),
       prompt: roundUserPrompt,
       schema: createDungeonRoundLlmSchema(remainingRewardSlots),
       name: 'DungeonRound',
-      sceneId: 'dungeon-round',
-    });
+      sceneId: 'dungeon-round' as const,
+      // 硬性输出上限：glm-4-flash 等模型可能无视字数约束放飞（实测输出过 1.5 万字/回合），
+      // 上限设为可容纳 480 字叙事 + 3 选项 + 战利品蓝图的合理量级。
+      maxOutputTokens: 2400,
+    };
+    // 使用「宽松文本模式」（无 schema 校验）：
+    // glm-4-flash 等模型对复杂 Zod schema 的 AI SDK 结构化输出（Output.object）实测 100% 校验失败，
+    // 每轮白白消耗 3 次调用（流式 1 + fallback 2）约 40s 后仍降级模板。
+    // 宽松模式：streamText/generateText 拿原始文本 → extractJsonObjectFromText 手动提取 JSON →
+    // repairDungeonRoundOutput 宽容修复。scene_description 在流式过程中渐进提取推给前端展示。
+    let aiOutput: DungeonRoundLlmOutput | null = null;
+    try {
+      if (stream?.narrativeStream) {
+        const result = streamAiText({
+          ...llmRequest,
+          abortSignal: stream.abortSignal,
+        });
+        let accum = '';
+        let lastScene = '';
+        for await (const part of result.textStream) {
+          accum += part;
+          const scene = extractSceneDescriptionProgress(accum);
+          // 只在 scene_description 增长时才推送（避免每个 token 一个 SSE 事件）
+          if (scene && scene !== lastScene) {
+            lastScene = scene;
+            stream.narrativeStream?.(scene);
+          }
+        }
+        aiOutput = extractJsonObjectFromText(accum) as
+          | DungeonRoundLlmOutput
+          | null;
+      } else {
+        const result = await generateAiText(llmRequest);
+        aiOutput = extractJsonObjectFromText(result.text) as
+          | DungeonRoundLlmOutput
+          | null;
+      }
+    } catch (llmError) {
+      console.warn(
+        '[DungeonService] callAI LLM 生成失败，降级模板回合:',
+        llmError instanceof Error ? llmError.message : String(llmError),
+      );
+      return this.buildTemplateRound(state);
+    }
+    if (!aiOutput || typeof aiOutput !== 'object') {
+      console.warn(
+        '[DungeonService] callAI 输出为空或非对象，降级模板回合',
+      );
+      return this.buildTemplateRound(state);
+    }
 
-    return DungeonRoundSchema.parse({
-      scene_description: aiRes.output.scene_description,
-      interaction: {
-        options: aiRes.output.options.map((option, index) => {
-          const costs: DungeonOptionCost[] = [
-            ...option.costs.resources.map((cost) => ({
-              type: cost.type,
-              value: calculateDungeonResourceCost({
-                ...cost,
-                realm: mapConfig.realmRequirement,
-                difficulty: mapConfig.difficultyTier,
-              }),
-            })),
-            ...option.costs.materials.map((cost) => {
-              const resolved = calculateDungeonMaterialCost({
-                realm: mapConfig.realmRequirement,
-                difficulty: mapConfig.difficultyTier,
-                rank: cost.rank,
-              });
-              return {
+    // 宽容修复：模型输出结构"差不多"时补齐/截断，尽量保留 AI 叙事。
+    // - scene_description 剥离 Markdown 代码块标记（```json{...}```），避免当正文渲染
+    // - options 不足 3 个用模板选项补齐；高风险选项（index 1）零代价时注入标准代价
+    // - internal_danger_score 越界/非整数时夹取到 [0,100] 整数
+    // - acquired_items 超出剩余槽位时截断
+    const repaired = this.repairDungeonRoundOutput(aiOutput, {
+      maxRewardSlots: remainingRewardSlots,
+    });
+    if (!repaired) {
+      return this.buildTemplateRound(state);
+    }
+    const sanitizedScene =
+      typeof repaired.scene_description === 'string'
+        ? repaired.scene_description
+            .replace(/```(?:json)?\s*[\s\S]*?```/g, '')
+            .replace(/```/g, '')
+            .trim() || repaired.scene_description
+        : repaired.scene_description;
+    try {
+      return DungeonRoundSchema.parse({
+        scene_description: sanitizedScene,
+        interaction: {
+          options: repaired.options.map((option, index) => {
+            const costs: DungeonOptionCost[] = [
+              ...option.costs.resources.map((cost) => ({
+                type: cost.type,
+                value: calculateDungeonResourceCost({
+                  ...cost,
+                  realm: mapConfig.realmRequirement,
+                  difficulty: mapConfig.difficultyTier,
+                }),
+              })),
+              ...option.costs.materials.map((cost) => {
+                const resolved = calculateDungeonMaterialCost({
+                  realm: mapConfig.realmRequirement,
+                  difficulty: mapConfig.difficultyTier,
+                  rank: cost.rank,
+                });
+return {
                 type: 'material' as const,
                 required_type: cost.required_type,
                 required_quality: resolved.requiredQuality,
@@ -2440,21 +2553,244 @@ export class DungeonService {
               value: 1,
               metadata,
             })),
-          ];
-          return {
-            text: option.text,
-            id: index + 1,
-            risk_level: (['low', 'high', 'medium'] as const)[index] ?? 'medium',
-            costs,
-          };
+            ];
+            return {
+              text: option.text,
+              id: index + 1,
+              risk_level: (['low', 'high', 'medium'] as const)[index] ?? 'medium',
+              costs,
+            };
+          }),
+        },
+        acquired_items: repaired.acquired_items,
+        status_update: {
+          is_final_round: state.currentRound >= state.maxRounds,
+          internal_danger_score: repaired.internal_danger_score,
+        },
+      });
+    } catch (parseError) {
+      console.warn(
+        '[DungeonService] callAI schema parse failed, fallback to template round:',
+        parseError instanceof Error ? parseError.message : String(parseError),
+      );
+      return this.buildTemplateRound(state);
+    }
+  }
+
+  /**
+   * 宽容修复：模型输出结构"差不多"时补齐/截断，尽量保留 AI 叙事。
+   * - scene_description 剥离 Markdown 代码块标记（```json{...}```），避免当正文渲染
+   * - options 不足 3 个用模板选项补齐；高风险选项（index 1）零代价时注入标准代价
+   * - internal_danger_score 越界/非整数时夹取到 [0,100] 整数
+   * - acquired_items 超出剩余槽位时截断
+   * 返回 null 表示结构损坏不可救，调用方应降级模板回合。
+   */
+  private repairDungeonRoundOutput(
+    output: DungeonRoundLlmOutput,
+    opts: { maxRewardSlots: number },
+  ): DungeonRoundLlmOutput | null {
+    if (!output || typeof output !== 'object') return null;
+    const scene =
+      typeof output.scene_description === 'string'
+        ? output.scene_description
+        : '';
+    if (!scene.trim()) return null;
+
+    let options = Array.isArray(output.options) ? output.options : [];
+    if (options.length === 0) return null;
+    // 不足 3 个：用模板选项补齐（复用 buildTemplateRound 的语义，简单注入标准代价）
+    while (options.length < 3) {
+      options = [
+        ...options,
+        {
+          text: '凝神戒备，先看清四周再说。',
+          costs: {
+            resources: [],
+            materials: [],
+            stat_losses: [{ type: 'hp_loss', rank: 'minor' as const }],
+            battles: [],
+          },
+        },
+      ];
+    }
+    // 高风险选项（index 1）零代价时注入标准灵石代价，满足 schema superRefine
+    const highRisk = options[1];
+    if (highRisk?.costs) {
+      const total =
+        (highRisk.costs.resources?.length ?? 0) +
+        (highRisk.costs.materials?.length ?? 0) +
+        (highRisk.costs.stat_losses?.length ?? 0) +
+        (highRisk.costs.battles?.length ?? 0);
+      if (total === 0) {
+        highRisk.costs.resources = [
+          { type: 'spirit_stones', rank: 'standard' as const },
+        ];
+      }
+    }
+    // 每个选项最多两项代价（schema superRefine），超出截断
+    for (const option of options) {
+      if (!option?.costs) continue;
+      const costs = option.costs;
+      const stack = [
+        ...(costs.resources ?? []).map((c) => ({ type: 'r', v: c })),
+        ...(costs.materials ?? []).map((c) => ({ type: 'm', v: c })),
+        ...(costs.stat_losses ?? []).map((c) => ({ type: 's', v: c })),
+        ...(costs.battles ?? []).map((c) => ({ type: 'b', v: c })),
+      ];
+      if (stack.length > 2) {
+        const keep = stack.slice(0, 2);
+        costs.resources = keep
+          .filter((k) => k.type === 'r')
+          .map((k) => k.v as (typeof costs.resources)[number]);
+        costs.materials = keep
+          .filter((k) => k.type === 'm')
+          .map((k) => k.v as (typeof costs.materials)[number]);
+        costs.stat_losses = keep
+          .filter((k) => k.type === 's')
+          .map((k) => k.v as (typeof costs.stat_losses)[number]);
+        costs.battles = keep
+          .filter((k) => k.type === 'b')
+          .map((k) => k.v as (typeof costs.battles)[number]);
+      }
+    }
+
+    // internal_danger_score 夹取到 [0,100] 整数
+    let danger =
+      typeof output.internal_danger_score === 'number' &&
+      Number.isFinite(output.internal_danger_score)
+        ? Math.round(output.internal_danger_score)
+        : 30;
+    if (!Number.isFinite(danger)) danger = 30;
+    danger = Math.min(100, Math.max(0, danger));
+
+    // acquired_items 超出剩余槽位时截断
+    let acquired = Array.isArray(output.acquired_items)
+      ? output.acquired_items
+      : [];
+    if (acquired.length > Math.max(0, opts.maxRewardSlots)) {
+      acquired = acquired.slice(0, Math.max(0, opts.maxRewardSlots));
+    }
+
+    return {
+      scene_description: scene,
+      options: options as DungeonRoundLlmOutput['options'],
+      acquired_items: acquired,
+      internal_danger_score: danger,
+    };
+  }
+
+  /**
+   * 内部工具：未配置 LLM 时的模板降级回合生成。
+   * 生成符合克苏鲁修仙世界观的最小可用副本回合（场景 + 三个抉择），
+   * 数值成本复用引擎归一化函数，奖励留空由后续流程兜底。
+   */
+  private buildTemplateRound(state: DungeonState): DungeonRound {
+    const mapNode = getMapNode(state.mapNodeId);
+    const mapConfig = mapNode
+      ? resolveDungeonMapConfig(mapNode)
+      : { difficultyTier: 'easy' as const };
+    const difficulty = mapConfig.difficultyTier;
+    const realm = state.playerInfo.realm as RealmType;
+    const locationName = mapNode?.name ?? state.theme ?? '未知秘境';
+    const isFinalRound = state.currentRound >= state.maxRounds;
+    const roundIdx = state.currentRound;
+
+    // 场景描写（窥渊录克苏鲁叙事，随地图与回合渐进；每段≥350字，三段意象互不雷同）
+    const sceneVariants = [
+      `${locationName}深处，昏黄灯影在黏腻的潮气里晃成一片。你听见低低的、像是从墙壁里渗出的窸窣声——那不是风声，是某种东西在缓慢挪动。你停下脚步，那声音也跟着停了，仿佛有谁隔着墙在听你呼吸。灯油的气味里混进一丝铁锈般的腥甜，你低头，看见脚边石缝里缓缓漫出一线深色的水，不流向低处，却逆着坡度往上爬。`,
+      `${locationName}的阴影比灯更沉。暗处一双双不该有的眼睛半阖半睁，它们不看你，却仿佛在等你先迈出那一步。你数了数，又数不清，因为每当你把灯照过去，那些眼睛就闭上一只、再在别处睁开两只。脚边漫过一摊深色的、像血又像油的积水，水面倒影里多出一个不该在身后的轮廓，一动不动。`,
+      `${locationName}尽头，一扇爬满旧符的窄门半掩着。门缝里漏出的不是光，而是更浓的黑暗——黑暗中隐约有叹息，又有推门声，一下、又一下，节奏与你自己的心跳错开半拍。符纸被潮气泡得发软，有些字被啃掉了一半，剩下的一半你认得，却念不出口。`,
+    ];
+    const sceneTail = isFinalRound
+      ? '\n这是最后一步了。前面再没有更次，也没有退路——你要么在此收束此行，要么被这地方的什么东西永远留下。灯芯跳了跳，像在等你作个了断。'
+      : '\n你握紧手中的灯，灯芯跳了跳。路还在前面，可每一步都要拿点东西来换。';
+    const scene =
+      sceneVariants[(roundIdx - 1) % sceneVariants.length] + sceneTail;
+
+    // 三个抉择的代价（复用引擎归一化函数）
+    const lowRisk: DungeonOptionCost[] = [
+      {
+        type: 'hp_loss',
+        value: calculateDungeonStatLoss({ realm, difficulty, rank: 'minor' }),
+      },
+    ];
+    const midRisk: DungeonOptionCost[] = [
+      {
+        type: 'spirit_stones',
+        value: calculateDungeonResourceCost({
+          type: 'spirit_stones',
+          realm,
+          difficulty,
+          rank: 'standard',
         }),
       },
-      acquired_items: aiRes.output.acquired_items,
-      status_update: {
-        is_final_round: state.currentRound >= state.maxRounds,
-        internal_danger_score: aiRes.output.internal_danger_score,
+    ];
+    const highRisk: DungeonOptionCost[] = [
+      {
+        type: 'hp_loss',
+        value: calculateDungeonStatLoss({ realm, difficulty, rank: 'major' }),
       },
-    });
+      {
+        type: 'cultivation_exp',
+        value: calculateDungeonResourceCost({
+          type: 'cultivation_exp',
+          realm,
+          difficulty,
+          rank: 'standard',
+        }),
+      },
+    ];
+
+    // 选项措辞随回合与意象递进，避免一成不变的“绕行/点灯/惊动”三件套。
+    const optionSets = [
+      {
+        low: '贴着墙根缓步绕行，避开那逆流而上的水线，先看清渗声从何而来。',
+        mid: '取一撮灯油抹在刃上，将火光照进最黑的角落，逼那挪动之物显出痕迹。',
+        high: '一脚踩上那摊逆流的水，喝破暗处，逼它现形。',
+      },
+      {
+        low: '屏住呼吸，不惊动那些半阖的眼睛，退到阴影外重新数一遍出口。',
+        mid: '把灯挑高，借水面倒影确认身后那个轮廓的方位，再决定如何下脚。',
+        high: '猛地回身，将灯照向身后的轮廓，正面与它照个对眼。',
+      },
+      {
+        low: '不推那扇门，先顺着符纸被啃掉的缺口，辨认门后到底封着什么。',
+        mid: '撕下半张尚完好的旧符缠在腕上，隔门低语，探问门内之物。',
+        high: '一脚踹开窄门，把灯探进那比夜更浓的黑暗。',
+      },
+    ];
+    const opts = optionSets[(roundIdx - 1) % optionSets.length];
+
+    return {
+      scene_description: scene,
+      interaction: {
+        options: [
+          {
+            id: 1,
+            text: opts.low,
+            risk_level: 'low',
+            costs: lowRisk,
+          },
+          {
+            id: 2,
+            text: opts.mid,
+            risk_level: 'medium',
+            costs: midRisk,
+          },
+          {
+            id: 3,
+            text: isFinalRound ? '咬紧牙关，径直穿进黑暗，去拿这一趟的因果。' : opts.high,
+            risk_level: 'high',
+            costs: highRisk,
+          },
+        ],
+      },
+      acquired_items: [],
+      status_update: {
+        is_final_round: isFinalRound,
+        internal_danger_score: Math.min(100, 10 + roundIdx * 8),
+      },
+    };
   }
 
   async saveState(

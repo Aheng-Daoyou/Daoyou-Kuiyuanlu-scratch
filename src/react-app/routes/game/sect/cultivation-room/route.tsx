@@ -88,7 +88,7 @@ function SectCultivationRoomBody() {
       <SectRoutedRoom
         roomKey="cultivation"
         registry={registry}
-        eyebrow="聚灵阵枢 · 闭关名册"
+        eyebrow="聚灯阵枢 · 闭关名册"
       />
     </SectScene>
   );

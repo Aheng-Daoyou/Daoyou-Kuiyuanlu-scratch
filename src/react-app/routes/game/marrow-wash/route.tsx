@@ -27,7 +27,7 @@ function RootStrengthList({
   roots: PlayerIdentityCultivator['spiritual_roots'];
 }) {
   if (roots.length === 0) {
-    return <InkNotice>尚无灵根信息。</InkNotice>;
+    return <InkNotice>尚无窍信息。</InkNotice>;
   }
 
   return (
@@ -85,7 +85,7 @@ export default function MarrowWashPage() {
         <InkNotice>
           尚无角色资料，先创建角色后再进入洗髓池。
           <InkButton href="/game/create" variant="primary" className="ml-2">
-            觉醒灵根
+            觉醒窍
           </InkButton>
         </InkNotice>
       </div>
@@ -114,7 +114,7 @@ export default function MarrowWashPage() {
         }),
       );
       pushToast({
-        message: `洗髓已破入第 ${result.toRealm} 重，灵根后天强度已提升。`,
+        message: `洗髓已破入第 ${result.toRealm} 重，窍后天强度已提升。`,
         tone: 'success',
       });
     } catch (error) {
@@ -146,7 +146,7 @@ export default function MarrowWashPage() {
   return (
     <GameSceneFrame
       title="洗髓池"
-      description="服用洗髓丹推动洗髓进度。洗髓升级会沉淀为自由属性点，破限后会增强后天灵根强度。"
+      description="服用洗髓香推动洗髓进度。洗髓升级会沉淀为自由属性点，破限后会增强后天窍强度。"
     >
       <GameSceneSection
         title="洗髓总览"
@@ -198,7 +198,7 @@ export default function MarrowWashPage() {
               <span className="text-ink-secondary">
                 {summary.nextBreakthroughLevel
                   ? `破限门槛 Lv.${summary.nextBreakthroughLevel}`
-                  : '当前修为暂不可继续破限'}
+                  : '当前灯韵暂不可继续破限'}
               </span>
             </div>
             <div className="bg-ink/10 mt-1 h-1.5 overflow-hidden">
@@ -211,7 +211,7 @@ export default function MarrowWashPage() {
         </div>
       </GameSceneSection>
 
-      <GameSceneSection title="后天灵根">
+      <GameSceneSection title="后天窍">
         <RootStrengthList roots={cultivator.spiritual_roots} />
       </GameSceneSection>
     </GameSceneFrame>

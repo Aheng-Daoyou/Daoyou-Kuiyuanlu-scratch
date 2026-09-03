@@ -54,7 +54,7 @@ export function TasksView() {
             ) : null}
             {!nextTutorialTask ? (
               <p className="text-ink-secondary text-sm leading-7">
-                入门卷宗已办妥。之后可按破境卷宗、宗门执事堂与洞府状态推进。
+                入门卷宗已办妥。之后可按破境卷宗、宗门执事堂与灯宅状态推进。
               </p>
             ) : null}
           </div>

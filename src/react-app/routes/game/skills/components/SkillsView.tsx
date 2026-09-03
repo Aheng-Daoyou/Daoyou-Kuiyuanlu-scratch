@@ -55,7 +55,7 @@ export function SkillsView() {
     <GameSceneFrame
       variant="lite"
       title="【所修神通】"
-      description="攻伐、辅助与身法诸术都在这里归卷。主区只保留术册本体，旁栏集中显示容量与下一步修行去向。"
+      description="攻伐、辅助与灯影诸术都在这里归卷。主区只保留术册本体，旁栏集中显示容量与下一步修行去向。"
       headerMeta={
         note ? (
           <GameSceneNote>

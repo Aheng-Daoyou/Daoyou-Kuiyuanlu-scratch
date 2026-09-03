@@ -295,7 +295,7 @@ function TowerRunStatusCard({
             tone="hp"
           />
           <TowerRunResourceMeter
-            label="境内法力"
+            label="境内灯焰"
             current={entryState.mp.current}
             max={entryState.mp.max}
             tone="mp"
@@ -363,7 +363,7 @@ function TowerReadyCard({
       {!state ? (
         <>
           <p className="text-sm leading-6">
-            蜃气已聚，此刻踏入后，境内气血与法力便会独立记账。
+            蜃气已聚，此刻踏入后，境内气血与灯焰便会独立记账。
           </p>
           <div className="flex justify-end">
             <InkButton
@@ -461,7 +461,7 @@ function TowerEncounterCard({
             </span>
           </div>
           <div>
-            <span className="text-ink-secondary">入场法力 </span>
+            <span className="text-ink-secondary">入场灯焰 </span>
             <span className="tabular-nums">
               {entryState.mp.current}/{entryState.mp.max}
             </span>
@@ -816,7 +816,7 @@ export default function TowerPage() {
           <div className="space-y-1.5">
             <div className="font-semibold">角色与状态</div>
             <p className="text-ink-secondary">
-              每次开战都会实时读取你当前的境界、功法、技能与装备，但境内气血、法力与伤势独立记账。场外换装会影响面板，场外吃药与恢复不会替你回满此境状态。
+              每次开战都会实时读取你当前的境界、功法、技能与装备，但境内气血、灯焰与伤势独立记账。场外换装会影响面板，场外吃药与恢复不会替你回满此境状态。
             </p>
           </div>
 
@@ -825,7 +825,7 @@ export default function TowerPage() {
             <p className="text-ink-secondary">
               每次胜出后，都会从三道随机机缘里择一承接，只在本轮幻境内生效，不会带出境外。每逢第
               5、10、15、20 层胜出时，会依次发放 C、B、A、S
-              级固定机缘；当前已实现的掉落池为灵石与修为，奖励强弱按你当时的大境界与该层凶险一并结算。
+              级固定机缘；当前已实现的掉落池为灯油券与灯韵，奖励强弱按你当时的大境界与该层凶险一并结算。
             </p>
           </div>
 

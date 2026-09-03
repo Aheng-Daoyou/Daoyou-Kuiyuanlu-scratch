@@ -1,4 +1,5 @@
 import { SectMap } from '@app/components/feature/sect/SectMap';
+import { SectCrest } from '@app/components/feature/sect/SectCrest';
 import {
   getSectDefinition,
   getSectPresentationForContext,
@@ -55,6 +56,11 @@ export default function SectPage() {
       contentClassName="lg:max-w-none"
     >
       <title>{formatDocumentTitle(mapScene.title)}</title>
+      <SectCrest
+        visual={presentation.visual}
+        title={mapScene.title}
+        className="mb-4"
+      />
       {presentation.map.image ? (
         <SectMap
           image={presentation.map.image}

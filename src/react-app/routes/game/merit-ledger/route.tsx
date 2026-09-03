@@ -197,7 +197,7 @@ export default function MeritLedgerPage() {
           await mailSummary.reload();
           setTab('mine');
           pushToast({
-            message: '功德已记，谢信已送至传音玉简',
+            message: '功德已记，谢信已送至传音灯笺',
             tone: 'success',
           });
           return;
@@ -221,7 +221,7 @@ export default function MeritLedgerPage() {
     <GameSceneFrame
       variant="default"
       title="功德簿"
-      description="不记灵石多寡，只录同行之缘。每笔支持留下一页功德与一封无附件谢信。"
+      description="不记灯油券多寡，只录同行之缘。每笔支持留下一页功德与一封无附件谢信。"
       contentClassName="!mt-4"
     >
       <nav

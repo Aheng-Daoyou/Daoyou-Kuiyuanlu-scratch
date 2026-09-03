@@ -92,7 +92,7 @@ const createEmptyPagination = (
 });
 
 function getIdentifyCostText(): string {
-  return '1 天地灵气';
+  return '1 灯油';
 }
 
 function getTalismanUseConfirmLines(item: Consumable): string[] {
@@ -341,12 +341,12 @@ export function useInventoryViewModel(): UseInventoryViewModelReturn {
     [handleDiscard],
   );
 
-  // 装备/卸下法宝
+  // 装备/卸下封灵器
   const handleEquipToggle = useCallback(
     async (item: Artifact) => {
       if (!cultivatorId || !item.id) {
         pushToast({
-          message: '此法宝暂无有效 ID，无法操作。',
+          message: '此封灵器暂无有效 ID，无法操作。',
           tone: 'warning',
         });
         return;
@@ -362,7 +362,7 @@ export function useInventoryViewModel(): UseInventoryViewModelReturn {
           }),
         );
 
-        pushToast({ message: '法宝灵性已调顺。', tone: 'success' });
+        pushToast({ message: '封灵器灵性已调顺。', tone: 'success' });
       } catch (error) {
         pushToast({
           message:

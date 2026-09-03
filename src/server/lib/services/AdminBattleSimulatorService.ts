@@ -20,7 +20,7 @@ import { prepareStandardFullBattle } from '@shared/engine/battle-v5/setup/Battle
 import { CombatPresenterV3 } from '@shared/engine/battle-v5/v3';
 import type { BattleRecordV3 } from '@shared/types/battle';
 import {
-  ENEMY_RACE_VALUES,
+  ENEMY_CLAN_VALUES,
   REALM_STAGE_VALUES,
   REALM_VALUES,
 } from '@shared/types/constants';
@@ -51,7 +51,7 @@ interface AdminBattleSimulatorDeps {
 }
 
 type AdminCombatantInput = CultivatorCombatInput &
-  Partial<Pick<Cultivator, 'title' | 'race'>>;
+  Partial<Pick<Cultivator, 'title' | 'clan'>>;
 
 interface Combatant {
   summary: AdminBattleParticipantSummary;
@@ -118,7 +118,7 @@ function buildParticipantSummary(args: {
     title: args.cultivator.title ?? null,
     realm: args.cultivator.realm,
     realmStage: args.cultivator.realm_stage,
-    race: args.cultivator.race,
+    clan: args.cultivator.clan,
     ...(args.template ? { template: args.template } : {}),
   };
 }
@@ -212,8 +212,8 @@ function buildBreakdowns(runs: SimulationRun[]): AdminBattleMonteCarloBreakdown[
     addBreakdownCandidate(grouped, 'B境界', run.b.summary.realm, run);
     addBreakdownCandidate(grouped, 'A阶段', run.a.summary.realmStage, run);
     addBreakdownCandidate(grouped, 'B阶段', run.b.summary.realmStage, run);
-    addBreakdownCandidate(grouped, 'A种族', run.a.summary.race, run);
-    addBreakdownCandidate(grouped, 'B种族', run.b.summary.race, run);
+    addBreakdownCandidate(grouped, 'A三族', run.a.summary.clan, run);
+    addBreakdownCandidate(grouped, 'B三族', run.b.summary.clan, run);
     addBreakdownCandidate(
       grouped,
       'A难度段',
@@ -450,11 +450,11 @@ export class AdminBattleSimulatorService {
   ): Combatant {
     const realms = filters?.realms ?? REALM_VALUES;
     const realmStages = filters?.realmStages ?? REALM_STAGE_VALUES;
-    const races = filters?.races ?? ENEMY_RACE_VALUES;
+    const clans = filters?.clans ?? ENEMY_CLAN_VALUES;
     const difficultyMin = filters?.difficultyMin ?? 0;
     const difficultyMax = filters?.difficultyMax ?? 100;
     const difficulty = randomInt(difficultyMin, difficultyMax);
-    const race = choice(races);
+    const clan = choice(clans);
     const realm = choice(realms);
     const realmStage = choice(realmStages);
     const variantSeed = [
@@ -463,14 +463,14 @@ export class AdminBattleSimulatorService {
       index,
       realm,
       realmStage,
-      race,
+      clan,
       difficulty,
       Math.random().toString(36).slice(2, 8),
     ].join(':');
     const draft = this.generator.buildDraft({
       realm,
       realmStage,
-      race,
+      clan,
       difficulty,
       isBoss: Math.random() < (filters?.bossRate ?? 0.1),
       variantSeed,

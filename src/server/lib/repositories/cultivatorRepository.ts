@@ -24,7 +24,7 @@ export async function getCultivatorBreakthroughPillQuantities(
     .where(
       and(
         eq(schema.consumables.cultivatorId, cultivatorId),
-        eq(schema.consumables.type, '丹药'),
+        eq(schema.consumables.type, '香品'),
         sql`${schema.consumables.spec} ->> 'kind' = 'pill'`,
         sql`${schema.consumables.spec} ->> 'family' = 'breakthrough'`,
         sql`${schema.consumables.quantity} > 0`,
@@ -43,7 +43,7 @@ export async function hasCultivatorRecoveryPill(
     .where(
       and(
         eq(schema.consumables.cultivatorId, cultivatorId),
-        eq(schema.consumables.type, '丹药'),
+        eq(schema.consumables.type, '香品'),
         sql`${schema.consumables.quantity} > 0`,
         sql`${schema.consumables.spec} ->> 'kind' = 'pill'`,
         sql`jsonb_path_exists(${schema.consumables.spec}, '$.operations[*] ? (@.type == "restore_resource" && (@.resource == "hp" || @.resource == "mp"))')`,

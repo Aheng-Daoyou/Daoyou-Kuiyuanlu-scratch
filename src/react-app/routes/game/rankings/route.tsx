@@ -65,7 +65,7 @@ type DirectEntryResponse = {
 function resolveRealm(value?: string | null): RealmType {
   return REALM_VALUES.includes(value as RealmType)
     ? (value as RealmType)
-    : '炼气';
+    : '闻腥';
 }
 
 function getExpectedRankingReputation(rank: number | null | undefined) {
@@ -202,7 +202,7 @@ function RankingEmptyState({
       {activeTab === 'battle'
         ? `${activeRealm}天骄榜暂无记录。越境榜单不可直接上榜，需等待本境修士留名后方可切磋。`
         : activeTab === 'wealth'
-          ? '财富榜暂无记录，静待灵石入库。'
+          ? '财富榜暂无记录，静待灯油券入库。'
           : '此榜单暂无记录，静待宝物出世。'}
     </InkNotice>
   );
@@ -434,13 +434,13 @@ export default function RankingsPage() {
 
       const result = await response.json();
       if (!response.ok || !result.success) {
-        throw new Error(result.error || '神识查探失败');
+        throw new Error(result.error || '心神查探失败');
       }
 
       setInspectedCultivator(result.data.cultivator);
     } catch (err) {
       const errorMessage =
-        err instanceof Error ? err.message : '神识查探失败，请稍后重试';
+        err instanceof Error ? err.message : '心神查探失败，请稍后重试';
       pushToast({ message: errorMessage, tone: 'danger' });
     } finally {
       setProbing(null);
@@ -530,7 +530,7 @@ export default function RankingsPage() {
   };
 
   if (isLoading && !cultivator) {
-    return <GameSceneLoading message="万界金榜刷新中……" />;
+    return <GameSceneLoading message="烬洲金榜刷新中……" />;
   }
 
   const myRank = myRankInfo?.rank;
@@ -544,10 +544,10 @@ export default function RankingsPage() {
   const rankingTabs = [
     { label: '天骄榜', value: 'battle' },
     { label: '财富榜', value: 'wealth' },
-    { label: '法宝榜', value: 'artifact' },
+    { label: '封灵器榜', value: 'artifact' },
     { label: '功法榜', value: 'technique' },
     { label: '神通榜', value: 'skill' },
-    { label: '丹药榜', value: 'elixir' },
+    { label: '香品榜', value: 'elixir' },
   ];
   const activeTabLabel =
     rankingTabs.find((tab) => tab.value === activeTab)?.label ?? '天骄榜';
@@ -574,12 +574,12 @@ export default function RankingsPage() {
     <>
       <GameSceneFrame
         variant="workflow"
-        title="【万界金榜】"
+        title="【烬洲金榜】"
         description={
           activeTab === 'battle'
             ? '择敌、查探、挑战，一切夺位都从榜前决断。'
             : activeTab === 'wealth'
-              ? '灵石聚散自有痕迹，榜上只看当前身家。'
+              ? '灯油券聚散自有痕迹，榜上只看当前身家。'
               : '诸般名器留影于榜，观其品阶、评分与持有者。'
         }
         headerMeta={
@@ -635,7 +635,7 @@ export default function RankingsPage() {
               title="结算奖励"
               className="text-sm leading-7"
               help={{
-                title: '万界金榜奖励规则',
+                title: '烬洲金榜奖励规则',
                 content: (
                   <div className="space-y-3">
                     <InkNotice tone="info" className="text-sm">
@@ -696,7 +696,7 @@ export default function RankingsPage() {
         ) : null}
 
         {!cultivator ? (
-          <InkNotice>请先觉醒角色再来挑战万界金榜。</InkNotice>
+          <InkNotice>请先觉醒角色再来挑战烬洲金榜。</InkNotice>
         ) : loadingRankings ? (
           <GameLoadingState message="正在推演金榜天机……" variant="inline" />
         ) : isEmpty ? (

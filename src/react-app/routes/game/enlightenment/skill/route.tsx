@@ -252,7 +252,7 @@ export default function SkillCreationPage() {
 
   const handleSubmit = async () => {
     if (!cultivator) {
-      pushToast({ message: '请先在首页觉醒灵根。', tone: 'warning' });
+      pushToast({ message: '请先在首页觉醒窍。', tone: 'warning' });
       return;
     }
 
@@ -280,7 +280,7 @@ export default function SkillCreationPage() {
       confirmLabel: '开始推演',
       onConfirm: async () => {
         setSubmitting(true);
-        setStatus('感悟天地，推演法则……');
+        setStatus('窥悟天地，推演法则……');
         setCreatedResult(null);
         setIsResultModalOpen(false);
 
@@ -347,7 +347,7 @@ export default function SkillCreationPage() {
     <GameSceneFrame
       variant="workflow"
       title="【神通推演】"
-      description="神通推演属于典型工作流页，保留原有推演逻辑，把材料、目标策略与道心消耗统一收束到同一壳内。"
+      description="神通推演属于典型工作流页，保留原有推演逻辑，把材料、目标策略与灯心消耗统一收束到同一壳内。"
       headerMeta={
         note ? (
           <GameSceneNote>
@@ -363,7 +363,7 @@ export default function SkillCreationPage() {
                 已选材料：{selectedMaterialIds.length} / {MAX_MATERIALS}
               </p>
               <p>目标策略：{targetPolicySummary}</p>
-              <p>预计感悟：{displayEstimatedCost?.comprehension ?? 0}</p>
+              <p>预计窥悟：{displayEstimatedCost?.comprehension ?? 0}</p>
             </div>
           </GameSceneAsideSection>
           <GameSceneAsideSection
@@ -505,7 +505,7 @@ export default function SkillCreationPage() {
             <span
               className={`text-xs ${displayCanAfford ? 'text-teal' : 'text-crimson'}`}
             >
-              {displayCanAfford ? '✓ 感悟充足' : '✗ 感悟不足'}
+              {displayCanAfford ? '✓ 窥悟充足' : '✗ 窥悟不足'}
             </span>
           </div>
         ) : (

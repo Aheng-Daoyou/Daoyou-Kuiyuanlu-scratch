@@ -55,7 +55,7 @@ export function ConsumablesTab({
     return <InkNotice>暂无{getResourceTypeLabel('consumable')}。</InkNotice>;
   }
 
-  // 按类型排序：符箓在前，丹药在后
+  // 按类型排序：符箓在前，香品在后
   const sortedItems = [...consumables].sort((a, b) => {
     if (a.type === '符箓' && b.type !== '符箓') return -1;
     if (a.type !== '符箓' && b.type === '符箓') return 1;

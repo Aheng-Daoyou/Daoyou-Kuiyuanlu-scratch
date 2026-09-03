@@ -156,16 +156,16 @@ export default function MapPage() {
               <div className="bgi-map absolute inset-0 opacity-80" />
 
               <div className="text-ink/40 pointer-events-none absolute top-[65%] right-[35%] rotate-6 text-6xl tracking-widest select-none">
-                乱星海
+                灯外海
               </div>
               <div className="text-ink/40 pointer-events-none absolute top-[48%] left-[33%] rotate-6 text-6xl tracking-widest select-none">
-                无边海
+                幽都
               </div>
               <div className="text-ink/40 pointer-events-none absolute right-[15%] bottom-[4%] text-6xl tracking-widest select-none">
-                天南
+                京畿
               </div>
               <div className="text-ink/40 writing-vertical pointer-events-none absolute top-[30%] left-[44%] text-6xl tracking-widest select-none">
-                大晋
+                雍州
               </div>
 
               <svg className="pointer-events-none absolute inset-0 h-full w-full">

@@ -114,7 +114,7 @@ function SpiritVeinFacilityConversation({
   const options: NpcConversationOption[] = [
     {
       id: 'mining',
-      label: mode.kind === 'reward' ? '开始今日灵矿采掘' : '进入矿脉自由练习',
+      label: mode.kind === 'reward' ? '开始今日灯矿采掘' : '进入矿脉自由练习',
       tone: mode.kind === 'reward' ? 'primary' : 'normal',
       disabled: entering,
     },

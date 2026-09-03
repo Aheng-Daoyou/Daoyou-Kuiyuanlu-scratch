@@ -60,12 +60,12 @@ export interface ValueRange {
  * 境界奖励范围配置
  */
 export interface RewardRangeConfig {
-  /** 灵石数量范围 */
+  /** 灯油券数量范围 */
   spirit_stones: ValueRange;
   /** 材料价值范围 */
   material_price: ValueRange;
   /** 修为值范围 */
   cultivation_exp: ValueRange;
-  /** 感悟值范围 */
+  /** 窥悟值范围 */
   comprehension_insight: ValueRange;
 }

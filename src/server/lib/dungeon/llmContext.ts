@@ -64,7 +64,7 @@ function summarizeJourney(history: History[]): string[] {
     const outcome = entry.outcome
       ? `；结果${truncateText(entry.outcome, 24)}`
       : '';
-    return `第${entry.round}轮：${scene}；${choice}${outcome}`;
+    return `第${entry.round}更：${scene}；${choice}${outcome}`;
   });
 }
 
@@ -96,7 +96,7 @@ function buildCombatStyleSummary(state: DungeonState): string {
   const technique = state.playerInfo.skills[0] ?? '无明显法门';
   const fate = stripParenthetical(state.playerInfo.fates[0] ?? '');
   const parts = uniqueStrings([
-    root ? `${truncateText(root, 8)}灵根` : undefined,
+    root ? `${truncateText(root, 8)}窍` : undefined,
     technique ? `主修${truncateText(technique, 10)}` : undefined,
     fate ? `命数偏${truncateText(fate, 8)}` : undefined,
   ]);

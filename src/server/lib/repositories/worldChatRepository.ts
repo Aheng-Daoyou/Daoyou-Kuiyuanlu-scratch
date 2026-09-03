@@ -34,7 +34,7 @@ function resolveStoredChannel(
 ): WorldChatMessageChannel {
   if (
     message.senderCultivatorId === null &&
-    message.senderName === '修仙界传闻'
+    message.senderName === '烬洲传闻'
   ) {
     return 'system';
   }

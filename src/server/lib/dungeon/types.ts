@@ -1,7 +1,7 @@
 import type { ResourceOperation } from '@shared/engine/resource/types';
 import { DUNGEON_COST_RANK_VALUES } from '@shared/lib/dungeon/costPolicy';
 import type { DungeonEndDisposition } from '@shared/lib/dungeon/settlementPolicy';
-import { ENEMY_RACE_VALUES, REALM_STAGE_VALUES } from '@shared/types/constants';
+import { ENEMY_CLAN_VALUES, REALM_STAGE_VALUES } from '@shared/types/constants';
 import { z } from 'zod';
 
 // === AI Interaction Schemas ===
@@ -23,7 +23,7 @@ const NarrativeSchema = z.string().trim().min(12).max(240);
 const RoundNarrativeSchema = z.string().trim().min(300).max(900);
 
 const DungeonBattleMetadataSchema = z.object({
-  race: z.enum(ENEMY_RACE_VALUES).describe('敌人种族'),
+  clan: z.enum(ENEMY_CLAN_VALUES).describe('敌人三族（腌物/遗种/投影）'),
   realm_stage: z.enum(REALM_STAGE_VALUES).describe('敌人境界阶段'),
   enemy_name: z.string().optional().describe('敌人名称'),
   background: z.string().optional().describe('敌人背景'),
@@ -79,13 +79,13 @@ export const DungeonCostSchema = z
       .describe('模糊要求时：材料类型'),
     desc: z.string().optional().describe('描述信息'),
     metadata: DungeonCostMetadataSchema.optional().describe(
-      '元数据（battle 类型需要 race/realm_stage；其他代价可记录系统反馈）',
+      '元数据（battle 类型需要 clan/realm_stage；其他代价可记录系统反馈）',
     ),
   })
   .superRefine((cost, ctx) => {
     if (
       cost.type === 'battle' &&
-      (!cost.metadata || !cost.metadata.race || !cost.metadata.realm_stage)
+      (!cost.metadata || !cost.metadata.clan || !cost.metadata.realm_stage)
     ) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
@@ -149,11 +149,11 @@ export const RewardBlueprintSchema = z.object({
     ])
     .optional()
     .describe(
-      '材料类型：herb=草药, ore=矿石, monster=妖兽材料, tcdb=天材地宝, aux=辅助, gongfa_manual=功法典籍, skill_manual=神通秘术',
+      '材料类型：herb=草药, ore=矿石, monster=诡异材料, tcdb=天材地宝, aux=辅助, gongfa_manual=功法典籍, skill_manual=神通秘术',
     ),
-  // 元素 - 仅 material 类型需要
+  // 元素 - 仅 material 类型需要（窥渊录八窍）
   element: z
-    .enum(['金', '木', '水', '火', '土', '风', '雷', '冰'])
+    .enum(['烛', '尸', '星', '渊', '梦', '噬', '帘', '疫'])
     .optional()
     .describe('元素'),
   quality_hint: z.any().optional().describe('已废弃，请使用 reward_score'), // 保持向后兼容性或作为过渡
@@ -184,7 +184,7 @@ const RewardBlueprintLlmSchema = z.object({
     ])
     .describe('材料内部分类枚举'),
   element: z
-    .enum(['金', '木', '水', '火', '土', '风', '雷', '冰'])
+    .enum(['烛', '尸', '星', '渊', '梦', '噬', '帘', '疫'])
     .optional()
     .describe('材料属性明确时填写的可选元素枚举'),
   reward_score: z
@@ -216,10 +216,10 @@ export const DungeonRoundSchema = z.object({
 });
 
 const DungeonBattleMetadataLlmSchema = z.object({
-  race: z.enum(ENEMY_RACE_VALUES).describe('敌人种族内部枚举'),
+  clan: z.enum(ENEMY_CLAN_VALUES).describe('敌人三族内部枚举（腌物/遗种/投影）'),
   realm_stage: z
     .enum(REALM_STAGE_VALUES)
-    .describe('敌人境界阶段，不包含炼气、筑基等境界名称'),
+    .describe('敌人境界阶段，不包含闻腥、守灯等境界名称'),
   enemy_name: ShortTextSchema.max(20).describe('面向玩家的敌人名称'),
   background: NarrativeSchema.max(80)
     .optional()
@@ -262,7 +262,7 @@ const DungeonMaterialCostLlmSchema = z.object({
 });
 
 const DungeonStatLossLlmSchema = z.object({
-  type: z.enum(['hp_loss', 'mp_loss']).describe('气血或法力损失'),
+  type: z.enum(['hp_loss', 'mp_loss']).describe('气血或灯焰损失'),
   rank: z
     .enum(DUNGEON_COST_RANK_VALUES)
     .describe('代价强度，程序将据此计算损失比例'),
@@ -273,18 +273,26 @@ const DungeonCostsLlmSchema = z
     resources: z
       .array(DungeonResourceCostLlmSchema)
       .max(2)
-      .describe('灵石、寿元、修为或悟性代价；没有则为空数组'),
+      .optional()
+      .default([])
+      .describe('灯油券、寿元、灯韵或悟性代价；没有则为空数组'),
     materials: z
       .array(DungeonMaterialCostLlmSchema)
       .max(2)
+      .optional()
+      .default([])
       .describe('材料代价；没有则为空数组'),
     stat_losses: z
       .array(DungeonStatLossLlmSchema)
       .max(2)
-      .describe('气血或法力损失；没有则为空数组'),
+      .optional()
+      .default([])
+      .describe('气血或灯焰损失；没有则为空数组'),
     battles: z
       .array(DungeonBattleMetadataLlmSchema)
       .max(1)
+      .optional()
+      .default([])
       .describe('必然触发的单场战斗；没有则为空数组'),
   })
   .superRefine((costs, ctx) => {
@@ -309,14 +317,20 @@ const DungeonOptionLlmSchema = z.object({
 });
 
 export function createDungeonRoundLlmSchema(maxRewardCount: number) {
+  // 注意：LLM schema 只做「结构」校验，不做「业务强约束」。
+  // 高风险选项必须含代价、恰好 3 个选项等业务约束由 service_v2 的
+  // repairDungeonRoundOutput + 最终 DungeonRoundSchema.parse 兜底，
+  // 避免 glm-4-flash 等模型偶发输出零代价选项时 AI SDK 生成阶段直接
+  // schema 校验失败 → 整轮降级模板（白白烧 2 次 LLM 调用）。
   return z
     .object({
       scene_description:
         RoundNarrativeSchema.describe('承接前情并推进到本轮抉择点的剧情正文'),
       options: z
         .array(DungeonOptionLlmSchema)
-        .length(3)
-        .describe('依次为低风险、高风险、中风险的三个行动'),
+        .min(1)
+        .max(3)
+        .describe('依次为低风险、高风险、中风险的三个行动（可为空选项补齐）'),
       acquired_items: z
         .array(RewardBlueprintLlmSchema)
         .max(Math.max(0, maxRewardCount))
@@ -327,24 +341,12 @@ export function createDungeonRoundLlmSchema(maxRewardCount: number) {
         .min(0)
         .max(100)
         .describe('进入本轮剧情后的累计危险值'),
-    })
-    .superRefine((round, ctx) => {
-      const highRiskCosts = round.options[1]?.costs;
-      const highRiskCostCount = highRiskCosts
-        ? highRiskCosts.resources.length +
-          highRiskCosts.materials.length +
-          highRiskCosts.stat_losses.length +
-          highRiskCosts.battles.length
-        : 0;
-      if (highRiskCostCount === 0) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: ['options', 1, 'costs'],
-          message: '高风险选项必须包含至少一项真实代价',
-        });
-      }
     });
 }
+
+export type DungeonRoundLlmOutput = z.infer<
+  ReturnType<typeof createDungeonRoundLlmSchema>
+>;
 
 // Settlement info from AI
 export const DungeonSettlementSchema = z

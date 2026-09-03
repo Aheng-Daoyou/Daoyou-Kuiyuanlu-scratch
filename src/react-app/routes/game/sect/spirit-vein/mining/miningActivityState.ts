@@ -32,11 +32,11 @@ export function resolveMiningActivityMode(
 
 export function miningActivityMessage(mode: MiningActivityMode): string {
   if (mode.kind === 'reward')
-    return '本局成绩将作为今日灵矿采掘委托的验收依据。';
+    return '本局成绩将作为今日灯矿采掘委托的验收依据。';
   if (mode.reason === 'settled')
     return '今日采掘回执已经生成，本局为自由练习，不会重复发放奖励。';
   if (mode.reason === 'not_accepted')
-    return '尚未在宗门事务领取灵矿采掘委托，本局为自由练习。';
+    return '尚未在宗门事务领取灯矿采掘委托，本局为自由练习。';
   if (mode.reason === 'locked')
     return '当前尚未取得采掘委托权限，本局为自由练习。';
   return '当前未发现可结算的采掘委托，本局为自由练习。';

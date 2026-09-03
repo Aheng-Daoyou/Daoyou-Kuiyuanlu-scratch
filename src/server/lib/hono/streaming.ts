@@ -31,6 +31,16 @@ export function streamSseEvents(
 
   return streamSSE(c, async (stream) => {
     stream.onAbort(markAborted);
-    await handler(stream, () => aborted);
+    // 立即写入一个心跳注释帧（SSE 规范 `: comment`，客户端会忽略）：
+    // 连接建立即重置服务器空闲计时器，避免 LLM 首个 token 到达前
+    // （glm-4-flash TTFB 可达 ~15s）因无数据帧被 Bun idleTimeout 掐断。
+    try {
+      await stream.write(': ping\n\n');
+    } catch {
+      // 客户端已断开，忽略写入失败
+    }
+    if (!aborted) {
+      await handler(stream, () => aborted);
+    }
   });
 }

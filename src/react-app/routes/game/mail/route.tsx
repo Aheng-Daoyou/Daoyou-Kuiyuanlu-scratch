@@ -35,7 +35,7 @@ import { useSearchParams } from 'react-router';
 
 const PAGE_SIZE = 20;
 const MAIL_PAGE_TABS = [
-  { label: '收件玉简', value: 'mail' },
+  { label: '收件灯笺', value: 'mail' },
   { label: '好友名录', value: 'friends' },
 ];
 const MIN_TRANSFER_QUALITY = '玄品';
@@ -97,10 +97,10 @@ function getAttachmentUnsupportedReason(
   item: SelectableAttachment,
 ): string | null {
   if (item.itemType === 'artifact' && (item as Artifact).isEquipped) {
-    return '已装备法宝不可附带';
+    return '已装备封灵器不可附带';
   }
   if (item.itemType === 'consumable' && !isPillConsumable(item as Consumable)) {
-    return '当前仅支持丹药附带';
+    return '当前仅支持香品附带';
   }
   if (!isTransferableQuality(getAttachmentQuality(item))) {
     return `仅玄品及以上物品可附带，当前为${getAttachmentQuality(item)}`;
@@ -478,8 +478,8 @@ export default function MailPage() {
 
     try {
       await navigator.share({
-        title: '万界道友',
-        text: '来万界道友与我结缘，一同踏上修仙之路。',
+        title: '窥渊录',
+        text: '来窥渊录与我结缘，一同踏上守灯之路。',
         url: link,
       });
     } catch (shareError) {
@@ -632,8 +632,8 @@ export default function MailPage() {
   ).length;
   const attachmentTabs = [
     { label: '材料', value: 'material' },
-    { label: '法宝', value: 'artifact' },
-    { label: '丹药', value: 'consumable' },
+    { label: '封灵器', value: 'artifact' },
+    { label: '香品', value: 'consumable' },
   ];
   const currentAttachmentItems = useMemo(() => {
     const items =
@@ -670,7 +670,7 @@ export default function MailPage() {
   return (
     <GameSceneFrame
       title="【道友传音】"
-      description="收拢往来玉简与好友名录。可先处理来函，也可寻访道友、分享结缘玉简。"
+      description="收拢往来灯笺与好友名录。可先处理来函，也可寻访道友、分享结缘灯笺。"
       aside={
         activeTab === 'mail' ? (
           <>
@@ -685,10 +685,10 @@ export default function MailPage() {
               title="操作说明"
               className="text-sm leading-7"
               help={{
-                title: '收件玉简操作说明',
+                title: '收件灯笺操作说明',
                 content: (
                   <div className="space-y-2 text-sm leading-7">
-                    <p>点击玉简可展开全文，未读会即时回写。</p>
+                    <p>点击灯笺可展开全文，未读会即时回写。</p>
                     <p>奖励类来函支持就地领取，不必离开当前场景。</p>
                   </div>
                 ),
@@ -781,7 +781,7 @@ export default function MailPage() {
               <div>
                 <h2 className="text-base font-semibold">邀请道友</h2>
                 <p className="text-ink-secondary mt-1 text-sm leading-6">
-                  将结缘玉简分享给朋友，对方打开后即可将你加入名录。
+                  将结缘灯笺分享给朋友，对方打开后即可将你加入名录。
                 </p>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -945,7 +945,7 @@ export default function MailPage() {
             onChange={setContent}
             multiline
             rows={5}
-            placeholder="写下要托玉简送达的话"
+            placeholder="写下要托灯笺送达的话"
             hint="发送会消耗空白传音符，可在天骄宝阁购买"
           />
           <div className="space-y-2">
@@ -1074,8 +1074,8 @@ export default function MailPage() {
               {activeAttachmentType === 'material'
                 ? '暂无可附带材料（仅限玄品及以上）。'
                 : activeAttachmentType === 'artifact'
-                  ? '暂无可附带法宝（仅限玄品及以上且未装备）。'
-                  : '暂无可附带丹药（仅限玄品及以上）。'}
+                  ? '暂无可附带封灵器（仅限玄品及以上且未装备）。'
+                  : '暂无可附带香品（仅限玄品及以上）。'}
             </InkNotice>
           )}
           {currentAttachmentPagination.totalPages > 1 ? (
