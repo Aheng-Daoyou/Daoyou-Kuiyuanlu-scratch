@@ -208,3 +208,11 @@ sponsorkit/.cache*.json
 sponsorkit/sponsors.json
 
 .venv*
+
+### Kuiyuanlu local exclusions ###
+cookies.txt
+.dev-mail/
+.workbuddy/
+backups/
+/daoyou/
+overview.md
