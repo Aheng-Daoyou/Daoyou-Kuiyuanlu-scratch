@@ -17,7 +17,7 @@ describe('item exchange shop rules', () => {
   it('enforces item-library grant quantities', () => {
     expect(
       getItemExchangeQuantityError({ itemType: 'artifact', quantity: 2 }),
-    ).toBe('法宝类商品每次只能发放 1 件');
+    ).toBe('封灵器类商品每次只能发放 1 件');
     expect(
       getItemExchangeQuantityError({ itemType: 'material', quantity: 31 }),
     ).toContain('最多发放 30 件');

@@ -7,8 +7,8 @@ describe('SpiritSeedGenerator skeleton', () => {
       1,
       {
         guaranteedRank: '玄品',
-        specifiedElement: '水',
-        regionTags: ['云梦山脉'],
+        specifiedElement: '星',
+        regionTags: ['烟波泽'],
       },
       () => 0.5,
     );
@@ -16,8 +16,8 @@ describe('SpiritSeedGenerator skeleton', () => {
     expect(skeleton).toEqual({
       rank: '玄品',
       quantity: 1,
-      forcedElement: '水',
-      regionTags: ['云梦山脉'],
+      forcedElement: '星',
+      regionTags: ['烟波泽'],
     });
     expect('type' in skeleton!).toBe(false);
   });

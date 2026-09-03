@@ -18,6 +18,8 @@ export default defineConfig({
       'src/shared/**/*.spec.ts',
       'src/shared/**/*.test.tsx',
       'src/shared/**/*.spec.tsx',
+      'src/server/**/*.test.ts',
+      'src/server/**/*.spec.ts',
     ],
     restoreMocks: true,
   },

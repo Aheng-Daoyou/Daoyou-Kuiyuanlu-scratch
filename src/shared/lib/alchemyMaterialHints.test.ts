@@ -13,7 +13,7 @@ describe('inferAlchemyMaterialPropertyHints', () => {
 
   it('keeps plain bone marrow materials on the body sinew-bone route', () => {
     const hints = inferAlchemyMaterialPropertyHints({
-      name: '妖兽骨髓',
+      name: '诡异骨髓',
       description: '骨髓沉重，适合锻骨强筋。',
     });
 

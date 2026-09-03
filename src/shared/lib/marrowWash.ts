@@ -6,15 +6,15 @@ export const MARROW_WASH_BREAKTHROUGH_QI_COST = 20;
 export const MARROW_WASH_BREAKTHROUGH_LEVEL_STEP = 10;
 
 const MARROW_WASH_LEVEL_CAP_BY_REALM = {
-  炼气: 10,
-  筑基: 20,
-  金丹: 35,
-  元婴: 50,
-  化神: 70,
-  炼虚: 90,
-  合体: 120,
-  大乘: 120,
-  渡劫: 120,
+  闻腥: 10,
+  守灯: 20,
+  窥渊: 35,
+  蚀体: 50,
+  忘川: 70,
+  执灯: 90,
+  掌灯: 120,
+  近神: 120,
+  渡渊: 120,
 } as const satisfies Record<RealmType, number>;
 
 export interface MarrowWashSummary {
@@ -46,7 +46,7 @@ export function getMarrowWashThresholdByLevel(level: number): number {
 export function getMarrowWashLevelCapByCultivationRealm(
   realm: RealmType | undefined,
 ): number {
-  return realm ? MARROW_WASH_LEVEL_CAP_BY_REALM[realm] : MARROW_WASH_LEVEL_CAP_BY_REALM.炼气;
+  return realm ? MARROW_WASH_LEVEL_CAP_BY_REALM[realm] : MARROW_WASH_LEVEL_CAP_BY_REALM.闻腥;
 }
 
 export function normalizeMarrowWashState(
@@ -172,7 +172,7 @@ export function breakthroughMarrowWash(
 
   if (breakthroughLevel > levelCap) {
     throw new Error(
-      `当前修为境界最多承载洗髓 Lv.${levelCap}，需提升修为后再继续洗髓破限。`,
+      `当前灯韵境界最多承载洗髓 Lv.${levelCap}，需提升灯韵后再继续洗髓破限。`,
     );
   }
   if (state.level < breakthroughLevel) {

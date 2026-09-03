@@ -222,7 +222,7 @@ describe('body cultivation battle init hooks', () => {
     );
 
     expect(guard).toMatchObject({
-      name: '铜皮·护体',
+      name: '灯皮·护体',
       duration: 3,
       listeners: [
         expect.objectContaining({
@@ -264,7 +264,7 @@ describe('body cultivation battle init hooks', () => {
         (buff) => buff.id === 'body_cultivation_iron_bone_crit',
       ),
     ).toMatchObject({
-      name: '铁骨·战骨',
+      name: '腌骨·战骨',
       duration: -1,
       modifiers: [
         {
@@ -310,7 +310,7 @@ describe('body cultivation battle init hooks', () => {
       (buff) => buff.id === 'body_cultivation_golden_body_burn_blood',
     );
     expect(burnBlood).toMatchObject({
-      name: '金身·燃血爆发',
+      name: '金躯·燃血爆发',
       listeners: [
         expect.objectContaining({
           eventType: 'DamageSegmentAppliedEvent',
@@ -358,7 +358,7 @@ describe('body cultivation battle init hooks', () => {
     );
 
     expect(jadeBuff).toMatchObject({
-      name: '玉髓·不灭骨',
+      name: '灯髓·不灭骨',
       listeners: [
         expect.objectContaining({
           eventType: GameplayTags.EVENT.DAMAGE_TAKEN,
@@ -416,7 +416,7 @@ describe('body cultivation battle init hooks', () => {
     );
 
     expect(dharmaBuff).toMatchObject({
-      name: '法身·神识定境',
+      name: '法躯·心神定境',
       duration: 2,
       modifiers: [
         {
@@ -455,7 +455,7 @@ describe('body cultivation battle init hooks', () => {
         (buff) => buff.id === 'body_cultivation_dao_body_damage_reduction',
       ),
     ).toMatchObject({
-      name: '道体·万劫不坏',
+      name: '灯体·万劫不坏',
       duration: -1,
       listeners: [
         expect.objectContaining({

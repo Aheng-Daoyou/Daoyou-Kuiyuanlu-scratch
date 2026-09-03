@@ -57,7 +57,7 @@ describe('marrowWash', () => {
       realm: 1,
       breakthroughs: 1,
     });
-    expect(getMarrowWashSummary(condition, { cultivatorRealm: '筑基' })).toMatchObject({
+    expect(getMarrowWashSummary(condition, { cultivatorRealm: '守灯' })).toMatchObject({
       nextBreakthroughLevel: 20,
       canBreakthrough: false,
     });
@@ -73,7 +73,7 @@ describe('marrowWash', () => {
     });
 
     expect(() =>
-      breakthroughMarrowWash(condition, { cultivatorRealm: '筑基' }),
+      breakthroughMarrowWash(condition, { cultivatorRealm: '守灯' }),
     ).toThrow('洗髓等级不足，达到 Lv.20 后方可破限。');
   });
 
@@ -94,7 +94,7 @@ describe('marrowWash', () => {
     });
 
     const result = breakthroughMarrowWash(condition, {
-      cultivatorRealm: '金丹',
+      cultivatorRealm: '窥渊',
     });
     expect(result).toMatchObject({
       fromRealm: 0,

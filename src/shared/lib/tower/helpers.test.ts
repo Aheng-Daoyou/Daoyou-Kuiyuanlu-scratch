@@ -18,18 +18,18 @@ import { getTowerBlessingEffectPreview } from './presentation';
 describe('tower helpers', () => {
   it('limits tower eligibility to golden core and above', () => {
     expect(TOWER_ELIGIBLE_REALMS).toEqual([
-      '金丹',
-      '元婴',
-      '化神',
-      '炼虚',
-      '合体',
-      '大乘',
-      '渡劫',
+      '窥渊',
+      '蚀体',
+      '忘川',
+      '执灯',
+      '掌灯',
+      '近神',
+      '渡渊',
     ]);
-    expect(isTowerRealmEligible('炼气')).toBe(false);
-    expect(isTowerRealmEligible('筑基')).toBe(false);
-    expect(isTowerRealmEligible('金丹')).toBe(true);
-    expect(isTowerRealmEligible('渡劫')).toBe(true);
+    expect(isTowerRealmEligible('闻腥')).toBe(false);
+    expect(isTowerRealmEligible('守灯')).toBe(false);
+    expect(isTowerRealmEligible('窥渊')).toBe(true);
+    expect(isTowerRealmEligible('渡渊')).toBe(true);
   });
 
   it('maps floor kinds and realm stages deterministically', () => {
@@ -128,36 +128,36 @@ describe('tower helpers', () => {
     expect(
       buildTowerEnemyVariantSeed({
         seasonKey: '2026-W22@Asia/Shanghai',
-        realm: '金丹',
+        realm: '窥渊',
         floor: 1,
       }),
-    ).toBe('tower:2026-W22@Asia/Shanghai:金丹:1');
+    ).toBe('tower:2026-W22@Asia/Shanghai:窥渊:1');
     expect(
       buildTowerEnemyVariantSeed({
         seasonKey: '2026-W22@Asia/Shanghai',
-        realm: '金丹',
+        realm: '窥渊',
         floor: 99,
       }),
-    ).toBe('tower:2026-W22@Asia/Shanghai:金丹:20');
+    ).toBe('tower:2026-W22@Asia/Shanghai:窥渊:20');
   });
 
   it('uses variantSeed to create distinct enemy variants for the same realm floor', () => {
     const generator = new EnemyGenerator();
     const base = {
-      realm: '金丹' as const,
+      realm: '窥渊' as const,
       realmStage: '初期' as const,
-      race: '人族' as const,
+      clan: '腌物' as const,
       difficulty: 5,
       isBoss: false,
     };
 
     const first = generator.buildDraft({
       ...base,
-      variantSeed: 'tower:2026-W22@Asia/Shanghai:金丹:1',
+      variantSeed: 'tower:2026-W22@Asia/Shanghai:窥渊:1',
     });
     const second = generator.buildDraft({
       ...base,
-      variantSeed: 'tower:2026-W23@Asia/Shanghai:金丹:1',
+      variantSeed: 'tower:2026-W23@Asia/Shanghai:窥渊:1',
     });
 
     expect(first.cultivator.id).not.toBe(second.cultivator.id);

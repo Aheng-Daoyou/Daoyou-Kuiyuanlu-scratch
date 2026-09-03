@@ -81,37 +81,37 @@ export function validateAlchemyEffectRoute(
   route: AlchemyEffectRoute,
 ): AlchemyEffectRoute {
   if (!route || !Array.isArray(route.effects)) {
-    throw new Error('丹药药性路线无效');
+    throw new Error('香品香性路线无效');
   }
   if (route.effects.length === 0 || route.effects.length > 3) {
-    throw new Error('丹药药性路线必须包含一至三个效果');
+    throw new Error('香品香性路线必须包含一至三个效果');
   }
   const seen = new Set<string>();
   let previousWeight = Number.POSITIVE_INFINITY;
   let totalWeight = 0;
   for (const effect of route.effects) {
     if (!effect || !ALCHEMY_EFFECT_KEYS.has(effect.key)) {
-      throw new Error(`丹药药性 key 无效：${String(effect?.key)}`);
+      throw new Error(`香品香性 key 无效：${String(effect?.key)}`);
     }
     if (
       !Number.isFinite(effect.weight) ||
       effect.weight <= 0 ||
       effect.weight > 1
     ) {
-      throw new Error(`丹药药性权重无效：${effect.key}`);
+      throw new Error(`香品香性权重无效：${effect.key}`);
     }
     if (seen.has(effect.key)) {
-      throw new Error(`丹药药性路线包含重复效果：${effect.key}`);
+      throw new Error(`香品香性路线包含重复效果：${effect.key}`);
     }
     if (effect.weight > previousWeight) {
-      throw new Error('丹药药性路线未按权重降序排列');
+      throw new Error('香品香性路线未按权重降序排列');
     }
     seen.add(effect.key);
     previousWeight = effect.weight;
     totalWeight += effect.weight;
   }
   if (Math.abs(totalWeight - 1) > 0.001) {
-    throw new Error('丹药药性路线权重未归一化');
+    throw new Error('香品香性路线权重未归一化');
   }
   return route;
 }
@@ -241,7 +241,7 @@ function buildOperation(
       };
     default: {
       const track = getAlchemyPropertyTrackPath(key);
-      if (!track) throw new Error(`无法解析丹药药性：${key}`);
+      if (!track) throw new Error(`无法解析香品香性：${key}`);
       return { type: 'advance_track', track, value: finalValue };
     }
   }

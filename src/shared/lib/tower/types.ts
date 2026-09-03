@@ -1,6 +1,6 @@
 import type { ResourceOperation } from '@shared/engine/resource/types';
 import type { CultivatorCondition } from '@shared/types/condition';
-import type { EnemyRace, RealmStage, RealmType } from '@shared/types/constants';
+import type { EnemyClan, RealmStage, RealmType } from '@shared/types/constants';
 import type { Cultivator } from '@shared/types/cultivator';
 import type { TowerBlessingId } from './blessings';
 
@@ -34,7 +34,7 @@ export interface TowerEncounter {
   floor: number;
   kind: TowerFloorKind;
   difficulty: number;
-  race: EnemyRace;
+  clan: EnemyClan;
   realm: RealmType;
   realmStage: RealmStage;
   isBoss: boolean;

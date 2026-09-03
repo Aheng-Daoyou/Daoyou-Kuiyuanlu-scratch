@@ -67,14 +67,14 @@ describe('normalizeBodyCultivationState', () => {
     };
 
     const summary = getBodyCultivationSummary(condition, {
-      cultivatorRealm: '炼气',
+      cultivatorRealm: '闻腥',
     });
 
-    expect(summary.realm.label).toBe('凡躯');
+    expect(summary.realm.label).toBe('肉胎');
     expect(summary.totalLevel).toBe(12);
     expect(summary.nextRealm).toMatchObject({
       key: 'bronze_skin',
-      label: '铜皮',
+      label: '灯皮',
       canAttempt: true,
     });
   });
@@ -95,14 +95,14 @@ describe('normalizeBodyCultivationState', () => {
     };
 
     const summary = getBodyCultivationSummary(condition, {
-      cultivatorRealm: '炼气',
+      cultivatorRealm: '闻腥',
     });
 
     expect(summary.nextRealm?.key).toBe('iron_bone');
     expect(summary.nextRealm?.canAttempt).toBe(false);
     expect(summary.nextRealm?.requirements).toEqual(
       expect.arrayContaining([
-        { label: '修为境界达到筑基', met: false },
+        { label: '灯韵境界达到守灯', met: false },
         { label: '皮肤 Lv.5/6', met: false },
       ]),
     );
@@ -124,10 +124,10 @@ describe('normalizeBodyCultivationState', () => {
     };
 
     const preview = previewBodyCultivationRealmBreakthrough(condition, {
-      cultivatorRealm: '炼气',
+      cultivatorRealm: '闻腥',
     });
     const result = breakthroughBodyCultivationRealm(condition, {
-      cultivatorRealm: '炼气',
+      cultivatorRealm: '闻腥',
     }, () => 0);
 
     expect(preview).toMatchObject({
@@ -148,8 +148,8 @@ describe('normalizeBodyCultivationState', () => {
         },
         {
           type: 'consumable',
-          name: '皮肤方向炼体丹（玄品以上）',
-          label: '皮肤方向炼体丹（玄品以上）',
+          name: '皮肤方向炼体香（玄品以上）',
+          label: '皮肤方向炼体香（玄品以上）',
           quantity: 1,
           family: 'tempering',
           property: 'body_skin',
@@ -183,7 +183,7 @@ describe('normalizeBodyCultivationState', () => {
     };
 
     const result = breakthroughBodyCultivationRealm(condition, {
-      cultivatorRealm: '炼气',
+      cultivatorRealm: '闻腥',
     }, () => 0.99);
 
     expect(result).toMatchObject({
@@ -224,7 +224,7 @@ describe('normalizeBodyCultivationState', () => {
     };
 
     const preview = previewBodyCultivationRealmBreakthrough(condition, {
-      cultivatorRealm: '炼气',
+      cultivatorRealm: '闻腥',
     });
 
     expect(preview.successChance).toBeCloseTo(0.98, 5);
@@ -253,7 +253,7 @@ describe('normalizeBodyCultivationState', () => {
     };
 
     const result = breakthroughBodyCultivationRealm(condition, {
-      cultivatorRealm: '炼气',
+      cultivatorRealm: '闻腥',
     }, () => 0.9999);
 
     expect(result.success).toBe(true);
@@ -278,13 +278,13 @@ describe('normalizeBodyCultivationState', () => {
     };
 
     const summary = getBodyCultivationSummary(condition, {
-      cultivatorRealm: '合体',
+      cultivatorRealm: '掌灯',
     });
     const preview = previewBodyCultivationRealmBreakthrough(condition, {
-      cultivatorRealm: '合体',
+      cultivatorRealm: '掌灯',
     });
     const result = breakthroughBodyCultivationRealm(condition, {
-      cultivatorRealm: '合体',
+      cultivatorRealm: '掌灯',
     }, () => 0);
 
     expect(summary.totalLevel).toBe(220);
@@ -319,7 +319,7 @@ describe('normalizeBodyCultivationState', () => {
 
     expect(() =>
       breakthroughBodyCultivationRealm(condition, {
-        cultivatorRealm: '炼气',
+        cultivatorRealm: '闻腥',
       }),
     ).toThrow('肉身进阶条件不足');
     expect(condition.tracks.bodyCultivation.realm).toBe('bronze_skin');

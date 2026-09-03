@@ -142,8 +142,8 @@ export function stableSerializeConsumableSpec(spec: ConsumableSpec): string {
 /**
  * 返回影响消耗品实际使用效果的稳定堆叠键。
  *
- * 炼丹来源、药蕴摘要、批次分布和展示文案都属于追踪/展示元数据，
- * 不应阻止同效果丹药合堆。该键会在写入时持久化，库存查询不再比较 JSONB。
+ * 制香来源、香蕴摘要、批次分布和展示文案都属于追踪/展示元数据，
+ * 不应阻止同效果香品合堆。该键会在写入时持久化，库存查询不再比较 JSONB。
  */
 export function buildConsumableStackKey(
   consumable: Pick<Consumable, 'name' | 'type' | 'quality' | 'spec'>,

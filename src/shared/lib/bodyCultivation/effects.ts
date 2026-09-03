@@ -265,7 +265,7 @@ function buildGoldenBodyBurnBloodBuff(organsLevel: number): BuffConfig {
 
   return {
     id: 'body_cultivation_golden_body_burn_blood',
-    name: '金身·燃血爆发',
+    name: '金躯·燃血爆发',
     type: BuffType.BUFF,
     duration: -1,
     stackRule: 'override',
@@ -293,7 +293,7 @@ function buildGoldenBodyBurnBloodBuff(organsLevel: number): BuffConfig {
             params: {
               buffConfig: {
                 id: 'body_cultivation_golden_body_burn_blood_active',
-                name: '金身·燃血',
+                name: '金躯·燃血',
                 type: BuffType.BUFF,
                 duration: 3,
                 stackRule: 'override',
@@ -326,7 +326,7 @@ function buildGoldenBodyBurnBloodBuff(organsLevel: number): BuffConfig {
 function buildBronzeSkinGuardBuff(): BuffConfig {
   return {
     id: 'body_cultivation_bronze_skin_guard',
-    name: '铜皮·护体',
+    name: '灯皮·护体',
     type: BuffType.BUFF,
     duration: 3,
     stackRule: 'override',
@@ -357,7 +357,7 @@ function buildBronzeSkinGuardBuff(): BuffConfig {
 function buildIronBoneCritBuff(): BuffConfig {
   return {
     id: 'body_cultivation_iron_bone_crit',
-    name: '铁骨·战骨',
+    name: '腌骨·战骨',
     type: BuffType.BUFF,
     duration: -1,
     stackRule: 'override',
@@ -379,7 +379,7 @@ function buildIronBoneCritBuff(): BuffConfig {
 function buildDharmaBodyControlResistanceBuff(): BuffConfig {
   return {
     id: 'body_cultivation_dharma_body_control_resistance',
-    name: '法身·神识定境',
+    name: '法躯·心神定境',
     type: BuffType.BUFF,
     duration: 2,
     stackRule: 'override',
@@ -396,7 +396,7 @@ function buildDharmaBodyControlResistanceBuff(): BuffConfig {
 function buildDaoBodyDamageReductionBuff(): BuffConfig {
   return {
     id: 'body_cultivation_dao_body_damage_reduction',
-    name: '道体·万劫不坏',
+    name: '灯体·万劫不坏',
     type: BuffType.BUFF,
     duration: -1,
     stackRule: 'override',
@@ -466,7 +466,7 @@ export function getBodyCultivationBattleInitHooks(
   if (hasJadeMarrowProtection) {
     startingBuffs.push({
       id: 'body_cultivation_jade_marrow_death_prevent',
-      name: '玉髓·不灭骨',
+      name: '灯髓·不灭骨',
       type: BuffType.BUFF,
       duration: -1,
       stackRule: 'override',

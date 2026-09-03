@@ -51,7 +51,7 @@ const fixtureOrganization: SectOrganizationModule = {
     methodLevelCap: () => 7,
     requirement: (rank) => ({
       rank,
-      minRealm: rank === 'true' ? '金丹' : rank === 'inner' ? '筑基' : '炼气',
+      minRealm: rank === 'true' ? '窥渊' : rank === 'inner' ? '守灯' : '闻腥',
       contribution: rank === 'true' ? 30 : rank === 'inner' ? 20 : 10,
     }),
   },

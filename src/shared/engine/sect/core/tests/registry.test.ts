@@ -178,7 +178,7 @@ describe('宗门模块扩展契约', () => {
     expect(() =>
       new SectCompiler().projectCombat(FIXTURE_SECT_MODULE, {
         sect: state,
-        realm: '炼气',
+        realm: '闻腥',
       }),
     ).toThrow('根基被动战斗投影必须且只能出现1次');
   });
@@ -200,7 +200,7 @@ describe('宗门模块扩展契约', () => {
           paths: [],
           abilityLoadout: [null, null, null, null],
         },
-        realm: '炼气',
+        realm: '闻腥',
         methodGrowth: module.methodGrowth,
       })
       .build();

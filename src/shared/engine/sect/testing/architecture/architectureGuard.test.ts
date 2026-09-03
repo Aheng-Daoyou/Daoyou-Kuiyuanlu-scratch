@@ -1,9 +1,15 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs';
-import { join, relative, resolve } from 'node:path';
+import { join, relative, resolve, sep } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 const root = resolve(process.cwd(), 'src/shared/engine/sect');
 const battleRoot = resolve(process.cwd(), 'src/shared/engine/battle-v5');
+
+/** 将路径统一为 `/` 分隔，避免 Windows 反斜杠导致 `includes('/tests/')` 漏判。 */
+const normalized = (p: string) => p.split(sep).join('/');
+const isTestFile = (p: string) => /\.test\.(ts|tsx)$/.test(normalized(p));
+const isUnderTestsDir = (p: string) => normalized(p).includes('/tests/');
+
 const battleUiRoot = resolve(
   process.cwd(),
   'src/react-app/components/feature/battle/v5',
@@ -36,7 +42,7 @@ describe('宗门插件架构守卫', () => {
 
   it('sect/core 不依赖具体生产宗门、流派、节点或内容目录', () => {
     for (const file of sourceFiles(join(root, 'core')).filter(
-      (path) => !path.includes('/tests/'),
+      (path) => !isUnderTestsDir(path),
     )) {
       const source = readFileSync(file, 'utf8');
       const label = relative(root, file);
@@ -54,7 +60,7 @@ describe('宗门插件架构守卫', () => {
 
   it('battle-v5 非适配器核心不依赖任何生产宗门、宗门内容或 React', () => {
     for (const file of sourceFiles(battleRoot).filter(
-      (path) => !path.includes('/tests/') && !path.includes('/adapters/'),
+      (path) => !isUnderTestsDir(path) && !normalized(path).includes('/adapters/'),
     )) {
       const source = readFileSync(file, 'utf8');
       const label = relative(process.cwd(), file);
@@ -65,7 +71,7 @@ describe('宗门插件架构守卫', () => {
 
   it('通用战斗 UI 不包含具体生产宗门或宗门主题分支', () => {
     for (const file of sourceFiles(battleUiRoot).filter(
-      (path) => !/\.test\.(ts|tsx)$/.test(path),
+      (path) => !isTestFile(path),
     )) {
       const source = readFileSync(file, 'utf8');
       expect(source, relative(process.cwd(), file)).not.toMatch(
@@ -125,7 +131,7 @@ describe('宗门插件架构守卫', () => {
 
   it('通用核心不固定流派层数或每层节点数', () => {
     for (const file of sourceFiles(join(root, 'core')).filter(
-      (path) => !path.includes('/tests/'),
+      (path) => !isUnderTestsDir(path),
     )) {
       const source = readFileSync(file, 'utf8');
       expect(source, relative(root, file)).not.toMatch(
@@ -145,7 +151,7 @@ describe('宗门插件架构守卫', () => {
   it('红尘剑宗内容不手写神通详情或启动期组合穷举', () => {
     const contentRoot = join(root, 'content/lingxiao');
     for (const file of sourceFiles(contentRoot).filter(
-      (path) => !path.includes('/tests/'),
+      (path) => !isUnderTestsDir(path),
     )) {
       const source = readFileSync(file, 'utf8');
       const label = relative(root, file);
@@ -166,7 +172,7 @@ describe('宗门插件架构守卫', () => {
     ];
     for (const file of frontendRoots
       .flatMap(sourceFiles)
-      .filter((path) => !/\.test\.(ts|tsx)$/.test(path))) {
+      .filter((path) => !isTestFile(path))) {
       const source = readFileSync(file, 'utf8');
       const label = relative(process.cwd(), file);
       expect(source, label).not.toMatch(

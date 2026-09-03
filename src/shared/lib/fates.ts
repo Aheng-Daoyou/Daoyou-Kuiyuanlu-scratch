@@ -11,7 +11,7 @@ import type {
  * - reduction = -0.05 表示增加 5%
  *
  * reduction 采用加法聚合，不在命格层设置折扣上限。具体成本在最终结算时
- * 转换为 multiplier，并由成本缩放函数保证非零成本至少消耗 1 灵石。
+ * 转换为 multiplier，并由成本缩放函数保证非零成本至少消耗 1 灯油券。
  */
 export interface FateContext {
   retreatExpMultiplier: number;

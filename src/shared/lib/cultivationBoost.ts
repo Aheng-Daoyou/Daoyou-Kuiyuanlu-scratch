@@ -75,7 +75,7 @@ export function getCultivationBoostDisplayText(
   value: Pick<AddStatusOperation, 'payload'> | ConditionStatusInstance,
 ): string {
   const percent = Number((getCultivationBoostPercent(value) * 100).toFixed(1));
-  return `下次闭关修为 +${
+  return `下次闭关灯韵 +${
     Number.isInteger(percent) ? percent.toFixed(0) : percent
   }%`;
 }

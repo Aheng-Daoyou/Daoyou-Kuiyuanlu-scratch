@@ -1,7 +1,7 @@
 import type { FormulaFitBand } from '@shared/types/consumable';
 
 export interface FormulaFitPolicy {
-  /** 兼容既有丹药元数据与评分展示的档位代表值，不是二次契合度计算。 */
+  /** 兼容既有香品元数据与评分展示的档位代表值，不是二次契合度计算。 */
   score: number;
   baseMultiplier: number;
   minMultiplier: number;

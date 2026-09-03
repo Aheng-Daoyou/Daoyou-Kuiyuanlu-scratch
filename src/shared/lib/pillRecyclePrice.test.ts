@@ -34,13 +34,13 @@ describe('calculatePillRecycleUnitPrice', () => {
     神品: 173076,
   };
 
-  it.each(QUALITY_VALUES)('按材料单位药蕴成本锚定%s丹药回收价', (quality) => {
+  it.each(QUALITY_VALUES)('按材料单位香蕴成本锚定%s香品回收价', (quality) => {
     expect(
       calculatePillRecycleUnitPrice(quality, PILL_QUALITY_BASE_SCORE[quality]),
     ).toBe(expectedByQuality[quality]);
   });
 
-  it.each(QUALITY_VALUES)('使用%s材料中最低的单位原始药蕴成本', (quality) => {
+  it.each(QUALITY_VALUES)('使用%s材料中最低的单位原始香蕴成本', (quality) => {
     const costs = ALCHEMY_ALLOWED_MATERIAL_TYPES.map(
       (type) =>
         (BASE_PRICES[quality] * TYPE_MULTIPLIERS[type]) /
@@ -52,7 +52,7 @@ describe('calculatePillRecycleUnitPrice', () => {
     );
   });
 
-  it('按最大药蕴效率折减经济锚点', () => {
+  it('按最大香蕴效率折减经济锚点', () => {
     expect(calculatePillRecycleEconomicAnchor('玄品')).toBe(
       (PILL_UNIT_ESSENCE_BY_QUALITY.玄品 *
         calculateMinimumMaterialAnchorCostPerEssence('玄品')) /

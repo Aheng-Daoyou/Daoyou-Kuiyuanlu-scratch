@@ -3,8 +3,8 @@ import { buildSpiritFieldSeedMaterialFromPlant, readSpiritFieldSeedSpec } from '
 import type { SpiritFieldPlantSnapshot } from './types';
 
 const plant: SpiritFieldPlantSnapshot = {
-  id: 'fingerprint-seed', seedName: '霜纹芽核', seedDescription: '淡白芽核表面有一圈霜纹。', clueTexts: ['靠近清露时霜纹会变亮', '暖意过盛时灵机略显沉寂'],
-  quality: '玄品', element: '冰', minRealm: '金丹', growthForm: 'shrub', harvestPart: 'fruit',
+  id: 'fingerprint-seed', seedName: '霜纹芽核', seedDescription: '淡白芽核表面有一圈霜纹。', clueTexts: ['靠近清露时霜纹会变亮', '暖意过盛时灯机略显沉寂'],
+  quality: '玄品', element: '疫', minRealm: '窥渊', growthForm: 'shrub', harvestPart: 'fruit',
   preferredMethods: ['shade_dew', 'flower_fruit'], avoidedMethods: ['sun_wake'], preferredHabitats: ['cold', 'shaded'], avoidedHabitats: ['volcanic'], growthTraits: ['dew-seeking'], useTags: ['qi-restoration'], outcomeBiases: ['spirit_fruit'], creationTags: ['Material.Semantic.Freeze'],
   stageDurationMs: { germination: 100_000, nourishing: 100_000, forming: 100_000 }, baseYieldMin: 2, baseYieldMax: 4,
 };

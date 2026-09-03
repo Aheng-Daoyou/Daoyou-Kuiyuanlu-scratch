@@ -41,11 +41,11 @@ function pickWeightedQuality(options: SpiritSeedRandomOptions, rng: () => number
 
 function requestList(skeletons: SpiritSeedSkeleton[]): string { return skeletons.map((item, index) => `${index + 1}. 品质=${item.rank}；元素=${item.forcedElement ?? '自选'}；地域=${item.regionTags?.join('、') || '无'}`).join('\n'); }
 function fallbackIdentity(skeleton: SpiritSeedSkeleton, index: number): SpiritSeedIdentity {
-  const element = skeleton.forcedElement ?? ELEMENT_VALUES[index % ELEMENT_VALUES.length] ?? '木';
+  const element = skeleton.forcedElement ?? ELEMENT_VALUES[index % ELEMENT_VALUES.length] ?? '尸';
   return {
     seedName: `${element}纹眠籽`,
-    seedDescription: `灰青种壳上浮着一线${element}行微光，握在掌中时灵机时隐时现。`,
-    clueTexts: ['种壳遇到温和灵机时会轻轻发热', '其内生机不喜骤然催逼，似宜循序培护'],
+    seedDescription: `灰青种壳上浮着一线${element}行微光，握在掌中时灯机时隐时现。`,
+    clueTexts: ['种壳遇到温和灯机时会轻轻发热', '其内生机不喜骤然催逼，似宜循序培护'],
     element, growthForm: 'herb', harvestPart: 'leaf',
     preferredMethods: ['seasonal_nurture', 'intrinsic_infusion', 'natural_form'],
     avoidedMethods: ['monster_blood'], preferredHabitats: ['mountain'], avoidedHabitats: [],
@@ -99,7 +99,7 @@ export class SpiritSeedGenerator {
     if (skeletons.length === 0) return [];
     let identities: SpiritSeedIdentity[];
     try {
-      const response = await generateAiArray({ system: renderPromptSystem('spirit-seed-generation'), prompt: renderPromptUser('spirit-seed-generation', { requestList: requestList(skeletons) }), elementSchema: SpiritSeedAISchema, name: 'SpiritSeedIdentityList', description: '灵种身份、隐性习性与玩家线索', sceneId: 'spirit-seed-generation', maxOutputTokens: Math.min(8_000, Math.max(1_600, skeletons.length * 1_000)) });
+      const response = await generateAiArray({ system: renderPromptSystem('spirit-seed-generation'), prompt: renderPromptUser('spirit-seed-generation', { requestList: requestList(skeletons) }), elementSchema: SpiritSeedAISchema, name: 'SpiritSeedIdentityList', description: '灯种身份、隐性习性与玩家线索', sceneId: 'spirit-seed-generation', maxOutputTokens: Math.min(8_000, Math.max(1_600, skeletons.length * 1_000)) });
       identities = skeletons.map((skeleton, index) => {
         const fallback = fallbackIdentity(skeleton, index);
         const identity = {

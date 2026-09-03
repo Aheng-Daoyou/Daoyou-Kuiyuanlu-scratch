@@ -11,9 +11,9 @@ import { getRealmStageAttributeBudget } from '@shared/config/realmProgression';
 
 describe('artifactRealmScaling', () => {
   it('uses the shared realm growth exponent for anchor scaling', () => {
-    expect(getArtifactRealmGrowthFactor('渡劫', '圆满')).toBeCloseTo(
+    expect(getArtifactRealmGrowthFactor('渡渊', '圆满')).toBeCloseTo(
       Math.pow(
-        getRealmStageAttributeBudget('渡劫', '圆满') / 60,
+        getRealmStageAttributeBudget('渡渊', '圆满') / 60,
         ARTIFACT_REALM_SCALING_EXPONENT,
       ),
       10,
@@ -21,19 +21,19 @@ describe('artifactRealmScaling', () => {
   });
 
   it('defaults missing artifact anchor stage to realm completion', () => {
-    expect(getArtifactRealmGrowthFactor('金丹')).toBeCloseTo(
-      getArtifactRealmGrowthFactor('金丹', '圆满'),
+    expect(getArtifactRealmGrowthFactor('窥渊')).toBeCloseTo(
+      getArtifactRealmGrowthFactor('窥渊', '圆满'),
       10,
     );
   });
 
   it('makes cross-realm decay the inverse ratio of the same growth curve', () => {
-    const anchorFactor = getArtifactRealmGrowthFactor('金丹', '圆满');
-    const wearerFactor = getArtifactRealmGrowthFactor('炼气', '初期');
+    const anchorFactor = getArtifactRealmGrowthFactor('窥渊', '圆满');
+    const wearerFactor = getArtifactRealmGrowthFactor('闻腥', '初期');
     const decay = getArtifactWearerRealmFactor(
-      '金丹',
+      '窥渊',
       '圆满',
-      '炼气',
+      '闻腥',
       '初期',
     );
 
@@ -43,7 +43,7 @@ describe('artifactRealmScaling', () => {
 
   it('does not boost low-anchor artifacts when worn by higher realms', () => {
     expect(
-      getArtifactWearerRealmFactor('炼气', '初期', '金丹', '圆满'),
+      getArtifactWearerRealmFactor('闻腥', '初期', '窥渊', '圆满'),
     ).toBe(1);
   });
 

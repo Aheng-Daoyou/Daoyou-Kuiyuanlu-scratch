@@ -25,14 +25,14 @@ export const ALCHEMY_PROPERTY_LABELS: Record<AlchemyPropertyKey, string> = {
   body_sinew_bone: '炼体·筋骨',
   body_organs: '炼体·脏腑',
   body_qi_blood: '炼体·气血',
-  body_primordial_spirit: '炼体·元神',
+  body_primordial_spirit: '炼体·心神',
   marrow_wash: '洗髓伐脉',
 };
 
 const LEGACY_ALCHEMY_PROPERTY_LABELS: Record<LegacyAlchemyPropertyKey, string> = {
   tempering_vitality: '炼体·气血',
   tempering_spirit: '炼体·脏腑',
-  tempering_wisdom: '炼体·元神',
+  tempering_wisdom: '炼体·心神',
   tempering_speed: '炼体·皮肤',
   tempering_willpower: '炼体·筋骨',
 };

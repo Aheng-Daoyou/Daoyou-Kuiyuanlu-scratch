@@ -171,7 +171,7 @@ describe('alchemy yield engine', () => {
     const result = rollAlchemyYieldProfile({
       materials: [{ rank: '神品', type: 'herb', dose: 999 }],
       factors: { stability: 100, purity: 0.98 },
-      // 最大随机值曾经会把数量放大到超过单位药蕴预算。
+      // 最大随机值曾经会把数量放大到超过单位香蕴预算。
       rng: () => 0.999999,
     });
     for (const lot of result.lots) {

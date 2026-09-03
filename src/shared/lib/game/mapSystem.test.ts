@@ -20,7 +20,7 @@ function createNode(difficulty?: DungeonDifficultyTier): MapNodeInfo {
     id: 'test-node',
     name: '测试秘境',
     region: '测试',
-    realm_requirement: '筑基',
+    realm_requirement: '守灯',
     tags: [],
     description: '',
     connections: [],
@@ -33,7 +33,7 @@ function createNode(difficulty?: DungeonDifficultyTier): MapNodeInfo {
 describe('resolveDungeonMapConfig', () => {
   it('defaults old map nodes to normal difficulty', () => {
     expect(resolveDungeonMapConfig(createNode())).toMatchObject({
-      realmRequirement: '筑基',
+      realmRequirement: '守灯',
       difficultyTier: 'normal',
       difficultyLabel: '普通',
       enemyDifficulty: 24,
@@ -62,10 +62,10 @@ describe('resolveDungeonMapConfig', () => {
   );
 
   it('resolves fixed enemy generator difficulty by realm and tier', () => {
-    expect(resolveDungeonEnemyDifficulty('炼气', 'easy')).toBe(10);
-    expect(resolveDungeonEnemyDifficulty('筑基', 'normal')).toBe(24);
-    expect(resolveDungeonEnemyDifficulty('元婴', 'hard')).toBe(50);
-    expect(resolveDungeonEnemyDifficulty('渡劫', 'boss')).toBe(96);
+    expect(resolveDungeonEnemyDifficulty('闻腥', 'easy')).toBe(10);
+    expect(resolveDungeonEnemyDifficulty('守灯', 'normal')).toBe(24);
+    expect(resolveDungeonEnemyDifficulty('蚀体', 'hard')).toBe(50);
+    expect(resolveDungeonEnemyDifficulty('渡渊', 'boss')).toBe(96);
   });
 
   it('clamps enemy realm stage by dungeon tier', () => {
@@ -110,9 +110,9 @@ describe('resolveDungeonMapConfig', () => {
   });
 
   it('allows dungeon challenges only up to the player realm', () => {
-    expect(canChallengeDungeonRealm('筑基', '炼气')).toBe(true);
-    expect(canChallengeDungeonRealm('筑基', '筑基')).toBe(true);
-    expect(canChallengeDungeonRealm('筑基', '金丹')).toBe(false);
+    expect(canChallengeDungeonRealm('守灯', '闻腥')).toBe(true);
+    expect(canChallengeDungeonRealm('守灯', '守灯')).toBe(true);
+    expect(canChallengeDungeonRealm('守灯', '窥渊')).toBe(false);
   });
 
   it('keeps curated map data explicitly classified', () => {
@@ -153,7 +153,8 @@ describe('resolveDungeonMapConfig', () => {
       tianyan: 'DJ_KW_01',
       wuxiang: 'DJ_SOUTH_01',
       youdu: 'DJ_VOID_01',
-      jiujie: 'DJ_TRIB_01',
+      jiujie: 'TN_YUE_01',
+      baixiban: 'DJ_CENTRAL_01',
     };
 
     expect(landmarks).toHaveLength(PRODUCTION_SECT_IDS.length);

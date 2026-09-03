@@ -5,7 +5,7 @@ import { buildConsumableStackKey } from './consumables';
 function buildPill(version?: 3 | 4): Consumable {
   return {
     name: '同名丹',
-    type: '丹药',
+    type: '香品',
     quality: '玄品',
     quantity: 1,
     spec: {

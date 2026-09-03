@@ -30,9 +30,9 @@ describe('body cultivation ranking tag', () => {
     } as CultivatorCondition;
 
     expect(getBodyCultivationRankingTag(condition)).toEqual({
-      realm: '铁骨',
+      realm: '腌骨',
       totalLevel: 30,
-      label: '铁骨 · 肉身 Lv.30',
+      label: '腌骨 · 肉身 Lv.30',
     });
   });
 });

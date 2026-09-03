@@ -54,7 +54,7 @@ export interface CultivationExpCalculation {
 
 function assertFiniteNumber(name: string, value: number): void {
   if (!Number.isFinite(value)) {
-    throw new Error(`修为收益计算参数 ${name} 必须是有限数字: ${value}`);
+    throw new Error(`灯韵收益计算参数 ${name} 必须是有限数字: ${value}`);
   }
 }
 
@@ -109,7 +109,7 @@ function roundExp(value: number, rounding: CultivationExpRounding): number {
  * 只负责 cap × percent × units 的数学计算，不认识场景、境界、品质、
  * 评级、危险度、命格或任何业务倍率。
  *
- * 当前仅用于丹药兼容和低层测试；普通玩法应使用
+ * 当前仅用于香品兼容和低层测试；普通玩法应使用
  * calculateCultivationExpByDailyBudget。
  */
 export function calculateCultivationExpByCap(

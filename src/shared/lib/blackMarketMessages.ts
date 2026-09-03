@@ -7,7 +7,7 @@ const LEGACY_INSPECTION_PREFIX = '查验：';
 
 const INSPECTION_PLAYER_COPY: Record<BlackMarketInspectionKind, string> = {
   appearance: '仔细观察货物外观',
-  aura: '凝神感知货物灵气',
+  aura: '凝神感知货物香蕴',
   damage: '检查货物破损痕迹',
   origin: '询问货物来历',
   sale_reason: '询问为何出售',

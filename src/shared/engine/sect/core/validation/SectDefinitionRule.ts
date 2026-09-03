@@ -238,11 +238,11 @@ export class SectDefinitionRule implements ValidationRule<SectModule> {
     const methodIds = definition.methods.map((method) => method.id);
     const abilityIds = definition.abilities.map((ability) => ability.id);
     assertNonEmptyIds(`宗门 ${definition.id} 心法`, methodIds);
-    assertNonEmptyIds(`宗门 ${definition.id} 法术`, abilityIds);
+    assertNonEmptyIds(`宗门 ${definition.id} 灯律`, abilityIds);
     if (duplicateIds(methodIds).length)
       throw new Error(`宗门 ${definition.id} 存在重复心法ID`);
     if (duplicateIds(abilityIds).length)
-      throw new Error(`宗门 ${definition.id} 存在重复法术ID`);
+      throw new Error(`宗门 ${definition.id} 存在重复灯律ID`);
     const methodSet = new Set(methodIds);
     if (
       typeof definition.foundationPassiveId !== 'string' ||
@@ -273,7 +273,7 @@ export class SectDefinitionRule implements ValidationRule<SectModule> {
     for (const ability of definition.abilities) {
       if (ability.sourceMethodId && !methodSet.has(ability.sourceMethodId)) {
         throw new Error(
-          `法术 ${ability.id} 引用了未知来源心法 ${ability.sourceMethodId}`,
+          `灯律 ${ability.id} 引用了未知来源心法 ${ability.sourceMethodId}`,
         );
       }
     }
@@ -293,7 +293,7 @@ export class SectDefinitionRule implements ValidationRule<SectModule> {
           (ability) => sectAbilityMethodId(ability) === method.id,
         )
       ) {
-        throw new Error(`心法 ${method.id} 必须至少拥有一个基础法术`);
+        throw new Error(`心法 ${method.id} 必须至少拥有一个基础灯律`);
       }
     }
     for (const ability of definition.abilities) {
@@ -303,14 +303,14 @@ export class SectDefinitionRule implements ValidationRule<SectModule> {
       if (ability.unlock.type === 'method') {
         if (!methodSet.has(ability.unlock.methodId)) {
           throw new Error(
-            `法术 ${ability.id} 引用了未知心法 ${ability.unlock.methodId}`,
+            `灯律 ${ability.id} 引用了未知心法 ${ability.unlock.methodId}`,
           );
         }
         if (
           !Number.isInteger(ability.unlock.level) ||
           ability.unlock.level < 0
         ) {
-          throw new Error(`法术 ${ability.id} 解锁等级无效`);
+          throw new Error(`灯律 ${ability.id} 解锁等级无效`);
         }
       }
     }
@@ -336,7 +336,7 @@ export class SectDefinitionRule implements ValidationRule<SectModule> {
         !pathSet.has(ability.unlock.pathId)
       ) {
         throw new Error(
-          `法术 ${ability.id} 引用了未知流派 ${ability.unlock.pathId}`,
+          `灯律 ${ability.id} 引用了未知流派 ${ability.unlock.pathId}`,
         );
       }
     }
@@ -374,15 +374,15 @@ export class SectDefinitionRule implements ValidationRule<SectModule> {
       const ability = definition.abilities.find(
         (entry) => entry.id === abilityId,
       );
-      if (!ability) throw new Error(`入宗配置引用未知法术 ${abilityId}`);
+      if (!ability) throw new Error(`入宗配置引用未知灯律 ${abilityId}`);
       if (ability.kind !== 'active')
-        throw new Error(`入宗配置包含非主动槽法术 ${abilityId}`);
+        throw new Error(`入宗配置包含非主动槽灯律 ${abilityId}`);
       if (
         ability.unlock.type === 'method' &&
         (definition.onboarding.initialMethods[ability.unlock.methodId] ?? 0) <
           ability.unlock.level
       ) {
-        throw new Error(`入宗配置包含未解锁法术 ${abilityId}`);
+        throw new Error(`入宗配置包含未解锁灯律 ${abilityId}`);
       }
     }
   }

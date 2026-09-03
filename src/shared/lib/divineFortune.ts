@@ -21,7 +21,7 @@ export const FALLBACK_FORTUNES: DivineFortune[] = [
     hint: '今日宜柔顺，忌锋芒',
   },
   {
-    fortune: '大道无形，生育天地',
+    fortune: '灯道无形，生育天地',
     hint: '今日宜观想，忌躁进',
   },
   {
@@ -30,7 +30,7 @@ export const FALLBACK_FORTUNES: DivineFortune[] = [
   },
   {
     fortune: '道法自然，顺势而为',
-    hint: '今日宜顿悟，忌强求',
+    hint: '今日宜窥真，忌强求',
   },
   {
     fortune: '一念成佛，一念入魔',
@@ -41,7 +41,7 @@ export const FALLBACK_FORTUNES: DivineFortune[] = [
     hint: '今日宜内视，忌外求',
   },
   {
-    fortune: '逆则成仙，顺则成人',
+    fortune: '逆则渡渊，顺则守灯',
     hint: '今日宜逆行，忌随波',
   },
   {

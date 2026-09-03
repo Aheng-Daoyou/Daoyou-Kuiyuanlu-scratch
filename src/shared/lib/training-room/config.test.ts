@@ -28,7 +28,7 @@ function createCultivator(id: string, name: string): Cultivator {
     equipped: { weapon: null, armor: null, accessory: null },
     spirit_stones: 0,
     gender: '男',
-    realm: '炼气',
+    realm: '闻腥',
     realm_stage: '初期',
   };
 }

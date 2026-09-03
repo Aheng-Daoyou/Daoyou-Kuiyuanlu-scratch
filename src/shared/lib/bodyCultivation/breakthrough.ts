@@ -109,32 +109,32 @@ const BODY_CULTIVATION_REALM_BREAKTHROUGH_PILL_REQUIREMENTS: Partial<
   bronze_skin: {
     property: 'body_skin',
     minQuality: '玄品',
-    label: '皮肤方向炼体丹（玄品以上）',
+    label: '皮肤方向炼体香（玄品以上）',
   },
   iron_bone: {
     property: 'body_sinew_bone',
     minQuality: '玄品',
-    label: '筋骨方向炼体丹（玄品以上）',
+    label: '筋骨方向炼体香（玄品以上）',
   },
   jade_marrow: {
     property: 'body_sinew_bone',
     minQuality: '真品',
-    label: '筋骨方向炼体丹（真品以上）',
+    label: '筋骨方向炼体香（真品以上）',
   },
   golden_body: {
     property: 'body_organs',
     minQuality: '地品',
-    label: '脏腑方向炼体丹（地品以上）',
+    label: '脏腑方向炼体香（地品以上）',
   },
   dharma_body: {
     property: 'body_primordial_spirit',
     minQuality: '天品',
-    label: '元神方向炼体丹（天品以上）',
+    label: '心神方向炼体香（天品以上）',
   },
   dao_body: {
     property: 'body_primordial_spirit',
     minQuality: '仙品',
-    label: '元神方向炼体丹（仙品以上）',
+    label: '心神方向炼体香（仙品以上）',
   },
 };
 

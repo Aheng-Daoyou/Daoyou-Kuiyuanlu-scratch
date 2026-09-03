@@ -10,10 +10,10 @@ export const CreationTags = {
   MATERIAL: {
     ROOT: 'Material',
     TYPE: 'Material.Type', // 材料类型总类
-    TYPE_SEED: 'Material.Type.Seed', // 灵植种子
-    TYPE_HERB: 'Material.Type.Herb', // 药材
+    TYPE_SEED: 'Material.Type.Seed', // 灯植种子
+    TYPE_HERB: 'Material.Type.Herb', // 香材
     TYPE_ORE: 'Material.Type.Ore', // 矿石
-    TYPE_MONSTER: 'Material.Type.Monster', // 妖兽材料
+    TYPE_MONSTER: 'Material.Type.Monster', // 诡异材料
     TYPE_MANUAL: 'Material.Type.Manual', // 典籍总类（兼容聚合规则）
     TYPE_GONGFA_MANUAL: 'Material.Type.Manual.GongFa', // 功法典籍
     TYPE_SKILL_MANUAL: 'Material.Type.Manual.Skill', // 神通秘术
@@ -24,14 +24,14 @@ export const CreationTags = {
     SEMANTIC: 'Material.Semantic', // 语义标签根
     SEMANTIC_FLAME: 'Material.Semantic.Flame', // 火焰/灼烧
     SEMANTIC_FREEZE: 'Material.Semantic.Freeze', // 冰寒/冻结
-    SEMANTIC_THUNDER: 'Material.Semantic.Thunder', // 雷霆/电击
+    SEMANTIC_THUNDER: 'Material.Semantic.Thunder', // 幕隙/空间裂隙
     SEMANTIC_WIND: 'Material.Semantic.Wind', // 风行/气流
     SEMANTIC_BLADE: 'Material.Semantic.Blade', // 锋刃/攻伐
     SEMANTIC_GUARD: 'Material.Semantic.Guard', // 防护/坚壁
     SEMANTIC_BURST: 'Material.Semantic.Burst', // 爆发/烈性
     SEMANTIC_SUSTAIN: 'Material.Semantic.Sustain', // 持续/恢复
     SEMANTIC_MANUAL: 'Material.Semantic.Manual', // 典籍/传承
-    SEMANTIC_SPIRIT: 'Material.Semantic.Spirit', // 灵识/神魂
+    SEMANTIC_SPIRIT: 'Material.Semantic.Spirit', // 心神/神魂
     SEMANTIC_EARTH: 'Material.Semantic.Earth', // 土脉/山岩
     SEMANTIC_METAL: 'Material.Semantic.Metal', // 金铁/铸炼
     SEMANTIC_WATER: 'Material.Semantic.Water', // 水流/潮汐
@@ -41,14 +41,14 @@ export const CreationTags = {
     SEMANTIC_SPACE: 'Material.Semantic.Space', // 空间/界域
     SEMANTIC_TIME: 'Material.Semantic.Time', // 时间/岁序
     SEMANTIC_LIFE: 'Material.Semantic.Life', // 生机/复苏
-    SEMANTIC_ALCHEMY: 'Material.Semantic.Alchemy', // 丹道/药性
+    SEMANTIC_ALCHEMY: 'Material.Semantic.Alchemy', // 香道/香性
     SEMANTIC_REFINING: 'Material.Semantic.Refining', // 器道/锻铸
     SEMANTIC_BEAST: 'Material.Semantic.Beast', // 妖性/兽性
     SEMANTIC_BLOOD: 'Material.Semantic.Blood', // 血煞/气血
     SEMANTIC_BONE: 'Material.Semantic.Bone', // 骨甲/角刺
     SEMANTIC_FORMATION: 'Material.Semantic.Formation', // 阵纹/禁制
     SEMANTIC_ILLUSION: 'Material.Semantic.Illusion', // 幻术/迷神
-    SEMANTIC_QI: 'Material.Semantic.Qi', // 灵气/元气
+    SEMANTIC_QI: 'Material.Semantic.Qi', // 灯油/元气
     RECIPE: 'Material.Recipe',
   },
 

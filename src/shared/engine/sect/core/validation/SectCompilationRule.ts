@@ -29,8 +29,8 @@ export class SectCompilationRule implements ValidationRule<SectModule> {
       ) as CultivatorSectState['abilityLoadout'],
     };
     const compileState = (state: CultivatorSectState) => {
-      compiler.compile(module, { sect: state, realm: '渡劫' });
-      compiler.projectCombat(module, { sect: state, realm: '渡劫' });
+      compiler.compile(module, { sect: state, realm: '渡渊' });
+      compiler.projectCombat(module, { sect: state, realm: '渡渊' });
     };
     compileState(baseState);
 

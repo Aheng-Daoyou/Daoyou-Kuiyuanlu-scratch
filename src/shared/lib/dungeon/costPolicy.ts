@@ -29,15 +29,15 @@ const DUNGEON_COST_RANK_MULTIPLIER: Record<DungeonCostRank, number> = {
 };
 
 const DUNGEON_LIFESPAN_COST_BASE: Record<RealmType, number> = {
-  炼气: 1,
-  筑基: 2,
-  金丹: 3,
-  元婴: 5,
-  化神: 8,
-  炼虚: 12,
-  合体: 18,
-  大乘: 25,
-  渡劫: 35,
+  闻腥: 1,
+  守灯: 2,
+  窥渊: 3,
+  蚀体: 5,
+  忘川: 8,
+  执灯: 12,
+  掌灯: 18,
+  近神: 25,
+  渡渊: 35,
 };
 
 const DUNGEON_MATERIAL_QUALITY_VALUES = [

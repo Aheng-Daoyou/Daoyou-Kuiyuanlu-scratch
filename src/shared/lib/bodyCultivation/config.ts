@@ -50,7 +50,7 @@ export const BODY_TRACK_LABELS = {
     shortDesc: '气血上限、治疗效果',
   },
   primordial_spirit: {
-    name: '炼体·元神',
+    name: '炼体·心神',
     layerName: '控制与抗暴',
     shortDesc: '控制抗性、抗暴',
   },
@@ -60,13 +60,13 @@ export const BODY_TRACK_LABELS = {
 >;
 
 export const BODY_REALM_LABELS = {
-  mortal_body: '凡躯',
-  bronze_skin: '铜皮',
-  iron_bone: '铁骨',
-  jade_marrow: '玉髓',
-  golden_body: '金身',
-  dharma_body: '法身',
-  dao_body: '道体',
+  mortal_body: '肉胎',
+  bronze_skin: '灯皮',
+  iron_bone: '腌骨',
+  jade_marrow: '灯髓',
+  golden_body: '金躯',
+  dharma_body: '法躯',
+  dao_body: '灯体',
 } as const satisfies Record<BodyCultivationRealm, string>;
 
 export const BODY_CULTIVATION_REALM_ORDER = [
@@ -98,7 +98,7 @@ export const BODY_CULTIVATION_REALM_REQUIREMENTS = {
   mortal_body: {
     realm: 'mortal_body',
     label: BODY_REALM_LABELS.mortal_body,
-    minCultivationRealm: '炼气',
+    minCultivationRealm: '闻腥',
     totalLevel: 0,
     softTrackCap: 5,
     unlockText: '初始肉身',
@@ -106,7 +106,7 @@ export const BODY_CULTIVATION_REALM_REQUIREMENTS = {
   bronze_skin: {
     realm: 'bronze_skin',
     label: BODY_REALM_LABELS.bronze_skin,
-    minCultivationRealm: '炼气',
+    minCultivationRealm: '闻腥',
     totalLevel: 12,
     requiredAnyTracks: { count: 3, minLevel: 3 },
     softTrackCap: 10,
@@ -115,7 +115,7 @@ export const BODY_CULTIVATION_REALM_REQUIREMENTS = {
   iron_bone: {
     realm: 'iron_bone',
     label: BODY_REALM_LABELS.iron_bone,
-    minCultivationRealm: '筑基',
+    minCultivationRealm: '守灯',
     totalLevel: 30,
     requiredTrackLevels: {
       sinew_bone: 8,
@@ -127,7 +127,7 @@ export const BODY_CULTIVATION_REALM_REQUIREMENTS = {
   jade_marrow: {
     realm: 'jade_marrow',
     label: BODY_REALM_LABELS.jade_marrow,
-    minCultivationRealm: '金丹',
+    minCultivationRealm: '窥渊',
     totalLevel: 55,
     requiredTrackLevels: {
       sinew_bone: 12,
@@ -139,7 +139,7 @@ export const BODY_CULTIVATION_REALM_REQUIREMENTS = {
   golden_body: {
     realm: 'golden_body',
     label: BODY_REALM_LABELS.golden_body,
-    minCultivationRealm: '元婴',
+    minCultivationRealm: '蚀体',
     totalLevel: 90,
     minAllTracksLevel: 10,
     softTrackCap: 30,
@@ -148,7 +148,7 @@ export const BODY_CULTIVATION_REALM_REQUIREMENTS = {
   dharma_body: {
     realm: 'dharma_body',
     label: BODY_REALM_LABELS.dharma_body,
-    minCultivationRealm: '化神',
+    minCultivationRealm: '忘川',
     totalLevel: 140,
     requiredTrackLevels: {
       organs: 18,
@@ -160,7 +160,7 @@ export const BODY_CULTIVATION_REALM_REQUIREMENTS = {
   dao_body: {
     realm: 'dao_body',
     label: BODY_REALM_LABELS.dao_body,
-    minCultivationRealm: '合体',
+    minCultivationRealm: '掌灯',
     totalLevel: 220,
     minAllTracksLevel: 25,
     softTrackCap: 55,

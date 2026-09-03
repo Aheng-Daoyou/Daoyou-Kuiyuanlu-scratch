@@ -45,14 +45,14 @@ export class SectStateValidator {
     if (new Set(loadoutIds).size !== loadoutIds.length)
       throw new Error('宗门神通栏不可重复装配');
     for (const id of loadoutIds) {
-      if (!abilityIds.has(id)) throw new Error(`未知宗门法术: ${id}`);
+      if (!abilityIds.has(id)) throw new Error(`未知宗门灯律: ${id}`);
       const ability = module.definition.abilities.find(
         (entry) => entry.id === id,
       );
       if (ability?.kind !== 'active')
-        throw new Error(`非主动法术不可装配: ${id}`);
+        throw new Error(`非主动灯律不可装配: ${id}`);
       if (!isAbilityUnlocked(module.definition, id, state))
-        throw new Error(`未解锁宗门法术不可装配: ${id}`);
+        throw new Error(`未解锁宗门灯律不可装配: ${id}`);
     }
     if (!Array.isArray(state.paths)) throw new Error('宗门流派进度结构无效');
     if (

@@ -23,9 +23,9 @@ export const CREATION_TAG_DESCRIPTIONS: Record<string, TagDescription> = {
     examples: '寒冰髓、霜纹铁、冰魄草、玄冰石',
   },
   [CreationTags.MATERIAL.SEMANTIC_THUNDER]: {
-    name: '雷霆',
-    description: '与雷、电、霆、闪电相关的材料',
-    examples: '雷灵珠、霆锤碎片、紫电石、引雷铁',
+    name: '幕隙',
+    description: '与帘、隙、帷幕、空间裂痕相关的材料',
+    examples: '幕灵珠、幕痕碎片、帘隙石、掀幕铁',
   },
   [CreationTags.MATERIAL.SEMANTIC_WIND]: {
     name: '风行',
@@ -45,22 +45,22 @@ export const CREATION_TAG_DESCRIPTIONS: Record<string, TagDescription> = {
   [CreationTags.MATERIAL.SEMANTIC_BURST]: {
     name: '爆发',
     description: '与爆裂、暴烈、瞬间高威力、激发相关的材料',
-    examples: '暴怒丹、爆裂矿、烈性精华、狂化血',
+    examples: '暴怒香、爆裂矿、烈性精华、狂化血',
   },
   [CreationTags.MATERIAL.SEMANTIC_SUSTAIN]: {
     name: '恢复',
     description: '与持续回复、疗愈、滋养、维持相关的材料',
-    examples: '生息草、回春露、养元丹、疗伤药',
+    examples: '生息草、回春露、养元香、疗伤药',
   },
   [CreationTags.MATERIAL.SEMANTIC_MANUAL]: {
     name: '典籍',
     description: '与经书、秘卷、传承知识、功法心得相关的材料',
-    examples: '破壁残卷、古法拓本、仙人手札、心法碎片',
+    examples: '破壁残卷、古法拓本、掌灯人手札、心法碎片',
   },
   [CreationTags.MATERIAL.SEMANTIC_SPIRIT]: {
-    name: '灵识',
-    description: '与灵魂、神魂、灵力本源、法术能量相关的材料',
-    examples: '灵魂碎片、魄石、灵力结晶、聚灵珠',
+    name: '心神',
+    description: '与灵魂、神魂、梦涎本源、灯律能量相关的材料',
+    examples: '灵魂碎片、魄石、梦涎结晶、聚灯珠',
   },
   [CreationTags.MATERIAL.SEMANTIC_EARTH]: {
     name: '土脉',
@@ -75,7 +75,7 @@ export const CREATION_TAG_DESCRIPTIONS: Record<string, TagDescription> = {
   [CreationTags.MATERIAL.SEMANTIC_WATER]: {
     name: '水流',
     description: '与水、潮汐、泉源、流动柔和相关的材料',
-    examples: '灵泉水、潮汐石、碧波珠、净水露',
+    examples: '灯泉水、潮汐石、碧波珠、净水露',
   },
   [CreationTags.MATERIAL.SEMANTIC_WOOD]: {
     name: '草木',
@@ -105,22 +105,22 @@ export const CREATION_TAG_DESCRIPTIONS: Record<string, TagDescription> = {
   [CreationTags.MATERIAL.SEMANTIC_LIFE]: {
     name: '生机',
     description: '与生命力、复苏、萌芽、生生不息相关的材料',
-    examples: '生命之种、复苏花、万灵草、不死根',
+    examples: '生命之种、复苏花、万灵灯草、不死根',
   },
   [CreationTags.MATERIAL.SEMANTIC_ALCHEMY]: {
-    name: '丹道',
-    description: '与炼丹、药性、丹炉、药材调配相关的材料',
-    examples: '炉中丹火、药引草、丹砂、灵药粉',
+    name: '香道',
+    description: '与制香、香性、香炉、香材调配相关的材料',
+    examples: '炉中灯焰、香引草、灯灰、灯药粉',
   },
   [CreationTags.MATERIAL.SEMANTIC_REFINING]: {
     name: '器道',
-    description: '与炼器、锻造、器胚、熔炼铸造相关的材料',
+    description: '与封灵（炼器）、锻造、器胚、熔炼铸造相关的材料',
     examples: '器胚铁、熔炉碎片、锻造石、铸魂金',
   },
   [CreationTags.MATERIAL.SEMANTIC_BEAST]: {
-    name: '妖兽',
-    description: '与妖、兽、蛟龙、野性力量相关的材料',
-    examples: '蛟龙鳞、虎骨、妖兽内丹、凶兽角',
+    name: '诡异',
+    description: '与诡异、兽类、野性力量相关的材料',
+    examples: '蛟龙鳞、虎骨、诡异异核、凶兽角',
   },
   [CreationTags.MATERIAL.SEMANTIC_BLOOD]: {
     name: '血煞',
@@ -130,7 +130,7 @@ export const CREATION_TAG_DESCRIPTIONS: Record<string, TagDescription> = {
   [CreationTags.MATERIAL.SEMANTIC_BONE]: {
     name: '骨甲',
     description: '与骨骼、甲壳、角刺、坚硬骨质相关的材料',
-    examples: '龙骨、妖兽甲壳、鹿角碎片、骨刺',
+    examples: '龙骨、诡异甲壳、鹿角碎片、骨刺',
   },
   [CreationTags.MATERIAL.SEMANTIC_FORMATION]: {
     name: '阵纹',
@@ -143,26 +143,26 @@ export const CREATION_TAG_DESCRIPTIONS: Record<string, TagDescription> = {
     examples: '蜃气珠、幻灵花、迷神香、梦境沙',
   },
   [CreationTags.MATERIAL.SEMANTIC_QI]: {
-    name: '灵气',
-    description: '与灵气浓度、元气、法力、灵压相关的材料',
-    examples: '聚灵阵石、灵息草、元炁珠、灵压晶',
+    name: '灯油',
+    description: '与灯油浓度、元气、灯焰、灯压相关的材料',
+    examples: '聚灯阵石、灯芯草、元炁珠、灯压晶',
   },
 
   // ========== 8 材料类型标签 ==========
   [CreationTags.MATERIAL.TYPE_HERB]: {
-    name: '药材',
-    description: '草药、花果、灵植类材料',
+    name: '香材',
+    description: '草药、花果、灯植类材料',
     examples: '灵芝、千年参、回春草、朱果',
   },
   [CreationTags.MATERIAL.TYPE_ORE]: {
     name: '矿石',
     description: '矿石、金属矿、晶石类材料',
-    examples: '寒铁矿、灵晶石、精金矿、玄石',
+    examples: '寒铁矿、灯晶石、精金矿、玄石',
   },
   [CreationTags.MATERIAL.TYPE_MONSTER]: {
-    name: '妖兽材料',
-    description: '妖兽掉落物：鳞片、骨角、内丹等',
-    examples: '蛟龙鳞、妖兽内丹、凤尾羽、虎骨',
+    name: '诡异材料',
+    description: '诡异掉落物：鳞片、骨角、异核等',
+    examples: '蛟龙鳞、诡异异核、凤尾羽、虎骨',
   },
   [CreationTags.MATERIAL.TYPE_MANUAL]: {
     name: '典籍',
@@ -171,13 +171,13 @@ export const CREATION_TAG_DESCRIPTIONS: Record<string, TagDescription> = {
   },
   [CreationTags.MATERIAL.TYPE_GONGFA_MANUAL]: {
     name: '功法典籍',
-    description: '专门记载功法修炼之法的典籍',
+    description: '专门记载功法窥悟之法的典籍',
     examples: '紫阳心经、玄天功法、太虚炼体诀',
   },
   [CreationTags.MATERIAL.TYPE_SKILL_MANUAL]: {
     name: '神通典籍',
     description: '专门记载神通秘术的典籍',
-    examples: '落雷诀残卷、火龙术心得、冰封千里秘录',
+    examples: '掀幕诀残卷、火龙术心得、冰封千里秘录',
   },
   [CreationTags.MATERIAL.TYPE_SPECIAL]: {
     name: '天材地宝',

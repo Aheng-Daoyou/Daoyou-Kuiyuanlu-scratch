@@ -10,7 +10,7 @@ import {
 function buildPillPayload() {
   return {
     name: '养元丹',
-    type: '丹药',
+    type: '香品',
     quality: '凡品',
     spec: {
       kind: 'pill',
@@ -110,7 +110,7 @@ describe('ItemLibraryMaterialPayloadSchema', () => {
       name: '青纹眠籽',
       type: 'seed',
       rank: '玄品',
-      element: '木',
+      element: '尸',
       description: '种壳中蕴着尚未定形的生机。',
       details: {
         seedSpec: {

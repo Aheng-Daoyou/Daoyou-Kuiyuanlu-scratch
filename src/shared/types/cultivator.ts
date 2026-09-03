@@ -8,7 +8,7 @@ import type { CultivatorSectState, PlayerRaceId } from '@shared/engine/sect';
 import type {
   ConsumableType,
   ElementType,
-  EnemyRace,
+  EnemyClan,
   EquipmentSlot,
   GenderType,
   MaterialType,
@@ -29,21 +29,21 @@ import type {
  *   `getCultivatorDisplayAttributes(cultivator)` 取 AttrsStateView。
  */
 export interface Attributes {
-  vitality: number; // 体魄：气血上限、少量法术防御
-  strength: number; // 力道：物理攻击
-  spirit: number; // 灵力：法术攻击、少量法力
-  endurance: number; // 根骨：物理防御、少量气血上限
-  speed: number; // 身法：行动速度、闪避率、命中
-  willpower: number; // 神识：法防、法力、控制命中与抗性
+  vitality: number; // 灯红：灯红上限、少量灯律防御
+  strength: number; // 灯锋：物理攻击
+  spirit: number; // 梦涎：灯律攻击、少量灯焰
+  endurance: number; // 灯骨：物理防御、少量灯红上限
+  speed: number; // 灯影：行动速度、闪避率、命中
+  willpower: number; // 灯芯：灯律防御、灯焰、控制命中与抗性
 }
 
-// 灵根
+// 窍
 export interface SpiritualRoot {
   element: ElementType;
   strength: number; // effective strength, capped by current systems
   baseStrength?: number; // original persisted strength before acquired bonuses
   marrowWashBonus?: number; // acquired bonus from marrow-wash breakthroughs
-  grade?: SpiritualRootGrade; // 天灵根 | 真灵根 | 伪灵根 | 变异灵根
+  grade?: SpiritualRootGrade; // 天窍 | 真窍 | 伪窍 | 变异窍
 }
 
 export interface RetreatRecordModifiers {
@@ -62,11 +62,11 @@ export interface RetreatRecord {
   timestamp: string;
   modifiers: RetreatRecordModifiers;
   // 修为系统扩展
-  exp_gained?: number; // 本次闭关获得修为
-  exp_before?: number; // 闭关前修为
-  exp_after?: number; // 闭关后修为
-  insight_gained?: number; // 本次闭关获得感悟
-  epiphany_triggered?: boolean; // 是否触发顿悟
+  exp_gained?: number; // 本次闭关获得灯韵
+  exp_before?: number; // 闭关前灯韵
+  exp_after?: number; // 闭关后灯韵
+  insight_gained?: number; // 本次闭关获得窥悟
+  epiphany_triggered?: boolean; // 是否触发窥真
 }
 
 export interface BreakthroughHistoryEntry {
@@ -78,9 +78,9 @@ export interface BreakthroughHistoryEntry {
   years_spent: number;
   story?: string;
   // 修为系统扩展
-  exp_progress?: number; // 突破时的修为进度（0-100百分比）
-  insight_value?: number; // 突破时的感悟值
-  exp_lost_on_failure?: number; // 失败时损失的修为（仅失败记录有）
+  exp_progress?: number; // 突破时的灯韵进度（0-100百分比）
+  insight_value?: number; // 突破时的窥悟值
+  exp_lost_on_failure?: number; // 失败时损失的灯韵（仅失败记录有）
   breakthrough_type?: 'forced' | 'normal' | 'perfect'; // 突破类型
 }
 
@@ -214,7 +214,7 @@ export interface Consumable {
   quality?: Quality;
   quantity: number;
   description?: string;
-  prompt?: string; // 炼丹提示词
+  prompt?: string; // 制香提示词
   score?: number; // 评分
   spec: ConsumableSpec;
 }
@@ -249,15 +249,15 @@ export interface EquippedItems {
 
 // 修为进度系统
 export interface CultivationProgress {
-  cultivation_exp: number; // 当前修为值
-  exp_cap: number; // 当前境界修为上限
-  comprehension_insight: number; // 当前感悟值（0-100）
+  cultivation_exp: number; // 当前灯韵值
+  exp_cap: number; // 当前境界灯韵上限
+  comprehension_insight: number; // 当前窥悟值（0-100）
   breakthrough_failures: number; // 连续突破失败次数
   bottleneck_state: boolean; // 是否处于瓶颈期
-  inner_demon: boolean; // 是否有心魔debuff
+  inner_demon: boolean; // 是否有魔障debuff
   deviation_risk: number; // 走火入魔风险值（0-100）
-  last_epiphany_at?: string; // 上次顿悟时间（ISO字符串）
-  epiphany_buff_expires_at?: string; // 顿悟buff过期时间（ISO字符串）
+  last_epiphany_at?: string; // 上次窥真时间（ISO字符串）
+  epiphany_buff_expires_at?: string; // 窥真buff过期时间（ISO字符串）
 }
 
 // 角色完整数据模型（与 basic.md 中 JSON Schema 对齐的运行时结构）
@@ -267,15 +267,17 @@ export interface Cultivator {
   name: string;
   title?: string | null;
   gender: GenderType;
-  /** 玩家种族；与敌人 EnemyRace 分离。 */
+  /** 玩家种族；与敌人 EnemyClan 分离。 */
   playerRace?: PlayerRaceId;
   raceNarrative?: string;
   /** 仅战斗/玩家状态组装时挂载，不写入 cultivators JSON。 */
   sect?: CultivatorSectState;
-  /** 敌人和旧战斗草稿仍使用该字段。 */
-  race?: EnemyRace;
+  /** 敌人和旧战斗草稿仍使用该字段（敌人三族：腌物/遗种/投影）。 */
+  clan?: EnemyClan;
   origin?: string;
   personality?: string;
+  /** 家系异闻：资质生成的叙事溯源，解释这身窍（八窍）是历代修士污染的遗产。 */
+  lineage_lore?: string;
 
   realm: RealmType;
   realm_stage: RealmStage;

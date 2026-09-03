@@ -80,7 +80,7 @@ export function calculateRawEssence(materials: AlchemyEssenceMaterial[]): number
   );
 }
 
-/** 每 200 点原始药蕴消耗 1 点天地灵气，单炉限制在 1～20 点。 */
+/** 每 200 点原始香蕴消耗 1 点灯油，单炉限制在 1～20 点。 */
 export function calculateAlchemyQiCost(
   materials: AlchemyEssenceMaterial[],
 ): number {

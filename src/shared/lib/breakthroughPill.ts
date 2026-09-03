@@ -15,24 +15,24 @@ export function getBreakthroughPillLabel(
   targetRealm: RealmType | null,
 ): string {
   switch (targetRealm) {
-    case '筑基':
-      return '筑基丹';
-    case '金丹':
-      return '降尘丹';
-    case '元婴':
-      return '护婴丹';
-    case '化神':
-      return '叩神丹';
-    case '炼虚':
-      return '洞虚丹';
-    case '合体':
-      return '合真丹';
-    case '大乘':
-      return '证道丹';
-    case '渡劫':
-      return '应劫丹';
+    case '守灯':
+      return '守灯香';
+    case '窥渊':
+      return '降尘香';
+    case '蚀体':
+      return '护婴香';
+    case '忘川':
+      return '叩神香';
+    case '执灯':
+      return '洞虚香';
+    case '掌灯':
+      return '合真香';
+    case '近神':
+      return '证道香';
+    case '渡渊':
+      return '应劫香';
     default:
-      return targetRealm ? `${targetRealm}破境丹` : '破境丹';
+      return targetRealm ? `${targetRealm}破境香` : '破境香';
   }
 }
 

@@ -73,17 +73,17 @@ export const MARKET_LAYER_CONFIG: Record<MarketLayer, LayerConfig> = {
   treasure: {
     count: MARKET_ITEM_COUNT,
     rankRange: { min: '玄品', max: '地品' },
-    access: { minRealm: '筑基', entryFee: 0 },
+    access: { minRealm: '守灯', entryFee: 0 },
   },
   heaven: {
     count: MARKET_ITEM_COUNT,
     rankRange: { min: '地品', max: '神品' },
-    access: { minRealm: '元婴' },
+    access: { minRealm: '蚀体' },
   },
   black: {
     count: MARKET_ITEM_COUNT,
     rankRange: { min: '地品', max: '神品' },
-    access: { minRealm: '筑基' },
+    access: { minRealm: '守灯' },
     mysteryChance: DEFAULT_BLACK_MYSTERY_CHANCE,
     qualityWeights: BLACK_MARKET_QUALITY_WEIGHTS,
     minHighTierCount: BLACK_MARKET_MIN_HIGH_TIER_COUNT,
@@ -100,7 +100,7 @@ export const REGION_PROFILES: Record<RegionProfileKey, RegionProfile> = {
     } satisfies Partial<Record<MaterialType, number>>,
     priceModifier: { min: 0.75, max: 1.1 },
     layerOverrides: {},
-    signatureTags: ['灵草', '阵材', '药王谷', '天南特产'],
+    signatureTags: ['灯下草', '香材', '烛京', '京畿特产'],
     signatureRatio: 0.4,
   },
   luanxinghai: {
@@ -112,7 +112,7 @@ export const REGION_PROFILES: Record<RegionProfileKey, RegionProfile> = {
     layerOverrides: {
       black: { mysteryChance: 0.85 },
     },
-    signatureTags: ['深海', '妖兽', '乱星海', '海底矿脉'],
+    signatureTags: ['深海', '诡异', '灯外海', '海底矿脉'],
     signatureRatio: 0.45,
   },
   dajin: {
@@ -125,7 +125,7 @@ export const REGION_PROFILES: Record<RegionProfileKey, RegionProfile> = {
       heaven: { rankRange: { min: '地品', max: '神品' } },
       treasure: { rankRange: { min: '真品', max: '天品' } },
     },
-    signatureTags: ['皇都', '贡品', '大晋商会', '上古遗珍'],
+    signatureTags: ['班底庄', '贡品', '雍州商会', '上古遗珍'],
     signatureRatio: 0.35,
   },
   baicao: {
@@ -135,7 +135,7 @@ export const REGION_PROFILES: Record<RegionProfileKey, RegionProfile> = {
     } satisfies Partial<Record<MaterialType, number>>,
     priceModifier: { min: 0.85, max: 1.2 },
     layerOverrides: {},
-    signatureTags: ['灵种', '苗圃', '灵植商盟', '百草集'],
+    signatureTags: ['草种', '苗圃', '灯下草圃', '灯草集'],
     signatureRatio: 0.65,
   },
   default: {
@@ -152,20 +152,20 @@ const REGION_MARKET_FLAVOR: Record<
   { title: string; description: string }
 > = {
   tiannan: {
-    title: '天南坊市',
-    description: '商旅往来密集，灵草与阵材流通最盛。',
+    title: '京畿坊市',
+    description: '商旅往来密集，灯下草与香材流通最盛。',
   },
   luanxinghai: {
-    title: '乱星海坊市',
-    description: '海风腥咸，妖兽骨甲与深海矿砂最受追捧。',
+    title: '灯外海坊市',
+    description: '海风腥咸，诡异骨甲与深海矿砂最受追捧。',
   },
   dajin: {
-    title: '大晋坊市',
-    description: '皇都商会云集，珍稀天材地宝层出不穷。',
+    title: '雍州坊市',
+    description: '戏班与商旅云集，珍稀诡珍层出不穷。',
   },
   baicao: {
-    title: '百草灵种集',
-    description: '山谷苗圃绵延成片，各地灵种按品相与灵性分区流通。',
+    title: '灯草灯种集',
+    description: '郊野草圃绵延成片，各地草种按品相分区流通。',
   },
   default: {
     title: '云游坊市',

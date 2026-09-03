@@ -119,7 +119,7 @@ registry.register({
     getGameConceptInfo('status_weakness').description ??
     '元气大伤，全属性随层数下降。',
   effectDetails: [
-    '战斗时体魄、力道、灵力、根骨、身法、神识都会同步下降。',
+    '战斗时灯红、灯锋、梦涎、灯骨、灯影、灯芯都会同步下降。',
     '每层额外降低 5%，最多衰减至原本的 50%。',
   ],
   display: {
@@ -178,7 +178,7 @@ registry.register({
   key: 'breakthrough_focus',
   name: getGameConceptInfo('status_breakthrough_focus').label,
   description: getGameConceptInfo('status_breakthrough_focus').description ?? '',
-  effectDetails: ['下一次突破按药力获得额外成功率。'],
+  effectDetails: ['下一次突破按香力获得额外成功率。'],
   display: {
     icon: getGameConceptInfo('status_breakthrough_focus').icon,
     shortDesc: '突破前凝神蓄势',
@@ -190,10 +190,10 @@ registry.register({
   key: 'protect_meridians',
   name: getGameConceptInfo('status_protect_meridians').label,
   description: getGameConceptInfo('status_protect_meridians').description ?? '',
-  effectDetails: ['突破失败时按药力降低修为损失。'],
+  effectDetails: ['突破失败时按香力降低灯韵损失。'],
   display: {
     icon: getGameConceptInfo('status_protect_meridians').icon,
-    shortDesc: '护住经脉，降低反噬',
+    shortDesc: '护住灯脉，降低反噬',
   },
   hooks: {},
 });
@@ -202,7 +202,7 @@ registry.register({
   key: 'clear_mind',
   name: getGameConceptInfo('status_clear_mind').label,
   description: getGameConceptInfo('status_clear_mind').description ?? '',
-  effectDetails: ['突破失败不会滋生心魔，服用时清除既有心魔。'],
+  effectDetails: ['突破失败不会滋生魔障，服用时清除既有魔障。'],
   display: {
     icon: getGameConceptInfo('status_clear_mind').icon,
     shortDesc: '清心定神，减少杂念',
@@ -214,10 +214,10 @@ registry.register({
   key: 'cultivation_boost',
   name: getGameConceptInfo('status_cultivation_boost').label,
   description: getGameConceptInfo('status_cultivation_boost').description ?? '',
-  effectDetails: ['下一次闭关修炼获得的修为按药力百分比提升。'],
+  effectDetails: ['下一次闭关窥悟获得的灯韵按香力百分比提升。'],
   display: {
     icon: getGameConceptInfo('status_cultivation_boost').icon,
-    shortDesc: '下一次闭关修为提升',
+    shortDesc: '下一次闭关灯韵提升',
   },
   hooks: {},
 });

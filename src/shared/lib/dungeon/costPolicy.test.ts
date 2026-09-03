@@ -12,7 +12,7 @@ describe('dungeon cost policy', () => {
     const costs = DUNGEON_COST_RANK_VALUES.map((rank) =>
       calculateDungeonResourceCost({
         type: 'lifespan',
-        realm: '渡劫',
+        realm: '渡渊',
         difficulty: 'boss',
         rank,
       }),
@@ -24,15 +24,15 @@ describe('dungeon cost policy', () => {
 
   it('never produces an excessive lifespan cost', () => {
     const realms = [
-      '炼气',
-      '筑基',
-      '金丹',
-      '元婴',
-      '化神',
-      '炼虚',
-      '合体',
-      '大乘',
-      '渡劫',
+      '闻腥',
+      '守灯',
+      '窥渊',
+      '蚀体',
+      '忘川',
+      '执灯',
+      '掌灯',
+      '近神',
+      '渡渊',
     ] as const;
     const difficulties = ['easy', 'normal', 'hard', 'elite', 'boss'] as const;
 
@@ -55,13 +55,13 @@ describe('dungeon cost policy', () => {
   it('scales resource costs with realm and difficulty', () => {
     const easy = calculateDungeonResourceCost({
       type: 'spirit_stones',
-      realm: '炼气',
+      realm: '闻腥',
       difficulty: 'easy',
       rank: 'standard',
     });
     const boss = calculateDungeonResourceCost({
       type: 'spirit_stones',
-      realm: '渡劫',
+      realm: '渡渊',
       difficulty: 'boss',
       rank: 'standard',
     });
@@ -73,14 +73,14 @@ describe('dungeon cost policy', () => {
   it('derives material quantity and quality instead of accepting LLM values', () => {
     expect(
       calculateDungeonMaterialCost({
-        realm: '炼气',
+        realm: '闻腥',
         difficulty: 'easy',
         rank: 'minor',
       }),
     ).toEqual({ requiredQuality: '凡品', value: 1 });
     expect(
       calculateDungeonMaterialCost({
-        realm: '渡劫',
+        realm: '渡渊',
         difficulty: 'boss',
         rank: 'major',
       }),
@@ -90,14 +90,14 @@ describe('dungeon cost policy', () => {
   it('caps proportional hp and mp losses', () => {
     expect(
       calculateDungeonStatLoss({
-        realm: '炼气',
+        realm: '闻腥',
         difficulty: 'easy',
         rank: 'minor',
       }),
     ).toBe(0.02);
     expect(
       calculateDungeonStatLoss({
-        realm: '渡劫',
+        realm: '渡渊',
         difficulty: 'boss',
         rank: 'major',
       }),

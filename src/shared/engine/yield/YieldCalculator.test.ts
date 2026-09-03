@@ -9,7 +9,7 @@ describe('YieldCalculator', () => {
     const values = [0.5, 0.25, 0];
     const result = YieldCalculator.calculateCultivatorYield(
       {
-        realm: '筑基',
+        realm: '守灯',
         realmStage: '中期',
         hoursElapsed: 2,
       },
@@ -20,7 +20,7 @@ describe('YieldCalculator', () => {
       { type: 'spirit_stones', value: 560 },
       {
         type: 'cultivation_exp',
-        value: calculateOfflineExp('筑基', '中期', 2, () => 0.25),
+        value: calculateOfflineExp('守灯', '中期', 2, () => 0.25),
       },
       { type: 'comprehension_insight', value: 2 },
     ]);
@@ -29,7 +29,7 @@ describe('YieldCalculator', () => {
   it('keeps realm-only dungeon yield independent from cultivator fields', () => {
     const values = [0, 1];
     expect(
-      YieldCalculator.calculateRealmYield('炼气', 1, () => values.shift() ?? 0),
+      YieldCalculator.calculateRealmYield('闻腥', 1, () => values.shift() ?? 0),
     ).toEqual([
       { type: 'spirit_stones', value: 80 },
       { type: 'cultivation_exp', value: 10 },
@@ -49,7 +49,7 @@ describe('YieldCalculator', () => {
   });
 
   it('blocks heaven immortal and divine materials for low realms', () => {
-    for (const realm of ['炼气', '筑基'] as const) {
+    for (const realm of ['闻腥', '守灯'] as const) {
       const chanceMap = YieldCalculator.getMaterialQualityChanceMap(realm);
       expect(chanceMap.天品).toBe(0);
       expect(chanceMap.仙品).toBe(0);
@@ -58,13 +58,13 @@ describe('YieldCalculator', () => {
   });
 
   it('opens top-tier materials progressively by realm', () => {
-    expect(YieldCalculator.getMaterialQualityChanceMap('金丹').天品).toBeGreaterThan(
+    expect(YieldCalculator.getMaterialQualityChanceMap('窥渊').天品).toBeGreaterThan(
       0,
     );
-    expect(YieldCalculator.getMaterialQualityChanceMap('元婴').仙品).toBeGreaterThan(
+    expect(YieldCalculator.getMaterialQualityChanceMap('蚀体').仙品).toBeGreaterThan(
       0,
     );
-    expect(YieldCalculator.getMaterialQualityChanceMap('化神').神品).toBeGreaterThan(
+    expect(YieldCalculator.getMaterialQualityChanceMap('忘川').神品).toBeGreaterThan(
       0,
     );
   });

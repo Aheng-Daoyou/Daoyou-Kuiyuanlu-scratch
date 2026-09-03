@@ -40,7 +40,7 @@ const BODY_MATERIAL_HINT_RULES: readonly AlchemyMaterialHintRule[] = [
   {
     property: 'body_primordial_spirit',
     weight: 0.85,
-    keywords: ['元神', '神识', '魂晶', '清神', '定魂', '心魔', '夺舍', '识海'],
+    keywords: ['心神', '魂晶', '清神', '定魂', '魔障', '夺舍', '心海'],
   },
 ];
 

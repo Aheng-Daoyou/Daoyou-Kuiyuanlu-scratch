@@ -231,14 +231,14 @@ import type { ElementType } from '@shared/types/constants';
  * 供 AbilityTagAssembler 与 affix 条件构造使用。
  */
 export const ELEMENT_TO_RUNTIME_ABILITY_TAG: Record<ElementType, string> = {
-  金: GameplayTags.ABILITY.ELEMENT.METAL,
-  木: GameplayTags.ABILITY.ELEMENT.WOOD,
-  水: GameplayTags.ABILITY.ELEMENT.WATER,
-  火: GameplayTags.ABILITY.ELEMENT.FIRE,
-  土: GameplayTags.ABILITY.ELEMENT.EARTH,
-  风: GameplayTags.ABILITY.ELEMENT.WIND,
-  雷: GameplayTags.ABILITY.ELEMENT.THUNDER,
-  冰: GameplayTags.ABILITY.ELEMENT.ICE,
+  烛: GameplayTags.ABILITY.ELEMENT.METAL,
+  尸: GameplayTags.ABILITY.ELEMENT.WOOD,
+  星: GameplayTags.ABILITY.ELEMENT.WATER,
+  渊: GameplayTags.ABILITY.ELEMENT.FIRE,
+  梦: GameplayTags.ABILITY.ELEMENT.EARTH,
+  噬: GameplayTags.ABILITY.ELEMENT.WIND,
+  帘: GameplayTags.ABILITY.ELEMENT.THUNDER,
+  疫: GameplayTags.ABILITY.ELEMENT.ICE,
 };
 
 export const DAMAGE_CHANNEL_ABILITY_TAGS = [

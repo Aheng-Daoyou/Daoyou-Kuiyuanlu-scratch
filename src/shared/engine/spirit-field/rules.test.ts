@@ -3,8 +3,8 @@ import { advanceSpiritFieldPlotToDecision, createDefaultSpiritFieldPlots, getCul
 import type { SpiritFieldPlantSnapshot, SpiritFieldPlotState } from './types';
 
 const plant: SpiritFieldPlantSnapshot = {
-  id: 'seed-test', seedName: '青纹眠籽', seedDescription: '青灰种壳上有木纹。', clueTexts: ['遇到温和灵机时微微发热', '似乎不喜血性浇灌'],
-  quality: '玄品', element: '木', minRealm: '金丹', growthForm: 'herb', harvestPart: 'leaf',
+  id: 'seed-test', seedName: '青纹眠籽', seedDescription: '青灰种壳上有木纹。', clueTexts: ['遇到温和灯机时微微发热', '似乎不喜血性浇灌'],
+  quality: '玄品', element: '尸', minRealm: '窥渊', growthForm: 'herb', harvestPart: 'leaf',
   preferredMethods: ['seasonal_nurture', 'intrinsic_infusion', 'leaf_medicine'], avoidedMethods: ['monster_blood'],
   preferredHabitats: ['shaded'], avoidedHabitats: ['volcanic'], growthTraits: ['qi-sensitive'],
   useTags: ['alchemy'], outcomeBiases: ['herb'], creationTags: ['Material.Semantic.Wood', 'Material.Semantic.Alchemy'],
@@ -38,7 +38,7 @@ describe('spirit field three-stage rules', () => {
     expect(getCultivationResourceCost('aux_gather', '地品').spiritStones).toBeGreaterThan(getCultivationResourceCost('aux_gather', '凡品').spiritStones);
   });
 
-  it('makes 天地灵气 cultivation deterministically faster', () => {
+  it('makes 灯油 cultivation deterministically faster', () => {
     expect(getStageDurationMs(plant, 'qi_sprout', 'neutral')).toBe(750_000);
     expect(getStageDurationMs(plant, 'seasonal_nurture', 'neutral')).toBe(1_000_000);
   });

@@ -76,7 +76,7 @@ const trackConfigs = {
   marrow_wash: {
     key: 'marrow_wash',
     name: '洗髓',
-    shortDesc: '升级后获得 1 点自由属性点，破限后强化后天灵根强度',
+    shortDesc: '升级后获得 1 点自由属性点，破限后强化后天窍强度',
     thresholdByLevel: getMarrowWashThresholdByLevel,
     reward: {
       kind: 'none',

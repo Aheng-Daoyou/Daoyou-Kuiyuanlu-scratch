@@ -23,8 +23,8 @@ function clamp(value: number, min: number, max: number): number {
 }
 
 /**
- * 取同品质可炼丹材料中最低的单位原始药蕴锚定成本。
- * 类型价格倍率与类型药蕴倍率必须同时参与，避免天材地宝等材料失真。
+ * 取同品质可制香材料中最低的单位原始香蕴锚定成本。
+ * 类型价格倍率与类型香蕴倍率必须同时参与，避免天材地宝等材料失真。
  */
 export function calculateMinimumMaterialAnchorCostPerEssence(
   quality: Quality,
@@ -40,7 +40,7 @@ export function calculateMinimumMaterialAnchorCostPerEssence(
 }
 
 /**
- * 单颗丹药可回收价值的生产锚点。先按最大 120% 药蕴效率折算，确保任何
+ * 单颗香品可回收价值的生产锚点。先按最大 120% 香蕴效率折算，确保任何
  * 炉况下整炉回收额都不会超过材料锚定成本的目标比例。
  */
 export function calculatePillRecycleEconomicAnchor(quality: Quality): number {

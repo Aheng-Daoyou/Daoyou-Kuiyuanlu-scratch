@@ -6,7 +6,7 @@ import {
 describe('black market player messages', () => {
   it.each([
     ['appearance', '仔细观察货物外观'],
-    ['aura', '凝神感知货物灵气'],
+    ['aura', '凝神感知货物香蕴'],
     ['damage', '检查货物破损痕迹'],
     ['origin', '询问货物来历'],
     ['sale_reason', '询问为何出售'],
@@ -16,7 +16,7 @@ describe('black market player messages', () => {
 
   it('normalizes inspection enums from existing Redis sessions', () => {
     expect(normalizeBlackMarketPlayerBody('查验：aura')).toBe(
-      '凝神感知货物灵气',
+      '凝神感知货物香蕴',
     );
     expect(normalizeBlackMarketPlayerBody('查验：origin')).toBe('询问货物来历');
   });
@@ -25,8 +25,8 @@ describe('black market player messages', () => {
     expect(normalizeBlackMarketPlayerBody('这东西从哪来的？')).toBe(
       '这东西从哪来的？',
     );
-    expect(normalizeBlackMarketPlayerBody('我出八千灵石。')).toBe(
-      '我出八千灵石。',
+    expect(normalizeBlackMarketPlayerBody('我出八千灯油券。')).toBe(
+      '我出八千灯油券。',
     );
     expect(normalizeBlackMarketPlayerBody('查验：unknown')).toBe(
       '查验：unknown',

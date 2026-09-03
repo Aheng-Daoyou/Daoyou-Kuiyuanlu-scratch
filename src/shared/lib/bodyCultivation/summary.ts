@@ -102,7 +102,7 @@ function getEffectTexts(key: BodyCultivationTrackKey, level: number): string[] {
       return [
         `控制抗性 +${formatPercent(clamp(level * 0.008, 0, 0.45))}`,
         `抗暴 +${formatPercent(clamp(level * 0.005, 0, 0.3))}`,
-        `最大法力 +${formatPercent(clamp(level * 0.005, 0, 0.3))}`,
+        `最大灯焰 +${formatPercent(clamp(level * 0.005, 0, 0.3))}`,
       ];
   }
 }
@@ -132,7 +132,7 @@ function buildNextRealmSummary(options: {
       met: options.totalLevel >= config.totalLevel,
     },
     {
-      label: `修为境界达到${config.minCultivationRealm}`,
+      label: `灯韵境界达到${config.minCultivationRealm}`,
       met: isCultivationRealmAtLeast(
         options.cultivatorRealm,
         config.minCultivationRealm,

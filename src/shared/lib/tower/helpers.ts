@@ -1,7 +1,7 @@
 import {
-  ENEMY_RACE_VALUES,
+  ENEMY_CLAN_VALUES,
   REALM_ORDER,
-  type EnemyRace,
+  type EnemyClan,
   type RealmStage,
   type RealmType,
 } from '@shared/types/constants';
@@ -20,15 +20,15 @@ export const TOWER_MAX_FLOOR = 20;
 export const TOWER_DIFFICULTY_STEP = 5;
 export const TOWER_LEADERBOARD_SCORE_UNIT = 1_000_000_000;
 export const TOWER_ELIGIBLE_REALMS = [
-  '金丹',
-  '元婴',
-  '化神',
-  '炼虚',
-  '合体',
-  '大乘',
-  '渡劫',
+  '窥渊',
+  '蚀体',
+  '忘川',
+  '执灯',
+  '掌灯',
+  '近神',
+  '渡渊',
 ] as const satisfies readonly RealmType[];
-export const TOWER_MIN_REALM: RealmType = '金丹';
+export const TOWER_MIN_REALM: RealmType = '窥渊';
 
 export function isTowerRealmEligible(realm: RealmType): boolean {
   return REALM_ORDER[realm] >= REALM_ORDER[TOWER_MIN_REALM];
@@ -84,8 +84,8 @@ export function hashTowerSeed(seed: string) {
   return Math.abs(hash >>> 0);
 }
 
-export function pickTowerRace(runId: string, floor: number): EnemyRace {
-  return ENEMY_RACE_VALUES[hashTowerSeed(`${runId}:${floor}:race`) % ENEMY_RACE_VALUES.length];
+export function pickTowerClan(runId: string, floor: number): EnemyClan {
+  return ENEMY_CLAN_VALUES[hashTowerSeed(`${runId}:${floor}:clan`) % ENEMY_CLAN_VALUES.length];
 }
 
 export function buildTowerEnemyVariantSeed(args: {

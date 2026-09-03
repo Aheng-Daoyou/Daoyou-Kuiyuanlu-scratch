@@ -473,10 +473,10 @@ export function getPillToxicityStage(
     return { key: 'critical', label: '毒火攻心' };
   }
   if (pillToxicity >= 400) {
-    return { key: 'heavy', label: '丹毒郁结' };
+    return { key: 'heavy', label: '香毒郁结' };
   }
   if (pillToxicity >= 200) {
-    return { key: 'light', label: '丹毒轻染' };
+    return { key: 'light', label: '香毒轻染' };
   }
-  return { key: 'none', label: '无明显丹毒' };
+  return { key: 'none', label: '无明显香毒' };
 }

@@ -46,7 +46,7 @@ export function projectNaturalQiState(options: {
 }): NaturalQiProjection {
   const nowMs = options.now.getTime();
   if (!Number.isFinite(nowMs)) {
-    throw new Error('天地灵气投影需要有效的当前时间');
+    throw new Error('灯油投影需要有效的当前时间');
   }
 
   const max = Math.max(0, normalizeInteger(options.max ?? QI_MAX, QI_MAX));

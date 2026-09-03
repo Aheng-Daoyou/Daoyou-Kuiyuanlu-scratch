@@ -142,7 +142,7 @@ export const ALCHEMY_COMPOUND_TIER_VALUES = [
 export type AlchemyCompoundTier = (typeof ALCHEMY_COMPOUND_TIER_VALUES)[number];
 
 export interface AlchemyBatchProfile {
-  /** @deprecated 新炼丹产量由 yieldProfile/批次引擎决定。仅兼容历史数据。 */
+  /** @deprecated 新制香产量由 yieldProfile/批次引擎决定。仅兼容历史数据。 */
   yieldQuantity?: number;
   lotQuantity?: number;
   synergyScore: number;
@@ -158,7 +158,7 @@ export interface AlchemyBatchProfile {
   essenceLossRatio?: number;
 }
 
-/** 面向玩家的丹方推演摘要；不得包含药蕴绝对值或内部炉况参数。 */
+/** 面向玩家的香方推演摘要；不得包含香蕴绝对值或内部炉况参数。 */
 export interface AlchemyBatchDisplayProfile {
   compoundTier: AlchemyCompoundTier;
   roleSummary: string;
@@ -228,6 +228,8 @@ export type PillAlchemyMeta =
       version?: 3 | 4;
       breakthroughTargetRealm?: RealmType;
       breakthroughLabel?: string;
+      /** 香变失败品标记：本炉香变，产出不可用的「坏香」诡异异物。 */
+      isBadIncense?: boolean;
     }
   | {
       source: 'formula';
@@ -248,6 +250,8 @@ export type PillAlchemyMeta =
       version?: 3 | 4;
       breakthroughTargetRealm?: RealmType;
       breakthroughLabel?: string;
+      /** 香变失败品标记：本炉香变，产出不可用的「坏香」诡异异物。 */
+      isBadIncense?: boolean;
     };
 
 export interface RestoreResourceOperation {
@@ -312,7 +316,7 @@ export interface PillSpec {
   alchemyMeta: PillAlchemyMeta;
 }
 
-/** 灵果复用丹药的效果协议，但不携带炼丹元数据、丹毒或服用额度。 */
+/** 灯果复用香品的效果协议，但不携带制香元数据、香毒或服用额度。 */
 export interface SpiritFruitSpec {
   kind: 'spirit_fruit';
   family: PillFamily;
@@ -371,7 +375,7 @@ export interface FormulaAnalysisResult {
   analysisId: string;
   valid: boolean;
   staticBlockingReason?: string;
-  /** LLM 裁决档位对应的服务端代表值；仅兼容既有丹药元数据。 */
+  /** LLM 裁决档位对应的服务端代表值；仅兼容既有香品元数据。 */
   fitScore: number;
   fitBand: FormulaFitBand;
   conclusion?: string;

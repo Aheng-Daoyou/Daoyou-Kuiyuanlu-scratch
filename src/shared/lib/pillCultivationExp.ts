@@ -26,7 +26,7 @@ function resolvePillExpCap(input: PillCultivationExpInput): number {
   }
 
   const realmStage = input.realmStage ?? '初期';
-  return EXP_CAP_TABLE[input.realm]?.[realmStage] ?? EXP_CAP_TABLE['炼气']['初期'];
+  return EXP_CAP_TABLE[input.realm]?.[realmStage] ?? EXP_CAP_TABLE['闻腥']['初期'];
 }
 
 function resolveQualityPercent(input: PillCultivationExpInput): number {

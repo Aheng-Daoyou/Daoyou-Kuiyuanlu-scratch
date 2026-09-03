@@ -9,7 +9,7 @@ export interface BlackMarketObservationCandidate extends Omit<
   truthExplanation: string;
 }
 
-const PRICE_PATTERN = /\d[\d,，]*(?:\.\d+)?\s*(?:灵石|到|至|~|～|-)/g;
+const PRICE_PATTERN = /\d[\d,，]*(?:\.\d+)?\s*(?:灯油券|到|至|~|～|-)/g;
 
 export function sanitizeBlackMarketObservationText(
   text: string,

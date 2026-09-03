@@ -29,16 +29,16 @@ const cultivator = {
   id: 'fixture-cultivator',
   name: '样例弟子',
   playerRace: 'human',
-  realm: '筑基',
+  realm: '守灯',
   realm_stage: '初期',
 } as Cultivator;
 
 describe('第二宗门扩展闭环', () => {
-  it('从效果和职责投影物理、法术、真实、范围、治疗、控制、utility 与被动标签', () => {
+  it('从效果和职责投影物理、灯律、真实、范围、治疗、控制、utility 与被动标签', () => {
     const runtime = createSectRuntime([FIXTURE_SECT_MODULE]);
     const details = new Map(
       runtime
-        .resolveAbilities({ sect: fixtureSectState(), realm: '筑基' })
+        .resolveAbilities({ sect: fixtureSectState(), realm: '守灯' })
         .map((ability) => [ability.id, ability]),
     );
 
@@ -107,7 +107,7 @@ describe('第二宗门扩展闭环', () => {
     const runtime = createSectRuntime([FIXTURE_SECT_MODULE]);
     const state = fixtureSectState();
     state.methods['fixture-method-1'] = 0;
-    expect(() => runtime.projectCombat({ sect: state, realm: '筑基' })).toThrow(
+    expect(() => runtime.projectCombat({ sect: state, realm: '守灯' })).toThrow(
       '没有已解锁的默认能力',
     );
   });
@@ -146,7 +146,7 @@ describe('第二宗门扩展闭环', () => {
     const compile = vi.spyOn(runtime.compiler, 'compile');
 
     expect(
-      runtime.resolveAbilities({ sect: fixtureSectState(), realm: '筑基' }),
+      runtime.resolveAbilities({ sect: fixtureSectState(), realm: '守灯' }),
     ).toHaveLength(6);
     expect(compile).toHaveBeenCalledTimes(1);
   });
@@ -237,7 +237,7 @@ describe('第二宗门扩展闭环', () => {
       0,
     );
     expect(
-      FIXTURE_SECT_MODULE.organization.economy.stipendBase('outer', '炼气'),
+      FIXTURE_SECT_MODULE.organization.economy.stipendBase('outer', '闻腥'),
     ).toBe(2000);
     expect(
       FIXTURE_SECT_MODULE.organization.construction.facilities,
@@ -262,7 +262,7 @@ describe('第二宗门扩展闭环', () => {
         ],
       },
     ];
-    const projection = runtime.projectCombat({ sect: state, realm: '筑基' });
+    const projection = runtime.projectCombat({ sect: state, realm: '守灯' });
     expect(projection?.resources[0]).toMatchObject({
       id: 'fixture.resource',
       initial: 1,
@@ -288,7 +288,7 @@ describe('第二宗门扩展闭环', () => {
     ];
     const repository = {
       loadCultivatorProgress: vi.fn(async () => ({
-        realm: '筑基',
+        realm: '守灯',
         stage: '初期',
         stones: 0,
         cultivationExp: 0,
@@ -312,7 +312,7 @@ describe('第二宗门扩展闭环', () => {
     expect(
       service.listAvailableDefinitions({
         playerRace: 'human',
-        realm: '筑基',
+        realm: '守灯',
         stage: '初期',
       })[0].id,
     ).toBe('fixture-sect');
@@ -352,7 +352,7 @@ describe('第二宗门扩展闭环', () => {
         : null;
     const repository = {
       loadCultivatorProgress: vi.fn(async () => ({
-        realm: '筑基',
+        realm: '守灯',
         stage: '中期',
         stones,
         cultivationExp,
@@ -544,7 +544,7 @@ describe('第二宗门扩展闭环', () => {
       sevenLayerNodes,
     );
     expect(
-      runtime.projectCombat({ sect: state!, realm: '筑基' })?.resources[0].id,
+      runtime.projectCombat({ sect: state!, realm: '守灯' })?.resources[0].id,
     ).toBe('fixture.resource');
   });
 
@@ -566,7 +566,7 @@ describe('第二宗门扩展闭环', () => {
       runtime,
       repository: {
         loadCultivatorProgress: vi.fn(async () => ({
-          realm: '炼气',
+          realm: '闻腥',
           stage: '初期',
           stones: 0,
           cultivationExp: 0,
@@ -645,7 +645,7 @@ describe('第二宗门扩展闭环', () => {
     ];
     expect(() => runtime.validateState(state)).not.toThrow();
     expect(
-      runtime.projectCombat({ sect: state, realm: '筑基' }),
+      runtime.projectCombat({ sect: state, realm: '守灯' }),
     ).not.toBeNull();
   });
 });

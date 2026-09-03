@@ -31,7 +31,7 @@ export function getItemExchangeQuantityError(args: {
     return '商品发放数量配置异常';
   }
   if (args.itemType === 'artifact' && args.quantity !== 1) {
-    return '法宝类商品每次只能发放 1 件';
+    return '封灵器类商品每次只能发放 1 件';
   }
   if (
     args.itemType !== 'artifact' &&

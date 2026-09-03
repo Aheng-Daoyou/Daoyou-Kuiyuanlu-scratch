@@ -1,5 +1,5 @@
 import type { ResourceOperation } from '@shared/engine/resource/types';
-import { ENEMY_RACE_VALUES, REALM_STAGE_VALUES } from '@shared/types/constants';
+import { ENEMY_CLAN_VALUES, REALM_STAGE_VALUES } from '@shared/types/constants';
 import { z } from 'zod';
 
 // === AI Interaction Schemas ===
@@ -15,7 +15,7 @@ const DUNGEON_QUALITY_VALUES = [
 ] as const;
 
 const DungeonBattleMetadataSchema = z.object({
-  race: z.enum(ENEMY_RACE_VALUES).describe('敌人种族'),
+  clan: z.enum(ENEMY_CLAN_VALUES).describe('敌人三族（腌物/遗种/投影）'),
   realm_stage: z.enum(REALM_STAGE_VALUES).describe('敌人境界阶段'),
   enemy_name: z.string().optional().describe('敌人名称'),
   background: z.string().optional().describe('敌人背景'),
@@ -71,13 +71,13 @@ export const DungeonCostSchema = z
       .describe('模糊要求时：材料类型'),
     desc: z.string().optional().describe('描述信息'),
     metadata: DungeonCostMetadataSchema.optional().describe(
-      '元数据（battle 类型需要 race/realm_stage；其他代价可记录系统反馈）',
+      '元数据（battle 类型需要 clan/realm_stage；其他代价可记录系统反馈）',
     ),
   })
   .superRefine((cost, ctx) => {
     if (
       cost.type === 'battle' &&
-      (!cost.metadata || !cost.metadata.race || !cost.metadata.realm_stage)
+      (!cost.metadata || !cost.metadata.clan || !cost.metadata.realm_stage)
     ) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
@@ -141,11 +141,11 @@ export const RewardBlueprintSchema = z.object({
     ])
     .optional()
     .describe(
-      '材料类型：herb=草药, ore=矿石, monster=妖兽材料, tcdb=天材地宝, aux=辅助, gongfa_manual=功法典籍, skill_manual=神通秘术',
+      '材料类型：herb=草药, ore=矿石, monster=诡异材料, tcdb=天材地宝, aux=辅助, gongfa_manual=功法典籍, skill_manual=神通秘术',
     ),
   // 元素 - 仅 material 类型需要
   element: z
-    .enum(['金', '木', '水', '火', '土', '风', '雷', '冰'])
+    .enum(['烛', '尸', '星', '渊', '梦', '噬', '帘', '疫'])
     .optional()
     .describe('元素'),
   quality_hint: z.any().optional().describe('已废弃，请使用 reward_score'), // 保持向后兼容性或作为过渡

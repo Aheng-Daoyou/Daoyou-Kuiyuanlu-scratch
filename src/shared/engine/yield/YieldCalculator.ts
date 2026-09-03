@@ -11,7 +11,7 @@ export const YIELD_MATERIAL_QUALITY_CHANCE_BY_REALM: Record<
   RealmType,
   Record<Quality, number>
 > = {
-  炼气: {
+  闻腥: {
     凡品: 0.45,
     灵品: 0.3,
     玄品: 0.18,
@@ -21,7 +21,7 @@ export const YIELD_MATERIAL_QUALITY_CHANCE_BY_REALM: Record<
     仙品: 0,
     神品: 0,
   },
-  筑基: {
+  守灯: {
     凡品: 0.35,
     灵品: 0.3,
     玄品: 0.2,
@@ -31,7 +31,7 @@ export const YIELD_MATERIAL_QUALITY_CHANCE_BY_REALM: Record<
     仙品: 0,
     神品: 0,
   },
-  金丹: {
+  窥渊: {
     凡品: 0.25,
     灵品: 0.28,
     玄品: 0.22,
@@ -41,7 +41,7 @@ export const YIELD_MATERIAL_QUALITY_CHANCE_BY_REALM: Record<
     仙品: 0,
     神品: 0,
   },
-  元婴: {
+  蚀体: {
     凡品: 0.18,
     灵品: 0.24,
     玄品: 0.23,
@@ -51,7 +51,7 @@ export const YIELD_MATERIAL_QUALITY_CHANCE_BY_REALM: Record<
     仙品: 0.01,
     神品: 0,
   },
-  化神: {
+  忘川: {
     凡品: 0.12,
     灵品: 0.2,
     玄品: 0.23,
@@ -61,7 +61,7 @@ export const YIELD_MATERIAL_QUALITY_CHANCE_BY_REALM: Record<
     仙品: 0.03,
     神品: 0.01,
   },
-  炼虚: {
+  执灯: {
     凡品: 0.08,
     灵品: 0.16,
     玄品: 0.22,
@@ -71,7 +71,7 @@ export const YIELD_MATERIAL_QUALITY_CHANCE_BY_REALM: Record<
     仙品: 0.06,
     神品: 0.02,
   },
-  合体: {
+  掌灯: {
     凡品: 0.05,
     灵品: 0.12,
     玄品: 0.2,
@@ -81,7 +81,7 @@ export const YIELD_MATERIAL_QUALITY_CHANCE_BY_REALM: Record<
     仙品: 0.09,
     神品: 0.03,
   },
-  大乘: {
+  近神: {
     凡品: 0.03,
     灵品: 0.09,
     玄品: 0.16,
@@ -91,7 +91,7 @@ export const YIELD_MATERIAL_QUALITY_CHANCE_BY_REALM: Record<
     仙品: 0.12,
     神品: 0.04,
   },
-  渡劫: {
+  渡渊: {
     凡品: 0.02,
     灵品: 0.06,
     玄品: 0.12,

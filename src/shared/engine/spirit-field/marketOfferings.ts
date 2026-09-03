@@ -1,6 +1,6 @@
 import type { MarketLayer } from '@shared/types/market';
 
-/** 根据节点配置把货架比例换算为灵种数量；普通坊市未配置时不强制注入。 */
+/** 根据节点配置把货架比例换算为灯种数量；普通坊市未配置时不强制注入。 */
 export function getSpiritFieldMarketSeedSlotCount(
   layer: MarketLayer,
   listingCount: number,

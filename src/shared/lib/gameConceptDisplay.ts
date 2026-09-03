@@ -24,9 +24,9 @@ export const GAME_CONCEPT_DISPLAY_MAP = {
     description: '当前气血、气血条、恢复气血',
   },
   mp: {
-    label: '法力',
+    label: '灯焰',
     icon: '💧',
-    description: '当前法力、法力条、法力消耗',
+    description: '当前灯焰、灯焰条、灯焰消耗',
   },
   maxHp: {
     label: '气血上限',
@@ -34,9 +34,9 @@ export const GAME_CONCEPT_DISPLAY_MAP = {
     description: '最大气血',
   },
   maxMp: {
-    label: '法力上限',
+    label: '灯焰上限',
     icon: '💧',
-    description: '最大法力',
+    description: '最大灯焰',
   },
   hp_loss: {
     label: '气血损失',
@@ -44,12 +44,12 @@ export const GAME_CONCEPT_DISPLAY_MAP = {
     description: '气血百分比损失',
   },
   mp_loss: {
-    label: '法力损失',
+    label: '灯焰损失',
     icon: '💧',
-    description: '法力百分比损失',
+    description: '灯焰百分比损失',
   },
   spirit_stones: {
-    label: '灵石',
+    label: '灯油券',
     icon: '💰',
     description: '通用货币',
   },
@@ -64,21 +64,21 @@ export const GAME_CONCEPT_DISPLAY_MAP = {
     description: '宗门任务与建设所得的宗门内部凭证',
   },
   cultivation_exp: {
-    label: '修为',
+    label: '灯韵',
     icon: '🧘',
-    description: '修为进度',
+    description: '灯韵进度',
   },
   comprehension_insight: {
-    label: '感悟',
-    shortLabel: '感悟',
+    label: '窥悟',
+    shortLabel: '窥悟',
     icon: '💡',
-    description: '突破、推演功法与神通所需的感悟',
+    description: '突破、推演功法与神通所需的窥悟',
   },
   world_qi: {
-    label: '天地灵气',
-    shortLabel: '灵气',
+    label: '灯油',
+    shortLabel: '灯油',
     icon: '🍃',
-    description: '玩法行动所消耗的天地灵气',
+    description: '玩法行动所消耗的灯油',
   },
   lifespan: {
     label: '寿元',
@@ -91,17 +91,17 @@ export const GAME_CONCEPT_DISPLAY_MAP = {
     description: '通用材料',
   },
   artifact: {
-    label: '法宝',
+    label: '封灵器',
     icon: '🗡️',
-    description: '法宝物品',
+    description: '封灵器物品',
     aliases: {
-      naming: '法宝灵器',
+      naming: '封灵器',
     },
   },
   consumable: {
     label: '消耗品',
-    icon: '💊',
-    description: '丹药、符箓等消耗品',
+    icon: '🕯️',
+    description: '香品、符箓等消耗品',
   },
   battle: {
     label: '战斗',
@@ -109,45 +109,45 @@ export const GAME_CONCEPT_DISPLAY_MAP = {
     description: '战斗事件或代价',
   },
   vitality: {
-    label: '体魄',
-    icon: '💪',
-    shortLabel: '体',
-    description: '气血与生命根基，决定最大气血并提供少量法术防御',
+    label: '灯红',
+    icon: '❤️',
+    shortLabel: '红',
+    description: '守灯人的生机，如灯油熬成的红，决定最大灯红并提供少量灯律防御',
   },
   strength: {
-    label: '力道',
+    label: '灯锋',
     icon: '⚔️',
-    shortLabel: '力',
-    description: '筋力与兵刃威势，决定物理攻击',
+    shortLabel: '锋',
+    description: '灯火外放的锋芒，决定物理攻击',
   },
   spirit: {
-    label: '灵力',
-    icon: '⚡',
-    shortLabel: '灵',
-    description: '灵力浑厚程度，决定法术攻击并提供少量法力',
+    label: '梦涎',
+    icon: '💧',
+    shortLabel: '涎',
+    description: '体内沉积的梦涎浓度——决定灯律攻击并提供少量灯焰；越高越强，也越「不对」',
   },
   endurance: {
-    label: '根骨',
+    label: '灯骨',
     icon: '🦴',
     shortLabel: '骨',
-    description: '筋骨坚韧程度，决定物理防御并提供少量最大气血',
+    description: '灯盏之骨的坚韧程度，决定物理防御并提供少量最大灯红',
   },
   speed: {
-    label: '身法',
+    label: '灯影',
     icon: '🦶',
-    shortLabel: '身',
-    description: '身形腾挪与步法根基，影响闪避、命中与行动速度',
+    shortLabel: '影',
+    description: '灯下之影的腾挪步法，影响闪避、命中与行动速度',
   },
   willpower: {
-    label: '神识',
+    label: '灯芯',
     icon: '👁️',
-    shortLabel: '识',
-    description: '神魂与意志强度，影响法术防御、法力和控制攻防',
+    shortLabel: '芯',
+    description: '灯中最核心的芯，战斗用的精神力量——影响灯律防御、灯焰和控制攻防；与会崩坏的神智相对，越高越稳',
   },
   gongfa: {
     label: '功法',
     icon: '📖',
-    description: '功法产品',
+    description: '功法产品（三轨：正法守灯、诡法吞诡、禁书蚀心）',
     aliases: {
       naming: '功法典籍',
     },
@@ -161,17 +161,22 @@ export const GAME_CONCEPT_DISPLAY_MAP = {
     },
   },
   consumable_pill: {
-    label: '丹药',
-    icon: '🌕',
-    description: '丹药消耗品',
+    label: '香品',
+    icon: '🕯️',
+    description: '香品消耗品',
   },
   consumable_talisman: {
     label: '符箓',
     icon: '📜',
     description: '符箓消耗品',
   },
+  consumable_bad_incense: {
+    label: '坏香',
+    icon: '🕳️',
+    description: '制香失败产生的诡异异物，不可名状',
+  },
   material_herb: {
-    label: '灵药',
+    label: '灯药',
     icon: '🌿',
   },
   material_ore: {
@@ -179,7 +184,7 @@ export const GAME_CONCEPT_DISPLAY_MAP = {
     icon: '🪨',
   },
   material_monster: {
-    label: '妖兽材料',
+    label: '诡异材料',
     icon: '🐉',
   },
   material_tcdb: {
@@ -199,39 +204,39 @@ export const GAME_CONCEPT_DISPLAY_MAP = {
     icon: '📜',
   },
   element_metal: {
-    label: '金',
+    label: '烛',
     icon: '⚔️',
   },
   element_wood: {
-    label: '木',
+    label: '尸',
     icon: '🌿',
   },
   element_water: {
-    label: '水',
+    label: '星',
     icon: '💧',
   },
   element_fire: {
-    label: '火',
+    label: '渊',
     icon: '🔥',
   },
   element_earth: {
-    label: '土',
+    label: '梦',
     icon: '⛰️',
   },
   element_wind: {
-    label: '风',
+    label: '噬',
     icon: '🌪️',
   },
   element_thunder: {
-    label: '雷',
+    label: '帘',
     icon: '⚡',
   },
   element_ice: {
-    label: '冰',
+    label: '疫',
     icon: '❄️',
   },
   equipment_weapon: {
-    label: '攻击法宝',
+    label: '攻伐封灵器',
     icon: '🗡️',
     aliases: {
       intent: '武器',
@@ -240,7 +245,7 @@ export const GAME_CONCEPT_DISPLAY_MAP = {
     },
   },
   equipment_armor: {
-    label: '护身法宝',
+    label: '护身封灵器',
     icon: '🛡️',
     aliases: {
       intent: '护甲',
@@ -249,7 +254,7 @@ export const GAME_CONCEPT_DISPLAY_MAP = {
     },
   },
   equipment_accessory: {
-    label: '辅助法宝',
+    label: '随身封灵器',
     icon: '💍',
     aliases: {
       intent: '配饰',
@@ -268,14 +273,14 @@ export const GAME_CONCEPT_DISPLAY_MAP = {
     shortLabel: '物防',
   },
   attribute_magic_atk: {
-    label: '法术攻击',
+    label: '灯律攻击',
     icon: '⚡',
-    shortLabel: '法攻',
+    shortLabel: '律攻',
   },
   attribute_magic_def: {
-    label: '法术防御',
+    label: '灯律防御',
     icon: '🛡️',
-    shortLabel: '法防',
+    shortLabel: '律防',
   },
   attribute_action_speed: {
     label: '速度',
@@ -332,11 +337,11 @@ export const GAME_CONCEPT_DISPLAY_MAP = {
     },
   },
   attribute_magic_penetration: {
-    label: '法术穿透',
+    label: '灯律穿透',
     icon: '⚡',
-    shortLabel: '法穿',
+    shortLabel: '律穿',
     aliases: {
-      compact: '法穿',
+      compact: '律穿',
     },
   },
   attribute_crit_resist: {
@@ -379,17 +384,17 @@ export const GAME_CONCEPT_DISPLAY_MAP = {
   skill_type_heal: {
     label: '治疗',
     icon: '💚',
-    description: '恢复气血或护持自身的术法',
+    description: '恢复气血或护持自身的灯律',
   },
   skill_type_control: {
     label: '控制',
     icon: '🌀',
-    description: '封禁、禁锢、限制对手行动的术法',
+    description: '封禁、禁锢、限制对手行动的灯律',
   },
   skill_type_debuff: {
     label: '削弱',
     icon: '😈',
-    description: '削减对手战力或叠加负面状态的术法',
+    description: '削减对手战力或叠加负面状态的灯律',
   },
   skill_type_buff: {
     label: '增益',
@@ -409,17 +414,17 @@ export const GAME_CONCEPT_DISPLAY_MAP = {
   status_poison: {
     label: '中毒',
     icon: '☠️',
-    description: '剧毒入骨，气血与法力缓慢流逝',
+    description: '剧毒入骨，气血与灯焰缓慢流逝',
   },
   status_stun: {
     label: '眩晕',
     icon: '🌀',
-    description: '元神震荡，暂时无法行动',
+    description: '心神震荡，暂时无法行动',
   },
   status_silence: {
     label: '沉默',
     icon: '🤐',
-    description: '法咒受限，无法施展部分神通',
+    description: '灯律受限，无法施展部分神通',
   },
   status_root: {
     label: '定身',
@@ -479,27 +484,27 @@ export const GAME_CONCEPT_DISPLAY_MAP = {
   status_protect_meridians: {
     label: '护脉',
     icon: '🪢',
-    description: '药力护住经脉，突破失败时降低修为损失',
+    description: '香力护住灯脉，突破失败时降低灯韵损失',
   },
   status_clear_mind: {
     label: '清心',
     icon: '🪷',
-    description: '心境澄明，突破失败不会滋生心魔',
+    description: '心境澄明，突破失败不会滋生魔障',
   },
   status_cultivation_boost: {
     label: '养元',
     icon: '🌿',
-    description: '药力温养丹田，下一次闭关修为提升',
+    description: '香力温养灯心，下一次闭关灯韵提升',
   },
   status_artifact_damaged: {
-    label: '法宝受损',
+    label: '封灵器受损',
     icon: '💔',
-    description: '法宝损坏，威力大减',
+    description: '封灵器损坏，威力大减',
   },
   status_mana_depleted: {
-    label: '法力枯竭',
+    label: '灯焰枯竭',
     icon: '💧',
-    description: '法力耗尽，难以施展术法',
+    description: '灯焰耗尽，难以施展灯律',
   },
   status_hp_deficit: {
     label: '气血不足',
@@ -527,9 +532,9 @@ export const GAME_CONCEPT_DISPLAY_MAP = {
     description: '被阵法压制，实力受限',
   },
   status_abundant_qi: {
-    label: '灵气充沛',
+    label: '灯油充沛',
     icon: '🍃',
-    description: '灵气浓郁，修炼速度提升',
+    description: '灯油充盈，窥悟速度提升',
   },
 } as const satisfies Record<string, GameConceptDisplayInfo>;
 
@@ -601,25 +606,25 @@ export interface ElementDisplayInfo {
 }
 
 const ELEMENT_CONCEPT_KEYS: Record<ElementType, GameConceptKey> = {
-  金: 'element_metal',
-  木: 'element_wood',
-  水: 'element_water',
-  火: 'element_fire',
-  土: 'element_earth',
-  风: 'element_wind',
-  雷: 'element_thunder',
-  冰: 'element_ice',
+  烛: 'element_metal',
+  尸: 'element_wood',
+  星: 'element_water',
+  渊: 'element_fire',
+  梦: 'element_earth',
+  噬: 'element_wind',
+  帘: 'element_thunder',
+  疫: 'element_ice',
 };
 
 export const ELEMENT_DISPLAY_MAP: Record<ElementType, ElementDisplayInfo> = {
-  金: getConceptInfo(ELEMENT_CONCEPT_KEYS.金),
-  木: getConceptInfo(ELEMENT_CONCEPT_KEYS.木),
-  水: getConceptInfo(ELEMENT_CONCEPT_KEYS.水),
-  火: getConceptInfo(ELEMENT_CONCEPT_KEYS.火),
-  土: getConceptInfo(ELEMENT_CONCEPT_KEYS.土),
-  风: getConceptInfo(ELEMENT_CONCEPT_KEYS.风),
-  雷: getConceptInfo(ELEMENT_CONCEPT_KEYS.雷),
-  冰: getConceptInfo(ELEMENT_CONCEPT_KEYS.冰),
+  烛: getConceptInfo(ELEMENT_CONCEPT_KEYS.烛),
+  尸: getConceptInfo(ELEMENT_CONCEPT_KEYS.尸),
+  星: getConceptInfo(ELEMENT_CONCEPT_KEYS.星),
+  渊: getConceptInfo(ELEMENT_CONCEPT_KEYS.渊),
+  梦: getConceptInfo(ELEMENT_CONCEPT_KEYS.梦),
+  噬: getConceptInfo(ELEMENT_CONCEPT_KEYS.噬),
+  帘: getConceptInfo(ELEMENT_CONCEPT_KEYS.帘),
+  疫: getConceptInfo(ELEMENT_CONCEPT_KEYS.疫),
 };
 
 export function getElementInfo(key: ElementType): ElementDisplayInfo {
@@ -830,9 +835,9 @@ export const CONSUMABLE_TYPE_DISPLAY_MAP: Record<
   ConsumableType,
   ConsumableTypeDisplayInfo
 > = {
-  丹药: getConceptInfo('consumable_pill'),
+  香品: getConceptInfo('consumable_pill'),
   符箓: getConceptInfo('consumable_talisman'),
-  灵果: { label: '灵果', icon: '🍑' },
+  灵果: { label: '灯果', icon: '🍑' },
 };
 
 export function getConsumableTypeLabel(type: ConsumableType): string {
@@ -848,7 +853,7 @@ export const MATERIAL_TYPE_DISPLAY_MAP: Record<
   MaterialType,
   MaterialTypeDisplayInfo
 > = {
-  seed: { label: '灵植种子', icon: '🌱' },
+  seed: { label: '灯植种子', icon: '🌱' },
   herb: getConceptInfo('material_herb'),
   ore: getConceptInfo('material_ore'),
   monster: getConceptInfo('material_monster'),
