@@ -33,8 +33,8 @@ export function FormulaArchiveView({
   };
   return (
     <AlchemyToolWorkspace
-      title="查看已有丹方"
-      backLabel="丹方玉简"
+      title="查看已有香方"
+      backLabel="香方灯册"
       onBack={onBack}
     >
       <div className="space-y-5">
@@ -42,7 +42,7 @@ export function FormulaArchiveView({
           <input
             className={inkFieldVariants()}
             value={library.search}
-            placeholder="以丹方名检索玉简"
+            placeholder="以香方名检索灯册"
             onChange={(event) => library.setSearch(event.target.value)}
           />
           <select
@@ -52,7 +52,7 @@ export function FormulaArchiveView({
               library.setFamily(event.target.value as PillFamily | 'all')
             }
           >
-            <option value="all">全部丹类</option>
+            <option value="all">全部香类</option>
             {PILL_FAMILY_VALUES.map((family) => (
               <option key={family} value={family}>
                 {getPillFamilyLabel(family)}
@@ -94,7 +94,7 @@ export function FormulaArchiveView({
                         </InkBadge>
                       </div>
                       <p className="text-ink-secondary mt-1 line-clamp-2 text-xs leading-5">
-                        {formula.description || '暂无丹方说明。'}
+                        {formula.description || '暂无香方说明。'}
                       </p>
                     </div>
                   </div>
@@ -118,7 +118,7 @@ export function FormulaArchiveView({
                       variant="primary"
                       onClick={() => openFurnace(formula)}
                     >
-                      使用此丹方
+                      使用此香方
                     </InkButton>
                   </div>
                 </article>
@@ -127,7 +127,7 @@ export function FormulaArchiveView({
           </div>
         ) : !library.loading ? (
           <InkNotice tone="info">
-            尚未留存丹方。可在丹炉选择随心炼丹，成功后有机会悟得新方。
+            尚未留存香方。可在香炉选择随心制香，成功后有机会悟得新方。
           </InkNotice>
         ) : null}
 
@@ -221,17 +221,17 @@ function FormulaDetailDrawer({
     <InkDetailDrawer
       isOpen={Boolean(formula)}
       onClose={onClose}
-      title={formula?.name ?? '丹方详情'}
-      description="查看这份丹方的用途、材料要求和药效方向。"
+      title={formula?.name ?? '香方详情'}
+      description="查看这份香方的用途、材料要求和药效方向。"
       size="md"
       footer={
         formula ? (
           <div className="flex flex-wrap justify-end gap-2">
             <InkButton variant="secondary" onClick={() => onDelete(formula)}>
-              删除丹方
+              删除香方
             </InkButton>
             <InkButton variant="primary" onClick={() => onUse(formula)}>
-              使用此丹方
+              使用此香方
             </InkButton>
           </div>
         ) : null
@@ -243,7 +243,7 @@ function FormulaDetailDrawer({
             <InkBadge>{getPillFamilyLabel(formula.family)}</InkBadge>
           </div>
           <p className="text-ink-secondary text-sm leading-7">
-            {formula.description || '这份丹方暂未留下更多说明。'}
+            {formula.description || '这份香方暂未留下更多说明。'}
           </p>
           <FormulaFacts formula={formula} propertyText={propertyText} />
         </div>

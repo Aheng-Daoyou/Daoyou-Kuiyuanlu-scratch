@@ -62,7 +62,7 @@ export function AlchemyMaterialShelf({
         <input
           className={inkFieldVariants()}
           value={search}
-          placeholder="搜索当前页药材"
+          placeholder="搜索当前页香材"
           onChange={(event) => setSearch(event.target.value)}
         />
         <select
@@ -98,12 +98,12 @@ export function AlchemyMaterialShelf({
           pending={inventory.isRefreshing}
           onClick={() => void inventory.reload()}
         >
-          刷新药柜
+          刷新香柜
         </InkButton>
       </div>
 
       {inventory.loading && !inventory.data ? (
-        <GameLoadingState variant="inline" message="药柜木签正在逐一亮起……" />
+        <GameLoadingState variant="inline" message="香柜木签正在逐一亮起……" />
       ) : null}
       {inventory.error ? (
         <InkNotice tone="warning">{inventory.error}</InkNotice>
@@ -122,7 +122,7 @@ export function AlchemyMaterialShelf({
                 {detail.element ?? '无属'} · 库存 {detail.quantity}
               </p>
               <p className="text-ink-secondary mt-3 max-w-2xl text-sm leading-7">
-                {detail.description || '药性尚未留下更多记述。'}
+                {detail.description || '香性尚未留下更多记述。'}
               </p>
             </div>
             <div className="flex gap-2">
@@ -134,7 +134,7 @@ export function AlchemyMaterialShelf({
                 disabled={isMystery(detail) || !detail.id}
                 onClick={() => onCarry(detail)}
               >
-                添加到丹炉
+                添加到香炉
               </InkButton>
             </div>
           </div>
@@ -170,7 +170,7 @@ export function AlchemyMaterialShelf({
                       {mystery
                         ? '封签晦暗，需先鉴定方可入药。'
                         : material.description ||
-                          `${material.element ?? '无属'}药性。`}
+                          `${material.element ?? '无属'}香性。`}
                     </span>
                   </span>
                 </button>
@@ -181,7 +181,7 @@ export function AlchemyMaterialShelf({
                     disabled={mystery || !material.id}
                     onClick={() => onCarry(material)}
                   >
-                    添加到丹炉
+                    添加到香炉
                   </InkButton>
                 </div>
               </article>
@@ -189,7 +189,7 @@ export function AlchemyMaterialShelf({
           })}
         </div>
       ) : !inventory.loading ? (
-        <InkNotice tone="info">当前药屉中没有符合条件的灵材。</InkNotice>
+        <InkNotice tone="info">当前药屉中没有符合条件的灯材。</InkNotice>
       ) : null}
 
       <div className="flex items-center justify-between">

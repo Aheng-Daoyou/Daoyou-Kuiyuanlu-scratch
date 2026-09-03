@@ -25,15 +25,15 @@ const pathIds = {
   condemnation: JIUJIE_CONDEMNATION_PATH_ID,
 } as const;
 const layerByRealm: Record<RealmType, string[]> = {
-  炼气: [],
-  筑基: ['1'],
-  金丹: ['1', '2'],
-  元婴: ['1', '2'],
-  化神: ['1', '2', '3'],
-  炼虚: ['1', '2', '3', '4'],
-  合体: ['1', '2', '3', '4'],
-  大乘: ['1', '2', '3', '4', '5'],
-  渡劫: ['1', '2', '3', '4', '5', 'ultimate'],
+  闻腥: [],
+  守灯: ['1'],
+  窥渊: ['1', '2'],
+  蚀体: ['1', '2'],
+  忘川: ['1', '2', '3'],
+  执灯: ['1', '2', '3', '4'],
+  掌灯: ['1', '2', '3', '4'],
+  近神: ['1', '2', '3', '4', '5'],
+  渡渊: ['1', '2', '3', '4', '5', 'ultimate'],
 };
 
 const builds = {
@@ -82,7 +82,7 @@ function baseCultivator(id: string, realm: RealmType, profile: Profile): Cultiva
     age: 100,
     lifespan: 10_000,
     attributes: attributes(realm, profile),
-    spiritual_roots: [{ element: '雷', strength: 80 }],
+    spiritual_roots: [{ element: '帘', strength: 80 }],
     pre_heaven_fates: [],
     cultivations: [],
     skills: [],
@@ -132,7 +132,7 @@ function behaviorAbility(behavior: Behavior, basic: boolean) {
   return {
     id: `behavior:${behavior}:${basic ? 'basic' : 'active'}`,
     name: basic ? '标准普攻' : '标准主动术',
-    element: '雷' as const,
+    element: '帘' as const,
     description: '平衡模拟行为技能',
     quality: '凡品' as const,
     cost: 0,

@@ -52,9 +52,9 @@ export function CultivatorLoadoutSections({
   return (
     <>
       <section className="space-y-3">
-        <h5 className="text-ink font-semibold">法宝</h5>
+        <h5 className="text-ink font-semibold">封灵器</h5>
         {equippedArtifacts.length === 0 ? (
-          <InkNotice>尚未佩戴法宝</InkNotice>
+          <InkNotice>尚未佩戴封灵器</InkNotice>
         ) : (
           <InkList>
             {equippedArtifacts.map((artifact) => (

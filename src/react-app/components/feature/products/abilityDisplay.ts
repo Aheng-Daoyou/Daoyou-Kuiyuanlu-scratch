@@ -5,7 +5,7 @@
  * `affixes`、`balanceMetrics` 等）与 battle-v5 的 `AbilityConfig` / `AttributeModifierConfig`
  * 翻译为 UI 友好的视图态。
  *
- * 所有神通 / 功法 / 法宝详情页面都应使用这里提供的类型和函数，而不是各自散落地解析
+ * 所有神通 / 功法 / 封灵器详情页面都应使用这里提供的类型和函数，而不是各自散落地解析
  * productModel 字段。
  */
 
@@ -51,7 +51,7 @@ export interface AffixView {
   formulaText?: string;
   /** apply_buff 的完整状态解释 */
   buffDetails: AffixBuffDetailView[];
-  /** 伤害类型中文，如“火系法术伤害”“持续伤害（DOT）” */
+  /** 伤害类型中文，如“渊系灯律伤害”“持续伤害（DOT）” */
   damageTypeLabels: string[];
   /** 相关运行时标签中文，永不直接暴露英文 tag */
   tagLabels: string[];
@@ -203,7 +203,7 @@ function buildProjection(
         ? '主动神通'
         : projection.projectionKind === 'gongfa_passive'
           ? '功法·被动'
-          : '法宝·被动',
+          : '封灵器·被动',
     tags: projection.abilityTags ?? [],
   };
 

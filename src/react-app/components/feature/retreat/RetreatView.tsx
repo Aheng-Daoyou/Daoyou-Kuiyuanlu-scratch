@@ -71,19 +71,19 @@ export function BreakthroughHelpContent({
     <div className="space-y-4 text-sm leading-7">
       <p className="text-ink-secondary">
         {!canBreakthrough
-          ? '你当前修为尚未到 60%，还不能正式尝试突破。此时静室更适合继续闭关积累。'
+          ? '你当前灯韵尚未到 60%，还不能正式尝试突破。此时静室更适合继续闭关积累。'
           : isMajorBreakthrough && majorBreakthroughBlocked
             ? `你当前的火候已摸到「${currentTypeText ?? '突破'}」，但这是跨大境界冲关，仍需先补齐破境前置。`
             : currentTypeText
               ? `你当前的眼下火候是「${currentTypeText}」。若决定冲关，确认时再看那一刻的成败推演。`
-              : '突破火候会随着修为与感悟变化，决定你此刻适合怎样起手。'}
+              : '突破火候会随着灯韵与窥悟变化，决定你此刻适合怎样起手。'}
       </p>
 
       <div className="space-y-3">
         <div>
           <p className="text-ink font-medium">强行突破</p>
           <p className="text-ink-secondary">
-            修为达到 60%
+            灯韵达到 60%
             后即可尝试。此时只是勉强摸到门槛，适合在寿元紧迫或不得不赌一把时起手，风险最高。
           </p>
         </div>
@@ -91,7 +91,7 @@ export function BreakthroughHelpContent({
         <div>
           <p className="text-ink font-medium">常规突破</p>
           <p className="text-ink-secondary">
-            修为达到 80%
+            灯韵达到 80%
             后即可尝试。根基比强行突破更稳，通常是大多数修士会考虑出手的火候。
           </p>
         </div>
@@ -99,7 +99,7 @@ export function BreakthroughHelpContent({
         <div>
           <p className="text-ink font-medium">圆满突破</p>
           <p className="text-ink-secondary">
-            修为达到 100%，且{COMPREHENSION_LABEL}至少达到 50
+            灯韵达到 100%，且{COMPREHENSION_LABEL}至少达到 50
             时方可成形。此时火候最足，往往是最稳妥的破关时机。
           </p>
         </div>
@@ -172,7 +172,7 @@ function RetreatBuffTags({
                 背包
               </InkButton>
               <InkButton href="/game/craft/alchemy" variant="ghost">
-                炼丹
+                制香
               </InkButton>
             </>
           ) : null}
@@ -199,7 +199,7 @@ function getRetreatLeadText({
     return '炉火已稳，卷宗也已齐备。若暂不冲关，也可先把这一段静坐坐实。';
   }
 
-  return '蒲团、丹炉与静香都已备好。定下这次要坐多少年，便可入定温养道基。';
+  return '蒲团、香炉与静香都已备好。定下这次要坐多少年，便可入定温养道基。';
 }
 
 function getBreakthroughLeadText({
@@ -217,7 +217,7 @@ function getBreakthroughLeadText({
   if (!canBreakthrough) {
     return '火候尚浅，静室暂不适合冲关。';
   }
-  return '火候已至，若要推门破关，先看眼前药力与心境是否齐备。';
+  return '火候已至，若要推门破关，先看眼前香力与心境是否齐备。';
 }
 
 function getRetreatGuidanceText({
@@ -248,7 +248,7 @@ function getRetreatGuidanceText({
   }
 
   if (!canBreakthrough) {
-    return '修为未到门槛，先把这回闭关坐实。';
+    return '灯韵未到门槛，先把这回闭关坐实。';
   }
 
   return breakthroughRecommendation ?? '火候已到，是否冲关，只看你此刻心意。';
@@ -307,10 +307,10 @@ function RetreatCultivationPanel({
         <InkButton
           onClick={onRetreat}
           pending={retreatLoading}
-          pendingLabel="修炼中……"
+          pendingLabel="窥悟中……"
           variant="primary"
         >
-          闭关修炼
+          闭关窥悟
         </InkButton>
       </div>
     </div>
@@ -502,7 +502,7 @@ export function RetreatView({ sectContext }: RetreatViewProps) {
     ) : undefined;
 
   if (isLoading && !cultivator && !shouldHoldResultShell) {
-    return <GameSceneLoading message="洞府封闭中，稍候片刻……" />;
+    return <GameSceneLoading message="灯宅封闭中，稍候片刻……" />;
   }
 
   if (!cultivator) {
@@ -542,7 +542,7 @@ export function RetreatView({ sectContext }: RetreatViewProps) {
     return (
       <div className="flex h-full items-center justify-center px-4">
         <InkNotice>
-          尚未觉醒灵根，无法入驻洞府。
+          尚未觉醒窍，无法入驻灯宅。
           <InkButton href="/game/create" variant="primary" className="ml-2">
             前往觉醒 →
           </InkButton>
@@ -652,14 +652,14 @@ export function RetreatView({ sectContext }: RetreatViewProps) {
               note="静室里的一切筹算，都从这一层火候起算。"
             />
             <RetreatSummaryEntry
-              label="修为进度"
+              label="灯韵进度"
               value={`${cultivationProgress?.percent ?? 0}%`}
-              note="修为达到 60% 后，才算摸到冲关门槛。"
+              note="灯韵达到 60% 后，才算摸到冲关门槛。"
             />
             <RetreatSummaryEntry
               label={COMPREHENSION_LABEL}
               value={`${cultivationProgress?.comprehension_insight ?? 0}/100`}
-              note="感悟越稳，临门一脚越不容易乱。"
+              note="窥悟越稳，临门一脚越不容易乱。"
             />
             <RetreatSummaryEntry
               label="剩余寿元"

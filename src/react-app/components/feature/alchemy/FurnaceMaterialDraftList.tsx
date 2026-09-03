@@ -27,7 +27,7 @@ export function FurnaceMaterialDraftList({
   if (selectedIds.length === 0) {
     return (
       <div className="border-ink/15 text-ink-secondary border border-dashed px-4 py-7 text-center text-sm">
-        炉膛尚空，请先从灵材匣中挑选本炉药材。
+        炉膛尚空，请先从灯材匣中挑选本炉香材。
       </div>
     );
   }
@@ -40,7 +40,7 @@ export function FurnaceMaterialDraftList({
           return (
             <div key={id} className="flex min-h-16 items-center gap-3 py-2">
               <GameLoadingState
-                message="正在辨认灵材……"
+                message="正在辨认灯材……"
                 variant="inline"
                 className="min-h-0 flex-1 py-0"
               />

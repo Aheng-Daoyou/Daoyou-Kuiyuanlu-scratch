@@ -152,7 +152,7 @@ function getMaxPriceForItem(item: SelectableItem): number {
 
 function getAuctionUnsupportedReason(item: SelectableItem): string | null {
   if (item.itemType === 'consumable' && !isPillConsumable(item as Consumable)) {
-    return '当前仅支持丹药寄售';
+    return '当前仅支持香品寄售';
   }
 
   return null;
@@ -355,13 +355,13 @@ export function ListItemModal({
 
     const priceNum = parseInt(price);
     if (isNaN(priceNum) || priceNum < 1) {
-      setError('价格必须至少为 1 灵石');
+      setError('价格必须至少为 1 灯油券');
       return;
     }
     const maxPrice = getMaxPriceForItem(selectedItem);
     if (priceNum > maxPrice) {
       const quality = getItemQuality(selectedItem);
-      setError(`${quality}物品单价不得超过 ${maxPrice.toLocaleString()} 灵石`);
+      setError(`${quality}物品单价不得超过 ${maxPrice.toLocaleString()} 灯油券`);
       return;
     }
 
@@ -613,7 +613,7 @@ export function ListItemModal({
   const tabs = [
     { label: getResourceTypeLabel('material'), value: 'material' },
     { label: getResourceTypeLabel('artifact'), value: 'artifact' },
-    { label: CONSUMABLE_TYPE_DISPLAY_MAP.丹药.label, value: 'consumable' },
+    { label: CONSUMABLE_TYPE_DISPLAY_MAP.香品.label, value: 'consumable' },
   ];
 
   return (
@@ -1046,13 +1046,13 @@ export function ListItemModal({
               <InkNotice>
                 {hasAnyLoadedItems && hasAnyAuctionItems
                   ? activeType === 'consumable'
-                    ? '暂无符合筛选条件的可寄售丹药（仅限玄品及以上）。'
+                    ? '暂无符合筛选条件的可寄售香品（仅限玄品及以上）。'
                     : '暂无符合筛选条件的可寄售物品（仅限玄品及以上）。'
                   : activeType === 'material'
                     ? '储物袋中没有可寄售材料（仅限玄品及以上）。'
                     : activeType === 'artifact'
-                      ? '储物袋中没有可寄售法宝（仅限玄品及以上）。'
-                      : '储物袋中没有可寄售丹药（仅限玄品及以上）。'}
+                      ? '储物袋中没有可寄售封灵器（仅限玄品及以上）。'
+                      : '储物袋中没有可寄售香品（仅限玄品及以上）。'}
               </InkNotice>
             )}
           </div>
@@ -1135,7 +1135,7 @@ export function ListItemModal({
 
           <div>
             <label className="mb-2 block text-sm font-medium">
-              设置单件价格（灵石）
+              设置单件价格（灯油券）
             </label>
             <InkInput
               value={price}
@@ -1148,7 +1148,7 @@ export function ListItemModal({
                 const q = getItemQuality(selectedItem);
                 return (
                   <p className="text-ink-secondary mt-1 text-xs">
-                    {q}单件上限：{maxP.toLocaleString()} 灵石
+                    {q}单件上限：{maxP.toLocaleString()} 灯油券
                   </p>
                 );
               })()}
@@ -1157,15 +1157,15 @@ export function ListItemModal({
                 <p>
                   总价：{settlementPreview.unitPrice.toLocaleString()} ×{' '}
                   {settlementPreview.quantity} ={' '}
-                  {settlementPreview.grossAmount.toLocaleString()} 灵石
+                  {settlementPreview.grossAmount.toLocaleString()} 灯油券
                 </p>
                 <p>
-                  阶梯税：{settlementPreview.feeAmount.toLocaleString()} 灵石
+                  阶梯税：{settlementPreview.feeAmount.toLocaleString()} 灯油券
                   （当前边际税率 {settlementPreview.marginalRatePercent}%）
                 </p>
                 <p>
                   全部售出预计到手：
-                  {settlementPreview.sellerAmount.toLocaleString()} 灵石
+                  {settlementPreview.sellerAmount.toLocaleString()} 灯油券
                 </p>
               </div>
             ) : null}

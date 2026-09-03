@@ -294,7 +294,7 @@ export function CultivatorCurrentStatusSection() {
       : detailDialog?.kind === 'toxicity'
         ? {
             id: 'toxicity',
-            title: '【丹毒】影响',
+            title: '【香毒】影响',
             content: (
               <div className="space-y-3 text-sm leading-7">
                 <div className="space-y-1">
@@ -369,7 +369,7 @@ export function CultivatorCurrentStatusSection() {
           />
           <CompactInfoRow
             icon="☠️"
-            label="丹毒"
+            label="香毒"
             note={state.pillToxicityStage.label}
             value={`${state.pillToxicity}`}
             trailing={`恢复 ${state.pillToxicityRecoveryEfficiency}% · 破境压制 ${state.breakthroughPenaltyPercent}%`}

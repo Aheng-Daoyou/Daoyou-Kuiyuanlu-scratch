@@ -152,7 +152,7 @@ export function RefineScene({ sectContext }: RefineSceneProps) {
       }
       if (prev.length >= MAX_MATERIALS) {
         pushToast({
-          message: `炼器炉量力有限，最多投入 ${MAX_MATERIALS} 种灵材`,
+          message: `封灵炉量力有限，最多投入 ${MAX_MATERIALS} 种灯材`,
           tone: 'warning',
         });
         return prev;
@@ -210,24 +210,24 @@ export function RefineScene({ sectContext }: RefineSceneProps) {
 
   const handleSubmit = async () => {
     if (!cultivator) {
-      pushToast({ message: '请先在首页觉醒灵根。', tone: 'warning' });
+      pushToast({ message: '请先在首页觉醒窍。', tone: 'warning' });
       return;
     }
 
     if (selectedMaterialIds.length === 0) {
-      pushToast({ message: '巧妇难为无米之炊，请投入灵材。', tone: 'warning' });
+      pushToast({ message: '巧妇难为无米之炊，请投入灯材。', tone: 'warning' });
       return;
     }
 
     if (!requestedSlot) {
-      pushToast({ message: '请选择目标槽位以确定法宝类型。', tone: 'warning' });
+      pushToast({ message: '请选择目标槽位以确定封灵器类型。', tone: 'warning' });
       return;
     }
 
     openQiActionConfirm({
-      actionName: '开炉炼器',
+      actionName: '开炉封灵',
       qiCost,
-      confirmLabel: '开炉炼器',
+      confirmLabel: '开炉封灵',
       onConfirm: async () => {
         setSubmitting(true);
         setStatus('炉火纯青，真火锤锻……');
@@ -273,11 +273,11 @@ export function RefineScene({ sectContext }: RefineSceneProps) {
   return (
     <GameSceneFrame
       variant="workflow"
-      title={sectContext ? `【${sectContext.scene.title}】` : '【炼器室】'}
+      title={sectContext ? `【${sectContext.scene.title}】` : '【封灵室】'}
       description={
         sectContext
           ? sectContext.scene.description
-          : '千锤百炼，法宝天成。保留原有炼器业务流，只把当前投入、资源判断与去向压缩进统一工作流壳。'
+          : '千锤百炼，封灵器天成。保留原有封灵业务流，只把当前投入、资源判断与去向压缩进统一工作流壳。'
       }
       identityOverride={
         sectContext
@@ -315,20 +315,20 @@ export function RefineScene({ sectContext }: RefineSceneProps) {
           <GameSceneAsideSection title="炼制摘要">
             <div className="space-y-2 text-sm leading-7">
               <p>
-                已投入灵材：{selectedMaterialIds.length} / {MAX_MATERIALS}
+                已投入灯材：{selectedMaterialIds.length} / {MAX_MATERIALS}
               </p>
               <p>目标槽位：{requestedSlot ? '已选定' : '尚未指定'}</p>
-              <p>预计灵石：{displayEstimatedCost?.spiritStones ?? 0}</p>
+              <p>预计灯油券：{displayEstimatedCost?.spiritStones ?? 0}</p>
             </div>
           </GameSceneAsideSection>
           <GameSceneAsideSection
             title="成器提醒"
             className="text-sm leading-7"
             help={{
-              title: '炼器成器提醒',
+              title: '封灵成器提醒',
               content: (
                 <div className="space-y-2 text-sm leading-7">
-                  <p>槽位决定器型，灵材决定骨相，意念决定成品气质。</p>
+                  <p>槽位决定器型，灯材决定骨相，意念决定成品气质。</p>
                   <p>若资源不足或规则冲突，先在主区修正后再起炉。</p>
                 </div>
               ),
@@ -353,10 +353,10 @@ export function RefineScene({ sectContext }: RefineSceneProps) {
         />
       </GameSceneSection>
 
-      <GameSceneSection title="灵材投入">
+      <GameSceneSection title="灯材投入">
         <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
           <p className="text-ink-secondary text-sm leading-7">
-            已投入 {selectedMaterialIds.length} / {MAX_MATERIALS} 种灵材
+            已投入 {selectedMaterialIds.length} / {MAX_MATERIALS} 种灯材
           </p>
           <InkButton
             variant="outline"
@@ -391,7 +391,7 @@ export function RefineScene({ sectContext }: RefineSceneProps) {
             <span
               className={`text-xs ${displayCanAfford ? 'text-teal' : 'text-crimson'}`}
             >
-              {displayCanAfford ? '✓ 资源充足' : '✗ 灵石不足'}
+              {displayCanAfford ? '✓ 资源充足' : '✗ 灯油券不足'}
             </span>
           </div>
         ) : (
@@ -422,7 +422,7 @@ export function RefineScene({ sectContext }: RefineSceneProps) {
             pending={isSubmitting}
             pendingLabel="真火炼中……"
           >
-            开炉炼器
+            开炉封灵
           </InkButton>
         </InkActionGroup>
       </GameSceneSection>
@@ -436,7 +436,7 @@ export function RefineScene({ sectContext }: RefineSceneProps) {
       <MaterialSelectionModal
         isOpen={isMaterialModalOpen}
         onClose={() => setIsMaterialModalOpen(false)}
-        title="甄选炼器灵材"
+        title="甄选封灵灯材"
         maxMaterials={MAX_MATERIALS}
         cultivatorId={cultivator?.id}
         selectedMaterialIds={selectedMaterialIds}
@@ -445,9 +445,9 @@ export function RefineScene({ sectContext }: RefineSceneProps) {
         isSubmitting={isSubmitting}
         pageSize={20}
         includeMaterialTypes={ALLOWED_MATERIAL_TYPES}
-        loadingText="正在检索储物袋中的灵材，请稍候……"
-        emptyNoticeText="暂无可用于炼器的材料。"
-        totalText={(total) => `共 ${total} 份可用于炼器的材料`}
+        loadingText="正在检索储物袋中的灯材，请稍候……"
+        emptyNoticeText="暂无可用于封灵的材料。"
+        totalText={(total) => `共 ${total} 份可用于封灵的材料`}
       />
 
       <CreationProductResultModal

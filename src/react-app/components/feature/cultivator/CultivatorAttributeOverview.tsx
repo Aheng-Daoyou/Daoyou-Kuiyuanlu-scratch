@@ -222,7 +222,7 @@ export function CultivatorAttributeOverview({
         isOpen={drawerOpen}
         onClose={() => setDrawerOpen(false)}
         title="全部战斗属性"
-        description="查看由基础根骨、装备、功法与状态共同形成的完整属性。"
+        description="查看由基础灯骨、装备、功法与状态共同形成的完整属性。"
         size="md"
       >
         <div className="grid gap-2 sm:grid-cols-2">

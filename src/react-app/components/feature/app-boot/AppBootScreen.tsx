@@ -6,7 +6,7 @@ export function AppBootScreen() {
       className="app-boot-screen"
       role="status"
       aria-live="polite"
-      aria-label="万界道友正在加载"
+      aria-label="窥渊录正在加载"
     >
       <div className="app-boot-content">
         <img

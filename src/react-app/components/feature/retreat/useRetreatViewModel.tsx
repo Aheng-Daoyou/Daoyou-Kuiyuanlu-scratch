@@ -341,7 +341,7 @@ export function useRetreatViewModel(): UseRetreatViewModelReturn {
     }
 
     openQiActionConfirm({
-      actionName: '闭关修炼',
+      actionName: '闭关窥悟',
       qiCost: getRetreatQiCost(parsedYears),
       confirmLabel: '入定闭关',
       onConfirm: async () => {

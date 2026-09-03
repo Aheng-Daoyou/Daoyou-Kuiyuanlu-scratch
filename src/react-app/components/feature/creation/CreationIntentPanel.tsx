@@ -6,7 +6,7 @@ export interface CreationIntentPanelProps {
   productType: 'artifact' | 'skill' | 'gongfa';
   userPrompt: string;
   onUserPromptChange: (value: string) => void;
-  /** 仅炼器需要：玩家必须声明目标槽位。其它产物传了也会被忽略。 */
+  /** 仅封灵需要：玩家必须声明目标槽位。其它产物传了也会被忽略。 */
   requestedSlot?: EquipmentSlot | '';
   onRequestedSlotChange?: (value: EquipmentSlot | '') => void;
   disabled?: boolean;
@@ -17,7 +17,7 @@ export interface CreationIntentPanelProps {
  *
  * 只暴露"玩家真正需要主动决定"的输入：
  *   - userPrompt：命名/风格意念，会传入 LLM 命名阶段做意向融合；
- *   - requestedSlot：仅法宝有意义的装备槽位（必选）。
+ *   - requestedSlot：仅封灵器有意义的装备槽位（必选）。
  *
  * 元素倾向 / 语义标签 一律交由材料和引擎自动推演；
  * LLM 命名增强固定开启（遇到错误会自动降级到规则命名）。

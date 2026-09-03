@@ -68,15 +68,18 @@ export function buildEmailOtpTarget(
     email,
     displayName,
     source,
+    inviteCode,
   }: {
     email?: string;
     displayName?: string;
     source?: EmailOtpSource;
+    inviteCode?: string;
   } = {},
 ) {
   const searchParams = new URLSearchParams();
   const trimmedEmail = email?.trim();
   const trimmedDisplayName = displayName?.trim();
+  const trimmedInviteCode = inviteCode?.trim();
 
   if (trimmedEmail) {
     searchParams.set('email', trimmedEmail);
@@ -84,6 +87,10 @@ export function buildEmailOtpTarget(
 
   if (trimmedDisplayName) {
     searchParams.set('name', trimmedDisplayName);
+  }
+
+  if (trimmedInviteCode) {
+    searchParams.set('invite', trimmedInviteCode);
   }
 
   if (source === 'signup') {

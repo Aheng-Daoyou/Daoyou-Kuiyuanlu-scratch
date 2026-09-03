@@ -117,21 +117,21 @@ function CultivationResultContent({
 
   return (
     <div className="border-ink/10 space-y-3 border border-dashed bg-[rgba(255,252,245,0.78)] p-4 text-sm leading-7">
-      <p className="text-ink text-base font-medium">🌱 修炼有成</p>
-      <p>修为增长：+{Number(summary.exp_gained)}</p>
+      <p className="text-ink text-base font-medium">🌱 窥悟有成</p>
+      <p>灯韵增长：+{Number(summary.exp_gained)}</p>
       <p>当前进度：{format('.2f')(summary.progress)}%</p>
 
       {summary.insight_gained > 0 ? (
         <p>
           {COMPREHENSION_LABEL}：+{summary.insight_gained}
           {summary.epiphany_triggered ? (
-            <span className="text-gold ml-1">（顿悟加持）</span>
+            <span className="text-gold ml-1">（窥真加持）</span>
           ) : null}
         </p>
       ) : null}
 
       {summary.epiphany_triggered ? (
-        <p className="text-gold">✨ 触发顿悟！修为翻倍，感悟大增！</p>
+        <p className="text-gold">✨ 触发窥真！灯韵翻倍，窥悟大增！</p>
       ) : null}
 
       {summary.bottleneck_entered ? (
@@ -211,16 +211,16 @@ function BreakthroughResultContent({
 
           {summary.exp_lost ? (
             <p className="text-wood">
-              修为损失：-{summary.exp_lost} 点
+              灯韵损失：-{summary.exp_lost} 点
               <span className="ml-1 text-xs opacity-80">
-                （冲关失败，法力涣散）
+                （冲关失败，灯焰涣散）
               </span>
             </p>
           ) : null}
 
           {summary.insight_change && summary.insight_change < 0 ? (
             <p className="text-wood">
-              道行感悟：{summary.insight_change}
+              道行窥悟：{summary.insight_change}
               <span className="ml-1 text-xs opacity-80">
                 （未能破关，心生迷惘）
               </span>
@@ -229,7 +229,7 @@ function BreakthroughResultContent({
 
           {summary.inner_demon_triggered ? (
             <p className="text-crimson font-medium">
-              ⚠️ 屡战屡败，已生心魔！下次突破成功率将降低
+              ⚠️ 屡战屡败，已生魔障！下次突破成功率将降低
               <span className="ml-1 text-xs opacity-80">
                 （可通过副本、战斗等历练消除）
               </span>

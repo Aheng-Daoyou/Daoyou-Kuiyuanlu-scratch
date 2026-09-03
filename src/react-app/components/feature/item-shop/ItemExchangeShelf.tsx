@@ -28,10 +28,10 @@ const SHOP_TABS: Array<{
   title: string;
   emptyText: string;
 }> = [
-  { key: 'artifact', title: '法宝', emptyText: '暂无可兑换法宝。' },
-  { key: 'pill', title: '丹药', emptyText: '暂无可兑换丹药。' },
+  { key: 'artifact', title: '封灵器', emptyText: '暂无可兑换封灵器。' },
+  { key: 'pill', title: '香品', emptyText: '暂无可兑换香品。' },
   { key: 'talisman', title: '符箓', emptyText: '暂无可兑换符箓。' },
-  { key: 'material', title: '灵材', emptyText: '暂无可兑换灵材。' },
+  { key: 'material', title: '灯材', emptyText: '暂无可兑换灯材。' },
 ];
 
 function toQualityTier(

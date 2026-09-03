@@ -39,11 +39,11 @@ export function FurnaceObservationStage() {
       </div>
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <Omen title="药蕴" value={essence.label}>
+        <Omen title="香蕴" value={essence.label}>
           {essence.description}
         </Omen>
         <Omen
-          title="主丹征兆"
+          title="主香征兆"
           value={
             batch
               ? `${batch.primaryQualityRange.min}—${batch.primaryQualityRange.max}`
@@ -53,7 +53,7 @@ export function FurnaceObservationStage() {
           {omen.primary}
         </Omen>
         <Omen
-          title="同炉副丹"
+          title="同炉副香"
           value={
             batch && batch.possibleQualities.length > 1
               ? '已有分流'
@@ -62,7 +62,7 @@ export function FurnaceObservationStage() {
         >
           {omen.secondary}
         </Omen>
-        <Omen title="品相倾向" value={batch ? '丹纹初现' : '未显'}>
+        <Omen title="品相倾向" value={batch ? '香纹初现' : '未显'}>
           {describeAppearanceTendency(batch?.appearanceHints)}
         </Omen>
       </div>
@@ -103,7 +103,7 @@ export function FurnaceObservationStage() {
       !session.readiness.loading &&
       !session.readiness.canAfford ? (
         <InkNotice tone="warning">
-          灵石不足：本次炼制需要{' '}
+          灯油券不足：本次炼制需要{' '}
           {session.readiness.estimatedSpiritStones.toLocaleString('zh-CN')} 枚，
           当前仅有{' '}
           {(session.cultivator?.spiritStones ?? 0).toLocaleString('zh-CN')} 枚。
@@ -118,7 +118,7 @@ export function FurnaceObservationStage() {
             label="炼法"
             value={
               session.mode === 'formula'
-                ? `依方 · ${session.formula?.name ?? '未定丹方'}`
+                ? `依方 · ${session.formula?.name ?? '未定香方'}`
                 : `随心 · ${session.intent.trim()}`
             }
           />
@@ -127,16 +127,16 @@ export function FurnaceObservationStage() {
             value={`${session.materials.ids.length} 味 · 共 ${session.totalDose} 份`}
           />
           <ConfirmRow
-            label="灵石"
+            label="灯油券"
             value={
               session.readiness.estimatedSpiritStones === null
                 ? '待核'
                 : `${session.readiness.estimatedSpiritStones} 枚`
             }
           />
-          <ConfirmRow label="天地灵气" value={`${session.qiCost} 点`} />
+          <ConfirmRow label="灯油" value={`${session.qiCost} 点`} />
           <ConfirmRow
-            label="预计成丹"
+            label="预计成香"
             value={
               batch
                 ? `${batch.totalQuantityRange.min}—${batch.totalQuantityRange.max} 枚`

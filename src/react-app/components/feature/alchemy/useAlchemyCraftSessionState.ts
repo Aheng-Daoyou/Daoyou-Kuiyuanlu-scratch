@@ -296,7 +296,7 @@ export function useAlchemyCraftSessionState(sectContext?: AlchemySectContext) {
       const outcome = addMaterialToFurnace(material);
       if (outcome === 'limit-reached')
         pushToast({
-          message: `一炉最多投入 ${ALCHEMY_MAX_MATERIALS} 种灵材。`,
+          message: `一炉最多投入 ${ALCHEMY_MAX_MATERIALS} 种灯材。`,
           tone: 'warning',
         });
     },
@@ -429,7 +429,7 @@ export function useAlchemyCraftSessionState(sectContext?: AlchemySectContext) {
             ...current,
             cooldownRemaining: body.remainingSeconds!,
           }));
-        throw new Error(body.error || '丹方分析失败');
+        throw new Error(body.error || '香方分析失败');
       }
       analysisKeyRef.current = selectionKey;
       if (analysisExpiryTimerRef.current !== null)
@@ -440,7 +440,7 @@ export function useAlchemyCraftSessionState(sectContext?: AlchemySectContext) {
         setAnalysis((current) => ({
           ...EMPTY_ANALYSIS,
           cooldownRemaining: current.cooldownRemaining,
-          error: '本次丹方分析已过期，请重新查看炼制预览。',
+          error: '本次香方分析已过期，请重新查看炼制预览。',
         }));
         setPhase('preparing');
       }, body.data.expiresInSeconds * 1000);
@@ -456,7 +456,7 @@ export function useAlchemyCraftSessionState(sectContext?: AlchemySectContext) {
         ...current,
         value: null,
         loading: false,
-        error: error instanceof Error ? error.message : '丹方分析失败',
+        error: error instanceof Error ? error.message : '香方分析失败',
       }));
       return false;
     }
@@ -511,18 +511,18 @@ export function useAlchemyCraftSessionState(sectContext?: AlchemySectContext) {
         );
         const body = (await response.json()) as DiscoveryResponse;
         if (!response.ok || !body.success)
-          throw new Error(body.error || '丹方留存失败');
+          throw new Error(body.error || '香方留存失败');
         setResult((current) => ({ ...current, formulaDiscovery: null }));
         if (save)
           pushToast({
             message: body.data?.formula
-              ? `已将【${body.data.formula.name}】收入玉简。`
-              : '新丹方已收入玉简。',
+              ? `已将【${body.data.formula.name}】收入灯册。`
+              : '新香方已收入灯册。',
             tone: 'success',
           });
       } catch (error) {
         pushToast({
-          message: error instanceof Error ? error.message : '丹方留存失败',
+          message: error instanceof Error ? error.message : '香方留存失败',
           tone: 'danger',
         });
       }
@@ -543,19 +543,19 @@ export function useAlchemyCraftSessionState(sectContext?: AlchemySectContext) {
       );
       const details = buildCraftConfirmationDetails([
         [
-          expectedMode === 'improvised' ? '炼制目标' : '丹方',
+          expectedMode === 'improvised' ? '炼制目标' : '香方',
           expectedMode === 'improvised'
             ? intent.trim()
             : (formula?.name ?? '未选择'),
         ],
         ['材料投入', `${materials.ids.length} 味 · 共 ${totalDose} 份`],
-        ['灵石消耗', `${readiness.estimatedSpiritStones ?? 0} 枚`],
-        ['天地灵气', `${qiCost} 点`],
+        ['灯油券消耗', `${readiness.estimatedSpiritStones ?? 0} 枚`],
+        ['灯油', `${qiCost} 点`],
         ...(expectedMode === 'improvised'
           ? ([
               [
                 '结果说明',
-                '随心炼制无法预知丹药效果、品阶与数量，结果将在开鼎后揭晓。',
+                '随心炼制无法预知香品效果、品阶与数量，结果将在开鼎后揭晓。',
               ],
             ] as Array<[string, string]>)
           : []),
@@ -572,7 +572,7 @@ export function useAlchemyCraftSessionState(sectContext?: AlchemySectContext) {
           setStatus(
             expectedMode === 'improvised'
               ? '炉门闭合，陌生药气正在火中交汇……'
-              : '炉门闭合，地火正沿丹方阵纹攀升……',
+              : '炉门闭合，地火正沿香方阵纹攀升……',
           );
           setResult(EMPTY_RESULT);
           const firePulse = window.setTimeout(
@@ -589,7 +589,7 @@ export function useAlchemyCraftSessionState(sectContext?: AlchemySectContext) {
               setStatus(
                 expectedMode === 'improvised'
                   ? '炉火渐稳，最终结果仍要等开鼎才能知晓……'
-                  : '药蕴回旋，丹药正在不同火层中凝形……',
+                  : '香蕴回旋，香品正在不同火层中凝形……',
               ),
             1500,
           );
@@ -601,7 +601,7 @@ export function useAlchemyCraftSessionState(sectContext?: AlchemySectContext) {
                 body: JSON.stringify(submitPayload),
               }),
             );
-            if (!body.consumable) throw new Error('炉中未能凝丹');
+            if (!body.consumable) throw new Error('炉中未能凝香');
             setResult({
               consumable: body.consumable,
               consumables: body.consumables ?? [body.consumable],
@@ -612,15 +612,15 @@ export function useAlchemyCraftSessionState(sectContext?: AlchemySectContext) {
               formulaDiscovery: body.formulaDiscovery ?? null,
               formulaProgress: body.formulaProgress ?? null,
             });
-            setStatus('炉鸣三响，丹香已从炉隙逸出。');
+            setStatus('炉鸣三响，香气已从炉隙逸出。');
             setPhase('result');
           } catch (error) {
             const message =
-              error instanceof Error ? error.message : '炼丹失败';
+              error instanceof Error ? error.message : '制香失败';
             setStatus(message);
             const analysisInvalid =
               expectedMode === 'formula' &&
-              (message.includes('请先推演药路') ||
+              (message.includes('请先推演香路') ||
                 message.includes('材料已发生变化'));
             if (analysisInvalid) clearAnalysis();
             setPhase(

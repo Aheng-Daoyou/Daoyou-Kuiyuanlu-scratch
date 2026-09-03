@@ -43,7 +43,7 @@ export function PillKeywordLine({ labels }: { labels: string[] }) {
           className="relative inline-flex border-b border-dashed pb-px"
           data-pill-keyword={label}
           style={
-            label.includes('丹毒')
+            label.includes('香毒')
               ? {
                   ...getAffixUnderlineStyle(false),
                   color: 'rgba(193, 18, 31, 0.76)',
@@ -52,7 +52,7 @@ export function PillKeywordLine({ labels }: { labels: string[] }) {
                   ...getAffixUnderlineStyle(false),
                   ...getAffixToneStyle(
                     label.startsWith('剩余') ||
-                      label.startsWith('寿元丹剩余') ||
+                      label.startsWith('寿元香剩余') ||
                       label.startsWith('服用上限')
                       ? 'info'
                       : 'muted',

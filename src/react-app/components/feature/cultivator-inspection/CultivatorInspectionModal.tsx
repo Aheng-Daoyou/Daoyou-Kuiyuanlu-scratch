@@ -1,5 +1,5 @@
 import { BodyCultivationInspectionSection } from '@app/components/feature/cultivator/BodyCultivationPanels';
-import { LingGenMini } from '@app/components/func/LingGen';
+import { BaQiaoMini } from '@app/components/func/BaQiao';
 import { InkBadge } from '@app/components/ui';
 import { InkDetailDrawer } from '@app/components/ui/InkDetailDrawer';
 import type { CultivatorInspectionData } from '@shared/contracts/player';
@@ -33,7 +33,7 @@ export function CultivatorInspectionModal({
     <InkDetailDrawer
       isOpen={isOpen}
       onClose={onClose}
-      title={mode === 'enemy' ? '敌情查探' : '神识查探'}
+      title={mode === 'enemy' ? '敌情查探' : '心神查探'}
       description={cultivator.name}
       size="xl"
     >
@@ -70,7 +70,7 @@ export function CultivatorInspectionModal({
 
         {cultivator.spiritual_roots?.length ? (
           <section>
-            <LingGenMini spiritualRoots={cultivator.spiritual_roots} />
+            <BaQiaoMini spiritualRoots={cultivator.spiritual_roots} />
           </section>
         ) : null}
 

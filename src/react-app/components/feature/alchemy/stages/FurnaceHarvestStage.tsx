@@ -24,10 +24,10 @@ export function FurnaceHarvestStage({ onReturn }: { onReturn(): void }) {
           炼制完成
         </p>
         <div className="mt-5 grid grid-cols-3 divide-x divide-[rgba(136,97,45,0.22)]">
-          <ResultCount label="成丹总数" value={`${total} 枚`} />
-          <ResultCount label="丹品批次" value={`${items.length} 批`} />
+          <ResultCount label="成香总数" value={`${total} 枚`} />
+          <ResultCount label="香品批次" value={`${items.length} 批`} />
           <ResultCount
-            label="主丹品阶"
+            label="主香品阶"
             value={profile?.primaryQuality ?? items[0]?.quality ?? '未定'}
           />
         </div>
@@ -38,7 +38,7 @@ export function FurnaceHarvestStage({ onReturn }: { onReturn(): void }) {
           <div className="mb-3 flex flex-wrap items-end justify-between gap-2">
             <div>
               <p className="text-crimson text-xs tracking-[0.22em]">
-                成丹清单
+                成香清单
               </p>
               <h3 className="mt-1 text-lg">本炉所得，一览于此</h3>
             </div>
@@ -65,14 +65,14 @@ export function FurnaceHarvestStage({ onReturn }: { onReturn(): void }) {
 
       {session.result.formulaProgress ? (
         <InkNotice tone="info">
-          丹方熟练 +{session.result.formulaProgress.gainedExp}，当前 Lv.
+          香方熟练 +{session.result.formulaProgress.gainedExp}，当前 Lv.
           {session.result.formulaProgress.level}。
         </InkNotice>
       ) : null}
 
       {session.result.formulaDiscovery ? (
         <section className="border-crimson/30 border border-dashed p-5">
-          <p className="text-crimson text-xs tracking-[0.24em]">发现新丹方</p>
+          <p className="text-crimson text-xs tracking-[0.24em]">发现新香方</p>
           <h3 className="mt-2 text-lg">
             {session.result.formulaDiscovery.name}
           </h3>
@@ -83,7 +83,7 @@ export function FurnaceHarvestStage({ onReturn }: { onReturn(): void }) {
             {session.result.formulaDiscovery.discoveryRemark}
           </p>
           <p className="text-ink-secondary mt-2 text-xs leading-6">
-            保存后，今后便可按照这份丹方推演材料并重复炼制。
+            保存后，今后便可按照这份香方推演材料并重复炼制。
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
             <InkButton
@@ -96,7 +96,7 @@ export function FurnaceHarvestStage({ onReturn }: { onReturn(): void }) {
               variant="primary"
               onClick={() => void session.resolveDiscovery(true)}
             >
-              保存到丹方玉简
+              保存到香方灯册
             </InkButton>
           </div>
         </section>
@@ -110,7 +110,7 @@ export function FurnaceHarvestStage({ onReturn }: { onReturn(): void }) {
             onReturn();
           }}
         >
-          返回炼丹房
+          返回制香房
         </InkButton>
         <InkButton variant="primary" onClick={session.startNextBatch}>
           再炼一炉
@@ -227,7 +227,7 @@ function YieldSummary({ profile }: { profile: AlchemyYieldDisplayProfile }) {
   return (
     <section className="border-ink/15 grid gap-0 border sm:grid-cols-2 sm:divide-x sm:divide-[rgba(58,50,43,0.1)]">
       <ResultMetric
-        label="药蕴损耗"
+        label="香蕴损耗"
         value={`${Math.round(profile.essenceLossRatio * 100)}%`}
       />
       <ResultMetric

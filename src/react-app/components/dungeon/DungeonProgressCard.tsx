@@ -9,15 +9,15 @@ interface DungeonProgressCardProps {
 }
 
 /**
- * 副本进度卡片
- * 集成状态卡片和资源统计，展示副本整体状态
+ * 秘境进度卡片
+ * 集成状态卡片和资源统计，展示秘境整体状态
  */
 export function DungeonProgressCard({
   state,
   onQuit,
 }: DungeonProgressCardProps) {
   return (
-    <InkSection title="副本状态" subdued>
+    <InkSection title="秘境状态" subdued>
       <div className="space-y-3">
         {/* 进度信息 */}
         <div className="flex justify-between px-2">

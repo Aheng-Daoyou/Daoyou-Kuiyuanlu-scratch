@@ -12,11 +12,11 @@ type CaveQuickGroup = {
 
 const CAVE_AREA_GROUPS: CaveQuickGroup[] = [
   {
-    title: '洞府内',
+    title: '灯宅内',
     areas: [
-      { label: '🧘 修炼室', href: '/game/retreat' },
-      { label: '🌕 炼丹房', href: '/game/craft/alchemy' },
-      { label: '🔥 炼器室', href: '/game/craft/refine' },
+      { label: '🧘 窥悟室', href: '/game/retreat' },
+      { label: '🌕 制香房', href: '/game/craft/alchemy' },
+      { label: '🔥 封灵室', href: '/game/craft/refine' },
       { label: '📚 悟道室', href: '/game/enlightenment' },
       { label: '👊 练功房', href: '/game/training-room' },
       { label: '💧 灵眼之泉', href: '/game/inn' },
@@ -25,7 +25,7 @@ const CAVE_AREA_GROUPS: CaveQuickGroup[] = [
     ],
   },
   {
-    title: '出洞府',
+    title: '出灯宅',
     areas: [
       { label: '⛰️ 外出云游', href: '/game/dungeon' },
       { label: '🛖 坊市', href: '/game/map?intent=market' },

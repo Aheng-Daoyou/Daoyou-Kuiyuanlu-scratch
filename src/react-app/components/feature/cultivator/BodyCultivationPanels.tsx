@@ -218,7 +218,7 @@ export function BodyCultivationSummaryContent({
     <div className={cn('space-y-3', dense && 'space-y-2')}>
       <BodyCultivationOverviewCard
         summary={summary}
-        status={summary.nextRealm ? '继续修炼' : '已圆满'}
+        status={summary.nextRealm ? '继续窥悟' : '已圆满'}
         statusTone={summary.nextRealm ? 'default' : 'success'}
       />
       <BodyCultivationTrackGrid
@@ -299,7 +299,7 @@ export function MarrowWashSummaryContent({
             Lv.{summary.level} · {summary.realmLabel}
           </p>
           <p className="text-ink-secondary text-xs leading-5">
-            服用洗髓丹推进进度，升级沉淀为自由属性点。
+            服用洗髓香推进进度，升级沉淀为自由属性点。
           </p>
         </div>
         {action ? <div className="shrink-0">{action}</div> : null}
@@ -312,7 +312,7 @@ export function MarrowWashSummaryContent({
           value={
             summary.nextBreakthroughLevel
               ? `Lv.${summary.nextBreakthroughLevel}`
-              : '修为不足'
+              : '灯韵不足'
           }
         />
         <BodyMetric
@@ -440,20 +440,20 @@ export function BodyCultivationDetailPanel() {
         </BodyCultivationOverviewCard>
       </GameSceneSection>
 
-      <GameSceneSection title="五轨修炼">
+      <GameSceneSection title="五轨窥悟">
         <BodyCultivationTrackGrid summary={summary} />
       </GameSceneSection>
 
       <GameSceneSection title="炼体说明">
         <div className="text-ink-secondary space-y-2 text-sm leading-7">
           <p>
-            五条轨道分别影响不同收益：皮肤偏防御，筋骨和气血偏生命与恢复，脏腑偏攻击和回蓝，元神偏控制抗性。
+            五条轨道分别影响不同收益：皮肤偏防御，筋骨和气血偏生命与恢复，脏腑偏攻击和回蓝，心神偏控制抗性。
           </p>
           <p>
-            炼体丹按药性方向提升对应轨道。丹药名称可以不同，只要药性方向相同，就会作用到同一条轨道。
+            炼体香按香性方向提升对应轨道。香品名称可以不同，只要香性方向相同，就会作用到同一条轨道。
           </p>
           <p>
-            提升肉身阶位前，需要满足轨道等级、修为境界、材料和对应方向炼体丹的质量要求。
+            提升肉身阶位前，需要满足轨道等级、灯韵境界、材料和对应方向炼体香的质量要求。
           </p>
         </div>
       </GameSceneSection>

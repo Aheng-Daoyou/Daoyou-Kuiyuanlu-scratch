@@ -33,9 +33,9 @@ export function FurnaceConversation({ onExit, onOpen }: ConversationProps) {
     });
   }
   options.push(
-    { id: 'improvised', label: '随心炼丹' },
-    { id: 'formula', label: '按照丹方炼制' },
-    { id: 'leave', label: '返回炼丹房', tone: 'muted' },
+    { id: 'improvised', label: '随心制香' },
+    { id: 'formula', label: '按照香方炼制' },
+    { id: 'leave', label: '返回制香房', tone: 'muted' },
   );
 
   return (
@@ -49,7 +49,7 @@ export function FurnaceConversation({ onExit, onOpen }: ConversationProps) {
               ? '炉火已经平息，这一炉的炼制结果正等你查看。'
               : hasCurrentBatch
                 ? '炉中已有准备好的材料。你可以继续这一炉，也可以重新选择炼制方式。'
-                : '炉火尚未点燃。你可以自由搭配材料，也可以按照已有丹方炼制。',
+                : '炉火尚未点燃。你可以自由搭配材料，也可以按照已有香方炼制。',
         },
       ]}
       options={options}
@@ -76,12 +76,12 @@ export function HerbCabinetConversation({
       messages={[
         {
           id: 'intro',
-          body: '药柜中存放着你已有的炼丹材料。可以在这里查看库存和材料药性。',
+          body: '香柜中存放着你已有的制香材料。可以在这里查看库存和材料香性。',
         },
       ]}
       options={[
-        { id: 'materials', label: '查看炼丹材料', tone: 'primary' },
-        { id: 'leave', label: '返回炼丹房', tone: 'muted' },
+        { id: 'materials', label: '查看制香材料', tone: 'primary' },
+        { id: 'leave', label: '返回制香房', tone: 'muted' },
       ]}
       onSelectOption={(optionId) => {
         if (optionId === 'leave') onExit();
@@ -101,17 +101,17 @@ export function FormulaArchiveConversation({
       messages={[
         {
           id: 'intro',
-          body: '玉简中记录着你已经掌握的丹方。可以在这里查阅、使用或删除已有丹方。',
+          body: '灯册中记录着你已经掌握的香方。可以在这里查阅、使用或删除已有香方。',
         },
       ]}
       options={[
         {
           id: 'formula-library',
-          label: '查看已有丹方',
+          label: '查看已有香方',
           tone: 'primary',
         },
-        { id: 'formula', label: '使用丹方炼制' },
-        { id: 'leave', label: '返回炼丹房', tone: 'muted' },
+        { id: 'formula', label: '使用香方炼制' },
+        { id: 'leave', label: '返回制香房', tone: 'muted' },
       ]}
       onSelectOption={(optionId) => {
         if (optionId === 'leave') onExit();
@@ -132,16 +132,16 @@ export function AlchemyGuideConversation({
       messages={[
         {
           id: 'intro',
-          body: '石碑记载着炼丹的基本方法和常见问题。阅读碑文不会改变炉中的材料。',
+          body: '石碑记载着制香的基本方法和常见问题。阅读碑文不会改变炉中的材料。',
         },
       ]}
       options={[
         {
           id: 'guide-reference',
-          label: '阅读炼丹说明',
+          label: '阅读制香说明',
           tone: 'primary',
         },
-        { id: 'leave', label: '返回炼丹房', tone: 'muted' },
+        { id: 'leave', label: '返回制香房', tone: 'muted' },
       ]}
       onSelectOption={(optionId) => {
         if (optionId === 'leave') onExit();

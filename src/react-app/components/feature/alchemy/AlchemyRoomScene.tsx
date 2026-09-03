@@ -97,7 +97,7 @@ function AlchemyRoomContent() {
   );
 
   if (session.loading && !session.cultivator)
-    return <GameSceneLoading message="丹房禁制正在辨认来者……" />;
+    return <GameSceneLoading message="闻香房禁制正在辨认来者……" />;
 
   const openAction = (nextAction: AlchemyFacilityAction) => {
     if (nextAction === 'formula' || nextAction === 'improvised') {
@@ -132,7 +132,7 @@ function AlchemyRoomContent() {
     },
     {
       ...ALCHEMY_FACILITIES.formulas,
-      status: { label: '玉简可阅', tone: 'neutral' },
+      status: { label: '灯册可阅', tone: 'neutral' },
     },
     {
       ...ALCHEMY_FACILITIES.guide,
@@ -171,13 +171,13 @@ function AlchemyRoomContent() {
 
   return (
     <GameSceneFrame
-      title="【炼丹房】"
-      description="丹炉、药柜、丹方玉简与炉理碑各有用途。先与设施交互，再选择要办理的事情。"
+      title="【制香房】"
+      description="香炉、香柜、香方灯册与炉理碑各有用途。先与设施交互，再选择要办理的事情。"
     >
       {workspace ?? (
         <RoomView
-          eyebrow="丹火沉静 · 四处设施各司其职"
-          description="中央丹炉火光微动，药柜、丹方玉简与炉理碑分列四周。走近一处设施，看看它能为你做什么。"
+          eyebrow="香火沉静 · 四处设施各司其职"
+          description="中央香炉火光微动，香柜、香方灯册与炉理碑分列四周。走近一处设施，看看它能为你做什么。"
           actors={actors}
           selectedId={selectedId}
           onSelect={(id) => setLocation(id as AlchemyFacilityId)}

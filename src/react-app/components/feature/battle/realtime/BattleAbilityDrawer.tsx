@@ -32,11 +32,11 @@ export function BattleAbilityDrawer({
     <InkDetailDrawer
       isOpen={isOpen}
       onClose={onClose}
-      title={`为 ${unitName} 选择术法`}
+      title={`为 ${unitName} 选择灯律`}
       className="md:w-[min(25rem,92vw)]"
     >
       <p className="border-ink/15 text-ink/55 mb-4 border-b border-dashed pb-3 text-[0.68rem]">
-        第 {round ?? '—'} 回合 · 单体术法选择目标后锁定；自身、范围与随机术法点选后立即锁定。
+        第 {round ?? '—'} 回合 · 单体灯律选择目标后锁定；自身、范围与随机灯律点选后立即锁定。
       </p>
 
       <div className="space-y-2">
@@ -71,7 +71,7 @@ export function BattleAbilityDrawer({
               <div className="text-ink/55 mt-3 flex items-center justify-between text-[0.65rem]">
                 <span>
                   {ability.costs
-                    ?.map((cost) => `${cost.resource === 'mp' ? '真元' : '气血'} ${cost.amount}`)
+                    ?.map((cost) => `${cost.resource === 'mp' ? '灯焰' : '气血'} ${cost.amount}`)
                     .join(' · ') || '无消耗'}
                 </span>
                 <span>
@@ -90,7 +90,7 @@ export function BattleAbilityDrawer({
         })}
         {abilities.length === 0 && (
           <p className="text-ink/50 py-10 text-center text-sm">
-            当前单位没有可选术法。
+            当前单位没有可选灯律。
           </p>
         )}
       </div>

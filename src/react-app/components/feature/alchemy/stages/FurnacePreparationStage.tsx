@@ -42,7 +42,7 @@ export function FurnacePreparationStage({
         <div className="grid gap-3 sm:grid-cols-2">
           <Choice
             active={session.mode === 'improvised'}
-            title="随心炼丹"
+            title="随心制香"
             detail="填写炼制目标并直接尝试，结果要等开鼎后才能知晓。"
             onClick={() =>
               onModeChange ? onModeChange('improvised') : session.setMode('improvised')
@@ -51,7 +51,7 @@ export function FurnacePreparationStage({
           <Choice
             active={session.mode === 'formula'}
             title="依方炼制"
-            detail="选择已有丹方，预览时分析本炉材料是否符合要求。"
+            detail="选择已有香方，预览时分析本炉材料是否符合要求。"
             onClick={() =>
               onModeChange ? onModeChange('formula') : session.setMode('formula')
             }
@@ -69,14 +69,14 @@ export function FurnacePreparationStage({
               className={`${inkFieldVariants()} mt-3 min-h-28 resize-y`}
               value={session.intent}
               maxLength={300}
-              placeholder="例如：以温养经脉、缓复气血为主，不求猛烈。"
+              placeholder="例如：以温养灯脉、缓复气血为主，不求猛烈。"
               onChange={(event) => session.setIntent(event.target.value)}
             />
           </label>
           <div className="mt-3 space-y-2">
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-ink-secondary mr-1 text-xs tracking-[0.16em]">
-                丹灵建议
+                香灵建议
               </span>
               {ALCHEMY_INTENT_SUGGESTIONS.slice(0, 4).map((suggestion) => (
                 <InkButton
@@ -105,7 +105,7 @@ export function FurnacePreparationStage({
             </div>
           </div>
           <InkNotice tone="info">
-            没有丹方可供参照。丹药效果、品阶与数量都将在开鼎后揭晓。
+            没有香方可供参照。香品效果、品阶与数量都将在开鼎后揭晓。
           </InkNotice>
         </section>
       ) : (
@@ -113,7 +113,7 @@ export function FurnacePreparationStage({
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <p className="text-ink-secondary text-xs tracking-[0.2em]">
-                本炉丹方
+                本炉香方
               </p>
               <p className="mt-2 text-lg">
                 {session.formula?.name ?? '尚未选择'}
@@ -128,7 +128,7 @@ export function FurnacePreparationStage({
               variant={session.formula ? 'secondary' : 'primary'}
               onClick={() => setFormulaPickerOpen(true)}
             >
-              {session.formula ? '更换丹方' : '选择丹方'}
+              {session.formula ? '更换香方' : '选择香方'}
             </InkButton>
           </div>
         </section>
@@ -179,7 +179,7 @@ export function FurnacePreparationStage({
       !session.readiness.loading &&
       !session.readiness.canAfford ? (
         <InkNotice tone="warning">
-          灵石不足：本次炼制需要{' '}
+          灯油券不足：本次炼制需要{' '}
           {session.readiness.estimatedSpiritStones.toLocaleString('zh-CN')} 枚，
           当前仅有{' '}
           {(session.cultivator?.spiritStones ?? 0).toLocaleString('zh-CN')} 枚。
@@ -225,15 +225,15 @@ export function FurnacePreparationStage({
           setSelectedIntentSuggestionId(null);
           setIntentSuggestionsOpen(false);
         }}
-        title="丹灵建议"
-        description="先选择一种炼丹思路，再确认使用；填入后仍可继续修改。"
+        title="香灵建议"
+        description="先选择一种制香思路，再确认使用；填入后仍可继续修改。"
         size="lg"
         footer={
           <div className="flex items-center justify-between gap-3">
             <span className="text-ink-secondary min-w-0 truncate text-xs">
               {selectedIntentSuggestion
                 ? `已选：${selectedIntentSuggestion.label}`
-                : '尚未选择炼丹思路'}
+                : '尚未选择制香思路'}
             </span>
             <div className="flex shrink-0 items-center gap-3">
               <InkButton
@@ -297,7 +297,7 @@ export function FurnacePreparationStage({
         isOpen={materialPickerOpen}
         onClose={() => setMaterialPickerOpen(false)}
         title="选择本炉材料"
-        description={`从药柜中选择材料。已选 ${session.materials.ids.length} / ${ALCHEMY_MAX_MATERIALS} 味，投入数量可在选择后调整。`}
+        description={`从香柜中选择材料。已选 ${session.materials.ids.length} / ${ALCHEMY_MAX_MATERIALS} 味，投入数量可在选择后调整。`}
         size="xl"
         footer={
           <div className="flex items-center justify-between gap-3">
@@ -321,8 +321,8 @@ export function FurnacePreparationStage({
           isSubmitting={session.submitting}
           includeMaterialTypes={[...MATERIAL_TYPES]}
           pageSize={16}
-          loadingText="正在展开药材名录……"
-          emptyNoticeText="暂无可用于炼丹的材料。"
+          loadingText="正在展开香材名录……"
+          emptyNoticeText="暂无可用于制香的材料。"
           totalText={(total) => `共 ${total} 份可用材料`}
           showSelectedMaterialsPanel
         />

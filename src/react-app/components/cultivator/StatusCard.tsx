@@ -41,13 +41,13 @@ function getStatusDescription(buff: ConditionStatusInstance): string {
   }
 
   if (buff.key === PROTECT_MERIDIANS_STATUS_KEY) {
-    return `失败修为损失降低 ${formatPercent(
+    return `失败灯韵损失降低 ${formatPercent(
       getProtectMeridiansReductionPercent(buff),
     )}，剩余 ${buff.usesRemaining ?? 1} 次突破`;
   }
 
   if (buff.key === CLEAR_MIND_STATUS_KEY) {
-    return `突破失败不会滋生心魔，剩余 ${buff.usesRemaining ?? 1} 次突破`;
+    return `突破失败不会滋生魔障，剩余 ${buff.usesRemaining ?? 1} 次突破`;
   }
 
   return config?.description || '未知状态';

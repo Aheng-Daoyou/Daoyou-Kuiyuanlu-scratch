@@ -25,7 +25,7 @@ export function TitleEditorModal({
         <div className="text-sm opacity-80">
           行走江湖，岂能无号？
           <br />
-          请为自己起一个响亮的名号（如：乱星海虫魔）。
+          请为自己起一个响亮的名号（如：灯外海虫魔）。
         </div>
         <InkInput
           value={editingTitle}

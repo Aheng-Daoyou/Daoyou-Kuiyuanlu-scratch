@@ -32,13 +32,13 @@ export function FormulaPickerModal({
     <InkDetailDrawer
       isOpen={isOpen}
       onClose={onClose}
-      title="选择本炉丹方"
-      description="查看丹药用途、材料要求和熟练度，点击一行即可选择。"
+      title="选择本炉香方"
+      description="查看香品用途、材料要求和熟练度，点击一行即可选择。"
       size="lg"
       footer={
         <div className="flex items-center justify-between gap-3">
           <span className="text-ink-secondary text-xs">
-            {selectedId ? '已为本炉选择丹方' : '尚未选择丹方'}
+            {selectedId ? '已为本炉选择香方' : '尚未选择香方'}
           </span>
           <InkButton variant="secondary" onClick={onClose}>
             关闭
@@ -51,13 +51,13 @@ export function FormulaPickerModal({
           <input
             className={inkFieldVariants()}
             value={library.search}
-            placeholder="搜索丹方名称"
+            placeholder="搜索香方名称"
             onChange={(event) => library.setSearch(event.target.value)}
           />
           <select
             className={inkFieldVariants()}
             value={library.family}
-            aria-label="按丹药用途筛选"
+            aria-label="按香品用途筛选"
             onChange={(event) =>
               library.setFamily(event.target.value as PillFamily | 'all')
             }
@@ -78,7 +78,7 @@ export function FormulaPickerModal({
         {library.loading && library.formulas.length === 0 ? (
           <GameLoadingState
             variant="inline"
-            message="正在读取丹方……"
+            message="正在读取香方……"
           />
         ) : null}
 
@@ -116,7 +116,7 @@ export function FormulaPickerModal({
                         </InkBadge>
                       </span>
                       <span className="text-ink-secondary mt-1 line-clamp-2 block text-xs leading-5">
-                        {formula.description || '暂无丹方说明。'}
+                        {formula.description || '暂无香方说明。'}
                       </span>
                     </span>
                     <span
@@ -154,7 +154,7 @@ export function FormulaPickerModal({
             })}
           </div>
         ) : !library.loading ? (
-          <InkNotice>暂无符合条件的丹方。</InkNotice>
+          <InkNotice>暂无符合条件的香方。</InkNotice>
         ) : null}
 
         <div className="flex items-center justify-between">

@@ -1,0 +1,542 @@
+[
+  {
+    "id": "26e5e9d6-f86a-49bc-a5e9-e891b1f4e089",
+    "item_id": "mat_herb_e7a59ee59381_klc1f6os_0",
+    "type": "material",
+    "status": "published",
+    "name": "混沌青莲果",
+    "description": "生于混沌初开之秘境，蕴含天地初生之灵气，服之可悟大道，炼丹至宝。",
+    "quality": "神品",
+    "element": "木",
+    "category": "herb",
+    "sample_key": 0.5720173074248267,
+    "payload": {
+      "name": "混沌青莲果",
+      "rank": "神品",
+      "type": "herb",
+      "element": "木",
+      "description": "生于混沌初开之秘境，蕴含天地初生之灵气，服之可悟大道，炼丹至宝。"
+    },
+    "editor_config": {
+      "source": "llm_batch",
+      "generatedAt": "2026-08-31T11:17:27.391Z"
+    },
+    "created_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "updated_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "created_at": "2026-08-31T03:17:27.394Z",
+    "updated_at": "2026-08-31T03:17:27.394Z"
+  },
+  {
+    "id": "043074e4-f335-4c42-94f3-4924aaf36ab7",
+    "item_id": "mat_herb_e7a59ee59381_b9nfq8a1_1",
+    "type": "material",
+    "status": "published",
+    "name": "九转玄黄芝",
+    "description": "九转轮回之灵草，蕴含玄黄之气，可炼九转还魂丹，起死回生之效。",
+    "quality": "神品",
+    "element": "土",
+    "category": "herb",
+    "sample_key": 0.31300233423028323,
+    "payload": {
+      "name": "九转玄黄芝",
+      "rank": "神品",
+      "type": "herb",
+      "element": "土",
+      "description": "九转轮回之灵草，蕴含玄黄之气，可炼九转还魂丹，起死回生之效。"
+    },
+    "editor_config": {
+      "source": "llm_batch",
+      "generatedAt": "2026-08-31T11:17:27.391Z"
+    },
+    "created_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "updated_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "created_at": "2026-08-31T03:17:27.394Z",
+    "updated_at": "2026-08-31T03:17:27.394Z"
+  },
+  {
+    "id": "d2d9317f-c390-404c-975d-c589aa8b7dc5",
+    "item_id": "mat_herb_e7a59ee59381_7ji5pilj_2",
+    "type": "material",
+    "status": "published",
+    "name": "星辰耀金花",
+    "description": "吸收星辰之力而绽放的金色花朵，花瓣如金石，可炼星辉丹，引星辰之力入体。",
+    "quality": "神品",
+    "element": "金",
+    "category": "herb",
+    "sample_key": 0.20949413960994923,
+    "payload": {
+      "name": "星辰耀金花",
+      "rank": "神品",
+      "type": "herb",
+      "element": "金",
+      "description": "吸收星辰之力而绽放的金色花朵，花瓣如金石，可炼星辉丹，引星辰之力入体。"
+    },
+    "editor_config": {
+      "source": "llm_batch",
+      "generatedAt": "2026-08-31T11:17:27.391Z"
+    },
+    "created_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "updated_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "created_at": "2026-08-31T03:17:27.394Z",
+    "updated_at": "2026-08-31T03:17:27.394Z"
+  },
+  {
+    "id": "898eaafc-bd2e-4c27-b48f-9bf14f354f79",
+    "item_id": "mat_herb_e7a59ee59381_59rsdcn1_3",
+    "type": "material",
+    "status": "published",
+    "name": "冰魄玉髓果",
+    "description": "万年寒冰中凝结的玉髓之果，蕴含极寒冰灵，可炼冰魄丹，淬炼冰系灵根。",
+    "quality": "神品",
+    "element": "冰",
+    "category": "herb",
+    "sample_key": 0.14642892831695886,
+    "payload": {
+      "name": "冰魄玉髓果",
+      "rank": "神品",
+      "type": "herb",
+      "element": "冰",
+      "description": "万年寒冰中凝结的玉髓之果，蕴含极寒冰灵，可炼冰魄丹，淬炼冰系灵根。"
+    },
+    "editor_config": {
+      "source": "llm_batch",
+      "generatedAt": "2026-08-31T11:17:27.391Z"
+    },
+    "created_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "updated_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "created_at": "2026-08-31T03:17:27.394Z",
+    "updated_at": "2026-08-31T03:17:27.394Z"
+  },
+  {
+    "id": "25e72273-6803-47f5-b528-bb4cafef8ca4",
+    "item_id": "mat_herb_e7a59ee59381_jm8crw2u_4",
+    "type": "material",
+    "status": "published",
+    "name": "赤炎龙血草",
+    "description": "沾染真龙之血而生长的赤红灵草，叶脉如火焰流动，可炼龙血丹，淬炼肉身。",
+    "quality": "神品",
+    "element": "火",
+    "category": "herb",
+    "sample_key": 0.5449321599414838,
+    "payload": {
+      "name": "赤炎龙血草",
+      "rank": "神品",
+      "type": "herb",
+      "element": "火",
+      "description": "沾染真龙之血而生长的赤红灵草，叶脉如火焰流动，可炼龙血丹，淬炼肉身。"
+    },
+    "editor_config": {
+      "source": "llm_batch",
+      "generatedAt": "2026-08-31T11:17:27.391Z"
+    },
+    "created_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "updated_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "created_at": "2026-08-31T03:17:27.394Z",
+    "updated_at": "2026-08-31T03:17:27.394Z"
+  },
+  {
+    "id": "8264206b-5495-4d5b-8c8d-85f5289c6e72",
+    "item_id": "mat_herb_e7a59ee59381_oxer1z7v_5",
+    "type": "material",
+    "status": "published",
+    "name": "紫霄风灵花",
+    "description": "生长于九天罡风之中，随风摇曳，蕴含风之法则，可炼风灵丹，身法如风。",
+    "quality": "神品",
+    "element": "风",
+    "category": "herb",
+    "sample_key": 0.6924458060372343,
+    "payload": {
+      "name": "紫霄风灵花",
+      "rank": "神品",
+      "type": "herb",
+      "element": "风",
+      "description": "生长于九天罡风之中，随风摇曳，蕴含风之法则，可炼风灵丹，身法如风。"
+    },
+    "editor_config": {
+      "source": "llm_batch",
+      "generatedAt": "2026-08-31T11:17:27.391Z"
+    },
+    "created_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "updated_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "created_at": "2026-08-31T03:17:27.394Z",
+    "updated_at": "2026-08-31T03:17:27.394Z"
+  },
+  {
+    "id": "6efbeb51-b874-4ba9-927f-9973b2f97453",
+    "item_id": "mat_herb_e7a59ee59381_arqhkk4t_6",
+    "type": "material",
+    "status": "published",
+    "name": "玄雷淬骨果",
+    "description": "受九天神雷洗礼而生的果实，果皮紫色雷纹密布，可炼雷骨丹，强化骨骼。",
+    "quality": "神品",
+    "element": "雷",
+    "category": "herb",
+    "sample_key": 0.29917884271820494,
+    "payload": {
+      "name": "玄雷淬骨果",
+      "rank": "神品",
+      "type": "herb",
+      "element": "雷",
+      "description": "受九天神雷洗礼而生的果实，果皮紫色雷纹密布，可炼雷骨丹，强化骨骼。"
+    },
+    "editor_config": {
+      "source": "llm_batch",
+      "generatedAt": "2026-08-31T11:17:27.391Z"
+    },
+    "created_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "updated_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "created_at": "2026-08-31T03:17:27.394Z",
+    "updated_at": "2026-08-31T03:17:27.394Z"
+  },
+  {
+    "id": "f6ed55ec-99c8-4b8a-9a09-233734cfce33",
+    "item_id": "mat_herb_e7a59ee59381_5l4rgh9t_7",
+    "type": "material",
+    "status": "published",
+    "name": "月华凝露草",
+    "description": "月圆之夜吸收月华之精而凝结的露珠，草身晶莹剔透，可炼月华丹，提升神识。",
+    "quality": "神品",
+    "element": "水",
+    "category": "herb",
+    "sample_key": 0.15519467412334675,
+    "payload": {
+      "name": "月华凝露草",
+      "rank": "神品",
+      "type": "herb",
+      "element": "水",
+      "description": "月圆之夜吸收月华之精而凝结的露珠，草身晶莹剔透，可炼月华丹，提升神识。"
+    },
+    "editor_config": {
+      "source": "llm_batch",
+      "generatedAt": "2026-08-31T11:17:27.391Z"
+    },
+    "created_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "updated_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "created_at": "2026-08-31T03:17:27.394Z",
+    "updated_at": "2026-08-31T03:17:27.394Z"
+  },
+  {
+    "id": "e5afcfb3-bfe6-472c-bbc4-2484d4abe807",
+    "item_id": "mat_herb_e7a59ee59381_hvek9fph_8",
+    "type": "material",
+    "status": "published",
+    "name": "地心灵乳参",
+    "description": "深藏地脉之心，吸收大地灵气千年而成的参王，蕴含磅礴土灵，可炼地灵丹。",
+    "quality": "神品",
+    "element": "土",
+    "category": "herb",
+    "sample_key": 0.4964541074389972,
+    "payload": {
+      "name": "地心灵乳参",
+      "rank": "神品",
+      "type": "herb",
+      "element": "土",
+      "description": "深藏地脉之心，吸收大地灵气千年而成的参王，蕴含磅礴土灵，可炼地灵丹。"
+    },
+    "editor_config": {
+      "source": "llm_batch",
+      "generatedAt": "2026-08-31T11:17:27.391Z"
+    },
+    "created_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "updated_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "created_at": "2026-08-31T03:17:27.394Z",
+    "updated_at": "2026-08-31T03:17:27.394Z"
+  },
+  {
+    "id": "3678434e-44cc-4d70-88f3-10775bb14b74",
+    "item_id": "mat_herb_e7a59ee59381_9idmno2w_9",
+    "type": "material",
+    "status": "published",
+    "name": "天火涅槃花",
+    "description": "传说凤凰涅槃之地生长出的火红奇花，蕴含涅槃之火，可炼涅槃丹，浴火重生。",
+    "quality": "神品",
+    "element": "火",
+    "category": "herb",
+    "sample_key": 0.26418101367807645,
+    "payload": {
+      "name": "天火涅槃花",
+      "rank": "神品",
+      "type": "herb",
+      "element": "火",
+      "description": "传说凤凰涅槃之地生长出的火红奇花，蕴含涅槃之火，可炼涅槃丹，浴火重生。"
+    },
+    "editor_config": {
+      "source": "llm_batch",
+      "generatedAt": "2026-08-31T11:17:27.391Z"
+    },
+    "created_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "updated_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "created_at": "2026-08-31T03:17:27.394Z",
+    "updated_at": "2026-08-31T03:17:27.394Z"
+  },
+  {
+    "id": "3ab68082-9800-4af3-8b62-cc56d777294a",
+    "item_id": "mat_herb_e7a59ee59381_10xv3yxq_10",
+    "type": "material",
+    "status": "published",
+    "name": "玄冰玉髓莲",
+    "description": "万年玄冰中孕育的冰莲，花朵如玉，冰心透亮，可炼冰心丹，驱除心魔。",
+    "quality": "神品",
+    "element": "冰",
+    "category": "herb",
+    "sample_key": 0.028503604568420604,
+    "payload": {
+      "name": "玄冰玉髓莲",
+      "rank": "神品",
+      "type": "herb",
+      "element": "冰",
+      "description": "万年玄冰中孕育的冰莲，花朵如玉，冰心透亮，可炼冰心丹，驱除心魔。"
+    },
+    "editor_config": {
+      "source": "llm_batch",
+      "generatedAt": "2026-08-31T11:17:27.391Z"
+    },
+    "created_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "updated_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "created_at": "2026-08-31T03:17:27.394Z",
+    "updated_at": "2026-08-31T03:17:27.394Z"
+  },
+  {
+    "id": "35e024e8-bc2b-4c74-a2cf-e807aae018ec",
+    "item_id": "mat_herb_e7a59ee59381_dar3ifin_11",
+    "type": "material",
+    "status": "published",
+    "name": "金乌扶桑果",
+    "description": "生于扶桑神木之巅，受金乌精魄照耀，蕴含太阳真火，可炼金乌丹，阳刚至极。",
+    "quality": "神品",
+    "element": "火",
+    "category": "herb",
+    "sample_key": 0.3694079551359941,
+    "payload": {
+      "name": "金乌扶桑果",
+      "rank": "神品",
+      "type": "herb",
+      "element": "火",
+      "description": "生于扶桑神木之巅，受金乌精魄照耀，蕴含太阳真火，可炼金乌丹，阳刚至极。"
+    },
+    "editor_config": {
+      "source": "llm_batch",
+      "generatedAt": "2026-08-31T11:17:27.391Z"
+    },
+    "created_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "updated_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "created_at": "2026-08-31T03:17:27.394Z",
+    "updated_at": "2026-08-31T03:17:27.394Z"
+  },
+  {
+    "id": "164b1233-583f-4273-9f3c-e8e59d49d07b",
+    "item_id": "mat_herb_e7a59ee59381_mirkxl0f_12",
+    "type": "material",
+    "status": "published",
+    "name": "幽冥鬼面芝",
+    "description": "生长于幽冥之地，芝面如鬼脸，蕴含浓郁阴气，可炼幽冥丹，沟通阴阳。",
+    "quality": "神品",
+    "element": "水",
+    "category": "herb",
+    "sample_key": 0.6255911665997489,
+    "payload": {
+      "name": "幽冥鬼面芝",
+      "rank": "神品",
+      "type": "herb",
+      "element": "水",
+      "description": "生长于幽冥之地，芝面如鬼脸，蕴含浓郁阴气，可炼幽冥丹，沟通阴阳。"
+    },
+    "editor_config": {
+      "source": "llm_batch",
+      "generatedAt": "2026-08-31T11:17:27.391Z"
+    },
+    "created_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "updated_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "created_at": "2026-08-31T03:17:27.394Z",
+    "updated_at": "2026-08-31T03:17:27.394Z"
+  },
+  {
+    "id": "a49fd8e4-626b-4201-9641-3fb3fc23c35d",
+    "item_id": "mat_herb_e7a59ee59381_xocwh97w_13",
+    "type": "material",
+    "status": "published",
+    "name": "九阳玄参",
+    "description": "吸收九阳之气而成的玄参，通体赤红，蕴含至阳药力，可炼九阳丹，辟邪驱魔。",
+    "quality": "神品",
+    "element": "火",
+    "category": "herb",
+    "sample_key": 0.9354617241894978,
+    "payload": {
+      "name": "九阳玄参",
+      "rank": "神品",
+      "type": "herb",
+      "element": "火",
+      "description": "吸收九阳之气而成的玄参，通体赤红，蕴含至阳药力，可炼九阳丹，辟邪驱魔。"
+    },
+    "editor_config": {
+      "source": "llm_batch",
+      "generatedAt": "2026-08-31T11:17:27.391Z"
+    },
+    "created_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "updated_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "created_at": "2026-08-31T03:17:27.394Z",
+    "updated_at": "2026-08-31T03:17:27.394Z"
+  },
+  {
+    "id": "e79c466b-7ea9-4e54-af30-69c2d6de1ce8",
+    "item_id": "mat_herb_e7a59ee59381_0vxorl92_14",
+    "type": "material",
+    "status": "published",
+    "name": "万载空青藤",
+    "description": "万年古藤上结出的空青之果，蕴含木之本源，可炼青木丹，焕发生机。",
+    "quality": "神品",
+    "element": "木",
+    "category": "herb",
+    "sample_key": 0.024641802887151343,
+    "payload": {
+      "name": "万载空青藤",
+      "rank": "神品",
+      "type": "herb",
+      "element": "木",
+      "description": "万年古藤上结出的空青之果，蕴含木之本源，可炼青木丹，焕发生机。"
+    },
+    "editor_config": {
+      "source": "llm_batch",
+      "generatedAt": "2026-08-31T11:17:27.391Z"
+    },
+    "created_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "updated_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "created_at": "2026-08-31T03:17:27.394Z",
+    "updated_at": "2026-08-31T03:17:27.394Z"
+  },
+  {
+    "id": "8a847dab-caf9-4212-a7d5-0e095134a03d",
+    "item_id": "mat_herb_e7a59ee59381_fj8jmtx7_15",
+    "type": "material",
+    "status": "published",
+    "name": "寒晶冰髓果",
+    "description": "极寒之地凝结的冰髓之果，如晶似玉，蕴含寒冰法则，可炼寒晶丹，冻结万物。",
+    "quality": "神品",
+    "element": "冰",
+    "category": "herb",
+    "sample_key": 0.4315103179534461,
+    "payload": {
+      "name": "寒晶冰髓果",
+      "rank": "神品",
+      "type": "herb",
+      "element": "冰",
+      "description": "极寒之地凝结的冰髓之果，如晶似玉，蕴含寒冰法则，可炼寒晶丹，冻结万物。"
+    },
+    "editor_config": {
+      "source": "llm_batch",
+      "generatedAt": "2026-08-31T11:17:27.391Z"
+    },
+    "created_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "updated_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "created_at": "2026-08-31T03:17:27.394Z",
+    "updated_at": "2026-08-31T03:17:27.394Z"
+  },
+  {
+    "id": "a99b57f5-f04d-4186-88c1-123b241990ca",
+    "item_id": "mat_herb_e7a59ee59381_u5st4yll_16",
+    "type": "material",
+    "status": "published",
+    "name": "幻梦迷魂花",
+    "description": "生于幻境之中的奇花，花色迷离，能迷人心神，可炼幻梦丹，制造幻境。",
+    "quality": "神品",
+    "element": "水",
+    "category": "herb",
+    "sample_key": 0.8378088430977488,
+    "payload": {
+      "name": "幻梦迷魂花",
+      "rank": "神品",
+      "type": "herb",
+      "element": "水",
+      "description": "生于幻境之中的奇花，花色迷离，能迷人心神，可炼幻梦丹，制造幻境。"
+    },
+    "editor_config": {
+      "source": "llm_batch",
+      "generatedAt": "2026-08-31T11:17:27.391Z"
+    },
+    "created_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "updated_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "created_at": "2026-08-31T03:17:27.394Z",
+    "updated_at": "2026-08-31T03:17:27.394Z"
+  },
+  {
+    "id": "040bb377-7557-40af-9239-fa17466b8b92",
+    "item_id": "mat_herb_e7a59ee59381_0oucf0eu_17",
+    "type": "material",
+    "status": "published",
+    "name": "天陨星陨芝",
+    "description": "陨石坠落之地生长的灵芝，吸收星空精华，蕴含星力，可炼星陨丹，引星辰之力。",
+    "quality": "神品",
+    "element": "金",
+    "category": "herb",
+    "sample_key": 0.019168915386072793,
+    "payload": {
+      "name": "天陨星陨芝",
+      "rank": "神品",
+      "type": "herb",
+      "element": "金",
+      "description": "陨石坠落之地生长的灵芝，吸收星空精华，蕴含星力，可炼星陨丹，引星辰之力。"
+    },
+    "editor_config": {
+      "source": "llm_batch",
+      "generatedAt": "2026-08-31T11:17:27.391Z"
+    },
+    "created_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "updated_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "created_at": "2026-08-31T03:17:27.394Z",
+    "updated_at": "2026-08-31T03:17:27.394Z"
+  },
+  {
+    "id": "25bc721a-80f0-4396-8460-e1e49db748ab",
+    "item_id": "mat_herb_e7a59ee59381_vusocdlk_18",
+    "type": "material",
+    "status": "published",
+    "name": "玄黄混沌果",
+    "description": "混沌之气凝结的果实，外观混沌不分，蕴含开天辟地之力，可炼混沌丹，参悟大道。",
+    "quality": "神品",
+    "element": "土",
+    "category": "herb",
+    "sample_key": 0.8848738901191266,
+    "payload": {
+      "name": "玄黄混沌果",
+      "rank": "神品",
+      "type": "herb",
+      "element": "土",
+      "description": "混沌之气凝结的果实，外观混沌不分，蕴含开天辟地之力，可炼混沌丹，参悟大道。"
+    },
+    "editor_config": {
+      "source": "llm_batch",
+      "generatedAt": "2026-08-31T11:17:27.391Z"
+    },
+    "created_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "updated_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "created_at": "2026-08-31T03:17:27.394Z",
+    "updated_at": "2026-08-31T03:17:27.394Z"
+  },
+  {
+    "id": "1db72abc-7a8d-445b-bfd1-c9c393cecf36",
+    "item_id": "mat_herb_e7a59ee59381_r4epf9vf_19",
+    "type": "material",
+    "status": "published",
+    "name": "紫霄雷音草",
+    "description": "生于雷池边缘，叶片上雷纹隐现，风吹过发出雷鸣之声，可炼雷音丹，淬炼神魂。",
+    "quality": "神品",
+    "element": "雷",
+    "category": "herb",
+    "sample_key": 0.7534016253030127,
+    "payload": {
+      "name": "紫霄雷音草",
+      "rank": "神品",
+      "type": "herb",
+      "element": "雷",
+      "description": "生于雷池边缘，叶片上雷纹隐现，风吹过发出雷鸣之声，可炼雷音丹，淬炼神魂。"
+    },
+    "editor_config": {
+      "source": "llm_batch",
+      "generatedAt": "2026-08-31T11:17:27.391Z"
+    },
+    "created_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "updated_by": "b56a578d-8811-4e8a-b635-f2e04254d2b5",
+    "created_at": "2026-08-31T03:17:27.394Z",
+    "updated_at": "2026-08-31T03:17:27.394Z"
+  }
+]

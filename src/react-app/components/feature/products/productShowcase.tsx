@@ -34,7 +34,7 @@ function getProductLabel(product: ProductDisplayModel): string {
 }
 
 function getDescriptionTitle(product: ProductDisplayModel): string {
-  if (product.productType === 'artifact') return '法宝说明';
+  if (product.productType === 'artifact') return '封灵器说明';
   if (product.productType === 'gongfa') return '功法详述';
   return '神通详述';
 }
@@ -95,12 +95,38 @@ function buildInfoRows(product: ProductDisplayModel) {
     });
   }
 
+  const spirit = metadata?.spirit;
+  if (spirit?.name) {
+    rows.push({
+      key: 'spirit-name',
+      label: spirit.sealTier ?? '器灵',
+      value: spirit.name,
+    });
+  }
+  if (spirit?.disposition) {
+    rows.push({
+      key: 'spirit-disposition',
+      label: '气质',
+      value: spirit.disposition,
+    });
+  }
+
   return rows;
+}
+
+function getSpiritWhisper(product: ProductDisplayModel): string | null {
+  if (!product.rawModel || product.rawModel.productType !== 'artifact') {
+    return null;
+  }
+  const whisper = product.rawModel.metadata?.spirit?.whisper;
+  if (!whisper) return null;
+  return whisper;
 }
 
 function getExtraInfo(product: ProductDisplayModel) {
   const rows = buildInfoRows(product);
-  if (rows.length === 0) return null;
+  const whisper = getSpiritWhisper(product);
+  if (rows.length === 0 && !whisper) return null;
 
   return (
     <div className="space-y-2">
@@ -113,6 +139,12 @@ function getExtraInfo(product: ProductDisplayModel) {
           <span className="text-ink text-right font-medium">{row.value}</span>
         </div>
       ))}
+      {whisper ? (
+        <div className="border-border/50 border-b pb-2">
+          <div className="text-ink-secondary mb-1">器灵低语</div>
+          <div className="text-ink italic leading-relaxed">{whisper}</div>
+        </div>
+      ) : null}
     </div>
   );
 }

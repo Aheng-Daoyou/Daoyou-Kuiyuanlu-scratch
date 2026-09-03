@@ -56,7 +56,7 @@ export function ResourceCostCard({
     <InkCard className={compact ? 'p-3' : 'p-4'}>
       {!compact && <h3 className="mb-3 font-bold">资源损耗</h3>}
       <div className="space-y-2 text-sm">
-        {/* 气血/法力损失 */}
+        {/* 气血/灯焰损失 */}
         {(hpLossPercent > 0 || mpLossPercent > 0) && (
           <div className="space-y-1">
             {hpLossPercent > 0 && (
@@ -106,7 +106,7 @@ export function ResourceCostCard({
         {pendingCosts.length > 0 && (
           <div className="border-ink/10 border-t pt-2">
             <div className="text-ink-secondary mb-1 text-xs font-bold">
-              本轮待确认
+              本更待确认
             </div>
             <div className="space-y-1">
               {pendingCosts.map((cost, idx) => (

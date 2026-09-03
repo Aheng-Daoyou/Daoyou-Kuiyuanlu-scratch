@@ -1037,7 +1037,7 @@ async function runCorruptArenaRuntimeFallbackScenario(): Promise<void> {
     userId: alpha.playerId,
     cultivatorId: alphaCultivatorId,
     displayName: alpha.playerId,
-    realm: '炼气',
+    realm: '闻腥',
     realmStage: '初期',
   });
   room = await rooms.joinRoom({
@@ -1045,7 +1045,7 @@ async function runCorruptArenaRuntimeFallbackScenario(): Promise<void> {
     userId: beta.playerId,
     cultivatorId: betaCultivatorId,
     displayName: beta.playerId,
-    realm: '炼气',
+    realm: '闻腥',
     realmStage: '初期',
   });
   room = await rooms.setReady(room.roomId, alpha.playerId, true);
@@ -1114,7 +1114,7 @@ async function runCorruptArenaIndexCleanupScenario(): Promise<void> {
     userId: alpha.playerId,
     cultivatorId: alphaCultivatorId,
     displayName: alpha.playerId,
-    realm: '炼气',
+    realm: '闻腥',
     realmStage: '初期',
   });
   room = await rooms.joinRoom({
@@ -1122,7 +1122,7 @@ async function runCorruptArenaIndexCleanupScenario(): Promise<void> {
     userId: beta.playerId,
     cultivatorId: betaCultivatorId,
     displayName: beta.playerId,
-    realm: '炼气',
+    realm: '闻腥',
     realmStage: '初期',
   });
   room = await rooms.setReady(room.roomId, alpha.playerId, true);
@@ -1554,7 +1554,7 @@ async function runTerminalFinalizerScenario(): Promise<void> {
     userId: alpha.playerId,
     cultivatorId: alphaCultivatorId,
     displayName: alpha.playerId,
-    realm: '炼气',
+    realm: '闻腥',
     realmStage: '初期',
   });
   room = await rooms.joinRoom({
@@ -1562,7 +1562,7 @@ async function runTerminalFinalizerScenario(): Promise<void> {
     userId: beta.playerId,
     cultivatorId: betaCultivatorId,
     displayName: beta.playerId,
-    realm: '炼气',
+    realm: '闻腥',
     realmStage: '初期',
   });
   room = await rooms.setReady(room.roomId, alpha.playerId, true);

@@ -2,10 +2,10 @@ import { useInkUI } from '@app/components/providers/InkUIProvider';
 import { useCallback, type ReactNode } from 'react';
 
 export const QI_INSUFFICIENT_FRIENDLY_MESSAGE =
-  '天地灵气不足，待自然恢复或使用恢复符箓后再试。';
+  '灯油不足，待自然恢复或使用恢复符箓后再试。';
 
 export function getQiActionConfirmText(actionName: string, qiCost: number) {
-  return `本次${actionName}将消耗 ${qiCost} 天地灵气。`;
+  return `本次${actionName}将消耗 ${qiCost} 灯油。`;
 }
 
 export function getQiErrorMessage(
@@ -46,7 +46,7 @@ export function useQiActionConfirm() {
       onConfirm: () => void | Promise<void>;
     }) => {
       openDialog({
-        title: '天地灵气消耗',
+        title: '灯油消耗',
         content: (
           <div className="space-y-2 text-sm leading-7">
             <p>{getQiActionConfirmText(actionName, qiCost)}</p>

@@ -55,7 +55,7 @@ export function buildBreakthroughChancePresentation(input: {
   if (modifiers.progressMultiplier !== 1) {
     factors.push({
       key: 'progress',
-      label: '修为进度',
+      label: '灯韵进度',
       value: `×${formatPercent(modifiers.progressMultiplier)}`,
       tone: getMultiplierTone(modifiers.progressMultiplier),
     });
@@ -63,7 +63,7 @@ export function buildBreakthroughChancePresentation(input: {
   if (modifiers.insightMultiplier !== 1) {
     factors.push({
       key: 'insight',
-      label: '道行感悟',
+      label: '道行窥悟',
       value: `×${formatPercent(modifiers.insightMultiplier)}`,
       tone: getMultiplierTone(modifiers.insightMultiplier),
     });
@@ -71,7 +71,7 @@ export function buildBreakthroughChancePresentation(input: {
   if (modifiers.demonPenalty !== 1) {
     factors.push({
       key: 'inner-demon',
-      label: '心魔影响',
+      label: '魔障影响',
       value: `×${formatPercent(modifiers.demonPenalty)}`,
       tone: getMultiplierTone(modifiers.demonPenalty),
     });
@@ -87,7 +87,7 @@ export function buildBreakthroughChancePresentation(input: {
   if (modifiers.pillBonus !== 0) {
     factors.push({
       key: 'pill',
-      label: '破境药力',
+      label: '破境香力',
       value: formatSignedPercent(modifiers.pillBonus),
       tone: getDeltaTone(modifiers.pillBonus),
     });
@@ -95,7 +95,7 @@ export function buildBreakthroughChancePresentation(input: {
   if (modifiers.toxicityPenalty !== 0) {
     factors.push({
       key: 'toxicity',
-      label: '丹毒惩罚',
+      label: '香毒惩罚',
       value: `-${formatPercent(modifiers.toxicityPenalty)}`,
       tone: 'warning',
     });

@@ -34,7 +34,7 @@ export function getStatusEffectDetails(
       (1 - Math.max(0.5, 1 - stacks * 0.05)) * 100,
     );
     return [
-      `当前 ${stacks} 层：体魄、力道、灵力、根骨、身法、神识降低 ${penaltyPercent}%。`,
+      `当前 ${stacks} 层：灯红、灯锋、梦涎、灯骨、灯影、灯芯降低 ${penaltyPercent}%。`,
       ...details,
     ];
   }
@@ -42,8 +42,8 @@ export function getStatusEffectDetails(
   if (status.key === CULTIVATION_BOOST_STATUS_KEY) {
     return [
       `${getCultivationBoostDisplayText(status)}。`,
-      '该药力只影响闭关修炼获得的修为，不影响闭关感悟。',
-      '完成一次闭关修炼后消耗；尝试突破不会消耗。',
+      '该香力只影响闭关窥悟获得的灯韵，不影响闭关窥悟。',
+      '完成一次闭关窥悟后消耗；尝试突破不会消耗。',
       ...details,
     ];
   }
@@ -58,7 +58,7 @@ export function getStatusEffectDetails(
 
   if (status.key === PROTECT_MERIDIANS_STATUS_KEY) {
     return [
-      `突破失败时修为损失降低 ${formatPercent(
+      `突破失败时灯韵损失降低 ${formatPercent(
         getProtectMeridiansReductionPercent(status),
       )}。`,
       `剩余 ${status.usesRemaining ?? 1} 次突破尝试。`,
@@ -68,7 +68,7 @@ export function getStatusEffectDetails(
 
   if (status.key === CLEAR_MIND_STATUS_KEY) {
     return [
-      '突破失败不会滋生心魔；服用时已清除既有心魔。',
+      '突破失败不会滋生魔障；服用时已清除既有魔障。',
       `剩余 ${status.usesRemaining ?? 1} 次突破尝试。`,
       ...details,
     ];
@@ -101,11 +101,11 @@ export function getPillToxicityEffectDetails(
   const currentToxicity = Math.max(0, conditionInput?.gauges.pillToxicity ?? 0);
 
   return [
-    `当前丹毒阶段：${stage}。`,
-    `当前丹毒值为 ${currentToxicity}，会把基础自然恢复效率压到 ${recoveryEfficiency}%。`,
-    `丹毒也会压制突破成功率，当前额外降低 ${breakthroughPenalty}%。`,
+    `当前香毒阶段：${stage}。`,
+    `当前香毒值为 ${currentToxicity}，会把基础自然恢复效率压到 ${recoveryEfficiency}%。`,
+    `香毒也会压制突破成功率，当前额外降低 ${breakthroughPenalty}%。`,
     currentToxicity > 0
-      ? '丹毒不会随自然恢复自行消退，需要靠解毒类丹药或其他专门手段化解。'
-      : '当前无明显丹毒压制。服丹累积后，恢复与突破都会受影响。',
+      ? '香毒不会随自然恢复自行消退，需要靠解毒类香品或其他专门手段化解。'
+      : '当前无明显香毒压制。服丹累积后，恢复与突破都会受影响。',
   ];
 }

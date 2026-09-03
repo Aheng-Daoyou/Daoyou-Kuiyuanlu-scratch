@@ -302,7 +302,7 @@ export function BattleUnitInspector({
           气血 {unit.hp.current}/{unit.hp.max}
         </span>
         <span className="text-[#28758d]">
-          真元 {unit.mp.current}/{unit.mp.max}
+          灯焰 {unit.mp.current}/{unit.mp.max}
         </span>
         <span className="text-[#946718]">护盾 {unit.shield}</span>
         <span className="text-[#2c1810]/58">

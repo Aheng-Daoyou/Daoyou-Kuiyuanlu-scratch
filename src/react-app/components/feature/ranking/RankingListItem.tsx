@@ -110,7 +110,7 @@ function resolveItemIcon(item: ItemRankingEntry) {
   }
 
   if (item.itemType === 'elixir') {
-    return CONSUMABLE_TYPE_DISPLAY_MAP[(item.type as '丹药' | '符箓') || '丹药']
+    return CONSUMABLE_TYPE_DISPLAY_MAP[(item.type as '香品' | '符箓') || '香品']
       .icon;
   }
 
@@ -242,7 +242,7 @@ function ItemRankingCardComponent({
           {
             id: item.id,
             name: item.name,
-            type: (item.type as Consumable['type']) || '丹药',
+            type: (item.type as Consumable['type']) || '香品',
             quality: item.quality as Consumable['quality'],
             quantity: item.quantity || 1,
             description: item.description,
@@ -322,7 +322,7 @@ function WealthRankingCardComponent({
   const rankTone = resolveBattleRankTone(item.rank);
   const origin = item.origin ?? '散修';
   const realmLabel = [item.realm, item.realm_stage].filter(Boolean).join(' · ');
-  const fullSpiritStones = `${formatFullGameNumber(item.spiritStones)} 灵石`;
+  const fullSpiritStones = `${formatFullGameNumber(item.spiritStones)} 灯油券`;
 
   return (
     <article
@@ -360,7 +360,7 @@ function WealthRankingCardComponent({
         </div>
 
         <div className="mt-2 text-right lg:mt-0" title={fullSpiritStones}>
-          <div className="text-battle-muted text-xs leading-5">灵石</div>
+          <div className="text-battle-muted text-xs leading-5">灯油券</div>
           <div className="text-wood text-lg leading-7 font-semibold">
             {formatCompactGameNumber(item.spiritStones)}
           </div>

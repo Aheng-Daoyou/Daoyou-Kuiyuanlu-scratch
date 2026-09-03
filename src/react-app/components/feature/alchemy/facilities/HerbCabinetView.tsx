@@ -17,7 +17,7 @@ export function HerbCabinetView({
     const outcome = session.addMaterialToFurnace(material);
     if (outcome === 'limit-reached') {
       pushToast({
-        message: '本炉材料种类已满，请先到丹炉调整。',
+        message: '本炉材料种类已满，请先到香炉调整。',
         tone: 'warning',
       });
       return;
@@ -26,15 +26,15 @@ export function HerbCabinetView({
       message:
         outcome === 'already-added'
           ? `【${material.name}】已在炉中，原有剂量保持不变。`
-          : `已将【${material.name}】添加到丹炉。`,
+          : `已将【${material.name}】添加到香炉。`,
       tone: 'success',
     });
     onOpenFurnace();
   };
   return (
     <AlchemyToolWorkspace
-      title="查看炼丹材料"
-      backLabel="百草药柜"
+      title="查看制香材料"
+      backLabel="百草香柜"
       onBack={onBack}
     >
       <AlchemyMaterialShelf

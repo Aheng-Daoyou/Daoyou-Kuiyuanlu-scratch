@@ -115,7 +115,7 @@ export function ConsumableDetailModal({
         metaSection={<QuantityInfo quantity={consumable.quantity} />}
         extraInfo={<PillDetailGroups groups={model.detailGroups} />}
         description={model.flavorText}
-        descriptionTitle="丹成评述"
+        descriptionTitle="香成评述"
       />
     );
   }

@@ -100,7 +100,7 @@ function getRestoreTargetText(
 }
 
 function getGaugeChangeText(delta: number): string {
-  return `丹毒 ${delta > 0 ? '+' : ''}${delta}`;
+  return `香毒 ${delta > 0 ? '+' : ''}${delta}`;
 }
 
 function getAppearanceDisplay(spec: PillSpec): PillDisplayModel['appearance'] {
@@ -118,7 +118,7 @@ function getProgressTargetLabel(
 ): string {
   return target === 'cultivation_exp'
     ? getResourceText('cultivation_exp')
-    : '感悟';
+    : '窥悟';
 }
 
 function getLifespanGainText(value: number): string {
@@ -190,7 +190,7 @@ function getPillUsageProgressText(
   const remaining = Math.max(0, limit - used);
   const keyword =
     quotaCategory === 'longevity'
-      ? `寿元丹剩余 ${remaining}/${limit}`
+      ? `寿元香剩余 ${remaining}/${limit}`
       : `剩余 ${remaining}/${limit}`;
 
   return {
@@ -214,7 +214,7 @@ export function getPillFamilyLabel(family: PillFamily): string {
     case 'cultivation':
       return getGameConceptLabel('cultivation_exp');
     case 'insight':
-      return '感悟';
+      return '窥悟';
     case 'breakthrough':
       return '破境';
     case 'tempering':
@@ -252,12 +252,12 @@ export function describePillOperation(operation: ConditionOperation): string {
         )}（可用 ${operation.usesRemaining ?? 1} 次）`;
       }
       if (operation.status === PROTECT_MERIDIANS_STATUS_KEY) {
-        return `${getStatusName(operation.status)}：突破失败修为损失降低 ${formatPercent(
+        return `${getStatusName(operation.status)}：突破失败灯韵损失降低 ${formatPercent(
           getProtectMeridiansReductionPercent(operation),
         )}（可用 ${operation.usesRemaining ?? 1} 次）`;
       }
       if (operation.status === CLEAR_MIND_STATUS_KEY) {
-        return `${getStatusName(operation.status)}：突破失败不会滋生心魔（可用 ${
+        return `${getStatusName(operation.status)}：突破失败不会滋生魔障（可用 ${
           operation.usesRemaining ?? 1
         } 次）`;
       }
@@ -316,7 +316,7 @@ function buildPrimaryEffect(spec: PillSpec): string {
         ): operation is Extract<ConditionOperation, { type: 'change_gauge' }> =>
           operation.type === 'change_gauge',
       );
-      return detox ? getGaugeChangeText(detox.delta) : '调理丹毒';
+      return detox ? getGaugeChangeText(detox.delta) : '调理香毒';
     }
     case 'insight': {
       const gain = spec.operations.find(
@@ -383,7 +383,7 @@ function buildPrimaryEffect(spec: PillSpec): string {
           { type: 'advance_track' }
         > => operation.type === 'advance_track',
       );
-      return advance ? describePillOperation(advance) : '推进修炼进度';
+      return advance ? describePillOperation(advance) : '推进窥悟进度';
     }
     case 'longevity': {
       const lifespan = spec.operations.find(
@@ -609,27 +609,27 @@ function buildAlchemyInfoLines(
   const formulaFitBandText =
     alchemyMeta.source === 'formula'
       ? alchemyMeta.fitBand === 'aligned'
-        ? '契合成丹'
+        ? '契合成香'
         : alchemyMeta.fitBand === 'degraded'
-          ? '勉强成丹'
-          : '偏路成丹'
+          ? '勉强成香'
+          : '偏路成香'
       : undefined;
   const formulaFitMultiplierText =
     alchemyMeta.source === 'formula' &&
     Number.isFinite(alchemyMeta.fitMultiplier)
-      ? `丹方倍率：${Math.round(alchemyMeta.fitMultiplier * 100)}%`
+      ? `香方倍率：${Math.round(alchemyMeta.fitMultiplier * 100)}%`
       : undefined;
   const fitBandText =
     alchemyMeta.source === 'formula' ? formulaFitBandText : undefined;
 
   return [
-    `丹药类别：${getPillFamilyLabel(consumable.spec.family)}`,
+    `香品类别：${getPillFamilyLabel(consumable.spec.family)}`,
     breakthroughLabel ? `破境用途：${breakthroughLabel}` : undefined,
     alchemyMeta.breakthroughTargetRealm
       ? `目标大境界：${alchemyMeta.breakthroughTargetRealm}`
       : undefined,
-    `炼制来源：${alchemyMeta.source === 'formula' ? '丹方炼制' : '即兴炼制'}`,
-    fitBandText ? `成丹层级：${fitBandText}` : undefined,
+    `炼制来源：${alchemyMeta.source === 'formula' ? '香方炼制' : '即兴炼制'}`,
+    fitBandText ? `成香层级：${fitBandText}` : undefined,
     formulaFitMultiplierText,
     `稳度：${alchemyMeta.stability}`,
     alchemyMeta.dominantElement

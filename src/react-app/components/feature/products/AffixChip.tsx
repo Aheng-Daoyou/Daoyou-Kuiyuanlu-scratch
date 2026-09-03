@@ -10,7 +10,7 @@ interface AffixChipProps {
 }
 
 /**
- * 词缀 chip：统一在法宝 / 神通 / 功法详情里渲染一条 AffixView。
+ * 词缀 chip：统一在封灵器 / 神通 / 功法详情里渲染一条 AffixView。
  *
  * 视觉契约：
  *   - 稀有度 → 文字颜色。

@@ -154,6 +154,6 @@ export function buildRetreatEfficiencyModel(input: {
     qiCost: safeYears > 0 ? getRetreatQiCost(safeYears) : 0,
     emptyHint: boostStatus
       ? null
-      : '未见养元药力。若想添一层助益，可先看看修为丹。',
+      : '未见养元香力。若想添一层助益，可先看看灯韵香。',
   };
 }

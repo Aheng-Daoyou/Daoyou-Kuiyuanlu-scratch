@@ -240,7 +240,7 @@ export function YieldCard({
 
         {yieldResult?.expGain && (
           <div className="mb-4 flex items-center justify-center gap-2">
-            <span className="text-ink-secondary">修为精进：</span>
+            <span className="text-ink-secondary">灯韵精进：</span>
             <span className="text-teal text-2xl font-bold">
               {cultivationInfo.icon} {yieldResult.expGain}
             </span>
@@ -280,7 +280,7 @@ export function YieldCard({
                 <span className="text-crimson font-bold">
                   {yieldResult.materialCount}
                 </span>{' '}
-                份天材地宝正在运送中，稍后将通过传音玉简（邮件）送达。
+                份天材地宝正在运送中，稍后将通过传音灯笺（邮件）送达。
               </p>
             </div>
           )}

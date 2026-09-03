@@ -44,7 +44,7 @@ export function BreakthroughConfirmModal({
           道友确定要尝试突破吗？此举关乎道途，不可不慎重。
         </p>
         <p className="text-ink">
-          本次突破将消耗 {qiCost} 天地灵气。
+          本次突破将消耗 {qiCost} 灯油。
         </p>
 
         <div className="border-wood/35 bg-bgpaper space-y-2 border border-dashed p-3">
@@ -52,10 +52,10 @@ export function BreakthroughConfirmModal({
           {isMajorBreakthrough ? (
             <>
               <p className="text-wood text-xs">
-                • 大境界失败会重创根基，经脉、丹田或识海都会承压
+                • 大境界失败会重创根基，灯脉、灯心或心海都会承压
               </p>
               <p className="text-wood text-xs">
-                • 元婴及以上失败更易抬升心魔与走火入魔风险
+                • 蚀体及以上失败更易抬升魔障与走火入魔风险
               </p>
               <p className="text-wood text-xs">
                 • 护脉与清心准备只会减轻代价，不会替你稳过此关
@@ -64,13 +64,13 @@ export function BreakthroughConfirmModal({
           ) : (
             <>
               <p className="text-wood text-xs">
-                • 若冲关失败，修为将有所损耗，法力涣散
+                • 若冲关失败，灯韵将有所损耗，灯焰涣散
               </p>
               <p className="text-wood text-xs">
-                • 道行感悟将有所降低，心生迷惘
+                • 道行窥悟将有所降低，心生迷惘
               </p>
               <p className="text-wood text-xs">
-                • 连续失败三次将生心魔，影响后续突破
+                • 连续失败三次将生魔障，影响后续突破
               </p>
             </>
           )}

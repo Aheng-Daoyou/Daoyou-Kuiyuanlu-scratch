@@ -98,7 +98,7 @@ export function FriendTargetModal({
     <InkModal isOpen={Boolean(targetId)} onClose={onClose} title="收录道友">
       {loading ? (
         <p className="py-6 text-center text-sm opacity-70">
-          正在辨认玉简气息……
+          正在辨认灯笺气息……
         </p>
       ) : error ? (
         <div className="space-y-4">

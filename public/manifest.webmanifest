@@ -1,7 +1,7 @@
 {
-  "name": "万界道友",
-  "short_name": "万界道友",
-  "description": "AIGC 驱动的高自由度修仙文字游戏",
+  "name": "窥渊录",
+  "short_name": "窥渊录",
+  "description": "AIGC 驱动的高自由度克苏鲁守灯文字游戏",
   "lang": "zh-CN",
   "start_url": "/game",
   "scope": "/",

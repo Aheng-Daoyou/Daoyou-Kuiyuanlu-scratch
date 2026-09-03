@@ -82,7 +82,7 @@ export function useAlchemyFormulaLibrary({
         if (!result) return;
         const { response, body } = result;
         if (!response.ok || !body.success || !body.data)
-          throw new Error(body.error || '丹方玉简读取失败');
+          throw new Error(body.error || '香方灯册读取失败');
         if (requestId !== requestIdRef.current) return;
         setFormulas(body.data.formulas);
         setPagination(body.data.pagination);
@@ -93,7 +93,7 @@ export function useAlchemyFormulaLibrary({
           return;
         if (requestId !== requestIdRef.current) return;
         setLoading(false);
-        setError(reason instanceof Error ? reason.message : '丹方玉简读取失败');
+        setError(reason instanceof Error ? reason.message : '香方灯册读取失败');
       });
     return () => controller.abort();
   }, [debouncedSearch, enabled, family, page, pageSize, refreshToken]);
@@ -114,12 +114,12 @@ export function useAlchemyFormulaLibrary({
   const deleteFormula = useCallback(
     (formula: AlchemyFormula) => {
       openDialog({
-        title: '删除丹方',
+        title: '删除香方',
         content: (
           <div className="space-y-2 py-2 text-center">
-            <p>确定要删除丹方【{formula.name}】吗？</p>
+            <p>确定要删除香方【{formula.name}】吗？</p>
             <p className="text-ink-secondary text-xs">
-              此操作不会影响已经炼成的丹药。
+              此操作不会影响已经炼成的香品。
             </p>
           </div>
         ),
@@ -133,9 +133,9 @@ export function useAlchemyFormulaLibrary({
             );
             const body = (await response.json()) as DeleteFormulaResponse;
             if (!response.ok || !body.success)
-              throw new Error(body.error || '丹方删除失败');
+              throw new Error(body.error || '香方删除失败');
             pushToast({
-              message: body.message || `已删除丹方【${formula.name}】。`,
+              message: body.message || `已删除香方【${formula.name}】。`,
               tone: 'success',
             });
             if (formulas.length === 1 && page > 1) setPage(page - 1);
@@ -143,7 +143,7 @@ export function useAlchemyFormulaLibrary({
           } catch (reason) {
             pushToast({
               message:
-                reason instanceof Error ? reason.message : '丹方删除失败',
+                reason instanceof Error ? reason.message : '香方删除失败',
               tone: 'danger',
             });
           }

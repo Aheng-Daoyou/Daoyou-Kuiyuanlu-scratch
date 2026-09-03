@@ -17,7 +17,7 @@ function itemFacts(candidate: SectSubmissionCandidateData): string[] {
   if (item.kind === 'pill')
     return [
       ...common,
-      `主丹类 ${getSectPillFamilyLabel(item.family)}`,
+      `主香类 ${getSectPillFamilyLabel(item.family)}`,
       ...(item.appearance
         ? [`品相 ${getPillAppearanceLabel(item.appearance)}`]
         : []),

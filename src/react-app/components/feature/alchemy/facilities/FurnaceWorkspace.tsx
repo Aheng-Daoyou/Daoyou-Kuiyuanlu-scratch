@@ -20,12 +20,12 @@ export function FurnaceWorkspace({
     session.phase === 'result'
       ? '查看炼制结果'
       : session.mode === 'formula'
-        ? '按照丹方炼制'
-        : '随心炼丹';
+        ? '按照香方炼制'
+        : '随心制香';
   return (
     <AlchemyToolWorkspace
       title={title}
-      backLabel={session.sectContext?.facilityLabel ?? '玄火丹炉'}
+      backLabel={session.sectContext?.facilityLabel ?? '玄火香炉'}
       onBack={onBack}
       backDisabled={session.phase === 'firing'}
     >

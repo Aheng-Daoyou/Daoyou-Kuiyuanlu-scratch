@@ -11,19 +11,19 @@ export function FurnaceFiringStage() {
         </span>
       </div>
       <p className="text-crimson mt-8 text-xs tracking-[0.32em]">
-        地火回环 · 药蕴聚合
+        地火回环 · 香蕴聚合
       </p>
       <h3 className="mt-3 text-xl">正在炼制，请稍候</h3>
       <p className="text-ink-secondary mx-auto mt-3 max-w-lg text-sm leading-7">
         {session.status ||
           (session.mode === 'improvised'
             ? '材料正在炉火中发生未知变化，结果要等开鼎后才能知晓。'
-            : '丹炉正依照推演火路煅去杂质、收束药力。')}
+            : '香炉正依照推演火路煅去杂质、收束香力。')}
       </p>
       <div className="text-ink-secondary mx-auto mt-7 flex max-w-md justify-center gap-8 text-xs">
         <span>处理材料</span>
-        <span className="text-crimson">汇聚药力</span>
-        <span>凝结丹药</span>
+        <span className="text-crimson">汇聚香力</span>
+        <span>凝结香品</span>
         <span>完成炼制</span>
       </div>
     </div>

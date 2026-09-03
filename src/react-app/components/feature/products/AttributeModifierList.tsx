@@ -5,7 +5,7 @@ interface AttributeModifierListProps {
 }
 
 /**
- * 属性修正（AttributeModifierConfig[]）的列表展示，用在功法 / 法宝详情。
+ * 属性修正（AttributeModifierConfig[]）的列表展示，用在功法 / 封灵器详情。
  */
 export function AttributeModifierList({ modifiers }: AttributeModifierListProps) {
   if (modifiers.length === 0) return null;
