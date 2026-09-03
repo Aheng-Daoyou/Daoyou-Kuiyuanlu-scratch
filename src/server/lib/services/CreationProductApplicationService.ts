@@ -50,7 +50,7 @@ export async function executeArtifactEquipCommand(args: {
   tx: DbTransaction;
 }) {
   if (!EQUIPMENT_SLOT_VALUES.includes(args.slot as EquipmentSlot)) {
-    throw new Error('法宝槽位无效');
+    throw new Error('封灵器槽位无效');
   }
   const slot = args.slot as EquipmentSlot;
   if (args.currentlyEquipped) {
@@ -171,7 +171,7 @@ export async function toggleCreationProduct(args: {
       }
       if (productType === 'artifact') {
         if (!product.slot) {
-          throw new CreationProductCommandError('法宝缺少槽位信息', 400);
+          throw new CreationProductCommandError('封灵器缺少槽位信息', 400);
         }
         return executeArtifactEquipCommand({
           cultivatorId: args.cultivatorId,
@@ -305,7 +305,7 @@ export async function toggleArtifactLoadout(args: {
         tx,
       );
       if (!updatedProduct) {
-        throw new Error('法宝状态更新后无法读取权威投影');
+        throw new Error('封灵器状态更新后无法读取权威投影');
       }
       const artifact = toArtifactFromProduct(updatedProduct);
       const resourceChanges: ResourceChangeDescriptor[] = [

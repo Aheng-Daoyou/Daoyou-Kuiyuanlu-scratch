@@ -564,7 +564,7 @@ function sortMaterialsByQualityAsc<
 }
 
 /**
- * 添加法宝到物品栏
+ * 添加封灵器到物品栏
  */
 export async function addArtifactToInventory(
   userId: string,
@@ -601,7 +601,7 @@ export async function addArtifactToInventoryInTransaction(
   );
 
   if (!rawProductModel || !normalizedProductModel) {
-    throw new Error('法宝数据缺少有效 productModel，无法入库');
+    throw new Error('封灵器数据缺少有效 productModel，无法入库');
   }
 
   const inserted = await creationProductRepository.insert(

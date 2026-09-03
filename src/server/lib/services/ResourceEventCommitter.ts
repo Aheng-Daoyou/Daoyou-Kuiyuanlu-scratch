@@ -82,7 +82,7 @@ function assertCompleteQiBaselines(
     );
     if (hasQi !== hasQiBaseline) {
       throw new Error(
-        'player.currency 灵气事件必须同时提供 qi 与 qiLastRefreshedAt',
+        'player.currency 灯油事件必须同时提供 qi 与 qiLastRefreshedAt',
       );
     }
   }

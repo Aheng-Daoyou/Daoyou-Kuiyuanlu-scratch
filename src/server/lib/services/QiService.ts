@@ -50,7 +50,7 @@ export class QiInsufficientError extends Error {
   readonly current: number;
 
   constructor(args: { action: QiAction; required: number; current: number }) {
-    super('天地灵气不足');
+    super('灯油不足');
     this.action = args.action;
     this.required = args.required;
     this.current = args.current;
@@ -267,7 +267,7 @@ export class QiService {
 
       if (existing) {
         if (existing.cultivatorId !== input.cultivatorId) {
-          throw new QiServiceError('灵气操作幂等键已被其他角色使用。', 409);
+          throw new QiServiceError('灯油操作幂等键已被其他角色使用。', 409);
         }
         if (
           existing.status === 'reserved' ||
@@ -284,7 +284,7 @@ export class QiService {
             consumed: existing.qiCost,
           };
         }
-        throw new QiServiceError('该灵气预扣已退款，不能重复使用。', 409);
+        throw new QiServiceError('该灯油预扣已退款，不能重复使用。', 409);
       }
 
       if (row.qi < cost) {
@@ -344,7 +344,7 @@ export class QiService {
         .where(eq(qiLogs.actionInstanceId, input.actionInstanceId))
         .limit(1);
       if (!log) {
-        throw new QiServiceError('未找到灵气预扣日志。', 404);
+        throw new QiServiceError('未找到灯油预扣日志。', 404);
       }
       if (log.status === 'committed') return;
 
@@ -367,7 +367,7 @@ export class QiService {
           .where(eq(qiLogs.id, log.id))
           .limit(1);
         if (current?.status === 'committed') return;
-        throw new QiServiceError('只有预扣中的灵气日志可以提交。', 409);
+        throw new QiServiceError('只有预扣中的灯油日志可以提交。', 409);
       }
     };
 
@@ -393,7 +393,7 @@ export class QiService {
         .where(eq(qiLogs.actionInstanceId, input.actionInstanceId))
         .limit(1);
       if (!log) {
-        throw new QiServiceError('未找到灵气预扣日志。', 404);
+        throw new QiServiceError('未找到灯油预扣日志。', 404);
       }
       if (log.status === 'failed_no_refund') return;
 
@@ -417,7 +417,7 @@ export class QiService {
           .where(eq(qiLogs.id, log.id))
           .limit(1);
         if (current?.status === 'failed_no_refund') return;
-        throw new QiServiceError('只有预扣中的灵气日志可以标记为不退款。', 409);
+        throw new QiServiceError('只有预扣中的灯油日志可以标记为不退款。', 409);
       }
     };
 
@@ -444,11 +444,11 @@ export class QiService {
         .where(eq(qiLogs.actionInstanceId, input.actionInstanceId))
         .limit(1);
       if (!log) {
-        throw new QiServiceError('未找到灵气预扣日志。', 404);
+        throw new QiServiceError('未找到灯油预扣日志。', 404);
       }
       if (log.status === 'refunded') return;
       if (log.status !== 'reserved') {
-        throw new QiServiceError('只有预扣中的灵气日志可以退款。', 409);
+        throw new QiServiceError('只有预扣中的灯油日志可以退款。', 409);
       }
 
       // 固定顺序：cultivators -> qi_logs。
@@ -477,7 +477,7 @@ export class QiService {
           .where(eq(qiLogs.id, log.id))
           .limit(1);
         if (current?.status === 'refunded') return;
-        throw new QiServiceError('只有预扣中的灵气日志可以退款。', 409);
+        throw new QiServiceError('只有预扣中的灯油日志可以退款。', 409);
       }
 
       await tx
@@ -503,7 +503,7 @@ export class QiService {
     tx?: DbTransaction;
   }): Promise<QiRestoreResult> {
     if (!isQiEnabled()) {
-      throw new QiServiceError('天地灵气系统维护中，暂不可使用恢复符箓。', 503);
+      throw new QiServiceError('灯油系统维护中，暂不可使用恢复符箓。', 503);
     }
 
     const run = async (tx: DbTransaction) => {
@@ -517,7 +517,7 @@ export class QiService {
 
       if (existing) {
         if (existing.cultivatorId !== input.cultivatorId) {
-          throw new QiServiceError('灵气操作幂等键已被其他角色使用。', 409);
+          throw new QiServiceError('灯油操作幂等键已被其他角色使用。', 409);
         }
         return {
           success: true,
@@ -543,12 +543,12 @@ export class QiService {
             ),
           );
         if (Number(usesRow?.uses ?? 0) >= QI_DAILY_RESTORE_ITEM_LIMIT) {
-          throw new QiServiceError('今日聚灵符使用次数已达上限。', 409);
+          throw new QiServiceError('今日香品使用次数已达上限。', 409);
         }
       }
 
       if (row.qi >= QI_OVERFLOW_MAX) {
-        throw new QiServiceError('天地灵气已达溢出上限，暂不可继续补充。', 409);
+        throw new QiServiceError('灯油已达溢出上限，暂不可继续补充。', 409);
       }
 
       const rawAmount =
@@ -560,7 +560,7 @@ export class QiService {
         Math.min(rawAmount, QI_OVERFLOW_MAX - row.qi),
       );
       if (restored <= 0) {
-        throw new QiServiceError('没有可恢复的天地灵气。', 409);
+        throw new QiServiceError('没有可恢复的灯油。', 409);
       }
 
       const qiAfter = row.qi + restored;

@@ -41,7 +41,7 @@ export const BLACK_MARKET_NPCS: readonly BlackMarketNpcConfig[] = [
     responsibility: '频频回望巷口，像是不愿在这里久留',
     voice: '急促、警惕、直来直往，不愿纠缠',
     opening: '别问我从哪弄的。看中就开价，我赶时间。',
-    epilogue: '散修攥紧灵石，转眼便消失在暗巷尽头。',
+    epilogue: '散修攥紧灯油券，转眼便消失在暗巷尽头。',
   },
 ] as const;
 

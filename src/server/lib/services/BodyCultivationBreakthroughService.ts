@@ -361,7 +361,7 @@ export async function listEligibleBodyCultivationBreakthroughItems(
   if (consumableCosts.length > 0) {
     const condition = and(
       eq(schema.consumables.cultivatorId, cultivator.id!),
-      eq(schema.consumables.type, '丹药'),
+      eq(schema.consumables.type, '香品'),
       sql`${schema.consumables.quantity} > 0`,
       sql`${schema.consumables.spec} ->> 'kind' = 'pill'`,
       or(
@@ -530,7 +530,7 @@ export async function planBodyCultivationBreakthroughSelections(
   for (const selection of consumableSelections) {
     const consumable = consumablesById.get(selection.id);
     if (!consumable) {
-      throw new Error('所选丹药不存在或不属于当前角色。');
+      throw new Error('所选香品不存在或不属于当前角色。');
     }
     if (selection.quantity > consumable.quantity) {
       throw new Error(`${consumable.name} 数量不足。`);

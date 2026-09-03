@@ -120,7 +120,7 @@ function resolveTaskRewardMailAttachments(
   if (definition.category === 'tutorial' && definition.rewardCultivationExp) {
     attachments.unshift({
       type: 'cultivation_exp',
-      name: '修为',
+      name: '灯韵',
       quantity: definition.rewardCultivationExp,
     });
   }

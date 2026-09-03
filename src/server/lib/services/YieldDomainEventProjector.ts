@@ -100,7 +100,7 @@ export async function projectYieldReward(
   await MailService.sendMail(
     event.data.cultivatorId,
     '历练机缘',
-    '道友历练途中，偶得天材地宝，特以此传音玉简送达。',
+    '道友历练途中，偶得天材地宝，特以此传音灯笺送达。',
     attachments,
     'reward',
     tx,

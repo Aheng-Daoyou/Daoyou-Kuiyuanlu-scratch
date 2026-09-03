@@ -78,7 +78,7 @@ function existingCharacterCopyFromDraft(
 
 export function buildEnemyNarrativeFacts(draft: EnemyGenerationDraft) {
   return {
-    race: draft.copyFacts.race,
+    clan: draft.copyFacts.clan,
     realm: draft.copyFacts.realm,
     realmStage: draft.copyFacts.realmStage,
     difficulty: draft.copyFacts.difficulty,

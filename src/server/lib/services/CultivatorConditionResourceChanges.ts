@@ -115,7 +115,7 @@ export function conditionChangesAfterConsumable(args: {
     });
   } else if (isTalismanConsumable(args.consumable)) {
     if (typeof args.state.qi !== 'number' || !args.state.qiLastRefreshedAt) {
-      throw new Error('聚灵符结算缺少权威灵气基线');
+      throw new Error('香品结算缺少权威灯油基线');
     }
     changes.push({
       resourceTopic: 'player.currency',

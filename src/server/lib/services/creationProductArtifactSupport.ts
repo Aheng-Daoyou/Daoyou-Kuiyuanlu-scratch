@@ -31,7 +31,7 @@ export function toArtifactFromProduct(record: CreationProductRecord): Artifact {
     id: record.id,
     name: record.name,
     slot: (record.slot as Artifact['slot']) || 'weapon',
-    element: (record.element as Artifact['element']) || '金',
+    element: (record.element as Artifact['element']) || '烛',
     quality: (record.quality as Artifact['quality']) || '凡品',
     description: record.description || undefined,
     attributeModifiers: abilityConfig?.modifiers ?? [],

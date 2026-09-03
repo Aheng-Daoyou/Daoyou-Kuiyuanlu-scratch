@@ -85,13 +85,13 @@ export async function executeCraftCommand(args: {
   if (input.craftType === 'alchemy') {
     const mode = input.alchemyMode ?? 'improvised';
     if (mode === 'improvised' && !normalizedUserPrompt) {
-      throw new CraftCommandError('请注入神念，描述丹药功效。');
+      throw new CraftCommandError('请注入神念，描述香品功效。');
     }
     if (mode === 'formula' && !input.formulaId) {
-      throw new CraftCommandError('请先选定丹方。');
+      throw new CraftCommandError('请先选定香方。');
     }
     if (mode === 'formula' && !input.analysisId) {
-      throw new CraftCommandError('请先推演药路。');
+      throw new CraftCommandError('请先推演香路。');
     }
     const prepared =
       mode === 'improvised'
@@ -299,7 +299,7 @@ export async function executeCreationConfirmationCommand(args: {
         lease.assertHeld();
       },
     );
-    return { kind: 'abandoned', message: '已放弃新生成的感悟' };
+    return { kind: 'abandoned', message: '已放弃新生成的窥悟' };
   }
   const prepared = await prepareCreationConfirmation(
     args.cultivatorId,

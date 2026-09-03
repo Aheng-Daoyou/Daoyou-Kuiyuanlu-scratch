@@ -19,6 +19,7 @@ import {
 import * as schema from '../drizzle/schema';
 import { FATE_RESHAPE_CANDIDATE_COUNT } from './FateConfig';
 import { FateEngine } from './FateEngine';
+import { applyFateNaming } from './FateNamingService';
 import type { ConsumableRow } from './consumablePersistence';
 import {
   consumeConsumableById,
@@ -204,12 +205,14 @@ export async function prepareFateReshapeStart(
   const currentCandidates = await FateEngine.generateCandidatePool({
     candidateCount: FATE_RESHAPE_CANDIDATE_COUNT,
   });
+  // 命案执笔 AI 命名：为候选命格批量起名/补全描述，失败自动降级为本地预设。
+  const namedCandidates = await applyFateNaming(currentCandidates);
   const createdAt = Date.now();
   const session: FateReshapeSessionStore = {
     sessionId: crypto.randomUUID(),
     cultivatorId,
     originalFates: FateEngine.normalizeFates(currentFates),
-    currentCandidates,
+    currentCandidates: namedCandidates,
     rerollUsed: false,
     createdAt,
     expiresAt: createdAt + FATE_RESHAPE_SESSION_TTL_SEC * 1000,
@@ -289,10 +292,11 @@ export const FateReshapeService = {
       const currentCandidates = await FateEngine.generateCandidatePool({
         candidateCount: FATE_RESHAPE_CANDIDATE_COUNT,
       });
+      const namedCandidates = await applyFateNaming(currentCandidates);
 
       const nextSession: FateReshapeSessionStore = {
         ...session,
-        currentCandidates,
+        currentCandidates: namedCandidates,
         rerollUsed: true,
       };
 

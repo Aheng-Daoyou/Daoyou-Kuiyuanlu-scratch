@@ -335,7 +335,7 @@ function buildMysteryMask(type: MaterialType) {
     descriptions: [
       '纸页泛黄，字迹断续，偶有完整周天图谱隐于夹层。',
       '抄本笔意凌乱，却夹杂数段精妙法门，真假难辨。',
-      '典籍封角残破，翻页时灵识微震，似有被遮掩的真解。',
+      '典籍封角残破，翻页时心神微震，似有被遮掩的真解。',
     ],
   };
 
@@ -344,29 +344,29 @@ function buildMysteryMask(type: MaterialType) {
     { names: string[]; descriptions: string[] }
   > = {
     seed: {
-      names: ['封存灵种'],
-      descriptions: ['灵种只由灵田专用生成器塑造，不参与通用神秘物品生成。'],
+      names: ['封存灯种'],
+      descriptions: ['灯种只由灯田专用生成器塑造，不参与通用神秘物品生成。'],
     },
     herb: {
-      names: ['枯萎的灵草束', '封泥药囊', '残叶草根'],
+      names: ['枯萎的灯草束', '封泥药囊', '残叶草根'],
       descriptions: [
-        '药香极淡，叶脉却隐约泛出灵纹，似有年份却难辨真伪。',
-        '外层药囊封泥龟裂，灵识探入时有短暂清凉感一闪而逝。',
+        '药香极淡，叶脉却隐约泛出灯纹，似有年份却难辨真伪。',
+        '外层药囊封泥龟裂，心神探入时有短暂清凉感一闪而逝。',
         '根须干枯近朽，偶尔渗出微弱青光，像被刻意掩饰过。',
       ],
     },
     ore: {
       names: ['沉重的黑色矿石', '裂纹斑驳的矿胚', '裹泥金属块'],
       descriptions: [
-        '石皮粗糙黯淡，内里偶有金芒流转，难判是凡矿还是灵矿。',
-        '矿胚表面裂隙纵横，触之发凉，隐约有灵压回弹。',
+        '石皮粗糙黯淡，内里偶有金芒流转，难判是凡矿还是灯矿。',
+        '矿胚表面裂隙纵横，触之发凉，隐约有灯压回弹。',
         '外层泥壳厚重，敲击声沉闷，似藏有被封住的金铁精华。',
       ],
     },
     monster: {
       names: ['风干的异兽残骨', '血迹斑驳的鳞片包', '缠布兽爪'],
       descriptions: [
-        '骨色灰白近腐，靠近却能感到微弱妖气盘旋不散。',
+        '骨色灰白近腐，靠近却能感到微弱秽气盘旋不散。',
         '鳞片暗沉失光，边缘却偶有寒芒掠过，真伪难分。',
         '兽爪被旧布层层缠绕，解开时有腥风掠过，气息驳杂。',
       ],
@@ -374,7 +374,7 @@ function buildMysteryMask(type: MaterialType) {
     tcdb: {
       names: ['蒙尘的古盒', '封纹残片', '无名灵物碎块'],
       descriptions: [
-        '器表满布岁月痕迹，神识触及时却有一丝古意回鸣。',
+        '器表满布岁月痕迹，心神触及时却有一丝古意回鸣。',
         '残片质地难辨，纹路断续，似曾属于某件高阶灵宝。',
         '此物毫不起眼，却在夜间时隐时现微光，来历可疑。',
       ],
@@ -382,7 +382,7 @@ function buildMysteryMask(type: MaterialType) {
     aux: {
       names: ['浑浊灵液瓶', '结块粉末包', '封蜡辅料罐'],
       descriptions: [
-        '液体色泽浑浊，摇晃时灵息层层分离，似可用亦似已废。',
+        '液体色泽浑浊，摇晃时灯息层层分离，似可用亦似已废。',
         '粉末结块严重，指尖摩挲却有细微灵麻感残留。',
         '封蜡年久开裂，罐内气息忽强忽弱，品质难测。',
       ],
@@ -833,7 +833,7 @@ async function generateFromMaterialLibrary(
   return listings.slice(0, layerConfig.count);
 }
 
-/** 按节点配置注入动态灵种；普通坊市不再固定占位，黑市始终不注入。 */
+/** 按节点配置注入动态灯种；普通坊市不再固定占位，黑市始终不注入。 */
 async function injectSpiritFieldSeedListings(
   listings: InternalMarketListing[],
   nodeId: string,
@@ -1153,7 +1153,7 @@ export async function prepareMarketItemPurchase(input: BuyInput) {
         .returning({ id: cultivators.id });
 
       if (!updatedCultivator) {
-        throw new MarketServiceError(400, '囊中羞涩，灵石不足');
+        throw new MarketServiceError(400, '囊中羞涩，灯油券不足');
       }
 
       let purchasedMaterial;
@@ -1315,7 +1315,7 @@ export async function prepareBatchMarketPurchase(input: BatchBuyInput) {
         .returning({ id: cultivators.id });
 
       if (!updatedCultivator) {
-        throw new MarketServiceError(400, '囊中羞涩，灵石不足');
+        throw new MarketServiceError(400, '囊中羞涩，灯油券不足');
       }
 
       const inventoryItems = [];
@@ -1437,7 +1437,7 @@ export async function prepareMysteryMaterialIdentification(
       count: 1,
     });
     if (!sampled) {
-      throw new MarketServiceError(503, '鉴定材料库暂无匹配灵材，请稍后再试');
+      throw new MarketServiceError(503, '鉴定材料库暂无匹配灯材，请稍后再试');
     }
     const sampledMaterial = materialLibraryEntryToMaterial(sampled);
     revealedMaterial = {

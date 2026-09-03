@@ -85,7 +85,7 @@ export function claimRedeemCode(args: {
       });
       return {
         result: {
-          message: '兑换成功，奖励已通过传音玉简发放',
+          message: '兑换成功，奖励已通过传音灯笺发放',
           mailId: mail.id,
         },
         resourceChanges: [],

@@ -77,7 +77,7 @@ export class ResourceEngine {
         ),
       )
       .limit(1);
-    if (!cultivator) return { valid: false, errors: ['修真者不存在'] };
+    if (!cultivator) return { valid: false, errors: ['修士不存在'] };
 
     const progress = cultivator.cultivationProgress as {
       cultivation_exp?: number;
@@ -385,7 +385,7 @@ export class ResourceEngine {
             return {
               success: false,
               operations,
-              errors: ['法宝数据不完整，缺少 name 字段'],
+              errors: ['封灵器数据不完整，缺少 name 字段'],
             };
           }
           break;

@@ -74,7 +74,7 @@ type CreationPreparationOptions = {
   materialQuantities?: Record<string, number>;
   /** 玩家自由书写的命名/风格提示，仅影响 LLM 命名文案，不改变数值。 */
   userPrompt?: string;
-  /** 仅法宝有效：玩家指定的装备槽位。其它产物传入会被忽略。 */
+  /** 仅封灵器有效：玩家指定的装备槽位。其它产物传入会被忽略。 */
   requestedSlot?: EquipmentSlot;
   /** 仅神通有效：玩家指定的目标策略（单体/AOE/队友等）。其它产物传入会被忽略。 */
   requestedTargetPolicy?: {
@@ -512,7 +512,7 @@ export async function previewCreationSelection(
 }
 
 /**
- * 主造物入口（炼器/神通/功法）。
+ * 主造物入口（封灵/神通/功法）。
  * 对应旧 CreationEngine.processRequest，但完全使用 v2 引擎和 creation_products 表。
  */
 export async function prepareCreation(

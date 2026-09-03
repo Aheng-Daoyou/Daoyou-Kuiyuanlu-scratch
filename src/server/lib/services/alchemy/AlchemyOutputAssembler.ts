@@ -9,19 +9,47 @@ import type { Consumable } from '@shared/types/cultivator';
 
 export interface AlchemyOutputDraft {
   name: string;
-  type: '丹药';
+  type: '香品';
   description?: string;
   prompt?: string;
   spec: Omit<PillSpec, 'operations'>;
   route: AlchemyEffectRoute;
   fitMultiplier: number;
+  /** 香变失败品标记：产出坏香（无有效香效的诡异异物）。 */
+  isBadIncense?: boolean;
 }
 
-/** 在最终 lot 的品质与品相确定后，唯一一次解析并组装可入库丹药。 */
+/** 在最终 lot 的品质与品相确定后，唯一一次解析并组装可入库香品。 */
 export function assembleAlchemyOutputConsumables(
   draft: AlchemyOutputDraft,
   yieldProfile: AlchemyYieldProfile,
 ): Consumable[] {
+  // 香变失败品：不解析任何有效香效，直接落库为不可用的「坏香」异物。
+  if (draft.isBadIncense) {
+    const quality = yieldProfile.primaryQuality ?? '凡品';
+    const spec: PillSpec = {
+      ...(draft.spec as Omit<PillSpec, 'operations'>),
+      operations: [],
+      alchemyMeta: {
+        ...draft.spec.alchemyMeta,
+        version: 4,
+        appearance: 'low',
+        isBadIncense: true,
+      },
+    };
+    const consumable: Consumable = {
+      name: draft.name,
+      type: draft.type,
+      description: draft.description,
+      prompt: draft.prompt,
+      quality,
+      quantity: 1,
+      spec,
+    };
+    consumable.score = 0;
+    return [consumable];
+  }
+
   return yieldProfile.lots.map((lot) => {
     const spec: PillSpec = {
       ...draft.spec,

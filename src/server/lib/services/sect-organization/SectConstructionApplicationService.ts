@@ -73,7 +73,7 @@ export class SectConstructionApplicationService {
       quote.spiritStones,
     );
     if (!spent.spent || spent.balance === undefined)
-      organizationError('灵石不足', 400);
+      organizationError('灯油券不足', 400);
 
     const contribution = await context.construction.grantContribution(
       membership.id,

@@ -92,7 +92,7 @@ function describeTrackLevelUp(levelUp: {
     return `${config.name}提升至 Lv.${levelUp.newLevel}`;
   }
 
-  return `${config.name}提升至 Lv.${levelUp.newLevel}，所有灵根 +${config.reward.amount}`;
+  return `${config.name}提升至 Lv.${levelUp.newLevel}，所有窍 +${config.reward.amount}`;
 }
 
 export const ConsumableUseEngine = {
@@ -201,13 +201,13 @@ export const ConsumableUseEngine = {
         : await getExecutor().transaction(restore);
 
       return {
-        message: `已使用${consumable.name}，天地灵气 +${restored.restored}。`,
+        message: `已使用${consumable.name}，灯油 +${restored.restored}。`,
         consumable,
       };
     }
 
     if (!isPillConsumable(consumable) && !isSpiritFruitConsumable(consumable)) {
-      throw new Error('该消耗品缺少有效丹药或灵果 spec。');
+      throw new Error('该消耗品缺少有效香品或灯果 spec。');
     }
 
     const cultivator = await loadPlayerConsumableOperationFacts(
@@ -272,7 +272,7 @@ export const ConsumableUseEngine = {
 
     return {
       message:
-        `${consumable.name}已服下，药力已经入体。${lifespanMessage}${trackMessage}`.trim(),
+        `${consumable.name}已服下，香力已经入体。${lifespanMessage}${trackMessage}`.trim(),
       consumable,
     };
   },

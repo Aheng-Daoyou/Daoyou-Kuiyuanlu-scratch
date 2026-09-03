@@ -120,7 +120,7 @@ export function chooseDominantElement(
 
   const [first, second] = entries;
   if (!first) {
-    return requestedElementBias ?? '土';
+    return requestedElementBias ?? '梦';
   }
 
   if (
@@ -380,7 +380,7 @@ export function buildAlchemyBatchProfile(
       : compoundTier === 'synergy'
         ? '主辅相合'
         : compoundTier === 'conflict'
-          ? '药路冲突'
+          ? '香路冲突'
           : '多材均衡';
 
   return {
@@ -439,7 +439,7 @@ export function aggregateAlchemyProperties(
     const vector = materialVectorMap.get(material.materialRef);
     if (!vector || vector.length === 0) {
       throw new AlchemyServiceError(
-        `材料 ${material.name} 缺少可用药性解析。`,
+        `材料 ${material.name} 缺少可用香性解析。`,
         503,
       );
     }
@@ -466,7 +466,7 @@ export function aggregateAlchemyProperties(
     [...propertyScores.entries()].map(([key, weight]) => ({ key, weight })),
   );
   if (rawPropertyVector.length === 0) {
-    throw new AlchemyServiceError('丹意未明，请稍后重试。', 503);
+    throw new AlchemyServiceError('香意未明，请稍后重试。', 503);
   }
 
   const propertyVector = selectEffectiveProperties(

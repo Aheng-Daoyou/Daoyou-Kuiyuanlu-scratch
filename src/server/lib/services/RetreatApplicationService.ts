@@ -137,7 +137,23 @@ export function executeRetreatCommand(args: {
           data: { task: majorGate.task },
         });
       }
-      const result = attemptBreakthrough(cultivator);
+      let result;
+      try {
+        result = attemptBreakthrough(cultivator);
+      } catch (breakthroughError) {
+        // engine 抛出的普通 Error（修为不足/已达最高境界/不可突破建议）包装为业务错误，
+        // 使路由能返回 409 友好提示而非 500 内部错误。
+        if (breakthroughError instanceof RetreatCommandError) {
+          throw breakthroughError;
+        }
+        throw new RetreatCommandError(
+          breakthroughError instanceof Error
+            ? breakthroughError.message
+            : '当前状态无法突破',
+          409,
+          { errorCode: 'BREAKTHROUGH_BLOCKED' },
+        );
+      }
       result.cultivator.condition =
         PillOperationExecutor.consumeBreakthroughSupportStatuses(
           result.cultivator.condition,

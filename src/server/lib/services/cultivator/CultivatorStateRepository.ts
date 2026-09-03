@@ -175,8 +175,8 @@ export async function deleteCultivator(
 
 const RESOURCE_SAFETY = {
   spirit_stones: {
-    maxDelta: 10_000_000, // 单次最多变动 1000 万灵石
-    ceiling: 1_000_000_000, // 灵石绝对上限 10 亿
+    maxDelta: 10_000_000, // 单次最多变动 1000 万灯油券
+    ceiling: 1_000_000_000, // 灯油券绝对上限 10 亿
   },
   reputation: {
     maxDelta: 9999, // 单次最多变动 9999 声望
@@ -187,8 +187,8 @@ const RESOURCE_SAFETY = {
     ceiling: 10_000_000, // 寿元绝对上限 1000 万年
   },
   cultivation_exp: {
-    maxDelta: 10_000_000, // 单次最多变动 1000 万修为
-    ceiling: 1_000_000_000, // 修为绝对上限 10 亿
+    maxDelta: 10_000_000, // 单次最多变动 1000 万灯韵
+    ceiling: 1_000_000_000, // 灯韵绝对上限 10 亿
   },
 } as const;
 
@@ -214,7 +214,7 @@ function assertResourceDeltaInRange(delta: number, maxDelta: number): number {
 }
 
 /**
- * 更新角色灵石数量
+ * 更新角色灯油券数量
  */
 export async function updateSpiritStones(
   userId: string,
@@ -259,9 +259,9 @@ export async function updateSpiritStones(
     throw new Error('角色不存在或无权限操作');
   }
   if (safeDelta < 0) {
-    throw new Error(`灵石不足，需要 ${-safeDelta}，当前拥有 ${current.value}`);
+    throw new Error(`灯油券不足，需要 ${-safeDelta}，当前拥有 ${current.value}`);
   }
-  throw new Error('灵石更新失败');
+  throw new Error('灯油券更新失败');
 }
 
 /**
@@ -340,7 +340,7 @@ export async function updateLifespan(
     .limit(1);
 
   if (cultivator.length === 0) {
-    throw new Error('修真者不存在');
+    throw new Error('修士不存在');
   }
 
   const newValue = Math.min(
@@ -361,9 +361,9 @@ export async function updateLifespan(
 }
 
 /**
- * 更新角色修为和感悟值
+ * 更新角色修为和窥悟值
  * @param cultivationExpDelta 修为变化量（可为负数）
- * @param comprehensionInsightDelta 感悟值变化量（可选，可为负数）
+ * @param comprehensionInsightDelta 窥悟值变化量（可选，可为负数）
  */
 export async function updateCultivationExp(
   userId: string,
@@ -385,7 +385,7 @@ export async function updateCultivationExp(
     .limit(1);
 
   if (cultivatorData.length === 0) {
-    throw new Error('修真者不存在');
+    throw new Error('修士不存在');
   }
 
   // 使用 getOrInitCultivationProgress 自动初始化
@@ -410,11 +410,11 @@ export async function updateCultivationExp(
   );
   if (newCultivationExp < 0) {
     throw new Error(
-      `修为不足，需要 ${-safeExpDelta}，当前修为 ${progress.cultivation_exp}`,
+      `灯韵不足，需要 ${-safeExpDelta}，当前灯韵 ${progress.cultivation_exp}`,
     );
   }
 
-  // 计算新的感悟值（如果提供）
+  // 计算新的窥悟值（如果提供）
   let newComprehensionInsight = progress.comprehension_insight;
   if (comprehensionInsightDelta !== undefined) {
     newComprehensionInsight = Math.max(

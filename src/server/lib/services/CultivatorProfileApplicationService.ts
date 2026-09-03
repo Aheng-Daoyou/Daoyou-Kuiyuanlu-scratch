@@ -105,7 +105,7 @@ export async function reincarnateActiveCultivator(args: {
         to_stage: '转世',
         age: current.age,
         years_spent: 0,
-        story: `道友${current.name}感悟天道无常，寿元虽未尽，然道心已决。遂于今日自行兵解，散去一身修为，只求来世再踏仙途，重证大道。天地为之动容，降下祥云送行。`,
+        story: `道友${current.name}窥见灯道无常，寿元虽未尽，然灯心已决。遂于今日自熄心灯，散去一身灯韵，只求来世再踏灯途，重证灯位。天地为之凝滞，夜雾为其让路。`,
       });
       return {
         result: null,

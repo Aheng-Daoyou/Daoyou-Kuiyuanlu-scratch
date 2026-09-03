@@ -51,6 +51,11 @@ import {
   assembleAlchemyOutputConsumables,
   type AlchemyOutputDraft,
 } from './alchemy/AlchemyOutputAssembler';
+import {
+  buildBadIncenseSpec,
+  resolveBadIncenseQuality,
+  shouldTriggerBadIncense,
+} from '@shared/lib/badIncense';
 import { buildDiscoveryCandidate } from './AlchemyFormulaService';
 import { AlchemyNarrativeEnricher } from './AlchemyNarrativeEnricher';
 import {
@@ -159,13 +164,13 @@ function validateMaterialRow(material: MaterialRow): string | null {
     return mysteryReason;
   }
   if (!material.element) {
-    return `材料 ${material.name} 缺少五行属性，当前无法入炉。`;
+    return `材料 ${material.name} 缺少窍属性，当前无法入炉。`;
   }
   if (!isAlchemyMaterialType(material.type as MaterialType)) {
-    return `材料 ${material.name} 不可用于炼丹。`;
+    return `材料 ${material.name} 不可用于制香。`;
   }
   if (!material.description?.trim()) {
-    return `材料 ${material.name} 缺少描述，当前无法判明药性。`;
+    return `材料 ${material.name} 缺少描述，当前无法判明香性。`;
   }
   return null;
 }
@@ -218,7 +223,7 @@ function buildFallbackName(
   dominantElement: ElementType,
 ): string {
   const coreName = materialNames[0]?.slice(0, 6) || '无名';
-  return `${ELEMENT_PREFIX_MAP[dominantElement]}${coreName}丹`;
+  return `${ELEMENT_PREFIX_MAP[dominantElement]}${coreName}香`;
 }
 
 function buildFallbackDescription(
@@ -230,8 +235,8 @@ function buildFallbackDescription(
   focusMode: AlchemyRecipePlan['focusMode'],
 ): string {
   return [
-    `以${materialNames.join('、')}合炉，丹意取向「${userPrompt.trim()}」。`,
-    `炉势走${describeFocusMode(focusMode)}之路，药性归于${propertyVectorText}，稳度 ${stability}，丹毒评定 ${toxicityRating}。`,
+    `以${materialNames.join('、')}合炉，香意取向「${userPrompt.trim()}」。`,
+    `炉势走${describeFocusMode(focusMode)}之路，香性归于${propertyVectorText}，稳度 ${stability}，香毒评定 ${toxicityRating}。`,
   ].join('');
 }
 
@@ -407,7 +412,7 @@ export function createAlchemyService(
 
     const prompt = options.userPrompt?.trim();
     if (!prompt) {
-      throw new AlchemyServiceError('请注入神念，描述丹药功效。');
+      throw new AlchemyServiceError('请注入神念，描述香品功效。');
     }
 
     const highestMaterialRank = calculateHighestMaterialRank(
@@ -426,7 +431,7 @@ export function createAlchemyService(
     );
 
     if ((cultivator.spirit_stones ?? 0) < cost) {
-      throw new AlchemyServiceError(`灵石不足，需要 ${cost} 枚`);
+      throw new AlchemyServiceError(`灯油券不足，需要 ${cost} 枚`);
     }
 
     const preparedMaterials = buildPreparedMaterials(
@@ -442,7 +447,7 @@ export function createAlchemyService(
         userPrompt: prompt,
       });
     } catch {
-      throw new AlchemyServiceError('丹意未明，请稍后重试。', 503);
+      throw new AlchemyServiceError('香意未明，请稍后重试。', 503);
     }
 
     const synthesis = synthesizeAlchemyFromPlan(preparedMaterials, recipePlan);
@@ -491,23 +496,59 @@ export function createAlchemyService(
           preparedMaterials.map((material) => material.name),
           synthesis.dominantElement,
         ));
+
+    // 香变判定：香路冲突显著（或后续产出为空）时，本炉香变成「坏香」。
+    const isBadIncense = shouldTriggerBadIncense({
+      conflictScore: synthesis.batchProfile.conflictScore,
+    });
+
+    const badIncenseCopy = isBadIncense
+      ? await alchemyNarrativeEnricher.generateImprovisedPillCopy({
+          family: synthesis.family,
+          dominantElement: synthesis.dominantElement,
+          quality: highestMaterialRank,
+          materialNames: preparedMaterials.map((material) => material.name),
+          propertyVector: route.effects,
+          stability: synthesis.stability,
+          toxicityRating: synthesis.toxicityRating,
+          userPrompt: prompt,
+          focusMode: synthesis.focusMode,
+          isBadIncense: true,
+        })
+      : null;
+
     const draft: AlchemyOutputDraft = {
-      name: resolvedName,
-      type: '丹药',
+      name: isBadIncense
+        ? (badIncenseCopy?.name ?? `坏香·${resolvedName}`)
+        : resolvedName,
+      type: '香品',
       prompt,
-      description:
-        generatedCopy?.description ??
-        buildFallbackDescription(
-          preparedMaterials.map((material) => material.name),
-          prompt,
-          describeAlchemyPropertyVector(route.effects),
-          synthesis.stability,
-          synthesis.toxicityRating,
-          synthesis.focusMode,
-        ),
-      spec,
+      description: isBadIncense
+        ? (badIncenseCopy?.description ??
+          `香灰中似有余响，本炉未成香，只余一捧说不出名字的东西。`)
+        : (generatedCopy?.description ??
+          buildFallbackDescription(
+            preparedMaterials.map((material) => material.name),
+            prompt,
+            describeAlchemyPropertyVector(route.effects),
+            synthesis.stability,
+            synthesis.toxicityRating,
+            synthesis.focusMode,
+          )),
+      spec: isBadIncense
+        ? buildBadIncenseSpec({
+            family: synthesis.family,
+            sourceMaterials: preparedMaterials.map((material) => material.name),
+            dominantElement: synthesis.dominantElement,
+            stability: synthesis.stability,
+            toxicityRating: synthesis.toxicityRating,
+            source: 'improvised',
+            tags: ['坏香', '香变', '不可名状'],
+          })
+        : spec,
       route,
-      fitMultiplier: 1,
+      fitMultiplier: isBadIncense ? 0.5 : 1,
+      isBadIncense,
     };
     return {
       qiCost,
@@ -554,12 +595,60 @@ export function createAlchemyService(
             purity: synthesis.batchProfile.essenceSummary?.purity,
           },
         });
+
+        // 香变兜底：若产出为空（香力不足以凝香），同样视为香变出「坏香」。
+        const effectiveBadIncense = draft.isBadIncense || yieldProfile.lots.length === 0;
+        const badIncenseDraft: AlchemyOutputDraft = effectiveBadIncense
+          ? {
+              ...draft,
+              isBadIncense: true,
+              name: draft.isBadIncense
+                ? draft.name
+                : `坏香·${draft.name}`,
+              description: draft.isBadIncense
+                ? draft.description
+                : `香灰中似有余响，本炉未成香，只余一捧说不出名字的东西。`,
+              spec: draft.isBadIncense
+                ? draft.spec
+                : buildBadIncenseSpec({
+                    family: synthesis.family,
+                    sourceMaterials: preparedMaterials.map(
+                      (material) => material.name,
+                    ),
+                    dominantElement: synthesis.dominantElement,
+                    stability: synthesis.stability,
+                    toxicityRating: synthesis.toxicityRating,
+                    source: 'improvised',
+                    tags: ['坏香', '香变', '不可名状'],
+                  }),
+            }
+          : draft;
         const outputConsumables = assembleAlchemyOutputConsumables(
-          draft,
-          yieldProfile,
+          badIncenseDraft,
+          effectiveBadIncense
+            ? {
+                ...yieldProfile,
+                primaryQuality: resolveBadIncenseQuality(
+                  preparedMaterials.map((material) => material.rank),
+                ),
+                lots: [
+                  {
+                    quality: resolveBadIncenseQuality(
+                      preparedMaterials.map((material) => material.rank),
+                    ),
+                    appearance: 'low' as const,
+                    quantity: 1,
+                    essenceSpent: 0,
+                    effectMultiplier: 0,
+                  },
+                ],
+                totalQuantity: 1,
+                distributionSummary: '坏香×1',
+              }
+            : yieldProfile,
         );
         if (outputConsumables.length === 0) {
-          throw new AlchemyServiceError('本炉药蕴不足，无法凝成丹药。', 400);
+          throw new AlchemyServiceError('本炉香蕴不足，无法凝成香品。', 400);
         }
         const primaryConsumable = outputConsumables[0]!;
 
@@ -634,7 +723,7 @@ export function createAlchemyService(
           )
           .returning({ id: cultivators.id });
         if (!charged) {
-          throw new AlchemyServiceError(`灵石不足，需要 ${cost} 枚`, 409);
+          throw new AlchemyServiceError(`灯油券不足，需要 ${cost} 枚`, 409);
         }
 
         const savedConsumables: Consumable[] = [];

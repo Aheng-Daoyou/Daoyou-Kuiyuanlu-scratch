@@ -96,7 +96,7 @@ export function mapLoadoutFromProducts(
     return {
       id: product.id,
       name: product.name,
-      element: (product.element as ElementType) || '金',
+      element: (product.element as ElementType) || '烛',
       quality: product.quality as Quality | undefined,
       cost: abilityConfig.mpCost || undefined,
       cooldown: abilityConfig.cooldown ?? 0,

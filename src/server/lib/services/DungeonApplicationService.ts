@@ -68,6 +68,10 @@ export async function executeDungeonCommand(args: {
   userId: string;
   cultivatorId: string;
   command: DungeonCommand;
+  /** 回合叙事流式回调（SSE 渐进展示用，仅 start/action/looting-continue 生效） */
+  narrativeStream?: (text: string) => void;
+  /** 客户端断开时中止 LLM 生成 */
+  abortSignal?: AbortSignal;
 }) {
   const source = dungeonCommandSource(args.command);
   const requestId =
@@ -105,6 +109,10 @@ export async function executeDungeonCommand(args: {
         args.cultivatorId,
         args.command,
         lease,
+        {
+          narrativeStream: args.narrativeStream,
+          abortSignal: args.abortSignal,
+        },
       );
       lease.assertHeld();
       const hooks = asDeferredResult(prepared);
@@ -280,8 +288,17 @@ async function prepareDungeonCommand(
   cultivatorId: string,
   command: DungeonCommand,
   lease: RedisLeaseContext,
+  stream?: {
+    narrativeStream?: (text: string) => void;
+    abortSignal?: AbortSignal;
+  },
 ): Promise<unknown> {
-  const options = { deferPersistence: true as const, lease };
+  const options = {
+    deferPersistence: true as const,
+    lease,
+    narrativeStream: stream?.narrativeStream,
+    abortSignal: stream?.abortSignal,
+  };
   switch (command.kind) {
     case 'start':
       return dungeonService.startDungeon(

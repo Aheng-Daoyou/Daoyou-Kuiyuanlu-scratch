@@ -429,7 +429,7 @@ function getMaterialRankTone(rank: HighTierMaterialRank): string {
     case '地品':
       return '底蕴稳固，足作上乘炼材';
     case '天品':
-      return '灵机昂藏，已有高阶宝材气象';
+      return '灯机昂藏，已有高阶宝材气象';
     case '仙品':
       return '仙蕴昭然，难得一见';
     case '神品':
@@ -454,8 +454,8 @@ export function buildMaterialHighTierAppraisal(
   );
   const typeLabel = getMaterialTypeLabel(material.type);
   const elementText = material.element
-    ? `${material.element}灵息流转`
-    : '灵息内敛';
+    ? `${material.element}灯息流转`
+    : '灯息内敛';
   const featureText = getMaterialAppraisalFeatureText(keywords);
   const comment = `此${rank}${typeLabel}「${material.name}」${elementText}，${featureText}。按坊市旧例称量，${getMaterialRankTone(rank)}，今可定为${rating}级回收。`;
 
@@ -490,13 +490,13 @@ function normalizeConsumableSelections(
         selection.quantity < 1,
     )
   ) {
-    throw new MarketRecycleError(400, '请选择有效的丹药和回收数量');
+    throw new MarketRecycleError(400, '请选择有效的香品和回收数量');
   }
   if (
     new Set(normalized.map((selection) => selection.id)).size !==
     normalized.length
   ) {
-    throw new MarketRecycleError(400, '同一丹药不可重复选择');
+    throw new MarketRecycleError(400, '同一香品不可重复选择');
   }
   return normalized;
 }
@@ -544,7 +544,7 @@ async function loadOwnedArtifacts(
   );
 
   if (rows.length !== artifactIds.length) {
-    throw new MarketRecycleError(400, '部分法宝不存在或不属于当前角色');
+    throw new MarketRecycleError(400, '部分封灵器不存在或不属于当前角色');
   }
 
   const order = new Map(artifactIds.map((id, index) => [id, index]));
@@ -571,14 +571,14 @@ async function loadOwnedConsumables(
     );
 
   if (rows.length !== consumableIds.length) {
-    throw new MarketRecycleError(400, '部分丹药不存在或不属于当前角色');
+    throw new MarketRecycleError(400, '部分香品不存在或不属于当前角色');
   }
 
   const order = new Map(consumableIds.map((id, index) => [id, index]));
   rows.sort((a, b) => (order.get(a.id) ?? 0) - (order.get(b.id) ?? 0));
   const items = rows.map(mapConsumableRow);
   if (items.some((item) => !isPillConsumable(item))) {
-    throw new MarketRecycleError(400, '丹药回收不支持符箓或无效消耗品');
+    throw new MarketRecycleError(400, '香品回收不支持符箓或无效消耗品');
   }
   return items;
 }
@@ -750,7 +750,7 @@ async function previewArtifactSell(
     cultivator.id,
     ids,
   );
-  ensureArtifactsNotEquipped(rawRecords, '已装备法宝不可回收，请先卸下');
+  ensureArtifactsNotEquipped(rawRecords, '已装备封灵器不可回收，请先卸下');
 
   const lowTier = ownedArtifacts.filter((item) =>
     isLowTier(getArtifactQuality(item)),
@@ -760,10 +760,10 @@ async function previewArtifactSell(
   );
 
   if (lowTier.length > 0 && highTier.length > 0) {
-    throw new MarketRecycleError(400, '不可混合回收低品与高品法宝');
+    throw new MarketRecycleError(400, '不可混合回收低品与高品封灵器');
   }
   if (highTier.length > 1) {
-    throw new MarketRecycleError(400, '真品及以上法宝仅支持单件鉴定回收');
+    throw new MarketRecycleError(400, '真品及以上封灵器仅支持单件鉴定回收');
   }
 
   let mode: SellMode;
@@ -780,7 +780,7 @@ async function previewArtifactSell(
   }
 
   if (targetArtifacts.length === 0) {
-    throw new MarketRecycleError(400, '未找到可回收法宝');
+    throw new MarketRecycleError(400, '未找到可回收封灵器');
   }
 
   const targetIds = new Set(targetArtifacts.map((a) => a.id));
@@ -861,10 +861,10 @@ async function previewConsumableSell(
     isHighTier(getConsumableQuality(item)),
   );
   if (lowTier.length > 0 && highTier.length > 0) {
-    throw new MarketRecycleError(400, '不可混合回收低品与高品丹药');
+    throw new MarketRecycleError(400, '不可混合回收低品与高品香品');
   }
   if (highTier.length > 1) {
-    throw new MarketRecycleError(400, '真品及以上丹药仅支持单组回收');
+    throw new MarketRecycleError(400, '真品及以上香品仅支持单组回收');
   }
 
   const mode: SellMode = highTier.length === 1 ? 'high_single' : 'low_bulk';
@@ -975,7 +975,7 @@ export async function previewAllLowTierSell(
       )
       .orderBy(desc(consumables.createdAt), desc(consumables.id));
     if (rows.length === 0) {
-      throw new MarketRecycleError(400, '未找到可回收丹药');
+      throw new MarketRecycleError(400, '未找到可回收香药');
     }
     return previewConsumableSell(
       cultivator,
@@ -989,7 +989,7 @@ export async function previewAllLowTierSell(
         lowTierQualities,
       );
     if (ids.length === 0) {
-      throw new MarketRecycleError(400, '未找到可回收法宝');
+      throw new MarketRecycleError(400, '未找到可回收封灵器');
     }
     return previewArtifactSell(cultivator, ids);
   }
@@ -1126,11 +1126,11 @@ async function confirmArtifactSell(
       );
 
     if (rows.length !== session.itemIds.length) {
-      throw new MarketRecycleError(409, '法宝已发生变化，请重新预览');
+      throw new MarketRecycleError(409, '封灵器已发生变化，请重新预览');
     }
 
     if (rows.some((row) => row.isEquipped)) {
-      throw new MarketRecycleError(409, '法宝已装备，无法回收，请先卸下');
+      throw new MarketRecycleError(409, '封灵器已装备，无法回收，请先卸下');
     }
 
     const rowMap = new Map(rows.map((row) => [row.id, row]));
@@ -1138,7 +1138,7 @@ async function confirmArtifactSell(
       const current = rowMap.get(id);
       const expected = session.snapshot[id] as ArtifactSnapshot | undefined;
       if (!current || !expected) {
-        throw new MarketRecycleError(409, '法宝已发生变化，请重新预览');
+        throw new MarketRecycleError(409, '封灵器已发生变化，请重新预览');
       }
       const currentQuality = getArtifactQualityFromProduct(current);
       const currentScore = current.score || 0;
@@ -1150,7 +1150,7 @@ async function confirmArtifactSell(
         currentSlot !== expected.slot ||
         currentEffectsHash !== expected.effectsHash
       ) {
-        throw new MarketRecycleError(409, '法宝已发生变化，请重新预览');
+        throw new MarketRecycleError(409, '封灵器已发生变化，请重新预览');
       }
     }
 
@@ -1162,7 +1162,7 @@ async function confirmArtifactSell(
       );
 
     if (deleted.length !== session.itemIds.length) {
-      throw new MarketRecycleError(409, '法宝已发生变化，请重新预览');
+      throw new MarketRecycleError(409, '封灵器已发生变化，请重新预览');
     }
 
     const [updated] = await tx
@@ -1230,7 +1230,7 @@ async function confirmConsumableSell(
       getConsumableSpecHash(current) !== expected.specHash ||
       quoted.quantity > current.quantity
     ) {
-      throw new MarketRecycleError(409, '丹药已发生变化，请重新预览');
+      throw new MarketRecycleError(409, '香品已发生变化，请重新预览');
     }
   }
 
@@ -1249,7 +1249,7 @@ async function confirmConsumableSell(
         )
         .returning({ id: consumables.id });
       if (deleted.length !== 1) {
-        throw new MarketRecycleError(409, '丹药已发生变化，请重新预览');
+        throw new MarketRecycleError(409, '香品已发生变化，请重新预览');
       }
       inventoryChanges.push({ operation: 'remove', id: quoted.id });
       continue;
@@ -1267,7 +1267,7 @@ async function confirmConsumableSell(
       )
       .returning();
     if (!updated) {
-      throw new MarketRecycleError(409, '丹药已发生变化，请重新预览');
+      throw new MarketRecycleError(409, '香品已发生变化，请重新预览');
     }
     inventoryChanges.push({
       operation: 'upsert',

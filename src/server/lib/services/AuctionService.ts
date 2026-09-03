@@ -252,7 +252,7 @@ export function assertAuctionListableItem(
   if ((itemSnapshot as Artifact).isEquipped) {
     throw new AuctionServiceError(
       AuctionError.INVALID_ITEM_TYPE,
-      '已装备法宝不可寄售，请先卸下',
+      '已装备封灵器不可寄售，请先卸下',
     );
   }
   if (
@@ -261,7 +261,7 @@ export function assertAuctionListableItem(
   ) {
     throw new AuctionServiceError(
       AuctionError.INVALID_ITEM_TYPE,
-      '当前仅支持丹药寄售',
+      '当前仅支持香品寄售',
     );
   }
 
@@ -280,7 +280,7 @@ export function assertAuctionListableItem(
   if (itemType === 'artifact' && quantity !== 1) {
     throw new AuctionServiceError(
       AuctionError.INVALID_QUANTITY,
-      '法宝每次只能上架 1 件',
+      '封灵器每次只能上架 1 件',
     );
   }
 
@@ -329,13 +329,13 @@ export async function listItem(
   if (price < 1) {
     throw new AuctionServiceError(
       AuctionError.INVALID_PRICE,
-      '价格必须至少为 1 灵石',
+      '价格必须至少为 1 灯油券',
     );
   }
   if (price > AUCTION_MAX_UNIT_PRICE) {
     throw new AuctionServiceError(
       AuctionError.INVALID_PRICE,
-      `单价不得超过 ${AUCTION_MAX_UNIT_PRICE.toLocaleString()} 灵石`,
+      `单价不得超过 ${AUCTION_MAX_UNIT_PRICE.toLocaleString()} 灯油券`,
     );
   }
 
@@ -434,7 +434,7 @@ export async function listItem(
   if (price > qualityCap) {
     throw new AuctionServiceError(
       AuctionError.INVALID_PRICE,
-      `${itemQuality}物品单价不得超过 ${qualityCap.toLocaleString()} 灵石`,
+      `${itemQuality}物品单价不得超过 ${qualityCap.toLocaleString()} 灯油券`,
     );
   }
 
@@ -525,7 +525,7 @@ export async function listItem(
       if (artifact.isEquipped) {
         throw new AuctionServiceError(
           AuctionError.INVALID_ITEM_TYPE,
-          '已装备法宝不可寄售，请先卸下',
+          '已装备封灵器不可寄售，请先卸下',
         );
       }
 
@@ -736,15 +736,15 @@ export async function buyItem(
   if (settlement.grossAmount > AUCTION_MAX_TRANSACTION_TOTAL) {
     throw new AuctionServiceError(
       AuctionError.INVALID_PRICE,
-      `单次购买总价不得超过 ${AUCTION_MAX_TRANSACTION_TOTAL.toLocaleString()} 灵石`,
+      `单次购买总价不得超过 ${AUCTION_MAX_TRANSACTION_TOTAL.toLocaleString()} 灯油券`,
     );
   }
   const price = settlement.grossAmount;
   const { feeAmount, sellerAmount } = settlement;
 
-  // 5. 事务：扣除买家灵石 + 更新拍卖状态 + 发送邮件
+  // 5. 事务：扣除买家灯油券 + 更新拍卖状态 + 发送邮件
   const persistPurchase = async (tx: DbTransaction) => {
-    // 5.0 禁止同一用户（userId）下不同角色之间的交易（防止小号对敲刷灵石）
+    // 5.0 禁止同一用户（userId）下不同角色之间的交易（防止小号对敲刷灯油券）
     const [buyerRow] = await tx
       .select({ userId: schema.cultivators.userId })
       .from(schema.cultivators)
@@ -763,7 +763,7 @@ export async function buyItem(
       );
     }
 
-    // 5.1 扣除买家灵石（原子操作）
+    // 5.1 扣除买家灯油券（原子操作）
     const [updatedBuyer] = await tx
       .update(schema.cultivators)
       .set({
@@ -785,7 +785,7 @@ export async function buyItem(
       if (buyer) {
         throw new AuctionServiceError(
           AuctionError.INSUFFICIENT_FUNDS,
-          `囊中羞涩，灵石不足 (需 ${price}，余 ${buyer.money})`,
+          `囊中羞涩，灯油券不足 (需 ${price}，余 ${buyer.money})`,
         );
       }
       throw new AuctionServiceError(
@@ -830,15 +830,15 @@ export async function buyItem(
       tx,
     );
 
-    // 5.4 发送邮件给卖家（扣除手续费后的灵石）
+    // 5.4 发送邮件给卖家（扣除手续费后的灯油券）
     await MailService.sendMail(
       listing.sellerId,
       '拍卖行物品售出',
-      `道友寄售的【${itemSnapshot.name}】成交 ${quantity} 件，成交额 ${price} 灵石，按阶梯税扣除 ${feeAmount} 灵石后获得 ${sellerAmount} 灵石，请收取附件。`,
+      `道友寄售的【${itemSnapshot.name}】成交 ${quantity} 件，成交额 ${price} 灯油券，按阶梯税扣除 ${feeAmount} 灯油券后获得 ${sellerAmount} 灯油券，请收取附件。`,
       [
         {
           type: 'spirit_stones',
-          name: '灵石',
+          name: '灯油券',
           quantity: sellerAmount,
         },
       ],

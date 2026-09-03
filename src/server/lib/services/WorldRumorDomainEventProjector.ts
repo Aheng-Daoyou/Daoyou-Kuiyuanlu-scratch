@@ -26,10 +26,10 @@ export async function projectWorldRumorDomainEvent(
     if (!event.data.major) return ignored();
     const target = `${event.data.toRealm}${event.data.toStage}`;
     const text = deterministicTemplate(event.id, [
-      `${event.data.cultivatorName}闭关洞府霞光冲霄，竟一举破境，踏入「${target}」！`,
+      `${event.data.cultivatorName}闭关灯宅霞光冲霄，竟一举破境，踏入「${target}」！`,
       `有修士夜观天象见异光东来，传闻${event.data.cultivatorName}已至「${target}」！`,
       `${event.data.cultivatorName}冲关成功，道音震荡八方，自此迈入「${target}」！`,
-      `灵潮翻涌，雷声隐隐，${event.data.cultivatorName}于万众传闻中晋升「${target}」！`,
+      `梦潮翻涌，雷声隐隐，${event.data.cultivatorName}于万众传闻中晋升「${target}」！`,
       `${event.data.cultivatorName}破开桎梏，境界再上一重楼，正式踏入「${target}」！`,
     ]);
     return createRumor(event, event.data.userId, 'text', text, { text });
@@ -39,9 +39,9 @@ export async function projectWorldRumorDomainEvent(
     if (QUALITY_ORDER[event.data.quality] < QUALITY_ORDER['天品']) {
       return ignored();
     }
-    const noun = event.data.itemType === 'consumable' ? '丹品' : '品阶';
+    const noun = event.data.itemType === 'consumable' ? '香品' : '品阶';
     const flourish =
-      event.data.itemType === 'consumable' ? '药香化霞' : '灵韵自生';
+      event.data.itemType === 'consumable' ? '药香化霞' : '灯韵自生';
     const text = `由${event.data.cultivatorName}炼成，${noun}已入${event.data.quality}，${flourish}，足令诸修侧目。`;
     return createRumor(event, event.data.userId, 'item_showcase', text, {
       itemType: event.data.itemType,
@@ -85,10 +85,10 @@ export async function projectWorldRumorDomainEvent(
   if (isDomainEventType(event, 'ranking.position.changed')) {
     const text =
       event.data.changeType === 'direct_entry'
-        ? `万界金榜初开，${event.data.challengerName}登临${event.data.realm}天骄榜第${event.data.rank}名。`
+        ? `烬洲金榜初开，${event.data.challengerName}登临${event.data.realm}天骄榜第${event.data.rank}名。`
         : event.data.changeType === 'vacancy_entry'
-          ? `万界金榜有感，${event.data.challengerName}虽挑战${event.data.targetName ?? '榜上修士'}未胜，仍补入${event.data.realm}天骄榜第${event.data.rank}名。`
-          : `万界金榜有感，${event.data.challengerName}击败${event.data.targetName ?? '榜上修士'}，登临${event.data.realm}天骄榜第${event.data.rank}名。`;
+          ? `烬洲金榜有感，${event.data.challengerName}虽挑战${event.data.targetName ?? '榜上修士'}未胜，仍补入${event.data.realm}天骄榜第${event.data.rank}名。`
+          : `烬洲金榜有感，${event.data.challengerName}击败${event.data.targetName ?? '榜上修士'}，登临${event.data.realm}天骄榜第${event.data.rank}名。`;
     return createRumor(event, event.data.userId, 'text', text, { text });
   }
 
@@ -111,8 +111,8 @@ async function createRumor(
     createdAt: event.occurredAt,
     senderUserId,
     senderCultivatorId: null,
-    senderName: '修仙界传闻',
-    senderRealm: '炼气',
+    senderName: '烬洲传闻',
+    senderRealm: '闻腥',
     senderRealmStage: '系统',
     channel: 'system',
     messageType,

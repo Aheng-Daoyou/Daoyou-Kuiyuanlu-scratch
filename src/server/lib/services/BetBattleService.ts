@@ -163,13 +163,13 @@ function validateExclusiveStake(
     if (stakeItem) {
       throw new BetBattleServiceError(
         BetBattleError.INVALID_STAKE,
-        '灵石赌斗不可同时押注道具',
+        '灯油券赌斗不可同时押注道具',
       );
     }
     if (!Number.isInteger(spiritStones) || spiritStones <= 0) {
       throw new BetBattleServiceError(
         BetBattleError.INVALID_STAKE,
-        '灵石押注必须是大于0的整数',
+        '灯油券押注必须是大于0的整数',
       );
     }
     return;
@@ -178,7 +178,7 @@ function validateExclusiveStake(
   if (spiritStones !== 0) {
     throw new BetBattleServiceError(
       BetBattleError.INVALID_STAKE,
-      '道具赌斗不可同时押注灵石',
+      '道具赌斗不可同时押注灯油券',
     );
   }
   if (!stakeItem) {
@@ -304,7 +304,7 @@ async function deductSpiritStones(
   if (!updated) {
     throw new BetBattleServiceError(
       BetBattleError.INSUFFICIENT_SPIRIT_STONES,
-      `灵石不足，押注需要 ${amount}`,
+      `灯油券不足，押注需要 ${amount}`,
     );
   }
 }
@@ -337,7 +337,7 @@ async function deductStakeItem(
     if (stakeItem.quantity !== 1) {
       throw new BetBattleServiceError(
         BetBattleError.INVALID_QUANTITY,
-        '法宝押注数量必须为 1',
+        '封灵器押注数量必须为 1',
       );
     }
 
@@ -492,7 +492,7 @@ function assertStakeMatch(
     if (creatorStake.spiritStones !== challengerStake.spiritStones) {
       throw new BetBattleServiceError(
         BetBattleError.CHALLENGER_STAKE_MISMATCH,
-        '应战灵石数量必须与发起方一致',
+        '应战灯油券数量必须与发起方一致',
       );
     }
     return;
@@ -524,7 +524,7 @@ function buildRewardAttachments(stake: BetStakeSnapshot): MailAttachment[] {
     return [
       {
         type: 'spirit_stones',
-        name: '灵石',
+        name: '灯油券',
         quantity: stake.spiritStones,
       },
     ];
@@ -543,7 +543,7 @@ function buildRewardAttachments(stake: BetStakeSnapshot): MailAttachment[] {
 
 function buildRumorStakeSummary(stake: BetStakeSnapshot): string {
   if (stake.stakeType === 'spirit_stones') {
-    return `${stake.spiritStones * 2}枚灵石`;
+    return `${stake.spiritStones * 2}枚灯油券`;
   }
 
   if (!stake.item) return '赌注';
@@ -607,7 +607,7 @@ export async function createBetBattle(
   ) {
     throw new BetBattleServiceError(
       BetBattleError.INVALID_STAKE,
-      `单次赌战押注灵石不能超过 ${MAX_BET_BATTLE_SPIRIT_STONES} 枚`,
+      `单次赌战押注灯油券不能超过 ${MAX_BET_BATTLE_SPIRIT_STONES} 枚`,
     );
   }
   validateRealmRange(input.minRealm, input.maxRealm);

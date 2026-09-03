@@ -114,7 +114,7 @@ export function fallbackTurnReply(input: {
   if (!input.negotiationOutcome) {
     if (input.proposal.intent === 'buy')
       return withClaim(
-        `既然你认这个价，便按${input.context.currentPrice}灵石成交。`,
+        `既然你认这个价，便按${input.context.currentPrice}灯油券成交。`,
       );
     if (input.proposal.intent === 'leave')
       return withClaim('买卖不成也无妨，暗巷里没人拦你的路。');
@@ -125,12 +125,12 @@ export function fallbackTurnReply(input: {
   }
   const { outcome, nextPrice } = input.negotiationOutcome;
   if (outcome === 'accepted')
-    return withClaim(`行，就按你说的，${nextPrice}灵石。`);
+    return withClaim(`行，就按你说的，${nextPrice}灯油券。`);
   if (outcome === 'countered')
-    return withClaim(`你说得有几分道理，但最多让到${nextPrice}灵石。`);
+    return withClaim(`你说得有几分道理，但最多让到${nextPrice}灯油券。`);
   if (outcome === 'locked')
-    return withClaim(`价就定在${nextPrice}灵石，再谈便不卖了。`);
-  return withClaim(`这个价不成，仍是${nextPrice}灵石。`);
+    return withClaim(`价就定在${nextPrice}灯油券，再谈便不卖了。`);
+  return withClaim(`这个价不成，仍是${nextPrice}灯油券。`);
 }
 
 function turnPayload(context: BlackMarketTurnContext): string {

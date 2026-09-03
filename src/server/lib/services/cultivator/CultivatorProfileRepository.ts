@@ -155,6 +155,7 @@ export async function createCultivator(
         origin: cultivator.origin || null,
         personality: cultivator.personality || null,
         background: cultivator.background || null,
+        lineageLore: cultivator.lineage_lore || null,
         prompt: cultivator.prompt || '',
         playerRace: 'human',
         raceNarrative: cultivator.raceNarrative ?? '人身近道，百法皆可参悟。',
@@ -182,7 +183,7 @@ export async function createCultivator(
     const cultivatorRecord = cultivatorResult[0];
     const cultivatorId = cultivatorRecord.id;
 
-    // 2. 创建灵根
+    // 2. 创建窍
     if (cultivator.spiritual_roots.length > 0) {
       const spiritualRootCount = cultivator.spiritual_roots.length;
       await tx.insert(schema.spiritualRoots).values(
@@ -254,19 +255,19 @@ function resolveSpiritualRootGrade(
   rootCount: number,
   element: Cultivator['spiritual_roots'][0]['element'],
 ): NonNullable<Cultivator['spiritual_roots'][0]['grade']> {
-  if (element === '风' || element === '雷' || element === '冰') {
-    return '变异灵根';
+  if (element === '噬' || element === '帘' || element === '疫') {
+    return '变异窍';
   }
 
   if (rootCount === 1) {
-    return '天灵根';
+    return '天窍';
   }
 
   if (rootCount <= 3) {
-    return '真灵根';
+    return '真窍';
   }
 
-  return '伪灵根';
+  return '伪窍';
 }
 
 export async function getUserAliveCultivatorId(
@@ -296,6 +297,7 @@ export async function getPlayerIdentityCultivatorById(
       origin: schema.cultivators.origin,
       personality: schema.cultivators.personality,
       background: schema.cultivators.background,
+      lineageLore: schema.cultivators.lineageLore,
       prompt: schema.cultivators.prompt,
       playerRace: schema.cultivators.playerRace,
       raceNarrative: schema.cultivators.raceNarrative,
@@ -347,6 +349,7 @@ export async function getPlayerIdentityCultivatorById(
     origin: cultivatorRecord.origin || undefined,
     personality: cultivatorRecord.personality || undefined,
     background: cultivatorRecord.background || undefined,
+    lineage_lore: cultivatorRecord.lineageLore || undefined,
     prompt: cultivatorRecord.prompt,
     playerRace: cultivatorRecord.playerRace as Cultivator['playerRace'],
     raceNarrative: cultivatorRecord.raceNarrative ?? undefined,

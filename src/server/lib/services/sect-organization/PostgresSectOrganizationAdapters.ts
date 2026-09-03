@@ -402,7 +402,7 @@ function mapSubmissionArtifact(row: {
     : undefined;
   const rowQuality = normalizeQuality(row.quality);
   if (modelQuality && modelQuality !== rowQuality)
-    throw new Error(`法宝品质持久化不一致：${row.id}`);
+    throw new Error(`封灵器品质持久化不一致：${row.id}`);
   return {
     kind: 'artifact',
     id: row.id,
@@ -1032,7 +1032,7 @@ export function createPostgresSectCommandContext(args: {
             quality: material.rank,
             type: 'ore' as const,
             ...(material.element ? { element: material.element } : {}),
-            description: material.description ?? '宗门灵脉中采得的灵矿材料。',
+            description: material.description ?? '宗门灯脉中采得的灯矿材料。',
           };
         }
         return null;

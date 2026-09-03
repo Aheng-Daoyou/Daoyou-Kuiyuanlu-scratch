@@ -669,11 +669,11 @@ function applyReveals(
 function playerBody(command: BlackMarketInteractCommand): string {
   const text = command.message?.trim();
   if (text && command.offeredPrice != null) {
-    return `${text}（报价：${command.offeredPrice.toLocaleString()}灵石）`;
+    return `${text}（报价：${command.offeredPrice.toLocaleString()}灯油券）`;
   }
   if (text) return text;
   if (command.offeredPrice != null) {
-    return `我出${command.offeredPrice.toLocaleString()}灵石。`;
+    return `我出${command.offeredPrice.toLocaleString()}灯油券。`;
   }
   return '（沉默）';
 }
@@ -957,7 +957,7 @@ export async function prepareBlackMarketInteraction(input: {
       if (input.command.offeredPrice != null) {
         const offeredPrice = input.command.offeredPrice;
         if (!Number.isSafeInteger(offeredPrice) || offeredPrice < 1) {
-          throw new BlackMarketServiceError(400, '请给出有效的灵石报价');
+          throw new BlackMarketServiceError(400, '请给出有效的灯油券报价');
         }
 
         const negotiation = proposal.negotiation ?? {
@@ -1142,7 +1142,7 @@ async function preparePurchase(
     )
     .returning({ spiritStones: cultivators.spirit_stones });
   if (!updatedCultivator) {
-    throw new BlackMarketServiceError(400, '囊中羞涩，灵石不足');
+    throw new BlackMarketServiceError(400, '囊中羞涩，灯油券不足');
   }
   const stored = await addMaterialStackToInventory(
     session.cultivatorId,

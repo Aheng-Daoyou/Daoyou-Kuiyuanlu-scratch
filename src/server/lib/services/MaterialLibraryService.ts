@@ -238,7 +238,7 @@ export async function generateMaterialLibraryEntries(input: {
   ignoreItemIdConflicts?: boolean;
 }): Promise<ItemLibraryEntry[]> {
   // 兼容尚未刷新、仍从普通材料入口提交 seed 的管理后台页面；
-  // 服务端统一改走灵种生成器，避免构造缺失 seedSpec 的普通材料。
+  // 服务端统一改走灯种生成器，避免构造缺失 seedSpec 的普通材料。
   if (input.request.materialType === 'seed') {
     return generateSpiritSeedLibraryEntries({
       request: {

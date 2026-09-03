@@ -83,6 +83,11 @@ import {
   assembleAlchemyOutputConsumables,
   type AlchemyOutputDraft,
 } from './alchemy/AlchemyOutputAssembler';
+import {
+  buildBadIncenseSpec,
+  resolveBadIncenseQuality,
+  shouldTriggerBadIncense,
+} from '@shared/lib/badIncense';
 import { alchemyFormulaAnalyzer } from './AlchemyFormulaAnalyzer';
 import { AlchemyServiceError } from './AlchemyServiceError';
 import { getMysteryMaterialBlockingReason } from './materialMysteryGuard';
@@ -250,11 +255,11 @@ function isValidFormulaPattern(
 
 function parseFormulaBlueprintV4(blueprint: unknown): AlchemyFormulaBlueprint {
   if (!blueprint || typeof blueprint !== 'object') {
-    throw new AlchemyServiceError('丹方蓝图已损坏，请重新悟方。', 500);
+    throw new AlchemyServiceError('香方蓝图已损坏，请重新悟方。', 500);
   }
   const record = blueprint as Record<string, unknown>;
   if (record.version !== 4) {
-    throw new AlchemyServiceError('此丹方需要升级后才能使用。', 409);
+    throw new AlchemyServiceError('此香方需要升级后才能使用。', 409);
   }
   const consumeRules = record.consumeRules as
     Record<string, unknown> | undefined;
@@ -265,13 +270,13 @@ function parseFormulaBlueprintV4(blueprint: unknown): AlchemyFormulaBlueprint {
       consumeRules.quotaCategory as (typeof PILL_QUOTA_CATEGORY_VALUES)[number],
     )
   ) {
-    throw new AlchemyServiceError('丹方服用规则已损坏，请重新悟方。', 500);
+    throw new AlchemyServiceError('香方服用规则已损坏，请重新悟方。', 500);
   }
   if (
     !Number.isFinite(record.targetStability) ||
     !Number.isFinite(record.targetToxicity)
   ) {
-    throw new AlchemyServiceError('丹方稳定度数据已损坏，请重新悟方。', 500);
+    throw new AlchemyServiceError('香方稳定度数据已损坏，请重新悟方。', 500);
   }
   const needsRebirth = record.needsRebirth === true;
   const route = record.route as AlchemyFormulaBlueprint['route'];
@@ -279,7 +284,7 @@ function parseFormulaBlueprintV4(blueprint: unknown): AlchemyFormulaBlueprint {
     try {
       validateAlchemyEffectRoute(route);
     } catch {
-      throw new AlchemyServiceError('丹方药性路线已损坏，请重新悟方。', 500);
+      throw new AlchemyServiceError('香方香性路线已损坏，请重新悟方。', 500);
     }
   }
   return {
@@ -298,7 +303,7 @@ function parseFormulaBlueprintV4(blueprint: unknown): AlchemyFormulaBlueprint {
 
 function mapAlchemyFormulaRow(row: AlchemyFormulaRow): AlchemyFormula {
   if (!isValidFormulaPattern(row.pattern)) {
-    throw new AlchemyServiceError('丹方数据已损坏，请删除后重新悟方。', 500);
+    throw new AlchemyServiceError('香方数据已损坏，请删除后重新悟方。', 500);
   }
   const blueprint = parseFormulaBlueprintV4(row.blueprint);
 
@@ -323,7 +328,7 @@ function mapAlchemyFormulaRow(row: AlchemyFormulaRow): AlchemyFormula {
 
 function getPatternSummary(pattern: AlchemyFormulaPattern): string {
   const segments = [
-    `目标药性：${formatAlchemyPropertyVector(pattern.targetPropertyVector)}`,
+    `目标香性：${formatAlchemyPropertyVector(pattern.targetPropertyVector)}`,
     `炉位：${pattern.slotCount} 种材料`,
   ];
 
@@ -338,13 +343,13 @@ function getPatternSummary(pattern: AlchemyFormulaPattern): string {
 }
 
 function getFormulaProductName(formulaName: string): string {
-  return formulaName.endsWith('丹方')
+  return formulaName.endsWith('香方')
     ? formulaName.slice(0, -2) || formulaName
     : formulaName;
 }
 
 function buildFallbackFormulaName(sourcePillName: string): string {
-  return `${sourcePillName}丹方`;
+  return `${sourcePillName}香方`;
 }
 
 function buildFallbackFormulaRecordDescription(
@@ -357,16 +362,16 @@ function buildFallbackFormulaRecordDescription(
     formula.family === 'tempering'
       ? '缓推肉身淬炼之势'
       : formula.family === 'cultivation'
-        ? '积蓄修为，温养道基'
+        ? '积蓄灯韵，温养道基'
         : formula.family === 'insight'
           ? '澄明心识，引动悟机'
           : formula.family === 'marrow_wash'
-            ? '引药力洗筋伐髓'
+            ? '引香力洗筋伐髓'
             : formula.family === 'longevity'
               ? '固本延寿，续补命元'
-              : '收束药性归于一脉';
+              : '收束香性归于一脉';
 
-  return `此方重在${directionText}，药性取向为${formatAlchemyPropertyVector(formula.pattern.targetPropertyVector)}，${formula.pattern.slotCount}味合炉${qualityText}。`;
+  return `此方重在${directionText}，香性取向为${formatAlchemyPropertyVector(formula.pattern.targetPropertyVector)}，${formula.pattern.slotCount}味合炉${qualityText}。`;
 }
 
 function buildFallbackDiscoveryRemark(formulaName: string): string {
@@ -383,13 +388,13 @@ function buildFormulaDescription(
 ): string {
   const lines = [
     `依《${formula.name}》炉意炼成，以${sourceMaterials.join('、')}合炉。`,
-    `成丹稳度 ${stability}，药力拟合 ${(fitMultiplier * 100).toFixed(0)}%，丹毒评定 ${toxicityRating}。`,
+    `成香稳度 ${stability}，香力拟合 ${(fitMultiplier * 100).toFixed(0)}%，香毒评定 ${toxicityRating}。`,
   ];
 
   if (fitBand === 'degraded') {
-    lines.push('本炉循方成丹，但药力散逸，终究未尽合丹方原意。');
+    lines.push('本炉循方成香，但香力散逸，终究未尽合香方原意。');
   } else if (fitBand === 'poor') {
-    lines.push('本炉药路偏离丹方甚远，虽可收丹，药力与品相都受明显折损。');
+    lines.push('本炉香路偏离香方甚远，虽可收香，香力与品相都受明显折损。');
   }
 
   return lines.join('');
@@ -417,11 +422,11 @@ function buildPreparedMaterial(
     throw new AlchemyServiceError(mysteryReason, 400);
   }
   if (!isAlchemyMaterialType(material.type as MaterialType)) {
-    throw new AlchemyServiceError(`材料 ${material.name} 不可用于炼丹`, 400);
+    throw new AlchemyServiceError(`材料 ${material.name} 不可用于制香`, 400);
   }
   if (!material.description?.trim()) {
     throw new AlchemyServiceError(
-      `材料 ${material.name} 缺少描述，当前无法判明药性。`,
+      `材料 ${material.name} 缺少描述，当前无法判明香性。`,
       400,
     );
   }
@@ -556,7 +561,7 @@ function validateFormulaIngredients(
   if (materialsList.length !== formula.pattern.slotCount) {
     return createValidation(
       false,
-      `此丹方需投入 ${formula.pattern.slotCount} 种材料。`,
+      `此香方需投入 ${formula.pattern.slotCount} 种材料。`,
     );
   }
 
@@ -570,7 +575,7 @@ function validateFormulaIngredients(
   ) {
     return createValidation(
       false,
-      `所选材料中存在低于 ${formula.pattern.minQuality} 的品阶，无法承载此丹方。`,
+      `所选材料中存在低于 ${formula.pattern.minQuality} 的品阶，无法承载此香方。`,
     );
   }
 
@@ -701,9 +706,9 @@ function buildFormulaAnalysisPayload(
   const warnings: string[] = [];
 
   if (fitBand === 'degraded') {
-    warnings.push('本炉虽可循方，但药力散逸较多，成丹后多半只得勉强之品。');
+    warnings.push('本炉虽可循方，但香力散逸较多，成香后多半只得勉强之品。');
   } else if (fitBand === 'poor') {
-    warnings.push('本炉药路偏离丹方甚远，强行收丹会明显削弱药力与品相。');
+    warnings.push('本炉香路偏离香方甚远，强行收香会明显削弱香力与品相。');
   }
 
   return {
@@ -775,7 +780,7 @@ async function loadCultivatorFormula(
     .limit(1);
 
   if (!row) {
-    throw new AlchemyServiceError('未找到这份丹方。', 404);
+    throw new AlchemyServiceError('未找到这份香方。', 404);
   }
 
   return mapAlchemyFormulaRow(row);
@@ -883,7 +888,7 @@ export async function deleteCultivatorFormula(
     .returning();
 
   if (deletedRows.length === 0) {
-    throw new AlchemyServiceError('未找到这份丹方。', 404);
+    throw new AlchemyServiceError('未找到这份香方。', 404);
   }
 }
 
@@ -988,11 +993,11 @@ export async function confirmDiscoveryCandidate(
     if (!accept) {
       return { saved: false };
     }
-    throw new AlchemyServiceError('待确认丹方已散去，可能已过期。', 404);
+    throw new AlchemyServiceError('待确认香方已散去，可能已过期。', 404);
   }
 
   if (payload.cultivatorId !== cultivatorId) {
-    throw new AlchemyServiceError('此丹意不属于你。', 403);
+    throw new AlchemyServiceError('此香意不属于你。', 403);
   }
 
   if (!accept) {
@@ -1097,7 +1102,7 @@ export async function analyzeFormulaMaterials(
   const cooldown = await checkAndAcquireFormulaAnalysisCooldown(cultivatorId);
   if (!cooldown.allowed) {
     throw new AlchemyServiceError(
-      `请 ${cooldown.remainingSeconds} 秒后再推演药路。`,
+      `请 ${cooldown.remainingSeconds} 秒后再推演香路。`,
       429,
       { remainingSeconds: cooldown.remainingSeconds },
     );
@@ -1110,7 +1115,7 @@ export async function analyzeFormulaMaterials(
       materials: materialsList,
     });
   } catch {
-    throw new AlchemyServiceError('药路推演未明，请稍后再试。', 503);
+    throw new AlchemyServiceError('香路推演未明，请稍后再试。', 503);
   }
 
   const payload = buildFormulaAnalysisPayload(
@@ -1275,7 +1280,7 @@ export async function prepareFormulaCraft(
     throw new AlchemyServiceError('道友查无此人', 404);
   }
   if (!analysisId) {
-    throw new AlchemyServiceError('请先推演药路。');
+    throw new AlchemyServiceError('请先推演香路。');
   }
 
   const materialsList = buildPreparedMaterials(
@@ -1284,7 +1289,7 @@ export async function prepareFormulaCraft(
   );
   const validation = validateFormulaIngredients(formula, materialsList);
   if (!validation.valid) {
-    throw new AlchemyServiceError(validation.blockingReason || '丹方不合。');
+    throw new AlchemyServiceError(validation.blockingReason || '香方不合。');
   }
 
   const analysisKey = getFormulaAnalysisKey(cultivatorId, analysisId);
@@ -1293,7 +1298,7 @@ export async function prepareFormulaCraft(
     analysisKey,
   );
   if (!analysisPayload) {
-    throw new AlchemyServiceError('请先推演药路。');
+    throw new AlchemyServiceError('请先推演香路。');
   }
 
   const signature = buildFormulaAnalysisSignature(
@@ -1308,7 +1313,7 @@ export async function prepareFormulaCraft(
     analysisPayload.formulaMasteryLevel !== formula.mastery.level ||
     analysisPayload.signature !== signature
   ) {
-    throw new AlchemyServiceError('请先推演药路。');
+    throw new AlchemyServiceError('请先推演香路。');
   }
 
   const highestMaterialRank = calculateHighestMaterialRank(
@@ -1325,7 +1330,7 @@ export async function prepareFormulaCraft(
     q,
   );
   if ((cultivator.spirit_stones ?? 0) < cost) {
-    throw new AlchemyServiceError(`灵石不足，需要 ${cost} 枚`);
+    throw new AlchemyServiceError(`灯油券不足，需要 ${cost} 枚`);
   }
 
   const aggregated = aggregateAlchemyProperties(
@@ -1347,7 +1352,7 @@ export async function prepareFormulaCraft(
   });
   const qiCost = calculateAlchemyQiCost(materialsList);
   if (formula.blueprint.needsRebirth) {
-    throw new AlchemyServiceError('此丹方需要升级后才能炼制。', 409);
+    throw new AlchemyServiceError('此香方需要升级后才能炼制。', 409);
   }
   const spec: Omit<PillSpec, 'operations'> = {
     kind: 'pill',
@@ -1402,22 +1407,47 @@ export async function prepareFormulaCraft(
   } else if (formula.family === 'breakthrough' && breakthroughTargetRealm) {
     spec.alchemyMeta.breakthroughTargetRealm = breakthroughTargetRealm;
   }
+  // 香变判定：fitBand 为 poor 或香路冲突显著时，本炉香变成「坏香」。
+  const isBadIncense = shouldTriggerBadIncense({
+    fitBand,
+    conflictScore: batchProfile.conflictScore,
+  });
+
   const draft: AlchemyOutputDraft = {
-    name: usesFixedBreakthroughName
-      ? getBreakthroughPillLabel(breakthroughTargetRealm)
-      : getFormulaProductName(formula.name),
-    type: '丹药',
-    description: buildFormulaDescription(
-      formula,
-      materialsList.map((material) => material.name),
-      spec.alchemyMeta.stability,
-      spec.alchemyMeta.toxicityRating,
-      projection.fitMultiplier,
-      fitBand,
-    ),
-    spec,
+    name: isBadIncense
+      ? `坏香·${usesFixedBreakthroughName ? getBreakthroughPillLabel(breakthroughTargetRealm) : getFormulaProductName(formula.name)}`
+      : usesFixedBreakthroughName
+        ? getBreakthroughPillLabel(breakthroughTargetRealm)
+        : getFormulaProductName(formula.name),
+    type: '香品',
+    description: isBadIncense
+      ? `依方合炉，然香路尽散，只余一捧说不出名字的东西在香灰里动了动。`
+      : buildFormulaDescription(
+          formula,
+          materialsList.map((material) => material.name),
+          spec.alchemyMeta.stability,
+          spec.alchemyMeta.toxicityRating,
+          projection.fitMultiplier,
+          fitBand,
+        ),
+    spec: isBadIncense
+      ? buildBadIncenseSpec({
+          family: formula.family,
+          sourceMaterials: materialsList.map((material) => material.name),
+          dominantElement: formula.pattern.dominantElement ?? dominantElement,
+          stability: spec.alchemyMeta.stability,
+          toxicityRating: spec.alchemyMeta.toxicityRating,
+          source: 'formula',
+          formulaId: formula.id,
+          fitBand,
+          fitScore: getFormulaFitPolicy(fitBand).score,
+          fitMultiplier: projection.fitMultiplier,
+          tags: ['坏香', '香变', '不可名状'],
+        })
+      : spec,
     route: formula.blueprint.route,
-    fitMultiplier: projection.fitMultiplier,
+    fitMultiplier: isBadIncense ? 0.5 : projection.fitMultiplier,
+    isBadIncense,
   };
   const { next: nextMastery, progress } = advanceFormulaMastery(
     formula.mastery,
@@ -1455,7 +1485,7 @@ export async function prepareFormulaCraft(
           current.element !== expected.element
         ) {
           throw new AlchemyServiceError(
-            '材料已发生变化，请重新推演药路。',
+            '材料已发生变化，请重新推演香路。',
             409,
           );
         }
@@ -1467,12 +1497,63 @@ export async function prepareFormulaCraft(
         materials: materialsList,
         factors: projection.yieldFactors,
       });
+
+      // 香变兜底：产出为空（香力不足以凝香）时，同样视为香变出「坏香」。
+      const effectiveBadIncense = draft.isBadIncense || yieldProfile.lots.length === 0;
+      const badIncenseDraft: AlchemyOutputDraft = effectiveBadIncense
+        ? {
+            ...draft,
+            isBadIncense: true,
+            name: draft.isBadIncense
+              ? draft.name
+              : `坏香·${draft.name}`,
+            description: draft.isBadIncense
+              ? draft.description
+              : `依方合炉，然香路尽散，只余一捧说不出名字的东西在香灰里动了动。`,
+            spec: draft.isBadIncense
+              ? draft.spec
+              : buildBadIncenseSpec({
+                  family: formula.family,
+                  sourceMaterials: materialsList.map((material) => material.name),
+                  dominantElement:
+                    formula.pattern.dominantElement ?? dominantElement,
+                  stability: spec.alchemyMeta.stability,
+                  toxicityRating: spec.alchemyMeta.toxicityRating,
+                  source: 'formula',
+                  formulaId: formula.id,
+                  fitBand,
+                  fitScore: getFormulaFitPolicy(fitBand).score,
+                  fitMultiplier: projection.fitMultiplier,
+                  tags: ['坏香', '香变', '不可名状'],
+                }),
+          }
+        : draft;
       const outputConsumables = assembleAlchemyOutputConsumables(
-        draft,
-        yieldProfile,
+        badIncenseDraft,
+        effectiveBadIncense
+          ? {
+              ...yieldProfile,
+              primaryQuality: resolveBadIncenseQuality(
+                materialsList.map((material) => material.rank),
+              ),
+              lots: [
+                {
+                  quality: resolveBadIncenseQuality(
+                    materialsList.map((material) => material.rank),
+                  ),
+                  appearance: 'low' as const,
+                  quantity: 1,
+                  essenceSpent: 0,
+                  effectMultiplier: 0,
+                },
+              ],
+              totalQuantity: 1,
+              distributionSummary: '坏香×1',
+            }
+          : yieldProfile,
       );
       if (outputConsumables.length === 0) {
-        throw new AlchemyServiceError('本炉药蕴不足，无法凝成丹药。', 400);
+        throw new AlchemyServiceError('本炉香蕴不足，无法凝成香品。', 400);
       }
 
       const [charged] = await tx
@@ -1489,7 +1570,7 @@ export async function prepareFormulaCraft(
         )
         .returning({ id: cultivators.id });
       if (!charged) {
-        throw new AlchemyServiceError(`灵石不足，需要 ${cost} 枚`, 409);
+        throw new AlchemyServiceError(`灯油券不足，需要 ${cost} 枚`, 409);
       }
 
       for (const id of stableMaterialIds) {
@@ -1511,7 +1592,7 @@ export async function prepareFormulaCraft(
             .returning({ id: materials.id });
           if (deleted.length !== 1) {
             throw new AlchemyServiceError(
-              '材料已发生变化，请重新推演药路。',
+              '材料已发生变化，请重新推演香路。',
               409,
             );
           }
@@ -1534,7 +1615,7 @@ export async function prepareFormulaCraft(
             .returning();
           if (updated.length !== 1) {
             throw new AlchemyServiceError(
-              '材料已发生变化，请重新推演药路。',
+              '材料已发生变化，请重新推演香路。',
               409,
             );
           }
@@ -1575,7 +1656,7 @@ export async function prepareFormulaCraft(
         )
         .returning({ id: alchemyFormulas.id });
       if (!masteryUpdated) {
-        throw new AlchemyServiceError('丹方熟练度已发生变化，请重试。', 409);
+        throw new AlchemyServiceError('香方熟练度已发生变化，请重试。', 409);
       }
 
       return {

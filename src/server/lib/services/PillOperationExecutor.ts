@@ -75,7 +75,7 @@ const EXECUTION_ORDER: ConditionOperation['type'][] = [
 const MAX_LIFESPAN_DELTA = 100_000;
 const MAX_LIFESPAN_TOTAL = 10_000_000;
 const PILL_TOXICITY_BLOCK_MESSAGE =
-  '丹毒已达上限，暂不可继续服用会增加丹毒的丹药。请先炼制或服用解毒丹化解丹毒。';
+  '香毒已达上限，暂不可继续服用会增加香毒的香品。请先炼制或服用解毒香化解香毒。';
 
 const BREAKTHROUGH_SUPPORT_STATUSES: ConditionStatusKey[] = [
   'breakthrough_focus',
@@ -126,11 +126,11 @@ function assertPillQualityAllowed(
   const pillOrder = QUALITY_ORDER[pillQuality] ?? 0;
   if (pillOrder > (QUALITY_ORDER[maxQuality] ?? 0)) {
     throw new Error(
-      `药力过盛，强行服用恐爆体而亡。当前境界最多可承受${maxQuality}丹药。`,
+      `香力过盛，强行服用恐爆体而亡。当前境界最多可承受${maxQuality}香品。`,
     );
   }
   if (pillOrder < (QUALITY_ORDER[minQuality] ?? 0)) {
-    throw new Error('药力过于稀薄，无法在当前境界形成有效药路。');
+    throw new Error('香力过于稀薄，无法在当前境界形成有效香路。');
   }
 }
 
@@ -492,7 +492,7 @@ function applyIncreaseLifespanOperation(
   operation: Extract<ConditionOperation, { type: 'increase_lifespan' }>,
 ): PillCultivatorFacts {
   if (!Number.isFinite(operation.value) || operation.value <= 0) {
-    throw new Error('寿元丹药效异常，无法服用。');
+    throw new Error('寿元香药效异常，无法服用。');
   }
 
   const delta = clamp(Math.floor(operation.value), 1, MAX_LIFESPAN_DELTA);
@@ -555,7 +555,7 @@ function assertBodyCultivationPillTrackCaps(
 
     if (trackState.level >= cap) {
       throw new Error(
-        `${trackName}已达当前肉身境界「${realmLabel}」的单轨上限 Lv.${cap}，请先完成肉身破限后再服用炼体丹。`,
+        `${trackName}已达当前肉身境界「${realmLabel}」的单轨上限 Lv.${cap}，请先完成肉身破限后再服用炼体香。`,
       );
     }
 
@@ -577,7 +577,7 @@ function assertBodyCultivationPillTrackCaps(
 
       if (level > cap || (level === cap && remaining > 0)) {
         throw new Error(
-          `${trackName}本次药力将超过当前肉身境界「${realmLabel}」的单轨上限 Lv.${cap}，请先完成肉身破限后再服用炼体丹。`,
+          `${trackName}本次香力将超过当前肉身境界「${realmLabel}」的单轨上限 Lv.${cap}，请先完成肉身破限后再服用炼体香。`,
         );
       }
     }
@@ -616,13 +616,13 @@ function assertMarrowWashPillTrackCaps(
       const breakthroughLevel =
         getNextMarrowWashBreakthroughLevel(projectedState);
       throw new Error(
-        `洗髓已达破限瓶颈 Lv.${breakthroughLevel}，请先完成本次破限后再服用洗髓丹。`,
+        `洗髓已达破限瓶颈 Lv.${breakthroughLevel}，请先完成本次破限后再服用洗髓香。`,
       );
     }
 
     if (projectedState.level >= cap) {
       throw new Error(
-        `洗髓已达当前修为境界的等级上限 Lv.${cap}，请先提升修为境界后再服用洗髓丹。`,
+        `洗髓已达当前灯韵境界的等级上限 Lv.${cap}，请先提升灯韵境界后再服用洗髓香。`,
       );
     }
 
@@ -635,7 +635,7 @@ function assertMarrowWashPillTrackCaps(
       (advancement.state.level === cap && advancement.state.progress > 0)
     ) {
       throw new Error(
-        `本次药力将超过当前修为境界的洗髓等级上限 Lv.${cap}，请先提升修为境界后再服用洗髓丹。`,
+        `本次香力将超过当前灯韵境界的洗髓等级上限 Lv.${cap}，请先提升灯韵境界后再服用洗髓香。`,
       );
     }
 
@@ -682,7 +682,7 @@ export const PillOperationExecutor = {
       : isSpiritFruitConsumable(consumable)
         ? {
             ...consumable,
-            type: '丹药',
+            type: '香品',
             spec: {
               kind: 'pill',
               family: consumable.spec.family,
@@ -697,10 +697,10 @@ export const PillOperationExecutor = {
               },
             },
           }
-        : (() => { throw new Error('该消耗品并非丹药或灵果，无法按药效协议执行。'); })();
+        : (() => { throw new Error('该消耗品并非香品或灯果，无法按药效协议执行。'); })();
 
     if (effectConsumable.spec.consumeRules.scene !== 'out_of_battle_only') {
-      throw new Error('该丹药当前不可在背包内直接服用。');
+      throw new Error('该香品当前不可在背包内直接服用。');
     }
 
     assertPillQualityAllowed(cultivator, effectConsumable);

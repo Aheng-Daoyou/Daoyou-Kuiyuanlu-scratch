@@ -145,7 +145,7 @@ export async function recoverCultivatorAtInn(args: { actor: Actor }) {
         });
       if (!updated) {
         throw new Error(
-          `囊中羞涩，灵石不足（至少需要 ${recovery.spiritStoneCost} 灵石）`,
+          `囊中羞涩，灯油券不足（至少需要 ${recovery.spiritStoneCost} 灯油券）`,
         );
       }
       return {
