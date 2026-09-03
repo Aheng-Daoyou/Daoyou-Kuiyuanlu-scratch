@@ -1,0 +1,44 @@
+name: ${COMPOSE_PROJECT_NAME:-daoyou}
+
+x-app-common: &app-common
+  image: ${APP_IMAGE:-swkzymlyy/daoyou-app:latest}
+  restart: unless-stopped
+  env_file:
+    - ${ENV_FILE:-/root/daoyou/.env.production}
+  environment:
+    PORT: 3000
+  extra_hosts:
+    - "host.docker.internal:host-gateway"
+  networks:
+    - runtime
+  healthcheck:
+    test:
+      [
+        "CMD",
+        "bun",
+        "-e",
+        "fetch('http://127.0.0.1:3000/api/health-check').then((res) => process.exit(res.ok ? 0 : 1)).catch(() => process.exit(1))",
+      ]
+    interval: 10s
+    timeout: 5s
+    retries: 12
+    start_period: 10s
+
+services:
+  app-blue:
+    <<: *app-common
+    container_name: ${BLUE_CONTAINER:-daoyou-app-blue}
+    ports:
+      - "127.0.0.1:${BLUE_PORT:-3000}:3000"
+    profiles: [blue]
+
+  app-green:
+    <<: *app-common
+    container_name: ${GREEN_CONTAINER:-daoyou-app-green}
+    ports:
+      - "127.0.0.1:${GREEN_PORT:-3001}:3000"
+    profiles: [green]
+
+networks:
+  runtime:
+    name: ${APP_NETWORK:-daoyou-runtime}
